@@ -4,16 +4,25 @@ class EditController < UIViewController
   outlet :cuePoint, UISlider
   outlet :titleLabel, UILabel
   outlet :artistLabel, UILabel
+  outlet :playlistPicker, UIPickerView
 
   def viewDidLoad
 
-    cuePoint.value = self.presentingViewController.getCue
+    titleLabel.text = Sting::Player.title
+    artistLabel.text = Sting::Player.artist
+
+    cuePoint.value = Sting::Player.getCue
     cuePoint.addTarget(self, action: "setCue", forControlEvents:UIControlEventTouchUpInside)
+
+    playlistPicker.delegate = self
+    playlistPicker.dataSource = self
+    # TODO: look up current playlist
 
   end
 
   def dismiss
 
+    self.presentingViewController.updateTitle
     self.dismissViewControllerAnimated(true, completion:nil)
 
   end
@@ -27,31 +36,54 @@ class EditController < UIViewController
 
   end
 
+  def setCue
+
+    Sting::Player.setCue(cuePoint.value)
+
+  end
+
 
   # Media picker delegate methods
   def mediaPicker(mediaPicker, didPickMediaItems:mediaItemCollection)
 
     track = mediaItemCollection.items[0]
-    self.presentingViewController.loadSting(mediaItemCollection.items[0])
-    titleLabel.text = track.valueForProperty(MPMediaItemPropertyTitle)
-    artistLabel.text = track.valueForProperty(MPMediaItemPropertyArtist)
+    Sting::Player.loadSting(mediaItemCollection.items[0])
+    titleLabel.text = Sting::Player.title
+    artistLabel.text = Sting::Player.artist
     cuePoint.value = 0
 
-    # self.dismissModalViewControllerAnimated(true)
     self.dismissViewControllerAnimated(true, completion:nil)
 
   end
 
   def mediaPickerDidCancel(mediaPicker)
 
-    # self.dismissModalViewControllerAnimated(true)
     self.dismissViewControllerAnimated(true, completion:nil)
 
   end
 
-  def setCue
+  def numberOfComponentsInPickerView(pickerView)
 
-    self.presentingViewController.setCue(cuePoint.value)
+    1
+
+  end
+
+  def pickerView(pickerView, numberOfRowsInComponent:component)
+
+    Music::Player.allPlaylists.size
+
+  end
+
+  def pickerView(pickerView, titleForRow:row, forComponent:component)
+
+    Music::Player.allPlaylists[row].valueForProperty(MPMediaPlaylistPropertyName)
+
+  end
+
+  def pickerView(pickerView, didSelectRow:row, inComponent:component)
+
+    Music::Player.usePlaylist(row)
+    self.presentingViewController.updateTable
 
   end
 

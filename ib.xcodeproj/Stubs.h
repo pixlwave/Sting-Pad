@@ -10,12 +10,14 @@
 @property IBOutlet UISlider * cuePoint;
 @property IBOutlet UILabel * titleLabel;
 @property IBOutlet UILabel * artistLabel;
+@property IBOutlet UIPickerView * playlistPicker;
 
 -(IBAction) viewDidLoad;
 -(IBAction) dismiss;
 -(IBAction) loadTrack;
--(IBAction) mediaPickerDidCancel:(id) mediaPicker;
 -(IBAction) setCue;
+-(IBAction) mediaPickerDidCancel:(id) mediaPicker;
+-(IBAction) numberOfComponentsInPickerView:(id) pickerView;
 
 @end
 
@@ -27,18 +29,29 @@
 -(IBAction) viewDidLoad;
 -(IBAction) play;
 -(IBAction) stop;
--(IBAction) loadSting:(id) mediaItem;
--(IBAction) setCue:(id) cuePoint;
--(IBAction) getCue;
 -(IBAction) iPodPlay;
 -(IBAction) iPodPause;
 -(IBAction) iPodPrevious;
 -(IBAction) iPodNext;
--(IBAction) getPlaylist;
+-(IBAction) updateTitle;
+-(IBAction) updateTable;
 
 @end
 
-@interface StingPlayer
+@interface Music
+-(IBAction) initialize;
+-(IBAction) play;
+-(IBAction) pause;
+-(IBAction) Previous;
+-(IBAction) Next;
+-(IBAction) playItem:(id) index;
+-(IBAction) getPlaylist;
+-(IBAction) getAllPlaylists;
+-(IBAction) usePlaylist:(id) index;
+
+@end
+
+@interface Sting
 -(IBAction) initialize;
 -(IBAction) play;
 -(IBAction) stop;

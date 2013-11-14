@@ -9,6 +9,9 @@
 @implementation StkController
 @end
 
-@implementation StingPlayer
+@implementation Music
+@end
+
+@implementation Sting
 @end
 

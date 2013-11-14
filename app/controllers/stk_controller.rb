@@ -6,10 +6,7 @@ class StkController < UIViewController
 
   def viewDidLoad
 
-    @stingPlayer = StingPlayer.new
-    @iPodPlayer = MPMusicPlayerController.iPodMusicPlayer
-
-    # if @iPodPlayer.playbackState == MPMusicPlaybackStatePlaying
+    # if Music::Player.playbackState == MPMusicPlaybackStatePlaying
     #   playlistTable.enabled = false
     #   @iPodLabel = UILabel.alloc.initWithFrame(CGRectZero)
     #   @iPodLabel.text = "Music Playing from iPod"
@@ -17,91 +14,75 @@ class StkController < UIViewController
     #   @iPodLabel.center = @playlistTable.center
     #   self.addSubview(@iPodLabel)
     # else
-      @playlistMediaItems = getPlaylist
+      # @playlistMediaItems = Music.getPlaylist
     # end
+
+    if NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1
+      playlistTable.setContentInset(UIEdgeInsetsMake(20, playlistTable.contentInset.left, playlistTable.contentInset.bottom, playlistTable.contentInset.right))
+      @statusBarView = UIView.alloc.initWithFrame(UIApplication.sharedApplication.statusBarFrame)
+      @statusBarView.backgroundColor = self.view.backgroundColor
+      self.view.addSubview(@statusBarView)
+    end
 
     playlistTable.delegate = self
     playlistTable.dataSource = self
+
+    updateTitle
 
   end
 
   def play
 
-    @iPodPlayer.pause
-    @stingPlayer.play
+    Sting::Player.play
 
   end
 
   def stop
 
-    @stingPlayer.stop
-
-  end
-
-  def loadSting(mediaItem)
-
-    @stingPlayer.loadSting(mediaItem)
-    titleLabel.text = mediaItem.valueForProperty(MPMediaItemPropertyTitle)
-
-  end
-
-  def setCue(cuePoint)
-
-    @stingPlayer.setCue(cuePoint)
-
-  end
-
-  def getCue
-
-    @stingPlayer.getCue
+    Sting::Player.stop
 
   end
 
   def iPodPlay
 
-    @stingPlayer.stop
-    @iPodPlayer.play
+    Music::Player.play
 
   end
 
   def iPodPause
 
-    @iPodPlayer.pause
+    Music::Player.pause
 
   end
 
   def iPodPrevious
 
-    @iPodPlayer.skipToPreviousItem
+    Music::Player.Previous
 
   end
 
   def iPodNext
 
-    @iPodPlayer.skipToNextItem
+    Music::Player.Next
 
   end
 
-  def getPlaylist
+  def updateTitle
 
-    aList = nil
+    titleLabel.text = Sting::Player.title
 
-    playlistsQuery = MPMediaQuery.playlistsQuery
-    playlistsArray = playlistsQuery.collections
-    playlistsArray.each do |playlist|
-      if playlist.valueForProperty(MPMediaPlaylistPropertyName) == "A-List"
-        aList = playlist
-      end
-    end
+  end
 
-    aList
+  def updateTable
+
+    playlistTable.reloadData
 
   end
 
   def tableView(tableView, numberOfRowsInSection:section)
 
-    if @playlistMediaItems
-      @playlistMediaItems.items.size
+    if Music::Player.playlist
+      Music::Player.playlist.items.size
     else
       0
     end
@@ -115,8 +96,8 @@ class StkController < UIViewController
     cell = tableView.dequeueReusableCellWithIdentifier(@reuseIdentifier)
     cell = UITableViewCell.alloc.initWithStyle(UITableViewCellStyleSubtitle, reuseIdentifier: @reuseIdentifier)
 
-    if @playlistMediaItems
-      song = @playlistMediaItems.items[indexPath.row]
+    if Music::Player.playlist
+      song = Music::Player.playlist.items[indexPath.row]
 
       cell.textLabel.text = song.valueForProperty(MPMediaItemPropertyTitle)
       cell.detailTextLabel.text = song.valueForProperty(MPMediaItemPropertyArtist)
@@ -130,7 +111,9 @@ class StkController < UIViewController
 
   def tableView(tableView, didSelectRowAtIndexPath:indexPath)
 
-    # play item
+    Music::Player.playItem(indexPath.row)
+
+    tableView.deselectRowAtIndexPath(indexPath, animated:true)
 
   end
   
