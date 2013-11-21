@@ -102,6 +102,7 @@ class StkController < UIViewController
       cell.textLabel.text = song.valueForProperty(MPMediaItemPropertyTitle)
       cell.detailTextLabel.text = song.valueForProperty(MPMediaItemPropertyArtist)
       cell.imageView.image = song.valueForProperty(MPMediaItemPropertyArtwork).imageWithSize(CGSizeMake(55, 55))
+      cell.imageView.image ||= UIImage.imageNamed("albumartblank")
       cell
     else
       nil

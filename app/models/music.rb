@@ -1,13 +1,14 @@
 class Music
 
-  attr_reader :playlist, :allPlaylists
+  attr_reader :allPlaylists, :playlist, :selectedPlaylist
 
   def initialize
 
     @musicPlayer = MPMusicPlayerController.iPodMusicPlayer
     @allPlaylists = getAllPlaylists
-    @playlist ||= @allPlaylists[0]
+    @playlist = @allPlaylists[0]
     @musicPlayer.setQueueWithItemCollection(@playlist)
+    @selectedPlaylist = 0
 
   end
 
@@ -70,9 +71,29 @@ class Music
 
     @playlist = @allPlaylists[index]
     @musicPlayer.setQueueWithItemCollection(@playlist)
+    @selectedPlaylist = index
 
   end
 
   Player = Music.new
+
+
+  # def archive
+
+  #   # restore selected playlist by name and not index
+  #   Turnkey.archive(@playlist, "Playlist")
+  #   Turnkey.archice(@selectedPlaylist, "Selected Playlist")
+
+  # end
+
+  # def unarchive
+
+  #   playlist = Turnkey.unarchive("Playlist")
+  #   selectedPlaylist = Turnkey.unarchive("Selected Playlist")
+
+  #   @playlist = playlist if playlist
+  #   @selectedPlaylist = selectedPlaylist if selectedPlaylist
+
+  # end
 
 end

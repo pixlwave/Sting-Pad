@@ -16,7 +16,7 @@ class EditController < UIViewController
 
     playlistPicker.delegate = self
     playlistPicker.dataSource = self
-    # TODO: look up current playlist
+    playlistPicker.selectRow(Music::Player.selectedPlaylist, inComponent:0, animated:true)
 
   end
 

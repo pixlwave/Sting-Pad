@@ -58,4 +58,22 @@ class Sting
 
   Player = Sting.new
 
+  def archive
+
+    Turnkey.archive(@stingPlayer, "Sting Player")
+    Turnkey.archive(@cuePoint, "Cue Point")
+    Turnkey.archive(@title, "Sting Title")
+    Turnkey.archive(@artist, "Sting Artist")
+
+  end
+
+  def unarchive
+
+    @stingPlayer = Turnkey.unarchive("Sting Player")
+    @cuePoint = Turnkey.unarchive("Cue Point")
+    @title = Turnkey.unarchive("Sting Title")
+    @artist = Turnkey.unarchive("Sting Artist")
+
+  end
+
 end
