@@ -51,6 +51,7 @@
 -(IBAction) getNamedPlaylist:(id) name;
 -(IBAction) getAllPlaylists;
 -(IBAction) usePlaylist:(id) index;
+-(IBAction) saveState;
 
 @end
 
@@ -61,6 +62,7 @@
 -(IBAction) loadSting:(id) mediaItem;
 -(IBAction) setCue:(id) cuePoint;
 -(IBAction) getCue;
+-(IBAction) saveState;
 
 @end
 

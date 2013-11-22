@@ -4,16 +4,17 @@ class Sting
 
   def initialize
 
-    @file = NSBundle.mainBundle.pathForResource("ComputerMagic", ofType:"m4a")
-    @stingPlayer = AVAudioPlayer.alloc.initWithContentsOfURL(NSURL.fileURLWithPath(@file), error:nil)
+    @url = Turnkey.unarchive("Sting URL") || NSURL.fileURLWithPath(NSBundle.mainBundle.pathForResource("ComputerMagic", ofType:"m4a"))
+    @stingPlayer = AVAudioPlayer.alloc.initWithContentsOfURL(@url, error:nil)
     @stingPlayer.delegate = self
     @stingPlayer.prepareToPlay
     @stingPlayer.numberOfLoops = 0
 
-    @cuePoint = 0
+    @cuePoint = Turnkey.unarchive("Cue Point") || 0
+    @stingPlayer.currentTime = @cuePoint
 
-    @title = "Empty"
-    @artist = "Empty"
+    @title = Turnkey.unarchive("Sting Title") || "Empty"
+    @artist = Turnkey.unarchive("Sting Artist") || "Empty"
 
   end
 
@@ -41,12 +42,15 @@ class Sting
     @title = mediaItem.valueForProperty(MPMediaItemPropertyTitle)
     @artist = mediaItem.valueForProperty(MPMediaItemPropertyArtist)
 
+    saveState
+
   end
 
   def setCue(cuePoint)
 
     @cuePoint = cuePoint * @stingPlayer.duration
     @stingPlayer.currentTime = @cuePoint
+    saveState
 
   end
 
@@ -58,21 +62,12 @@ class Sting
 
   Player = Sting.new
 
-  def archive
+  def saveState
 
-    Turnkey.archive(@stingPlayer, "Sting Player")
+    Turnkey.archive(@url, "Sting URL")
     Turnkey.archive(@cuePoint, "Cue Point")
     Turnkey.archive(@title, "Sting Title")
     Turnkey.archive(@artist, "Sting Artist")
-
-  end
-
-  def unarchive
-
-    @stingPlayer = Turnkey.unarchive("Sting Player")
-    @cuePoint = Turnkey.unarchive("Cue Point")
-    @title = Turnkey.unarchive("Sting Title")
-    @artist = Turnkey.unarchive("Sting Artist")
 
   end
 

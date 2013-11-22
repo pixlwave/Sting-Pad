@@ -11,7 +11,7 @@ end
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
   app.name = 'Stingmtk'
-  app.version = '0.1.9'
+  app.version = '0.2'
   app.identifier = 'uk.me.digitalfx.Stingmtk'
   # app.codesign_certificate = 'iPhone Distribution: Douglas Earnshaw (NU8A5Y875P)'
   # app.provisioning_profile = '/Users/Douglas/Documents/RubyMotion/Certificates/SSV_Ad_Hoc.mobileprovision'

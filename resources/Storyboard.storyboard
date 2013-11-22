@@ -16,102 +16,104 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1bI-IB-IZs">
+                                <rect key="frame" x="0.0" y="470" width="320" height="98"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Track" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="108" translatesAutoresizingMaskIntoConstraints="NO" id="lfF-a8-7qU">
+                                        <rect key="frame" x="192" y="27" width="108" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wMX-Nx-qA3">
+                                        <rect key="frame" x="128" y="25" width="48" height="48"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="stop.png"/>
+                                        <connections>
+                                            <action selector="stop" destination="Fwb-c8-22I" eventType="touchUpInside" id="hXA-BT-98S"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pbu-wE-dhP">
+                                        <rect key="frame" x="34" y="17" width="64" height="64"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="play.png"/>
+                                        <connections>
+                                            <action selector="play" destination="Fwb-c8-22I" eventType="touchUpInside" id="XdM-bk-H1r"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="center" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iPU-MZ-tNJ">
+                                        <rect key="frame" x="284" y="62" width="36" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="settings.png"/>
+                                        <connections>
+                                            <segue destination="sKY-0b-GtB" kind="modal" modalTransitionStyle="flipHorizontal" id="ay0-ft-lF0"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="0.64694368840000005" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XHH-me-2CU">
                                 <rect key="frame" x="0.0" y="422" width="320" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m9M-Uv-BVM">
+                                        <rect key="frame" x="90" y="10" width="70" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Play">
+                                            <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="iPodPlay" destination="Fwb-c8-22I" eventType="touchUpInside" id="hxP-es-dld"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LOf-EA-SsP">
+                                        <rect key="frame" x="11" y="10" width="70" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Previous">
+                                            <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="iPodPrevious" destination="Fwb-c8-22I" eventType="touchUpInside" id="cw2-iT-Cu1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V7i-Ah-KQ6">
+                                        <rect key="frame" x="238" y="10" width="70" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Next">
+                                            <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="iPodNext" destination="Fwb-c8-22I" eventType="touchUpInside" id="K2x-BD-FsU"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Crj-QJ-9rP">
+                                        <rect key="frame" x="162" y="10" width="70" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Pause">
+                                            <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="iPodPause" destination="Fwb-c8-22I" eventType="touchUpInside" id="CZe-qg-qD7"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pbu-wE-dhP">
-                                <rect key="frame" x="37" y="484" width="64" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="play.png"/>
-                                <connections>
-                                    <action selector="play" destination="Fwb-c8-22I" eventType="touchUpInside" id="XdM-bk-H1r"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m9M-Uv-BVM">
-                                <rect key="frame" x="122" y="432" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Play">
-                                    <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="iPodPlay" destination="Fwb-c8-22I" eventType="touchUpInside" id="hxP-es-dld"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wMX-Nx-qA3">
-                                <rect key="frame" x="130" y="492" width="48" height="48"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="stop.png"/>
-                                <connections>
-                                    <action selector="stop" destination="Fwb-c8-22I" eventType="touchUpInside" id="hXA-BT-98S"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Crj-QJ-9rP">
-                                <rect key="frame" x="173" y="432" width="43" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Pause">
-                                    <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="iPodPause" destination="Fwb-c8-22I" eventType="touchUpInside" id="CZe-qg-qD7"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V7i-Ah-KQ6">
-                                <rect key="frame" x="246" y="432" width="32" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Next">
-                                    <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="iPodNext" destination="Fwb-c8-22I" eventType="touchUpInside" id="K2x-BD-FsU"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LOf-EA-SsP">
-                                <rect key="frame" x="40" y="432" width="59" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Previous">
-                                    <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="iPodPrevious" destination="Fwb-c8-22I" eventType="touchUpInside" id="cw2-iT-Cu1"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Track" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="108" translatesAutoresizingMaskIntoConstraints="NO" id="lfF-a8-7qU">
-                                <rect key="frame" x="192" y="494" width="108" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Cz5-hC-AHC">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="424"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iPU-MZ-tNJ">
-                                <rect key="frame" x="279" y="530" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="settings.png"/>
-                                <connections>
-                                    <segue destination="sKY-0b-GtB" kind="modal" modalTransitionStyle="flipHorizontal" id="ay0-ft-lF0"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="0.64694368839263916" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="m9M-Uv-BVM" secondAttribute="bottom" constant="106" id="6Gh-9u-vgj"/>
-                            <constraint firstAttribute="bottom" secondItem="V7i-Ah-KQ6" secondAttribute="bottom" constant="106" id="95X-BW-qUh"/>
-                            <constraint firstItem="LOf-EA-SsP" firstAttribute="top" secondItem="Cz5-hC-AHC" secondAttribute="bottom" constant="8" id="Kt4-oQ-ZNj"/>
-                            <constraint firstAttribute="bottom" secondItem="LOf-EA-SsP" secondAttribute="bottom" constant="106" id="RB6-kM-Adq"/>
-                            <constraint firstAttribute="bottom" secondItem="lfF-a8-7qU" secondAttribute="bottom" constant="30" id="aSr-Zx-lUa"/>
-                            <constraint firstAttribute="bottom" secondItem="Crj-QJ-9rP" secondAttribute="bottom" constant="106" id="bQw-dD-bbe"/>
-                            <constraint firstAttribute="bottom" secondItem="pbu-wE-dhP" secondAttribute="bottom" constant="20" id="bcA-VN-jrQ"/>
                             <constraint firstItem="Cz5-hC-AHC" firstAttribute="top" secondItem="iFE-v0-bVO" secondAttribute="top" id="bka-w1-x6A"/>
-                            <constraint firstAttribute="bottom" secondItem="wMX-Nx-qA3" secondAttribute="bottom" constant="28" id="cY3-kg-Bho"/>
                             <constraint firstAttribute="bottom" secondItem="XHH-me-2CU" secondAttribute="bottom" constant="97" id="eup-LC-9Au"/>
-                            <constraint firstAttribute="bottom" secondItem="iPU-MZ-tNJ" secondAttribute="bottom" constant="10" id="zsn-19-AFg"/>
+                            <constraint firstAttribute="bottom" secondItem="Cz5-hC-AHC" secondAttribute="bottom" constant="144" id="pfx-Vc-ov3"/>
+                            <constraint firstAttribute="bottom" secondItem="1bI-IB-IZs" secondAttribute="bottom" id="xjm-fX-mQI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="JS4-QJ-xUA"/>

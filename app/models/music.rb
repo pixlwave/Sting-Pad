@@ -6,9 +6,9 @@ class Music
 
     @musicPlayer = MPMusicPlayerController.iPodMusicPlayer
     @allPlaylists = getAllPlaylists
-    @playlist = @allPlaylists[0]
+    @selectedPlaylist = Turnkey.unarchive("Selected Playlist") || 0
+    @playlist = @allPlaylists[@selectedPlaylist]
     @musicPlayer.setQueueWithItemCollection(@playlist)
-    @selectedPlaylist = 0
 
   end
 
@@ -72,28 +72,19 @@ class Music
     @playlist = @allPlaylists[index]
     @musicPlayer.setQueueWithItemCollection(@playlist)
     @selectedPlaylist = index
+    
+    saveState
 
   end
 
   Player = Music.new
 
+  def saveState
 
-  # def archive
+    # restore selected playlist by name and not index
+    # Turnkey.archive(@playlist, "Playlist")
+    Turnkey.archive(@selectedPlaylist, "Selected Playlist")
 
-  #   # restore selected playlist by name and not index
-  #   Turnkey.archive(@playlist, "Playlist")
-  #   Turnkey.archice(@selectedPlaylist, "Selected Playlist")
-
-  # end
-
-  # def unarchive
-
-  #   playlist = Turnkey.unarchive("Playlist")
-  #   selectedPlaylist = Turnkey.unarchive("Selected Playlist")
-
-  #   @playlist = playlist if playlist
-  #   @selectedPlaylist = selectedPlaylist if selectedPlaylist
-
-  # end
+  end
 
 end
