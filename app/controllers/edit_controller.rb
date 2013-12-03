@@ -4,6 +4,7 @@ class EditController < UIViewController
   outlet :cuePoint, UISlider
   outlet :titleLabel, UILabel
   outlet :artistLabel, UILabel
+  outlet :waveView, UIView
   outlet :playlistPicker, UIPickerView
 
   def viewDidLoad
@@ -13,6 +14,13 @@ class EditController < UIViewController
 
     cuePoint.value = Sting::Player.getCue
     cuePoint.addTarget(self, action: "setCue", forControlEvents:UIControlEventTouchUpInside)
+
+    if NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1
+      waveFrame = @waveView.frame
+      @wave = FDWaveformView.alloc.initWithFrame(waveFrame)
+      self.view.addSubview(@wave)
+      updateWaveURL
+    end
 
     playlistPicker.delegate = self
     playlistPicker.dataSource = self
@@ -39,6 +47,27 @@ class EditController < UIViewController
   def setCue
 
     Sting::Player.setCue(cuePoint.value)
+    updateWaveCue
+
+  end
+
+  def updateWaveURL
+
+    if NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1
+      render = Dispatch::Queue.main
+      render.async {
+        @wave.setAudioURL(Sting::Player.url)
+        updateWaveCue
+      }
+    end
+
+  end
+
+  def updateWaveCue
+
+    if NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1
+      @wave.setProgressSamples(@wave.totalSamples * cuePoint.value)
+    end
 
   end
 
@@ -51,6 +80,7 @@ class EditController < UIViewController
     titleLabel.text = Sting::Player.title
     artistLabel.text = Sting::Player.artist
     cuePoint.value = 0
+    updateWaveURL
 
     self.dismissViewControllerAnimated(true, completion:nil)
 

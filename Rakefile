@@ -13,13 +13,16 @@ Motion::Project::App.setup do |app|
   app.name = 'Stingmtk'
   app.version = '0.2'
   app.identifier = 'uk.me.digitalfx.Stingmtk'
+  app.icons = ["Icon@2x.png"]
+  app.prerendered_icon = true
   # app.codesign_certificate = 'iPhone Distribution: Douglas Earnshaw (NU8A5Y875P)'
   # app.provisioning_profile = '/Users/Douglas/Documents/RubyMotion/Certificates/SSV_Ad_Hoc.mobileprovision'
 
   app.frameworks << 'AVFoundation'
   app.frameworks << 'MediaPlayer'
   app.deployment_target = '6.1'
-  app.icons = ["Icon@2x.png"]
-  app.prerendered_icon = true
+  app.pods do
+    pod 'FDWaveformView'
+  end
   
 end

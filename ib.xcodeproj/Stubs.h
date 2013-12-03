@@ -13,6 +13,7 @@
 @property IBOutlet UISlider * cuePoint;
 @property IBOutlet UILabel * titleLabel;
 @property IBOutlet UILabel * artistLabel;
+@property IBOutlet UIView * waveView;
 @property IBOutlet UIPickerView * playlistPicker;
 
 -(IBAction) viewDidLoad;

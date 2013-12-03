@@ -1,0 +1,22 @@
+<?xml version='1.0'?>
+<signatures version='1.0'>
+<class name='FDWaveformView'>
+<method selector='audioURL'>
+<retval declared_type='NSURL*' type='@'/>
+</method>
+<method selector='progressSamples'>
+<retval declared_type='unsigned long' type='L' type64='Q'/>
+</method>
+<method selector='setAudioURL:'>
+<arg declared_type='NSURL*' index='0' name='audioURL' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setProgressSamples:'>
+<arg declared_type='unsigned long' index='0' name='progressSamples' type='L' type64='Q'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='totalSamples'>
+<retval declared_type='unsigned long' type='L' type64='Q'/>
+</method>
+</class>
+</signatures>

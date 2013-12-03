@@ -1,20 +1,29 @@
 class Sting
 
-  attr_reader :title, :artist
+  attr_reader :url, :title, :artist
 
   def initialize
 
-    @url = Turnkey.unarchive("Sting URL") || NSURL.fileURLWithPath(NSBundle.mainBundle.pathForResource("ComputerMagic", ofType:"m4a"))
+    # TODO: use error handler rather than check for nil AVAudioPlayer
+    @url = Turnkey.unarchive("Sting URL")
     @stingPlayer = AVAudioPlayer.alloc.initWithContentsOfURL(@url, error:nil)
+
+    if @stingPlayer
+      @title = Turnkey.unarchive("Sting Title") || "No Sting Loaded"
+      @artist = Turnkey.unarchive("Sting Artist") || "No Artist"
+      @cuePoint = Turnkey.unarchive("Cue Point") || 0
+    else
+      @url = NSURL.fileURLWithPath(NSBundle.mainBundle.pathForResource("ComputerMagic", ofType:"m4a"))
+      @stingPlayer = AVAudioPlayer.alloc.initWithContentsOfURL(@url, error:nil)
+      @title = "No Sting Loaded"
+      @artist = "No Artist"
+      @cuePoint = 0
+    end
+
     @stingPlayer.delegate = self
     @stingPlayer.prepareToPlay
     @stingPlayer.numberOfLoops = 0
-
-    @cuePoint = Turnkey.unarchive("Cue Point") || 0
     @stingPlayer.currentTime = @cuePoint
-
-    @title = Turnkey.unarchive("Sting Title") || "Empty"
-    @artist = Turnkey.unarchive("Sting Artist") || "Empty"
 
   end
 

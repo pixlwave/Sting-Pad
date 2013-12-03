@@ -1,0 +1,5 @@
+#include "Pods-FDWaveformView.xcconfig"
+GCC_PREPROCESSOR_DEFINITIONS = COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/FDWaveformView" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/FDWaveformView"
+OTHER_LDFLAGS = -ObjC ${PODS_FDWAVEFORMVIEW_OTHER_LDFLAGS}
+PODS_ROOT = ${SRCROOT}
