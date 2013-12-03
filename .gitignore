@@ -14,3 +14,7 @@ nbproject
 .eprj
 .sass-cache
 .idea
+vendor/Pods/.build
+vendor/Pods/build
+vendor/Pods/build-iPhoneOS
+vendor/Pods/build-iPhoneSimulator
