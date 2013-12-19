@@ -3,6 +3,7 @@ class StkController < UIViewController
 
   outlet :titleLabel, UILabel
   outlet :playlistTable, UITableView
+  outlet :stingScrollView, UIScrollView
 
   def viewDidLoad
 
@@ -18,14 +19,18 @@ class StkController < UIViewController
     # end
 
     if NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1
-      playlistTable.setContentInset(UIEdgeInsetsMake(20, playlistTable.contentInset.left, playlistTable.contentInset.bottom, playlistTable.contentInset.right))
+      @playlistTable.setContentInset(UIEdgeInsetsMake(20, @playlistTable.contentInset.left, @playlistTable.contentInset.bottom, @playlistTable.contentInset.right))
       @statusBarView = UIView.alloc.initWithFrame(UIApplication.sharedApplication.statusBarFrame)
       @statusBarView.backgroundColor = self.view.backgroundColor
       self.view.addSubview(@statusBarView)
     end
 
-    playlistTable.delegate = self
-    playlistTable.dataSource = self
+    @playlistTable.delegate = self
+    @playlistTable.dataSource = self
+
+    @stingScrollView.setContentSize(CGSizeMake(324, 64))
+    @stingScrollView.delegate = self
+    @selectedSting = 0
 
     updateTitle
 
@@ -69,13 +74,13 @@ class StkController < UIViewController
 
   def updateTitle
 
-    titleLabel.text = Sting::Player.title
+    @titleLabel.text = Sting::Player.title
 
   end
 
   def updateTable
 
-    playlistTable.reloadData
+    @playlistTable.reloadData
 
   end
 
@@ -115,6 +120,13 @@ class StkController < UIViewController
     Music::Player.playItem(indexPath.row)
 
     tableView.deselectRowAtIndexPath(indexPath, animated:true)
+
+  end
+
+  def scrollViewDidEndDecelerating(scrollView)
+
+    @selectedSting = (scrollView.contentOffset.x / scrollView.frame.size.width).to_int
+    puts "Page #{@selectedSting}"
 
   end
   

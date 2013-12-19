@@ -92,6 +92,7 @@ class EditController < UIViewController
 
   end
 
+  # PickerView delegate methods
   def numberOfComponentsInPickerView(pickerView)
 
     1
