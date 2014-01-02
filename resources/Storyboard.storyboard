@@ -84,7 +84,7 @@
                                             <action selector="play" destination="Fwb-c8-22I" eventType="touchUpInside" id="oIW-ez-76h"/>
                                         </connections>
                                     </button>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" id="Cgp-Kx-hgF">
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="Cgp-Kx-hgF">
                                         <rect key="frame" x="192" y="17" width="108" height="64"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <subviews>
@@ -112,6 +112,12 @@
                                             <segue destination="sKY-0b-GtB" kind="modal" id="Wl4-7v-s13"/>
                                         </connections>
                                     </button>
+                                    <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" id="zOQ-cv-f9K">
+                                        <rect key="frame" x="141" y="61" width="39" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="currentPageIndicatorTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </pageControl>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="0.64694368840000005" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -122,6 +128,7 @@
                     <navigationItem key="navigationItem" id="JS4-QJ-xUA"/>
                     <connections>
                         <outlet property="playlistTable" destination="Cz5-hC-AHC" id="W2r-Um-aR2"/>
+                        <outlet property="stingPage" destination="zOQ-cv-f9K" id="sNv-MG-Uu4"/>
                         <outlet property="stingScrollView" destination="Cgp-Kx-hgF" id="ei4-71-Ozy"/>
                         <outlet property="titleLabel" destination="nNb-y1-3Ir" id="231-wW-gGf"/>
                     </connections>

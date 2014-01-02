@@ -34,6 +34,7 @@
 @property IBOutlet UILabel * titleLabel;
 @property IBOutlet UITableView * playlistTable;
 @property IBOutlet UIScrollView * stingScrollView;
+@property IBOutlet UIPageControl * stingPage;
 
 -(IBAction) viewDidLoad;
 -(IBAction) play;
@@ -44,6 +45,7 @@
 -(IBAction) iPodNext;
 -(IBAction) updateTitle;
 -(IBAction) updateTable;
+-(IBAction) scrollViewDidEndDecelerating:(id) scrollView;
 
 @end
 
