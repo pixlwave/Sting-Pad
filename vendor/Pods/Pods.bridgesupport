@@ -4,11 +4,18 @@
 <method selector='audioURL'>
 <retval declared_type='NSURL*' type='@'/>
 </method>
+<method selector='doesAllowScrubbing'>
+<retval declared_type='BOOL' type='B'/>
+</method>
 <method selector='progressSamples'>
 <retval declared_type='unsigned long' type='L' type64='Q'/>
 </method>
 <method selector='setAudioURL:'>
 <arg declared_type='NSURL*' index='0' name='audioURL' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setDoesAllowScrubbing:'>
+<arg declared_type='BOOL' index='0' name='doesAllowScrubbing' type='B'/>
 <retval declared_type='void' type='v'/>
 </method>
 <method selector='setProgressSamples:'>

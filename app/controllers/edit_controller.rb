@@ -18,6 +18,7 @@ class EditController < UIViewController
     if NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1
       waveFrame = @waveView.frame
       @wave = FDWaveformView.alloc.initWithFrame(waveFrame)
+      # @wave.doesAllowScrubbing = true
       self.view.addSubview(@wave)
       updateWaveURL
     end

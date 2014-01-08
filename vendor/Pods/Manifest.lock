@@ -1,10 +1,10 @@
 PODS:
-  - FDWaveformView (0.1.0)
+  - FDWaveformView (0.1.2)
 
 DEPENDENCIES:
   - FDWaveformView
 
 SPEC CHECKSUMS:
-  FDWaveformView: 5322d6c612733551708c36fe5287ca7ce99ed6ba
+  FDWaveformView: 7eae7314c012c177f0235d19c1d32336b451e5e5
 
-COCOAPODS: 0.28.0
+COCOAPODS: 0.29.0
