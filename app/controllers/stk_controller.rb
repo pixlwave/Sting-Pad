@@ -8,16 +8,7 @@ class StkController < UIViewController
 
   def viewDidLoad
 
-    # if Music::Player.playbackState == MPMusicPlaybackStatePlaying
-    #   playlistTable.enabled = false
-    #   @iPodLabel = UILabel.alloc.initWithFrame(CGRectZero)
-    #   @iPodLabel.text = "Music Playing from iPod"
-    #   @iPodLabel.sizeToFit
-    #   @iPodLabel.center = @playlistTable.center
-    #   self.addSubview(@iPodLabel)
-    # else
-      # @playlistMediaItems = Music.getPlaylist
-    # end
+    @engine = Engine.sharedClient
 
     if NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1
       @playlistTable.setContentInset(UIEdgeInsetsMake(20, @playlistTable.contentInset.left, @playlistTable.contentInset.bottom, @playlistTable.contentInset.right))
@@ -39,43 +30,43 @@ class StkController < UIViewController
 
   def play
 
-    Sting::Player.play
+    @engine.playSting
 
   end
 
   def stop
 
-    Sting::Player.stop
+    @engine.stopSting
 
   end
 
   def iPodPlay
 
-    Music::Player.play
+    @engine.playiPod
 
   end
 
   def iPodPause
 
-    Music::Player.pause
+    @engine.pauseiPod
 
   end
 
   def iPodPrevious
 
-    Music::Player.Previous
+    @engine.ipod.Previous
 
   end
 
   def iPodNext
 
-    Music::Player.Next
+    @engine.ipod.Next
 
   end
 
   def updateTitle
 
-    @titleLabel.text = Sting::Player.title
+    @titleLabel.text = @engine.sting.title
 
   end
 
@@ -87,8 +78,8 @@ class StkController < UIViewController
 
   def tableView(tableView, numberOfRowsInSection:section)
 
-    if Music::Player.playlist
-      Music::Player.playlist.items.size
+    if @engine.ipod.playlist
+      @engine.ipod.playlist.items.size
     else
       0
     end
@@ -102,8 +93,8 @@ class StkController < UIViewController
     cell = tableView.dequeueReusableCellWithIdentifier(@reuseIdentifier)
     cell = UITableViewCell.alloc.initWithStyle(UITableViewCellStyleSubtitle, reuseIdentifier: @reuseIdentifier)
 
-    if Music::Player.playlist
-      song = Music::Player.playlist.items[indexPath.row]
+    if @engine.ipod.playlist
+      song = @engine.ipod.playlist.items[indexPath.row]
 
       cell.textLabel.text = song.valueForProperty(MPMediaItemPropertyTitle)
       cell.detailTextLabel.text = song.valueForProperty(MPMediaItemPropertyArtist)
@@ -118,7 +109,7 @@ class StkController < UIViewController
 
   def tableView(tableView, didSelectRowAtIndexPath:indexPath)
 
-    Music::Player.playItem(indexPath.row)
+    @engine.ipod.playItem(indexPath.row)
 
     tableView.deselectRowAtIndexPath(indexPath, animated:true)
 

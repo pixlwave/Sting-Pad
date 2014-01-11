@@ -14,7 +14,6 @@ class Music
 
   def play
 
-    Sting::Player.stop
     @musicPlayer.play
 
   end
@@ -76,8 +75,6 @@ class Music
     saveState
 
   end
-
-  Player = Music.new
 
   def saveState
 

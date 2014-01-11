@@ -9,10 +9,12 @@ class EditController < UIViewController
 
   def viewDidLoad
 
-    titleLabel.text = Sting::Player.title
-    artistLabel.text = Sting::Player.artist
+    @engine = Engine.sharedClient
 
-    cuePoint.value = Sting::Player.getCue
+    titleLabel.text = @engine.sting.title
+    artistLabel.text = @engine.sting.artist
+
+    cuePoint.value = @engine.sting.getCue
     cuePoint.addTarget(self, action: "setCue", forControlEvents:UIControlEventTouchUpInside)
 
     if NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1
@@ -25,7 +27,7 @@ class EditController < UIViewController
 
     playlistPicker.delegate = self
     playlistPicker.dataSource = self
-    playlistPicker.selectRow(Music::Player.selectedPlaylist, inComponent:0, animated:true)
+    playlistPicker.selectRow(@engine.ipod.selectedPlaylist, inComponent:0, animated:true)
 
   end
 
@@ -47,7 +49,7 @@ class EditController < UIViewController
 
   def setCue
 
-    Sting::Player.setCue(cuePoint.value)
+    @engine.sting.setCue(cuePoint.value)
     updateWaveCue
 
   end
@@ -57,7 +59,7 @@ class EditController < UIViewController
     if NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1
       render = Dispatch::Queue.main
       render.async {
-        @wave.setAudioURL(Sting::Player.url)
+        @wave.setAudioURL(@engine.sting.url)
         updateWaveCue
       }
     end
@@ -77,9 +79,9 @@ class EditController < UIViewController
   def mediaPicker(mediaPicker, didPickMediaItems:mediaItemCollection)
 
     track = mediaItemCollection.items[0]
-    Sting::Player.loadSting(mediaItemCollection.items[0])
-    titleLabel.text = Sting::Player.title
-    artistLabel.text = Sting::Player.artist
+    @engine.sting.loadSting(mediaItemCollection.items[0])
+    titleLabel.text = @engine.sting.title
+    artistLabel.text = @engine.sting.artist
     cuePoint.value = 0
     updateWaveURL
 
@@ -102,19 +104,19 @@ class EditController < UIViewController
 
   def pickerView(pickerView, numberOfRowsInComponent:component)
 
-    Music::Player.allPlaylists.size
+    @engine.ipod.allPlaylists.size
 
   end
 
   def pickerView(pickerView, titleForRow:row, forComponent:component)
 
-    Music::Player.allPlaylists[row].valueForProperty(MPMediaPlaylistPropertyName)
+    @engine.ipod.allPlaylists[row].valueForProperty(MPMediaPlaylistPropertyName)
 
   end
 
   def pickerView(pickerView, didSelectRow:row, inComponent:component)
 
-    Music::Player.usePlaylist(row)
+    @engine.ipod.usePlaylist(row)
     self.presentingViewController.updateTable
 
   end

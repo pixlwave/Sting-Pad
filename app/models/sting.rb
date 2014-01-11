@@ -29,7 +29,6 @@ class Sting
 
   def play
 
-    Music::Player.pause
     @stingPlayer.play
 
   end
@@ -68,8 +67,6 @@ class Sting
     @cuePoint / @stingPlayer.duration
 
   end
-
-  Player = Sting.new
 
   def saveState
 
