@@ -81,7 +81,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="play.png"/>
                                         <connections>
-                                            <action selector="play" destination="Fwb-c8-22I" eventType="touchUpInside" id="oIW-ez-76h"/>
+                                            <action selector="play" destination="Fwb-c8-22I" eventType="touchDown" id="8gm-3M-qRq"/>
                                         </connections>
                                     </button>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="Cgp-Kx-hgF">
@@ -94,6 +94,20 @@
                                                 <subviews>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nNb-y1-3Ir">
                                                         <rect key="frame" x="0.0" y="10" width="108" height="44"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kiS-Wc-66Q">
+                                                        <rect key="frame" x="108" y="10" width="108" height="44"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NeK-y0-Hjp">
+                                                        <rect key="frame" x="216" y="10" width="108" height="44"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -130,7 +144,9 @@
                         <outlet property="playlistTable" destination="Cz5-hC-AHC" id="W2r-Um-aR2"/>
                         <outlet property="stingPage" destination="zOQ-cv-f9K" id="sNv-MG-Uu4"/>
                         <outlet property="stingScrollView" destination="Cgp-Kx-hgF" id="ei4-71-Ozy"/>
-                        <outlet property="titleLabel" destination="nNb-y1-3Ir" id="231-wW-gGf"/>
+                        <outlet property="titleLabel0" destination="nNb-y1-3Ir" id="lGn-gQ-IcR"/>
+                        <outlet property="titleLabel1" destination="kiS-Wc-66Q" id="21k-OW-lim"/>
+                        <outlet property="titleLabel2" destination="NeK-y0-Hjp" id="jGj-NA-Q4m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="093-u7-AzH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -156,35 +172,123 @@
                                     <action selector="dismiss" destination="sKY-0b-GtB" eventType="touchUpInside" id="cEX-VF-jBs"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="SDr-NV-ToG">
-                                <rect key="frame" x="181" y="111" width="101" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Load Track">
-                                    <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="loadTrack" destination="sKY-0b-GtB" eventType="touchUpInside" id="b2W-qK-NMP"/>
-                                </connections>
-                            </button>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="r2b-xF-6Z1">
-                                <rect key="frame" x="43" y="185" width="235" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </slider>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Nii-cs-a7j">
-                                <rect key="frame" x="45" y="136" width="231" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Yxs-Nh-nE2">
-                                <rect key="frame" x="45" y="158" width="231" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="8ag-4V-6aI">
+                                <rect key="frame" x="0.0" y="84" width="320" height="285"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" id="sNQ-lP-HOK">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="550"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="SDr-NV-ToG">
+                                                <rect key="frame" x="180" y="20" width="101" height="31"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Load Track">
+                                                    <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="loadTrack0" destination="sKY-0b-GtB" eventType="touchUpInside" id="CYZ-bx-rDH"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Nii-cs-a7j">
+                                                <rect key="frame" x="50" y="46" width="231" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Yxs-Nh-nE2">
+                                                <rect key="frame" x="50" y="67" width="231" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="r2b-xF-6Z1">
+                                                <rect key="frame" x="42" y="83" width="235" height="34"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </slider>
+                                            <view hidden="YES" contentMode="scaleToFill" id="zzc-ba-zTB">
+                                                <rect key="frame" x="44" y="124" width="231" height="55"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.99215692281723022" green="1" blue="0.59607845544815063" alpha="1" colorSpace="deviceRGB"/>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wDV-XY-4hz">
+                                                <rect key="frame" x="180" y="198" width="101" height="31"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Load Track">
+                                                    <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="loadTrack" destination="sKY-0b-GtB" eventType="touchUpInside" id="TXb-dU-541"/>
+                                                    <action selector="loadTrack1" destination="sKY-0b-GtB" eventType="touchUpInside" id="Hsg-Qv-g8Z"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KbB-HQ-3Ix">
+                                                <rect key="frame" x="50" y="224" width="231" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xQf-C4-voI">
+                                                <rect key="frame" x="50" y="245" width="231" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="b0V-O3-NnU">
+                                                <rect key="frame" x="42" y="262" width="235" height="34"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </slider>
+                                            <view hidden="YES" contentMode="scaleToFill" id="d0O-c2-X0h">
+                                                <rect key="frame" x="44" y="302" width="231" height="55"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.99215692280000001" green="1" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="czH-3B-m6p">
+                                                <rect key="frame" x="180" y="374" width="101" height="31"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Load Track">
+                                                    <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="loadTrack" destination="sKY-0b-GtB" eventType="touchUpInside" id="uwx-rM-OPM"/>
+                                                    <action selector="loadTrack2" destination="sKY-0b-GtB" eventType="touchUpInside" id="Ogp-NG-d7i"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CP1-Eu-hpD">
+                                                <rect key="frame" x="50" y="400" width="231" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZXW-Ne-n4i">
+                                                <rect key="frame" x="50" y="421" width="231" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="HXD-V4-v9x">
+                                                <rect key="frame" x="42" y="439" width="235" height="34"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </slider>
+                                            <view hidden="YES" contentMode="scaleToFill" id="IJd-7G-FaY">
+                                                <rect key="frame" x="44" y="478" width="231" height="55"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.99215692280000001" green="1" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                            </scrollView>
                             <pickerView contentMode="scaleToFill" id="G8L-k4-3rn">
                                 <rect key="frame" x="0.0" y="406" width="320" height="162"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -201,21 +305,26 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view hidden="YES" contentMode="scaleToFill" id="zzc-ba-zTB">
-                                <rect key="frame" x="45" y="226" width="231" height="55"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.99215692281723022" green="1" blue="0.59607845544815063" alpha="1" colorSpace="deviceRGB"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
-                        <outlet property="artistLabel" destination="Yxs-Nh-nE2" id="OEI-PX-gLb"/>
-                        <outlet property="cuePoint" destination="r2b-xF-6Z1" id="1ZF-7Q-O4x"/>
+                        <outlet property="artistLabel0" destination="Yxs-Nh-nE2" id="X1o-v2-Fab"/>
+                        <outlet property="artistLabel1" destination="xQf-C4-voI" id="lDV-qQ-rRZ"/>
+                        <outlet property="artistLabel2" destination="ZXW-Ne-n4i" id="sEf-bM-UJk"/>
+                        <outlet property="cuePoint0" destination="r2b-xF-6Z1" id="Ipw-l9-Fq0"/>
+                        <outlet property="cuePoint1" destination="b0V-O3-NnU" id="LBu-r9-fVw"/>
+                        <outlet property="cuePoint2" destination="HXD-V4-v9x" id="o1s-tT-a5e"/>
+                        <outlet property="editScrollView" destination="8ag-4V-6aI" id="Rtm-ye-e2f"/>
+                        <outlet property="editView" destination="sNQ-lP-HOK" id="3Vd-Y3-SXC"/>
                         <outlet property="playlistPicker" destination="G8L-k4-3rn" id="Ulz-ob-VyI"/>
-                        <outlet property="titleLabel" destination="Nii-cs-a7j" id="KXF-5h-oZN"/>
-                        <outlet property="waveView" destination="zzc-ba-zTB" id="k2l-PR-j0u"/>
+                        <outlet property="titleLabel0" destination="Nii-cs-a7j" id="bp1-kx-Ib3"/>
+                        <outlet property="titleLabel1" destination="KbB-HQ-3Ix" id="MsJ-Sq-2wJ"/>
+                        <outlet property="titleLabel2" destination="CP1-Eu-hpD" id="Ti3-NC-zBg"/>
+                        <outlet property="waveView0" destination="zzc-ba-zTB" id="8HB-O2-eK7"/>
+                        <outlet property="waveView1" destination="d0O-c2-X0h" id="G8I-jS-UCl"/>
+                        <outlet property="waveView2" destination="IJd-7G-FaY" id="Emx-2l-HOj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="17N-rm-diW" userLabel="First Responder" sceneMemberID="firstResponder"/>

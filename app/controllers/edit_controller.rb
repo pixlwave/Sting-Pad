@@ -1,29 +1,40 @@
 class EditController < UIViewController
   extend IB
 
-  outlet :cuePoint, UISlider
-  outlet :titleLabel, UILabel
-  outlet :artistLabel, UILabel
-  outlet :waveView, UIView
+  outlet :editScrollView, UIScrollView
+  outlet :editView, UIView
+  outlet :titleLabel0, UILabel
+  outlet :artistLabel0, UILabel
+  outlet :cuePoint0, UISlider
+  outlet :waveView0, UIView
+  outlet :titleLabel1, UILabel
+  outlet :artistLabel1, UILabel
+  outlet :cuePoint1, UISlider
+  outlet :waveView1, UIView
+  outlet :titleLabel2, UILabel
+  outlet :artistLabel2, UILabel
+  outlet :cuePoint2, UISlider
+  outlet :waveView2, UIView
+
   outlet :playlistPicker, UIPickerView
 
   def viewDidLoad
 
     @engine = Engine.sharedClient
 
-    titleLabel.text = @engine.sting.title
-    artistLabel.text = @engine.sting.artist
+    updateLabels
+    @cuePoint0.addTarget(self, action: "setCue", forControlEvents:UIControlEventTouchUpInside)
+    @cuePoint1.addTarget(self, action: "setCue", forControlEvents:UIControlEventTouchUpInside)
+    @cuePoint2.addTarget(self, action: "setCue", forControlEvents:UIControlEventTouchUpInside)
 
-    cuePoint.value = @engine.sting.getCue
-    cuePoint.addTarget(self, action: "setCue", forControlEvents:UIControlEventTouchUpInside)
+    waveFrame = @waveView0.frame
+    @wave = FDWaveformView.alloc.initWithFrame(waveFrame)
+    # @wave.doesAllowScrubbing = true
+    @editView.addSubview(@wave)
+    updateWaveURL
 
-    if NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1
-      waveFrame = @waveView.frame
-      @wave = FDWaveformView.alloc.initWithFrame(waveFrame)
-      # @wave.doesAllowScrubbing = true
-      self.view.addSubview(@wave)
-      updateWaveURL
-    end
+    @editScrollView.setContentSize(@editView.frame.size)
+    @editScrollView.delegate = self
 
     playlistPicker.delegate = self
     playlistPicker.dataSource = self
@@ -47,42 +58,73 @@ class EditController < UIViewController
 
   end
 
+  def loadTrack0
+
+    @loadingTrack = 0
+    loadTrack
+
+  end
+
+  def loadTrack1
+
+    @loadingTrack = 1
+    loadTrack
+
+  end
+
+  def loadTrack2
+
+    @loadingTrack = 2
+    loadTrack
+
+  end
+
   def setCue
 
-    @engine.sting.setCue(cuePoint.value)
+    @engine.sting[0].setCue(cuePoint0.value)
     updateWaveCue
+
+  end
+
+  def updateLabels
+
+    @titleLabel0.text = @engine.sting[0].title
+    @artistLabel0.text = @engine.sting[0].artist
+    @cuePoint0.value = @engine.sting[0].getCue
+
+    @titleLabel1.text = @engine.sting[1].title
+    @artistLabel1.text = @engine.sting[1].artist
+    @cuePoint1.value = @engine.sting[1].getCue
+
+    @titleLabel2.text = @engine.sting[2].title
+    @artistLabel2.text = @engine.sting[2].artist
+    @cuePoint2.value = @engine.sting[2].getCue
 
   end
 
   def updateWaveURL
 
-    if NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1
-      render = Dispatch::Queue.main
-      render.async {
-        @wave.setAudioURL(@engine.sting.url)
-        updateWaveCue
-      }
-    end
+    render = Dispatch::Queue.main
+    render.async {
+      @wave.setAudioURL(@engine.sting[0].url)
+      updateWaveCue
+    }
 
   end
 
   def updateWaveCue
 
-    if NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1
-      @wave.setProgressSamples(@wave.totalSamples * cuePoint.value)
-    end
+    @wave.setProgressSamples(@wave.totalSamples * cuePoint0.value)
 
   end
 
 
-  # Media picker delegate methods
+  ##### Media picker delegate methods #####
   def mediaPicker(mediaPicker, didPickMediaItems:mediaItemCollection)
 
     track = mediaItemCollection.items[0]
-    @engine.sting.loadSting(mediaItemCollection.items[0])
-    titleLabel.text = @engine.sting.title
-    artistLabel.text = @engine.sting.artist
-    cuePoint.value = 0
+    @engine.sting[@loadingTrack].loadSting(mediaItemCollection.items[0])
+    updateLabels
     updateWaveURL
 
     self.dismissViewControllerAnimated(true, completion:nil)
@@ -95,7 +137,7 @@ class EditController < UIViewController
 
   end
 
-  # PickerView delegate methods
+  ##### PickerView delegate methods #####
   def numberOfComponentsInPickerView(pickerView)
 
     1

@@ -1,7 +1,9 @@
 class StkController < UIViewController
   extend IB
 
-  outlet :titleLabel, UILabel
+  outlet :titleLabel0, UILabel
+  outlet :titleLabel1, UILabel
+  outlet :titleLabel2, UILabel
   outlet :playlistTable, UITableView
   outlet :stingScrollView, UIScrollView
   outlet :stingPage, UIPageControl
@@ -30,8 +32,8 @@ class StkController < UIViewController
 
   def play
 
-    @engine.playSting
-    # @engine.playSting(@selectedSting)
+    # @engine.playSting
+    @engine.playSting(@selectedSting)
 
   end
 
@@ -67,7 +69,9 @@ class StkController < UIViewController
 
   def updateTitle
 
-    @titleLabel.text = @engine.sting.title
+    @titleLabel0.text = @engine.sting[0].title
+    @titleLabel1.text = @engine.sting[1].title
+    @titleLabel2.text = @engine.sting[2].title
 
   end
 

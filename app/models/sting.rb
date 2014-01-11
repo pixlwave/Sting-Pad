@@ -21,9 +21,9 @@ class Sting
     end
 
     @stingPlayer.delegate = self
-    @stingPlayer.prepareToPlay
     @stingPlayer.numberOfLoops = 0
     @stingPlayer.currentTime = @cuePoint
+    @stingPlayer.prepareToPlay
 
   end
 
@@ -37,6 +37,7 @@ class Sting
 
     @stingPlayer.stop
     @stingPlayer.currentTime = @cuePoint
+    @stingPlayer.prepareToPlay
 
   end
 
@@ -58,6 +59,7 @@ class Sting
 
     @cuePoint = cuePoint * @stingPlayer.duration
     @stingPlayer.currentTime = @cuePoint
+    @stingPlayer.prepareToPlay
     Engine.saveState
 
   end

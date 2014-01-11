@@ -12,16 +12,30 @@
 
 @interface EditController: UIViewController
 
-@property IBOutlet UISlider * cuePoint;
-@property IBOutlet UILabel * titleLabel;
-@property IBOutlet UILabel * artistLabel;
-@property IBOutlet UIView * waveView;
+@property IBOutlet UIScrollView * editScrollView;
+@property IBOutlet UIView * editView;
+@property IBOutlet UILabel * titleLabel0;
+@property IBOutlet UILabel * artistLabel0;
+@property IBOutlet UISlider * cuePoint0;
+@property IBOutlet UIView * waveView0;
+@property IBOutlet UILabel * titleLabel1;
+@property IBOutlet UILabel * artistLabel1;
+@property IBOutlet UISlider * cuePoint1;
+@property IBOutlet UIView * waveView1;
+@property IBOutlet UILabel * titleLabel2;
+@property IBOutlet UILabel * artistLabel2;
+@property IBOutlet UISlider * cuePoint2;
+@property IBOutlet UIView * waveView2;
 @property IBOutlet UIPickerView * playlistPicker;
 
 -(IBAction) viewDidLoad;
 -(IBAction) dismiss;
 -(IBAction) loadTrack;
+-(IBAction) loadTrack0;
+-(IBAction) loadTrack1;
+-(IBAction) loadTrack2;
 -(IBAction) setCue;
+-(IBAction) updateLabels;
 -(IBAction) updateWaveURL;
 -(IBAction) updateWaveCue;
 -(IBAction) mediaPickerDidCancel:(id) mediaPicker;
@@ -31,7 +45,9 @@
 
 @interface StkController: UIViewController
 
-@property IBOutlet UILabel * titleLabel;
+@property IBOutlet UILabel * titleLabel0;
+@property IBOutlet UILabel * titleLabel1;
+@property IBOutlet UILabel * titleLabel2;
 @property IBOutlet UITableView * playlistTable;
 @property IBOutlet UIScrollView * stingScrollView;
 @property IBOutlet UIPageControl * stingPage;
@@ -49,8 +65,17 @@
 
 @end
 
-@interface Music: NSObject
+@interface Engine: NSObject
 -(IBAction) initialize;
+-(IBAction) playSting:(id) selectedSting;
+-(IBAction) stopSting;
+-(IBAction) playiPod;
+-(IBAction) pauseiPod;
+
+@end
+
+@interface Music: NSObject
+-(IBAction) initialize:(id) selectedPlaylist;
 -(IBAction) play;
 -(IBAction) pause;
 -(IBAction) Previous;
@@ -59,18 +84,15 @@
 -(IBAction) getNamedPlaylist:(id) name;
 -(IBAction) getAllPlaylists;
 -(IBAction) usePlaylist:(id) index;
--(IBAction) saveState;
 
 @end
 
 @interface Sting: NSObject
--(IBAction) initialize;
 -(IBAction) play;
 -(IBAction) stop;
 -(IBAction) loadSting:(id) mediaItem;
 -(IBAction) setCue:(id) cuePoint;
 -(IBAction) getCue;
--(IBAction) saveState;
 
 @end
 

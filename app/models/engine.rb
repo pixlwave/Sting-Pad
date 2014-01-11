@@ -11,34 +11,38 @@ class Engine
 
   def initialize
 
-    # TODO: use error handler rather than check for nil AVAudioPlayer
-    url = Turnkey.unarchive("Sting URL")
-    title = Turnkey.unarchive("Sting Title") || "No Sting Loaded"
-    artist = Turnkey.unarchive("Sting Artist") || "No Artist"
-    cuePoint = Turnkey.unarchive("Cue Point") || 0
-    @sting = Sting.new(url, title, artist, cuePoint)
+    @sting = Array.new(3)
+
+    @sting.each_with_index do |s, i|
+      url = Turnkey.unarchive("Sting URL #{i}")
+      title = Turnkey.unarchive("Sting Title #{i}") || "No Sting Loaded"
+      artist = Turnkey.unarchive("Sting Artist #{i}") || "No Artist"
+      cuePoint = Turnkey.unarchive("Cue Point #{i}") || 0
+      @sting[i] = Sting.new(url, title, artist, cuePoint)
+    end
 
     selectedPlaylist = Turnkey.unarchive("Selected Playlist") || 0
     @ipod = Music.new(selectedPlaylist)
 
   end
 
-  def playSting
+  def playSting(selectedSting)
 
     @ipod.pause
-    @sting.play
+    @sting[selectedSting].play
+    @playingSting = selectedSting
 
   end
 
   def stopSting
 
-    @sting.stop
+    @sting[@playingSting].stop
 
   end
 
   def playiPod
 
-    @sting.stop
+    @sting[@playingSting].stop
     @ipod.play
 
   end
@@ -51,10 +55,12 @@ class Engine
 
   def self.saveState
 
-    Turnkey.archive(Engine.sharedClient.sting.url, "Sting URL")
-    Turnkey.archive(Engine.sharedClient.sting.cuePoint, "Cue Point")
-    Turnkey.archive(Engine.sharedClient.sting.title, "Sting Title")
-    Turnkey.archive(Engine.sharedClient.sting.artist, "Sting Artist")
+    Engine.sharedClient.sting.each_with_index do |s, i|
+      Turnkey.archive(Engine.sharedClient.sting[i].url, "Sting URL #{i}")
+      Turnkey.archive(Engine.sharedClient.sting[i].cuePoint, "Cue Point #{i}")
+      Turnkey.archive(Engine.sharedClient.sting[i].title, "Sting Title #{i}")
+      Turnkey.archive(Engine.sharedClient.sting[i].artist, "Sting Artist #{i}")
+    end
 
     # restore selected playlist by name and not index
     # Turnkey.archive(@playlist, "Playlist")
