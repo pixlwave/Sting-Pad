@@ -4,6 +4,7 @@ GEM
     activesupport (3.2.15)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
+    bubble-wrap (1.4.0)
     claide (0.4.0)
     cocoapods (0.29.0)
       activesupport (>= 3.2.15, < 4)
@@ -51,6 +52,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bubble-wrap
   ib
   motion-cocoapods
   rake

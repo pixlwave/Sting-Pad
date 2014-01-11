@@ -1,19 +1,18 @@
 class EditController < UIViewController
   extend IB
 
+  include BW::KVO
+
   outlet :editScrollView, UIScrollView
   outlet :editView, UIView
   outlet :titleLabel0, UILabel
   outlet :artistLabel0, UILabel
-  outlet :cuePoint0, UISlider
   outlet :waveView0, UIView
   outlet :titleLabel1, UILabel
   outlet :artistLabel1, UILabel
-  outlet :cuePoint1, UISlider
   outlet :waveView1, UIView
   outlet :titleLabel2, UILabel
   outlet :artistLabel2, UILabel
-  outlet :cuePoint2, UISlider
   outlet :waveView2, UIView
 
   outlet :playlistPicker, UIPickerView
@@ -23,15 +22,39 @@ class EditController < UIViewController
     @engine = Engine.sharedClient
 
     updateLabels
-    @cuePoint0.addTarget(self, action: "setCue", forControlEvents:UIControlEventTouchUpInside)
-    @cuePoint1.addTarget(self, action: "setCue", forControlEvents:UIControlEventTouchUpInside)
-    @cuePoint2.addTarget(self, action: "setCue", forControlEvents:UIControlEventTouchUpInside)
 
     waveFrame = @waveView0.frame
-    @wave = FDWaveformView.alloc.initWithFrame(waveFrame)
-    # @wave.doesAllowScrubbing = true
-    @editView.addSubview(@wave)
-    updateWaveURL
+    @wave0 = FDWaveformView.alloc.initWithFrame(waveFrame)
+    @wave0.doesAllowScrubbing = true
+    @editView.addSubview(@wave0)
+    updateWaveURL(0)
+
+    observe(@wave0, "progressSamples") do |old_value, new_value|
+      cue = new_value.to_f / @wave0.totalSamples
+      @engine.sting[0].setCue(cue)
+    end
+
+    waveFrame = @waveView1.frame
+    @wave1 = FDWaveformView.alloc.initWithFrame(waveFrame)
+    @wave1.doesAllowScrubbing = true
+    @editView.addSubview(@wave1)
+    updateWaveURL(1)
+
+    observe(@wave1, "progressSamples") do |old_value, new_value|
+      cue = new_value.to_f / @wave1.totalSamples
+      @engine.sting[1].setCue(cue)
+    end
+
+    waveFrame = @waveView2.frame
+    @wave2 = FDWaveformView.alloc.initWithFrame(waveFrame)
+    @wave2.doesAllowScrubbing = true
+    @editView.addSubview(@wave2)
+    updateWaveURL(2)
+
+    observe(@wave2, "progressSamples") do |old_value, new_value|
+      cue = new_value.to_f / @wave2.totalSamples
+      @engine.sting[2].setCue(cue)
+    end
 
     @editScrollView.setContentSize(@editView.frame.size)
     @editScrollView.delegate = self
@@ -79,42 +102,41 @@ class EditController < UIViewController
 
   end
 
-  def setCue
-
-    @engine.sting[0].setCue(cuePoint0.value)
-    updateWaveCue
-
-  end
-
   def updateLabels
 
     @titleLabel0.text = @engine.sting[0].title
     @artistLabel0.text = @engine.sting[0].artist
-    @cuePoint0.value = @engine.sting[0].getCue
 
     @titleLabel1.text = @engine.sting[1].title
     @artistLabel1.text = @engine.sting[1].artist
-    @cuePoint1.value = @engine.sting[1].getCue
 
     @titleLabel2.text = @engine.sting[2].title
     @artistLabel2.text = @engine.sting[2].artist
-    @cuePoint2.value = @engine.sting[2].getCue
 
   end
 
-  def updateWaveURL
+  def updateWaveURL(player)
 
-    render = Dispatch::Queue.main
-    render.async {
-      @wave.setAudioURL(@engine.sting[0].url)
-      updateWaveCue
-    }
-
-  end
-
-  def updateWaveCue
-
-    @wave.setProgressSamples(@wave.totalSamples * cuePoint0.value)
+    case player
+    when 0
+      render = Dispatch::Queue.main
+      render.async {
+        @wave0.setAudioURL(@engine.sting[0].url)
+        @wave0.setProgressSamples(@wave0.totalSamples * @engine.sting[0].getCue)
+      }
+    when 1
+      render = Dispatch::Queue.main
+      render.async {
+        @wave1.setAudioURL(@engine.sting[1].url)
+        @wave1.setProgressSamples(@wave1.totalSamples * @engine.sting[1].getCue)
+      }
+    when 2
+      render = Dispatch::Queue.main
+      render.async {
+        @wave2.setAudioURL(@engine.sting[2].url)
+        @wave2.setProgressSamples(@wave2.totalSamples * @engine.sting[2].getCue)
+      }
+    end
 
   end
 
@@ -125,7 +147,7 @@ class EditController < UIViewController
     track = mediaItemCollection.items[0]
     @engine.sting[@loadingTrack].loadSting(mediaItemCollection.items[0])
     updateLabels
-    updateWaveURL
+    updateWaveURL(@loadingTrack)
 
     self.dismissViewControllerAnimated(true, completion:nil)
 
