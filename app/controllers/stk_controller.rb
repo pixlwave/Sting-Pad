@@ -31,6 +31,7 @@ class StkController < UIViewController
   def play
 
     @engine.playSting
+    # @engine.playSting(@selectedSting)
 
   end
 

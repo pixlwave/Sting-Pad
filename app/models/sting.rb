@@ -1,17 +1,17 @@
 class Sting
 
-  attr_reader :url, :title, :artist
+  attr_reader :url, :title, :artist, :cuePoint
 
-  def initialize
+  def initialize(url, title, artist, cuePoint)
 
     # TODO: use error handler rather than check for nil AVAudioPlayer
-    @url = Turnkey.unarchive("Sting URL")
+    @url = url
     @stingPlayer = AVAudioPlayer.alloc.initWithContentsOfURL(@url, error:nil)
 
     if @stingPlayer
-      @title = Turnkey.unarchive("Sting Title") || "No Sting Loaded"
-      @artist = Turnkey.unarchive("Sting Artist") || "No Artist"
-      @cuePoint = Turnkey.unarchive("Cue Point") || 0
+      @title = title
+      @artist = artist
+      @cuePoint = cuePoint
     else
       @url = NSURL.fileURLWithPath(NSBundle.mainBundle.pathForResource("ComputerMagic", ofType:"m4a"))
       @stingPlayer = AVAudioPlayer.alloc.initWithContentsOfURL(@url, error:nil)
@@ -50,7 +50,7 @@ class Sting
     @title = mediaItem.valueForProperty(MPMediaItemPropertyTitle)
     @artist = mediaItem.valueForProperty(MPMediaItemPropertyArtist)
 
-    saveState
+    Engine.saveState
 
   end
 
@@ -58,22 +58,13 @@ class Sting
 
     @cuePoint = cuePoint * @stingPlayer.duration
     @stingPlayer.currentTime = @cuePoint
-    saveState
+    Engine.saveState
 
   end
 
   def getCue
 
     @cuePoint / @stingPlayer.duration
-
-  end
-
-  def saveState
-
-    Turnkey.archive(@url, "Sting URL")
-    Turnkey.archive(@cuePoint, "Cue Point")
-    Turnkey.archive(@title, "Sting Title")
-    Turnkey.archive(@artist, "Sting Artist")
 
   end
 
