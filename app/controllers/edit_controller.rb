@@ -23,37 +23,22 @@ class EditController < UIViewController
 
     updateLabels
 
-    waveFrame = @waveView0.frame
-    @wave0 = FDWaveformView.alloc.initWithFrame(waveFrame)
-    @wave0.doesAllowScrubbing = true
-    @editView.addSubview(@wave0)
-    updateWaveURL(0)
+    waveFrame = Array.new(3)
+    waveFrame[0] = @waveView0.frame
+    waveFrame[1] = @waveView1.frame
+    waveFrame[2] = @waveView2.frame
+    
+    @wave = Array.new(3)
+    @wave.each_with_index do |w, i|
+      @wave[i] = FDWaveformView.alloc.initWithFrame(waveFrame[i])
+      @wave[i].doesAllowScrubbing = true
+      @editView.addSubview(@wave[i])
+      updateWaveURL(i)
 
-    observe(@wave0, "progressSamples") do |old_value, new_value|
-      cue = new_value.to_f / @wave0.totalSamples
-      @engine.sting[0].setCue(cue)
-    end
-
-    waveFrame = @waveView1.frame
-    @wave1 = FDWaveformView.alloc.initWithFrame(waveFrame)
-    @wave1.doesAllowScrubbing = true
-    @editView.addSubview(@wave1)
-    updateWaveURL(1)
-
-    observe(@wave1, "progressSamples") do |old_value, new_value|
-      cue = new_value.to_f / @wave1.totalSamples
-      @engine.sting[1].setCue(cue)
-    end
-
-    waveFrame = @waveView2.frame
-    @wave2 = FDWaveformView.alloc.initWithFrame(waveFrame)
-    @wave2.doesAllowScrubbing = true
-    @editView.addSubview(@wave2)
-    updateWaveURL(2)
-
-    observe(@wave2, "progressSamples") do |old_value, new_value|
-      cue = new_value.to_f / @wave2.totalSamples
-      @engine.sting[2].setCue(cue)
+      observe(@wave[i], "progressSamples") do |old_value, new_value|
+        cue = new_value.to_f / @wave[i].totalSamples
+        @engine.sting[i].setCue(cue)
+      end
     end
 
     @editScrollView.setContentSize(@editView.frame.size)
@@ -115,28 +100,13 @@ class EditController < UIViewController
 
   end
 
-  def updateWaveURL(player)
+  def updateWaveURL(i)
 
-    case player
-    when 0
-      render = Dispatch::Queue.main
-      render.async {
-        @wave0.setAudioURL(@engine.sting[0].url)
-        @wave0.setProgressSamples(@wave0.totalSamples * @engine.sting[0].getCue)
-      }
-    when 1
-      render = Dispatch::Queue.main
-      render.async {
-        @wave1.setAudioURL(@engine.sting[1].url)
-        @wave1.setProgressSamples(@wave1.totalSamples * @engine.sting[1].getCue)
-      }
-    when 2
-      render = Dispatch::Queue.main
-      render.async {
-        @wave2.setAudioURL(@engine.sting[2].url)
-        @wave2.setProgressSamples(@wave2.totalSamples * @engine.sting[2].getCue)
-      }
-    end
+    render = Dispatch::Queue.main
+    render.async {
+      @wave[i].setAudioURL(@engine.sting[i].url)
+      @wave[i].setProgressSamples(@wave[i].totalSamples * @engine.sting[i].getCue)
+    }
 
   end
 
