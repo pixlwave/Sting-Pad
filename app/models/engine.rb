@@ -24,11 +24,14 @@ class Engine
     selectedPlaylist = Turnkey.unarchive("Selected Playlist") || 0
     @ipod = Music.new(selectedPlaylist)
 
+    @playingSting = 0
+
   end
 
   def playSting(selectedSting)
 
     @ipod.pause
+    @sting[@playingSting].stop if selectedSting != @playingSting
     @sting[selectedSting].play
     @playingSting = selectedSting
 
@@ -44,6 +47,13 @@ class Engine
 
     @sting[@playingSting].stop
     @ipod.play
+
+  end
+
+  def playiPodItem(index)
+
+    @sting[@playingSting].stop
+    @ipod.playItem(index)
 
   end
 

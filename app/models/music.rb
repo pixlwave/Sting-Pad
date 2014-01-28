@@ -39,7 +39,7 @@ class Music
   def playItem(index)
 
     @musicPlayer.setNowPlayingItem(@playlist.items[index])
-    play unless @musicPlayer.playbackState == MPMusicPlaybackStatePlaying
+    play # unless @musicPlayer.playbackState == MPMusicPlaybackStatePlaying
 
   end
 

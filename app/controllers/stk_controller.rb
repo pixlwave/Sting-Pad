@@ -113,7 +113,7 @@ class StkController < UIViewController
 
   def tableView(tableView, didSelectRowAtIndexPath:indexPath)
 
-    @engine.ipod.playItem(indexPath.row)
+    @engine.playiPodItem(indexPath.row)
 
     tableView.deselectRowAtIndexPath(indexPath, animated:true)
 

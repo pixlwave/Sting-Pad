@@ -15,6 +15,7 @@ Motion::Project::App.setup do |app|
   app.identifier = 'uk.me.digitalfx.Stingmtk'
   app.icons = ["Icon@2x.png"]
   app.prerendered_icon = true
+  app.interface_orientations = [:portrait]
   # app.codesign_certificate = 'iPhone Distribution: Douglas Earnshaw (NU8A5Y875P)'
   # app.provisioning_profile = '/Users/Douglas/Documents/RubyMotion/Certificates/SSV_Ad_Hoc.mobileprovision'
 
