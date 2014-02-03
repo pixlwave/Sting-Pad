@@ -66,7 +66,7 @@
                             </tableView>
                             <view contentMode="scaleToFill" id="CQ8-x6-yNq">
                                 <rect key="frame" x="0.0" y="470" width="320" height="98"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9Xd-OU-8VQ">
                                         <rect key="frame" x="128" y="25" width="48" height="48"/>
@@ -174,7 +174,7 @@
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="8ag-4V-6aI">
                                 <rect key="frame" x="0.0" y="84" width="320" height="285"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="sNQ-lP-HOK">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="550"/>

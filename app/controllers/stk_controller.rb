@@ -149,7 +149,6 @@ class StkController < UIViewController
 
     @selectedSting = (scrollView.contentOffset.x / scrollView.frame.size.width).to_int
     @stingPage.currentPage = @selectedSting
-    puts "Page #{@selectedSting}"
 
   end
   

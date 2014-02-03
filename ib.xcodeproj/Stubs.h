@@ -48,6 +48,8 @@
 @property IBOutlet UIPageControl * stingPage;
 
 -(IBAction) viewDidLoad;
+-(IBAction) viewWillAppear:(id) animated;
+-(IBAction) viewWillDisappear:(id) animated;
 -(IBAction) play;
 -(IBAction) stop;
 -(IBAction) iPodPlay;
