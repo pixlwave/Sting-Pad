@@ -30,6 +30,23 @@ class StkController < UIViewController
 
   end
 
+  def viewWillAppear(animated)
+
+    # @ipodObserver = App.notification_center.observe MPMusicPlayerControllerNowPlayingItemDidChangeNotification do |notification|
+    #   self.performSelector(updateTable, withObject:self, afterDelay:1)
+    #   App.alert("Notified")
+    # end
+
+    NSNotificationCenter.defaultCenter.addObserver(self, selector:'updateTable', name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification, object:nil)
+
+  end
+
+  def viewWillDisappear(animated)
+  
+    NSNotificationCenter.defaultCenter.removeObserver(self)
+  
+  end
+
   def play
 
     @engine.playSting(@selectedSting)
@@ -56,13 +73,13 @@ class StkController < UIViewController
 
   def iPodPrevious
 
-    @engine.ipod.Previous
+    @engine.ipod.previous
 
   end
 
   def iPodNext
 
-    @engine.ipod.Next
+    @engine.ipod.next
 
   end
 
@@ -80,6 +97,8 @@ class StkController < UIViewController
 
   end
 
+
+  ##### Table View delegate methods #####
   def tableView(tableView, numberOfRowsInSection:section)
 
     if @engine.ipod.playlist
@@ -104,6 +123,13 @@ class StkController < UIViewController
       cell.detailTextLabel.text = song.valueForProperty(MPMediaItemPropertyArtist)
       cell.imageView.image = song.valueForProperty(MPMediaItemPropertyArtwork).imageWithSize(CGSizeMake(55, 55))
       cell.imageView.image ||= UIImage.imageNamed("albumartblank")
+
+      # need to implement a better way of doing this that doesn't call updateTable every time a track changes???
+      if song == @engine.ipod.nowPlayingItem
+        cell.textLabel.font = UIFont.boldSystemFontOfSize(cell.textLabel.font.pointSize)
+        cell.detailTextLabel.font = UIFont.boldSystemFontOfSize(cell.detailTextLabel.font.pointSize)
+      end
+
       cell
     else
       nil

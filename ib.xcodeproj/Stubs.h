@@ -32,8 +32,7 @@
 -(IBAction) loadTrack1;
 -(IBAction) loadTrack2;
 -(IBAction) updateLabels;
--(IBAction) updateWaveURL;
--(IBAction) updateWaveCue;
+-(IBAction) updateWaveURL:(id) i;
 -(IBAction) mediaPickerDidCancel:(id) mediaPicker;
 -(IBAction) numberOfComponentsInPickerView:(id) pickerView;
 
@@ -66,6 +65,7 @@
 -(IBAction) playSting:(id) selectedSting;
 -(IBAction) stopSting;
 -(IBAction) playiPod;
+-(IBAction) playiPodItem:(id) index;
 -(IBAction) pauseiPod;
 
 @end
@@ -74,9 +74,10 @@
 -(IBAction) initialize:(id) selectedPlaylist;
 -(IBAction) play;
 -(IBAction) pause;
--(IBAction) Previous;
--(IBAction) Next;
+-(IBAction) previous;
+-(IBAction) next;
 -(IBAction) playItem:(id) index;
+-(IBAction) nowPlayingItem;
 -(IBAction) getNamedPlaylist:(id) name;
 -(IBAction) getAllPlaylists;
 -(IBAction) usePlaylist:(id) index;

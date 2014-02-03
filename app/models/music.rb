@@ -9,6 +9,7 @@ class Music
     @selectedPlaylist = selectedPlaylist
     @playlist = @allPlaylists[@selectedPlaylist]
     @musicPlayer.setQueueWithItemCollection(@playlist)
+    @musicPlayer.beginGeneratingPlaybackNotifications
 
   end
 
@@ -24,13 +25,13 @@ class Music
 
   end
 
-  def Previous
+  def previous
 
     @musicPlayer.skipToPreviousItem
 
   end
 
-  def Next
+  def next
 
     @musicPlayer.skipToNextItem
 
@@ -40,6 +41,12 @@ class Music
 
     @musicPlayer.setNowPlayingItem(@playlist.items[index])
     play # unless @musicPlayer.playbackState == MPMusicPlaybackStatePlaying
+
+  end
+
+  def nowPlayingItem
+
+    @musicPlayer.nowPlayingItem
 
   end
 
