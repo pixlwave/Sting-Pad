@@ -153,6 +153,29 @@
             </objects>
             <point key="canvasLocation" x="108" y="37"/>
         </scene>
+        <!--Walkthrough Controller-->
+        <scene sceneID="AKy-7c-kxQ">
+            <objects>
+                <viewController storyboardIdentifier="WalkthroughController" id="Mht-0w-Ces" customClass="WalkthroughController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nhn-ml-5AK">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="whs-Lr-FtN">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="walkthroughImageView" destination="whs-Lr-FtN" id="98f-EU-yBq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HWt-Mz-z2a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="108" y="722"/>
+        </scene>
         <!--Edit Controller-->
         <scene sceneID="BBH-1f-24n">
             <objects>

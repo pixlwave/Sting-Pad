@@ -13,7 +13,7 @@ Motion::Project::App.setup do |app|
   app.name = 'Stingmtk'
   app.version = '0.2'
   app.identifier = 'uk.me.digitalfx.Stingmtk'
-  app.icons = ["Icon@2x.png"]
+  app.icons = ["Icon.png, Icon@2x.png, Icon-57.png, Icon-57@2x.png"]
   app.prerendered_icon = true
   app.interface_orientations = [:portrait]
   # app.codesign_certificate = 'iPhone Distribution: Douglas Earnshaw (NU8A5Y875P)'

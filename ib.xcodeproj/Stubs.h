@@ -56,9 +56,18 @@
 -(IBAction) iPodPause;
 -(IBAction) iPodPrevious;
 -(IBAction) iPodNext;
--(IBAction) updateTitle;
+-(IBAction) updateStingTitles;
 -(IBAction) updateTable;
 -(IBAction) scrollViewDidEndDecelerating:(id) scrollView;
+
+@end
+
+@interface WalkthroughController: UIViewController
+
+@property IBOutlet UIImageView * walkthroughImageView;
+
+-(IBAction) viewDidLoad;
+-(IBAction) imageTapped;
 
 @end
 

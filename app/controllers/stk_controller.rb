@@ -26,7 +26,7 @@ class StkController < UIViewController
     @stingScrollView.delegate = self
     @selectedSting = 0
 
-    updateTitle
+    updateStingTitles
 
   end
 
@@ -38,6 +38,12 @@ class StkController < UIViewController
     # end
 
     NSNotificationCenter.defaultCenter.addObserver(self, selector:'updateTable', name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification, object:nil)
+
+  end
+
+  def viewDidAppear(animated)
+
+    showWalkthrough unless Turnkey.unarchive("hasSeenTutorial")
 
   end
 
@@ -83,7 +89,7 @@ class StkController < UIViewController
 
   end
 
-  def updateTitle
+  def updateStingTitles
 
     @titleLabel0.text = @engine.sting[0].title
     @titleLabel1.text = @engine.sting[1].title
@@ -94,6 +100,15 @@ class StkController < UIViewController
   def updateTable
 
     @playlistTable.reloadData
+
+  end
+
+  def showWalkthrough
+
+    walkvc = storyboard.instantiateViewControllerWithIdentifier("WalkthroughController")
+    walkvc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve
+    presentViewController(walkvc, animated:true, completion:nil)
+    Turnkey.archive(true, "hasSeenTutorial")
 
   end
 

@@ -12,6 +12,9 @@
 @implementation StkController
 @end
 
+@implementation WalkthroughController
+@end
+
 @implementation Engine
 @end
 

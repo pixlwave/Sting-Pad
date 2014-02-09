@@ -52,7 +52,7 @@ class EditController < UIViewController
 
   def dismiss
 
-    self.presentingViewController.updateTitle
+    self.presentingViewController.updateStingTitles
     self.dismissViewControllerAnimated(true, completion:nil)
 
   end
