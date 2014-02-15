@@ -8,7 +8,11 @@ class WalkthroughController < UIViewController
   def viewDidLoad
 
     @currentImage = 0
-    @images = ["StkPlaylist", "StkSting", "EditSting", "EditPlaylist"]
+    if UIScreen.mainScreen.bounds.size.height == 568
+      @images = ["StkPlaylist-568h", "StkSting-568h", "EditSting-568h", "EditPlaylist-568h"]
+    else
+      @images = ["StkPlaylist", "StkSting", "EditSting", "EditPlaylist"]
+    end
     tap = UITapGestureRecognizer.alloc.initWithTarget(self, action:"imageTapped")
 
     @walkthroughImageView.image = UIImage.imageNamed("Walkthrough/"+@images[@currentImage])
