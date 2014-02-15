@@ -10,9 +10,9 @@ end
 
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
-  app.name = 'Stingmtk'
+  app.name = 'Stingtk'
   app.version = '0.2'
-  app.identifier = 'uk.me.digitalfx.Stingmtk'
+  app.identifier = 'uk.pixlwave.Stingmtk'
   app.icons = ["Icon.png, Icon@2x.png, Icon-57.png, Icon-57@2x.png"]
   app.prerendered_icon = true
   app.interface_orientations = [:portrait]
