@@ -49,6 +49,7 @@
 
 -(IBAction) viewDidLoad;
 -(IBAction) viewWillAppear:(id) animated;
+-(IBAction) viewDidAppear:(id) animated;
 -(IBAction) viewWillDisappear:(id) animated;
 -(IBAction) play;
 -(IBAction) stop;
@@ -58,6 +59,7 @@
 -(IBAction) iPodNext;
 -(IBAction) updateStingTitles;
 -(IBAction) updateTable;
+-(IBAction) showWalkthrough;
 -(IBAction) scrollViewDidEndDecelerating:(id) scrollView;
 
 @end
