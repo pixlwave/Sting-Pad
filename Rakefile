@@ -11,7 +11,7 @@ end
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
   app.name = 'Stingtk'
-  app.version = '0.5'
+  app.version = '0.6'
   app.identifier = 'uk.pixlwave.Stingmtk'
   app.deployment_target = '6.1'
   
