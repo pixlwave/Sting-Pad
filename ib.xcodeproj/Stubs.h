@@ -16,13 +16,13 @@
 @property IBOutlet UIView * editView;
 @property IBOutlet UILabel * titleLabel0;
 @property IBOutlet UILabel * artistLabel0;
-@property IBOutlet UIView * waveView0;
+@property IBOutlet UIImageView * waveLoadImageView0;
 @property IBOutlet UILabel * titleLabel1;
 @property IBOutlet UILabel * artistLabel1;
-@property IBOutlet UIView * waveView1;
+@property IBOutlet UIImageView * waveLoadImageView1;
 @property IBOutlet UILabel * titleLabel2;
 @property IBOutlet UILabel * artistLabel2;
-@property IBOutlet UIView * waveView2;
+@property IBOutlet UIImageView * waveLoadImageView2;
 @property IBOutlet UIPickerView * playlistPicker;
 
 -(IBAction) viewDidLoad;

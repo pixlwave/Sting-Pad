@@ -228,11 +228,10 @@
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view hidden="YES" contentMode="scaleToFill" id="zzc-ba-zTB">
-                                                <rect key="frame" x="47" y="96" width="231" height="55"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="waveload.png" id="DSS-g4-Ymn">
+                                                <rect key="frame" x="45" y="96" width="230" height="55"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="0.99215692281723022" green="1" blue="0.59607845544815063" alpha="1" colorSpace="deviceRGB"/>
-                                            </view>
+                                            </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wDV-XY-4hz">
                                                 <rect key="frame" x="183" y="170" width="101" height="31"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -259,11 +258,10 @@
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view hidden="YES" contentMode="scaleToFill" id="d0O-c2-X0h">
-                                                <rect key="frame" x="47" y="246" width="231" height="55"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="waveload.png" id="O9P-7B-qNl">
+                                                <rect key="frame" x="45" y="246" width="230" height="55"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="0.99215692280000001" green="1" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
-                                            </view>
+                                            </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="czH-3B-m6p">
                                                 <rect key="frame" x="183" y="318" width="101" height="31"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -290,11 +288,10 @@
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view hidden="YES" contentMode="scaleToFill" id="IJd-7G-FaY">
-                                                <rect key="frame" x="47" y="395" width="231" height="55"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="waveload.png" id="tkj-t8-6gB">
+                                                <rect key="frame" x="45" y="395" width="230" height="55"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="0.99215692280000001" green="1" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
-                                            </view>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     </view>
@@ -340,9 +337,9 @@
                         <outlet property="titleLabel0" destination="Nii-cs-a7j" id="bp1-kx-Ib3"/>
                         <outlet property="titleLabel1" destination="KbB-HQ-3Ix" id="MsJ-Sq-2wJ"/>
                         <outlet property="titleLabel2" destination="CP1-Eu-hpD" id="Ti3-NC-zBg"/>
-                        <outlet property="waveView0" destination="zzc-ba-zTB" id="8HB-O2-eK7"/>
-                        <outlet property="waveView1" destination="d0O-c2-X0h" id="G8I-jS-UCl"/>
-                        <outlet property="waveView2" destination="IJd-7G-FaY" id="Emx-2l-HOj"/>
+                        <outlet property="waveLoadImageView0" destination="DSS-g4-Ymn" id="dqA-e6-UD9"/>
+                        <outlet property="waveLoadImageView1" destination="O9P-7B-qNl" id="Dpj-Yc-YAa"/>
+                        <outlet property="waveLoadImageView2" destination="tkj-t8-6gB" id="ixQ-ui-DVW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="17N-rm-diW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -355,6 +352,7 @@
         <image name="play.png" width="64" height="64"/>
         <image name="settings.png" width="16" height="16"/>
         <image name="stop.png" width="48" height="48"/>
+        <image name="waveload.png" width="230" height="55"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

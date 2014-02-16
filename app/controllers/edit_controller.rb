@@ -7,13 +7,13 @@ class EditController < UIViewController
   outlet :editView, UIView
   outlet :titleLabel0, UILabel
   outlet :artistLabel0, UILabel
-  outlet :waveView0, UIView
+  outlet :waveLoadImageView0, UIImageView
   outlet :titleLabel1, UILabel
   outlet :artistLabel1, UILabel
-  outlet :waveView1, UIView
+  outlet :waveLoadImageView1, UIImageView
   outlet :titleLabel2, UILabel
   outlet :artistLabel2, UILabel
-  outlet :waveView2, UIView
+  outlet :waveLoadImageView2, UIImageView
 
   outlet :playlistPicker, UIPickerView
 
@@ -24,14 +24,15 @@ class EditController < UIViewController
     updateLabels
 
     waveFrame = Array.new(3)
-    waveFrame[0] = @waveView0.frame
-    waveFrame[1] = @waveView1.frame
-    waveFrame[2] = @waveView2.frame
+    waveFrame[0] = @waveLoadImageView0.frame
+    waveFrame[1] = @waveLoadImageView1.frame
+    waveFrame[2] = @waveLoadImageView2.frame
     
     @wave = Array.new(3)
     @wave.each_with_index do |w, i|
       @wave[i] = FDWaveformView.alloc.initWithFrame(waveFrame[i])
       @wave[i].doesAllowScrubbing = true
+      @wave[i].delegate = self
       @editView.addSubview(@wave[i])
       updateWaveURL(i)
 
@@ -102,11 +103,32 @@ class EditController < UIViewController
 
   def updateWaveURL(i)
 
-    render = Dispatch::Queue.main
-    render.async {
-      @wave[i].setAudioURL(@engine.sting[i].url)
-      @wave[i].setProgressSamples(@wave[i].totalSamples * @engine.sting[i].getCue)
-    }
+    # render = Dispatch::Queue.main
+    # render.async {
+    @wave[i].setAudioURL(@engine.sting[i].url)
+    @wave[i].setProgressSamples(@wave[i].totalSamples * @engine.sting[i].getCue)
+    # }
+
+  end
+
+
+  ##### Waveform view delegate methods #####
+  def waveformViewDidRender(waveformView)
+
+    # fix this crappy bodge!!!
+    num = nil
+
+    @wave.each_with_index do |w, i|
+      num = i if waveformView == w
+    end
+
+    if num == 0
+      waveLoadImageView0.removeFromSuperview
+    elsif num == 1
+      waveLoadImageView1.removeFromSuperview
+    elsif num == 2
+      waveLoadImageView2.removeFromSuperview
+    end
 
   end
 
@@ -117,6 +139,16 @@ class EditController < UIViewController
     track = mediaItemCollection.items[0]
     @engine.sting[@loadingTrack].loadSting(mediaItemCollection.items[0])
     updateLabels
+
+    # fix this crappy bodge too!!!
+    if @loadingTrack == 0
+      @editView.addSubview(waveLoadImageView0)
+    elsif @loadingTrack == 1
+      @editView.addSubview(waveLoadImageView1)
+    elsif @loadingTrack == 2
+      @editView.addSubview(waveLoadImageView2)
+    end
+
     updateWaveURL(@loadingTrack)
 
     self.dismissViewControllerAnimated(true, completion:nil)
