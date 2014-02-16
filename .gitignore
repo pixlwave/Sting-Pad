@@ -18,3 +18,6 @@ vendor/Pods/.build
 vendor/Pods/build
 vendor/Pods/build-iPhoneOS
 vendor/Pods/build-iPhoneSimulator
+vendor/*/build
+vendor/*/build-iPhoneOS
+vendor/*/build-iPhoneSimulator
