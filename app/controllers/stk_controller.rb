@@ -141,8 +141,11 @@ class StkController < UIViewController
 
       # need to implement a better way of doing this that doesn't call updateTable every time a track changes???
       if song == @engine.ipod.nowPlayingItem
-        cell.textLabel.font = UIFont.boldSystemFontOfSize(cell.textLabel.font.pointSize)
-        cell.detailTextLabel.font = UIFont.boldSystemFontOfSize(cell.detailTextLabel.font.pointSize)
+        # cell.textLabel.font = UIFont.boldSystemFontOfSize(cell.textLabel.font.pointSize)
+        cell.textLabel.textColor = UIColor.colorWithHue(30/360.0, saturation:1.0, brightness:0.95, alpha:1.0)
+        # cell.detailTextLabel.font = UIFont.boldSystemFontOfSize(cell.detailTextLabel.font.pointSize)
+        # cell.textLabel.textColor = UIColor.orangeColor
+        cell.detailTextLabel.textColor = UIColor.colorWithHue(34/360.0, saturation:1.0, brightness:0.95, alpha:1.0)
       end
 
       cell
