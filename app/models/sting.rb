@@ -15,8 +15,8 @@ class Sting
     else
       @url = NSURL.fileURLWithPath(NSBundle.mainBundle.pathForResource("ComputerMagic", ofType:"m4a"))
       @stingPlayer = AVAudioPlayer.alloc.initWithContentsOfURL(@url, error:nil)
-      @title = "No Sting Loaded"
-      @artist = "No Artist"
+      @title = "Chime"
+      @artist = "Default Sting"
       @cuePoint = 0
     end
 
