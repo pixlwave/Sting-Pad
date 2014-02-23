@@ -6,6 +6,7 @@ class StkController < UIViewController
   outlet :titleLabel2, UILabel
   outlet :playlistTable, UITableView
   outlet :stingScrollView, UIScrollView
+  outlet :stingView, UIView
   outlet :stingPage, UIPageControl
 
   def viewDidLoad
@@ -22,7 +23,8 @@ class StkController < UIViewController
     @playlistTable.delegate = self
     @playlistTable.dataSource = self
 
-    @stingScrollView.setContentSize(CGSizeMake(324, 64))
+    @stingScrollView.setContentSize(@stingView.frame.size)
+    @stingScrollView.delaysContentTouches = false
     @stingScrollView.delegate = self
     @selectedSting = 0
 

@@ -46,6 +46,10 @@
 @property IBOutlet UILabel * titleLabel2;
 @property IBOutlet UITableView * playlistTable;
 @property IBOutlet UIScrollView * stingScrollView;
+@property IBOutlet UIView * stingView;
+@property IBOutlet UIButton * stingPlayButton0;
+@property IBOutlet UIButton * stingPlayButton1;
+@property IBOutlet UIButton * stingPlayButton2;
 @property IBOutlet UIPageControl * stingPage;
 
 -(IBAction) viewDidLoad;
