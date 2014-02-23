@@ -33,6 +33,7 @@
 -(IBAction) loadTrack2;
 -(IBAction) updateLabels;
 -(IBAction) updateWaveURL:(id) i;
+-(IBAction) waveformViewDidRender:(id) waveformView;
 -(IBAction) mediaPickerDidCancel:(id) mediaPicker;
 -(IBAction) numberOfComponentsInPickerView:(id) pickerView;
 
