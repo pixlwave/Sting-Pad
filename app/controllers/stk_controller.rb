@@ -210,8 +210,10 @@ class StkController < UIViewController
 
   def scrollViewDidEndDecelerating(scrollView)
 
-    @selectedSting = (scrollView.contentOffset.x / scrollView.frame.size.width).to_int
-    @stingPage.currentPage = @selectedSting
+    if scrollView == @stingScrollView
+      @selectedSting = (scrollView.contentOffset.x / scrollView.frame.size.width).to_int
+      @stingPage.currentPage = @selectedSting
+    end
 
   end
   
