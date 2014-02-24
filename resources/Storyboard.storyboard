@@ -16,30 +16,30 @@
                                 <rect key="frame" x="0.0" y="422" width="320" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="m9M-Uv-BVM">
-                                        <rect key="frame" x="120" y="10" width="80" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="m9M-Uv-BVM">
+                                        <rect key="frame" x="135" y="7" width="50" height="35"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Play">
+                                        <state key="normal" image="ipodplay.png">
                                             <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="iPodPlayPause" destination="Fwb-c8-22I" eventType="touchUpInside" id="ZNR-dX-pYB"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LOf-EA-SsP">
-                                        <rect key="frame" x="42" y="10" width="70" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="LOf-EA-SsP">
+                                        <rect key="frame" x="65" y="7" width="50" height="35"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Previous">
+                                        <state key="normal" image="ipodprevious.png">
                                             <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="iPodPrevious" destination="Fwb-c8-22I" eventType="touchUpInside" id="cw2-iT-Cu1"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="V7i-Ah-KQ6">
-                                        <rect key="frame" x="208" y="10" width="70" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="V7i-Ah-KQ6">
+                                        <rect key="frame" x="205" y="7" width="50" height="35"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Next">
+                                        <state key="normal" image="ipodnext.png">
                                             <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
@@ -393,6 +393,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ipodnext.png" width="32" height="25"/>
+        <image name="ipodplay.png" width="30" height="30"/>
+        <image name="ipodprevious.png" width="32" height="25"/>
         <image name="logo.png" width="120" height="45"/>
         <image name="play.png" width="64" height="64"/>
         <image name="settings.png" width="16" height="16"/>

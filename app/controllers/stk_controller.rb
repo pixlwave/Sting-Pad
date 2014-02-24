@@ -31,6 +31,9 @@ class StkController < UIViewController
 
     updateStingTitles
 
+    @ipodPlayImage = UIImage.imageNamed("ipodplay")
+    @ipodPauseImage = UIImage.imageNamed("ipodpause")
+
   end
 
   def viewWillAppear(animated)
@@ -122,9 +125,9 @@ class StkController < UIViewController
     state = notification.userInfo.objectForKey("MPMusicPlayerControllerPlaybackStateKey")
 
     if state == MPMusicPlaybackStatePlaying
-      @ipodPlayButton.setTitle("Pause", forState:UIControlStateNormal)
+      @ipodPlayButton.setImage(@ipodPauseImage, forState:UIControlStateNormal)
     else
-      @ipodPlayButton.setTitle("Play", forState:UIControlStateNormal)
+      @ipodPlayButton.setImage(@ipodPlayImage, forState:UIControlStateNormal)
     end
 
   end
