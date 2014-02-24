@@ -15,8 +15,8 @@ class Engine
 
     @sting.each_with_index do |s, i|
       url = Turnkey.unarchive("Sting URL #{i}")
-      title = Turnkey.unarchive("Sting Title #{i}") || "No Sting Loaded"
-      artist = Turnkey.unarchive("Sting Artist #{i}") || "No Artist"
+      title = Turnkey.unarchive("Sting Title #{i}") || "Chime"
+      artist = Turnkey.unarchive("Sting Artist #{i}") || "Default Sting"
       cuePoint = Turnkey.unarchive("Cue Point #{i}") || 0
       @sting[i] = Sting.new(url, title, artist, cuePoint)
     end
