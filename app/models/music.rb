@@ -50,6 +50,12 @@ class Music
 
   end
 
+  def playbackState
+
+    @musicPlayer.playbackState
+
+  end
+
   def getNamedPlaylist(name)
 
     selectedPlaylist = nil

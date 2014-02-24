@@ -5,6 +5,7 @@ class StkController < UIViewController
   outlet :titleLabel1, UILabel
   outlet :titleLabel2, UILabel
   outlet :playlistTable, UITableView
+  outlet :ipodPlayButton, UIButton
   outlet :stingScrollView, UIScrollView
   outlet :stingView, UIView
   outlet :stingPage, UIPageControl
@@ -40,6 +41,7 @@ class StkController < UIViewController
     # end
 
     NSNotificationCenter.defaultCenter.addObserver(self, selector:'updateTable', name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification, object:nil)
+    NSNotificationCenter.defaultCenter.addObserver(self, selector:'playbackStateDidChange:', name:MPMusicPlayerControllerPlaybackStateDidChangeNotification, object:nil)
 
   end
 
@@ -67,17 +69,27 @@ class StkController < UIViewController
 
   end
 
-  def iPodPlay
+  def iPodPlayPause
 
-    @engine.playiPod
-
-  end
-
-  def iPodPause
-
-    @engine.pauseiPod
+    if ipodIsPlaying
+      @engine.pauseiPod
+    else
+      @engine.playiPod
+    end
 
   end
+
+  # def iPodPlay
+
+  #   @engine.playiPod
+
+  # end
+
+  # def iPodPause
+
+  #   @engine.pauseiPod
+
+  # end
 
   def iPodPrevious
 
@@ -105,12 +117,43 @@ class StkController < UIViewController
 
   end
 
+  def playbackStateDidChange(notification)
+
+    state = notification.userInfo.objectForKey("MPMusicPlayerControllerPlaybackStateKey")
+
+    if state == MPMusicPlaybackStatePlaying
+      @ipodPlayButton.setTitle("Pause", forState:UIControlStateNormal)
+    else
+      @ipodPlayButton.setTitle("Play", forState:UIControlStateNormal)
+    end
+
+  end
+
+# - (void)playbackStateDidChange:(NSNotification *)notification {
+#     static NSString * const stateKey = @"MPMusicPlayerControllerPlaybackStateKey";
+#     NSNumber *number = [[notification userInfo] objectForKey:stateKey];
+#     MPMusicPlaybackState state = [number integerValue];
+#     // state is the new state
+#     MPMusicPlayerController *player = [notification object];
+#     // state may not be equal to player.playbackState
+# }
+
   def showWalkthrough
 
     walkvc = storyboard.instantiateViewControllerWithIdentifier("WalkthroughController")
     walkvc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve
     presentViewController(walkvc, animated:true, completion:nil)
     Turnkey.archive(true, "hasSeenTutorial")
+
+  end
+
+  def ipodIsPlaying
+
+    if @engine.ipod.playbackState == MPMusicPlaybackStatePlaying
+      return true
+    else
+      return false
+    end
 
   end
 

@@ -45,11 +45,9 @@
 @property IBOutlet UILabel * titleLabel1;
 @property IBOutlet UILabel * titleLabel2;
 @property IBOutlet UITableView * playlistTable;
+@property IBOutlet UIButton * ipodPlayButton;
 @property IBOutlet UIScrollView * stingScrollView;
 @property IBOutlet UIView * stingView;
-@property IBOutlet UIButton * stingPlayButton0;
-@property IBOutlet UIButton * stingPlayButton1;
-@property IBOutlet UIButton * stingPlayButton2;
 @property IBOutlet UIPageControl * stingPage;
 
 -(IBAction) viewDidLoad;
@@ -58,13 +56,14 @@
 -(IBAction) viewWillDisappear:(id) animated;
 -(IBAction) play;
 -(IBAction) stop;
--(IBAction) iPodPlay;
--(IBAction) iPodPause;
+-(IBAction) iPodPlayPause;
 -(IBAction) iPodPrevious;
 -(IBAction) iPodNext;
 -(IBAction) updateStingTitles;
 -(IBAction) updateTable;
+-(IBAction) playbackStateDidChange:(id) notification;
 -(IBAction) showWalkthrough;
+-(IBAction) ipodIsPlaying;
 -(IBAction) scrollViewDidEndDecelerating:(id) scrollView;
 
 @end
@@ -96,6 +95,7 @@
 -(IBAction) next;
 -(IBAction) playItem:(id) index;
 -(IBAction) nowPlayingItem;
+-(IBAction) playbackState;
 -(IBAction) getNamedPlaylist:(id) name;
 -(IBAction) getAllPlaylists;
 -(IBAction) usePlaylist:(id) index;

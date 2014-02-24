@@ -17,17 +17,17 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="m9M-Uv-BVM">
-                                        <rect key="frame" x="90" y="10" width="70" height="30"/>
+                                        <rect key="frame" x="122" y="10" width="77" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Play">
+                                        <state key="normal" title="Play/Pause">
                                             <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="iPodPlay" destination="Fwb-c8-22I" eventType="touchUpInside" id="hxP-es-dld"/>
+                                            <action selector="iPodPlayPause" destination="Fwb-c8-22I" eventType="touchUpInside" id="ZNR-dX-pYB"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LOf-EA-SsP">
-                                        <rect key="frame" x="11" y="10" width="70" height="30"/>
+                                        <rect key="frame" x="20" y="10" width="70" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Previous">
                                             <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -37,23 +37,13 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="V7i-Ah-KQ6">
-                                        <rect key="frame" x="238" y="10" width="70" height="30"/>
+                                        <rect key="frame" x="230" y="10" width="70" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Next">
                                             <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="iPodNext" destination="Fwb-c8-22I" eventType="touchUpInside" id="K2x-BD-FsU"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Crj-QJ-9rP">
-                                        <rect key="frame" x="162" y="10" width="70" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Pause">
-                                            <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="iPodPause" destination="Fwb-c8-22I" eventType="touchUpInside" id="CZe-qg-qD7"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -173,6 +163,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="JS4-QJ-xUA"/>
                     <connections>
+                        <outlet property="ipodPlayButton" destination="m9M-Uv-BVM" id="Mcm-y4-amZ"/>
                         <outlet property="playlistTable" destination="Cz5-hC-AHC" id="W2r-Um-aR2"/>
                         <outlet property="stingPage" destination="zOQ-cv-f9K" id="sNv-MG-Uu4"/>
                         <outlet property="stingScrollView" destination="Cgp-Kx-hgF" id="ei4-71-Ozy"/>
@@ -398,7 +389,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="17N-rm-diW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="512" y="37"/>
+            <point key="canvasLocation" x="538" y="37"/>
         </scene>
     </scenes>
     <resources>
