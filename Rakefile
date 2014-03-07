@@ -19,6 +19,8 @@ Motion::Project::App.setup do |app|
   app.prerendered_icon = true
   app.interface_orientations = [:portrait]
   
+  app.background_modes = [:audio]
+
   app.development do
     app.provisioning_profile = '/Users/Douglas/Documents/RubyMotion/Certificates/Stingmtkdevelopment.mobileprovision'
   end
