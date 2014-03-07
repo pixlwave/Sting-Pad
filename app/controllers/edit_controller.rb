@@ -62,6 +62,7 @@ class EditController < UIViewController
 
     mediaPicker = MPMediaPickerController.alloc.initWithMediaTypes(MPMediaTypeMusic)
     mediaPicker.delegate = self
+    mediaPicker.showsCloudItems = false  # hides iTunes in the Cloud items, which crash the app if picked
     mediaPicker.allowsPickingMultipleItems = false
     self.presentModalViewController(mediaPicker, animated:true)
 
