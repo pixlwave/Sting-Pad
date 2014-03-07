@@ -50,9 +50,16 @@ class Music
 
   end
 
-  def playbackState
+  def isPlaying
 
-    @musicPlayer.playbackState
+    # if @musicPlayer.playbackState == MPMusicPlaybackStatePlaying
+    # workaround: http://stackoverflow.com/questions/18910207/ios7-mpmusicplayercontroller-states-incorrect
+
+    if @musicPlayer.currentPlaybackRate != 0
+      return true
+    else
+      return false
+    end
 
   end
 

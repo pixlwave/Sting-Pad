@@ -14,7 +14,7 @@ class StkController < UIViewController
 
     @engine = Engine.sharedClient
 
-    if NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1
+    if NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1 #&& UIDevice.currentDevice.userInterfaceIdiom != UIUserInterfaceIdiomPad
       @playlistTable.setContentInset(UIEdgeInsetsMake(20, @playlistTable.contentInset.left, @playlistTable.contentInset.bottom, @playlistTable.contentInset.right))
       @statusBarView = UIView.alloc.initWithFrame(UIApplication.sharedApplication.statusBarFrame)
       @statusBarView.backgroundColor = self.view.backgroundColor
@@ -74,7 +74,7 @@ class StkController < UIViewController
 
   def iPodPlayPause
 
-    if ipodIsPlaying
+    if @engine.ipod.isPlaying
       @engine.pauseiPod
     else
       @engine.playiPod
@@ -122,9 +122,23 @@ class StkController < UIViewController
 
   def playbackStateDidChange(notification)
 
-    state = notification.userInfo.objectForKey("MPMusicPlayerControllerPlaybackStateKey")
+    # http://stackoverflow.com/questions/1324409/mpmusicplayercontroller-stops-sending-notifications
 
-    if state == MPMusicPlaybackStatePlaying
+    # state = notification.userInfo.objectForKey("MPMusicPlayerControllerPlaybackStateKey")
+
+    # if state == MPMusicPlaybackStatePlaying
+    #   @ipodPlayButton.setImage(@ipodPauseImage, forState:UIControlStateNormal)
+    # else
+    #   @ipodPlayButton.setImage(@ipodPlayImage, forState:UIControlStateNormal)
+    # end
+
+    updatePlayPause
+
+  end
+
+  def updatePlayPause
+
+    if @engine.ipod.isPlaying
       @ipodPlayButton.setImage(@ipodPauseImage, forState:UIControlStateNormal)
     else
       @ipodPlayButton.setImage(@ipodPlayImage, forState:UIControlStateNormal)
@@ -132,14 +146,11 @@ class StkController < UIViewController
 
   end
 
-# - (void)playbackStateDidChange:(NSNotification *)notification {
-#     static NSString * const stateKey = @"MPMusicPlayerControllerPlaybackStateKey";
-#     NSNumber *number = [[notification userInfo] objectForKey:stateKey];
-#     MPMusicPlaybackState state = [number integerValue];
-#     // state is the new state
-#     MPMusicPlayerController *player = [notification object];
-#     // state may not be equal to player.playbackState
-# }
+  def playlistDidChange
+
+    updateTable
+
+  end
 
   def showWalkthrough
 
@@ -147,16 +158,6 @@ class StkController < UIViewController
     walkvc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve
     presentViewController(walkvc, animated:true, completion:nil)
     Turnkey.archive(true, "hasSeenTutorial")
-
-  end
-
-  def ipodIsPlaying
-
-    if @engine.ipod.playbackState == MPMusicPlaybackStatePlaying
-      return true
-    else
-      return false
-    end
 
   end
 

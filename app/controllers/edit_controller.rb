@@ -184,7 +184,7 @@ class EditController < UIViewController
   def pickerView(pickerView, didSelectRow:row, inComponent:component)
 
     @engine.ipod.usePlaylist(row)
-    self.presentingViewController.updateTable
+    self.presentingViewController.playlistDidChange
 
   end
 

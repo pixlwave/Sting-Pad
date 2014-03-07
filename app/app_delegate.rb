@@ -24,7 +24,7 @@ class AppDelegate
   def applicationDidEnterBackground(application)
 
     # disables mixing so that if a sting is playing and the user chooses to play something else, stingtk is faded out
-    setMixingState(false) unless Engine.sharedClient.ipod.playbackState == MPMusicPlaybackStatePlaying
+    setMixingState(false) unless Engine.sharedClient.ipod.isPlaying
 
   end
 
