@@ -14,8 +14,8 @@ class StkController < UIViewController
 
     @engine = Engine.sharedClient
 
-    if NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1 #&& UIDevice.currentDevice.userInterfaceIdiom != UIUserInterfaceIdiomPad
-      @playlistTable.setContentInset(UIEdgeInsetsMake(20, @playlistTable.contentInset.left, @playlistTable.contentInset.bottom, @playlistTable.contentInset.right))
+    if NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1 && UIDevice.currentDevice.userInterfaceIdiom != UIUserInterfaceIdiomPad
+      @playlistTable.setContentInset(UIEdgeInsetsMake(UIApplication.sharedApplication.statusBarFrame.size.height, @playlistTable.contentInset.left, @playlistTable.contentInset.bottom, @playlistTable.contentInset.right))
       @statusBarView = UIView.alloc.initWithFrame(UIApplication.sharedApplication.statusBarFrame)
       @statusBarView.backgroundColor = self.view.backgroundColor
       self.view.addSubview(@statusBarView)
