@@ -70,4 +70,21 @@ class Sting
 
   end
 
+
+  #### Delegate Methods ####
+
+  def audioPlayerDidFinishPlaying(player, successfully:flag)
+
+    # Model talking to the Controller in a bad way? Delegates?
+    UIApplication.sharedApplication.delegate.window.rootViewController.stop
+
+  end
+
+  def audioPlayerBeginInterruption(player)
+
+    # Model talking to the Controller in a bad way? Delegates?
+    UIApplication.sharedApplication.delegate.window.rootViewController.stop
+
+  end
+
 end

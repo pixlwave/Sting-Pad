@@ -9,6 +9,7 @@ class StkController < UIViewController
   outlet :stingScrollView, UIScrollView
   outlet :stingView, UIView
   outlet :stingPage, UIPageControl
+  outlet :playingLabel, UILabel
 
   def viewDidLoad
 
@@ -63,12 +64,14 @@ class StkController < UIViewController
   def play
 
     @engine.playSting(@selectedSting)
+    @playingLabel.hidden = false
 
   end
 
   def stop
 
     @engine.stopSting
+    @playingLabel.hidden = true
 
   end
 

@@ -8,6 +8,10 @@
 #import <MediaPlayer/MediaPlayer.h>
 
 @interface AppDelegate: UIResponder <UIApplicationDelegate>
+-(IBAction) applicationDidEnterBackground:(id) application;
+-(IBAction) applicationWillEnterForeground:(id) application;
+-(IBAction) setMixingState:(id) state;
+
 @end
 
 @interface EditController: UIViewController
@@ -49,6 +53,7 @@
 @property IBOutlet UIScrollView * stingScrollView;
 @property IBOutlet UIView * stingView;
 @property IBOutlet UIPageControl * stingPage;
+@property IBOutlet UILabel * playingLabel;
 
 -(IBAction) viewDidLoad;
 -(IBAction) viewWillAppear:(id) animated;
@@ -62,8 +67,9 @@
 -(IBAction) updateStingTitles;
 -(IBAction) updateTable;
 -(IBAction) playbackStateDidChange:(id) notification;
+-(IBAction) updatePlayPause;
+-(IBAction) playlistDidChange;
 -(IBAction) showWalkthrough;
--(IBAction) ipodIsPlaying;
 -(IBAction) scrollViewDidEndDecelerating:(id) scrollView;
 
 @end
@@ -95,7 +101,7 @@
 -(IBAction) next;
 -(IBAction) playItem:(id) index;
 -(IBAction) nowPlayingItem;
--(IBAction) playbackState;
+-(IBAction) isPlaying;
 -(IBAction) getNamedPlaylist:(id) name;
 -(IBAction) getAllPlaylists;
 -(IBAction) usePlaylist:(id) index;
