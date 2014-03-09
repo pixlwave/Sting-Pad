@@ -9,9 +9,9 @@ class WalkthroughController < UIViewController
 
     @currentImage = 0
     if UIScreen.mainScreen.bounds.size.height == 568
-      @images = ["StkPlaylist-568h", "StkSting-568h", "EditSting-568h", "EditPlaylist-568h"]
+      @images = ["ThankYou-568h","StkPlaylist-568h", "StkSting-568h", "StkSettings-568h", "EditSting-568h", "EditPlaylist-568h"]
     else
-      @images = ["StkPlaylist", "StkSting", "EditSting", "EditPlaylist"]
+      @images = ["ThankYou", "StkPlaylist", "StkSting", "StkSettings", "EditSting", "EditPlaylist"]
     end
     tap = UITapGestureRecognizer.alloc.initWithTarget(self, action:"imageTapped")
 
