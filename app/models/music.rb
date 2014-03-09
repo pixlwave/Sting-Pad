@@ -63,6 +63,17 @@ class Music
 
   end
 
+  def refreshPlaylists
+
+    @allPlaylists = getAllPlaylists
+    @selectedPlaylist = @allPlaylists.index(@playlist) || 0
+    @playlist = @allPlaylists[@selectedPlaylist]
+
+    # update @selectedPlaylist and @playlist too.
+    # this will require testing @selectedPlaylist for it's name incase it's moved in the collection
+
+  end
+
   def getNamedPlaylist(name)
 
     selectedPlaylist = nil

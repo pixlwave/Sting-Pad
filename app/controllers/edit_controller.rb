@@ -45,9 +45,15 @@ class EditController < UIViewController
     @editScrollView.setContentSize(@editView.frame.size)
     @editScrollView.delegate = self
 
+    # refresh playlists in case anything has changed
+    @engine.ipod.refreshPlaylists
+
     playlistPicker.delegate = self
     playlistPicker.dataSource = self
-    playlistPicker.selectRow(@engine.ipod.selectedPlaylist, inComponent:0, animated:true)
+
+    # searches for active playlist in playlists array and uses this to select it in the picker
+    playlistIndex = @engine.ipod.allPlaylists.index(@engine.ipod.playlist)
+    playlistPicker.selectRow(playlistIndex || 0, inComponent:0, animated:true)
 
   end
 
