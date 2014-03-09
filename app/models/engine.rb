@@ -11,7 +11,7 @@ class Engine
 
   def initialize
 
-    @sting = Array.new(3)
+    @sting = Array.new(5)
 
     @sting.each_with_index do |s, i|
       url = Turnkey.unarchive("Sting URL #{i}")

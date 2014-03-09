@@ -27,6 +27,12 @@
 @property IBOutlet UILabel * titleLabel2;
 @property IBOutlet UILabel * artistLabel2;
 @property IBOutlet UIImageView * waveLoadImageView2;
+@property IBOutlet UILabel * titleLabel3;
+@property IBOutlet UILabel * artistLabel3;
+@property IBOutlet UIImageView * waveLoadImageView3;
+@property IBOutlet UILabel * titleLabel4;
+@property IBOutlet UILabel * artistLabel4;
+@property IBOutlet UIImageView * waveLoadImageView4;
 @property IBOutlet UIPickerView * playlistPicker;
 
 -(IBAction) viewDidLoad;
@@ -35,6 +41,8 @@
 -(IBAction) loadTrack0;
 -(IBAction) loadTrack1;
 -(IBAction) loadTrack2;
+-(IBAction) loadTrack3;
+-(IBAction) loadTrack4;
 -(IBAction) updateLabels;
 -(IBAction) updateWaveURL:(id) i;
 -(IBAction) waveformViewDidRender:(id) waveformView;
@@ -48,6 +56,8 @@
 @property IBOutlet UILabel * titleLabel0;
 @property IBOutlet UILabel * titleLabel1;
 @property IBOutlet UILabel * titleLabel2;
+@property IBOutlet UILabel * titleLabel3;
+@property IBOutlet UILabel * titleLabel4;
 @property IBOutlet UITableView * playlistTable;
 @property IBOutlet UIButton * ipodPlayButton;
 @property IBOutlet UIScrollView * stingScrollView;
@@ -102,6 +112,7 @@
 -(IBAction) playItem:(id) index;
 -(IBAction) nowPlayingItem;
 -(IBAction) isPlaying;
+-(IBAction) refreshPlaylists;
 -(IBAction) getNamedPlaylist:(id) name;
 -(IBAction) getAllPlaylists;
 -(IBAction) usePlaylist:(id) index;
@@ -114,6 +125,7 @@
 -(IBAction) loadSting:(id) mediaItem;
 -(IBAction) setCue:(id) cuePoint;
 -(IBAction) getCue;
+-(IBAction) audioPlayerBeginInterruption:(id) player;
 
 @end
 

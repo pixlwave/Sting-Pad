@@ -4,6 +4,8 @@ class StkController < UIViewController
   outlet :titleLabel0, UILabel
   outlet :titleLabel1, UILabel
   outlet :titleLabel2, UILabel
+  outlet :titleLabel3, UILabel
+  outlet :titleLabel4, UILabel
   outlet :playlistTable, UITableView
   outlet :ipodPlayButton, UIButton
   outlet :stingScrollView, UIScrollView
@@ -114,6 +116,8 @@ class StkController < UIViewController
     @titleLabel0.text = @engine.sting[0].title
     @titleLabel1.text = @engine.sting[1].title
     @titleLabel2.text = @engine.sting[2].title
+    @titleLabel3.text = @engine.sting[3].title
+    @titleLabel4.text = @engine.sting[4].title
 
   end
 

@@ -14,6 +14,12 @@ class EditController < UIViewController
   outlet :titleLabel2, UILabel
   outlet :artistLabel2, UILabel
   outlet :waveLoadImageView2, UIImageView
+  outlet :titleLabel3, UILabel
+  outlet :artistLabel3, UILabel
+  outlet :waveLoadImageView3, UIImageView
+  outlet :titleLabel4, UILabel
+  outlet :artistLabel4, UILabel
+  outlet :waveLoadImageView4, UIImageView
 
   outlet :playlistPicker, UIPickerView
 
@@ -23,12 +29,14 @@ class EditController < UIViewController
 
     updateLabels
 
-    waveFrame = Array.new(3)
+    waveFrame = Array.new(@engine.sting.size)
     waveFrame[0] = @waveLoadImageView0.frame
     waveFrame[1] = @waveLoadImageView1.frame
     waveFrame[2] = @waveLoadImageView2.frame
+    waveFrame[3] = @waveLoadImageView3.frame
+    waveFrame[4] = @waveLoadImageView4.frame
     
-    @wave = Array.new(3)
+    @wave = Array.new(waveFrame.size)
     @wave.each_with_index do |w, i|
       @wave[i] = FDWaveformView.alloc.initWithFrame(waveFrame[i])
       @wave[i].doesAllowScrubbing = true
@@ -95,6 +103,20 @@ class EditController < UIViewController
 
   end
 
+  def loadTrack3
+
+    @loadingTrack = 3
+    loadTrack
+
+  end
+
+    def loadTrack4
+
+    @loadingTrack = 4
+    loadTrack
+
+  end
+
   def updateLabels
 
     @titleLabel0.text = @engine.sting[0].title
@@ -106,15 +128,18 @@ class EditController < UIViewController
     @titleLabel2.text = @engine.sting[2].title
     @artistLabel2.text = @engine.sting[2].artist
 
+    @titleLabel3.text = @engine.sting[3].title
+    @artistLabel3.text = @engine.sting[3].artist
+
+    @titleLabel4.text = @engine.sting[4].title
+    @artistLabel4.text = @engine.sting[4].artist
+
   end
 
   def updateWaveURL(i)
 
-    # render = Dispatch::Queue.main
-    # render.async {
     @wave[i].setAudioURL(@engine.sting[i].url)
     @wave[i].setProgressSamples(@wave[i].totalSamples * @engine.sting[i].getCue)
-    # }
 
   end
 
@@ -135,6 +160,10 @@ class EditController < UIViewController
       waveLoadImageView1.removeFromSuperview
     elsif num == 2
       waveLoadImageView2.removeFromSuperview
+    elsif num == 3
+      waveLoadImageView3.removeFromSuperview
+    elsif num == 4
+      waveLoadImageView4.removeFromSuperview
     end
 
   end
@@ -154,6 +183,10 @@ class EditController < UIViewController
       @editView.addSubview(waveLoadImageView1)
     elsif @loadingTrack == 2
       @editView.addSubview(waveLoadImageView2)
+    elsif @loadingTrack == 3
+      @editView.addSubview(waveLoadImageView3)
+    elsif @loadingTrack == 4
+      @editView.addSubview(waveLoadImageView4)
     end
 
     updateWaveURL(@loadingTrack)
