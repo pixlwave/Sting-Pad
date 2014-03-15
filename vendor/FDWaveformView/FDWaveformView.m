@@ -184,7 +184,7 @@
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     CGRect drawRect = CGRectMake(0, 0, image.size.width, image.size.height);
     [self.progressColor set];
-    UIRectFillUsingBlendMode(drawRect, kCGBlendModeSourceAtop);
+    UIRectFillUsingBlendMode(drawRect, kCGBlendModeColor);
     UIImage *tintedImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     done(image, tintedImage);

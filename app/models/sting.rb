@@ -28,6 +28,8 @@ class Sting
     @waveform = FDWaveformView.alloc.initWithFrame(CGRectZero)
     @waveform.audioURL = @url
     @waveform.doesAllowScrubbing = true
+    @waveform.wavesColor = UIColor.blueColor
+    @waveform.progressColor = UIColor.whiteColor
     @waveform.setProgressSamples(waveform.totalSamples * getCue)
 
   end
