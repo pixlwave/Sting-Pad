@@ -2,7 +2,7 @@ class Engine
 
   # singleton containing all the players for the app.
 
-  attr_accessor :sting, :ipod
+  attr_accessor :sting, :ipod, :wavesLoaded
 
   def self.sharedClient
     Dispatch.once { @instance ||= new }

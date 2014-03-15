@@ -1,6 +1,6 @@
 class Sting
 
-  attr_reader :url, :title, :artist, :cuePoint
+  attr_reader :url, :title, :artist, :cuePoint, :waveform
 
   def initialize(url, title, artist, cuePoint)
 
@@ -24,6 +24,11 @@ class Sting
     @stingPlayer.numberOfLoops = 0
     @stingPlayer.currentTime = @cuePoint
     @stingPlayer.prepareToPlay
+
+    @waveform = FDWaveformView.alloc.initWithFrame(CGRectZero)
+    @waveform.audioURL = @url
+    @waveform.doesAllowScrubbing = true
+    @waveform.setProgressSamples(waveform.totalSamples * getCue)
 
   end
 

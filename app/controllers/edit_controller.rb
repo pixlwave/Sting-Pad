@@ -38,16 +38,36 @@ class EditController < UIViewController
     
     @wave = Array.new(waveFrame.size)
     @wave.each_with_index do |w, i|
-      @wave[i] = FDWaveformView.alloc.initWithFrame(waveFrame[i])
-      @wave[i].doesAllowScrubbing = true
+
+      # not using whilst storing waveformView inside Sting object
+      # @wave[i] = FDWaveformView.alloc.initWithFrame(waveFrame[i])
+      # @wave[i].doesAllowScrubbing = true
+      # @wave[i].delegate = self
+      # @editView.addSubview(@wave[i])
+      # updateWaveURL(i)
+
+      # temporary bodge to stop waveform being rendered each time it is presented
+      # memory usage is probably excessive!
+      @wave[i] = @engine.sting[i].waveform
+      @wave[i].setFrame(waveFrame[i]) unless @engine.wavesLoaded
       @wave[i].delegate = self
       @editView.addSubview(@wave[i])
-      updateWaveURL(i)
 
       observe(@wave[i], "progressSamples") do |old_value, new_value|
         cue = new_value.to_f / @wave[i].totalSamples
         @engine.sting[i].setCue(cue)
       end
+    end
+
+    # temporary bodge to remove waveform loading image if the waveform isn't going to render
+    if @engine.wavesLoaded
+      waveLoadImageView0.removeFromSuperview
+      waveLoadImageView1.removeFromSuperview
+      waveLoadImageView2.removeFromSuperview
+      waveLoadImageView3.removeFromSuperview
+      waveLoadImageView4.removeFromSuperview
+    else
+      @engine.wavesLoaded = true
     end
 
     @editScrollView.setContentSize(@editView.frame.size)
