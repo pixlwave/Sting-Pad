@@ -65,7 +65,6 @@ class Sting
     @cuePoint = cuePoint * @stingPlayer.duration
     @stingPlayer.currentTime = @cuePoint
     @stingPlayer.prepareToPlay
-    Engine.saveState
 
   end
 
