@@ -19,6 +19,7 @@ class StkController < UIViewController
 
     if NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1 && UIDevice.currentDevice.userInterfaceIdiom != UIUserInterfaceIdiomPad
       @playlistTable.setContentInset(UIEdgeInsetsMake(UIApplication.sharedApplication.statusBarFrame.size.height, @playlistTable.contentInset.left, @playlistTable.contentInset.bottom, @playlistTable.contentInset.right))
+      @playlistTable.setScrollIndicatorInsets(UIEdgeInsetsMake(UIApplication.sharedApplication.statusBarFrame.size.height, @playlistTable.contentInset.left, @playlistTable.contentInset.bottom, @playlistTable.contentInset.right))
       @statusBarView = UIView.alloc.initWithFrame(UIApplication.sharedApplication.statusBarFrame)
       @statusBarView.backgroundColor = self.view.backgroundColor
       self.view.addSubview(@statusBarView)
@@ -185,7 +186,7 @@ class StkController < UIViewController
     @reuseIdentifier ||= "CELL_IDENTIFIER"
 
     cell = tableView.dequeueReusableCellWithIdentifier(@reuseIdentifier)
-    cell = UITableViewCell.alloc.initWithStyle(UITableViewCellStyleSubtitle, reuseIdentifier: @reuseIdentifier)
+    cell ||= UITableViewCell.alloc.initWithStyle(UITableViewCellStyleSubtitle, reuseIdentifier: @reuseIdentifier)
 
     if @engine.ipod.playlist
       song = @engine.ipod.playlist.items[indexPath.row]
@@ -202,6 +203,9 @@ class StkController < UIViewController
         # cell.detailTextLabel.font = UIFont.boldSystemFontOfSize(cell.detailTextLabel.font.pointSize)
         # cell.textLabel.textColor = UIColor.orangeColor
         cell.detailTextLabel.textColor = UIColor.colorWithHue(34/360.0, saturation:1.0, brightness:0.95, alpha:1.0)
+      else
+        cell.textLabel.textColor = UIColor.darkTextColor
+        cell.detailTextLabel.textColor = UIColor.darkTextColor
       end
 
       cell
