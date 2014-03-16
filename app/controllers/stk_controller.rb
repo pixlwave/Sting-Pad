@@ -215,6 +215,9 @@ class StkController < UIViewController
 
     @engine.playiPodItem(indexPath.row)
 
+    # needs a more "universal" way of calling stop (move from engine to here?)
+    @playingLabel.hidden = true
+
     tableView.deselectRowAtIndexPath(indexPath, animated:true)
 
   end
