@@ -27,6 +27,7 @@ class WalkthroughController < UIViewController
     if @currentImage < @images.count
       UIView.transitionWithView(@walkthroughImageView, duration:0.2, options:UIViewAnimationOptionTransitionCrossDissolve, animations: lambda {@walkthroughImageView.image = UIImage.imageNamed("Walkthrough/"+@images[@currentImage])}, completion:nil)
     else
+      self.modalTransitionStyle = UIModalTransitionStyleCoverVertical
       presentingViewController.dismissModalViewControllerAnimated(true)
     end
 
