@@ -84,6 +84,7 @@ class StkController < UIViewController
       @engine.pauseiPod
     else
       @engine.playiPod
+      @playingLabel.hidden = true
     end
 
   end
