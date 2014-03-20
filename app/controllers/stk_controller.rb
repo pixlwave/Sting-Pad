@@ -129,7 +129,6 @@ class StkController < UIViewController
 
     @engine.ipod.refreshPlaylists
     updateTable
-    NSLog("updated playlists")
 
   end
 
