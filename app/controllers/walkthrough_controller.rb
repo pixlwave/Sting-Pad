@@ -3,8 +3,6 @@ class WalkthroughController < UIViewController
 
   outlet :walkthroughImageView, UIImageView
 
-  attr_accessor :imageFile
-
   def viewDidLoad
 
     @currentImage = 0

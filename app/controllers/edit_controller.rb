@@ -56,7 +56,7 @@ class EditController < UIViewController
       observe(@wave[i], "progressSamples") do |old_value, new_value|
         cue = new_value.to_f / @wave[i].totalSamples
         @engine.sting[i].setCue(cue)
-        Turnkey.archive(@engine.sting[i].cuePoint, "Cue Point #{i}")
+        Turnkey.archive(@engine.sting[i].cuePoint, "Sting #{i} Cue Point")
       end
     end
 

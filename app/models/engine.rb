@@ -14,10 +14,10 @@ class Engine
     @sting = Array.new(5)
 
     @sting.each_with_index do |s, i|
-      url = Turnkey.unarchive("Sting URL #{i}")
-      title = Turnkey.unarchive("Sting Title #{i}") || "Chime"
-      artist = Turnkey.unarchive("Sting Artist #{i}") || "Default Sting"
-      cuePoint = Turnkey.unarchive("Cue Point #{i}") || 0
+      url = Turnkey.unarchive("Sting #{i} URL")
+      title = Turnkey.unarchive("Sting #{i} Title") || "Chime"
+      artist = Turnkey.unarchive("Sting #{i} Artist") || "Default Sting"
+      cuePoint = Turnkey.unarchive("Sting #{i} Cue Point") || 0
       @sting[i] = Sting.new(url, title, artist, cuePoint)
     end
 
@@ -66,14 +66,14 @@ class Engine
   def self.saveState
 
     Engine.sharedClient.sting.each_with_index do |s, i|
-      Turnkey.archive(Engine.sharedClient.sting[i].url, "Sting URL #{i}")
-      Turnkey.archive(Engine.sharedClient.sting[i].cuePoint, "Cue Point #{i}")
-      Turnkey.archive(Engine.sharedClient.sting[i].title, "Sting Title #{i}")
-      Turnkey.archive(Engine.sharedClient.sting[i].artist, "Sting Artist #{i}")
+      Turnkey.archive(Engine.sharedClient.sting[i].url, "Sting #{i} URL")
+      Turnkey.archive(Engine.sharedClient.sting[i].cuePoint, "Sting #{i} Cue Point")
+      Turnkey.archive(Engine.sharedClient.sting[i].title, "Sting #{i} Title")
+      Turnkey.archive(Engine.sharedClient.sting[i].artist, "Sting #{i} Artist")
     end
 
-    # restore selected playlist by name and not index
-    # Turnkey.archive(@playlist, "Playlist")
+    # This needs to be changed to save by playlist id or similar
+    # Would enable checking of playlist properly if order changed
     Turnkey.archive(Engine.sharedClient.ipod.selectedPlaylist, "Selected Playlist")
 
   end
