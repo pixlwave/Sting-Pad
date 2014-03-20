@@ -10,6 +10,7 @@ class Music
     @playlist = @allPlaylists[@selectedPlaylist]
     @musicPlayer.setQueueWithItemCollection(@playlist)
     @musicPlayer.beginGeneratingPlaybackNotifications
+    MPMediaLibrary.defaultMediaLibrary.beginGeneratingLibraryChangeNotifications
 
   end
 
@@ -65,12 +66,13 @@ class Music
 
   def refreshPlaylists
 
+    # gets all playlists in the media library
     @allPlaylists = getAllPlaylists
+
+    # find currect playlist in the collection and update
+    # if not found select first playlist
     @selectedPlaylist = @allPlaylists.index(@playlist) || 0
     @playlist = @allPlaylists[@selectedPlaylist]
-
-    # update @selectedPlaylist and @playlist too.
-    # this will require testing @selectedPlaylist for it's name incase it's moved in the collection
 
   end
 

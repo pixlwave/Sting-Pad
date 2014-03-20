@@ -35,10 +35,6 @@ class AppDelegate
     # re-enables mixing so app launch doesn't kill iPod music
     setMixingState(true)
 
-    # refresh playlists in case user has edited anything in the iPod app
-    # doesn't work?! calling from edit controller but needs to be on app appearing again for complete consistency.
-    # Engine.sharedClient.ipod.refreshPlaylists
-
   end
 
   def setMixingState(state)

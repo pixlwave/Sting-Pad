@@ -50,6 +50,8 @@ class StkController < UIViewController
     NSNotificationCenter.defaultCenter.addObserver(self, selector:'updateTable', name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification, object:nil)
     NSNotificationCenter.defaultCenter.addObserver(self, selector:'playbackStateDidChange:', name:MPMusicPlayerControllerPlaybackStateDidChangeNotification, object:nil)
 
+    NSNotificationCenter.defaultCenter.addObserver(self, selector:'refreshPlaylists', name:MPMediaLibraryDidChangeNotification, object:nil)
+
   end
 
   def viewDidAppear(animated)
@@ -120,6 +122,14 @@ class StkController < UIViewController
     @titleLabel2.text = @engine.sting[2].title
     @titleLabel3.text = @engine.sting[3].title
     @titleLabel4.text = @engine.sting[4].title
+
+  end
+
+  def refreshPlaylists
+
+    @engine.ipod.refreshPlaylists
+    updateTable
+    NSLog("updated playlists")
 
   end
 
