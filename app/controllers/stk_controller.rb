@@ -56,7 +56,7 @@ class StkController < UIViewController
 
   def viewDidAppear(animated)
 
-    showWalkthrough unless Turnkey.unarchive("hasSeenTutorial")
+    showWalkthrough if (Turnkey.unarchive("walkthroughVersionSeen") || 0) < WalkthroughController.version
 
   end
 
@@ -175,7 +175,7 @@ class StkController < UIViewController
     walkvc = storyboard.instantiateViewControllerWithIdentifier("WalkthroughController")
     walkvc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve
     presentViewController(walkvc, animated:true, completion:nil)
-    Turnkey.archive(true, "hasSeenTutorial")
+    Turnkey.archive(WalkthroughController.version, "walkthroughVersionSeen")
 
   end
 
