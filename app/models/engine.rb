@@ -63,6 +63,14 @@ class Engine
 
   end
 
+  def setStingDelegates(object)
+
+    @sting.each do |s|
+      s.delegate = object
+    end
+
+  end
+
   def self.saveState
 
     Engine.sharedClient.sting.each_with_index do |s, i|

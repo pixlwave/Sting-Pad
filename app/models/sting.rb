@@ -1,5 +1,6 @@
 class Sting
 
+  attr_accessor :delegate
   attr_reader :url, :title, :artist, :cuePoint, :waveform
 
   def initialize(url, title, artist, cuePoint)
@@ -8,6 +9,7 @@ class Sting
     @url = url
     @stingPlayer = AVAudioPlayer.alloc.initWithContentsOfURL(@url, error:nil)
 
+    # checks if player loaded, as an old url will return a nil object
     if @stingPlayer
       @title = title
       @artist = artist
@@ -21,7 +23,7 @@ class Sting
     end
 
     @stingPlayer.delegate = self
-    @stingPlayer.numberOfLoops = 0
+    @stingPlayer.numberOfLoops = 0  # needed?
     @stingPlayer.currentTime = @cuePoint
     @stingPlayer.prepareToPlay
 
@@ -52,8 +54,14 @@ class Sting
 
     # init player with new track and set cue to 0
     @url = mediaItem.valueForProperty(MPMediaItemPropertyAssetURL)
+
     @stingPlayer = AVAudioPlayer.alloc.initWithContentsOfURL(@url, error:nil)
+    @stingPlayer.delegate = self    # new object still needs to call delegate methods
+    @stingPlayer.numberOfLoops = 0  # needed?
+
     @cuePoint = 0
+    @stingPlayer.currentTime = @cuePoint
+    @stingPlayer.prepareToPlay
 
     @title = mediaItem.valueForProperty(MPMediaItemPropertyTitle)
     @artist = mediaItem.valueForProperty(MPMediaItemPropertyArtist)
@@ -81,15 +89,16 @@ class Sting
 
   def audioPlayerDidFinishPlaying(player, successfully:flag)
 
-    # Model talking to the Controller in a bad way? Delegates?
-    UIApplication.sharedApplication.delegate.window.rootViewController.stop
+    # Is this the correct way to do delegates? delegate.stingFinished(self)
+    # delegate.stingDidStop(self) -> label.hidden
+    # then call currentTime=cuePoint from here
+    delegate.stop
 
   end
 
   def audioPlayerBeginInterruption(player)
 
-    # Model talking to the Controller in a bad way? Delegates?
-    UIApplication.sharedApplication.delegate.window.rootViewController.stop
+    delegate.stop
 
   end
 

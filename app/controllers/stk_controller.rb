@@ -16,6 +16,7 @@ class StkController < UIViewController
   def viewDidLoad
 
     @engine = Engine.sharedClient
+    @engine.setStingDelegates(self)
 
     if NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1 && UIDevice.currentDevice.userInterfaceIdiom != UIUserInterfaceIdiomPad
       @playlistTable.setContentInset(UIEdgeInsetsMake(UIApplication.sharedApplication.statusBarFrame.size.height, @playlistTable.contentInset.left, @playlistTable.contentInset.bottom, @playlistTable.contentInset.right))
@@ -236,6 +237,8 @@ class StkController < UIViewController
 
   end
 
+
+  #### Scroll View delegate methods
   def scrollViewDidEndDecelerating(scrollView)
 
     if scrollView == @stingScrollView

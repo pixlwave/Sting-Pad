@@ -1,5 +1,6 @@
 class AppDelegate
 
+  # this can be removed with final delegate implementation
   attr_reader :window
   
   def application(application, didFinishLaunchingWithOptions:launchOptions)
