@@ -1,6 +1,7 @@
 class EditController < UIViewController
   extend IB
 
+  # observing for waveform view progress changes
   include BW::KVO
 
   outlet :editScrollView, UIScrollView
@@ -25,10 +26,13 @@ class EditController < UIViewController
 
   def viewDidLoad
 
+    # access the music
     @engine = Engine.sharedClient
 
+    # load track info
     updateLabels
 
+    # get waveform view positions
     waveFrame = Array.new(@engine.sting.size)
     waveFrame[0] = @waveLoadImageView0.frame
     waveFrame[1] = @waveLoadImageView1.frame
@@ -36,6 +40,7 @@ class EditController < UIViewController
     waveFrame[3] = @waveLoadImageView3.frame
     waveFrame[4] = @waveLoadImageView4.frame
     
+    # set up array for waveform views
     @wave = Array.new(waveFrame.size)
     @wave.each_with_index do |w, i|
 
@@ -53,6 +58,7 @@ class EditController < UIViewController
       @wave[i].delegate = self
       @editView.addSubview(@wave[i])
 
+      # update cue point when waveform view touched and save
       observe(@wave[i], "progressSamples") do |old_value, new_value|
         cue = new_value.to_f / @wave[i].totalSamples
         @engine.sting[i].setCue(cue)
@@ -68,15 +74,18 @@ class EditController < UIViewController
       waveLoadImageView3.removeFromSuperview
       waveLoadImageView4.removeFromSuperview
     else
+      # otherwise they will have loaded so save for next time
       @engine.wavesLoaded = true
     end
 
+    # set up scrolling
     @editScrollView.setContentSize(@editView.frame.size)
     @editScrollView.delegate = self
 
     # refresh playlists in case anything has changed
     @engine.ipod.refreshPlaylists
 
+    # set up playlist selection wheel
     playlistPicker.delegate = self
     playlistPicker.dataSource = self
 
@@ -88,6 +97,7 @@ class EditController < UIViewController
 
   def dismiss
 
+    # display updates before dismissing
     self.presentingViewController.updateStingTitles
     self.dismissViewControllerAnimated(true, completion:nil)
 
@@ -95,6 +105,7 @@ class EditController < UIViewController
 
   def loadTrack
 
+    # present music picker to load a track from ipod
     mediaPicker = MPMediaPickerController.alloc.initWithMediaTypes(MPMediaTypeMusic)
     mediaPicker.delegate = self
     mediaPicker.showsCloudItems = false  # hides iTunes in the Cloud items, which crash the app if picked
@@ -103,6 +114,7 @@ class EditController < UIViewController
 
   end
 
+  # these set a marker for which track to load before presenting the music picker
   def loadTrack0
 
     @loadingTrack = 0
@@ -140,6 +152,8 @@ class EditController < UIViewController
 
   def updateLabels
 
+    # get all the relevant track info from the engine
+    
     @titleLabel0.text = @engine.sting[0].title
     @artistLabel0.text = @engine.sting[0].artist
 
@@ -171,10 +185,12 @@ class EditController < UIViewController
     # fix this crappy bodge!!!
     num = nil
 
+    # find out which waveformView has rendered
     @wave.each_with_index do |w, i|
       num = i if waveformView == w
     end
 
+    # remove wave loading image from the view
     if num == 0
       waveLoadImageView0.removeFromSuperview
     elsif num == 1
@@ -193,11 +209,13 @@ class EditController < UIViewController
   ##### Media picker delegate methods #####
   def mediaPicker(mediaPicker, didPickMediaItems:mediaItemCollection)
 
-    track = mediaItemCollection.items[0]
+    # load media item into the currently loading sting player and update labels
+    track = mediaItemCollection.items[0]    # not needed...
     @engine.sting[@loadingTrack].loadSting(mediaItemCollection.items[0])
     updateLabels
 
     # fix this crappy bodge too!!!
+    # add wave loading image whilst waveform generates
     if @loadingTrack == 0
       @editView.addSubview(waveLoadImageView0)
     elsif @loadingTrack == 1
@@ -210,14 +228,17 @@ class EditController < UIViewController
       @editView.addSubview(waveLoadImageView4)
     end
 
+    # generate new waveform
     updateWaveURL(@loadingTrack)
 
+    # dismiss media picker
     self.dismissViewControllerAnimated(true, completion:nil)
 
   end
 
   def mediaPickerDidCancel(mediaPicker)
 
+    # dismiss media picker
     self.dismissViewControllerAnimated(true, completion:nil)
 
   end
