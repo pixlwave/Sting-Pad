@@ -6,6 +6,9 @@
 @implementation AppDelegate
 @end
 
+@implementation BackgroundController
+@end
+
 @implementation EditController
 @end
 

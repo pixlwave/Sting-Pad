@@ -14,6 +14,12 @@
 
 @end
 
+@interface BackgroundController: UITableViewController
+-(IBAction) viewDidLoad;
+-(IBAction) dismiss;
+
+@end
+
 @interface EditController: UIViewController
 
 @property IBOutlet UIScrollView * editScrollView;
@@ -75,6 +81,7 @@
 -(IBAction) iPodPrevious;
 -(IBAction) iPodNext;
 -(IBAction) updateStingTitles;
+-(IBAction) refreshPlaylists;
 -(IBAction) updateTable;
 -(IBAction) playbackStateDidChange:(id) notification;
 -(IBAction) updatePlayPause;
@@ -100,6 +107,7 @@
 -(IBAction) playiPod;
 -(IBAction) playiPodItem:(id) index;
 -(IBAction) pauseiPod;
+-(IBAction) setStingDelegates:(id) object;
 
 @end
 

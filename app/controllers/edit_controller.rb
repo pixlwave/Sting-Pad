@@ -22,8 +22,6 @@ class EditController < UIViewController
   outlet :artistLabel4, UILabel
   outlet :waveLoadImageView4, UIImageView
 
-  outlet :playlistPicker, UIPickerView
-
   def viewDidLoad
 
     # access the music
@@ -84,14 +82,6 @@ class EditController < UIViewController
 
     # refresh playlists in case anything has changed
     @engine.ipod.refreshPlaylists
-
-    # set up playlist selection wheel
-    playlistPicker.delegate = self
-    playlistPicker.dataSource = self
-
-    # searches for active playlist in playlists array and uses this to select it in the picker
-    playlistIndex = @engine.ipod.allPlaylists.index(@engine.ipod.playlist)
-    playlistPicker.selectRow(playlistIndex || 0, inComponent:0, animated:true)
 
   end
 
@@ -240,32 +230,6 @@ class EditController < UIViewController
 
     # dismiss media picker
     self.dismissViewControllerAnimated(true, completion:nil)
-
-  end
-
-  ##### PickerView delegate methods #####
-  def numberOfComponentsInPickerView(pickerView)
-
-    1
-
-  end
-
-  def pickerView(pickerView, numberOfRowsInComponent:component)
-
-    @engine.ipod.allPlaylists.size
-
-  end
-
-  def pickerView(pickerView, titleForRow:row, forComponent:component)
-
-    @engine.ipod.allPlaylists[row].valueForProperty(MPMediaPlaylistPropertyName)
-
-  end
-
-  def pickerView(pickerView, didSelectRow:row, inComponent:component)
-
-    @engine.ipod.usePlaylist(row)
-    self.presentingViewController.playlistDidChange
 
   end
 
