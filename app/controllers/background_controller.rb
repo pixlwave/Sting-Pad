@@ -11,8 +11,10 @@ class BackgroundController < UITableViewController
 
   def viewWillAppear(animated)
 
-    indexPath = NSIndexPath.indexPathForRow(@selectedPlaylist, inSection:0)         
-    self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition:UITableViewScrollPositionNone, animated:false)
+    if @engine.ipod.playlist
+      indexPath = NSIndexPath.indexPathForRow(@selectedPlaylist, inSection:0)         
+      self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition:UITableViewScrollPositionNone, animated:false)
+    end
 
   end
 
