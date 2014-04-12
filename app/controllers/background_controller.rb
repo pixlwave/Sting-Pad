@@ -5,8 +5,8 @@ class BackgroundController < UITableViewController
 
     @engine = Engine.sharedClient
 
-    # match titlebar colour to main controller - is this needed: a colour bug??
-    self.navigationController.navigationBar.barTintColor = self.presentingViewController.view.backgroundColor
+    # match titlebar colour to main controller - when device rgb instead of generic rgb
+    # self.navigationController.navigationBar.barTintColor = self.presentingViewController.view.backgroundColor
 
     @selectedPlaylist = @engine.ipod.selectedPlaylist
 

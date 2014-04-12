@@ -17,8 +17,8 @@ class StingController < UIViewController
     # access the music
     @engine = Engine.sharedClient
 
-    # match titlebar colour to main controller - is this needed: a colour bug??
-    self.view.backgroundColor = self.presentingViewController.view.backgroundColor
+    # match titlebar colour to main controller - when device rgb instead of generic rgb
+    # self.view.backgroundColor = self.presentingViewController.view.backgroundColor
 
     # load track info
     @stingNumberLabel.text = "Sting #{@stingIndex+1}"
@@ -92,6 +92,18 @@ class StingController < UIViewController
 
     @wave.setAudioURL(@engine.sting[@stingIndex].url)
     @wave.setProgressSamples(@wave.totalSamples * @engine.sting[@stingIndex].getCue)
+
+  end
+
+  def startPreview
+
+    @engine.playSting(@stingIndex)
+
+  end
+
+  def stopPreview
+
+    @engine.stopSting
 
   end
 

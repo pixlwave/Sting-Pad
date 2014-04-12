@@ -33,7 +33,9 @@
 -(IBAction) dismiss;
 -(IBAction) loadTrack;
 -(IBAction) updateLabels;
--(IBAction) updateWaveURL:(id) i;
+-(IBAction) updateWaveURL;
+-(IBAction) startPreview;
+-(IBAction) stopPreview;
 -(IBAction) waveformViewDidRender:(id) waveformView;
 -(IBAction) mediaPickerDidCancel:(id) mediaPicker;
 
