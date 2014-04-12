@@ -1,4 +1,4 @@
-class EditController < UIViewController
+class StingController < UIViewController
   extend IB
 
   # observing for waveform view progress changes

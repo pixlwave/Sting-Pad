@@ -322,10 +322,10 @@
             </objects>
             <point key="canvasLocation" x="948" y="722"/>
         </scene>
-        <!--Edit Controller-->
+        <!--Sting Controller-->
         <scene sceneID="BBH-1f-24n">
             <objects>
-                <viewController id="sKY-0b-GtB" customClass="EditController" sceneMemberID="viewController">
+                <viewController id="sKY-0b-GtB" customClass="StingController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IL7-SC-53c">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
