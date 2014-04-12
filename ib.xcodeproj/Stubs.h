@@ -16,6 +16,7 @@
 
 @interface BackgroundController: UITableViewController
 -(IBAction) viewDidLoad;
+-(IBAction) viewWillAppear:(id) animated;
 -(IBAction) dismiss;
 
 @end
@@ -39,7 +40,6 @@
 @property IBOutlet UILabel * titleLabel4;
 @property IBOutlet UILabel * artistLabel4;
 @property IBOutlet UIImageView * waveLoadImageView4;
-@property IBOutlet UIPickerView * playlistPicker;
 
 -(IBAction) viewDidLoad;
 -(IBAction) dismiss;
@@ -53,7 +53,6 @@
 -(IBAction) updateWaveURL:(id) i;
 -(IBAction) waveformViewDidRender:(id) waveformView;
 -(IBAction) mediaPickerDidCancel:(id) mediaPicker;
--(IBAction) numberOfComponentsInPickerView:(id) pickerView;
 
 @end
 

@@ -27,6 +27,9 @@ class EditController < UIViewController
     # access the music
     @engine = Engine.sharedClient
 
+    # match titlebar colour to main controller - is this needed: a colour bug??
+    self.view.backgroundColor = self.presentingViewController.view.backgroundColor
+
     # load track info
     updateLabels
 
