@@ -59,6 +59,8 @@ class StingController < UIViewController
     # refresh playlists in case anything has changed
     @engine.ipod.refreshPlaylists
 
+    puts @wave.contentMode
+
   end
 
   def dismiss
@@ -92,6 +94,13 @@ class StingController < UIViewController
 
     @wave.setAudioURL(@engine.sting[@stingIndex].url)
     @wave.setProgressSamples(@wave.totalSamples * @engine.sting[@stingIndex].getCue)
+
+  end
+
+  def zoomWaveOut
+
+    @wave.zoomStartSamples = 0
+    @wave.zoomEndSamples = @wave.totalSamples
 
   end
 

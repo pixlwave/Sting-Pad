@@ -34,6 +34,7 @@
 -(IBAction) loadTrack;
 -(IBAction) updateLabels;
 -(IBAction) updateWaveURL;
+-(IBAction) zoomWaveOut;
 -(IBAction) startPreview;
 -(IBAction) stopPreview;
 -(IBAction) waveformViewDidRender:(id) waveformView;
