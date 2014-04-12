@@ -174,7 +174,17 @@ class StkController < UIViewController
   end
 
 
-  ##### Table View delegate methods #####
+  #### Segue methods ####
+  def prepareForSegue(segue, sender:sender)
+
+    if segue.identifier == "LoadSting"
+      segue.destinationViewController.stingIndex = @selectedSting
+    end
+
+  end
+
+
+  #### Table View delegate methods ####
   def tableView(tableView, numberOfRowsInSection:section)
 
     if @engine.ipod.playlist
@@ -237,7 +247,7 @@ class StkController < UIViewController
   end
 
 
-  #### Scroll View delegate methods
+  #### Scroll View delegate methods ####
   def scrollViewDidEndDecelerating(scrollView)
 
     # update selected sting when sting scroll view has completed animating

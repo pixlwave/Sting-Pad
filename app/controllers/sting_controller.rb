@@ -4,23 +4,13 @@ class StingController < UIViewController
   # observing for waveform view progress changes
   include BW::KVO
 
-  outlet :editScrollView, UIScrollView
+  attr_accessor :stingIndex
+
   outlet :editView, UIView
-  outlet :titleLabel0, UILabel
-  outlet :artistLabel0, UILabel
-  outlet :waveLoadImageView0, UIImageView
-  outlet :titleLabel1, UILabel
-  outlet :artistLabel1, UILabel
-  outlet :waveLoadImageView1, UIImageView
-  outlet :titleLabel2, UILabel
-  outlet :artistLabel2, UILabel
-  outlet :waveLoadImageView2, UIImageView
-  outlet :titleLabel3, UILabel
-  outlet :artistLabel3, UILabel
-  outlet :waveLoadImageView3, UIImageView
-  outlet :titleLabel4, UILabel
-  outlet :artistLabel4, UILabel
-  outlet :waveLoadImageView4, UIImageView
+  outlet :stingNumberLabel, UILabel
+  outlet :titleLabel, UILabel
+  outlet :artistLabel, UILabel
+  outlet :waveLoadImageView, UIImageView
 
   def viewDidLoad
 
@@ -31,57 +21,40 @@ class StingController < UIViewController
     self.view.backgroundColor = self.presentingViewController.view.backgroundColor
 
     # load track info
+    @stingNumberLabel.text = "Sting #{@stingIndex+1}"
     updateLabels
 
     # get waveform view positions
-    waveFrame = Array.new(@engine.sting.size)
-    waveFrame[0] = @waveLoadImageView0.frame
-    waveFrame[1] = @waveLoadImageView1.frame
-    waveFrame[2] = @waveLoadImageView2.frame
-    waveFrame[3] = @waveLoadImageView3.frame
-    waveFrame[4] = @waveLoadImageView4.frame
-    
-    # set up array for waveform views
-    @wave = Array.new(waveFrame.size)
-    @wave.each_with_index do |w, i|
+    waveFrame = @waveLoadImageView.frame
 
-      # not using whilst storing waveformView inside Sting object
-      # @wave[i] = FDWaveformView.alloc.initWithFrame(waveFrame[i])
-      # @wave[i].doesAllowScrubbing = true
-      # @wave[i].delegate = self
-      # @editView.addSubview(@wave[i])
-      # updateWaveURL(i)
+    # not using whilst storing waveformView inside Sting object
+    # @wave = FDWaveformView.alloc.initWithFrame(waveFrame)
+    # @wave.doesAllowScrubbing = true
+    # @wave.delegate = self
+    # @editView.addSubview(@wave)
+    # updateWaveURL()
 
-      # temporary bodge to stop waveform being rendered each time it is presented
-      # memory usage is probably excessive!
-      @wave[i] = @engine.sting[i].waveform
-      @wave[i].setFrame(waveFrame[i]) unless @engine.wavesLoaded
-      @wave[i].delegate = self
-      @editView.addSubview(@wave[i])
+    # temporary bodge to stop waveform being rendered each time it is presented
+    # memory usage is probably excessive!
+    @wave = @engine.sting[@stingIndex].waveform
+    @wave.setFrame(waveFrame) unless @engine.wavesLoaded[@stingIndex]
+    @wave.delegate = self
+    @editView.addSubview(@wave)
 
-      # update cue point when waveform view touched and save
-      observe(@wave[i], "progressSamples") do |old_value, new_value|
-        cue = new_value.to_f / @wave[i].totalSamples
-        @engine.sting[i].setCue(cue)
-        Turnkey.archive(@engine.sting[i].cuePoint, "Sting #{i} Cue Point")
-      end
+    # update cue point when waveform view touched and save
+    observe(@wave, "progressSamples") do |old_value, new_value|
+      cue = new_value.to_f / @wave.totalSamples
+      @engine.sting[@stingIndex].setCue(cue)
+      Turnkey.archive(@engine.sting[@stingIndex].cuePoint, "Sting #{@stingIndex} Cue Point")
     end
 
     # temporary bodge to remove waveform loading image if the waveform isn't going to render
-    if @engine.wavesLoaded
-      waveLoadImageView0.removeFromSuperview
-      waveLoadImageView1.removeFromSuperview
-      waveLoadImageView2.removeFromSuperview
-      waveLoadImageView3.removeFromSuperview
-      waveLoadImageView4.removeFromSuperview
+    if @engine.wavesLoaded[@stingIndex]
+      waveLoadImageView.removeFromSuperview
     else
       # otherwise they will have loaded so save for next time
-      @engine.wavesLoaded = true
+      @engine.wavesLoaded[@stingIndex] = true
     end
-
-    # set up scrolling
-    @editScrollView.setContentSize(@editView.frame.size)
-    @editScrollView.delegate = self
 
     # refresh playlists in case anything has changed
     @engine.ipod.refreshPlaylists
@@ -107,67 +80,18 @@ class StingController < UIViewController
 
   end
 
-  # these set a marker for which track to load before presenting the music picker
-  def loadTrack0
-
-    @loadingTrack = 0
-    loadTrack
-
-  end
-
-  def loadTrack1
-
-    @loadingTrack = 1
-    loadTrack
-
-  end
-
-  def loadTrack2
-
-    @loadingTrack = 2
-    loadTrack
-
-  end
-
-  def loadTrack3
-
-    @loadingTrack = 3
-    loadTrack
-
-  end
-
-    def loadTrack4
-
-    @loadingTrack = 4
-    loadTrack
-
-  end
-
   def updateLabels
 
     # get all the relevant track info from the engine
-    
-    @titleLabel0.text = @engine.sting[0].title
-    @artistLabel0.text = @engine.sting[0].artist
-
-    @titleLabel1.text = @engine.sting[1].title
-    @artistLabel1.text = @engine.sting[1].artist
-
-    @titleLabel2.text = @engine.sting[2].title
-    @artistLabel2.text = @engine.sting[2].artist
-
-    @titleLabel3.text = @engine.sting[3].title
-    @artistLabel3.text = @engine.sting[3].artist
-
-    @titleLabel4.text = @engine.sting[4].title
-    @artistLabel4.text = @engine.sting[4].artist
+    @titleLabel.text = @engine.sting[@stingIndex].title
+    @artistLabel.text = @engine.sting[@stingIndex].artist
 
   end
 
-  def updateWaveURL(i)
+  def updateWaveURL
 
-    @wave[i].setAudioURL(@engine.sting[i].url)
-    @wave[i].setProgressSamples(@wave[i].totalSamples * @engine.sting[i].getCue)
+    @wave.setAudioURL(@engine.sting[@stingIndex].url)
+    @wave.setProgressSamples(@wave.totalSamples * @engine.sting[@stingIndex].getCue)
 
   end
 
@@ -175,26 +99,7 @@ class StingController < UIViewController
   ##### Waveform view delegate methods #####
   def waveformViewDidRender(waveformView)
 
-    # fix this crappy bodge!!!
-    num = nil
-
-    # find out which waveformView has rendered
-    @wave.each_with_index do |w, i|
-      num = i if waveformView == w
-    end
-
-    # remove wave loading image from the view
-    if num == 0
-      waveLoadImageView0.removeFromSuperview
-    elsif num == 1
-      waveLoadImageView1.removeFromSuperview
-    elsif num == 2
-      waveLoadImageView2.removeFromSuperview
-    elsif num == 3
-      waveLoadImageView3.removeFromSuperview
-    elsif num == 4
-      waveLoadImageView4.removeFromSuperview
-    end
+    waveLoadImageView.removeFromSuperview
 
   end
 
@@ -204,25 +109,14 @@ class StingController < UIViewController
 
     # load media item into the currently loading sting player and update labels
     track = mediaItemCollection.items[0]    # not needed...
-    @engine.sting[@loadingTrack].loadSting(mediaItemCollection.items[0])
+    @engine.sting[@stingIndex].loadSting(mediaItemCollection.items[0])
     updateLabels
 
-    # fix this crappy bodge too!!!
     # add wave loading image whilst waveform generates
-    if @loadingTrack == 0
-      @editView.addSubview(waveLoadImageView0)
-    elsif @loadingTrack == 1
-      @editView.addSubview(waveLoadImageView1)
-    elsif @loadingTrack == 2
-      @editView.addSubview(waveLoadImageView2)
-    elsif @loadingTrack == 3
-      @editView.addSubview(waveLoadImageView3)
-    elsif @loadingTrack == 4
-      @editView.addSubview(waveLoadImageView4)
-    end
+    @editView.addSubview(waveLoadImageView)
 
     # generate new waveform
-    updateWaveURL(@loadingTrack)
+    updateWaveURL
 
     # dismiss media picker
     self.dismissViewControllerAnimated(true, completion:nil)

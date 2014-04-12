@@ -9,7 +9,7 @@
 @implementation BackgroundController
 @end
 
-@implementation EditController
+@implementation StingController
 @end
 
 @implementation StkController

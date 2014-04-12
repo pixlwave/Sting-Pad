@@ -21,34 +21,17 @@
 
 @end
 
-@interface EditController: UIViewController
+@interface StingController: UIViewController
 
-@property IBOutlet UIScrollView * editScrollView;
 @property IBOutlet UIView * editView;
-@property IBOutlet UILabel * titleLabel0;
-@property IBOutlet UILabel * artistLabel0;
-@property IBOutlet UIImageView * waveLoadImageView0;
-@property IBOutlet UILabel * titleLabel1;
-@property IBOutlet UILabel * artistLabel1;
-@property IBOutlet UIImageView * waveLoadImageView1;
-@property IBOutlet UILabel * titleLabel2;
-@property IBOutlet UILabel * artistLabel2;
-@property IBOutlet UIImageView * waveLoadImageView2;
-@property IBOutlet UILabel * titleLabel3;
-@property IBOutlet UILabel * artistLabel3;
-@property IBOutlet UIImageView * waveLoadImageView3;
-@property IBOutlet UILabel * titleLabel4;
-@property IBOutlet UILabel * artistLabel4;
-@property IBOutlet UIImageView * waveLoadImageView4;
+@property IBOutlet UILabel * stingNumberLabel;
+@property IBOutlet UILabel * titleLabel;
+@property IBOutlet UILabel * artistLabel;
+@property IBOutlet UIImageView * waveLoadImageView;
 
 -(IBAction) viewDidLoad;
 -(IBAction) dismiss;
 -(IBAction) loadTrack;
--(IBAction) loadTrack0;
--(IBAction) loadTrack1;
--(IBAction) loadTrack2;
--(IBAction) loadTrack3;
--(IBAction) loadTrack4;
 -(IBAction) updateLabels;
 -(IBAction) updateWaveURL:(id) i;
 -(IBAction) waveformViewDidRender:(id) waveformView;

@@ -12,6 +12,7 @@ class Engine
   def initialize
 
     @sting = Array.new(5)
+    @wavesLoaded = Array.new(@sting.size)
 
     @sting.each_with_index do |s, i|
       url = Turnkey.unarchive("Sting #{i} URL")
