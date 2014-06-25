@@ -59,8 +59,6 @@ class StingController < UIViewController
     # refresh playlists in case anything has changed
     @engine.ipod.refreshPlaylists
 
-    puts @wave.contentMode
-
   end
 
   def dismiss
