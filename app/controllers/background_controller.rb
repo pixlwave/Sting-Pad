@@ -9,6 +9,8 @@ class BackgroundController < UITableViewController
     # self.navigationController.navigationBar.barTintColor = self.presentingViewController.view.backgroundColor
 
     @selectedPlaylist = @engine.ipod.selectedPlaylist
+    @playlistImage = UIImage.imageNamed("playlist")
+    @smartPlaylistImage = UIImage.imageNamed("smartplaylist")
 
   end
 
@@ -51,6 +53,13 @@ class BackgroundController < UITableViewController
     
     playlist = @engine.ipod.allPlaylists[indexPath.row]
     cell.textLabel.text = playlist.valueForProperty(MPMediaPlaylistPropertyName)
+
+    if playlist.valueForProperty(MPMediaPlaylistPropertyPlaylistAttributes) == MPMediaPlaylistAttributeSmart
+      cell.imageView.image = @smartPlaylistImage
+    else
+      cell.imageView.image = @playlistImage
+    end
+
 
     if playlist == @engine.ipod.playlist
       cell.accessoryType = UITableViewCellAccessoryCheckmark
