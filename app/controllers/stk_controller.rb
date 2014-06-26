@@ -7,6 +7,7 @@ class StkController < UIViewController
   outlet :titleLabel3, UILabel
   outlet :titleLabel4, UILabel
   outlet :playlistTable, UITableView
+  outlet :ipodShuffleButton, UIButton
   outlet :ipodPlayButton, UIButton
   outlet :stingScrollView, UIScrollView
   outlet :stingView, UIView
@@ -41,10 +42,6 @@ class StkController < UIViewController
     # gets correct labels for the stings
     updateStingTitles
 
-    # ipod play/pause images loaded into memory for quick switching
-    @ipodPlayImage = UIImage.imageNamed("ipodplay")
-    @ipodPauseImage = UIImage.imageNamed("ipodpause")
-
   end
 
   def viewWillAppear(animated)
@@ -55,6 +52,9 @@ class StkController < UIViewController
 
     # listen for iPod library changes
     NSNotificationCenter.defaultCenter.addObserver(self, selector:'refreshPlaylists', name:MPMediaLibraryDidChangeNotification, object:nil)
+
+    # update shuffle button in case changed outside of app
+    @ipodShuffleButton.selected = @engine.ipod.shuffleState   # TODO: observe this?
 
   end
 
@@ -111,6 +111,13 @@ class StkController < UIViewController
 
   end
 
+  def iPodShuffle
+
+    shuffleState = @engine.ipod.toggleShuffle
+    @ipodShuffleButton.selected = @engine.ipod.shuffleState
+
+  end
+
   def updateStingTitles
 
     # get titles from stings
@@ -146,11 +153,7 @@ class StkController < UIViewController
 
   def updatePlayPause
 
-    if @engine.ipod.isPlaying
-      @ipodPlayButton.setImage(@ipodPauseImage, forState:UIControlStateNormal)
-    else
-      @ipodPlayButton.setImage(@ipodPlayImage, forState:UIControlStateNormal)
-    end
+    @ipodPlayButton.selected = @engine.ipod.isPlaying
 
   end
 

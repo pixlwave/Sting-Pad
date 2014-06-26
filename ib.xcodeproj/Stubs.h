@@ -50,6 +50,7 @@
 @property IBOutlet UILabel * titleLabel3;
 @property IBOutlet UILabel * titleLabel4;
 @property IBOutlet UITableView * playlistTable;
+@property IBOutlet UIButton * ipodShuffleButton;
 @property IBOutlet UIButton * ipodPlayButton;
 @property IBOutlet UIScrollView * stingScrollView;
 @property IBOutlet UIView * stingView;
@@ -65,6 +66,7 @@
 -(IBAction) iPodPlayPause;
 -(IBAction) iPodPrevious;
 -(IBAction) iPodNext;
+-(IBAction) iPodShuffle;
 -(IBAction) updateStingTitles;
 -(IBAction) refreshPlaylists;
 -(IBAction) updateTable;
@@ -105,6 +107,7 @@
 -(IBAction) playItem:(id) index;
 -(IBAction) nowPlayingItem;
 -(IBAction) isPlaying;
+-(IBAction) toggleShuffle;
 -(IBAction) refreshPlaylists;
 -(IBAction) getNamedPlaylist:(id) name;
 -(IBAction) getAllPlaylists;

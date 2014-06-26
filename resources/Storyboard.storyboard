@@ -29,6 +29,7 @@
                                         <state key="normal" image="ipodplay.png">
                                             <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <state key="selected" image="ipodpause.png"/>
                                         <connections>
                                             <action selector="iPodPlayPause" destination="Fwb-c8-22I" eventType="touchUpInside" id="ZNR-dX-pYB"/>
                                         </connections>
@@ -54,7 +55,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dVz-4c-dxA">
-                                        <rect key="frame" x="279" y="10" width="35" height="30"/>
+                                        <rect key="frame" x="275" y="10" width="35" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <state key="normal" title="Load">
@@ -62,6 +63,17 @@
                                         </state>
                                         <connections>
                                             <segue destination="g74-a5-Est" kind="modal" id="jN1-NT-xWr"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="D0U-wD-wqz">
+                                        <rect key="frame" x="10" y="11" width="45" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <state key="normal" title="Shuffle">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="iPodShuffle" destination="Fwb-c8-22I" eventType="touchUpInside" id="dv9-s0-Lhl"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -263,6 +275,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="ipodPlayButton" destination="m9M-Uv-BVM" id="Mcm-y4-amZ"/>
+                        <outlet property="ipodShuffleButton" destination="D0U-wD-wqz" id="eSA-A9-nWV"/>
                         <outlet property="playingLabel" destination="zPT-HY-W6c" id="4B0-PL-I7W"/>
                         <outlet property="playlistTable" destination="Cz5-hC-AHC" id="W2r-Um-aR2"/>
                         <outlet property="stingPage" destination="zOQ-cv-f9K" id="sNv-MG-Uu4"/>
@@ -467,6 +480,7 @@
     </scenes>
     <resources>
         <image name="ipodnext.png" width="32" height="25"/>
+        <image name="ipodpause.png" width="30" height="30"/>
         <image name="ipodplay.png" width="30" height="30"/>
         <image name="ipodprevious.png" width="32" height="25"/>
         <image name="logo.png" width="120" height="45"/>

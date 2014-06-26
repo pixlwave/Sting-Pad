@@ -64,6 +64,26 @@ class Music
 
   end
 
+  def toggleShuffle
+
+    if shuffleState
+      @musicPlayer.shuffleMode = MPMusicShuffleModeOff
+    else
+      @musicPlayer.shuffleMode = MPMusicShuffleModeSongs
+    end
+
+  end
+
+  def shuffleState
+
+    if @musicPlayer.shuffleMode == MPMusicShuffleModeOff
+      return false
+    else
+      return true
+    end
+
+  end
+
   def refreshPlaylists
 
     # gets all playlists in the media library
