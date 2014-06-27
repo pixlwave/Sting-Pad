@@ -108,6 +108,7 @@
 -(IBAction) nowPlayingItem;
 -(IBAction) isPlaying;
 -(IBAction) toggleShuffle;
+-(IBAction) shuffleState;
 -(IBAction) refreshPlaylists;
 -(IBAction) getNamedPlaylist:(id) name;
 -(IBAction) getAllPlaylists;
@@ -122,6 +123,19 @@
 -(IBAction) setCue:(id) cuePoint;
 -(IBAction) getCue;
 -(IBAction) audioPlayerBeginInterruption:(id) player;
+
+@end
+
+@interface StingView: UIView
+
+@property IBOutlet UIView * view;
+@property IBOutlet UIButton * playButton;
+@property IBOutlet UIButton * stopButton;
+@property IBOutlet UILabel * titleLabel;
+
+-(IBAction) initWithFrame:(id) frame;
+-(IBAction) initWithCoder:(id) aDecoder;
+-(IBAction) loadNib;
 
 @end
 

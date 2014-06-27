@@ -27,3 +27,6 @@
 @implementation Sting
 @end
 
+@implementation StingView
+@end
+

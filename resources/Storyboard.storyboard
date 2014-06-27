@@ -66,7 +66,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="D0U-wD-wqz">
-                                        <rect key="frame" x="10" y="11" width="45" height="30"/>
+                                        <rect key="frame" x="10" y="10" width="45" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <state key="normal" title="Shuffle">
@@ -83,6 +83,10 @@
                                 <rect key="frame" x="0.0" y="469" width="320" height="99"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <subviews>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="Cgp-Kx-hgF">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                    </scrollView>
                                     <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Playing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zPT-HY-W6c">
                                         <rect key="frame" x="277" y="0.0" width="40" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -90,174 +94,14 @@
                                         <color key="textColor" red="0.0" green="0.75294117647058822" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="Cgp-Kx-hgF">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" id="FKp-9H-Eb4">
-                                                <rect key="frame" x="0.0" y="0.0" width="1600" height="99"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tsT-Tu-LK4">
-                                                        <rect key="frame" x="33" y="15" width="64" height="64"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <state key="normal" image="play.png"/>
-                                                        <connections>
-                                                            <action selector="play" destination="Fwb-c8-22I" eventType="touchDown" id="8gm-3M-qRq"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9Xd-OU-8VQ">
-                                                        <rect key="frame" x="128" y="23" width="48" height="48"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <state key="normal" image="stop.png"/>
-                                                        <connections>
-                                                            <action selector="stop" destination="Fwb-c8-22I" eventType="touchUpInside" id="4xT-yj-cuj"/>
-                                                        </connections>
-                                                    </button>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nNb-y1-3Ir">
-                                                        <rect key="frame" x="200" y="18" width="108" height="58"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="QYV-Zp-vgU" userLabel="Load Button">
-                                                        <rect key="frame" x="284" y="67" width="36" height="32"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <state key="normal" image="settings.png"/>
-                                                        <connections>
-                                                            <segue destination="sKY-0b-GtB" kind="modal" identifier="LoadSting" id="Wl4-7v-s13"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pW0-3q-bnP">
-                                                        <rect key="frame" x="353" y="15" width="64" height="64"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <state key="normal" image="play.png"/>
-                                                        <connections>
-                                                            <action selector="play" destination="Fwb-c8-22I" eventType="touchDown" id="7Du-4g-wAy"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="KrG-ra-eLd">
-                                                        <rect key="frame" x="448" y="23" width="48" height="48"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <state key="normal" image="stop.png"/>
-                                                        <connections>
-                                                            <action selector="stop" destination="Fwb-c8-22I" eventType="touchUpInside" id="LvE-k6-uMR"/>
-                                                        </connections>
-                                                    </button>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kiS-Wc-66Q">
-                                                        <rect key="frame" x="520" y="18" width="108" height="58"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qOZ-mc-B2p" userLabel="Load Button">
-                                                        <rect key="frame" x="604" y="67" width="36" height="32"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <state key="normal" image="settings.png"/>
-                                                        <connections>
-                                                            <segue destination="sKY-0b-GtB" kind="modal" identifier="LoadSting" id="uq1-bu-UYg"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZQx-De-c4S">
-                                                        <rect key="frame" x="673" y="15" width="64" height="64"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <state key="normal" image="play.png"/>
-                                                        <connections>
-                                                            <action selector="play" destination="Fwb-c8-22I" eventType="touchDown" id="pIN-6m-9yD"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NS7-7d-DRl">
-                                                        <rect key="frame" x="768" y="23" width="48" height="48"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <state key="normal" image="stop.png"/>
-                                                        <connections>
-                                                            <action selector="stop" destination="Fwb-c8-22I" eventType="touchUpInside" id="RYS-ZQ-fjk"/>
-                                                        </connections>
-                                                    </button>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NeK-y0-Hjp">
-                                                        <rect key="frame" x="840" y="18" width="108" height="58"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1HO-D3-VAE" userLabel="Load Button">
-                                                        <rect key="frame" x="924" y="67" width="36" height="32"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <state key="normal" image="settings.png"/>
-                                                        <connections>
-                                                            <segue destination="sKY-0b-GtB" kind="modal" identifier="LoadSting" id="44w-Je-DKo"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="YKZ-rj-eS0">
-                                                        <rect key="frame" x="993" y="15" width="64" height="64"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <state key="normal" image="play.png"/>
-                                                        <connections>
-                                                            <action selector="play" destination="Fwb-c8-22I" eventType="touchDown" id="UrB-04-hEb"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3mD-sZ-Eih">
-                                                        <rect key="frame" x="1088" y="23" width="48" height="48"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <state key="normal" image="stop.png"/>
-                                                        <connections>
-                                                            <action selector="stop" destination="Fwb-c8-22I" eventType="touchUpInside" id="xap-Mx-YzA"/>
-                                                        </connections>
-                                                    </button>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7Yv-74-2AN">
-                                                        <rect key="frame" x="1160" y="18" width="108" height="58"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ew8-ak-fXq" userLabel="Load Button">
-                                                        <rect key="frame" x="1244" y="67" width="36" height="32"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <state key="normal" image="settings.png"/>
-                                                        <connections>
-                                                            <segue destination="sKY-0b-GtB" kind="modal" identifier="LoadSting" id="VsR-9c-R3F"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TEJ-Tt-4On">
-                                                        <rect key="frame" x="1313" y="15" width="64" height="64"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <state key="normal" image="play.png"/>
-                                                        <connections>
-                                                            <action selector="play" destination="Fwb-c8-22I" eventType="touchDown" id="MXj-6y-zR7"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="p64-dZ-PEk">
-                                                        <rect key="frame" x="1408" y="23" width="48" height="48"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <state key="normal" image="stop.png"/>
-                                                        <connections>
-                                                            <action selector="stop" destination="Fwb-c8-22I" eventType="touchUpInside" id="Pfv-6h-04V"/>
-                                                        </connections>
-                                                    </button>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kSk-WY-mVl">
-                                                        <rect key="frame" x="1480" y="18" width="108" height="58"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Phb-nh-trm" userLabel="Load Button">
-                                                        <rect key="frame" x="1564" y="67" width="36" height="32"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <state key="normal" image="settings.png"/>
-                                                        <connections>
-                                                            <segue destination="sKY-0b-GtB" kind="modal" identifier="LoadSting" id="anJ-aj-CuQ"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            </view>
-                                        </subviews>
-                                    </scrollView>
+                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="QYV-Zp-vgU" userLabel="Load Button">
+                                        <rect key="frame" x="284" y="67" width="36" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="settings.png"/>
+                                        <connections>
+                                            <segue destination="sKY-0b-GtB" kind="modal" identifier="LoadSting" id="Wl4-7v-s13"/>
+                                        </connections>
+                                    </button>
                                     <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" id="zOQ-cv-f9K">
                                         <rect key="frame" x="122" y="67" width="76" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -280,12 +124,6 @@
                         <outlet property="playlistTable" destination="Cz5-hC-AHC" id="W2r-Um-aR2"/>
                         <outlet property="stingPage" destination="zOQ-cv-f9K" id="sNv-MG-Uu4"/>
                         <outlet property="stingScrollView" destination="Cgp-Kx-hgF" id="ei4-71-Ozy"/>
-                        <outlet property="stingView" destination="FKp-9H-Eb4" id="Sr4-ee-Ttc"/>
-                        <outlet property="titleLabel0" destination="nNb-y1-3Ir" id="lGn-gQ-IcR"/>
-                        <outlet property="titleLabel1" destination="kiS-Wc-66Q" id="21k-OW-lim"/>
-                        <outlet property="titleLabel2" destination="NeK-y0-Hjp" id="jGj-NA-Q4m"/>
-                        <outlet property="titleLabel3" destination="7Yv-74-2AN" id="TDF-fT-rDc"/>
-                        <outlet property="titleLabel4" destination="kSk-WY-mVl" id="6i6-B0-7Nu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="093-u7-AzH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -484,9 +322,7 @@
         <image name="ipodplay.png" width="30" height="30"/>
         <image name="ipodprevious.png" width="32" height="25"/>
         <image name="logo.png" width="120" height="45"/>
-        <image name="play.png" width="64" height="64"/>
         <image name="settings.png" width="16" height="16"/>
-        <image name="stop.png" width="48" height="48"/>
         <image name="waveload.png" width="230" height="55"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -494,7 +330,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="Wl4-7v-s13"/>
-    </inferredMetricsTieBreakers>
 </document>

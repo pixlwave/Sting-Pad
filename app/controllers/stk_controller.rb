@@ -1,16 +1,10 @@
 class StkController < UIViewController
   extend IB
 
-  outlet :titleLabel0, UILabel
-  outlet :titleLabel1, UILabel
-  outlet :titleLabel2, UILabel
-  outlet :titleLabel3, UILabel
-  outlet :titleLabel4, UILabel
   outlet :playlistTable, UITableView
   outlet :ipodShuffleButton, UIButton
   outlet :ipodPlayButton, UIButton
   outlet :stingScrollView, UIScrollView
-  outlet :stingView, UIView
   outlet :stingPage, UIPageControl
   outlet :playingLabel, UILabel
 
@@ -33,14 +27,25 @@ class StkController < UIViewController
     @playlistTable.delegate = self
     @playlistTable.dataSource = self
 
+    # array to hold the sting views
+    @stingViews = Array.new(@engine.sting.count)
+
+    # add sting views to sting scroll view
+    @stingViews.count.times do |i|
+      v = StingView.alloc.initWithFrame(CGRectMake(i * 320, 0, 320, 99))
+      v.playButton.when(UIControlEventTouchDown) { play }
+      v.stopButton.when(UIControlEventTouchUpInside) { stop }
+      v.titleLabel.text = @engine.sting[i].title
+      @stingViews[i] = v
+
+      @stingScrollView.addSubview(@stingViews[i])
+    end
+
     # set up scroll view for playing stings
-    @stingScrollView.setContentSize(@stingView.frame.size)
+    @stingScrollView.setContentSize(CGSizeMake(@stingViews.last.frame.origin.x + @stingViews.last.frame.size.width, @stingViews.first.frame.size.height))
     @stingScrollView.delaysContentTouches = false           # prevents scroll view from momentarily blocking the play button's action
     @stingScrollView.delegate = self
     @selectedSting = 0
-
-    # gets correct labels for the stings
-    updateStingTitles
 
   end
 
@@ -121,11 +126,9 @@ class StkController < UIViewController
   def updateStingTitles
 
     # get titles from stings
-    @titleLabel0.text = @engine.sting[0].title
-    @titleLabel1.text = @engine.sting[1].title
-    @titleLabel2.text = @engine.sting[2].title
-    @titleLabel3.text = @engine.sting[3].title
-    @titleLabel4.text = @engine.sting[4].title
+    @stingViews.each_with_index do |v, i|
+      v.titleLabel.text = @engine.sting[i].title
+    end
 
   end
 
