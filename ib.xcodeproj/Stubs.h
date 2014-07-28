@@ -44,16 +44,10 @@
 
 @interface StkController: UIViewController
 
-@property IBOutlet UILabel * titleLabel0;
-@property IBOutlet UILabel * titleLabel1;
-@property IBOutlet UILabel * titleLabel2;
-@property IBOutlet UILabel * titleLabel3;
-@property IBOutlet UILabel * titleLabel4;
 @property IBOutlet UITableView * playlistTable;
 @property IBOutlet UIButton * ipodShuffleButton;
 @property IBOutlet UIButton * ipodPlayButton;
 @property IBOutlet UIScrollView * stingScrollView;
-@property IBOutlet UIView * stingView;
 @property IBOutlet UIPageControl * stingPage;
 @property IBOutlet UILabel * playingLabel;
 

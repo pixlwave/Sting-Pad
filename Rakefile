@@ -17,6 +17,7 @@ Motion::Project::App.setup do |app|
   
   app.icons = ["Icon.png", "Icon@2x.png", "Icon-57.png", "Icon-57@2x.png"]
   app.prerendered_icon = true
+  app.status_bar_style = :light_content
   app.interface_orientations = [:portrait]
   
   app.background_modes = [:audio]

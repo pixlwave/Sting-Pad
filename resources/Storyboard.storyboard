@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Fwb-c8-22I">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Fwb-c8-22I">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -54,24 +54,25 @@
                                             <action selector="iPodNext" destination="Fwb-c8-22I" eventType="touchUpInside" id="K2x-BD-FsU"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dVz-4c-dxA">
-                                        <rect key="frame" x="275" y="10" width="35" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dVz-4c-dxA">
+                                        <rect key="frame" x="286" y="7" width="34" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <state key="normal" title="Load">
+                                        <inset key="contentEdgeInsets" minX="8" minY="7" maxX="8" maxY="7"/>
+                                        <state key="normal" image="load_playlist.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <segue destination="g74-a5-Est" kind="modal" id="jN1-NT-xWr"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="D0U-wD-wqz">
-                                        <rect key="frame" x="10" y="10" width="45" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="D0U-wD-wqz">
+                                        <rect key="frame" x="2" y="7" width="34" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <state key="normal" title="Shuffle">
+                                        <inset key="contentEdgeInsets" minX="3" minY="7" maxX="3" maxY="7"/>
+                                        <state key="normal" image="shuffle.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <state key="selected" image="shuffle_selected.png"/>
                                         <connections>
                                             <action selector="iPodShuffle" destination="Fwb-c8-22I" eventType="touchUpInside" id="dv9-s0-Lhl"/>
                                         </connections>
@@ -179,16 +180,6 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="pBb-Ni-i95">
-                                <rect key="frame" x="0.0" y="55" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pBb-Ni-i95" id="SLN-cU-p9J">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="9AY-zd-2O7" id="heM-gD-X6m"/>
                             <outlet property="delegate" destination="9AY-zd-2O7" id="6Pu-FC-req"/>
@@ -321,8 +312,11 @@
         <image name="ipodpause.png" width="30" height="30"/>
         <image name="ipodplay.png" width="30" height="30"/>
         <image name="ipodprevious.png" width="32" height="25"/>
+        <image name="load_playlist.png" width="18" height="18"/>
         <image name="logo.png" width="120" height="45"/>
         <image name="settings.png" width="16" height="16"/>
+        <image name="shuffle.png" width="28" height="18"/>
+        <image name="shuffle_selected.png" width="28" height="18"/>
         <image name="waveload.png" width="230" height="55"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
