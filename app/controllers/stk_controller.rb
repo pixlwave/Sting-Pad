@@ -10,6 +10,8 @@ class StkController < UIViewController
 
   def viewDidLoad
 
+    super
+
     # instantiate engine and make self delegate for sting players
     @engine = Engine.sharedClient
     @engine.setStingDelegates(self)
@@ -51,6 +53,8 @@ class StkController < UIViewController
 
   def viewWillAppear(animated)
 
+    super
+
     # listen for iPod playback changes
     NSNotificationCenter.defaultCenter.addObserver(self, selector:'updateTable', name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification, object:nil)
     NSNotificationCenter.defaultCenter.addObserver(self, selector:'playbackStateDidChange:', name:MPMusicPlayerControllerPlaybackStateDidChangeNotification, object:nil)
@@ -65,11 +69,15 @@ class StkController < UIViewController
 
   def viewDidAppear(animated)
 
+    super
+
     showWalkthrough if (Turnkey.unarchive("walkthroughVersionSeen") || 0) < WalkthroughController.version
 
   end
 
   def viewWillDisappear(animated)
+
+    super
   
     # remove all observers when view isn't visable (because someone said so)
     NSNotificationCenter.defaultCenter.removeObserver(self)

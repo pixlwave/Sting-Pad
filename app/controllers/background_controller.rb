@@ -3,6 +3,8 @@ class BackgroundController < UITableViewController
 
   def viewDidLoad
 
+    super
+
     @engine = Engine.sharedClient
 
     # match titlebar colour to main controller - when device rgb instead of generic rgb
@@ -15,6 +17,8 @@ class BackgroundController < UITableViewController
   end
 
   def viewWillAppear(animated)
+
+    super
 
     if @engine.ipod.playlist
       indexPath = NSIndexPath.indexPathForRow(@selectedPlaylist, inSection:0)         

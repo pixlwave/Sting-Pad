@@ -5,6 +5,8 @@ class WalkthroughController < UIViewController
 
   def viewDidLoad
 
+    super
+
     # use appropriate images for the screen size
     if UIScreen.mainScreen.bounds.size.height == 568
       @images = ["ThankYou-568h","StkPlaylist-568h", "StkSting-568h", "StkSettings-568h", "EditSting-568h", "EditPlaylist-568h"]

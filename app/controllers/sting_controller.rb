@@ -14,6 +14,8 @@ class StingController < UIViewController
 
   def viewDidLoad
 
+    super
+
     # access the music
     @engine = Engine.sharedClient
 
