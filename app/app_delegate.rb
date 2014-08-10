@@ -14,6 +14,10 @@ class AppDelegate
     # prevent app launch from killing iPod by allowing mixing
     setMixingState(true)
 
+    # customise appearance
+    UINavigationBar.appearance.setTitleTextAttributes({ UITextAttributeFont => UIFont.fontWithName("Sansation", size: 18)})
+    UIBarButtonItem.appearance.setTitleTextAttributes({ UITextAttributeFont => UIFont.fontWithName("Sansation", size: 18)}, forState: UIControlStateNormal)
+
     # set up main window and begin!
     @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
     @storyboard = UIStoryboard.storyboardWithName("Storyboard", bundle:nil)

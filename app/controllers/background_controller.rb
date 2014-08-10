@@ -7,8 +7,8 @@ class BackgroundController < UITableViewController
 
     @engine = Engine.sharedClient
 
-    # match titlebar colour to main controller - when device rgb instead of generic rgb
-    # self.navigationController.navigationBar.barTintColor = self.presentingViewController.view.backgroundColor
+    # fonts for use throughout
+    @titleFont = UIFont.fontWithName("Sansation_Light", size: 18)
 
     @selectedPlaylist = @engine.ipod.selectedPlaylist
     @playlistImage = UIImage.imageNamed("playlist")
@@ -55,6 +55,10 @@ class BackgroundController < UITableViewController
     cell = tableView.dequeueReusableCellWithIdentifier(@reuseIdentifier)
     cell ||= UITableViewCell.alloc.initWithStyle(UITableViewCellStyleSubtitle, reuseIdentifier: @reuseIdentifier)
     
+    # format cell
+    cell.textLabel.font = @titleFont
+    cell.detailTextLabel.font = @subtitleFont
+
     playlist = @engine.ipod.allPlaylists[indexPath.row]
     cell.textLabel.text = playlist.valueForProperty(MPMediaPlaylistPropertyName)
 

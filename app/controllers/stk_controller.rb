@@ -25,6 +25,10 @@ class StkController < UIViewController
       self.view.addSubview(@statusBarView)
     end
 
+    # fonts for use throughout
+    @titleFont = UIFont.fontWithName("Sansation_Light", size: 18)
+    @subtitleFont = UIFont.fontWithName("Sansation_Light", size: 12)
+
     # control of the table
     @playlistTable.delegate = self
     @playlistTable.dataSource = self
@@ -37,11 +41,14 @@ class StkController < UIViewController
       v = StingView.alloc.initWithFrame(CGRectMake(i * 320, 0, 320, 99))
       v.playButton.when(UIControlEventTouchDown) { play }
       v.stopButton.when(UIControlEventTouchUpInside) { stop }
+      v.titleLabel.font = @titleFont
       v.titleLabel.text = @engine.sting[i].title
       @stingViews[i] = v
 
       @stingScrollView.addSubview(@stingViews[i])
     end
+
+    @playingLabel.font = UIFont.fontWithName("Sansation_Light", size: 11)
 
     # set up scroll view for playing stings
     @stingScrollView.setContentSize(CGSizeMake(@stingViews.last.frame.origin.x + @stingViews.last.frame.size.width, @stingViews.first.frame.size.height))
@@ -221,6 +228,10 @@ class StkController < UIViewController
       
       # get request song
       song = @engine.ipod.playlist.items[indexPath.row]
+
+      # format cell
+      cell.textLabel.font = @titleFont
+      cell.detailTextLabel.font = @subtitleFont
 
       # fill out cell as appropriate
       cell.textLabel.text = song.valueForProperty(MPMediaItemPropertyTitle)

@@ -19,8 +19,27 @@ class StingController < UIViewController
     # access the music
     @engine = Engine.sharedClient
 
-    # match titlebar colour to main controller - when device rgb instead of generic rgb
-    # self.view.backgroundColor = self.presentingViewController.view.backgroundColor
+    # # fonts for use throughout
+    # @titleFont = UIFont.fontWithName("Sansation", size: 18)
+    # @subtitleFont = UIFont.fontWithName("Sansation", size: 14)
+    # @smallFont = UIFont.fontWithName("Sansation", size: 11)
+
+    # # format labels and buttons
+    # @stingNumberLabel.font = @smallFont
+    # @titleLabel.font = @titleFont
+    # @artistLabel.font = @subtitleFont
+
+    self.view.subviews.each do |v|
+      if v.respondsToSelector(:font)
+        v.font = UIFont.fontWithName("Sansation_Light", size: v.font.pointSize)
+      elsif v.class == UIView
+        v.subviews.each do |v2|
+          if v2.respondsToSelector(:font)
+            v2.font = UIFont.fontWithName("Sansation_Light", size: v2.font.pointSize)
+          end
+        end
+      end
+    end
 
     # load track info
     @stingNumberLabel.text = "Sting #{@stingIndex+1}"
