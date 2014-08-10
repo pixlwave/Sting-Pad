@@ -70,7 +70,7 @@ class StkController < UIViewController
     NSNotificationCenter.defaultCenter.addObserver(self, selector:'refreshPlaylists', name:MPMediaLibraryDidChangeNotification, object:nil)
 
     # update shuffle button in case changed outside of app
-    @ipodShuffleButton.selected = @engine.ipod.shuffleState   # TODO: observe this?
+    @ipodShuffleButton.selected = @engine.ipod.shuffleState unless Device.simulator?   # TODO: observe this?
 
   end
 
@@ -199,7 +199,7 @@ class StkController < UIViewController
   def prepareForSegue(segue, sender:sender)
 
     if segue.identifier == "LoadSting"
-      segue.destinationViewController.stingIndex = @selectedSting
+      segue.destinationViewController.topViewController.stingIndex = @selectedSting
     end
 
   end

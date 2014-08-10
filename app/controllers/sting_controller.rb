@@ -6,7 +6,6 @@ class StingController < UIViewController
 
   attr_accessor :stingIndex
 
-  outlet :editView, UIView
   outlet :stingNumberLabel, UILabel
   outlet :titleLabel, UILabel
   outlet :artistLabel, UILabel
@@ -29,15 +28,13 @@ class StingController < UIViewController
     # @titleLabel.font = @titleFont
     # @artistLabel.font = @subtitleFont
 
+    self.navigationItem.titleView = UIImageView.alloc.initWithImage(UIImage.imageNamed("logo"))
+
     self.view.subviews.each do |v|
-      if v.respondsToSelector(:font)
+      if v.class == UIButton
+        v.font = UIFont.fontWithName("Sansation", size: v.font.pointSize)
+      elsif v.class == UILabel
         v.font = UIFont.fontWithName("Sansation_Light", size: v.font.pointSize)
-      elsif v.class == UIView
-        v.subviews.each do |v2|
-          if v2.respondsToSelector(:font)
-            v2.font = UIFont.fontWithName("Sansation_Light", size: v2.font.pointSize)
-          end
-        end
       end
     end
 
@@ -52,7 +49,7 @@ class StingController < UIViewController
     # @wave = FDWaveformView.alloc.initWithFrame(waveFrame)
     # @wave.doesAllowScrubbing = true
     # @wave.delegate = self
-    # @editView.addSubview(@wave)
+    # self.view.addSubview(@wave)
     # updateWaveURL()
 
     # temporary bodge to stop waveform being rendered each time it is presented
@@ -60,7 +57,7 @@ class StingController < UIViewController
     @wave = @engine.sting[@stingIndex].waveform
     @wave.setFrame(waveFrame) unless @engine.wavesLoaded[@stingIndex]
     @wave.delegate = self
-    @editView.addSubview(@wave)
+    self.view.addSubview(@wave)
 
     # update cue point when waveform view touched and save
     observe(@wave, "progressSamples") do |old_value, new_value|
@@ -153,7 +150,7 @@ class StingController < UIViewController
     updateLabels
 
     # add wave loading image whilst waveform generates
-    @editView.addSubview(waveLoadImageView)
+    self.view.addSubview(waveLoadImageView)
 
     # generate new waveform
     updateWaveURL
