@@ -32,9 +32,9 @@ class StingController < UIViewController
 
     self.view.subviews.each do |v|
       if v.class == UIButton
-        v.font = UIFont.fontWithName("Sansation", size: v.font.pointSize)
+        v.font = UIFont.fontWithName(@engine.fontName, size: v.font.pointSize)
       elsif v.class == UILabel
-        v.font = UIFont.fontWithName("Sansation_Light", size: v.font.pointSize)
+        v.font = UIFont.fontWithName(@engine.fontName, size: v.font.pointSize)
       end
     end
 

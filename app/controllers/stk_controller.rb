@@ -26,8 +26,8 @@ class StkController < UIViewController
     end
 
     # fonts for use throughout
-    @titleFont = UIFont.fontWithName("Sansation_Light", size: 18)
-    @subtitleFont = UIFont.fontWithName("Sansation_Light", size: 12)
+    @titleFont = UIFont.fontWithName(@engine.fontName, size: 18)
+    @subtitleFont = UIFont.fontWithName(@engine.fontName, size: 12)
 
     # control of the table
     @playlistTable.delegate = self
@@ -48,7 +48,7 @@ class StkController < UIViewController
       @stingScrollView.addSubview(@stingViews[i])
     end
 
-    @playingLabel.font = UIFont.fontWithName("Sansation_Light", size: 11)
+    @playingLabel.font = UIFont.fontWithName(@engine.fontName, size: 11)
 
     # set up scroll view for playing stings
     @stingScrollView.setContentSize(CGSizeMake(@stingViews.last.frame.origin.x + @stingViews.last.frame.size.width, @stingViews.first.frame.size.height))

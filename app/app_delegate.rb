@@ -15,8 +15,8 @@ class AppDelegate
     setMixingState(true)
 
     # customise appearance
-    UINavigationBar.appearance.setTitleTextAttributes({ UITextAttributeFont => UIFont.fontWithName("Sansation", size: 18)})
-    UIBarButtonItem.appearance.setTitleTextAttributes({ UITextAttributeFont => UIFont.fontWithName("Sansation", size: 18)}, forState: UIControlStateNormal)
+    UINavigationBar.appearance.setTitleTextAttributes({ UITextAttributeFont => UIFont.fontWithName(Engine.sharedClient.fontName, size: 18)})
+    UIBarButtonItem.appearance.setTitleTextAttributes({ UITextAttributeFont => UIFont.fontWithName(Engine.sharedClient.fontName, size: 18)}, forState: UIControlStateNormal)
 
     # set up main window and begin!
     @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)

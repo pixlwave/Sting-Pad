@@ -8,7 +8,7 @@ class BackgroundController < UITableViewController
     @engine = Engine.sharedClient
 
     # fonts for use throughout
-    @titleFont = UIFont.fontWithName("Sansation_Light", size: 18)
+    @titleFont = UIFont.fontWithName(@engine.fontName, size: 18)
 
     @selectedPlaylist = @engine.ipod.selectedPlaylist
     @playlistImage = UIImage.imageNamed("playlist")

@@ -3,6 +3,7 @@ class Engine
   # singleton containing all the players for the app.
 
   attr_accessor :sting, :ipod, :wavesLoaded
+  attr_reader :fontName
 
   def self.sharedClient
     Dispatch.once { @instance ||= new }
@@ -26,6 +27,8 @@ class Engine
     @ipod = Music.new(selectedPlaylist)
 
     @playingSting = 0
+
+    @fontName = "Exo2-Regular"
 
   end
 
