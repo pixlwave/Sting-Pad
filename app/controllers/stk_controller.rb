@@ -33,12 +33,13 @@ class StkController < UIViewController
     @playlistTable.delegate = self
     @playlistTable.dataSource = self
 
-    # array to hold the sting views
+    # make array to hold the sting views and get screen width for positioning
     @stingViews = Array.new(@engine.sting.count)
+    screenWidth = UIScreen.mainScreen.bounds.size.width
 
     # add sting views to sting scroll view
     @stingViews.count.times do |i|
-      v = StingView.alloc.initWithFrame(CGRectMake(i * 320, 0, 320, 99))
+      v = StingView.alloc.initWithFrame(CGRectMake(i * screenWidth, 0, screenWidth, 99))
       v.playButton.when(UIControlEventTouchDown) { play }
       v.stopButton.when(UIControlEventTouchUpInside) { stop }
       v.titleLabel.font = @titleFont

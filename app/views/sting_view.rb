@@ -10,6 +10,7 @@ class StingView < UIView
 
     super
     self.loadNib if self
+    @view.frame = [[0, 0], frame.size]  # this works, but can it be implied by design. Or rename as contentView?
     
     self
 
@@ -19,6 +20,7 @@ class StingView < UIView
 
     super
     self.loadNib if self
+    @view.frame = [[0, 0], frame.size]
 
     self
 

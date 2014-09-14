@@ -19,6 +19,7 @@ Motion::Project::App.setup do |app|
   app.prerendered_icon = true
   app.status_bar_style = :light_content
   app.interface_orientations = [:portrait]
+  app.info_plist['UILaunchStoryboardName'] = 'LaunchScreen'
   
   app.background_modes = [:audio]
 
