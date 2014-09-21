@@ -15,12 +15,11 @@ Motion::Project::App.setup do |app|
   app.identifier = 'uk.pixlwave.Stingmtk'
   app.deployment_target = '6.1'
   
-  app.icons = ["Icon.png", "Icon@2x.png", "Icon-57.png", "Icon-57@2x.png"]
+  app.icons = ["Icon.png", "Icon@2x.png", "Icon@3x", "Icon-76.png", "Icon-76@2x.png", "Icon-57.png", "Icon-57@2x.png"]
   app.prerendered_icon = true
   app.status_bar_style = :light_content
   app.interface_orientations = [:portrait]
-  app.info_plist['UILaunchStoryboardName'] = 'LaunchScreen'
-  
+
   app.background_modes = [:audio]
 
   app.development do
@@ -35,5 +34,31 @@ Motion::Project::App.setup do |app|
   app.frameworks << 'MediaPlayer'
 
   app.vendor_project('vendor/FDWaveformView', :static, :cflags => '-fobjc-arc')
+
+  app.info_plist['UILaunchImages'] = [
+    {
+      'UILaunchImageName' => 'Default',
+      'UILaunchImageOrientation' => 'Portrait',
+      'UILaunchImageMinimumOSVersion' => '7.0',
+      'UILaunchImageSize' => '{320, 480}'
+    },
+    {
+      'UILaunchImageName' => 'Default-568h',
+      'UILaunchImageOrientation' => 'Portrait',
+      'UILaunchImageMinimumOSVersion' => '7.0',
+      'UILaunchImageSize' => '{320, 568}'
+    },
+    {
+      'UILaunchImageName' => 'Default-667h',
+      'UILaunchImageOrientation' => 'Portrait',
+      'UILaunchImageMinimumOSVersion' => '8.0',
+      'UILaunchImageSize' => '{375, 667}'
+    },
+    {
+      'UILaunchImageName' => 'Default-736h',
+      'UILaunchImageOrientation' => 'Portrait',
+      'UILaunchImageMinimumOSVersion' => '8.0',
+      'UILaunchImageSize' => '{414, 736}'
+    }] 
   
 end
