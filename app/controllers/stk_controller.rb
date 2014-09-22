@@ -39,7 +39,7 @@ class StkController < UIViewController
 
     # add sting views to sting scroll view
     @stingViews.count.times do |i|
-      v = StingView.alloc.initWithFrame(CGRectMake(i * screenWidth, 0, screenWidth, 99))
+      v = StingView.alloc.initWithFrame(CGRectMake(i * screenWidth, 0, screenWidth, @stingScrollView.frame.size.height))
       v.playButton.when(UIControlEventTouchDown) { play }
       v.stopButton.when(UIControlEventTouchUpInside) { stop }
       v.titleLabel.font = @titleFont
