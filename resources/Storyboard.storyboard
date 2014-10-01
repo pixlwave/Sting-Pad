@@ -19,7 +19,7 @@
                                 <inset key="contentInset" minX="0.0" minY="0.0" maxX="0.0" maxY="49"/>
                                 <inset key="scrollIndicatorInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="49"/>
                             </tableView>
-                            <view contentMode="scaleToFill" id="XHH-me-2CU">
+                            <view contentMode="scaleToFill" id="XHH-me-2CU" userLabel="iPod Control View">
                                 <rect key="frame" x="0.0" y="415" width="320" height="49"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <subviews>
@@ -80,7 +80,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="0.97999999999999998" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" id="CQ8-x6-yNq">
+                            <view contentMode="scaleToFill" id="CQ8-x6-yNq" userLabel="Sting Control View">
                                 <rect key="frame" x="0.0" y="464" width="320" height="104"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <subviews>
@@ -90,7 +90,7 @@
                                     </scrollView>
                                     <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Playing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zPT-HY-W6c">
                                         <rect key="frame" x="277" y="0.0" width="40" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" red="0.0" green="0.75294117647058822" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -131,29 +131,6 @@
             </objects>
             <point key="canvasLocation" x="108" y="37"/>
         </scene>
-        <!--Walkthrough Controller-->
-        <scene sceneID="AKy-7c-kxQ">
-            <objects>
-                <viewController storyboardIdentifier="WalkthroughController" id="Mht-0w-Ces" customClass="WalkthroughController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="nhn-ml-5AK">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="whs-Lr-FtN">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="walkthroughImageView" destination="whs-Lr-FtN" id="98f-EU-yBq"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HWt-Mz-z2a" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="108" y="722"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="atT-D4-pnV">
             <objects>
@@ -169,14 +146,14 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0UJ-l0-TlE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="555" y="722"/>
+            <point key="canvasLocation" x="108" y="734"/>
         </scene>
         <!--Select Playlist-->
         <scene sceneID="jBl-uQ-yI1">
             <objects>
                 <tableViewController id="9AY-zd-2O7" customClass="BackgroundController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="gOG-Zz-Gxz">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -195,14 +172,14 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Jp-qJ-ckQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="984" y="722"/>
+            <point key="canvasLocation" x="537" y="734"/>
         </scene>
         <!--Sting Controller-->
         <scene sceneID="BBH-1f-24n">
             <objects>
                 <viewController id="sKY-0b-GtB" customClass="StingController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IL7-SC-53c">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sting #" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="W2N-PM-WRG">

@@ -186,7 +186,8 @@ class StkController < UIViewController
   def showWalkthrough
 
     # instantiate walkthrough controller and present
-    walkvc = storyboard.instantiateViewControllerWithIdentifier("WalkthroughController")
+    walksb = UIStoryboard.storyboardWithName("Walkthrough", bundle: nil)
+    walkvc = walksb.instantiateViewControllerWithIdentifier("WalkthroughController")
     walkvc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve
     presentViewController(walkvc, animated:true, completion:nil)
     

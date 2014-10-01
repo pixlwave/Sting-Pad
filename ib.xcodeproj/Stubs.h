@@ -73,10 +73,14 @@
 
 @interface WalkthroughController: UIViewController
 
+@property IBOutlet UILabel * progressLabel;
 @property IBOutlet UIImageView * walkthroughImageView;
+@property IBOutlet NSLayoutConstraint * labelSpaceConstraint;
+@property IBOutlet NSLayoutConstraint * imageTopConstraint;
+@property IBOutlet NSLayoutConstraint * bottomSpaceConstraint;
 
 -(IBAction) viewDidLoad;
--(IBAction) imageTapped;
+-(IBAction) screenTapped;
 
 @end
 
