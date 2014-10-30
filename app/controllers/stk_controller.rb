@@ -238,11 +238,15 @@ class StkController < UIViewController
       # fill out cell as appropriate
       cell.textLabel.text = song.valueForProperty(MPMediaItemPropertyTitle)
       cell.detailTextLabel.text = song.valueForProperty(MPMediaItemPropertyArtist)
-      cell.imageView.image = song.valueForProperty(MPMediaItemPropertyArtwork).imageWithSize(CGSizeMake(55, 55))
-      cell.imageView.image ||= UIImage.imageNamed("albumartblank")    # gets image from song, else uses the "blank" item artwork
+
+      if artwork = song.valueForProperty(MPMediaItemPropertyArtwork)      # iOS 8 returns nil if artwork is missing
+        artwork = artwork.imageWithSize(CGSizeMake(55, 55))
+      end
+
+      cell.imageView.image = artwork || UIImage.imageNamed("albumartblank")   # fall back to blank artwork (iOS 6/7 might fail above test??)
 
       # need to implement a better way of doing this that doesn't call updateTable every time a track changes???
-      # color the now playing song in orange (slightl darker than the main orange for balance)
+      # color the now playing song in orange (slightly darker than the main orange for balance)
       if song == @engine.ipod.nowPlayingItem
         cell.textLabel.textColor = UIColor.colorWithHue(30/360.0, saturation:1.0, brightness:0.95, alpha:1.0)
         cell.detailTextLabel.textColor = UIColor.colorWithHue(34/360.0, saturation:1.0, brightness:0.95, alpha:1.0)
