@@ -23,11 +23,10 @@ Motion::Project::App.setup do |app|
   app.background_modes = [:audio]
 
   app.development do
-    app.provisioning_profile = '/Users/Douglas/Documents/RubyMotion/Certificates/Stingmtkdevelopment.mobileprovision'
+    app.provisioning_profile = '/Users/Douglas/Documents/RubyMotion/Certificates/Stingmtk_development.mobileprovision'
   end
   app.release do
     app.provisioning_profile = '/Users/Douglas/Documents/RubyMotion/Certificates/Stingmtk.mobileprovision'
-    # app.codesign_certificate = 'iPhone Distribution: Douglas Earnshaw (NU8A5Y875P)'
   end
 
   app.frameworks << 'AVFoundation'
