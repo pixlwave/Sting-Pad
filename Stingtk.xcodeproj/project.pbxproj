@@ -1,0 +1,437 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A54D5B971BA5BCB400958BB7 /* Exo2-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A581C3931B947684006CE228 /* Exo2-Regular.otf */; };
+		A54FCB561B9E343900A85009 /* FDWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = A54FCB551B9E343900A85009 /* FDWaveformView.m */; };
+		A5664E221C0C8A47007EFAE8 /* SCScrollableWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5664E1D1C0C8A47007EFAE8 /* SCScrollableWaveformView.m */; };
+		A5664E231C0C8A47007EFAE8 /* SCWaveformCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A5664E1F1C0C8A47007EFAE8 /* SCWaveformCache.m */; };
+		A5664E241C0C8A47007EFAE8 /* SCWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5664E211C0C8A47007EFAE8 /* SCWaveformView.m */; };
+		A56DCA931BA71E150096C377 /* Exo2-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A56DCA911BA71E0C0096C377 /* Exo2-SemiBold.otf */; };
+		A581C38D1B946B7C006CE228 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C38C1B946B7C006CE228 /* Engine.swift */; };
+		A581C38F1B946EC6006CE228 /* SwiftyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C38E1B946EC6006CE228 /* SwiftyUserDefaults.swift */; };
+		A581C3971B94769F006CE228 /* StingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A581C3941B94769F006CE228 /* StingView.xib */; };
+		A581C3981B94769F006CE228 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A581C3951B94769F006CE228 /* Main.storyboard */; };
+		A581C3991B94769F006CE228 /* Walkthrough.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A581C3961B94769F006CE228 /* Walkthrough.storyboard */; };
+		A581C39D1B949A06006CE228 /* StingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C39C1B949A06006CE228 /* StingController.swift */; };
+		A581C39F1B949AD6006CE228 /* StkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C39E1B949AD6006CE228 /* StkController.swift */; };
+		A581C3A21B94A041006CE228 /* StingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C3A11B94A041006CE228 /* StingView.swift */; };
+		A581C3A41B94C5B2006CE228 /* WalkthroughController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C3A31B94C5B2006CE228 /* WalkthroughController.swift */; };
+		A5A49C8F1B5BF1C2004B80CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A49C8E1B5BF1C2004B80CE /* AppDelegate.swift */; };
+		A5A49C961B5BF1C2004B80CE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5A49C951B5BF1C2004B80CE /* Images.xcassets */; };
+		A5A49CB11B5BF216004B80CE /* Sting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A49CB01B5BF216004B80CE /* Sting.swift */; };
+		A5A49CB51B5BF7E0004B80CE /* ComputerMagic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = A5A49CB21B5BF791004B80CE /* ComputerMagic.m4a */; };
+		A5A49CB71B5BFF27004B80CE /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A49CB61B5BFF27004B80CE /* Music.swift */; };
+		A5FFFBCE1B95CCE4004C6961 /* BackgroundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FFFBCD1B95CCE4004C6961 /* BackgroundController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A54FCB531B9E343800A85009 /* Stingtk-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Stingtk-Bridging-Header.h"; sourceTree = "<group>"; };
+		A54FCB541B9E343900A85009 /* FDWaveformView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDWaveformView.h; sourceTree = "<group>"; };
+		A54FCB551B9E343900A85009 /* FDWaveformView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDWaveformView.m; sourceTree = "<group>"; };
+		A5664E1C1C0C8A47007EFAE8 /* SCScrollableWaveformView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCScrollableWaveformView.h; sourceTree = "<group>"; };
+		A5664E1D1C0C8A47007EFAE8 /* SCScrollableWaveformView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCScrollableWaveformView.m; sourceTree = "<group>"; };
+		A5664E1E1C0C8A47007EFAE8 /* SCWaveformCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCWaveformCache.h; sourceTree = "<group>"; };
+		A5664E1F1C0C8A47007EFAE8 /* SCWaveformCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCWaveformCache.m; sourceTree = "<group>"; };
+		A5664E201C0C8A47007EFAE8 /* SCWaveformView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCWaveformView.h; sourceTree = "<group>"; };
+		A5664E211C0C8A47007EFAE8 /* SCWaveformView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCWaveformView.m; sourceTree = "<group>"; };
+		A56DCA911BA71E0C0096C377 /* Exo2-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo2-SemiBold.otf"; sourceTree = "<group>"; };
+		A581C38C1B946B7C006CE228 /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
+		A581C38E1B946EC6006CE228 /* SwiftyUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyUserDefaults.swift; sourceTree = "<group>"; };
+		A581C3931B947684006CE228 /* Exo2-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo2-Regular.otf"; sourceTree = "<group>"; };
+		A581C3941B94769F006CE228 /* StingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StingView.xib; sourceTree = "<group>"; };
+		A581C3951B94769F006CE228 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		A581C3961B94769F006CE228 /* Walkthrough.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Walkthrough.storyboard; sourceTree = "<group>"; };
+		A581C39C1B949A06006CE228 /* StingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StingController.swift; sourceTree = "<group>"; };
+		A581C39E1B949AD6006CE228 /* StkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StkController.swift; sourceTree = "<group>"; };
+		A581C3A11B94A041006CE228 /* StingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StingView.swift; sourceTree = "<group>"; };
+		A581C3A31B94C5B2006CE228 /* WalkthroughController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkthroughController.swift; sourceTree = "<group>"; };
+		A5A49C891B5BF1C2004B80CE /* Stingtk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stingtk.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5A49C8D1B5BF1C2004B80CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5A49C8E1B5BF1C2004B80CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A5A49C951B5BF1C2004B80CE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		A5A49CB01B5BF216004B80CE /* Sting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sting.swift; sourceTree = "<group>"; };
+		A5A49CB21B5BF791004B80CE /* ComputerMagic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = ComputerMagic.m4a; sourceTree = "<group>"; };
+		A5A49CB61B5BFF27004B80CE /* Music.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
+		A5FFFBCD1B95CCE4004C6961 /* BackgroundController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A5A49C861B5BF1C2004B80CE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A54FCB521B9E341300A85009 /* FDWaveformView */ = {
+			isa = PBXGroup;
+			children = (
+				A54FCB541B9E343900A85009 /* FDWaveformView.h */,
+				A54FCB551B9E343900A85009 /* FDWaveformView.m */,
+				A54FCB531B9E343800A85009 /* Stingtk-Bridging-Header.h */,
+			);
+			name = FDWaveformView;
+			sourceTree = "<group>";
+		};
+		A5664E1B1C0C8A47007EFAE8 /* SCWaveformView */ = {
+			isa = PBXGroup;
+			children = (
+				A5664E1C1C0C8A47007EFAE8 /* SCScrollableWaveformView.h */,
+				A5664E1D1C0C8A47007EFAE8 /* SCScrollableWaveformView.m */,
+				A5664E1E1C0C8A47007EFAE8 /* SCWaveformCache.h */,
+				A5664E1F1C0C8A47007EFAE8 /* SCWaveformCache.m */,
+				A5664E201C0C8A47007EFAE8 /* SCWaveformView.h */,
+				A5664E211C0C8A47007EFAE8 /* SCWaveformView.m */,
+			);
+			path = SCWaveformView;
+			sourceTree = "<group>";
+		};
+		A581C3901B946ECE006CE228 /* SwiftyUserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				A581C38E1B946EC6006CE228 /* SwiftyUserDefaults.swift */,
+			);
+			name = SwiftyUserDefaults;
+			sourceTree = "<group>";
+		};
+		A581C39A1B947791006CE228 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A5A49CB01B5BF216004B80CE /* Sting.swift */,
+				A5A49CB61B5BFF27004B80CE /* Music.swift */,
+				A581C38C1B946B7C006CE228 /* Engine.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		A581C39B1B9499F1006CE228 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A581C39E1B949AD6006CE228 /* StkController.swift */,
+				A581C39C1B949A06006CE228 /* StingController.swift */,
+				A5FFFBCD1B95CCE4004C6961 /* BackgroundController.swift */,
+				A581C3A31B94C5B2006CE228 /* WalkthroughController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		A581C3A01B94A02B006CE228 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A581C3A11B94A041006CE228 /* StingView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		A5A49C801B5BF1C2004B80CE = {
+			isa = PBXGroup;
+			children = (
+				A5A49C8B1B5BF1C2004B80CE /* Stingtk */,
+				A5A49C8A1B5BF1C2004B80CE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A5A49C8A1B5BF1C2004B80CE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A5A49C891B5BF1C2004B80CE /* Stingtk.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A5A49C8B1B5BF1C2004B80CE /* Stingtk */ = {
+			isa = PBXGroup;
+			children = (
+				A5A49CB41B5BF7A7004B80CE /* App */,
+				A5A49CB31B5BF797004B80CE /* Resources */,
+				A581C3901B946ECE006CE228 /* SwiftyUserDefaults */,
+				A5664E1B1C0C8A47007EFAE8 /* SCWaveformView */,
+				A54FCB521B9E341300A85009 /* FDWaveformView */,
+				A5A49C8C1B5BF1C2004B80CE /* Supporting Files */,
+			);
+			path = Stingtk;
+			sourceTree = "<group>";
+		};
+		A5A49C8C1B5BF1C2004B80CE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A5A49C8D1B5BF1C2004B80CE /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A5A49CB31B5BF797004B80CE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A581C3951B94769F006CE228 /* Main.storyboard */,
+				A581C3941B94769F006CE228 /* StingView.xib */,
+				A581C3961B94769F006CE228 /* Walkthrough.storyboard */,
+				A5A49C951B5BF1C2004B80CE /* Images.xcassets */,
+				A581C3931B947684006CE228 /* Exo2-Regular.otf */,
+				A56DCA911BA71E0C0096C377 /* Exo2-SemiBold.otf */,
+				A5A49CB21B5BF791004B80CE /* ComputerMagic.m4a */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		A5A49CB41B5BF7A7004B80CE /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A5A49C8E1B5BF1C2004B80CE /* AppDelegate.swift */,
+				A581C39B1B9499F1006CE228 /* Controllers */,
+				A581C39A1B947791006CE228 /* Models */,
+				A581C3A01B94A02B006CE228 /* Views */,
+			);
+			name = App;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A5A49C881B5BF1C2004B80CE /* Stingtk */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5A49CA81B5BF1C2004B80CE /* Build configuration list for PBXNativeTarget "Stingtk" */;
+			buildPhases = (
+				A5A49C851B5BF1C2004B80CE /* Sources */,
+				A5A49C861B5BF1C2004B80CE /* Frameworks */,
+				A5A49C871B5BF1C2004B80CE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Stingtk;
+			productName = Stingtk;
+			productReference = A5A49C891B5BF1C2004B80CE /* Stingtk.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A5A49C811B5BF1C2004B80CE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = pixlwave;
+				TargetAttributes = {
+					A5A49C881B5BF1C2004B80CE = {
+						CreatedOnToolsVersion = 6.4;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = A5A49C841B5BF1C2004B80CE /* Build configuration list for PBXProject "Stingtk" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A5A49C801B5BF1C2004B80CE;
+			productRefGroup = A5A49C8A1B5BF1C2004B80CE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A5A49C881B5BF1C2004B80CE /* Stingtk */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A5A49C871B5BF1C2004B80CE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5A49C961B5BF1C2004B80CE /* Images.xcassets in Resources */,
+				A581C3971B94769F006CE228 /* StingView.xib in Resources */,
+				A581C3991B94769F006CE228 /* Walkthrough.storyboard in Resources */,
+				A581C3981B94769F006CE228 /* Main.storyboard in Resources */,
+				A5A49CB51B5BF7E0004B80CE /* ComputerMagic.m4a in Resources */,
+				A54D5B971BA5BCB400958BB7 /* Exo2-Regular.otf in Resources */,
+				A56DCA931BA71E150096C377 /* Exo2-SemiBold.otf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A5A49C851B5BF1C2004B80CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A581C3A41B94C5B2006CE228 /* WalkthroughController.swift in Sources */,
+				A5664E241C0C8A47007EFAE8 /* SCWaveformView.m in Sources */,
+				A5A49C8F1B5BF1C2004B80CE /* AppDelegate.swift in Sources */,
+				A581C38F1B946EC6006CE228 /* SwiftyUserDefaults.swift in Sources */,
+				A5FFFBCE1B95CCE4004C6961 /* BackgroundController.swift in Sources */,
+				A5664E221C0C8A47007EFAE8 /* SCScrollableWaveformView.m in Sources */,
+				A5664E231C0C8A47007EFAE8 /* SCWaveformCache.m in Sources */,
+				A581C3A21B94A041006CE228 /* StingView.swift in Sources */,
+				A54FCB561B9E343900A85009 /* FDWaveformView.m in Sources */,
+				A5A49CB11B5BF216004B80CE /* Sting.swift in Sources */,
+				A581C39D1B949A06006CE228 /* StingController.swift in Sources */,
+				A581C39F1B949AD6006CE228 /* StkController.swift in Sources */,
+				A5A49CB71B5BFF27004B80CE /* Music.swift in Sources */,
+				A581C38D1B946B7C006CE228 /* Engine.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A5A49CA61B5BF1C2004B80CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A5A49CA71B5BF1C2004B80CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A5A49CA91B5BF1C2004B80CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = Stingtk/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.pixlwave.Stingmtk;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Stingtk/Stingtk-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A5A49CAA1B5BF1C2004B80CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = Stingtk/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.pixlwave.Stingmtk;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Stingtk/Stingtk-Bridging-Header.h";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A5A49C841B5BF1C2004B80CE /* Build configuration list for PBXProject "Stingtk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5A49CA61B5BF1C2004B80CE /* Debug */,
+				A5A49CA71B5BF1C2004B80CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A5A49CA81B5BF1C2004B80CE /* Build configuration list for PBXNativeTarget "Stingtk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5A49CA91B5BF1C2004B80CE /* Debug */,
+				A5A49CAA1B5BF1C2004B80CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A5A49C811B5BF1C2004B80CE /* Project object */;
+}
