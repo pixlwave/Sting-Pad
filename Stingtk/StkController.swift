@@ -43,8 +43,8 @@ class StkController: UIViewController {
         // add sting views to sting scroll view
         for i in 0..<engine.sting.count {
             let v = StingView(frame: CGRect(x: CGFloat(i) * screenWidth, y: 0, width: screenWidth, height: stingScrollView.frame.height))
-            v.playButton.addTarget(self, action: "play", forControlEvents: .TouchDown)
-            v.stopButton.addTarget(self, action: "stop", forControlEvents: .TouchUpInside)
+            v.playButton.addTarget(self, action: #selector(play), forControlEvents: .TouchDown)
+            v.stopButton.addTarget(self, action: #selector(stop), forControlEvents: .TouchUpInside)
             v.titleLabel.text = engine.sting[i].title
             stingViews.append(v)
             
@@ -62,11 +62,11 @@ class StkController: UIViewController {
         super.viewWillAppear(animated)
         
         // listen for iPod playback changes
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateTable", name: MPMusicPlayerControllerNowPlayingItemDidChangeNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "playbackStateDidChange:", name: MPMusicPlayerControllerPlaybackStateDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateTable), name: MPMusicPlayerControllerNowPlayingItemDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(playbackStateDidChange(_:)), name: MPMusicPlayerControllerPlaybackStateDidChangeNotification, object: nil)
         
         // listen for iPod library changes
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "refreshPlaylists", name:MPMediaLibraryDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refreshPlaylists), name:MPMediaLibraryDidChangeNotification, object: nil)
         
         // update shuffle button in case changed outside of app
         #if !(arch(i386) || arch(x86_64)) && os(iOS)
