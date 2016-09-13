@@ -4,7 +4,7 @@ import MediaPlayer
 class Music: NSObject {
     
     var allPlaylists: [MPMediaPlaylist] {
-        return MPMediaQuery.playlistsQuery().collections as! [MPMediaPlaylist]
+        return MPMediaQuery.playlistsQuery().collections as? [MPMediaPlaylist] ?? [MPMediaPlaylist]()
     }
     
     var playlist: MPMediaPlaylist?
