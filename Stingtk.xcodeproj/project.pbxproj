@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A54D5B971BA5BCB400958BB7 /* Exo2-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A581C3931B947684006CE228 /* Exo2-Regular.otf */; };
-		A54FCB561B9E343900A85009 /* FDWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = A54FCB551B9E343900A85009 /* FDWaveformView.m */; };
 		A56DCA931BA71E150096C377 /* Exo2-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A56DCA911BA71E0C0096C377 /* Exo2-SemiBold.otf */; };
 		A581C38D1B946B7C006CE228 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C38C1B946B7C006CE228 /* Engine.swift */; };
 		A581C3971B94769F006CE228 /* StingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A581C3941B94769F006CE228 /* StingView.xib */; };
@@ -23,13 +22,11 @@
 		A5A49CB11B5BF216004B80CE /* Sting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A49CB01B5BF216004B80CE /* Sting.swift */; };
 		A5A49CB51B5BF7E0004B80CE /* ComputerMagic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = A5A49CB21B5BF791004B80CE /* ComputerMagic.m4a */; };
 		A5A49CB71B5BFF27004B80CE /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A49CB61B5BFF27004B80CE /* Music.swift */; };
+		A5B39BDE1DAA843A00AA22EF /* FDWaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B39BDD1DAA843A00AA22EF /* FDWaveformView.swift */; };
 		A5FFFBCE1B95CCE4004C6961 /* BackgroundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FFFBCD1B95CCE4004C6961 /* BackgroundController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A54FCB531B9E343800A85009 /* Stingtk-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Stingtk-Bridging-Header.h"; sourceTree = "<group>"; };
-		A54FCB541B9E343900A85009 /* FDWaveformView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDWaveformView.h; sourceTree = "<group>"; };
-		A54FCB551B9E343900A85009 /* FDWaveformView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDWaveformView.m; sourceTree = "<group>"; };
 		A56DCA911BA71E0C0096C377 /* Exo2-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo2-SemiBold.otf"; sourceTree = "<group>"; };
 		A581C38C1B946B7C006CE228 /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		A581C3931B947684006CE228 /* Exo2-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo2-Regular.otf"; sourceTree = "<group>"; };
@@ -47,6 +44,7 @@
 		A5A49CB01B5BF216004B80CE /* Sting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sting.swift; sourceTree = "<group>"; };
 		A5A49CB21B5BF791004B80CE /* ComputerMagic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = ComputerMagic.m4a; sourceTree = "<group>"; };
 		A5A49CB61B5BFF27004B80CE /* Music.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
+		A5B39BDD1DAA843A00AA22EF /* FDWaveformView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FDWaveformView.swift; sourceTree = "<group>"; };
 		A5FFFBCD1B95CCE4004C6961 /* BackgroundController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,9 +62,7 @@
 		A54FCB521B9E341300A85009 /* FDWaveformView */ = {
 			isa = PBXGroup;
 			children = (
-				A54FCB541B9E343900A85009 /* FDWaveformView.h */,
-				A54FCB551B9E343900A85009 /* FDWaveformView.m */,
-				A54FCB531B9E343800A85009 /* Stingtk-Bridging-Header.h */,
+				A5B39BDD1DAA843A00AA22EF /* FDWaveformView.swift */,
 			);
 			name = FDWaveformView;
 			sourceTree = "<group>";
@@ -244,9 +240,9 @@
 			files = (
 				A581C3A41B94C5B2006CE228 /* WalkthroughController.swift in Sources */,
 				A5A49C8F1B5BF1C2004B80CE /* AppDelegate.swift in Sources */,
+				A5B39BDE1DAA843A00AA22EF /* FDWaveformView.swift in Sources */,
 				A5FFFBCE1B95CCE4004C6961 /* BackgroundController.swift in Sources */,
 				A581C3A21B94A041006CE228 /* StingView.swift in Sources */,
-				A54FCB561B9E343900A85009 /* FDWaveformView.m in Sources */,
 				A5A49CB11B5BF216004B80CE /* Sting.swift in Sources */,
 				A581C39D1B949A06006CE228 /* StingController.swift in Sources */,
 				A581C39F1B949AD6006CE228 /* StkController.swift in Sources */,
@@ -356,7 +352,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.pixlwave.Stingmtk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Stingtk/Stingtk-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -373,7 +368,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.pixlwave.Stingmtk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Stingtk/Stingtk-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

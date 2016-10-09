@@ -83,7 +83,7 @@ class StingController: UIViewController {
     
     func updateWaveURL() {
         wave.audioURL = engine.sting[stingIndex].url
-        wave.progressSamples = UInt(Double(wave.totalSamples) * engine.sting[stingIndex].getCue())
+        wave.progressSamples = Int(Double(wave.totalSamples) * engine.sting[stingIndex].getCue())
     }
     
     func zoomWaveOut() {

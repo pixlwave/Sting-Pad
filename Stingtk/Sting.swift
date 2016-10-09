@@ -44,7 +44,7 @@ class Sting: NSObject {
         // waveform.doesAllowStretchAndScroll = true
         waveform.wavesColor = UIColor.blue
         waveform.progressColor = UIColor.white
-        waveform.progressSamples = UInt(Double(waveform.totalSamples) * getCue())
+        waveform.progressSamples = Int(Double(waveform.totalSamples) * getCue())
     
     }
     
