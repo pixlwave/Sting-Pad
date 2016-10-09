@@ -20,8 +20,8 @@ class BackgroundController: UITableViewController {
         }
     }
     
-    @IBAction func dismiss() {
-        self.dismiss(animated: true, completion: nil)
+    @IBAction func done() {
+        dismiss(animated: true, completion: nil)
     }
     
     // MARK: UITableViewDataSource

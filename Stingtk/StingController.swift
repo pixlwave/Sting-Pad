@@ -59,11 +59,11 @@ class StingController: UIViewController {
         engine.ipod.refreshPlaylists()
     }
     
-    func dismiss() {
+    @IBAction func done() {
         // display updates before dismissing
         (presentingViewController as? StkController)?.updateStingTitles()
         wave.removeObserver(self, forKeyPath: "progressSamples")
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     func loadTrack() {
@@ -134,12 +134,12 @@ extension StingController: MPMediaPickerControllerDelegate {
         save(engine.sting[stingIndex])
         
         // dismiss media picker
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     func mediaPickerDidCancel(_ mediaPicker: MPMediaPickerController) {
         // dismiss media picker
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     func save(_ sting: Sting) {
