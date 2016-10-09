@@ -4,7 +4,7 @@ import MediaPlayer
 class Music: NSObject {
     
     var allPlaylists: [MPMediaPlaylist] {
-        return MPMediaQuery.playlistsQuery().collections as? [MPMediaPlaylist] ?? [MPMediaPlaylist]()
+        return MPMediaQuery.playlists().collections as? [MPMediaPlaylist] ?? [MPMediaPlaylist]()
     }
     
     var playlist: MPMediaPlaylist?
@@ -22,11 +22,11 @@ class Music: NSObject {
         }
         
         if let playlist = allPlaylists.first {
-            musicPlayer.setQueueWithItemCollection(playlist)
+            musicPlayer.setQueue(with: playlist)
         }
         
         musicPlayer.beginGeneratingPlaybackNotifications()
-        MPMediaLibrary.defaultMediaLibrary().beginGeneratingLibraryChangeNotifications()
+        MPMediaLibrary.default().beginGeneratingLibraryChangeNotifications()
         
     }
     
@@ -46,7 +46,7 @@ class Music: NSObject {
         musicPlayer.skipToNextItem()
     }
     
-    func playItem(index: Int) {
+    func playItem(_ index: Int) {
         musicPlayer.nowPlayingItem = playlist?.items[index]
         play()
     }
@@ -68,14 +68,14 @@ class Music: NSObject {
     
     func toggleShuffle() {
         if shuffleState {
-            musicPlayer.shuffleMode = .Off
+            musicPlayer.shuffleMode = .off
         } else {
-            musicPlayer.shuffleMode = .Songs
+            musicPlayer.shuffleMode = .songs
         }
     }
     
     var shuffleState: Bool {
-        if musicPlayer.shuffleMode == .Off {
+        if musicPlayer.shuffleMode == .off {
             return false
         } else {
             return true
@@ -85,16 +85,16 @@ class Music: NSObject {
     func refreshPlaylists() {
         // check if current playlist still exists, if not then set as nil
         // TODO: Test this out
-        if let playlist = playlist where !allPlaylists.contains(playlist) {
+        if let playlist = playlist, !allPlaylists.contains(playlist) {
             self.playlist = nil
         }
     }
     
-    func getNamedPlaylist(name: String) -> MPMediaPlaylist? {
+    func getNamedPlaylist(_ name: String) -> MPMediaPlaylist? {
         var namedPlaylist: MPMediaPlaylist? = nil
     
         for playlist in allPlaylists {
-            if (playlist.valueForProperty(MPMediaPlaylistPropertyName) as! String) == name {
+            if (playlist.value(forProperty: MPMediaPlaylistPropertyName) as! String) == name {
                 namedPlaylist = playlist
             }
         }
@@ -103,19 +103,19 @@ class Music: NSObject {
     }
     
     func getAllPlaylists() -> [MPMediaPlaylist] {
-        return MPMediaQuery.playlistsQuery().collections as! [MPMediaPlaylist]
+        return MPMediaQuery.playlists().collections as! [MPMediaPlaylist]
     }
     
-    func usePlaylist(index: Int) {
+    func usePlaylist(_ index: Int) {
         if index < allPlaylists.count {
             playlist = allPlaylists[index]
-            musicPlayer.setQueueWithItemCollection(playlist!)
+            musicPlayer.setQueue(with: playlist!)
         }
     }
     
     var playlistIndex: Int? {
         if let playlist = playlist {
-            return allPlaylists.indexOf(playlist)
+            return allPlaylists.index(of: playlist)
         }
         
         return nil

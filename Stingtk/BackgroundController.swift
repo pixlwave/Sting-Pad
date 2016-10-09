@@ -11,36 +11,36 @@ class BackgroundController: UITableViewController {
     private var playlistImage = UIImage(named: "playlist")
     private var smartPlaylistImage = UIImage(named: "smartplaylist")
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if let playlistIndex = engine.ipod.playlistIndex {
-            let indexPath = NSIndexPath(forRow: playlistIndex, inSection: 0)
-            tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .None, animated: false)
+            let indexPath = IndexPath(row: playlistIndex, section: 0)
+            tableView.scrollToRow(at: indexPath, at: .none, animated: false)
         }
     }
     
     @IBAction func dismiss() {
-        dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: UITableViewDataSource
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return engine.ipod.allPlaylists.count
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Playlists"
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Playlist Cell") ?? UITableViewCell(style: .Default, reuseIdentifier: "Playlist Cell")
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Playlist Cell") ?? UITableViewCell(style: .default, reuseIdentifier: "Playlist Cell")
         
         let playlist = engine.ipod.allPlaylists[indexPath.row]
-        cell.textLabel?.text = playlist.valueForProperty(MPMediaPlaylistPropertyName) as? String
+        cell.textLabel?.text = playlist.value(forProperty: MPMediaPlaylistPropertyName) as? String
         
-        if let attributes = playlist.valueForProperty(MPMediaPlaylistPropertyPlaylistAttributes) as? NSNumber {
-            if attributes == Int(MPMediaPlaylistAttribute.Smart.rawValue) {
+        if let attributes = playlist.value(forProperty: MPMediaPlaylistPropertyPlaylistAttributes) as? MPMediaPlaylistAttribute {
+            if attributes == .smart {
                 cell.imageView?.image = smartPlaylistImage
             } else {
                 cell.imageView?.image = playlistImage
@@ -48,9 +48,9 @@ class BackgroundController: UITableViewController {
         }
         
         if playlist == currentPlaylist {
-            cell.accessoryType = .Checkmark
+            cell.accessoryType = .checkmark
         } else {
-            cell.accessoryType = .None
+            cell.accessoryType = .none
         }
         
         return cell
@@ -58,31 +58,31 @@ class BackgroundController: UITableViewController {
     
     
     // MARK: UITableViewDelegate
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedPlaylist = engine.ipod.allPlaylists[indexPath.row]
         
         // don't update playlist when it's already the current playlist
         if selectedPlaylist != currentPlaylist {
             // TODO: Test ?? 0 for cases where selected is also 0
-            let oldIndexPath = NSIndexPath(forRow: engine.ipod.playlistIndex ?? 0, inSection: 0)
+            let oldIndexPath = IndexPath(row: engine.ipod.playlistIndex ?? 0, section: 0)
             
             engine.ipod.usePlaylist(indexPath.row)
             (presentingViewController as! StkController).playlistDidChange()
             
             // update checkmark and clear selection
             let indexPaths = [oldIndexPath, indexPath]
-            tableView.reloadRowsAtIndexPaths(indexPaths, withRowAnimation: .Automatic)
+            tableView.reloadRows(at: indexPaths, with: .automatic)
             
             save(engine.ipod)
         }
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    func save(ipod: Music) {
+    func save(_ ipod: Music) {
         // this needs to be changed to save by playlist id or similar
         // would enable checking of playlist properly if order changed
-        Defaults["Playlist Index"] = ipod.playlistIndex
+        UserDefaults.standard.set(ipod.playlistIndex, forKey: "Playlist Index")
     }
     
 }

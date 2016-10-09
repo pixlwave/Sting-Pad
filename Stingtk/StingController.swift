@@ -45,7 +45,7 @@ class StingController: UIViewController {
         wave.delegate = self
         view.addSubview(wave)
         
-        wave.addObserver(self, forKeyPath: "progressSamples", options: .New, context: &kvoContext)
+        wave.addObserver(self, forKeyPath: "progressSamples", options: .new, context: &kvoContext)
         
         // temporary bodge to remove waveform loading image if the waveform isn't going to render
         if engine.wavesLoaded[stingIndex] {
@@ -63,16 +63,16 @@ class StingController: UIViewController {
         // display updates before dismissing
         (presentingViewController as? StkController)?.updateStingTitles()
         wave.removeObserver(self, forKeyPath: "progressSamples")
-        dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     func loadTrack() {
         // present music picker to load a track from ipod
-        let mediaPicker = MPMediaPickerController(mediaTypes: .Music)
+        let mediaPicker = MPMediaPickerController(mediaTypes: .music)
         mediaPicker.delegate = self
         mediaPicker.showsCloudItems = false  // hides iTunes in the Cloud items, which crash the app if picked
         mediaPicker.allowsPickingMultipleItems = false
-        presentViewController(mediaPicker, animated: true, completion: nil)
+        present(mediaPicker, animated: true, completion: nil)
     }
     
     func updateLabels() {
@@ -99,13 +99,13 @@ class StingController: UIViewController {
         engine.stopSting()
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if context == &kvoContext {
-            let cue = Double(change?[NSKeyValueChangeNewKey] as! NSNumber) / Double(wave.totalSamples)
+            let cue = Double(change?[NSKeyValueChangeKey.newKey] as! NSNumber) / Double(wave.totalSamples)
             engine.sting[stingIndex].setCue(cue)
-            Defaults["Sting \(stingIndex) Cue Point"] = engine.sting[stingIndex].cuePoint
+            UserDefaults.standard.set(engine.sting[stingIndex].cuePoint, forKey: "Sting \(stingIndex) Cue Point")
         } else {
-            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
     
@@ -113,14 +113,14 @@ class StingController: UIViewController {
 
 // MARK: FDWaveformViewDelegate
 extension StingController: FDWaveformViewDelegate {
-    func waveformViewDidRender(waveform: FDWaveformView) {
+    func waveformViewDidRender(_ waveform: FDWaveformView) {
         waveLoadImageView.removeFromSuperview()
     }
 }
 
 // MARK: MPMediaPickerControllerDelegate
 extension StingController: MPMediaPickerControllerDelegate {
-    func mediaPicker(mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
+    func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
         // load media item into the currently loading sting player and update labels
         engine.sting[stingIndex].loadSting(mediaItemCollection.items[0])
         updateLabels()
@@ -134,18 +134,18 @@ extension StingController: MPMediaPickerControllerDelegate {
         save(engine.sting[stingIndex])
         
         // dismiss media picker
-        dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
-    func mediaPickerDidCancel(mediaPicker: MPMediaPickerController) {
+    func mediaPickerDidCancel(_ mediaPicker: MPMediaPickerController) {
         // dismiss media picker
-        dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
-    func save(sting: Sting) {
-        Defaults["Sting \(stingIndex) URL"] = sting.url
-        Defaults["Sting \(stingIndex) Cue Point"] = sting.cuePoint
-        Defaults["Sting \(stingIndex) Title"] = sting.title
-        Defaults["Sting \(stingIndex) Artist"] = sting.artist
+    func save(_ sting: Sting) {
+        UserDefaults.standard.set(sting.url, forKey: "Sting \(stingIndex) URL")
+        UserDefaults.standard.set(sting.cuePoint, forKey: "Sting \(stingIndex) Cue Point")
+        UserDefaults.standard.set(sting.title, forKey: "Sting \(stingIndex) Title")
+        UserDefaults.standard.set(sting.artist, forKey: "Sting \(stingIndex) Artist")
     }
 }

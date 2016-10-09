@@ -3,11 +3,11 @@ import AVFoundation
 import MediaPlayer
 
 class Sting: NSObject {
-    static let defaultURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("ComputerMagic", ofType: "m4a")!)
+    static let defaultURL = URL(fileURLWithPath: Bundle.main.path(forResource: "ComputerMagic", ofType: "m4a")!)
     
     var delegate: StingDelegate?
     
-    var url: NSURL
+    var url: URL
     var title: String
     var artist: String
     private(set) var cuePoint: Double // TODO: This is public get to archive, but should probs be computed?
@@ -15,10 +15,10 @@ class Sting: NSObject {
     
     private var stingPlayer: AVAudioPlayer!
     
-    init(url: NSURL, title: String, artist: String, cuePoint: Double) {
+    init(url: URL, title: String, artist: String, cuePoint: Double) {
     
         // TODO: load title & artist from url
-        if let stingPlayer = try? AVAudioPlayer(contentsOfURL: url) {
+        if let stingPlayer = try? AVAudioPlayer(contentsOf: url) {
             self.url = url
             self.title = title
             self.artist = artist
@@ -26,7 +26,7 @@ class Sting: NSObject {
             self.stingPlayer = stingPlayer
         } else {    // TODO: Test this as a fallthrough case
             self.url = Sting.defaultURL
-            self.stingPlayer = try? AVAudioPlayer(contentsOfURL: self.url)
+            self.stingPlayer = try? AVAudioPlayer(contentsOf: self.url)
             self.title = "Chime"
             self.artist = "Default Sting"
             self.cuePoint = 0
@@ -42,8 +42,8 @@ class Sting: NSObject {
         waveform.audioURL = self.url
         waveform.doesAllowScrubbing = true
         // waveform.doesAllowStretchAndScroll = true
-        waveform.wavesColor = UIColor.blueColor()
-        waveform.progressColor = UIColor.whiteColor()
+        waveform.wavesColor = UIColor.blue
+        waveform.progressColor = UIColor.white
         waveform.progressSamples = UInt(Double(waveform.totalSamples) * getCue())
     
     }
@@ -58,10 +58,10 @@ class Sting: NSObject {
         stingPlayer.prepareToPlay()
     }
     
-    func loadSting(mediaItem: MPMediaItem) {
-        url = mediaItem.valueForProperty(MPMediaItemPropertyAssetURL) as! NSURL
+    func loadSting(_ mediaItem: MPMediaItem) {
+        url = mediaItem.value(forProperty: MPMediaItemPropertyAssetURL) as! URL
         
-        stingPlayer = try? AVAudioPlayer(contentsOfURL: url)
+        stingPlayer = try? AVAudioPlayer(contentsOf: url)
         stingPlayer.delegate = self
         stingPlayer.numberOfLoops = 0 // needed?
         
@@ -69,11 +69,11 @@ class Sting: NSObject {
         stingPlayer.currentTime = cuePoint
         stingPlayer.prepareToPlay()
         
-        title = mediaItem.valueForProperty(MPMediaItemPropertyTitle) as! String
-        artist = mediaItem.valueForProperty(MPMediaItemPropertyArtist) as! String
+        title = mediaItem.value(forProperty: MPMediaItemPropertyTitle) as! String
+        artist = mediaItem.value(forProperty: MPMediaItemPropertyArtist) as! String
     }
     
-    func setCue(cuePoint: Double) {
+    func setCue(_ cuePoint: Double) {
         self.cuePoint = cuePoint * stingPlayer.duration
         stingPlayer.currentTime = self.cuePoint
         stingPlayer.prepareToPlay()
@@ -86,15 +86,15 @@ class Sting: NSObject {
 }
 
 extension Sting: AVAudioPlayerDelegate {
-    func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         delegate?.stingHasStopped(self)
     }
     
-    func audioPlayerBeginInterruption(player: AVAudioPlayer) {
+    func audioPlayerBeginInterruption(_ player: AVAudioPlayer) {
         delegate?.stingHasStopped(self)
     }
 }
 
 protocol StingDelegate {
-    func stingHasStopped(sting: Sting)
+    func stingHasStopped(_ sting: Sting)
 }

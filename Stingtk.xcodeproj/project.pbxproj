@@ -11,7 +11,6 @@
 		A54FCB561B9E343900A85009 /* FDWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = A54FCB551B9E343900A85009 /* FDWaveformView.m */; };
 		A56DCA931BA71E150096C377 /* Exo2-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A56DCA911BA71E0C0096C377 /* Exo2-SemiBold.otf */; };
 		A581C38D1B946B7C006CE228 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C38C1B946B7C006CE228 /* Engine.swift */; };
-		A581C38F1B946EC6006CE228 /* SwiftyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C38E1B946EC6006CE228 /* SwiftyUserDefaults.swift */; };
 		A581C3971B94769F006CE228 /* StingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A581C3941B94769F006CE228 /* StingView.xib */; };
 		A581C3981B94769F006CE228 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A581C3951B94769F006CE228 /* Main.storyboard */; };
 		A581C3991B94769F006CE228 /* Walkthrough.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A581C3961B94769F006CE228 /* Walkthrough.storyboard */; };
@@ -33,7 +32,6 @@
 		A54FCB551B9E343900A85009 /* FDWaveformView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDWaveformView.m; sourceTree = "<group>"; };
 		A56DCA911BA71E0C0096C377 /* Exo2-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo2-SemiBold.otf"; sourceTree = "<group>"; };
 		A581C38C1B946B7C006CE228 /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
-		A581C38E1B946EC6006CE228 /* SwiftyUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyUserDefaults.swift; sourceTree = "<group>"; };
 		A581C3931B947684006CE228 /* Exo2-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo2-Regular.otf"; sourceTree = "<group>"; };
 		A581C3941B94769F006CE228 /* StingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StingView.xib; sourceTree = "<group>"; };
 		A581C3951B94769F006CE228 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -71,14 +69,6 @@
 				A54FCB531B9E343800A85009 /* Stingtk-Bridging-Header.h */,
 			);
 			name = FDWaveformView;
-			sourceTree = "<group>";
-		};
-		A581C3901B946ECE006CE228 /* SwiftyUserDefaults */ = {
-			isa = PBXGroup;
-			children = (
-				A581C38E1B946EC6006CE228 /* SwiftyUserDefaults.swift */,
-			);
-			name = SwiftyUserDefaults;
 			sourceTree = "<group>";
 		};
 		A581C39A1B947791006CE228 /* Models */ = {
@@ -131,7 +121,6 @@
 			children = (
 				A5A49CB41B5BF7A7004B80CE /* App */,
 				A5A49CB31B5BF797004B80CE /* Resources */,
-				A581C3901B946ECE006CE228 /* SwiftyUserDefaults */,
 				A54FCB521B9E341300A85009 /* FDWaveformView */,
 				A5A49C8C1B5BF1C2004B80CE /* Supporting Files */,
 			);
@@ -255,7 +244,6 @@
 			files = (
 				A581C3A41B94C5B2006CE228 /* WalkthroughController.swift in Sources */,
 				A5A49C8F1B5BF1C2004B80CE /* AppDelegate.swift in Sources */,
-				A581C38F1B946EC6006CE228 /* SwiftyUserDefaults.swift in Sources */,
 				A5FFFBCE1B95CCE4004C6961 /* BackgroundController.swift in Sources */,
 				A581C3A21B94A041006CE228 /* StingView.swift in Sources */,
 				A54FCB561B9E343900A85009 /* FDWaveformView.m in Sources */,
@@ -370,7 +358,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Stingtk/Stingtk-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -386,7 +374,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = uk.pixlwave.Stingmtk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Stingtk/Stingtk-Bridging-Header.h";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

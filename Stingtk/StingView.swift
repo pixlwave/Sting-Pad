@@ -27,7 +27,7 @@ class StingView: UIView {
         // let nibName = NSStringFromClass(self)
         let nibName = "StingView"
         let nib = UINib(nibName: nibName, bundle:nil)
-        nib.instantiateWithOwner(self, options:nil)
+        nib.instantiate(withOwner: self, options:nil)
         
         // add the view loaded from the nib into self.
         self.addSubview(self.view)

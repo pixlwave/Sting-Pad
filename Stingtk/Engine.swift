@@ -11,18 +11,18 @@ class Engine {
     
     init() {
         for i in 0..<5 {
-            let url = Defaults["Sting \(i) URL"].url ?? Sting.defaultURL
-            let title = Defaults["Sting \(i) Title"].string ?? "Chime"
-            let artist = Defaults["Sting \(i) Artist"].string ?? "Default Sting"
-            let cuePoint = Defaults["Sting \(i) Cue Point"].double ?? 0
+            let url = UserDefaults.standard.url(forKey: "Sting \(i) URL") ?? Sting.defaultURL
+            let title = UserDefaults.standard.string(forKey: "Sting \(i) Title") ?? "Chime"
+            let artist = UserDefaults.standard.string(forKey: "Sting \(i) Artist") ?? "Default Sting"
+            let cuePoint = UserDefaults.standard.double(forKey: "Sting \(i) Cue Point")
             sting.append(Sting(url: url, title: title, artist: artist, cuePoint: cuePoint))
         }
     
-        let playlistIndex = Defaults["Playlist Index"].int ?? 0
+        let playlistIndex = UserDefaults.standard.integer(forKey: "Playlist Index") 
         ipod.usePlaylist(playlistIndex)
     }
     
-    func playSting(selectedSting: Int) {
+    func playSting(_ selectedSting: Int) {
         ipod.pause()
         if selectedSting != playingSting { sting[playingSting].stop() }
         sting[selectedSting].play()
@@ -38,7 +38,7 @@ class Engine {
         ipod.play()
     }
     
-    func playiPodItem(index: Int) {
+    func playiPodItem(_ index: Int) {
         sting[playingSting].stop()
         ipod.playItem(index)
     }
@@ -47,7 +47,7 @@ class Engine {
         ipod.pause()
     }
     
-    func setStingDelegates(delegate: StingDelegate) {
+    func setStingDelegates(_ delegate: StingDelegate) {
         for s in sting {
             s.delegate = delegate
         }
