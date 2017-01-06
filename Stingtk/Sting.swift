@@ -41,7 +41,8 @@ class Sting: NSObject {
         
         waveform.audioURL = self.url
         waveform.doesAllowScrubbing = true
-        // waveform.doesAllowStretchAndScroll = true
+        waveform.doesAllowScroll = false
+        waveform.doesAllowStretch = false
         waveform.wavesColor = UIColor.blue
         waveform.progressColor = UIColor.white
         waveform.progressSamples = Int(Double(waveform.totalSamples) * getCue())

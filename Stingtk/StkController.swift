@@ -70,7 +70,7 @@ class StkController: UIViewController {
         
         // update shuffle button in case changed outside of app
         #if !(arch(i386) || arch(x86_64)) && os(iOS)
-            ipodShuffleButton.selected = engine.ipod.shuffleState   // TODO: observe this?
+            ipodShuffleButton.isSelected = engine.ipod.shuffleState   // TODO: observe this?
         #endif
     }
     
