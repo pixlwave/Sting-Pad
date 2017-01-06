@@ -64,7 +64,7 @@
 			children = (
 				A5B39BDD1DAA843A00AA22EF /* FDWaveformView.swift */,
 			);
-			name = FDWaveformView;
+			path = FDWaveformView;
 			sourceTree = "<group>";
 		};
 		A581C39A1B947791006CE228 /* Models */ = {
@@ -100,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				A5A49C8B1B5BF1C2004B80CE /* Stingtk */,
+				A54FCB521B9E341300A85009 /* FDWaveformView */,
 				A5A49C8A1B5BF1C2004B80CE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -117,7 +118,6 @@
 			children = (
 				A5A49CB41B5BF7A7004B80CE /* App */,
 				A5A49CB31B5BF797004B80CE /* Resources */,
-				A54FCB521B9E341300A85009 /* FDWaveformView */,
 				A5A49C8C1B5BF1C2004B80CE /* Supporting Files */,
 			);
 			path = Stingtk;
