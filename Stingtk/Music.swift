@@ -9,16 +9,16 @@ class Music: NSObject {
     
     var playlist: MPMediaPlaylist?
     
-    private var musicPlayer = MPMusicPlayerController.iPodMusicPlayer()
+    private var musicPlayer = MPMusicPlayerController.iPodMusicPlayer
     
     override init() {
         
         super.init()
         
         if #available(iOS 8, *) {
-            musicPlayer = MPMusicPlayerController.systemMusicPlayer()
+            musicPlayer = MPMusicPlayerController.systemMusicPlayer
         } else {
-            musicPlayer = MPMusicPlayerController.iPodMusicPlayer()
+            musicPlayer = MPMusicPlayerController.iPodMusicPlayer
         }
         
         if let playlist = allPlaylists.first {

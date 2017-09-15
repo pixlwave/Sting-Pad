@@ -95,13 +95,13 @@ class StkController: UIViewController {
         }
     }
     
-    func play() {
+    @objc func play() {
         // plays selected sting (from sting scroll view) and shows that it's playing
         engine.playSting(selectedSting)
         playingLabel.isHidden = false
     }
     
-    func stop() {
+    @objc func stop() {
         // stops and hides the playing label
         engine.stopSting()
         playingLabel.isHidden = true
@@ -137,17 +137,17 @@ class StkController: UIViewController {
         }
     }
     
-    func refreshPlaylists() {
+    @objc func refreshPlaylists() {
         // called when ipod library changes
         engine.ipod.refreshPlaylists()
         updateTable()
     }
     
-    func updateTable() {
+    @objc func updateTable() {
         playlistTable.reloadData()
     }
     
-    func playbackStateDidChange(_ notification: Notification) {
+    @objc func playbackStateDidChange(_ notification: Notification) {
         updatePlayPause()
         
         // correct (but buggy) alternative here:

@@ -16,8 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // customise appearance
         if let exoFont = UIFont(name: "Exo2-Regular", size: 18), let exoBoldFont = UIFont(name: "Exo2-SemiBold", size: 18) {
-            UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: exoFont]
-            UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: exoBoldFont], for: UIControlState())
+            UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.font: exoFont]
+            UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: exoBoldFont], for: UIControlState())
         }
         
         return true

@@ -30,7 +30,7 @@ open class FDWaveformView: UIView {
             let asset = AVURLAsset(url: audioURL, options: [AVURLAssetPreferPreciseDurationAndTimingKey: NSNumber(value: true as Bool)])
             self.asset = asset
             
-            guard let assetTrack = asset.tracks(withMediaType: AVMediaTypeAudio).first else {
+            guard let assetTrack = asset.tracks(withMediaType: AVMediaType.audio).first else {
                 NSLog("FDWaveformView failed to load AVAssetTrack")
                 return
             }
@@ -484,7 +484,7 @@ extension FDWaveformView: UIGestureRecognizerDelegate {
         return true
     }
     
-    func handlePinchGesture(_ recognizer: UIPinchGestureRecognizer) {
+    @objc func handlePinchGesture(_ recognizer: UIPinchGestureRecognizer) {
         if !doesAllowStretch {
             return
         }
@@ -510,7 +510,7 @@ extension FDWaveformView: UIGestureRecognizerDelegate {
         recognizer.scale = 1
     }
     
-    func handlePanGesture(_ recognizer: UIPanGestureRecognizer) {
+    @objc func handlePanGesture(_ recognizer: UIPanGestureRecognizer) {
         let point = recognizer.translation(in: self)
         if doesAllowScroll {
             if recognizer.state == .began {
@@ -538,7 +538,7 @@ extension FDWaveformView: UIGestureRecognizerDelegate {
         }
     }
     
-    func handleTapGesture(_ recognizer: UITapGestureRecognizer) {
+    @objc func handleTapGesture(_ recognizer: UITapGestureRecognizer) {
         if doesAllowScrubbing {
             let rangeSamples = CGFloat(zoomEndSamples - zoomStartSamples)
             progressSamples = Int(CGFloat(zoomStartSamples) + rangeSamples * recognizer.location(in: self).x / bounds.width)
