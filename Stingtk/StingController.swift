@@ -66,7 +66,7 @@ class StingController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    func loadTrack() {
+    @IBAction func loadTrack() {
         // present music picker to load a track from ipod
         let mediaPicker = MPMediaPickerController(mediaTypes: .music)
         mediaPicker.delegate = self
@@ -86,16 +86,16 @@ class StingController: UIViewController {
         wave.progressSamples = Int(Double(wave.totalSamples) * engine.sting[stingIndex].getCue())
     }
     
-    func zoomWaveOut() {
+    @IBAction func zoomWaveOut() {
         wave.zoomStartSamples = 0
         wave.zoomEndSamples = wave.totalSamples
     }
     
-    @objc func startPreview() {
+    @IBAction func startPreview() {
         engine.playSting(stingIndex)
     }
 
-    @objc func stopPreview() {
+    @IBAction func stopPreview() {
         engine.stopSting()
     }
     
