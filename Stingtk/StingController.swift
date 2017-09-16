@@ -9,7 +9,7 @@ class StingController: UIViewController {
     var stingIndex = 0
     var wave: FDWaveformView!   // could be computed?
     
-    var observed: NSKeyValueObservation?
+    var scrubObservation: NSKeyValueObservation?
     
     @IBOutlet weak var stingNumberLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
@@ -45,7 +45,7 @@ class StingController: UIViewController {
         wave.delegate = self
         view.addSubview(wave)
         
-        observed = wave.observe(\.progressSamples, options: .new) { (waveformView, progressSamples) in
+        scrubObservation = wave.observe(\.progressSamples, options: .new) { (waveformView, progressSamples) in
             if let newProgressSamples = progressSamples.newValue {
                 let cue = Double(newProgressSamples) / Double(waveformView.totalSamples)
                 self.engine.sting[self.stingIndex].setCue(cue)
