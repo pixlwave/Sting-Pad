@@ -41,14 +41,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9zX-2P-e3B">
-                                                    <rect key="frame" x="15" y="4" width="37" height="22"/>
+                                                    <rect key="frame" x="15" y="5" width="34" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" name="Exo2-Regular" family="Exo 2" pointSize="18"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0fH-Rh-GoA">
-                                                    <rect key="frame" x="15" y="26" width="43" height="14.5"/>
+                                                    <rect key="frame" x="15" y="26" width="41" height="14"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" name="Exo2-Regular" family="Exo 2" pointSize="12"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -294,19 +294,19 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sting #" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W2N-PM-WRG">
-                                <rect key="frame" x="30" y="30" width="48.5" height="18"/>
+                                <rect key="frame" x="30" y="30" width="47.5" height="18"/>
                                 <fontDescription key="fontDescription" name="Exo2-Regular" family="Exo 2" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="waveload" translatesAutoresizingMaskIntoConstraints="NO" id="DSS-g4-Ymn">
-                                <rect key="frame" x="20" y="162" width="280" height="75"/>
+                                <rect key="frame" x="20" y="161" width="280" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="DSS-g4-Ymn" secondAttribute="height" multiplier="56:15" id="ymd-rN-3EN"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lRX-bK-xRr">
-                                <rect key="frame" x="15" y="272" width="85" height="38"/>
+                                <rect key="frame" x="15" y="271" width="83" height="38"/>
                                 <fontDescription key="fontDescription" name="Exo2-Regular" family="Exo 2" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="15" minY="10" maxX="15" maxY="10"/>
                                 <state key="normal" title="Preview">
@@ -319,7 +319,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyO-e7-KqD">
-                                <rect key="frame" x="197" y="272" width="107" height="38"/>
+                                <rect key="frame" x="196" y="271" width="108" height="38"/>
                                 <fontDescription key="fontDescription" name="Exo2-Regular" family="Exo 2" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
                                 <state key="normal" title="Zoom Out">
@@ -330,7 +330,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SDr-NV-ToG">
-                                <rect key="frame" x="201" y="20" width="103" height="38"/>
+                                <rect key="frame" x="199" y="21" width="105" height="38"/>
                                 <fontDescription key="fontDescription" name="Exo2-Regular" family="Exo 2" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="15" minY="10" maxX="15" maxY="10"/>
                                 <state key="normal" title="Load Track">
@@ -342,13 +342,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDC-cS-RXP">
-                                <rect key="frame" x="30" y="78" width="260" height="22"/>
+                                <rect key="frame" x="30" y="78" width="260" height="21"/>
                                 <fontDescription key="fontDescription" name="Exo2-Regular" family="Exo 2" pointSize="18"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ah-Ra-mmM">
-                                <rect key="frame" x="30" y="105" width="260" height="17"/>
+                                <rect key="frame" x="30" y="104" width="260" height="17"/>
                                 <fontDescription key="fontDescription" name="Exo2-Regular" family="Exo 2" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -361,11 +361,11 @@
                             <constraint firstItem="W2N-PM-WRG" firstAttribute="top" secondItem="1re-0v-UTP" secondAttribute="bottom" constant="30" id="2of-oI-IBc"/>
                             <constraint firstAttribute="trailing" secondItem="SDr-NV-ToG" secondAttribute="trailing" constant="16" id="2pJ-Jo-116"/>
                             <constraint firstItem="EDC-cS-RXP" firstAttribute="leading" secondItem="8ah-Ra-mmM" secondAttribute="leading" id="2q3-eT-qTJ"/>
-                            <constraint firstItem="lRX-bK-xRr" firstAttribute="top" secondItem="DSS-g4-Ymn" secondAttribute="bottom" constant="35" id="3Ir-rM-0ft"/>
+                            <constraint firstItem="lRX-bK-xRr" firstAttribute="top" secondItem="8ah-Ra-mmM" secondAttribute="bottom" constant="150" id="CDc-iB-0xd"/>
                             <constraint firstItem="W2N-PM-WRG" firstAttribute="leading" secondItem="EDC-cS-RXP" secondAttribute="leading" id="CQM-FG-Gbq"/>
                             <constraint firstItem="tyO-e7-KqD" firstAttribute="trailing" secondItem="SDr-NV-ToG" secondAttribute="trailing" id="DpU-mO-Ylm"/>
                             <constraint firstItem="EDC-cS-RXP" firstAttribute="top" secondItem="W2N-PM-WRG" secondAttribute="bottom" constant="30" id="Jkq-PH-xXN"/>
-                            <constraint firstItem="lRX-bK-xRr" firstAttribute="baseline" secondItem="tyO-e7-KqD" secondAttribute="baseline" id="Kts-uq-dV1"/>
+                            <constraint firstItem="tyO-e7-KqD" firstAttribute="baseline" secondItem="lRX-bK-xRr" secondAttribute="baseline" id="Kts-uq-dV1"/>
                             <constraint firstItem="DSS-g4-Ymn" firstAttribute="top" secondItem="8ah-Ra-mmM" secondAttribute="bottom" constant="40" id="R0K-nJ-FcB"/>
                             <constraint firstItem="8ah-Ra-mmM" firstAttribute="trailing" secondItem="EDC-cS-RXP" secondAttribute="trailing" id="SWE-hL-3z9"/>
                             <constraint firstAttribute="trailing" secondItem="DSS-g4-Ymn" secondAttribute="trailing" constant="20" id="aWp-AI-3Kb"/>
@@ -387,7 +387,7 @@
                         <outlet property="artistLabel" destination="8ah-Ra-mmM" id="PDI-ff-nfj"/>
                         <outlet property="stingNumberLabel" destination="W2N-PM-WRG" id="8X1-SE-u8r"/>
                         <outlet property="titleLabel" destination="EDC-cS-RXP" id="mWC-r4-wcL"/>
-                        <outlet property="waveLoadImageView" destination="DSS-g4-Ymn" id="NRW-rX-Hcg"/>
+                        <outlet property="waveformLoadingImageView" destination="DSS-g4-Ymn" id="NRW-rX-Hcg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="17N-rm-diW" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -7,14 +7,14 @@ class StingController: UIViewController {
     let engine = Engine.sharedClient
     
     var stingIndex = 0
-    var wave: FDWaveformView!   // could be computed?
+    var waveformView: FDWaveformView!   // could be computed?
     
     var scrubObservation: NSKeyValueObservation?
     
     @IBOutlet weak var stingNumberLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var artistLabel: UILabel!
-    @IBOutlet var waveLoadImageView: UIImageView! // FIXME: without weak, addSubview(waveLoadImageView) unwraps nil
+    @IBOutlet var waveformLoadingImageView: UIImageView! // FIXME: without weak, addSubview(waveformLoadingImageView) unwraps nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,26 +26,26 @@ class StingController: UIViewController {
         updateLabels()
         
         // get waveform view positions
-        let waveFrame = waveLoadImageView.frame
+        let waveformFrame = waveformLoadingImageView.frame
         
         // not using whilst storing waveformView inside Sting object
-        // @wave = FDWaveformView.alloc.initWithFrame(waveFrame)
-        // @wave.doesAllowScrubbing = true
-        // @wave.delegate = self
-        // self.view.addSubview(@wave)
+        // @waveformView = FDWaveformView.alloc.initWithFrame(waveFrame)
+        // @waveformView.doesAllowScrubbing = true
+        // @waveformView.delegate = self
+        // self.view.addSubview(@waveformView)
         // updateWaveURL()
         
         // temporary bodge to stop waveform being rendered each time it is presented
         // memory usage is probably excessive!
-        wave = engine.sting[stingIndex].waveform
+        waveformView = engine.sting[stingIndex].waveform
         if !engine.wavesLoaded[stingIndex] {
-            wave.frame = waveFrame
+            waveformView.frame = waveformFrame
         }
         
-        wave.delegate = self
-        view.addSubview(wave)
+        waveformView.delegate = self
+        view.addSubview(waveformView)
         
-        scrubObservation = wave.observe(\.progressSamples, options: .new) { (waveformView, progressSamples) in
+        scrubObservation = waveformView.observe(\.progressSamples, options: .new) { (waveformView, progressSamples) in
             if let newProgressSamples = progressSamples.newValue {
                 let cue = Double(newProgressSamples) / Double(waveformView.totalSamples)
                 self.engine.sting[self.stingIndex].setCue(cue)
@@ -55,7 +55,7 @@ class StingController: UIViewController {
         
         // temporary bodge to remove waveform loading image if the waveform isn't going to render
         if engine.wavesLoaded[stingIndex] {
-            waveLoadImageView.removeFromSuperview()
+            waveformLoadingImageView.removeFromSuperview()
         } else {
             // otherwise they will have loaded so save for next time
             engine.wavesLoaded[stingIndex] = true
@@ -87,13 +87,13 @@ class StingController: UIViewController {
     }
     
     func updateWaveURL() {
-        wave.audioURL = engine.sting[stingIndex].url
-        wave.progressSamples = Int(Double(wave.totalSamples) * engine.sting[stingIndex].getCue())
+        waveformView.audioURL = engine.sting[stingIndex].url
+        waveformView.progressSamples = Int(Double(waveformView.totalSamples) * engine.sting[stingIndex].getCue())
     }
     
     @IBAction func zoomWaveOut() {
-        wave.zoomStartSamples = 0
-        wave.zoomEndSamples = wave.totalSamples
+        waveformView.zoomStartSamples = 0
+        waveformView.zoomEndSamples = waveformView.totalSamples
     }
     
     @IBAction func startPreview() {
@@ -109,7 +109,7 @@ class StingController: UIViewController {
 // MARK: FDWaveformViewDelegate
 extension StingController: FDWaveformViewDelegate {
     func waveformViewDidRender(_ waveform: FDWaveformView) {
-        waveLoadImageView.removeFromSuperview()
+        waveformLoadingImageView.removeFromSuperview()
     }
 }
 
@@ -121,7 +121,7 @@ extension StingController: MPMediaPickerControllerDelegate {
         updateLabels()
         
         // add wave loading image whilst waveform generates
-        view.addSubview(waveLoadImageView)
+        view.addSubview(waveformLoadingImageView)
         
         // generate new waveform
         updateWaveURL()
