@@ -91,17 +91,17 @@ class StingController: UIViewController {
         wave.zoomEndSamples = wave.totalSamples
     }
     
-    func startPreview() {
+    @objc func startPreview() {
         engine.playSting(stingIndex)
     }
 
-    func stopPreview() {
+    @objc func stopPreview() {
         engine.stopSting()
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if context == &kvoContext {
-            let cue = Double(change?[NSKeyValueChangeKey.newKey] as! NSNumber) / Double(wave.totalSamples)
+            let cue = (change?[NSKeyValueChangeKey.newKey] as! NSNumber).doubleValue / Double(wave.totalSamples)
             engine.sting[stingIndex].setCue(cue)
             UserDefaults.standard.set(engine.sting[stingIndex].cuePoint, forKey: "Sting \(stingIndex) Cue Point")
         } else {
