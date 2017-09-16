@@ -59,7 +59,7 @@ open class FDWaveformView: UIView {
                         }
                     }
                 case .failed, .cancelled, .loading, .unknown:
-                    print("FDWaveformView could not load asset: \(error?.localizedDescription)")
+                    print("FDWaveformView could not load asset: \(String(describing: error?.localizedDescription))")
                 }
             }
         }
@@ -69,7 +69,7 @@ open class FDWaveformView: UIView {
     open fileprivate(set) var totalSamples = 0
     
     /// A portion of the waveform rendering to be highlighted
-    @IBInspectable open var progressSamples: Int = 0 {
+    @objc dynamic open var progressSamples: Int = 0 {
         didSet {
             if totalSamples > 0 {
                 let progress = CGFloat(progressSamples) / CGFloat(totalSamples)

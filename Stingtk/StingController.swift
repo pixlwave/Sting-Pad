@@ -7,9 +7,9 @@ class StingController: UIViewController {
     let engine = Engine.sharedClient
     
     var stingIndex = 0
-     var wave: FDWaveformView!   // could be computed?
+    var wave: FDWaveformView!   // could be computed?
     
-    private var kvoContext = 0
+    var observed: NSKeyValueObservation?
     
     @IBOutlet weak var stingNumberLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
@@ -45,7 +45,13 @@ class StingController: UIViewController {
         wave.delegate = self
         view.addSubview(wave)
         
-        wave.addObserver(self, forKeyPath: "progressSamples", options: .new, context: &kvoContext)
+        observed = wave.observe(\.progressSamples, options: .new) { (waveformView, progressSamples) in
+            if let newProgressSamples = progressSamples.newValue {
+                let cue = Double(newProgressSamples) / Double(waveformView.totalSamples)
+                self.engine.sting[self.stingIndex].setCue(cue)
+                UserDefaults.standard.set(self.engine.sting[self.stingIndex].cuePoint, forKey: "Sting \(self.stingIndex) Cue Point")
+            }
+        }
         
         // temporary bodge to remove waveform loading image if the waveform isn't going to render
         if engine.wavesLoaded[stingIndex] {
@@ -62,7 +68,6 @@ class StingController: UIViewController {
     @IBAction func done() {
         // display updates before dismissing
         (presentingViewController as? StkController)?.updateStingTitles()
-        wave.removeObserver(self, forKeyPath: "progressSamples")
         dismiss(animated: true, completion: nil)
     }
     
@@ -97,16 +102,6 @@ class StingController: UIViewController {
 
     @IBAction func stopPreview() {
         engine.stopSting()
-    }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if context == &kvoContext {
-            let cue = (change?[NSKeyValueChangeKey.newKey] as! NSNumber).doubleValue / Double(wave.totalSamples)
-            engine.sting[stingIndex].setCue(cue)
-            UserDefaults.standard.set(engine.sting[stingIndex].cuePoint, forKey: "Sting \(stingIndex) Cue Point")
-        } else {
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-        }
     }
     
 }
