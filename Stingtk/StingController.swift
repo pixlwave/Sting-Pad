@@ -9,8 +9,6 @@ class StingController: UIViewController {
     var stingIndex = 0
     var waveformView: FDWaveformView!   // could be computed?
     
-    var scrubObservation: NSKeyValueObservation?
-    
     @IBOutlet weak var stingNumberLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var artistLabel: UILabel!
@@ -24,6 +22,12 @@ class StingController: UIViewController {
         // load track info
         stingNumberLabel.text = "Sting \(stingIndex + 1)"
         updateLabels()
+        
+        // refresh playlists in case anything has changed
+        engine.ipod.refreshPlaylists()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         
         // get waveform view positions
         let waveformFrame = waveformLoadingImageView.frame
@@ -45,14 +49,6 @@ class StingController: UIViewController {
         waveformView.delegate = self
         view.addSubview(waveformView)
         
-        scrubObservation = waveformView.observe(\.progressSamples, options: .new) { (waveformView, progressSamples) in
-            if let newProgressSamples = progressSamples.newValue {
-                let cue = Double(newProgressSamples) / Double(waveformView.totalSamples)
-                self.engine.sting[self.stingIndex].setCue(cue)
-                UserDefaults.standard.set(self.engine.sting[self.stingIndex].cuePoint, forKey: "Sting \(self.stingIndex) Cue Point")
-            }
-        }
-        
         // temporary bodge to remove waveform loading image if the waveform isn't going to render
         if engine.wavesLoaded[stingIndex] {
             waveformLoadingImageView.removeFromSuperview()
@@ -60,9 +56,6 @@ class StingController: UIViewController {
             // otherwise they will have loaded so save for next time
             engine.wavesLoaded[stingIndex] = true
         }
-        
-        // refresh playlists in case anything has changed
-        engine.ipod.refreshPlaylists()
     }
     
     @IBAction func done() {
@@ -110,6 +103,12 @@ class StingController: UIViewController {
 extension StingController: FDWaveformViewDelegate {
     func waveformViewDidRender(_ waveform: FDWaveformView) {
         waveformLoadingImageView.removeFromSuperview()
+    }
+    
+    func waveformDidEndScrubbing(_ waveformView: FDWaveformView) {
+        let cue = Double(waveformView.progressSamples) / Double(waveformView.totalSamples)
+        engine.sting[stingIndex].setCue(cue)
+        UserDefaults.standard.set(engine.sting[stingIndex].cuePoint, forKey: "Sting \(stingIndex) Cue Point")
     }
 }
 

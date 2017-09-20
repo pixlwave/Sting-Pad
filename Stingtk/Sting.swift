@@ -43,8 +43,8 @@ class Sting: NSObject {
         waveform.doesAllowScrubbing = true
         waveform.doesAllowScroll = false
         waveform.doesAllowStretch = false
-        waveform.wavesColor = UIColor.blue
-        waveform.progressColor = UIColor.white
+        waveform.wavesColor = UIColor(red: 0.25, green: 0.25, blue: 1.0, alpha: 1.0)
+        waveform.progressColor = UIColor(red: 0.35, green: 0.35, blue: 0.35, alpha: 1.0)
         waveform.progressSamples = Int(Double(waveform.totalSamples) * getCue())
     
     }
