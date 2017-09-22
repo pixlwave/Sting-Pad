@@ -16,7 +16,6 @@ class Sting: NSObject {
     private var stingPlayer: AVAudioPlayer!
     
     init(url: URL, title: String, artist: String, cuePoint: Double) {
-    
         // TODO: load title & artist from url
         if let stingPlayer = try? AVAudioPlayer(contentsOf: url) {
             self.url = url
@@ -46,7 +45,6 @@ class Sting: NSObject {
         waveform.wavesColor = UIColor(red: 0.25, green: 0.25, blue: 1.0, alpha: 1.0)
         waveform.progressColor = UIColor(red: 0.35, green: 0.35, blue: 0.35, alpha: 1.0)
         waveform.progressSamples = Int(Double(waveform.totalSamples) * getCue())
-    
     }
     
     func play() {

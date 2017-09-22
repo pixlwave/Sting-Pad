@@ -1,7 +1,7 @@
 import Foundation
 import MediaPlayer
 
-class Music: NSObject {
+class Music {
     
     var allPlaylists: [MPMediaPlaylist] {
         return MPMediaQuery.playlists().collections as? [MPMediaPlaylist] ?? [MPMediaPlaylist]()
@@ -11,10 +11,7 @@ class Music: NSObject {
     
     private var musicPlayer = MPMusicPlayerController.iPodMusicPlayer
     
-    override init() {
-        
-        super.init()
-        
+    init() {
         if #available(iOS 8, *) {
             musicPlayer = MPMusicPlayerController.systemMusicPlayer
         } else {
@@ -27,7 +24,6 @@ class Music: NSObject {
         
         musicPlayer.beginGeneratingPlaybackNotifications()
         MPMediaLibrary.default().beginGeneratingLibraryChangeNotifications()
-        
     }
     
     func play() {
