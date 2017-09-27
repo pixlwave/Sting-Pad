@@ -95,16 +95,9 @@
 			children = (
 				A5FBD7D11F7C445A00B5799C /* App */,
 				A5A49CB31B5BF797004B80CE /* Resources */,
-				A5A49C8C1B5BF1C2004B80CE /* Supporting Files */,
+				A5A49C8D1B5BF1C2004B80CE /* Info.plist */,
 			);
 			path = Stingtk;
-			sourceTree = "<group>";
-		};
-		A5A49C8C1B5BF1C2004B80CE /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		A5A49CB31B5BF797004B80CE /* Resources */ = {
@@ -117,7 +110,6 @@
 				A581C3931B947684006CE228 /* Exo2-Regular.otf */,
 				A56DCA911BA71E0C0096C377 /* Exo2-SemiBold.otf */,
 				A5A49CB21B5BF791004B80CE /* ComputerMagic.m4a */,
-				A5A49C8D1B5BF1C2004B80CE /* Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
