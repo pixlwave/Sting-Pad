@@ -6,7 +6,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // prevent device from going to sleep
         application.isIdleTimerDisabled = true
         
@@ -16,8 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // customise appearance
         if let exoFont = UIFont(name: "Exo2-Regular", size: 18), let exoBoldFont = UIFont(name: "Exo2-SemiBold", size: 18) {
-            UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.font: exoFont]
-            UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: exoBoldFont], for: UIControlState())
+            UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: exoFont]
+            UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: exoBoldFont], for: UIControl.State())
         }
         
         return true
@@ -38,15 +38,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let session = AVAudioSession.sharedInstance()
         if state {
             do {
-                try session.setCategory(AVAudioSessionCategoryPlayback, with: AVAudioSessionCategoryOptions.mixWithOthers)
+                try session.setCategory(.playback, mode: .default, options: .mixWithOthers)
             } catch {}
         } else {
             do {
-                try session.setCategory(AVAudioSessionCategoryPlayback)
+                try session.setCategory(.playback, mode: .default)
             } catch {}
         }
     }
 
 
 }
-

@@ -9,15 +9,9 @@ class Music {
     
     var playlist: MPMediaPlaylist?
     
-    private var musicPlayer = MPMusicPlayerController.iPodMusicPlayer
+    private let musicPlayer = MPMusicPlayerController.systemMusicPlayer
     
     init() {
-        if #available(iOS 8, *) {
-            musicPlayer = MPMusicPlayerController.systemMusicPlayer
-        } else {
-            musicPlayer = MPMusicPlayerController.iPodMusicPlayer
-        }
-        
         if let playlist = allPlaylists.first {
             musicPlayer.setQueue(with: playlist)
         }

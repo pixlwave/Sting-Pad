@@ -23,14 +23,12 @@ class StkController: UIViewController {
         engine.setStingDelegates(self)
         
         // puts yellow view under status bar on iOS 7, handling Insets for correct scrolling
-        if #available(iOS 7, *) {
-            if UIDevice.current.userInterfaceIdiom != .pad {
-                playlistTable.contentInset = UIEdgeInsetsMake(UIApplication.shared.statusBarFrame.height, playlistTable.contentInset.left, playlistTable.contentInset.bottom, playlistTable.contentInset.right)
-                playlistTable.scrollIndicatorInsets = UIEdgeInsetsMake(UIApplication.shared.statusBarFrame.height, playlistTable.contentInset.left, playlistTable.contentInset.bottom, playlistTable.contentInset.right)
-                let statusBarView = UIView(frame: UIApplication.shared.statusBarFrame)
-                statusBarView.backgroundColor = view.backgroundColor
-                view.addSubview(statusBarView)
-            }
+        if UIDevice.current.userInterfaceIdiom != .pad {
+            playlistTable.contentInset = UIEdgeInsets(top: UIApplication.shared.statusBarFrame.height, left: playlistTable.contentInset.left, bottom: playlistTable.contentInset.bottom, right: playlistTable.contentInset.right)
+            playlistTable.scrollIndicatorInsets = UIEdgeInsets(top: UIApplication.shared.statusBarFrame.height, left: playlistTable.contentInset.left, bottom: playlistTable.contentInset.bottom, right: playlistTable.contentInset.right)
+            let statusBarView = UIView(frame: UIApplication.shared.statusBarFrame)
+            statusBarView.backgroundColor = view.backgroundColor
+            view.addSubview(statusBarView)
         }
 
         // control of the table
