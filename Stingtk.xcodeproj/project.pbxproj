@@ -76,7 +76,8 @@
 		A5A49C801B5BF1C2004B80CE = {
 			isa = PBXGroup;
 			children = (
-				A5A49C8B1B5BF1C2004B80CE /* Stingtk */,
+				A5FBD7D11F7C445A00B5799C /* Source */,
+				A5A49CB31B5BF797004B80CE /* Resources */,
 				A54FCB521B9E341300A85009 /* FDWaveformView */,
 				A5A49C8A1B5BF1C2004B80CE /* Products */,
 			);
@@ -90,16 +91,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A5A49C8B1B5BF1C2004B80CE /* Stingtk */ = {
-			isa = PBXGroup;
-			children = (
-				A5FBD7D11F7C445A00B5799C /* App */,
-				A5A49CB31B5BF797004B80CE /* Resources */,
-				A5A49C8D1B5BF1C2004B80CE /* Info.plist */,
-			);
-			path = Stingtk;
-			sourceTree = "<group>";
-		};
 		A5A49CB31B5BF797004B80CE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -110,11 +101,12 @@
 				A581C3931B947684006CE228 /* Exo2-Regular.otf */,
 				A56DCA911BA71E0C0096C377 /* Exo2-SemiBold.otf */,
 				A5A49CB21B5BF791004B80CE /* ComputerMagic.m4a */,
+				A5A49C8D1B5BF1C2004B80CE /* Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		A5FBD7D11F7C445A00B5799C /* App */ = {
+		A5FBD7D11F7C445A00B5799C /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				A5A49C8E1B5BF1C2004B80CE /* AppDelegate.swift */,
@@ -122,7 +114,7 @@
 				A5FBD7D31F7C447800B5799C /* Models */,
 				A5FBD7D41F7C447D00B5799C /* Views */,
 			);
-			path = App;
+			path = Source;
 			sourceTree = "<group>";
 		};
 		A5FBD7D21F7C447000B5799C /* Controllers */ = {
@@ -363,7 +355,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = NU8A5Y875P;
-				INFOPLIST_FILE = Stingtk/Info.plist;
+				INFOPLIST_FILE = Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.pixlwave.Stingmtk;
@@ -379,7 +371,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = NU8A5Y875P;
-				INFOPLIST_FILE = Stingtk/Info.plist;
+				INFOPLIST_FILE = Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.pixlwave.Stingmtk;
