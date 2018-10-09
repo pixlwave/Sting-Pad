@@ -32,8 +32,12 @@ class WalkthroughController: UIViewController {
         // go to the next image until end, then dismiss self
         currentImage += 1
         if currentImage < images.count {
-            UIView.transition(with: walkthroughImageView, duration: 0.2, options: .transitionCrossDissolve, animations: { self.walkthroughImageView.image = UIImage(named: "Walkthrough\(self.images[self.currentImage])") }, completion: nil)
-            UIView.transition(with: progressLabel, duration: 0.2, options: .transitionCrossDissolve, animations: { self.progressLabel.text = "\(self.currentImage + 1) of \(self.images.count)" }, completion: nil)
+            UIView.transition(with: walkthroughImageView, duration: 0.2, options: .transitionCrossDissolve, animations: {
+                self.walkthroughImageView.image = UIImage(named: "Walkthrough\(self.images[self.currentImage])")
+            })
+            UIView.transition(with: progressLabel, duration: 0.2, options: .transitionCrossDissolve, animations: {
+                self.progressLabel.text = "\(self.currentImage + 1) of \(self.images.count)"
+            })
         } else {
             modalTransitionStyle = .coverVertical
             presentingViewController!.dismiss(animated: true, completion: nil)

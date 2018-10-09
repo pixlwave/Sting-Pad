@@ -98,6 +98,7 @@ class StingController: UIViewController {
     
 }
 
+
 // MARK: FDWaveformViewDelegate
 extension StingController: FDWaveformViewDelegate {
     func waveformViewDidRender(_ waveform: FDWaveformView) {
@@ -110,6 +111,7 @@ extension StingController: FDWaveformViewDelegate {
         UserDefaults.standard.set(engine.sting[stingIndex].cuePoint, forKey: "Sting \(stingIndex) Cue Point")
     }
 }
+
 
 // MARK: MPMediaPickerControllerDelegate
 extension StingController: MPMediaPickerControllerDelegate {

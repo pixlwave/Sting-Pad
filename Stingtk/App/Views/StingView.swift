@@ -2,7 +2,6 @@ import UIKit
 
 class StingView: UIView {
     
-    
     @IBOutlet var view: UIView!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
@@ -32,4 +31,5 @@ class StingView: UIView {
         // add the view loaded from the nib into self.
         self.addSubview(self.view)
     }
+    
 }

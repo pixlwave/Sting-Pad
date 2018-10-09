@@ -174,12 +174,14 @@ class StkController: UIViewController {
     }
 }
 
+
 // MARK: StingDelegate
 extension StkController: StingDelegate {
     func stingHasStopped(_ sting: Sting) {
         stop()
     }
 }
+
 
 // MARK: UITableViewDataSource
 extension StkController: UITableViewDataSource {
@@ -226,6 +228,7 @@ extension StkController: UITableViewDataSource {
     }
 }
 
+
 // MARK: UITableViewDelegate
 extension StkController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -240,6 +243,7 @@ extension StkController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated:true)
     }
 }
+
 
 // MARK: UIScrollViewDelegate
 extension StkController: UIScrollViewDelegate {
