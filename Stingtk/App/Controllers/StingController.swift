@@ -81,12 +81,11 @@ class StingController: UIViewController {
     
     func updateWaveURL() {
         waveformView.audioURL = engine.sting[stingIndex].url
-        waveformView.progressSamples = Int(Double(waveformView.totalSamples) * engine.sting[stingIndex].getCue())
+        waveformView.highlightedSamples = CountableRange(Int(Double(waveformView.totalSamples) * engine.sting[stingIndex].getCue())...waveformView.totalSamples)
     }
     
     @IBAction func zoomWaveOut() {
-        waveformView.zoomStartSamples = 0
-        waveformView.zoomEndSamples = waveformView.totalSamples
+        waveformView.zoomSamples = CountableRange(0...waveformView.totalSamples)
     }
     
     @IBAction func startPreview() {
@@ -106,7 +105,7 @@ extension StingController: FDWaveformViewDelegate {
     }
     
     func waveformDidEndScrubbing(_ waveformView: FDWaveformView) {
-        let cue = Double(waveformView.progressSamples) / Double(waveformView.totalSamples)
+        let cue = Double(waveformView.highlightedSamples?.startIndex ?? 0) / Double(waveformView.totalSamples)
         engine.sting[stingIndex].setCue(cue)
         UserDefaults.standard.set(engine.sting[stingIndex].cuePoint, forKey: "Sting \(stingIndex) Cue Point")
     }

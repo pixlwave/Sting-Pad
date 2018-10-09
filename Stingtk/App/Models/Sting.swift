@@ -44,7 +44,7 @@ class Sting: NSObject {
         waveform.doesAllowStretch = false
         waveform.wavesColor = UIColor(red: 0.25, green: 0.25, blue: 1.0, alpha: 1.0)
         waveform.progressColor = UIColor(red: 0.35, green: 0.35, blue: 0.35, alpha: 1.0)
-        waveform.progressSamples = Int(Double(waveform.totalSamples) * getCue())
+        waveform.highlightedSamples = CountableRange(Int(Double(waveform.totalSamples) * getCue())...waveform.totalSamples)
     }
     
     func play() {
