@@ -125,7 +125,12 @@ class StkController: UIViewController {
     
     @IBAction func ipodShuffle() {
         engine.ipod.toggleShuffle()
-        ipodShuffleButton.isSelected = engine.ipod.shuffleState
+        
+        if engine.ipod.shuffleState {
+            ipodShuffleButton.setImage(#imageLiteral(resourceName: "shuffle_selected"), for: .normal)
+        } else {
+            ipodShuffleButton.setImage(#imageLiteral(resourceName: "shuffle"), for: .normal)
+        }
     }
     
     func updateStingTitles() {
@@ -153,7 +158,11 @@ class StkController: UIViewController {
     }
     
     func updatePlayPause() {
-        ipodPlayButton.isSelected = engine.ipod.isPlaying
+        if engine.ipod.isPlaying {
+            ipodPlayButton.setImage(#imageLiteral(resourceName: "ipodpause.png"), for: .normal)
+        } else {
+            ipodPlayButton.setImage(#imageLiteral(resourceName: "ipodplay"), for: .normal)
+        }
     }
     
     func playlistDidChange() {
