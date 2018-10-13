@@ -46,10 +46,7 @@ class Music {
     }
     
     var isPlaying: Bool {
-        // if musicPlayer.playbackState == MPMusicPlaybackStatePlaying
-        // workaround: http://stackoverflow.com/questions/18910207/ios7-mpmusicplayercontroller-states-incorrect
-        
-        if musicPlayer.currentPlaybackRate != 0 {
+        if musicPlayer.playbackState == .playing {
             return true
         } else {
             return false
