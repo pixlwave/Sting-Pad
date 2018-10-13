@@ -23,15 +23,7 @@ class StingController: UIViewController {
         stingNumberLabel.text = "Sting \(stingIndex + 1)"
         updateLabels()
         
-        // refresh playlists in case anything has changed
-        engine.ipod.refreshPlaylists()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        // get waveform view positions
-        let waveformFrame = waveformLoadingImageView.frame
-        
-        waveformView = FDWaveformView(frame: waveformFrame)
+        waveformView = FDWaveformView(frame: waveformLoadingImageView.frame)
         waveformView.doesAllowScrubbing = true
         waveformView.doesAllowScrubbing = true
         waveformView.doesAllowScroll = false
@@ -42,6 +34,9 @@ class StingController: UIViewController {
         
         waveformView.delegate = self
         view.addSubview(waveformView)
+        
+        // refresh playlists in case anything has changed
+        engine.ipod.refreshPlaylists()
     }
     
     @IBAction func done() {
@@ -93,7 +88,7 @@ extension StingController: FDWaveformViewDelegate {
     }
     
     func waveformViewDidRender(_ waveform: FDWaveformView) {
-        waveformLoadingImageView.removeFromSuperview()
+        waveformLoadingImageView.isHidden = true
     }
     
     func waveformDidEndScrubbing(_ waveformView: FDWaveformView) {
@@ -114,7 +109,7 @@ extension StingController: MPMediaPickerControllerDelegate {
         updateLabels()
         
         // add wave loading image whilst waveform generates
-        view.addSubview(waveformLoadingImageView)
+        waveformLoadingImageView.isHidden = false
         
         // generate new waveform
         updateWaveURL()
