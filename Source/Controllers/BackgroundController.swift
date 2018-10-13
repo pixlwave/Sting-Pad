@@ -8,8 +8,8 @@ class BackgroundController: UITableViewController {
         return engine.ipod.playlist
     }
     
-    private var playlistImage = UIImage(named: "playlist")
-    private var smartPlaylistImage = UIImage(named: "smartplaylist")
+    private var playlistImage = #imageLiteral(resourceName: "playlist")
+    private var smartPlaylistImage = #imageLiteral(resourceName: "smartplaylist")
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

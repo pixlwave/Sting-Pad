@@ -219,7 +219,7 @@ extension StkController: UITableViewDataSource {
             if let artwork = song.value(forProperty: MPMediaItemPropertyArtwork) as? MPMediaItemArtwork {
                 cell.imageView?.image = artwork.image(at: CGSize(width: 55, height: 55))
             } else {
-                cell.imageView?.image = UIImage(named: "albumartblank")
+                cell.imageView?.image = #imageLiteral(resourceName: "albumartblank.png")
             }
             
             // need to implement a better way of doing this that doesn't call updateTable every time a track changes???

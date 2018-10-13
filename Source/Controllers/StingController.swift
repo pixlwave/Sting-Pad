@@ -17,7 +17,7 @@ class StingController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.titleView = UIImageView(image: UIImage(named: "logo"))
+        navigationItem.titleView = UIImageView(image: #imageLiteral(resourceName: "logo"))
         
         // load track info
         stingNumberLabel.text = "Sting \(stingIndex + 1)"
