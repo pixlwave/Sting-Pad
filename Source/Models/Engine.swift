@@ -6,7 +6,6 @@ class Engine {
     var sting = [Sting]()
     var ipod = Music()
     
-    var wavesLoaded = [false, false, false, false, false]
     private var playingSting = 0
     
     init() {

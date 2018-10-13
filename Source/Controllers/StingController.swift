@@ -7,7 +7,7 @@ class StingController: UIViewController {
     let engine = Engine.sharedClient
     
     var stingIndex = 0
-    var waveformView: FDWaveformView!   // could be computed?
+    var waveformView: FDWaveformView!
     
     @IBOutlet weak var stingNumberLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
@@ -28,34 +28,20 @@ class StingController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
         // get waveform view positions
         let waveformFrame = waveformLoadingImageView.frame
         
-        // not using whilst storing waveformView inside Sting object
-        // @waveformView = FDWaveformView.alloc.initWithFrame(waveFrame)
-        // @waveformView.doesAllowScrubbing = true
-        // @waveformView.delegate = self
-        // self.view.addSubview(@waveformView)
-        // updateWaveURL()
-        
-        // temporary bodge to stop waveform being rendered each time it is presented
-        // memory usage is probably excessive!
-        waveformView = engine.sting[stingIndex].waveform
-        if !engine.wavesLoaded[stingIndex] {
-            waveformView.frame = waveformFrame
-        }
+        waveformView = FDWaveformView(frame: waveformFrame)
+        waveformView.doesAllowScrubbing = true
+        waveformView.doesAllowScrubbing = true
+        waveformView.doesAllowScroll = false
+        waveformView.doesAllowStretch = false
+        waveformView.wavesColor = UIColor(red: 0.25, green: 0.25, blue: 1.0, alpha: 1.0)
+        waveformView.progressColor = UIColor(red: 0.35, green: 0.35, blue: 0.35, alpha: 1.0)
+        updateWaveURL()
         
         waveformView.delegate = self
         view.addSubview(waveformView)
-        
-        // temporary bodge to remove waveform loading image if the waveform isn't going to render
-        if engine.wavesLoaded[stingIndex] {
-            waveformLoadingImageView.removeFromSuperview()
-        } else {
-            // otherwise they will have loaded so save for next time
-            engine.wavesLoaded[stingIndex] = true
-        }
     }
     
     @IBAction func done() {
@@ -81,11 +67,10 @@ class StingController: UIViewController {
     
     func updateWaveURL() {
         waveformView.audioURL = engine.sting[stingIndex].url
-        waveformView.highlightedSamples = CountableRange(Int(Double(waveformView.totalSamples) * engine.sting[stingIndex].getCue())...waveformView.totalSamples)
     }
     
     @IBAction func zoomWaveOut() {
-        waveformView.zoomSamples = CountableRange(0...waveformView.totalSamples)
+        waveformView.zoomSamples = Range(0...waveformView.totalSamples)
     }
     
     @IBAction func startPreview() {
@@ -101,20 +86,28 @@ class StingController: UIViewController {
 
 // MARK: FDWaveformViewDelegate
 extension StingController: FDWaveformViewDelegate {
+    
+    func waveformViewDidLoad(_ waveformView: FDWaveformView) {
+        // once the audio file has loaded (and totalSamples is known), set the highlighted samples
+        waveformView.highlightedSamples = 0..<Int(Double(waveformView.totalSamples) * engine.sting[stingIndex].getCue())
+    }
+    
     func waveformViewDidRender(_ waveform: FDWaveformView) {
         waveformLoadingImageView.removeFromSuperview()
     }
     
     func waveformDidEndScrubbing(_ waveformView: FDWaveformView) {
-        let cue = Double(waveformView.highlightedSamples?.startIndex ?? 0) / Double(waveformView.totalSamples)
+        let cue = Double(waveformView.highlightedSamples?.endIndex ?? 0) / Double(waveformView.totalSamples)
         engine.sting[stingIndex].setCue(cue)
         UserDefaults.standard.set(engine.sting[stingIndex].cuePoint, forKey: "Sting \(stingIndex) Cue Point")
     }
+    
 }
 
 
 // MARK: MPMediaPickerControllerDelegate
 extension StingController: MPMediaPickerControllerDelegate {
+    
     func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
         // load media item into the currently loading sting player and update labels
         engine.sting[stingIndex].loadSting(mediaItemCollection.items[0])
@@ -143,4 +136,5 @@ extension StingController: MPMediaPickerControllerDelegate {
         UserDefaults.standard.set(sting.title, forKey: "Sting \(stingIndex) Title")
         UserDefaults.standard.set(sting.artist, forKey: "Sting \(stingIndex) Artist")
     }
+    
 }

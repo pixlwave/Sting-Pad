@@ -3,9 +3,9 @@ import AVFoundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // prevent device from going to sleep
         application.isIdleTimerDisabled = true
@@ -22,12 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-
+    
     func applicationDidEnterBackground(_ application: UIApplication) {
         // disables mixing so that if a sting is playing and the user chooses to play something else, stingtk is faded out
         if Engine.sharedClient.ipod.isPlaying == false { setMixingState(false) }
     }
-
+    
     func applicationWillEnterForeground(_ application: UIApplication) {
         // re-enables mixing so app launch doesn't kill iPod music
         setMixingState(true)
@@ -46,6 +46,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } catch {}
         }
     }
-
-
+    
 }

@@ -11,7 +11,6 @@ class Sting: NSObject {
     var title: String
     var artist: String
     private(set) var cuePoint: Double // TODO: This is public get to archive, but should probs be computed?
-    lazy var waveform = FDWaveformView(frame: CGRect.zero)
     
     private var stingPlayer: AVAudioPlayer!
     
@@ -37,14 +36,6 @@ class Sting: NSObject {
         self.stingPlayer.numberOfLoops = 0  // needed?
         self.stingPlayer.currentTime = cuePoint
         self.stingPlayer.prepareToPlay()
-        
-        waveform.audioURL = self.url
-        waveform.doesAllowScrubbing = true
-        waveform.doesAllowScroll = false
-        waveform.doesAllowStretch = false
-        waveform.wavesColor = UIColor(red: 0.25, green: 0.25, blue: 1.0, alpha: 1.0)
-        waveform.progressColor = UIColor(red: 0.35, green: 0.35, blue: 0.35, alpha: 1.0)
-        waveform.highlightedSamples = CountableRange(Int(Double(waveform.totalSamples) * getCue())...waveform.totalSamples)
     }
     
     func play() {
