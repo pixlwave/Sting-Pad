@@ -81,7 +81,7 @@ class Music {
         var namedPlaylist: MPMediaPlaylist? = nil
     
         for playlist in allPlaylists {
-            if (playlist.value(forProperty: MPMediaPlaylistPropertyName) as! String) == name {
+            if playlist.name == name {
                 namedPlaylist = playlist
             }
         }

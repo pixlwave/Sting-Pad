@@ -213,10 +213,10 @@ extension StkController: UITableViewDataSource {
             let song = playlist.items[indexPath.row]
             
             // fill out cell as appropriate
-            cell.textLabel?.text = song.value(forProperty: MPMediaItemPropertyTitle) as? String
-            cell.detailTextLabel?.text = song.value(forProperty: MPMediaItemPropertyArtist) as? String
+            cell.textLabel?.text = song.title
+            cell.detailTextLabel?.text = song.artist
             
-            if let artwork = song.value(forProperty: MPMediaItemPropertyArtwork) as? MPMediaItemArtwork {
+            if let artwork = song.artwork {
                 cell.imageView?.image = artwork.image(at: CGSize(width: 55, height: 55))
             } else {
                 cell.imageView?.image = #imageLiteral(resourceName: "albumartblank.png")

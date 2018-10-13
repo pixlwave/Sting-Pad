@@ -37,14 +37,12 @@ class BackgroundController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Playlist Cell") ?? UITableViewCell(style: .default, reuseIdentifier: "Playlist Cell")
         
         let playlist = engine.ipod.allPlaylists[indexPath.row]
-        cell.textLabel?.text = playlist.value(forProperty: MPMediaPlaylistPropertyName) as? String
+        cell.textLabel?.text = playlist.name
         
-        if let attributes = playlist.value(forProperty: MPMediaPlaylistPropertyPlaylistAttributes) as? MPMediaPlaylistAttribute {
-            if attributes == .smart {
-                cell.imageView?.image = smartPlaylistImage
-            } else {
-                cell.imageView?.image = playlistImage
-            }
+        if playlist.playlistAttributes == .smart {
+            cell.imageView?.image = smartPlaylistImage
+        } else {
+            cell.imageView?.image = playlistImage
         }
         
         if playlist == currentPlaylist {

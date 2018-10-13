@@ -49,7 +49,7 @@ class Sting: NSObject {
     }
     
     func loadSting(_ mediaItem: MPMediaItem) {
-        url = mediaItem.value(forProperty: MPMediaItemPropertyAssetURL) as! URL
+        url = mediaItem.assetURL ?? Sting.defaultURL
         
         stingPlayer = try? AVAudioPlayer(contentsOf: url)
         stingPlayer.delegate = self
@@ -59,8 +59,8 @@ class Sting: NSObject {
         stingPlayer.currentTime = cuePoint
         stingPlayer.prepareToPlay()
         
-        title = mediaItem.value(forProperty: MPMediaItemPropertyTitle) as! String
-        artist = mediaItem.value(forProperty: MPMediaItemPropertyArtist) as! String
+        title = mediaItem.title ?? ""
+        artist = mediaItem.artist ?? ""
     }
     
     func setCue(_ cuePoint: Double) {
