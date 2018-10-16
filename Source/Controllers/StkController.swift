@@ -21,15 +21,6 @@ class StkController: UIViewController {
         
         // make self delegate for sting players
         engine.setStingDelegates(self)
-        
-        // puts yellow view under status bar on iOS 7, handling Insets for correct scrolling
-        if UIDevice.current.userInterfaceIdiom != .pad {
-            playlistTable.contentInset = UIEdgeInsets(top: UIApplication.shared.statusBarFrame.height, left: playlistTable.contentInset.left, bottom: playlistTable.contentInset.bottom, right: playlistTable.contentInset.right)
-            playlistTable.scrollIndicatorInsets = UIEdgeInsets(top: UIApplication.shared.statusBarFrame.height, left: playlistTable.contentInset.left, bottom: playlistTable.contentInset.bottom, right: playlistTable.contentInset.right)
-            let statusBarView = UIView(frame: UIApplication.shared.statusBarFrame)
-            statusBarView.backgroundColor = view.backgroundColor
-            view.addSubview(statusBarView)
-        }
 
         // control of the table
         playlistTable.delegate = self
