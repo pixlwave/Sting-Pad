@@ -1,10 +1,10 @@
 import UIKit
 import MediaPlayer
 
-class StingController: UIViewController {
+class StingViewController: UIViewController {
     
     // access the music
-    let engine = Engine.sharedClient
+    let engine = Engine.shared
     
     var stingIndex = 0
     var waveformView: FDWaveformView!
@@ -41,7 +41,7 @@ class StingController: UIViewController {
     
     @IBAction func done() {
         // display updates before dismissing
-        (presentingViewController as? StkController)?.updateStingTitles()
+        (presentingViewController as? MainViewController)?.updateStingTitles()
         dismiss(animated: true, completion: nil)
     }
     
@@ -80,7 +80,7 @@ class StingController: UIViewController {
 
 
 // MARK: FDWaveformViewDelegate
-extension StingController: FDWaveformViewDelegate {
+extension StingViewController: FDWaveformViewDelegate {
     
     func waveformViewDidLoad(_ waveformView: FDWaveformView) {
         // once the audio file has loaded (and totalSamples is known), set the highlighted samples
@@ -101,7 +101,7 @@ extension StingController: FDWaveformViewDelegate {
 
 
 // MARK: MPMediaPickerControllerDelegate
-extension StingController: MPMediaPickerControllerDelegate {
+extension StingViewController: MPMediaPickerControllerDelegate {
     
     func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
         // load media item into the currently loading sting player and update labels

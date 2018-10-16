@@ -1,9 +1,9 @@
 import UIKit
 import MediaPlayer
 
-class StkController: UIViewController {
+class MainViewController: UIViewController {
     
-    fileprivate let engine = Engine.sharedClient
+    fileprivate let engine = Engine.shared
     
     @IBOutlet weak var playlistTable: UITableView!
     @IBOutlet weak var ipodShuffleButton: UIButton!
@@ -67,7 +67,7 @@ class StkController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if UserDefaults.standard.double(forKey: "walkthroughVersionSeen") < WalkthroughController.currentVersion {
+        if UserDefaults.standard.double(forKey: "walkthroughVersionSeen") < WalkthroughViewController.currentVersion {
             showWalkthrough()
         }
     }
@@ -80,7 +80,7 @@ class StkController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "LoadSting", let navC = segue.destination as? UINavigationController, let loadVC = navC.topViewController as? StingController {
+        if segue.identifier == "LoadSting", let navC = segue.destination as? UINavigationController, let loadVC = navC.topViewController as? StingViewController {
             loadVC.stingIndex = selectedSting
         }
     }
@@ -165,19 +165,19 @@ class StkController: UIViewController {
     func showWalkthrough() {
         // instantiate walkthrough controller and present
         let walkSB = UIStoryboard(name: "Walkthrough", bundle: nil)
-        if let walkVC = walkSB.instantiateViewController(withIdentifier: "WalkthroughController") as? WalkthroughController {
+        if let walkVC = walkSB.instantiateViewController(withIdentifier: "WalkthroughController") as? WalkthroughViewController {
             walkVC.modalTransitionStyle = .crossDissolve
             present(walkVC, animated:true, completion:nil)
             
             // record the version being seen to allow ui updates to be shown in future versions
-            UserDefaults.standard.set(WalkthroughController.currentVersion, forKey: "walkthroughVersionSeen")
+            UserDefaults.standard.set(WalkthroughViewController.currentVersion, forKey: "walkthroughVersionSeen")
         }
     }
 }
 
 
 // MARK: StingDelegate
-extension StkController: StingDelegate {
+extension MainViewController: StingDelegate {
     func stingHasStopped(_ sting: Sting) {
         stop()
     }
@@ -185,7 +185,7 @@ extension StkController: StingDelegate {
 
 
 // MARK: UITableViewDataSource
-extension StkController: UITableViewDataSource {
+extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let playlist = engine.ipod.playlist {
             return playlist.count
@@ -231,7 +231,7 @@ extension StkController: UITableViewDataSource {
 
 
 // MARK: UITableViewDelegate
-extension StkController: UITableViewDelegate {
+extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // play selected song
         engine.playiPodItem(indexPath.row)
@@ -247,7 +247,7 @@ extension StkController: UITableViewDelegate {
 
 
 // MARK: UIScrollViewDelegate
-extension StkController: UIScrollViewDelegate {
+extension MainViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // update selected sting when sting scroll view has completed animating
         if scrollView == stingScrollView {

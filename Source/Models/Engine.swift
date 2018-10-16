@@ -1,7 +1,7 @@
 import Foundation
 
 class Engine {
-    static let sharedClient = Engine()
+    static let shared = Engine()
     
     var sting = [Sting]()
     var ipod = Music()

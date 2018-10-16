@@ -1,6 +1,6 @@
 import UIKit
 
-class WalkthroughController: UIViewController {
+class WalkthroughViewController: UIViewController {
     static let currentVersion = 1.1
     
     // image names and info text

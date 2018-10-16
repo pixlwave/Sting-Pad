@@ -1,9 +1,9 @@
 import UIKit
 import MediaPlayer
 
-class BackgroundController: UITableViewController {
+class PlaylistViewController: UITableViewController {
     
-    private let engine = Engine.sharedClient
+    private let engine = Engine.shared
     private var currentPlaylist: MPMediaPlaylist? {
         return engine.ipod.playlist
     }
@@ -65,7 +65,7 @@ class BackgroundController: UITableViewController {
             let oldIndexPath = IndexPath(row: engine.ipod.playlistIndex ?? 0, section: 0)
             
             engine.ipod.usePlaylist(indexPath.row)
-            (presentingViewController as! StkController).playlistDidChange()
+            (presentingViewController as! MainViewController).playlistDidChange()
             
             // update checkmark and clear selection
             let indexPaths = [oldIndexPath, indexPath]

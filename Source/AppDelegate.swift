@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         // disables mixing so that if a sting is playing and the user chooses to play something else, stingtk is faded out
-        if Engine.sharedClient.ipod.isPlaying == false { setMixingState(false) }
+        if Engine.shared.ipod.isPlaying == false { setMixingState(false) }
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
