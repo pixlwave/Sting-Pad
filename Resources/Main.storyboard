@@ -57,84 +57,90 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XHH-me-2CU" userLabel="iPod Control View">
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3dz-YY-dmb" userLabel="iPod Control Visual Effect View">
                                 <rect key="frame" x="0.0" y="415" width="320" height="49"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m9M-Uv-BVM" userLabel="iPod Play Button">
-                                        <rect key="frame" x="135" y="7" width="50" height="35"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="JOo-mz-4yZ"/>
-                                            <constraint firstAttribute="height" constant="35" id="Zik-jV-8Nw"/>
-                                        </constraints>
-                                        <state key="normal" image="ipodplay">
-                                            <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="ipodPlayPause" destination="Fwb-c8-22I" eventType="touchUpInside" id="Rv5-CM-ymu"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LOf-EA-SsP" userLabel="iPod Previous Button">
-                                        <rect key="frame" x="65" y="7" width="50" height="35"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="9gX-NX-ouL"/>
-                                            <constraint firstAttribute="height" constant="35" id="c4J-ws-GGJ"/>
-                                        </constraints>
-                                        <state key="normal" image="ipodprevious">
-                                            <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="ipodPrevious" destination="Fwb-c8-22I" eventType="touchUpInside" id="Tum-Ad-q2W"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V7i-Ah-KQ6" userLabel="iPod Next Button">
-                                        <rect key="frame" x="203.5" y="7" width="50" height="35"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="35" id="Gjr-7C-Ixt"/>
-                                            <constraint firstAttribute="width" constant="50" id="cEL-G6-Equ"/>
-                                        </constraints>
-                                        <state key="normal" image="ipodnext">
-                                            <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="ipodNext" destination="Fwb-c8-22I" eventType="touchUpInside" id="xWu-VF-EQ8"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dVz-4c-dxA" userLabel="Playlist Button">
-                                        <rect key="frame" x="286" y="6.5" width="34" height="36"/>
-                                        <inset key="contentEdgeInsets" minX="8" minY="7" maxX="8" maxY="7"/>
-                                        <state key="normal" image="load_playlist">
-                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="g74-a5-Est" kind="modal" id="jN1-NT-xWr"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D0U-wD-wqz" userLabel="iPod Shuffle Button">
-                                        <rect key="frame" x="2" y="6.5" width="34" height="36"/>
-                                        <inset key="contentEdgeInsets" minX="3" minY="7" maxX="3" maxY="7"/>
-                                        <state key="normal" image="shuffle">
-                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="ipodShuffle" destination="Fwb-c8-22I" eventType="touchUpInside" id="XTm-gr-KGA"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.97999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="yMC-ok-obj">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sZG-mG-EaE" userLabel="iPod Play Button">
+                                            <rect key="frame" x="135" y="7" width="50" height="35"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="35" id="BPX-3f-xdK"/>
+                                                <constraint firstAttribute="width" constant="50" id="wRm-t3-fYh"/>
+                                            </constraints>
+                                            <state key="normal" image="ipodplay">
+                                                <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="ipodPlayPause" destination="Fwb-c8-22I" eventType="touchUpInside" id="k3t-XU-tCE"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PxR-vj-DWh" userLabel="iPod Previous Button">
+                                            <rect key="frame" x="65" y="7" width="50" height="35"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="50" id="4sq-xl-MLF"/>
+                                                <constraint firstAttribute="height" constant="35" id="NPV-Ol-wBz"/>
+                                            </constraints>
+                                            <state key="normal" image="ipodprevious">
+                                                <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="ipodPrevious" destination="Fwb-c8-22I" eventType="touchUpInside" id="1Vq-Vm-aAs"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofe-SA-bsw" userLabel="iPod Next Button">
+                                            <rect key="frame" x="203.5" y="7" width="50" height="35"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="35" id="QaY-ve-KkW"/>
+                                                <constraint firstAttribute="width" constant="50" id="fR9-Jn-eeP"/>
+                                            </constraints>
+                                            <state key="normal" image="ipodnext">
+                                                <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="ipodNext" destination="Fwb-c8-22I" eventType="touchUpInside" id="qF1-LW-cmE"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WPY-Zs-yDi" userLabel="Playlist Button">
+                                            <rect key="frame" x="286" y="6.5" width="34" height="36"/>
+                                            <inset key="contentEdgeInsets" minX="8" minY="7" maxX="8" maxY="7"/>
+                                            <state key="normal" image="load_playlist">
+                                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <connections>
+                                                <segue destination="g74-a5-Est" kind="modal" id="qjP-g6-hHB"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XKk-I0-XLo" userLabel="iPod Shuffle Button">
+                                            <rect key="frame" x="2" y="6.5" width="34" height="36"/>
+                                            <inset key="contentEdgeInsets" minX="3" minY="7" maxX="3" maxY="7"/>
+                                            <state key="normal" image="shuffle">
+                                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="ipodShuffle" destination="Fwb-c8-22I" eventType="touchUpInside" id="E4f-Tl-9Ax"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="sZG-mG-EaE" firstAttribute="centerX" secondItem="yMC-ok-obj" secondAttribute="centerX" id="1fM-7e-8jE"/>
+                                        <constraint firstItem="WPY-Zs-yDi" firstAttribute="centerY" secondItem="yMC-ok-obj" secondAttribute="centerY" id="BBS-xZ-o6U"/>
+                                        <constraint firstItem="XKk-I0-XLo" firstAttribute="leading" secondItem="yMC-ok-obj" secondAttribute="leading" constant="2" id="aEv-rK-qht"/>
+                                        <constraint firstItem="XKk-I0-XLo" firstAttribute="centerY" secondItem="yMC-ok-obj" secondAttribute="centerY" id="cwk-CC-tFX"/>
+                                        <constraint firstItem="ofe-SA-bsw" firstAttribute="centerX" secondItem="yMC-ok-obj" secondAttribute="centerX" multiplier="3/2.1" id="lcN-YK-LzR"/>
+                                        <constraint firstItem="PxR-vj-DWh" firstAttribute="centerX" secondItem="yMC-ok-obj" secondAttribute="centerX" multiplier="2/3.55" id="pfp-m7-32c"/>
+                                        <constraint firstItem="ofe-SA-bsw" firstAttribute="centerY" secondItem="yMC-ok-obj" secondAttribute="centerY" id="q3X-Rz-OQi"/>
+                                        <constraint firstItem="PxR-vj-DWh" firstAttribute="centerY" secondItem="yMC-ok-obj" secondAttribute="centerY" id="xFb-B5-K0z"/>
+                                        <constraint firstAttribute="trailing" secondItem="WPY-Zs-yDi" secondAttribute="trailing" id="yRR-B3-Udm"/>
+                                        <constraint firstItem="sZG-mG-EaE" firstAttribute="centerY" secondItem="yMC-ok-obj" secondAttribute="centerY" id="zq8-Vl-7wt"/>
+                                    </constraints>
+                                </view>
                                 <constraints>
-                                    <constraint firstItem="V7i-Ah-KQ6" firstAttribute="centerX" secondItem="XHH-me-2CU" secondAttribute="centerX" multiplier="3/2.1" id="1zQ-rD-rfY"/>
-                                    <constraint firstAttribute="height" constant="49" id="KdI-oU-Mez"/>
-                                    <constraint firstItem="LOf-EA-SsP" firstAttribute="centerX" secondItem="XHH-me-2CU" secondAttribute="centerX" multiplier="2/3.55" id="MfE-Mw-QHR"/>
-                                    <constraint firstItem="m9M-Uv-BVM" firstAttribute="centerY" secondItem="XHH-me-2CU" secondAttribute="centerY" id="Nrj-Fq-bJg"/>
-                                    <constraint firstAttribute="trailing" secondItem="dVz-4c-dxA" secondAttribute="trailing" id="VWs-5K-usT"/>
-                                    <constraint firstItem="m9M-Uv-BVM" firstAttribute="centerX" secondItem="XHH-me-2CU" secondAttribute="centerX" id="ZDH-qR-6pd"/>
-                                    <constraint firstItem="LOf-EA-SsP" firstAttribute="centerY" secondItem="XHH-me-2CU" secondAttribute="centerY" id="b40-AQ-tb5"/>
-                                    <constraint firstItem="D0U-wD-wqz" firstAttribute="leading" secondItem="XHH-me-2CU" secondAttribute="leading" constant="2" id="fjS-KE-jJJ"/>
-                                    <constraint firstItem="dVz-4c-dxA" firstAttribute="centerY" secondItem="XHH-me-2CU" secondAttribute="centerY" id="iyS-1o-3pn"/>
-                                    <constraint firstItem="D0U-wD-wqz" firstAttribute="centerY" secondItem="XHH-me-2CU" secondAttribute="centerY" id="kIX-Bt-NQA"/>
-                                    <constraint firstItem="V7i-Ah-KQ6" firstAttribute="centerY" secondItem="XHH-me-2CU" secondAttribute="centerY" id="rTl-Ce-KYC"/>
+                                    <constraint firstAttribute="height" constant="49" id="lAD-M6-vFI"/>
                                 </constraints>
-                            </view>
+                                <blurEffect style="prominent"/>
+                            </visualEffectView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CQ8-x6-yNq" userLabel="Sting Control View">
                                 <rect key="frame" x="0.0" y="464" width="320" height="104"/>
                                 <subviews>
@@ -188,22 +194,22 @@
                         <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Cz5-hC-AHC" secondAttribute="trailing" id="3f7-IX-b5c"/>
-                            <constraint firstItem="XHH-me-2CU" firstAttribute="leading" secondItem="iFE-v0-bVO" secondAttribute="leading" id="MSX-LD-TJf"/>
                             <constraint firstItem="CQ8-x6-yNq" firstAttribute="leading" secondItem="iFE-v0-bVO" secondAttribute="leading" id="P8A-Ow-43V"/>
                             <constraint firstItem="Cz5-hC-AHC" firstAttribute="leading" secondItem="iFE-v0-bVO" secondAttribute="leading" id="TjE-R3-mjL"/>
                             <constraint firstItem="dUL-rC-Hpr" firstAttribute="top" secondItem="CQ8-x6-yNq" secondAttribute="bottom" id="Wad-zP-sHi"/>
+                            <constraint firstItem="CQ8-x6-yNq" firstAttribute="top" secondItem="3dz-YY-dmb" secondAttribute="bottom" id="bv4-5T-BWU"/>
                             <constraint firstItem="Cz5-hC-AHC" firstAttribute="top" secondItem="Bqd-Vg-bAO" secondAttribute="bottom" id="ecZ-vA-qMG"/>
-                            <constraint firstAttribute="trailing" secondItem="XHH-me-2CU" secondAttribute="trailing" id="jlv-cS-99f"/>
-                            <constraint firstItem="CQ8-x6-yNq" firstAttribute="top" secondItem="XHH-me-2CU" secondAttribute="bottom" id="nFR-Ka-1Dk"/>
+                            <constraint firstItem="3dz-YY-dmb" firstAttribute="bottom" secondItem="Cz5-hC-AHC" secondAttribute="bottom" id="l3n-FB-qqf"/>
+                            <constraint firstItem="3dz-YY-dmb" firstAttribute="leading" secondItem="iFE-v0-bVO" secondAttribute="leading" id="nW7-WE-NzA"/>
+                            <constraint firstAttribute="trailing" secondItem="3dz-YY-dmb" secondAttribute="trailing" id="nfs-uN-mo4"/>
                             <constraint firstAttribute="trailing" secondItem="CQ8-x6-yNq" secondAttribute="trailing" id="y0k-rb-p5G"/>
-                            <constraint firstItem="XHH-me-2CU" firstAttribute="top" secondItem="Cz5-hC-AHC" secondAttribute="bottom" constant="-49" id="ya0-LI-5Bj"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="JS4-QJ-xUA"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="ipodPlayButton" destination="m9M-Uv-BVM" id="Ff4-ug-nQA"/>
-                        <outlet property="ipodShuffleButton" destination="D0U-wD-wqz" id="pQ8-z6-HiJ"/>
+                        <outlet property="ipodPlayButton" destination="sZG-mG-EaE" id="9x9-e7-cES"/>
+                        <outlet property="ipodShuffleButton" destination="XKk-I0-XLo" id="pwZ-Fj-BTe"/>
                         <outlet property="playingLabel" destination="zPT-HY-W6c" id="8Zz-35-VlY"/>
                         <outlet property="playlistTable" destination="Cz5-hC-AHC" id="fcK-vE-I8M"/>
                         <outlet property="stingPageControl" destination="zOQ-cv-f9K" id="IQt-mc-Pxg"/>

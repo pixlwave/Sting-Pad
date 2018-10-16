@@ -25,6 +25,7 @@ class StkController: UIViewController {
         // control of the table
         playlistTable.delegate = self
         playlistTable.dataSource = self
+        playlistTable.contentInset.bottom = 49
         
         // and get screen width for positioning
         let screenWidth = UIScreen.main.bounds.width
@@ -79,7 +80,7 @@ class StkController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let navC = segue.destination as? UINavigationController, let loadVC = navC.topViewController as? StingController, segue.identifier == "LoadSting" {
+        if segue.identifier == "LoadSting", let navC = segue.destination as? UINavigationController, let loadVC = navC.topViewController as? StingController {
             loadVC.stingIndex = selectedSting
         }
     }
