@@ -48,16 +48,16 @@ class MainViewController: UIViewController {
         stingScrollView.delaysContentTouches = false    // prevents scroll view from momentarily blocking the play button's action
         stingScrollView.delegate = self
         
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
         // listen for iPod library changes (includes now playing track changes)
         NotificationCenter.default.addObserver(self, selector: #selector(ipodDidChange(notification:)), name: .MPMediaLibraryDidChange, object: nil)
         
         // listen for iPod playback changes
         NotificationCenter.default.addObserver(self, selector: #selector(playbackStateDidChange(_:)), name:  .MPMusicPlayerControllerPlaybackStateDidChange, object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         // update shuffle button in case changed outside of app
         if engine.ipod.shuffleState {
@@ -77,13 +77,6 @@ class MainViewController: UIViewController {
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        // remove all observers when view isn't visable (because someone said so)
-        NotificationCenter.default.removeObserver(self)
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "LoadSting", let navC = segue.destination as? UINavigationController, let loadVC = navC.topViewController as? StingViewController {
             loadVC.stingIndex = selectedSting
@@ -93,13 +86,11 @@ class MainViewController: UIViewController {
     @objc func play() {
         // plays selected sting (from sting scroll view) and shows that it's playing
         engine.playSting(selectedSting)
-        playingLabel.isHidden = false
     }
     
     @objc func stop() {
         // stops and hides the playing label
         engine.stopSting()
-        playingLabel.isHidden = true
     }
     
     @IBAction func ipodPlayPause() {
@@ -108,7 +99,6 @@ class MainViewController: UIViewController {
             engine.pauseiPod()
         } else {
             engine.playiPod()
-            playingLabel.isHidden = true   // remove sting playing label (should go in the engine probably)
         }
     }
     
@@ -197,8 +187,12 @@ class MainViewController: UIViewController {
 
 // MARK: StingDelegate
 extension MainViewController: StingDelegate {
-    func stingHasStopped(_ sting: Sting) {
-        stop()
+    func stingDidStartPlaying(_ sting: Sting) {
+        playingLabel.isHidden = false
+    }
+    
+    func stingDidStopPlaying(_ sting: Sting) {
+        playingLabel.isHidden = true
     }
 }
 
@@ -245,10 +239,6 @@ extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // play selected song
         engine.playiPodItem(indexPath.row)
-        
-        // hides sting playing label
-        // needs a more "universal" way of calling stop (move from engine to here?)
-        playingLabel.isHidden = true
         
         // clear selection
         tableView.deselectRow(at: indexPath, animated:true)

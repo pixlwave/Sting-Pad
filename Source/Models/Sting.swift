@@ -40,12 +40,14 @@ class Sting: NSObject {
     
     func play() {
         stingPlayer.play()
+        delegate?.stingDidStartPlaying(self)
     }
     
     func stop() {
         stingPlayer.stop()
         stingPlayer.currentTime = cuePoint
         stingPlayer.prepareToPlay()
+        delegate?.stingDidStopPlaying(self)
     }
     
     func loadSting(_ mediaItem: MPMediaItem) {
@@ -77,14 +79,15 @@ class Sting: NSObject {
 
 extension Sting: AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        delegate?.stingHasStopped(self)
+        delegate?.stingDidStopPlaying(self)
     }
     
     func audioPlayerBeginInterruption(_ player: AVAudioPlayer) {
-        delegate?.stingHasStopped(self)
+        delegate?.stingDidStopPlaying(self)
     }
 }
 
 protocol StingDelegate {
-    func stingHasStopped(_ sting: Sting)
+    func stingDidStartPlaying(_ sting: Sting)
+    func stingDidStopPlaying(_ sting: Sting)
 }
