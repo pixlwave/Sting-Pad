@@ -1,7 +1,7 @@
 import UIKit
 
-class WalkthroughViewController: UIViewController {
-    static let currentVersion = 1.1
+class WelcomeViewController: UIViewController {
+    static let currentVersion = 2.0
     
     // image names and info text
     let images = ["ThankYou", "Playlist", "Sting", "Settings"]
@@ -9,7 +9,7 @@ class WalkthroughViewController: UIViewController {
     var currentImage = 0
     
     @IBOutlet weak var progressLabel: UILabel!
-    @IBOutlet weak var walkthroughImageView: UIImageView!
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var labelSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomSpaceConstraint: NSLayoutConstraint!
@@ -18,7 +18,7 @@ class WalkthroughViewController: UIViewController {
         super.viewDidLoad()
         
         // start at the beginning and load first image
-        walkthroughImageView.image = UIImage(named: "Walkthrough\(images[currentImage])")
+        imageView.image = UIImage(named: "Welcome-\(images[currentImage])")
         progressLabel.text = "\(currentImage + 1) of \(images.count)"
         
         if UIScreen.main.bounds.height < 568 {
@@ -32,8 +32,8 @@ class WalkthroughViewController: UIViewController {
         // go to the next image until end, then dismiss self
         currentImage += 1
         if currentImage < images.count {
-            UIView.transition(with: walkthroughImageView, duration: 0.2, options: .transitionCrossDissolve, animations: {
-                self.walkthroughImageView.image = UIImage(named: "Walkthrough\(self.images[self.currentImage])")
+            UIView.transition(with: imageView, duration: 0.2, options: .transitionCrossDissolve, animations: {
+                self.imageView.image = UIImage(named: "Welcome-\(self.images[self.currentImage])")
             })
             UIView.transition(with: progressLabel, duration: 0.2, options: .transitionCrossDissolve, animations: {
                 self.progressLabel.text = "\(self.currentImage + 1) of \(self.images.count)"

@@ -72,8 +72,8 @@ class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if UserDefaults.standard.double(forKey: "walkthroughVersionSeen") < WalkthroughViewController.currentVersion {
-            showWalkthrough()
+        if UserDefaults.standard.double(forKey: "WelcomeVersionSeen") < WelcomeViewController.currentVersion {
+            showWelcomeScreen()
         }
     }
     
@@ -171,15 +171,15 @@ class MainViewController: UIViewController {
         }
     }
     
-    func showWalkthrough() {
-        // instantiate walkthrough controller and present
-        let walkSB = UIStoryboard(name: "Walkthrough", bundle: nil)
-        if let walkVC = walkSB.instantiateViewController(withIdentifier: "WalkthroughController") as? WalkthroughViewController {
+    func showWelcomeScreen() {
+        // instantiate welcome controller and present
+        let walkSB = UIStoryboard(name: "Welcome", bundle: nil)
+        if let walkVC = walkSB.instantiateViewController(withIdentifier: "Welcome") as? WelcomeViewController {
             walkVC.modalTransitionStyle = .crossDissolve
             present(walkVC, animated:true, completion:nil)
             
             // record the version being seen to allow ui updates to be shown in future versions
-            UserDefaults.standard.set(WalkthroughViewController.currentVersion, forKey: "walkthroughVersionSeen")
+            UserDefaults.standard.set(WelcomeViewController.currentVersion, forKey: "WelcomeVersionSeen")
         }
     }
 }

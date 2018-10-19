@@ -80,7 +80,7 @@ class PlaylistViewController: UITableViewController {
     func save(_ ipod: Music) {
         // this needs to be changed to save by playlist id or similar
         // would enable checking of playlist properly if order changed
-        UserDefaults.standard.set(ipod.playlistIndex, forKey: "Playlist Index")
+        UserDefaults.standard.set(ipod.playlistIndex, forKey: "PlaylistIndex")
     }
     
 }

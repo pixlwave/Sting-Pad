@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,33 +14,33 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Walkthrough View Controller-->
+        <!--Welcome View Controller-->
         <scene sceneID="bXP-4U-Zef">
             <objects>
-                <viewController storyboardIdentifier="WalkthroughController" id="vPo-zw-7WO" customClass="WalkthroughViewController" customModule="Stingtk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Welcome" id="vPo-zw-7WO" customClass="WelcomeViewController" customModule="Stingtk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ha7-km-oLI"/>
                         <viewControllerLayoutGuide type="bottom" id="Vxm-6B-SHe"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="vZR-hR-WMu">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="okX-Os-RWT">
-                                <rect key="frame" x="161.5" y="88" width="277" height="492"/>
+                                <rect key="frame" x="30.5" y="88" width="314" height="559"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="okX-Os-RWT" secondAttribute="height" multiplier="9:16" id="3SA-QV-8O8"/>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="320" id="hZs-Vo-jE6"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 of 4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jGS-jd-HFJ">
-                                <rect key="frame" x="278.5" y="28" width="43.5" height="22"/>
+                                <rect key="frame" x="167" y="28" width="41" height="22"/>
                                 <fontDescription key="fontDescription" name="Exo2-Regular" family="Exo 2" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tap to continue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ov-28-XAh">
-                                <rect key="frame" x="259.5" y="58" width="81" height="15"/>
+                                <rect key="frame" x="146.5" y="58" width="82.5" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="DEz-EN-7lA"/>
                                 </constraints>
@@ -64,9 +68,9 @@
                     <connections>
                         <outlet property="bottomSpaceConstraint" destination="bcD-a2-v5r" id="VQd-Lw-o4G"/>
                         <outlet property="imageTopConstraint" destination="Hjr-P3-OYs" id="Jjx-0L-IdE"/>
+                        <outlet property="imageView" destination="okX-Os-RWT" id="Qkg-Ry-Exs"/>
                         <outlet property="labelSpaceConstraint" destination="qJ2-02-7z6" id="mSJ-nT-k2v"/>
                         <outlet property="progressLabel" destination="jGS-jd-HFJ" id="GPK-25-lwd"/>
-                        <outlet property="walkthroughImageView" destination="okX-Os-RWT" id="Qkg-Ry-Exs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wLe-TV-FJy" userLabel="First Responder" sceneMemberID="firstResponder"/>
