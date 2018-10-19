@@ -19,8 +19,8 @@
             <objects>
                 <viewController id="Fwb-c8-22I" customClass="MainViewController" customModule="Stingtk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Bqd-Vg-bAO"/>
-                        <viewControllerLayoutGuide type="bottom" id="dUL-rC-Hpr"/>
+                        <viewControllerLayoutGuide type="top" id="pGq-Pe-t1g"/>
+                        <viewControllerLayoutGuide type="bottom" id="EoB-sS-u3i"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="iFE-v0-bVO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -31,29 +31,48 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="scrollIndicatorInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="49"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Track Cell" textLabel="9zX-2P-e3B" detailTextLabel="0fH-Rh-GoA" style="IBUITableViewCellStyleSubtitle" id="q1c-tI-48t">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Song Cell" id="DOd-9u-z9k" customClass="SongCell" customModule="Stingtk" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q1c-tI-48t" id="lGN-QS-oKJ">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DOd-9u-z9k" id="z5q-6f-uc2">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9zX-2P-e3B">
-                                                    <rect key="frame" x="15" y="5" width="34" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m6y-nr-Y3z">
+                                                    <rect key="frame" x="73.5" y="4" width="37" height="22"/>
                                                     <fontDescription key="fontDescription" name="Exo2-Regular" family="Exo 2" pointSize="18"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0fH-Rh-GoA">
-                                                    <rect key="frame" x="15" y="26" width="41" height="14"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" insetsLayoutMarginsFromSafeArea="NO" image="albumartblank" translatesAutoresizingMaskIntoConstraints="NO" id="kKo-OH-OH0" userLabel="Album Art">
+                                                    <rect key="frame" x="15" y="0.0" width="43.5" height="43.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="kKo-OH-OH0" secondAttribute="height" multiplier="1:1" id="x6e-II-XyS"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVS-n5-lgR">
+                                                    <rect key="frame" x="73.5" y="26" width="43" height="14.5"/>
                                                     <fontDescription key="fontDescription" name="Exo2-Regular" family="Exo 2" pointSize="12"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="kKo-OH-OH0" secondAttribute="bottom" id="1zo-ho-KN3"/>
+                                                <constraint firstItem="kKo-OH-OH0" firstAttribute="leading" secondItem="z5q-6f-uc2" secondAttribute="leading" constant="15" id="HcV-U4-Wak"/>
+                                                <constraint firstItem="bVS-n5-lgR" firstAttribute="top" secondItem="m6y-nr-Y3z" secondAttribute="bottom" id="ONL-Qq-Y9N"/>
+                                                <constraint firstItem="m6y-nr-Y3z" firstAttribute="baseline" secondItem="z5q-6f-uc2" secondAttribute="centerY" id="bgm-5v-nOz"/>
+                                                <constraint firstItem="m6y-nr-Y3z" firstAttribute="leading" secondItem="kKo-OH-OH0" secondAttribute="trailing" constant="15" id="d6P-Me-6Dk"/>
+                                                <constraint firstItem="bVS-n5-lgR" firstAttribute="leading" secondItem="m6y-nr-Y3z" secondAttribute="leading" id="hdq-J5-a7d"/>
+                                                <constraint firstItem="kKo-OH-OH0" firstAttribute="top" secondItem="z5q-6f-uc2" secondAttribute="top" id="u2C-qO-oxh"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="73.5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <outlet property="albumArtImageView" destination="kKo-OH-OH0" id="uJF-Jn-k1F"/>
+                                            <outlet property="artistLabel" destination="bVS-n5-lgR" id="TLX-YG-sQd"/>
+                                            <outlet property="titleLabel" destination="m6y-nr-Y3z" id="hBi-SA-4ks"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -196,9 +215,9 @@
                             <constraint firstAttribute="trailing" secondItem="Cz5-hC-AHC" secondAttribute="trailing" id="3f7-IX-b5c"/>
                             <constraint firstItem="CQ8-x6-yNq" firstAttribute="leading" secondItem="iFE-v0-bVO" secondAttribute="leading" id="P8A-Ow-43V"/>
                             <constraint firstItem="Cz5-hC-AHC" firstAttribute="leading" secondItem="iFE-v0-bVO" secondAttribute="leading" id="TjE-R3-mjL"/>
-                            <constraint firstItem="dUL-rC-Hpr" firstAttribute="top" secondItem="CQ8-x6-yNq" secondAttribute="bottom" id="Wad-zP-sHi"/>
+                            <constraint firstItem="EoB-sS-u3i" firstAttribute="top" secondItem="CQ8-x6-yNq" secondAttribute="bottom" id="Wad-zP-sHi"/>
                             <constraint firstItem="CQ8-x6-yNq" firstAttribute="top" secondItem="3dz-YY-dmb" secondAttribute="bottom" id="bv4-5T-BWU"/>
-                            <constraint firstItem="Cz5-hC-AHC" firstAttribute="top" secondItem="Bqd-Vg-bAO" secondAttribute="bottom" id="ecZ-vA-qMG"/>
+                            <constraint firstItem="Cz5-hC-AHC" firstAttribute="top" secondItem="pGq-Pe-t1g" secondAttribute="bottom" id="ecZ-vA-qMG"/>
                             <constraint firstItem="3dz-YY-dmb" firstAttribute="bottom" secondItem="Cz5-hC-AHC" secondAttribute="bottom" id="l3n-FB-qqf"/>
                             <constraint firstItem="3dz-YY-dmb" firstAttribute="leading" secondItem="iFE-v0-bVO" secondAttribute="leading" id="nW7-WE-NzA"/>
                             <constraint firstAttribute="trailing" secondItem="3dz-YY-dmb" secondAttribute="trailing" id="nfs-uN-mo4"/>
@@ -288,27 +307,27 @@
             <objects>
                 <viewController id="sKY-0b-GtB" customClass="StingViewController" customModule="Stingtk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="1re-0v-UTP"/>
-                        <viewControllerLayoutGuide type="bottom" id="Lr8-el-yvL"/>
+                        <viewControllerLayoutGuide type="top" id="jgb-pc-X2x"/>
+                        <viewControllerLayoutGuide type="bottom" id="rVl-rn-yCL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="IL7-SC-53c">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sting #" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W2N-PM-WRG">
-                                <rect key="frame" x="30" y="30" width="47.5" height="18"/>
+                                <rect key="frame" x="30" y="30" width="48.5" height="18"/>
                                 <fontDescription key="fontDescription" name="Exo2-Regular" family="Exo 2" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="waveload" translatesAutoresizingMaskIntoConstraints="NO" id="DSS-g4-Ymn">
-                                <rect key="frame" x="20" y="161" width="280" height="75"/>
+                                <rect key="frame" x="20" y="162" width="280" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="DSS-g4-Ymn" secondAttribute="height" multiplier="56:15" id="ymd-rN-3EN"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lRX-bK-xRr">
-                                <rect key="frame" x="15" y="271" width="83" height="38"/>
+                                <rect key="frame" x="15" y="272" width="85" height="38"/>
                                 <fontDescription key="fontDescription" name="Exo2-Regular" family="Exo 2" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="15" minY="10" maxX="15" maxY="10"/>
                                 <state key="normal" title="Preview">
@@ -321,7 +340,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyO-e7-KqD">
-                                <rect key="frame" x="196" y="271" width="108" height="38"/>
+                                <rect key="frame" x="197" y="272" width="107" height="38"/>
                                 <fontDescription key="fontDescription" name="Exo2-Regular" family="Exo 2" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
                                 <state key="normal" title="Zoom Out">
@@ -332,7 +351,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SDr-NV-ToG">
-                                <rect key="frame" x="199" y="20.5" width="105" height="38"/>
+                                <rect key="frame" x="201" y="20" width="103" height="38"/>
                                 <fontDescription key="fontDescription" name="Exo2-Regular" family="Exo 2" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="15" minY="10" maxX="15" maxY="10"/>
                                 <state key="normal" title="Load Track">
@@ -344,13 +363,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDC-cS-RXP">
-                                <rect key="frame" x="30" y="78" width="260" height="21"/>
+                                <rect key="frame" x="30" y="78" width="260" height="22"/>
                                 <fontDescription key="fontDescription" name="Exo2-Regular" family="Exo 2" pointSize="18"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ah-Ra-mmM">
-                                <rect key="frame" x="30" y="104" width="260" height="17"/>
+                                <rect key="frame" x="30" y="105" width="260" height="17"/>
                                 <fontDescription key="fontDescription" name="Exo2-Regular" family="Exo 2" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -360,7 +379,7 @@
                         <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="8ah-Ra-mmM" firstAttribute="top" secondItem="EDC-cS-RXP" secondAttribute="bottom" constant="5" id="2FF-7U-pZO"/>
-                            <constraint firstItem="W2N-PM-WRG" firstAttribute="top" secondItem="1re-0v-UTP" secondAttribute="bottom" constant="30" id="2of-oI-IBc"/>
+                            <constraint firstItem="W2N-PM-WRG" firstAttribute="top" secondItem="jgb-pc-X2x" secondAttribute="bottom" constant="30" id="2of-oI-IBc"/>
                             <constraint firstAttribute="trailing" secondItem="SDr-NV-ToG" secondAttribute="trailing" constant="16" id="2pJ-Jo-116"/>
                             <constraint firstItem="EDC-cS-RXP" firstAttribute="leading" secondItem="8ah-Ra-mmM" secondAttribute="leading" id="2q3-eT-qTJ"/>
                             <constraint firstItem="lRX-bK-xRr" firstAttribute="top" secondItem="8ah-Ra-mmM" secondAttribute="bottom" constant="150" id="CDc-iB-0xd"/>
@@ -419,6 +438,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="albumartblank" width="55" height="55"/>
         <image name="ipodnext" width="32" height="25"/>
         <image name="ipodplay" width="30" height="30"/>
         <image name="ipodprevious" width="32" height="25"/>

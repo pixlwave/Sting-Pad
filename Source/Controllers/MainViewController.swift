@@ -195,9 +195,7 @@ extension MainViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // let reuseIdentifier ||= "TrackCell"
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Track Cell") ?? UITableViewCell(style: .subtitle, reuseIdentifier: "Track Cell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Song Cell") as? SongCell ?? SongCell()
         
         // ensure library/playlist contains songs
         if let playlist = engine.ipod.playlist, playlist.count > 0 {
@@ -205,13 +203,13 @@ extension MainViewController: UITableViewDataSource {
             let song = playlist.items[indexPath.row]
             
             // fill out cell as appropriate
-            cell.textLabel?.text = song.title
-            cell.detailTextLabel?.text = song.artist
+            cell.titleLabel?.text = song.title
+            cell.artistLabel?.text = song.artist
             
             if let artwork = song.artwork {
-                cell.imageView?.image = artwork.image(at: CGSize(width: 55, height: 55))
+                cell.albumArtImageView?.image = artwork.image(at: CGSize(width: 55, height: 55))
             } else {
-                cell.imageView?.image = #imageLiteral(resourceName: "albumartblank.png")
+                cell.albumArtImageView?.image = #imageLiteral(resourceName: "albumartblank.png")
             }
             
             // need to implement a better way of doing this that doesn't call updateTable every time a track changes???
