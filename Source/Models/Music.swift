@@ -45,6 +45,11 @@ class Music {
         return musicPlayer.nowPlayingItem
     }
     
+    var nowPlayingItemIndex: Int? {
+        guard let item = nowPlayingItem() else { return nil }
+        return playlist?.items.firstIndex(of: item)
+    }
+    
     var isPlaying: Bool {
         if musicPlayer.playbackState == .playing {
             return true

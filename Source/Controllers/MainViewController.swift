@@ -14,7 +14,9 @@ class MainViewController: UIViewController {
     
     // array to hold the sting views
     private var stingViews = [StingView]()
+    
     fileprivate var selectedSting = 0
+    fileprivate var scrollPosition = UITableView.ScrollPosition.top
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,17 +53,20 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // listen for iPod playback changes
-        NotificationCenter.default.addObserver(self, selector: #selector(updateTable), name: NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(playbackStateDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerPlaybackStateDidChange, object: nil)
+        // listen for iPod library changes (includes now playing track changes)
+        NotificationCenter.default.addObserver(self, selector: #selector(ipodDidChange(notification:)), name: .MPMediaLibraryDidChange, object: nil)
         
-        // listen for iPod library changes
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshPlaylists), name:NSNotification.Name.MPMediaLibraryDidChange, object: nil)
+        // listen for iPod playback changes
+        NotificationCenter.default.addObserver(self, selector: #selector(playbackStateDidChange(_:)), name:  .MPMusicPlayerControllerPlaybackStateDidChange, object: nil)
         
         // update shuffle button in case changed outside of app
-        #if !(arch(i386) || arch(x86_64)) && os(iOS)
-            ipodShuffleButton.isSelected = engine.ipod.shuffleState   // TODO: observe this?
-        #endif
+        if engine.ipod.shuffleState {
+            ipodShuffleButton.setImage(#imageLiteral(resourceName: "shuffle_selected"), for: .normal)
+            scrollPosition = .middle
+        } else {
+            ipodShuffleButton.setImage(#imageLiteral(resourceName: "shuffle"), for: .normal)
+            scrollPosition = .top
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -120,8 +125,10 @@ class MainViewController: UIViewController {
         
         if engine.ipod.shuffleState {
             ipodShuffleButton.setImage(#imageLiteral(resourceName: "shuffle_selected"), for: .normal)
+            scrollPosition = .middle
         } else {
             ipodShuffleButton.setImage(#imageLiteral(resourceName: "shuffle"), for: .normal)
+            scrollPosition = .top
         }
     }
     
@@ -132,14 +139,22 @@ class MainViewController: UIViewController {
         }
     }
     
-    @objc func refreshPlaylists() {
-        // called when ipod library changes
-        engine.ipod.refreshPlaylists()
-        updateTable()
+    func playlistDidChange() {
+        // called when user selects new playlist
+        playlistTable.reloadData()
     }
     
-    @objc func updateTable() {
-        playlistTable.reloadData()
+    @objc func ipodDidChange(notification: Notification) {
+        // called when ipod library changes or a new track plays
+        engine.ipod.refreshPlaylists()
+        
+        if playlistTable.numberOfRows(inSection: 0) == engine.ipod.playlist?.count, let visibleIndexPaths = playlistTable.indexPathsForVisibleRows {
+            playlistTable.reloadRows(at: visibleIndexPaths, with: .none); #warning("this seems excessive for a track change")
+        } else {
+            playlistTable.reloadData()
+        }
+        
+        scrollToCurrentItem()
     }
     
     @objc func playbackStateDidChange(_ notification: Notification) {
@@ -157,9 +172,13 @@ class MainViewController: UIViewController {
         }
     }
     
-    func playlistDidChange() {
-        // called when user selects new playlist
-        updateTable()
+    func scrollToCurrentItem() {
+        guard let nowPlayingItemIndex = engine.ipod.nowPlayingItemIndex else { return }
+        let indexPath = IndexPath(row: nowPlayingItemIndex, section: 0)
+        
+        if playlistTable.indexPathsForVisibleRows?.dropLast(2).contains(indexPath) != true {
+            playlistTable.scrollToRow(at: indexPath, at: scrollPosition, animated: true)
+        }
     }
     
     func showWalkthrough() {
@@ -212,15 +231,8 @@ extension MainViewController: UITableViewDataSource {
                 cell.albumArtImageView?.image = #imageLiteral(resourceName: "albumartblank.png")
             }
             
-            // need to implement a better way of doing this that doesn't call updateTable every time a track changes???
-            // color the now playing song in orange (slightly darker than the main orange for balance)
-            if song == engine.ipod.nowPlayingItem() {
-                cell.textLabel?.textColor = UIColor(hue: 30/360.0, saturation:1.0, brightness:0.95, alpha:1.0)
-                cell.detailTextLabel?.textColor = UIColor(hue: 34/360.0, saturation:1.0, brightness:0.95, alpha:1.0)
-            } else {
-                cell.textLabel?.textColor = UIColor.darkText
-                cell.detailTextLabel?.textColor = UIColor.darkText
-            }
+            // color the now playing song
+            cell.isPlaying = (song == engine.ipod.nowPlayingItem())
         }
         
         return cell
