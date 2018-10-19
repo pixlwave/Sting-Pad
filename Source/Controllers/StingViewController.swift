@@ -94,7 +94,7 @@ extension StingViewController: FDWaveformViewDelegate {
     func waveformDidEndScrubbing(_ waveformView: FDWaveformView) {
         let cue = Double(waveformView.highlightedSamples?.endIndex ?? 0) / Double(waveformView.totalSamples)
         engine.sting[stingIndex].setCue(cue)
-        UserDefaults.standard.set(engine.sting[stingIndex].cuePoint, forKey: "StingCuePoint-\(stingIndex)")
+        UserDefaults.standard.set(engine.sting[stingIndex].cuePoint, forKey: "StingCuePoint\(stingIndex)")
     }
     
 }
@@ -126,9 +126,9 @@ extension StingViewController: MPMediaPickerControllerDelegate {
     }
     
     func save(_ sting: Sting) {
-        UserDefaults.standard.set(sting.url, forKey: "StingURL-\(stingIndex)")
-        UserDefaults.standard.set(sting.cuePoint, forKey: "StingCuePoint-\(stingIndex)")
-        UserDefaults.standard.set(sting.title, forKey: "StingTitle-\(stingIndex)")
+        UserDefaults.standard.set(sting.url, forKey: "StingURL\(stingIndex)")
+        UserDefaults.standard.set(sting.cuePoint, forKey: "StingCuePoint\(stingIndex)")
+        UserDefaults.standard.set(sting.title, forKey: "StingTitle\(stingIndex)")
         UserDefaults.standard.set(sting.artist, forKey: "StingArtist\(stingIndex)")
     }
     

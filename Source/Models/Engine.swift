@@ -10,14 +10,14 @@ class Engine {
     
     init() {
         for i in 0..<5 {
-            let url = UserDefaults.standard.url(forKey: "StingURL-\(i)") ?? Sting.defaultURL
-            let title = UserDefaults.standard.string(forKey: "StingTitle-\(i)") ?? "Chime"
-            let artist = UserDefaults.standard.string(forKey: "StingArtist-\(i)") ?? "Default Sting"
+            let url = UserDefaults.standard.url(forKey: "StingURL\(i)") ?? Sting.defaultURL
+            let title = UserDefaults.standard.string(forKey: "StingTitle\(i)") ?? "Chime"
+            let artist = UserDefaults.standard.string(forKey: "StingArtist\(i)") ?? "Default Sting"
             let cuePoint = UserDefaults.standard.double(forKey: "StingCuePoint\(i)")
             sting.append(Sting(url: url, title: title, artist: artist, cuePoint: cuePoint))
         }
     
-        let playlistIndex = UserDefaults.standard.integer(forKey: "Playlist Index") 
+        let playlistIndex = UserDefaults.standard.integer(forKey: "PlaylistIndex") 
         ipod.usePlaylist(playlistIndex)
     }
     
