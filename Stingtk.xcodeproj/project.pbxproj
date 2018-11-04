@@ -26,6 +26,7 @@
 		A5A49CB51B5BF7E0004B80CE /* ComputerMagic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = A5A49CB21B5BF791004B80CE /* ComputerMagic.m4a */; };
 		A5A49CB71B5BFF27004B80CE /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A49CB61B5BFF27004B80CE /* Music.swift */; };
 		A5B39BDE1DAA843A00AA22EF /* FDWaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B39BDD1DAA843A00AA22EF /* FDWaveformView.swift */; };
+		A5BD01E0218F2AEB0010FE10 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5BD01DF218F2AEB0010FE10 /* Launch Screen.storyboard */; };
 		A5FFFBCE1B95CCE4004C6961 /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FFFBCD1B95CCE4004C6961 /* PlaylistViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		A5A49CB21B5BF791004B80CE /* ComputerMagic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = ComputerMagic.m4a; sourceTree = "<group>"; };
 		A5A49CB61B5BFF27004B80CE /* Music.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 		A5B39BDD1DAA843A00AA22EF /* FDWaveformView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FDWaveformView.swift; sourceTree = "<group>"; };
+		A5BD01DF218F2AEB0010FE10 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		A5FFFBCD1B95CCE4004C6961 /* PlaylistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +101,7 @@
 				A581C3951B94769F006CE228 /* Main.storyboard */,
 				A581C3941B94769F006CE228 /* StingView.xib */,
 				A581C3961B94769F006CE228 /* Welcome.storyboard */,
+				A5BD01DF218F2AEB0010FE10 /* Launch Screen.storyboard */,
 				A5A49C951B5BF1C2004B80CE /* Images.xcassets */,
 				A581C3931B947684006CE228 /* Exo2-Regular.otf */,
 				A56DCA911BA71E0C0096C377 /* Exo2-SemiBold.otf */,
@@ -217,6 +220,7 @@
 			files = (
 				A5A49C961B5BF1C2004B80CE /* Images.xcassets in Resources */,
 				A581C3971B94769F006CE228 /* StingView.xib in Resources */,
+				A5BD01E0218F2AEB0010FE10 /* Launch Screen.storyboard in Resources */,
 				A581C3991B94769F006CE228 /* Welcome.storyboard in Resources */,
 				A581C3981B94769F006CE228 /* Main.storyboard in Resources */,
 				A5A49CB51B5BF7E0004B80CE /* ComputerMagic.m4a in Resources */,
@@ -356,7 +360,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = NU8A5Y875P;
 				INFOPLIST_FILE = Resources/Info.plist;
@@ -372,7 +375,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = NU8A5Y875P;
 				INFOPLIST_FILE = Resources/Info.plist;

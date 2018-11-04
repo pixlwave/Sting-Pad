@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreen-Background" translatesAutoresizingMaskIntoConstraints="NO" id="jWD-Md-Yfb" userLabel="Background">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreen-Logo" translatesAutoresizingMaskIntoConstraints="NO" id="gUh-ii-bJs" userLabel="Logo">
+                                <rect key="frame" x="84" y="61" width="152" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="gUh-ii-bJs" secondAttribute="height" multiplier="19:7" id="FbZ-Ku-Zev"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreen-Bee" translatesAutoresizingMaskIntoConstraints="NO" id="1j3-Ha-dHo" userLabel="Bee">
+                                <rect key="frame" x="55" y="178" width="197" height="208"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="1j3-Ha-dHo" secondAttribute="height" multiplier="197:208" id="ElL-Rx-QcP"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreen-pixlwave" translatesAutoresizingMaskIntoConstraints="NO" id="Moi-Vx-IY8" userLabel="pixlwave">
+                                <rect key="frame" x="205" y="549" width="104" height="12"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="1j3-Ha-dHo" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" multiplier="0.96" id="AQT-4O-NBS"/>
+                            <constraint firstAttribute="trailing" secondItem="jWD-Md-Yfb" secondAttribute="trailing" id="Gwg-4E-mhf"/>
+                            <constraint firstAttribute="bottom" secondItem="jWD-Md-Yfb" secondAttribute="bottom" id="HcU-dZ-7VK"/>
+                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="trailing" secondItem="Moi-Vx-IY8" secondAttribute="trailing" constant="11" id="Luc-2H-5c1"/>
+                            <constraint firstItem="jWD-Md-Yfb" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="LwA-TV-sYF"/>
+                            <constraint firstItem="gUh-ii-bJs" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="0.314" id="QN0-al-Sxc"/>
+                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="bottom" secondItem="Moi-Vx-IY8" secondAttribute="bottom" constant="7" id="Uc2-iG-rbX"/>
+                            <constraint firstItem="1j3-Ha-dHo" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="196/320" constant="1" id="VMf-4K-MKj"/>
+                            <constraint firstItem="gUh-ii-bJs" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="152/320" id="efm-07-OWY"/>
+                            <constraint firstItem="1j3-Ha-dHo" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="0.993" id="eh7-f7-yLu"/>
+                            <constraint firstAttribute="top" secondItem="jWD-Md-Yfb" secondAttribute="top" id="mpi-af-76Q"/>
+                            <constraint firstItem="gUh-ii-bJs" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="u1t-ud-a0U"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
+                    </view>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="50.625" y="375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="LaunchScreen-Background" width="320" height="694"/>
+        <image name="LaunchScreen-Bee" width="197" height="208"/>
+        <image name="LaunchScreen-Logo" width="152" height="56"/>
+        <image name="LaunchScreen-pixlwave" width="104" height="12"/>
+    </resources>
+</document>
