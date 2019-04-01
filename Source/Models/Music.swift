@@ -107,7 +107,7 @@ class Music {
     
     var playlistIndex: Int? {
         if let playlist = playlist {
-            return allPlaylists.index(of: playlist)
+            return allPlaylists.firstIndex(of: playlist)
         }
         
         return nil
