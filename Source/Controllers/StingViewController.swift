@@ -34,9 +34,6 @@ class StingViewController: UIViewController {
         
         waveformView.delegate = self
         view.addSubview(waveformView)
-        
-        // refresh playlists in case anything has changed
-        engine.ipod.refreshPlaylists()
     }
     
     @IBAction func done() {
@@ -56,12 +53,12 @@ class StingViewController: UIViewController {
     
     func updateLabels() {
         // get all the relevant track info from the engine
-        titleLabel.text = engine.sting[stingIndex].title
-        artistLabel.text = engine.sting[stingIndex].artist
+        titleLabel.text = engine.stings[stingIndex].title
+        artistLabel.text = engine.stings[stingIndex].artist
     }
     
     func updateWaveURL() {
-        waveformView.audioURL = engine.sting[stingIndex].url
+        waveformView.audioURL = engine.stings[stingIndex].url
     }
     
     @IBAction func zoomWaveOut() {
@@ -84,7 +81,7 @@ extension StingViewController: FDWaveformViewDelegate {
     
     func waveformViewDidLoad(_ waveformView: FDWaveformView) {
         // once the audio file has loaded (and totalSamples is known), set the highlighted samples
-        waveformView.highlightedSamples = 0..<Int(Double(waveformView.totalSamples) * engine.sting[stingIndex].getCue())
+        waveformView.highlightedSamples = 0..<Int(Double(waveformView.totalSamples) * engine.stings[stingIndex].getCue())
     }
     
     func waveformViewDidRender(_ waveform: FDWaveformView) {
@@ -93,8 +90,8 @@ extension StingViewController: FDWaveformViewDelegate {
     
     func waveformDidEndScrubbing(_ waveformView: FDWaveformView) {
         let cue = Double(waveformView.highlightedSamples?.endIndex ?? 0) / Double(waveformView.totalSamples)
-        engine.sting[stingIndex].setCue(cue)
-        UserDefaults.standard.set(engine.sting[stingIndex].cuePoint, forKey: "StingCuePoint\(stingIndex)")
+        engine.stings[stingIndex].setCue(cue)
+        UserDefaults.standard.set(engine.stings[stingIndex].cuePoint, forKey: "StingCuePoint\(stingIndex)")
     }
     
 }
@@ -105,7 +102,7 @@ extension StingViewController: MPMediaPickerControllerDelegate {
     
     func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
         // load media item into the currently loading sting player and update labels
-        engine.sting[stingIndex].loadSting(mediaItemCollection.items[0])
+        engine.stings[stingIndex].loadSting(mediaItemCollection.items[0])
         updateLabels()
         
         // add wave loading image whilst waveform generates
@@ -114,7 +111,7 @@ extension StingViewController: MPMediaPickerControllerDelegate {
         // generate new waveform
         updateWaveURL()
         
-        save(engine.sting[stingIndex])
+        save(engine.stings[stingIndex])
         
         // dismiss media picker
         dismiss(animated: true, completion: nil)

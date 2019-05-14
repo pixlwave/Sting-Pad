@@ -38,6 +38,10 @@ class Sting: NSObject {
         self.stingPlayer.prepareToPlay()
     }
     
+    func useOutput(channels: [AVAudioSessionChannelDescription]) {
+        stingPlayer.channelAssignments = channels
+    }
+    
     func play() {
         stingPlayer.play()
         delegate?.stingDidStartPlaying(self)

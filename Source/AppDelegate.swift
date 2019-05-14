@@ -10,9 +10,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // prevent device from going to sleep
         application.isIdleTimerDisabled = true
         
-        // allow music to play whilst muted with playback category
-        // prevent app launch from killing iPod by allowing mixing
-        setMixingState(true)
+        Engine.shared.enableMultiRoutes()
         
         // customise appearance
         if let exoFont = UIFont(name: "Exo2-Regular", size: 18), let exoBoldFont = UIFont(name: "Exo2-SemiBold", size: 18) {
@@ -21,30 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         return true
-    }
-    
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // disables mixing so that if a sting is playing and the user chooses to play something else, stingtk is faded out
-        if Engine.shared.ipod.isPlaying == false { setMixingState(false) }
-    }
-    
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // re-enables mixing so app launch doesn't kill iPod music
-        setMixingState(true)
-    }
-    
-    func setMixingState(_ state: Bool) {
-        // TODO: Test this is correct?
-        let session = AVAudioSession.sharedInstance()
-        if state {
-            do {
-                try session.setCategory(.playback, mode: .default, options: .mixWithOthers)
-            } catch {}
-        } else {
-            do {
-                try session.setCategory(.playback, mode: .default)
-            } catch {}
-        }
     }
     
 }
