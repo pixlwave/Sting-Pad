@@ -10,19 +10,19 @@ class Sting: NSObject {
     var url: URL
     var title: String
     var artist: String
-    private(set) var cuePoint: Double // TODO: This is public get to archive, but should probs be computed?
+    private(set) var cuePoint: Double; #warning("This is public get to archive, but should probs be computed?")
     
     private var stingPlayer: AVAudioPlayer!
     
     init(url: URL, title: String, artist: String, cuePoint: Double) {
-        // TODO: load title & artist from url
+        #warning("Implement loading title & artist from url")
         if let stingPlayer = try? AVAudioPlayer(contentsOf: url) {
             self.url = url
             self.title = title
             self.artist = artist
             self.cuePoint = cuePoint
             self.stingPlayer = stingPlayer
-        } else {    // TODO: Test this as a fallthrough case
+        } else {    #warning("Test this as a fallthrough case")
             self.url = Sting.defaultURL
             self.stingPlayer = try? AVAudioPlayer(contentsOf: self.url)
             self.title = "Chime"

@@ -1,48 +1,18 @@
 import UIKit
 import MediaPlayer
 
-class MainViewController: UIViewController {
+class MainViewController: UICollectionViewController {
     
-    fileprivate let engine = Engine.shared
-    
-    @IBOutlet weak var stingScrollView: UIScrollView!
-    @IBOutlet weak var stingPageControl: UIPageControl!
-    @IBOutlet weak var playingLabel: UILabel!
-    
-    // array to hold the sting views
-    private var stingViews = [StingView]()
-    
-    fileprivate var selectedSting = 0
-    fileprivate var scrollPosition = UITableView.ScrollPosition.top
+    private let engine = Engine.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // make self delegate for sting players
         engine.setStingDelegates(self)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
-        // and get screen width for positioning
-        let viewWidth = view.bounds.width
-        
-        // add sting views to sting scroll view
-        for i in 0..<engine.stings.count {
-            let v = StingView(frame: CGRect(x: CGFloat(i) * viewWidth, y: 0, width: viewWidth, height: stingScrollView.frame.height))
-            v.playButton.addTarget(self, action: #selector(play), for: .touchDown)
-            v.stopButton.addTarget(self, action: #selector(stop), for: .touchUpInside)
-            v.titleLabel.text = engine.stings[i].title
-            stingViews.append(v)
-            
-            stingScrollView.addSubview(stingViews[i])
-        }
-        
-        // set up scroll view for playing stings
-        stingScrollView.contentSize = CGSize(width: stingViews.last!.frame.origin.x + stingViews.last!.frame.width, height: stingViews.first!.frame.height)
-        stingScrollView.delaysContentTouches = false    // prevents scroll view from momentarily blocking the play button's action
-        stingScrollView.delegate = self
+        // prevents scroll view from momentarily blocking the play button's action
+        collectionView.delaysContentTouches = false; #warning("Test if this works or if the property needs to be set on the scroll view")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -54,26 +24,24 @@ class MainViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "LoadSting", let navC = segue.destination as? UINavigationController, let loadVC = navC.topViewController as? StingViewController {
-            loadVC.stingIndex = selectedSting
+        if segue.identifier == "Load Sting", let navC = segue.destination as? UINavigationController, let loadVC = navC.topViewController as? StingViewController, let button = sender as? UIButton {
+            loadVC.stingIndex = button.tag
         }
     }
     
-    @objc func play() {
-        // plays selected sting (from sting scroll view) and shows that it's playing
-        engine.playSting(selectedSting)
+    @IBAction func play(_ sender: UIButton) {
+        // plays selected sting and shows that it's playing
+        engine.playSting(sender.tag)
     }
     
-    @objc func stop() {
+    @IBAction func stop(_ sender: UIButton) {
         // stops and hides the playing label
         engine.stopSting()
     }
     
-    func updateStingTitles() {
-        // get titles from stings
-        for (i, v) in stingViews.enumerated() {
-            v.titleLabel.text = engine.stings[i].title
-        }
+    func updateSting(at indexPath: IndexPath) {
+        // reload cell to update title
+        collectionView.reloadItems(at: [indexPath])
     }
     
     func showWelcomeScreen() {
@@ -87,28 +55,34 @@ class MainViewController: UIViewController {
             UserDefaults.standard.set(WelcomeViewController.currentVersion, forKey: "WelcomeVersionSeen")
         }
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return engine.stings.count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Sting Cell", for: indexPath)
+        
+        guard let stingCell = cell as? StingCell else { return cell }
+        
+        stingCell.titleLabel.text = engine.stings[indexPath.item].title
+        stingCell.playButton.tag = indexPath.item
+        stingCell.settingsButton.tag = indexPath.item
+        
+        return stingCell
+    }
 }
 
 
 // MARK: StingDelegate
 extension MainViewController: StingDelegate {
     func stingDidStartPlaying(_ sting: Sting) {
-        playingLabel.isHidden = false
+        let index = engine.stings.firstIndex(of: sting)
+        (collectionView.cellForItem(at: IndexPath(item: index ?? 0, section: 0)) as? StingCell)?.playingLabel.isHidden = false
     }
     
     func stingDidStopPlaying(_ sting: Sting) {
-        playingLabel.isHidden = true
-    }
-}
-
-
-// MARK: UIScrollViewDelegate
-extension MainViewController: UIScrollViewDelegate {
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        // update selected sting when sting scroll view has completed animating
-        if scrollView == stingScrollView {
-            selectedSting = Int(scrollView.contentOffset.x / scrollView.frame.width)
-            stingPageControl.currentPage = selectedSting
-        }
+        let index = engine.stings.firstIndex(of: sting)
+        (collectionView.cellForItem(at: IndexPath(item: index ?? 0, section: 0)) as? StingCell)?.playingLabel.isHidden = true
     }
 }

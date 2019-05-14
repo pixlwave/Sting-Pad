@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="Fwb-c8-22I">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="yak-cE-mUi">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -14,85 +14,98 @@
     </customFonts>
     <scenes>
         <!--Main View Controller-->
-        <scene sceneID="GDg-5Z-k2Z">
+        <scene sceneID="qqr-4I-6Cw">
             <objects>
-                <viewController id="Fwb-c8-22I" customClass="MainViewController" customModule="Stingtk" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="pGq-Pe-t1g"/>
-                        <viewControllerLayoutGuide type="bottom" id="EoB-sS-u3i"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="iFE-v0-bVO">
+                <collectionViewController id="yak-cE-mUi" customClass="MainViewController" customModule="Stingtk" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="7JH-vP-Uzz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CQ8-x6-yNq" userLabel="Sting Control View">
-                                <rect key="frame" x="0.0" y="464" width="320" height="104"/>
-                                <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cgp-Kx-hgF">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="104"/>
-                                    </scrollView>
-                                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Playing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zPT-HY-W6c">
-                                        <rect key="frame" x="277" y="0.0" width="40" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="AeB-VX-cEF"/>
-                                            <constraint firstAttribute="width" constant="40" id="kHh-1P-0Ti"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Exo2-Regular" family="Exo 2" pointSize="11"/>
-                                        <color key="textColor" red="0.0" green="0.75294117647058822" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QYV-Zp-vgU" userLabel="Load Button">
-                                        <rect key="frame" x="284" y="72" width="36" height="32"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="36" id="4Py-Ix-nyV"/>
-                                            <constraint firstAttribute="height" constant="32" id="PsD-YE-7CJ"/>
-                                        </constraints>
-                                        <state key="normal" image="settings"/>
-                                        <connections>
-                                            <segue destination="1Zf-16-CXl" kind="modal" identifier="LoadSting" id="DFt-j6-5Wf"/>
-                                        </connections>
-                                    </button>
-                                    <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="zOQ-cv-f9K">
-                                        <rect key="frame" x="124.5" y="72" width="71" height="37"/>
-                                        <color key="pageIndicatorTintColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <color key="currentPageIndicatorTintColor" red="0.27450722455978394" green="0.27449896931648254" blue="0.27450364828109741" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </pageControl>
-                                </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="0.64694368840000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstItem="zOQ-cv-f9K" firstAttribute="centerX" secondItem="CQ8-x6-yNq" secondAttribute="centerX" id="5vy-pT-8Fl"/>
-                                    <constraint firstAttribute="height" constant="104" id="AW8-rU-hFt"/>
-                                    <constraint firstAttribute="bottom" secondItem="QYV-Zp-vgU" secondAttribute="bottom" id="FTg-vl-qJD"/>
-                                    <constraint firstItem="Cgp-Kx-hgF" firstAttribute="top" secondItem="CQ8-x6-yNq" secondAttribute="top" id="Hdn-Qi-mWT"/>
-                                    <constraint firstAttribute="bottom" secondItem="Cgp-Kx-hgF" secondAttribute="bottom" id="MHk-DS-dlx"/>
-                                    <constraint firstAttribute="trailing" secondItem="zPT-HY-W6c" secondAttribute="trailing" constant="3" id="PFR-Tp-5jS"/>
-                                    <constraint firstAttribute="bottom" secondItem="zOQ-cv-f9K" secondAttribute="bottom" constant="-5" id="iqA-Kk-cSl"/>
-                                    <constraint firstItem="zPT-HY-W6c" firstAttribute="top" secondItem="CQ8-x6-yNq" secondAttribute="top" id="l3B-Rn-0YF"/>
-                                    <constraint firstAttribute="trailing" secondItem="Cgp-Kx-hgF" secondAttribute="trailing" id="oei-MH-wI3"/>
-                                    <constraint firstAttribute="trailing" secondItem="QYV-Zp-vgU" secondAttribute="trailing" id="yZd-DK-yZI"/>
-                                    <constraint firstItem="Cgp-Kx-hgF" firstAttribute="leading" secondItem="CQ8-x6-yNq" secondAttribute="leading" id="zQm-GV-zCG"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="0.64694368839263916" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="0.64694368840000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="CQ8-x6-yNq" firstAttribute="leading" secondItem="iFE-v0-bVO" secondAttribute="leading" id="P8A-Ow-43V"/>
-                            <constraint firstItem="EoB-sS-u3i" firstAttribute="top" secondItem="CQ8-x6-yNq" secondAttribute="bottom" id="Wad-zP-sHi"/>
-                            <constraint firstAttribute="trailing" secondItem="CQ8-x6-yNq" secondAttribute="trailing" id="y0k-rb-p5G"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="JS4-QJ-xUA"/>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <connections>
-                        <outlet property="playingLabel" destination="zPT-HY-W6c" id="8Zz-35-VlY"/>
-                        <outlet property="stingPageControl" destination="zOQ-cv-f9K" id="IQt-mc-Pxg"/>
-                        <outlet property="stingScrollView" destination="Cgp-Kx-hgF" id="pYT-tP-2nn"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="093-u7-AzH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hvH-XK-hJu">
+                            <size key="itemSize" width="320" height="103"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Sting Cell" id="wn0-gC-jEl" customClass="StingCell" customModule="Stingtk" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="103"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="103"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hme-o2-jY2">
+                                            <rect key="frame" x="22" y="19" width="64" height="64"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="play"/>
+                                            <connections>
+                                                <action selector="play:" destination="yak-cE-mUi" eventType="touchDown" id="gYr-wX-Ixc"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Hy-IS-b0A">
+                                            <rect key="frame" x="117" y="27" width="48" height="48"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="stop"/>
+                                            <connections>
+                                                <action selector="stop:" destination="yak-cE-mUi" eventType="touchUpInside" id="UqH-ab-t3W"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Track" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMJ-uU-fhi">
+                                            <rect key="frame" x="189" y="22" width="108" height="58"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="Exo2-Regular" family="Exo 2" pointSize="18"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t2r-FP-73O" userLabel="Load Button">
+                                            <rect key="frame" x="284" y="71" width="36" height="32"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="32" id="vzs-Qb-Z4S"/>
+                                                <constraint firstAttribute="width" constant="36" id="xwr-wP-7Ua"/>
+                                            </constraints>
+                                            <state key="normal" image="settings"/>
+                                            <connections>
+                                                <segue destination="1Zf-16-CXl" kind="modal" identifier="Load Sting" id="dXo-uP-EMS"/>
+                                            </connections>
+                                        </button>
+                                        <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Playing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ees-sD-UzS">
+                                            <rect key="frame" x="277" y="0.0" width="40" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="40" id="5Fo-ti-ULG"/>
+                                                <constraint firstAttribute="height" constant="20" id="mRJ-4r-f3U"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Exo2-Regular" family="Exo 2" pointSize="11"/>
+                                            <color key="textColor" red="0.0" green="0.75294117650000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="t2r-FP-73O" secondAttribute="trailing" id="9Rn-0U-AYA"/>
+                                    <constraint firstItem="Ees-sD-UzS" firstAttribute="top" secondItem="wn0-gC-jEl" secondAttribute="top" id="UXj-Pe-J40"/>
+                                    <constraint firstAttribute="bottom" secondItem="t2r-FP-73O" secondAttribute="bottom" id="sW0-M3-MEE"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ees-sD-UzS" secondAttribute="trailing" constant="3" id="y50-PW-EFM"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="playButton" destination="Hme-o2-jY2" id="BAQ-uS-dZx"/>
+                                    <outlet property="playingLabel" destination="Ees-sD-UzS" id="RS9-FS-Xve"/>
+                                    <outlet property="settingsButton" destination="t2r-FP-73O" id="A0r-88-0rh"/>
+                                    <outlet property="stopButton" destination="9Hy-IS-b0A" id="6Qj-pv-WQ6"/>
+                                    <outlet property="titleLabel" destination="cMJ-uU-fhi" id="PU5-68-PKs"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="yak-cE-mUi" id="4Hm-aS-78b"/>
+                            <outlet property="delegate" destination="yak-cE-mUi" id="UP5-39-shT"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TjI-mr-Eu1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="172.80000000000001" y="33.283358320839582"/>
+            <point key="canvasLocation" x="219" y="33"/>
         </scene>
         <!--Sting View Controller-->
         <scene sceneID="BBH-1f-24n">
@@ -230,7 +243,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="play" width="64" height="64"/>
         <image name="settings" width="16" height="16"/>
+        <image name="stop" width="48" height="48"/>
         <image name="waveload" width="280" height="75"/>
     </resources>
 </document>

@@ -12,7 +12,7 @@ class StingViewController: UIViewController {
     @IBOutlet weak var stingNumberLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var artistLabel: UILabel!
-    @IBOutlet var waveformLoadingImageView: UIImageView! // FIXME: without weak, addSubview(waveformLoadingImageView) unwraps nil
+    @IBOutlet var waveformLoadingImageView: UIImageView!; #warning("without weak, addSubview(waveformLoadingImageView) unwraps nil")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +38,7 @@ class StingViewController: UIViewController {
     
     @IBAction func done() {
         // display updates before dismissing
-        (presentingViewController as? MainViewController)?.updateStingTitles()
+        (presentingViewController as? MainViewController)?.updateSting(at: IndexPath(item: stingIndex, section: 0))
         dismiss(animated: true, completion: nil)
     }
     
