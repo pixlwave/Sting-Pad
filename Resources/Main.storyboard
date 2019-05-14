@@ -52,14 +52,21 @@
                                             <segue destination="1Zf-16-CXl" kind="modal" identifier="LoadSting" id="DFt-j6-5Wf"/>
                                         </connections>
                                     </button>
+                                    <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="zOQ-cv-f9K">
+                                        <rect key="frame" x="124.5" y="72" width="71" height="37"/>
+                                        <color key="pageIndicatorTintColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="currentPageIndicatorTintColor" red="0.27450722455978394" green="0.27449896931648254" blue="0.27450364828109741" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </pageControl>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="0.64694368840000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="zOQ-cv-f9K" firstAttribute="centerX" secondItem="CQ8-x6-yNq" secondAttribute="centerX" id="5vy-pT-8Fl"/>
                                     <constraint firstAttribute="height" constant="104" id="AW8-rU-hFt"/>
                                     <constraint firstAttribute="bottom" secondItem="QYV-Zp-vgU" secondAttribute="bottom" id="FTg-vl-qJD"/>
                                     <constraint firstItem="Cgp-Kx-hgF" firstAttribute="top" secondItem="CQ8-x6-yNq" secondAttribute="top" id="Hdn-Qi-mWT"/>
                                     <constraint firstAttribute="bottom" secondItem="Cgp-Kx-hgF" secondAttribute="bottom" id="MHk-DS-dlx"/>
                                     <constraint firstAttribute="trailing" secondItem="zPT-HY-W6c" secondAttribute="trailing" constant="3" id="PFR-Tp-5jS"/>
+                                    <constraint firstAttribute="bottom" secondItem="zOQ-cv-f9K" secondAttribute="bottom" constant="-5" id="iqA-Kk-cSl"/>
                                     <constraint firstItem="zPT-HY-W6c" firstAttribute="top" secondItem="CQ8-x6-yNq" secondAttribute="top" id="l3B-Rn-0YF"/>
                                     <constraint firstAttribute="trailing" secondItem="Cgp-Kx-hgF" secondAttribute="trailing" id="oei-MH-wI3"/>
                                     <constraint firstAttribute="trailing" secondItem="QYV-Zp-vgU" secondAttribute="trailing" id="yZd-DK-yZI"/>
@@ -79,6 +86,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="playingLabel" destination="zPT-HY-W6c" id="8Zz-35-VlY"/>
+                        <outlet property="stingPageControl" destination="zOQ-cv-f9K" id="IQt-mc-Pxg"/>
                         <outlet property="stingScrollView" destination="Cgp-Kx-hgF" id="pYT-tP-2nn"/>
                     </connections>
                 </viewController>
