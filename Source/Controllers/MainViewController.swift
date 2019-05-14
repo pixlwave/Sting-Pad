@@ -6,6 +6,7 @@ class MainViewController: UIViewController {
     fileprivate let engine = Engine.shared
     
     @IBOutlet weak var playlistTable: UITableView!
+    @IBOutlet weak var ipodControlVisualEffectView: UIVisualEffectView!
     @IBOutlet weak var ipodShuffleButton: UIButton!
     @IBOutlet weak var ipodPlayButton: UIButton!
     @IBOutlet weak var stingScrollView: UIScrollView!
@@ -24,10 +25,14 @@ class MainViewController: UIViewController {
         // make self delegate for sting players
         engine.setStingDelegates(self)
 
-        // control of the table
-        playlistTable.delegate = self
-        playlistTable.dataSource = self
+        // layout the playlist table
         playlistTable.contentInset.bottom = 49
+        playlistTable.layer.cornerRadius = 15
+        
+        // round the bottom corners of the visual effect view to match the playlist table
+        ipodControlVisualEffectView.clipsToBounds = true
+        ipodControlVisualEffectView.layer.cornerRadius = 15
+        ipodControlVisualEffectView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         
         // and get screen width for positioning
         let screenWidth = UIScreen.main.bounds.width
@@ -46,7 +51,6 @@ class MainViewController: UIViewController {
         // set up scroll view for playing stings
         stingScrollView.contentSize = CGSize(width: stingViews.last!.frame.origin.x + stingViews.last!.frame.width, height: stingViews.first!.frame.height)
         stingScrollView.delaysContentTouches = false    // prevents scroll view from momentarily blocking the play button's action
-        stingScrollView.delegate = self
         
         
         // listen for iPod library changes (includes now playing track changes)
