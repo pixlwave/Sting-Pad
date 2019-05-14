@@ -25,6 +25,7 @@
 		A5A49CB51B5BF7E0004B80CE /* ComputerMagic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = A5A49CB21B5BF791004B80CE /* ComputerMagic.m4a */; };
 		A5B39BDE1DAA843A00AA22EF /* FDWaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B39BDD1DAA843A00AA22EF /* FDWaveformView.swift */; };
 		A5BD01E0218F2AEB0010FE10 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5BD01DF218F2AEB0010FE10 /* Launch Screen.storyboard */; };
+		A5C32F4E228B64FE00E4B4EB /* Extends.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C32F4D228B64FE00E4B4EB /* Extends.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		A5A49CB21B5BF791004B80CE /* ComputerMagic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = ComputerMagic.m4a; sourceTree = "<group>"; };
 		A5B39BDD1DAA843A00AA22EF /* FDWaveformView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FDWaveformView.swift; sourceTree = "<group>"; };
 		A5BD01DF218F2AEB0010FE10 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		A5C32F4D228B64FE00E4B4EB /* Extends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extends.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				A5A49C8E1B5BF1C2004B80CE /* AppDelegate.swift */,
+				A5C32F4D228B64FE00E4B4EB /* Extends.swift */,
 				A5FBD7D21F7C447000B5799C /* Controllers */,
 				A5FBD7D31F7C447800B5799C /* Models */,
 				A5FBD7D41F7C447D00B5799C /* Views */,
@@ -233,6 +236,7 @@
 				A581C3A21B94A041006CE228 /* StingCell.swift in Sources */,
 				A5A49CB11B5BF216004B80CE /* Sting.swift in Sources */,
 				A52C90E4217A51A2005653C4 /* SongCell.swift in Sources */,
+				A5C32F4E228B64FE00E4B4EB /* Extends.swift in Sources */,
 				A549825A1F7067EC00909196 /* FDAudioContext.swift in Sources */,
 				A581C39D1B949A06006CE228 /* StingViewController.swift in Sources */,
 				A581C39F1B949AD6006CE228 /* MainViewController.swift in Sources */,

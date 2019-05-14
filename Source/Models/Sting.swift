@@ -23,8 +23,8 @@ class Sting: NSObject, Codable {
         #warning("Implement loading title & artist from url")
         if let stingPlayer = try? AVAudioPlayer(contentsOf: url) {
             self.url = url
-            self.title = "TO BE IMPLEMENTED"
-            self.artist = "TO BE IMPLEMENTED"
+            self.title = url.songTitle() ?? "Unknown"
+            self.artist = url.songArtist() ?? "Unknown"
             self.cuePoint = cuePoint
             self.stingPlayer = stingPlayer
         } else {    #warning("Test this as a fallthrough case")
