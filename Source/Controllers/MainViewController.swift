@@ -13,6 +13,8 @@ class MainViewController: UICollectionViewController {
         
         // prevents scroll view from momentarily blocking the play button's action
         collectionView.delaysContentTouches = false; #warning("Test if this works or if the property needs to be set on the scroll view")
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: NSNotification.Name("Stings Did Change"), object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -23,9 +25,13 @@ class MainViewController: UICollectionViewController {
         }
     }
     
+    @IBAction func addSting(_ sender: UIBarButtonItem) {
+        engine.addSting()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Load Sting", let navC = segue.destination as? UINavigationController, let loadVC = navC.topViewController as? StingViewController, let button = sender as? UIButton {
-            loadVC.stingIndex = button.tag
+        if segue.identifier == "Sting Settings", let stingVC = segue.destination as? StingViewController, let button = sender as? UIButton {
+            stingVC.stingIndex = button.tag
         }
     }
     
@@ -39,9 +45,9 @@ class MainViewController: UICollectionViewController {
         engine.stopSting()
     }
     
-    func updateSting(at indexPath: IndexPath) {
-        // reload cell to update title
-        collectionView.reloadItems(at: [indexPath])
+    #warning("Implement more efficient responses to changed data.")
+    @objc func reloadData() {
+        collectionView.reloadData()
     }
     
     func showWelcomeScreen() {

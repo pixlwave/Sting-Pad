@@ -36,12 +36,6 @@ class StingViewController: UIViewController {
         view.addSubview(waveformView)
     }
     
-    @IBAction func done() {
-        // display updates before dismissing
-        (presentingViewController as? MainViewController)?.updateSting(at: IndexPath(item: stingIndex, section: 0))
-        dismiss(animated: true, completion: nil)
-    }
-    
     @IBAction func loadTrack() {
         // present music picker to load a track from ipod
         let mediaPicker = MPMediaPickerController(mediaTypes: .music)
@@ -91,7 +85,7 @@ extension StingViewController: FDWaveformViewDelegate {
     func waveformDidEndScrubbing(_ waveformView: FDWaveformView) {
         let cue = Double(waveformView.highlightedSamples?.endIndex ?? 0) / Double(waveformView.totalSamples)
         engine.stings[stingIndex].setCue(cue)
-        UserDefaults.standard.set(engine.stings[stingIndex].cuePoint, forKey: "StingCuePoint\(stingIndex)")
+        engine.save(); #warning("This is probably bad for performance!")
     }
     
 }
@@ -102,16 +96,18 @@ extension StingViewController: MPMediaPickerControllerDelegate {
     
     func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
         // load media item into the currently loading sting player and update labels
-        engine.stings[stingIndex].loadSting(mediaItemCollection.items[0])
-        updateLabels()
-        
-        // add wave loading image whilst waveform generates
-        waveformLoadingImageView.isHidden = false
-        
-        // generate new waveform
-        updateWaveURL()
-        
-        save(engine.stings[stingIndex])
+        if let newSting = Sting(mediaItem: mediaItemCollection.items[0]) {
+            engine.stings[stingIndex] = newSting
+            updateLabels()
+            
+            // add wave loading image whilst waveform generates
+            waveformLoadingImageView.isHidden = false
+            
+            // generate new waveform
+            updateWaveURL()
+            
+            engine.save()
+        }
         
         // dismiss media picker
         dismiss(animated: true, completion: nil)
@@ -120,13 +116,6 @@ extension StingViewController: MPMediaPickerControllerDelegate {
     func mediaPickerDidCancel(_ mediaPicker: MPMediaPickerController) {
         // dismiss media picker
         dismiss(animated: true, completion: nil)
-    }
-    
-    func save(_ sting: Sting) {
-        UserDefaults.standard.set(sting.url, forKey: "StingURL\(stingIndex)")
-        UserDefaults.standard.set(sting.cuePoint, forKey: "StingCuePoint\(stingIndex)")
-        UserDefaults.standard.set(sting.title, forKey: "StingTitle\(stingIndex)")
-        UserDefaults.standard.set(sting.artist, forKey: "StingArtist\(stingIndex)")
     }
     
 }

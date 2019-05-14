@@ -11,17 +11,20 @@ class Engine {
     private var isMultiRoute = true
     
     let musicPlayer = MPMusicPlayerController.systemMusicPlayer
-    var stings = [Sting]()
+    var stings: [Sting] {
+        didSet {
+            NotificationCenter.default.post(Notification(name: Notification.Name("Stings Did Change")))
+        }
+    }
     
     private var playingSting = 0
     
     init() {
-        for i in 0..<5 {
-            let url = UserDefaults.standard.url(forKey: "StingURL\(i)") ?? Sting.defaultURL
-            let title = UserDefaults.standard.string(forKey: "StingTitle\(i)") ?? "Chime"
-            let artist = UserDefaults.standard.string(forKey: "StingArtist\(i)") ?? "Default Sting"
-            let cuePoint = UserDefaults.standard.double(forKey: "StingCuePoint\(i)")
-            stings.append(Sting(url: url, title: title, artist: artist, cuePoint: cuePoint))
+        // load stings from user defaults
+        if let data = UserDefaults.standard.data(forKey: "Stings"), let array = try? JSONDecoder().decode([Sting].self, from: data) {
+            stings = array
+        } else {
+            stings = [Sting]()
         }
         
         // listen for iPod playback changes
@@ -54,6 +57,10 @@ class Engine {
         }
     }
     
+    func addSting() {
+        stings.append(Sting(url: Sting.defaultURL, cuePoint: 0))
+    }
+    
     func playSting(_ selectedSting: Int) {
         if !isMultiRoute { musicPlayer.pause() }
         if selectedSting != playingSting { stings[playingSting].stop() }
@@ -84,6 +91,11 @@ class Engine {
         for sting in stings {
             sting.delegate = delegate
         }
+    }
+    
+    func save() {
+        guard let jsonData = try? JSONEncoder().encode(stings) else { return }
+        UserDefaults.standard.set(jsonData, forKey: "Stings")
     }
     
 }

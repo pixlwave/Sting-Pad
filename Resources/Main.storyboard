@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="yak-cE-mUi">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="1Zf-16-CXl">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -18,7 +18,7 @@
             <objects>
                 <collectionViewController id="yak-cE-mUi" customClass="MainViewController" customModule="Stingtk" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="7JH-vP-Uzz">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="0.64694368840000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -29,7 +29,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Sting Cell" id="wn0-gC-jEl" customClass="StingCell" customModule="Stingtk" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="Sting Cell" id="wn0-gC-jEl" customClass="StingCell" customModule="Stingtk" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="103"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -60,14 +60,14 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t2r-FP-73O" userLabel="Load Button">
-                                            <rect key="frame" x="284" y="71" width="36" height="32"/>
+                                            <rect key="frame" x="284" y="7" width="36" height="32"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="32" id="vzs-Qb-Z4S"/>
                                                 <constraint firstAttribute="width" constant="36" id="xwr-wP-7Ua"/>
                                             </constraints>
                                             <state key="normal" image="settings"/>
                                             <connections>
-                                                <segue destination="1Zf-16-CXl" kind="modal" identifier="Load Sting" id="dXo-uP-EMS"/>
+                                                <segue destination="sKY-0b-GtB" kind="push" identifier="Sting Settings" id="kQQ-Fg-Wob"/>
                                             </connections>
                                         </button>
                                         <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Playing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ees-sD-UzS">
@@ -102,10 +102,17 @@
                             <outlet property="delegate" destination="yak-cE-mUi" id="UP5-39-shT"/>
                         </connections>
                     </collectionView>
+                    <navigationItem key="navigationItem" id="fhU-qn-D6z">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="gSH-Mp-izq">
+                            <connections>
+                                <action selector="addSting:" destination="yak-cE-mUi" id="QTU-9f-L36"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TjI-mr-Eu1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="219" y="33"/>
+            <point key="canvasLocation" x="1393" y="33"/>
         </scene>
         <!--Sting View Controller-->
         <scene sceneID="BBH-1f-24n">
@@ -202,13 +209,7 @@
                             <constraint firstItem="DSS-g4-Ymn" firstAttribute="leading" secondItem="IL7-SC-53c" secondAttribute="leading" constant="20" id="wes-Sw-WKg"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="JWi-WN-0lh">
-                        <barButtonItem key="rightBarButtonItem" title="Done" style="done" id="Egr-ob-djQ">
-                            <connections>
-                                <action selector="done" destination="sKY-0b-GtB" id="qJX-mL-zGu"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="JWi-WN-0lh"/>
                     <connections>
                         <outlet property="artistLabel" destination="8ah-Ra-mmM" id="PDI-ff-nfj"/>
                         <outlet property="stingNumberLabel" destination="W2N-PM-WRG" id="8X1-SE-u8r"/>
@@ -218,7 +219,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="17N-rm-diW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1830" y="33"/>
+            <point key="canvasLocation" x="2228" y="33"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cqG-71-brD">
@@ -234,12 +235,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="sKY-0b-GtB" kind="relationship" relationship="rootViewController" id="1Pr-tc-GGU"/>
+                        <segue destination="yak-cE-mUi" kind="relationship" relationship="rootViewController" id="uaq-Ew-X9r"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N6V-b1-R2q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1003" y="33"/>
+            <point key="canvasLocation" x="549" y="33"/>
         </scene>
     </scenes>
     <resources>

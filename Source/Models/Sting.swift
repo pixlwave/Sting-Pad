@@ -2,7 +2,7 @@ import Foundation
 import AVFoundation
 import MediaPlayer
 
-class Sting: NSObject {
+class Sting: NSObject, Codable {
     static let defaultURL = URL(fileURLWithPath: Bundle.main.path(forResource: "ComputerMagic", ofType: "m4a")!)
     
     var delegate: StingDelegate?
@@ -12,30 +12,59 @@ class Sting: NSObject {
     var artist: String
     private(set) var cuePoint: Double; #warning("This is public get to archive, but should probs be computed?")
     
-    private var stingPlayer: AVAudioPlayer!
+    private let stingPlayer: AVAudioPlayer
     
-    init(url: URL, title: String, artist: String, cuePoint: Double) {
+    enum CodingKeys: String, CodingKey {
+        case url
+        case cuePoint
+    }
+    
+    init(url: URL, cuePoint: Double) {
         #warning("Implement loading title & artist from url")
         if let stingPlayer = try? AVAudioPlayer(contentsOf: url) {
             self.url = url
-            self.title = title
-            self.artist = artist
+            self.title = "TO BE IMPLEMENTED"
+            self.artist = "TO BE IMPLEMENTED"
             self.cuePoint = cuePoint
             self.stingPlayer = stingPlayer
         } else {    #warning("Test this as a fallthrough case")
             self.url = Sting.defaultURL
-            self.stingPlayer = try? AVAudioPlayer(contentsOf: self.url)
+            self.stingPlayer = try! AVAudioPlayer(contentsOf: self.url)
             self.title = "Chime"
             self.artist = "Default Sting"
             self.cuePoint = 0
         }
         
         super.init()
-    
+        
         self.stingPlayer.delegate = self
         self.stingPlayer.numberOfLoops = 0  // needed?
         self.stingPlayer.currentTime = cuePoint
         self.stingPlayer.prepareToPlay()
+    }
+    
+    init?(mediaItem: MPMediaItem) {
+        guard let assetURL = mediaItem.assetURL, let stingPlayer = try? AVAudioPlayer(contentsOf: assetURL) else { return nil }
+        
+        url = assetURL
+        title = mediaItem.title ?? "Unknown"
+        artist = mediaItem.artist ?? "Unknown"
+        cuePoint = 0
+        self.stingPlayer = stingPlayer
+        
+        super.init()
+        
+        stingPlayer.delegate = self
+        stingPlayer.numberOfLoops = 0 // needed?
+        stingPlayer.currentTime = cuePoint
+        stingPlayer.prepareToPlay()
+    }
+    
+    required convenience init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let url = try container.decode(URL.self, forKey: .url)
+        let cuePoint = try container.decode(Double.self, forKey: .cuePoint)
+        self.init(url: url, cuePoint: cuePoint)
     }
     
     func useOutput(channels: [AVAudioSessionChannelDescription]) {
@@ -52,21 +81,6 @@ class Sting: NSObject {
         stingPlayer.currentTime = cuePoint
         stingPlayer.prepareToPlay()
         delegate?.stingDidStopPlaying(self)
-    }
-    
-    func loadSting(_ mediaItem: MPMediaItem) {
-        url = mediaItem.assetURL ?? Sting.defaultURL
-        
-        stingPlayer = try? AVAudioPlayer(contentsOf: url)
-        stingPlayer.delegate = self
-        stingPlayer.numberOfLoops = 0 // needed?
-        
-        cuePoint = 0
-        stingPlayer.currentTime = cuePoint
-        stingPlayer.prepareToPlay()
-        
-        title = mediaItem.title ?? ""
-        artist = mediaItem.artist ?? ""
     }
     
     func setCue(_ cuePoint: Double) {
