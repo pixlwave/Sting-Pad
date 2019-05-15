@@ -13,27 +13,31 @@ class StingViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet var waveformLoadingImageView: UIImageView!; #warning("without weak, addSubview(waveformLoadingImageView) unwraps nil")
+    @IBOutlet weak var stingPickerView: UIPickerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.titleView = UIImageView(image: #imageLiteral(resourceName: "logo"))
-        
-        // load track info
-        stingNumberLabel.text = "Sting \(stingIndex + 1)"
-        updateLabels()
-        
         waveformView = FDWaveformView(frame: waveformLoadingImageView.frame)
+        waveformView.delegate = self
         waveformView.doesAllowScrubbing = true
         waveformView.doesAllowScrubbing = true
         waveformView.doesAllowScroll = false
         waveformView.doesAllowStretch = false
         waveformView.wavesColor = UIColor(red: 0.25, green: 0.25, blue: 1.0, alpha: 1.0)
         waveformView.progressColor = UIColor(red: 0.35, green: 0.35, blue: 0.35, alpha: 1.0)
-        updateWaveURL()
         
-        waveformView.delegate = self
+        loadSting(at: stingIndex)
         view.addSubview(waveformView)
+    }
+    
+    func loadSting(at index: Int) {
+        stingIndex = index
+        
+        // load track info
+        stingNumberLabel.text = "Sting \(stingIndex + 1)"
+        updateLabels()
+        updateWaveURL()
     }
     
     @IBAction func loadTrack() {
@@ -49,6 +53,9 @@ class StingViewController: UIViewController {
         // get all the relevant track info from the engine
         titleLabel.text = engine.stings[stingIndex].title
         artistLabel.text = engine.stings[stingIndex].artist
+        
+        // update the sting picker
+        stingPickerView.reloadComponent(0)
     }
     
     func updateWaveURL() {
@@ -67,6 +74,16 @@ class StingViewController: UIViewController {
         engine.stopSting()
     }
     
+    @IBAction func addSting() {
+        engine.addSting()
+        stingPickerView.reloadComponent(0)
+        stingPickerView.selectRow(engine.stings.count - 1, inComponent: 0, animated: true)
+        loadSting(at: stingPickerView.selectedRow(inComponent: 0))
+    }
+    
+    @IBAction func deleteSting() {
+        
+    }
 }
 
 
@@ -118,4 +135,28 @@ extension StingViewController: MPMediaPickerControllerDelegate {
         dismiss(animated: true, completion: nil)
     }
     
+}
+
+
+// MARK: UIPickerViewDataSource
+extension StingViewController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return engine.stings.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return engine.stings[row].title
+    }
+}
+
+
+// MARK: UIPickerViewDelegate
+extension StingViewController: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        loadSting(at: row)
+    }
 }
