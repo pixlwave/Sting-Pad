@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="1Zf-16-CXl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="Az4-sg-PrW">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,12 +13,12 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Main View Controller-->
+        <!--Playback-->
         <scene sceneID="qqr-4I-6Cw">
             <objects>
                 <collectionViewController id="yak-cE-mUi" customClass="MainViewController" customModule="Stingtk" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="7JH-vP-Uzz">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="0.64694368840000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -29,70 +29,34 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="Sting Cell" id="wn0-gC-jEl" customClass="StingCell" customModule="Stingtk" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Sting Cell" id="wn0-gC-jEl" customClass="StingCell" customModule="Stingtk" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="103"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="103"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hme-o2-jY2">
-                                            <rect key="frame" x="22" y="19" width="64" height="64"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" image="play"/>
-                                            <connections>
-                                                <action selector="play:" destination="yak-cE-mUi" eventType="touchDown" id="gYr-wX-Ixc"/>
-                                            </connections>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Hy-IS-b0A">
-                                            <rect key="frame" x="117" y="27" width="48" height="48"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" image="stop"/>
-                                            <connections>
-                                                <action selector="stop:" destination="yak-cE-mUi" eventType="touchUpInside" id="UqH-ab-t3W"/>
-                                            </connections>
-                                        </button>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Track" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMJ-uU-fhi">
-                                            <rect key="frame" x="189" y="22" width="108" height="58"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMJ-uU-fhi">
+                                            <rect key="frame" x="20" y="20" width="280" height="63"/>
                                             <fontDescription key="fontDescription" name="Exo2-Regular" family="Exo 2" pointSize="18"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t2r-FP-73O" userLabel="Load Button">
-                                            <rect key="frame" x="284" y="7" width="36" height="32"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="32" id="vzs-Qb-Z4S"/>
-                                                <constraint firstAttribute="width" constant="36" id="xwr-wP-7Ua"/>
-                                            </constraints>
-                                            <state key="normal" image="settings"/>
-                                            <connections>
-                                                <segue destination="sKY-0b-GtB" kind="push" identifier="Sting Settings" id="kQQ-Fg-Wob"/>
-                                            </connections>
-                                        </button>
-                                        <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Playing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ees-sD-UzS">
-                                            <rect key="frame" x="277" y="0.0" width="40" height="20"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="40" id="5Fo-ti-ULG"/>
-                                                <constraint firstAttribute="height" constant="20" id="mRJ-4r-f3U"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="Exo2-Regular" family="Exo 2" pointSize="11"/>
-                                            <color key="textColor" red="0.0" green="0.75294117650000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                     </subviews>
                                 </view>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="t2r-FP-73O" secondAttribute="trailing" id="9Rn-0U-AYA"/>
-                                    <constraint firstItem="Ees-sD-UzS" firstAttribute="top" secondItem="wn0-gC-jEl" secondAttribute="top" id="UXj-Pe-J40"/>
-                                    <constraint firstAttribute="bottom" secondItem="t2r-FP-73O" secondAttribute="bottom" id="sW0-M3-MEE"/>
-                                    <constraint firstAttribute="trailing" secondItem="Ees-sD-UzS" secondAttribute="trailing" constant="3" id="y50-PW-EFM"/>
+                                    <constraint firstItem="cMJ-uU-fhi" firstAttribute="top" secondItem="wn0-gC-jEl" secondAttribute="top" constant="20" id="6w2-xd-K8W"/>
+                                    <constraint firstAttribute="bottom" secondItem="cMJ-uU-fhi" secondAttribute="bottom" constant="20" id="A6N-hm-zRL"/>
+                                    <constraint firstItem="cMJ-uU-fhi" firstAttribute="leading" secondItem="wn0-gC-jEl" secondAttribute="leading" constant="20" id="Mxp-SS-DEc"/>
+                                    <constraint firstAttribute="trailing" secondItem="cMJ-uU-fhi" secondAttribute="trailing" constant="20" id="yvQ-G7-YiH"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <outlet property="playButton" destination="Hme-o2-jY2" id="BAQ-uS-dZx"/>
-                                    <outlet property="playingLabel" destination="Ees-sD-UzS" id="RS9-FS-Xve"/>
-                                    <outlet property="settingsButton" destination="t2r-FP-73O" id="A0r-88-0rh"/>
-                                    <outlet property="stopButton" destination="9Hy-IS-b0A" id="6Qj-pv-WQ6"/>
                                     <outlet property="titleLabel" destination="cMJ-uU-fhi" id="PU5-68-PKs"/>
                                 </connections>
                             </collectionViewCell>
@@ -102,6 +66,7 @@
                             <outlet property="delegate" destination="yak-cE-mUi" id="UP5-39-shT"/>
                         </connections>
                     </collectionView>
+                    <tabBarItem key="tabBarItem" title="Playback" image="load_playlist" id="8eI-x5-krT"/>
                     <navigationItem key="navigationItem" id="fhU-qn-D6z">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="gSH-Mp-izq">
                             <connections>
@@ -112,34 +77,34 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TjI-mr-Eu1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1393" y="33"/>
+            <point key="canvasLocation" x="547.5" y="32.74647887323944"/>
         </scene>
-        <!--Sting View Controller-->
+        <!--Configuration-->
         <scene sceneID="BBH-1f-24n">
             <objects>
-                <viewController id="sKY-0b-GtB" customClass="StingViewController" customModule="Stingtk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Configuration" id="sKY-0b-GtB" customClass="StingViewController" customModule="Stingtk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jgb-pc-X2x"/>
                         <viewControllerLayoutGuide type="bottom" id="rVl-rn-yCL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="IL7-SC-53c">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sting #" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W2N-PM-WRG">
-                                <rect key="frame" x="30" y="30" width="48.5" height="18"/>
+                                <rect key="frame" x="30" y="50" width="48.5" height="18"/>
                                 <fontDescription key="fontDescription" name="Exo2-Regular" family="Exo 2" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="waveload" translatesAutoresizingMaskIntoConstraints="NO" id="DSS-g4-Ymn">
-                                <rect key="frame" x="20" y="162" width="280" height="75"/>
+                                <rect key="frame" x="20" y="182" width="280" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="DSS-g4-Ymn" secondAttribute="height" multiplier="56:15" id="ymd-rN-3EN"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lRX-bK-xRr">
-                                <rect key="frame" x="15" y="272" width="85" height="38"/>
+                                <rect key="frame" x="15" y="292" width="85" height="38"/>
                                 <fontDescription key="fontDescription" name="Exo2-Regular" family="Exo 2" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="15" minY="10" maxX="15" maxY="10"/>
                                 <state key="normal" title="Preview">
@@ -152,7 +117,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyO-e7-KqD">
-                                <rect key="frame" x="197" y="272" width="107" height="38"/>
+                                <rect key="frame" x="197" y="292" width="107" height="38"/>
                                 <fontDescription key="fontDescription" name="Exo2-Regular" family="Exo 2" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
                                 <state key="normal" title="Zoom Out">
@@ -163,7 +128,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SDr-NV-ToG">
-                                <rect key="frame" x="201" y="20" width="103" height="38"/>
+                                <rect key="frame" x="201" y="40" width="103" height="38"/>
                                 <fontDescription key="fontDescription" name="Exo2-Regular" family="Exo 2" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="15" minY="10" maxX="15" maxY="10"/>
                                 <state key="normal" title="Load Track">
@@ -175,13 +140,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDC-cS-RXP">
-                                <rect key="frame" x="30" y="78" width="260" height="22"/>
+                                <rect key="frame" x="30" y="98" width="260" height="22"/>
                                 <fontDescription key="fontDescription" name="Exo2-Regular" family="Exo 2" pointSize="18"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ah-Ra-mmM">
-                                <rect key="frame" x="30" y="105" width="260" height="17"/>
+                                <rect key="frame" x="30" y="125" width="260" height="17"/>
                                 <fontDescription key="fontDescription" name="Exo2-Regular" family="Exo 2" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -209,6 +174,7 @@
                             <constraint firstItem="DSS-g4-Ymn" firstAttribute="leading" secondItem="IL7-SC-53c" secondAttribute="leading" constant="20" id="wes-Sw-WKg"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Configuration" image="settings" id="8x9-bp-sBW"/>
                     <navigationItem key="navigationItem" id="JWi-WN-0lh"/>
                     <connections>
                         <outlet property="artistLabel" destination="8ah-Ra-mmM" id="PDI-ff-nfj"/>
@@ -219,34 +185,32 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="17N-rm-diW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2228" y="33"/>
+            <point key="canvasLocation" x="548" y="836"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="cqG-71-brD">
+        <!--Tab Bar Controller-->
+        <scene sceneID="29m-fQ-Ok6">
             <objects>
-                <navigationController definesPresentationContext="YES" id="1Zf-16-CXl" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="DvO-fl-sIT">
-                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                <tabBarController id="Az4-sg-PrW" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6CD-en-BVX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="barTintColor" red="1" green="1" blue="0.64705882349999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </navigationBar>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="MwC-be-wuX">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </toolbar>
+                        <color key="selectedImageTintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBar>
                     <connections>
-                        <segue destination="yak-cE-mUi" kind="relationship" relationship="rootViewController" id="uaq-Ew-X9r"/>
+                        <segue destination="yak-cE-mUi" kind="relationship" relationship="viewControllers" id="vXm-H1-87N"/>
+                        <segue destination="sKY-0b-GtB" kind="relationship" relationship="viewControllers" id="S86-yB-3C4"/>
                     </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="N6V-b1-R2q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="auo-40-VJW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="549" y="33"/>
+            <point key="canvasLocation" x="-323" y="33"/>
         </scene>
     </scenes>
     <resources>
-        <image name="play" width="64" height="64"/>
+        <image name="load_playlist" width="18" height="18"/>
         <image name="settings" width="16" height="16"/>
-        <image name="stop" width="48" height="48"/>
         <image name="waveload" width="280" height="75"/>
     </resources>
 </document>

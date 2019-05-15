@@ -29,6 +29,8 @@ class Engine {
             stings = [Sting]()
         }
         
+        enableMultiRoutes()
+        
         // listen for iPod playback changes
         musicPlayer.beginGeneratingPlaybackNotifications()
         NotificationCenter.default.addObserver(self, selector: #selector(playbackStateDidChange(_:)), name:  .MPMusicPlayerControllerPlaybackStateDidChange, object: nil)

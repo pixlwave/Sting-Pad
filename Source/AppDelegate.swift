@@ -10,8 +10,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // prevent device from going to sleep
         application.isIdleTimerDisabled = true
         
-        Engine.shared.enableMultiRoutes()
-        
         // customise appearance
         if let exoFont = UIFont(name: "Exo2-Regular", size: 18), let exoBoldFont = UIFont(name: "Exo2-SemiBold", size: 18) {
             UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: exoFont]

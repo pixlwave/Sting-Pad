@@ -29,22 +29,6 @@ class MainViewController: UICollectionViewController {
         engine.addSting()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Sting Settings", let stingVC = segue.destination as? StingViewController, let button = sender as? UIButton {
-            stingVC.stingIndex = button.tag
-        }
-    }
-    
-    @IBAction func play(_ sender: UIButton) {
-        // plays selected sting and shows that it's playing
-        engine.playSting(sender.tag)
-    }
-    
-    @IBAction func stop(_ sender: UIButton) {
-        // stops and hides the playing label
-        engine.stopSting()
-    }
-    
     #warning("Implement more efficient responses to changed data.")
     @objc func reloadData() {
         collectionView.reloadData()
@@ -72,11 +56,18 @@ class MainViewController: UICollectionViewController {
         guard let stingCell = cell as? StingCell else { return cell }
         
         stingCell.titleLabel.text = engine.stings[indexPath.item].title
-        stingCell.playButton.tag = indexPath.item
-        stingCell.settingsButton.tag = indexPath.item
         
         return stingCell
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if (collectionView.cellForItem(at: indexPath) as? StingCell)?.isPlaying != true {
+            engine.playSting(indexPath.item)
+        } else {
+            engine.stopSting()
+        }
+    }
+    
 }
 
 
@@ -84,11 +75,11 @@ class MainViewController: UICollectionViewController {
 extension MainViewController: StingDelegate {
     func stingDidStartPlaying(_ sting: Sting) {
         let index = engine.stings.firstIndex(of: sting)
-        (collectionView.cellForItem(at: IndexPath(item: index ?? 0, section: 0)) as? StingCell)?.playingLabel.isHidden = false
+        (collectionView.cellForItem(at: IndexPath(item: index ?? 0, section: 0)) as? StingCell)?.isPlaying = true
     }
     
     func stingDidStopPlaying(_ sting: Sting) {
         let index = engine.stings.firstIndex(of: sting)
-        (collectionView.cellForItem(at: IndexPath(item: index ?? 0, section: 0)) as? StingCell)?.playingLabel.isHidden = true
+        (collectionView.cellForItem(at: IndexPath(item: index ?? 0, section: 0)) as? StingCell)?.isPlaying = false
     }
 }

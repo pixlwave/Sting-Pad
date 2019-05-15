@@ -2,10 +2,12 @@ import UIKit
 
 class StingCell: UICollectionViewCell {
     
-    @IBOutlet weak var playButton: UIButton!
-    @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var playingLabel: UILabel!
-    @IBOutlet weak var settingsButton: UIButton!
+    
+    var isPlaying = false {
+        didSet {
+            backgroundColor = isPlaying ? .lightGray : .white
+        }
+    }
     
 }
