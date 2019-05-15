@@ -13,6 +13,8 @@ class Engine {
     let musicPlayer = MPMusicPlayerController.systemMusicPlayer
     var stings: [Sting] {
         didSet {
+            let channels = currentChannels()
+            if channels.count > 3 { useOutput(channels: [channels[2], channels[3]]) }; #warning("Handle this for each new player.")
             NotificationCenter.default.post(Notification(name: Notification.Name("Stings Did Change")))
         }
     }
