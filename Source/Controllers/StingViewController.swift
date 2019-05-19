@@ -21,9 +21,8 @@ class StingViewController: UIViewController {
         waveformView = FDWaveformView(frame: waveformLoadingImageView.frame)
         waveformView.delegate = self
         waveformView.doesAllowScrubbing = true
-        waveformView.doesAllowScrubbing = true
-        waveformView.doesAllowScroll = false
-        waveformView.doesAllowStretch = false
+        waveformView.doesAllowScroll = true
+        waveformView.doesAllowStretch = true
         waveformView.wavesColor = UIColor(red: 0.25, green: 0.25, blue: 1.0, alpha: 1.0)
         waveformView.progressColor = UIColor(red: 0.35, green: 0.35, blue: 0.35, alpha: 1.0)
         
