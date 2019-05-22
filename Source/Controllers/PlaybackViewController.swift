@@ -1,7 +1,7 @@
 import UIKit
 import MediaPlayer
 
-class MainViewController: UICollectionViewController {
+class PlaybackViewController: UICollectionViewController {
     
     private let engine = Engine.shared
 
@@ -23,10 +23,6 @@ class MainViewController: UICollectionViewController {
         if UserDefaults.standard.double(forKey: "WelcomeVersionSeen") < WelcomeViewController.currentVersion {
             showWelcomeScreen()
         }
-    }
-    
-    @IBAction func addSting(_ sender: UIBarButtonItem) {
-        engine.addSting()
     }
     
     #warning("Implement more efficient responses to changed data.")
@@ -72,7 +68,7 @@ class MainViewController: UICollectionViewController {
 
 
 // MARK: StingDelegate
-extension MainViewController: StingDelegate {
+extension PlaybackViewController: StingDelegate {
     func stingDidStartPlaying(_ sting: Sting) {
         let index = engine.stings.firstIndex(of: sting)
         (collectionView.cellForItem(at: IndexPath(item: index ?? 0, section: 0)) as? StingCell)?.isPlaying = true

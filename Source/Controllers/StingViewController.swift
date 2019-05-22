@@ -13,7 +13,6 @@ class StingViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet var waveformLoadingImageView: UIImageView!; #warning("without weak, addSubview(waveformLoadingImageView) unwraps nil")
-    @IBOutlet weak var stingPickerView: UIPickerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,9 +51,6 @@ class StingViewController: UIViewController {
         // get all the relevant track info from the engine
         titleLabel.text = engine.stings[stingIndex].title
         artistLabel.text = engine.stings[stingIndex].artist
-        
-        // update the sting picker
-        stingPickerView.reloadComponent(0)
     }
     
     func updateWaveURL() {
@@ -73,16 +69,6 @@ class StingViewController: UIViewController {
         engine.stopSting()
     }
     
-    @IBAction func addSting() {
-        engine.addSting()
-        stingPickerView.reloadComponent(0)
-        stingPickerView.selectRow(engine.stings.count - 1, inComponent: 0, animated: true)
-        loadSting(at: stingPickerView.selectedRow(inComponent: 0))
-    }
-    
-    @IBAction func deleteSting() {
-        
-    }
 }
 
 
@@ -149,13 +135,5 @@ extension StingViewController: UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return engine.stings[row].title
-    }
-}
-
-
-// MARK: UIPickerViewDelegate
-extension StingViewController: UIPickerViewDelegate {
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        loadSting(at: row)
     }
 }

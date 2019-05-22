@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A504FDE9229550D900B117BF /* ShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A504FDE8229550D900B117BF /* ShowViewController.swift */; };
+		A504FDEB229557FE00B117BF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A504FDEA229557FE00B117BF /* SettingsViewController.swift */; };
 		A52C90E4217A51A2005653C4 /* SongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52C90E3217A51A2005653C4 /* SongCell.swift */; };
 		A549825A1F7067EC00909196 /* FDAudioContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54982581F7067EC00909196 /* FDAudioContext.swift */; };
 		A549825B1F7067EC00909196 /* FDWaveformRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54982591F7067EC00909196 /* FDWaveformRenderOperation.swift */; };
@@ -16,7 +18,7 @@
 		A581C3981B94769F006CE228 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A581C3951B94769F006CE228 /* Main.storyboard */; };
 		A581C3991B94769F006CE228 /* Welcome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A581C3961B94769F006CE228 /* Welcome.storyboard */; };
 		A581C39D1B949A06006CE228 /* StingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C39C1B949A06006CE228 /* StingViewController.swift */; };
-		A581C39F1B949AD6006CE228 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C39E1B949AD6006CE228 /* MainViewController.swift */; };
+		A581C39F1B949AD6006CE228 /* PlaybackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C39E1B949AD6006CE228 /* PlaybackViewController.swift */; };
 		A581C3A21B94A041006CE228 /* StingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C3A11B94A041006CE228 /* StingCell.swift */; };
 		A581C3A41B94C5B2006CE228 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C3A31B94C5B2006CE228 /* WelcomeViewController.swift */; };
 		A5A49C8F1B5BF1C2004B80CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A49C8E1B5BF1C2004B80CE /* AppDelegate.swift */; };
@@ -29,6 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A504FDE8229550D900B117BF /* ShowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowViewController.swift; sourceTree = "<group>"; };
+		A504FDEA229557FE00B117BF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A52C90E3217A51A2005653C4 /* SongCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongCell.swift; sourceTree = "<group>"; };
 		A54982581F7067EC00909196 /* FDAudioContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDAudioContext.swift; sourceTree = "<group>"; };
 		A54982591F7067EC00909196 /* FDWaveformRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDWaveformRenderOperation.swift; sourceTree = "<group>"; };
@@ -38,7 +42,7 @@
 		A581C3951B94769F006CE228 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		A581C3961B94769F006CE228 /* Welcome.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Welcome.storyboard; sourceTree = "<group>"; };
 		A581C39C1B949A06006CE228 /* StingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StingViewController.swift; sourceTree = "<group>"; };
-		A581C39E1B949AD6006CE228 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		A581C39E1B949AD6006CE228 /* PlaybackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackViewController.swift; sourceTree = "<group>"; };
 		A581C3A11B94A041006CE228 /* StingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StingCell.swift; sourceTree = "<group>"; };
 		A581C3A31B94C5B2006CE228 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		A5A49C891B5BF1C2004B80CE /* Stingtk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stingtk.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,8 +125,10 @@
 		A5FBD7D21F7C447000B5799C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A581C39E1B949AD6006CE228 /* MainViewController.swift */,
+				A581C39E1B949AD6006CE228 /* PlaybackViewController.swift */,
+				A504FDE8229550D900B117BF /* ShowViewController.swift */,
 				A581C39C1B949A06006CE228 /* StingViewController.swift */,
+				A504FDEA229557FE00B117BF /* SettingsViewController.swift */,
 				A581C3A31B94C5B2006CE228 /* WelcomeViewController.swift */,
 			);
 			path = Controllers;
@@ -131,8 +137,8 @@
 		A5FBD7D31F7C447800B5799C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A5A49CB01B5BF216004B80CE /* Sting.swift */,
 				A581C38C1B946B7C006CE228 /* Engine.swift */,
+				A5A49CB01B5BF216004B80CE /* Sting.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -238,8 +244,10 @@
 				A52C90E4217A51A2005653C4 /* SongCell.swift in Sources */,
 				A5C32F4E228B64FE00E4B4EB /* Extends.swift in Sources */,
 				A549825A1F7067EC00909196 /* FDAudioContext.swift in Sources */,
+				A504FDEB229557FE00B117BF /* SettingsViewController.swift in Sources */,
+				A504FDE9229550D900B117BF /* ShowViewController.swift in Sources */,
 				A581C39D1B949A06006CE228 /* StingViewController.swift in Sources */,
-				A581C39F1B949AD6006CE228 /* MainViewController.swift in Sources */,
+				A581C39F1B949AD6006CE228 /* PlaybackViewController.swift in Sources */,
 				A581C38D1B946B7C006CE228 /* Engine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
