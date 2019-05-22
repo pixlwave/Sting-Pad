@@ -12,8 +12,6 @@
 		A52C90E4217A51A2005653C4 /* SongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52C90E3217A51A2005653C4 /* SongCell.swift */; };
 		A549825A1F7067EC00909196 /* FDAudioContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54982581F7067EC00909196 /* FDAudioContext.swift */; };
 		A549825B1F7067EC00909196 /* FDWaveformRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54982591F7067EC00909196 /* FDWaveformRenderOperation.swift */; };
-		A54D5B971BA5BCB400958BB7 /* Exo2-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A581C3931B947684006CE228 /* Exo2-Regular.otf */; };
-		A56DCA931BA71E150096C377 /* Exo2-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A56DCA911BA71E0C0096C377 /* Exo2-SemiBold.otf */; };
 		A581C38D1B946B7C006CE228 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C38C1B946B7C006CE228 /* Engine.swift */; };
 		A581C3981B94769F006CE228 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A581C3951B94769F006CE228 /* Main.storyboard */; };
 		A581C3991B94769F006CE228 /* Welcome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A581C3961B94769F006CE228 /* Welcome.storyboard */; };
@@ -36,9 +34,7 @@
 		A52C90E3217A51A2005653C4 /* SongCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongCell.swift; sourceTree = "<group>"; };
 		A54982581F7067EC00909196 /* FDAudioContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDAudioContext.swift; sourceTree = "<group>"; };
 		A54982591F7067EC00909196 /* FDWaveformRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDWaveformRenderOperation.swift; sourceTree = "<group>"; };
-		A56DCA911BA71E0C0096C377 /* Exo2-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo2-SemiBold.otf"; sourceTree = "<group>"; };
 		A581C38C1B946B7C006CE228 /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
-		A581C3931B947684006CE228 /* Exo2-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo2-Regular.otf"; sourceTree = "<group>"; };
 		A581C3951B94769F006CE228 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		A581C3961B94769F006CE228 /* Welcome.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Welcome.storyboard; sourceTree = "<group>"; };
 		A581C39C1B949A06006CE228 /* StingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StingViewController.swift; sourceTree = "<group>"; };
@@ -102,8 +98,6 @@
 				A581C3961B94769F006CE228 /* Welcome.storyboard */,
 				A5BD01DF218F2AEB0010FE10 /* Launch Screen.storyboard */,
 				A5A49C951B5BF1C2004B80CE /* Images.xcassets */,
-				A581C3931B947684006CE228 /* Exo2-Regular.otf */,
-				A56DCA911BA71E0C0096C377 /* Exo2-SemiBold.otf */,
 				A5A49CB21B5BF791004B80CE /* ComputerMagic.m4a */,
 				A5A49C8D1B5BF1C2004B80CE /* Info.plist */,
 			);
@@ -223,8 +217,6 @@
 				A581C3991B94769F006CE228 /* Welcome.storyboard in Resources */,
 				A581C3981B94769F006CE228 /* Main.storyboard in Resources */,
 				A5A49CB51B5BF7E0004B80CE /* ComputerMagic.m4a in Resources */,
-				A54D5B971BA5BCB400958BB7 /* Exo2-Regular.otf in Resources */,
-				A56DCA931BA71E150096C377 /* Exo2-SemiBold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

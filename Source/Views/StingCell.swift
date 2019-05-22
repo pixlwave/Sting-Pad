@@ -6,7 +6,7 @@ class StingCell: UICollectionViewCell {
     
     var isPlaying = false {
         didSet {
-            backgroundColor = isPlaying ? .lightGray : .white
+            backgroundColor = isPlaying ? .lightGray : UIColor(named: "Background Color")
         }
     }
     

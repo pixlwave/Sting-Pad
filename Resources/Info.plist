@@ -24,11 +24,6 @@
 	<true/>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>This will allow you to load your playlists and music files into the app.</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Exo2-Regular.otf</string>
-		<string>Exo2-SemiBold.otf</string>
-	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
