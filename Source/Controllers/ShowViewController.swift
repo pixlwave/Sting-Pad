@@ -81,8 +81,6 @@ class ShowViewController: UITableViewController {
                 tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
             })
             present(alert, animated: true)
-        case 1:
-            super.tableView(tableView, didSelectRowAt: indexPath)
         default:
             return
         }
