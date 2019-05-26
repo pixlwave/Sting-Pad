@@ -30,7 +30,6 @@ class Sting: NSObject, Codable {
     }
     
     init(url: URL, cuePoint: Double) {
-        #warning("Implement loading title & artist from url")
         if let stingPlayer = try? AVAudioPlayer(contentsOf: url) {
             self.url = url
             self.title = url.songTitle() ?? "Unknown"

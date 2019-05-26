@@ -12,7 +12,7 @@ class StingViewController: UIViewController {
     @IBOutlet weak var stingNumberLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var artistLabel: UILabel!
-    @IBOutlet var waveformLoadingImageView: UIImageView!; #warning("without weak, addSubview(waveformLoadingImageView) unwraps nil")
+    @IBOutlet weak var waveformLoadingImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
