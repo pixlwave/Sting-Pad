@@ -77,7 +77,7 @@ extension StingViewController: FDWaveformViewDelegate {
     
     func waveformViewDidLoad(_ waveformView: FDWaveformView) {
         // once the audio file has loaded (and totalSamples is known), set the highlighted samples
-        waveformView.highlightedSamples = 0..<Int(Double(waveformView.totalSamples) * engine.stings[stingIndex].getCue())
+        waveformView.highlightedSamples = 0..<Int(Double(waveformView.totalSamples) * engine.stings[stingIndex].normalisedCuePoint)
     }
     
     func waveformViewDidRender(_ waveform: FDWaveformView) {
@@ -85,8 +85,7 @@ extension StingViewController: FDWaveformViewDelegate {
     }
     
     func waveformDidEndScrubbing(_ waveformView: FDWaveformView) {
-        let cue = Double(waveformView.highlightedSamples?.endIndex ?? 0) / Double(waveformView.totalSamples)
-        engine.stings[stingIndex].setCue(cue)
+        engine.stings[stingIndex].normalisedCuePoint = Double(waveformView.highlightedSamples?.endIndex ?? 0) / Double(waveformView.totalSamples)
         engine.save(); #warning("This is probably bad for performance!")
     }
     

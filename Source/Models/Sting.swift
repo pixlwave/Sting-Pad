@@ -10,7 +10,17 @@ class Sting: NSObject, Codable {
     var url: URL
     var title: String
     var artist: String
-    private(set) var cuePoint: Double; #warning("This is public get to archive, but should probs be computed?")
+    private var cuePoint: Double {
+        didSet {
+            stingPlayer.currentTime = cuePoint
+            stingPlayer.prepareToPlay()
+        }
+    }
+    
+    var normalisedCuePoint: Double {
+        get { return cuePoint / stingPlayer.duration }
+        set { cuePoint = newValue * stingPlayer.duration }
+    }
     
     private let stingPlayer: AVAudioPlayer
     
@@ -81,16 +91,6 @@ class Sting: NSObject, Codable {
         stingPlayer.currentTime = cuePoint
         stingPlayer.prepareToPlay()
         delegate?.stingDidStopPlaying(self)
-    }
-    
-    func setCue(_ cuePoint: Double) {
-        self.cuePoint = cuePoint * stingPlayer.duration
-        stingPlayer.currentTime = self.cuePoint
-        stingPlayer.prepareToPlay()
-    }
-    
-    func getCue() -> Double {
-        return cuePoint / stingPlayer.duration
     }
     
 }
