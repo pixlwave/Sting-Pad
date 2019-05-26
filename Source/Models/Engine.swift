@@ -15,7 +15,7 @@ class Engine {
         didSet {
             let channels = currentChannels()
             if channels.count > 3 { useOutput(channels: [channels[2], channels[3]]) }; #warning("Handle this for each new player.")
-            NotificationCenter.default.post(Notification(name: Notification.Name("Stings Did Change")))
+            NotificationCenter.default.post(Notification(name: .stingsDidChange))
         }
     }
     
@@ -59,6 +59,10 @@ class Engine {
         for sting in stings {
             sting.useOutput(channels: channels)
         }
+    }
+    
+    func newShow() {
+        stings = [Sting]()
     }
     
     func addSting() {

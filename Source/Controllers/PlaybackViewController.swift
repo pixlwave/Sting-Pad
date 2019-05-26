@@ -14,7 +14,7 @@ class PlaybackViewController: UICollectionViewController {
         // prevents scroll view from momentarily blocking the play button's action
         collectionView.delaysContentTouches = false; #warning("Test if this works or if the property needs to be set on the scroll view")
         
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: NSNotification.Name("Stings Did Change"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: .stingsDidChange, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {

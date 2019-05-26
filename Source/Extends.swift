@@ -48,3 +48,7 @@ extension URL {
         return asset.metadata
     }
 }
+
+extension Notification.Name {
+    static let stingsDidChange = Notification.Name("Stings Did Change")
+}

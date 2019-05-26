@@ -57,7 +57,7 @@ class ShowViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            return tableView.dequeueReusableCell(withIdentifier: "Edit Sting Cell") ?? UITableViewCell()
+            return tableView.dequeueReusableCell(withIdentifier: "File Cell") ?? UITableViewCell()
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "Edit Sting Cell") ?? UITableViewCell()
             cell.textLabel?.text = engine.stings[indexPath.row].title
@@ -65,6 +65,26 @@ class ShowViewController: UITableViewController {
             return cell
         default:
             return UITableViewCell()
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            let alert = UIAlertController(title: "New Show?", message: "Are you sure you would like to start a new show? This will delete any unsaved changes.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in
+                tableView.deselectRow(at: indexPath, animated: true)
+            })
+            alert.addAction(UIAlertAction(title: "Yes", style: .destructive) { action in
+                self.engine.newShow()   // reloads playback view controller via notification
+                tableView.deselectRow(at: indexPath, animated: true)
+                tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
+            })
+            present(alert, animated: true)
+        case 1:
+            super.tableView(tableView, didSelectRowAt: indexPath)
+        default:
+            return
         }
     }
     
