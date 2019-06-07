@@ -46,7 +46,7 @@ class Sting: NSObject, Codable {
         }
         
         super.init()
-        configureStingPlayer()
+        configure()
     }
     
     init?(mediaItem: MPMediaItem) {
@@ -59,7 +59,7 @@ class Sting: NSObject, Codable {
         self.stingPlayer = stingPlayer
         
         super.init()
-        configureStingPlayer()
+        configure()
     }
     
     required convenience init(from decoder: Decoder) throws {
@@ -69,18 +69,24 @@ class Sting: NSObject, Codable {
         self.init(url: url, cuePoint: cuePoint)
     }
     
-    func configureStingPlayer() {
+    func configure() {
+        updateDelegate()
+        updateOutputChannels()
+        
         stingPlayer.delegate = self
-        stingPlayer.numberOfLoops = 0 // needed?
-        stingPlayer.channelAssignments = Engine.shared.outputChannels()
         stingPlayer.currentTime = cuePoint
         stingPlayer.prepareToPlay()
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateOutputChannels), name: .outputChannelsDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateDelegate), name: .stingDelegateDidChange, object: nil)
     }
     
     @objc func updateOutputChannels() {
         stingPlayer.channelAssignments = Engine.shared.outputChannels()
+    }
+    
+    @objc func updateDelegate() {
+        delegate = Engine.shared.stingDelegate
     }
     
     func play() {

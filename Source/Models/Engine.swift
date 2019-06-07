@@ -14,6 +14,7 @@ class Engine {
     var show: ShowDocument
     
     private var playingSting = 0
+    var stingDelegate: StingDelegate? { didSet { NotificationCenter.default.post(Notification(name: .stingDelegateDidChange)) } }
     
     init() {
         #warning("Test whether file exists after initialising document?")
@@ -85,12 +86,6 @@ class Engine {
     
     func pauseiPod() {
         musicPlayer.pause()
-    }
-    
-    func setStingDelegates(_ delegate: StingDelegate) {
-        for sting in show.stings {
-            sting.delegate = delegate
-        }
     }
     
 }

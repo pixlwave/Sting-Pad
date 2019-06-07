@@ -9,7 +9,7 @@ class PlaybackViewController: UICollectionViewController {
         super.viewDidLoad()
         
         // make self delegate for sting players
-        engine.setStingDelegates(self)
+        engine.stingDelegate = self
         
         // prevents scroll view from momentarily blocking the play button's action
         collectionView.delaysContentTouches = false; #warning("Test if this works or if the property needs to be set on the scroll view")
