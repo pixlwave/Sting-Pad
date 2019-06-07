@@ -74,8 +74,7 @@ class Sting: NSObject, Codable {
         updateOutputChannels()
         
         stingPlayer.delegate = self
-        stingPlayer.currentTime = cuePoint
-        stingPlayer.prepareToPlay()
+        seekToCuePoint()
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateOutputChannels), name: .outputChannelsDidChange, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateDelegate), name: .stingDelegateDidChange, object: nil)
@@ -96,9 +95,13 @@ class Sting: NSObject, Codable {
     
     func stop() {
         stingPlayer.stop()
-        stingPlayer.currentTime = cuePoint
-        stingPlayer.prepareToPlay()
         delegate?.stingDidStopPlaying(self)
+        seekToCuePoint()
+    }
+    
+    func seekToCuePoint() {
+        stingPlayer.currentTime = cuePoint
+        if !stingPlayer.isPlaying { stingPlayer.prepareToPlay() }
     }
     
 }

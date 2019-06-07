@@ -68,6 +68,10 @@ class Engine {
         playingSting = selectedSting
     }
     
+    func rewindSting(_ selectedSting: Int) {
+        show.stings[selectedSting].seekToCuePoint()
+    }
+    
     func stopSting() {
         show.stings[playingSting].stop()
     }

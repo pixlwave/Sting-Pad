@@ -77,7 +77,7 @@ class PlaybackViewController: UICollectionViewController {
         if (collectionView.cellForItem(at: indexPath) as? StingCell)?.isPlaying != true {
             engine.playSting(indexPath.item)
         } else {
-            engine.stopSting()
+            engine.rewindSting(indexPath.item)
         }
     }
     
