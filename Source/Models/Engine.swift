@@ -17,12 +17,11 @@ class Engine {
     var stingDelegate: StingDelegate? { didSet { NotificationCenter.default.post(Notification(name: .stingDelegateDidChange)) } }
     
     init() {
-        #warning("Test whether file exists after initialising document?")
-        if FileManager.default.fileExists(atPath: ShowDocument.defaultURL.path) {
-            show = ShowDocument(fileURL: ShowDocument.defaultURL)
+        show = ShowDocument(fileURL: ShowDocument.defaultURL)
+        
+        if FileManager.default.fileExists(atPath: show.fileURL.path) {
             show.open()
         } else {
-            show = ShowDocument(fileURL: ShowDocument.defaultURL)
             show.save(to: show.fileURL, for: .forCreating)
         }
         
