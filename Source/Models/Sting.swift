@@ -3,6 +3,7 @@ import AVFoundation
 import MediaPlayer
 
 class Sting: NSObject, Codable {
+    
     static let defaultURL = URL(fileURLWithPath: Bundle.main.path(forResource: "ComputerMagic", ofType: "m4a")!)
     
     var delegate: StingDelegate?
@@ -45,11 +46,7 @@ class Sting: NSObject, Codable {
         }
         
         super.init()
-        
-        self.stingPlayer.delegate = self
-        self.stingPlayer.numberOfLoops = 0  // needed?
-        self.stingPlayer.currentTime = cuePoint
-        self.stingPlayer.prepareToPlay()
+        configureStingPlayer()
     }
     
     init?(mediaItem: MPMediaItem) {
@@ -62,11 +59,7 @@ class Sting: NSObject, Codable {
         self.stingPlayer = stingPlayer
         
         super.init()
-        
-        stingPlayer.delegate = self
-        stingPlayer.numberOfLoops = 0 // needed?
-        stingPlayer.currentTime = cuePoint
-        stingPlayer.prepareToPlay()
+        configureStingPlayer()
     }
     
     required convenience init(from decoder: Decoder) throws {
@@ -76,8 +69,18 @@ class Sting: NSObject, Codable {
         self.init(url: url, cuePoint: cuePoint)
     }
     
-    func useOutput(channels: [AVAudioSessionChannelDescription]) {
-        stingPlayer.channelAssignments = channels
+    func configureStingPlayer() {
+        stingPlayer.delegate = self
+        stingPlayer.numberOfLoops = 0 // needed?
+        stingPlayer.channelAssignments = Engine.shared.outputChannels()
+        stingPlayer.currentTime = cuePoint
+        stingPlayer.prepareToPlay()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateOutputChannels), name: .outputChannelsDidChange, object: nil)
+    }
+    
+    @objc func updateOutputChannels() {
+        stingPlayer.channelAssignments = Engine.shared.outputChannels()
     }
     
     func play() {
@@ -94,6 +97,8 @@ class Sting: NSObject, Codable {
     
 }
 
+
+// MARK: AVAudioPlayerDelegate
 extension Sting: AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         delegate?.stingDidStopPlaying(self)
