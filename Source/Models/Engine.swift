@@ -11,16 +11,18 @@ class Engine {
     private var isMultiRoute = true
     
     let musicPlayer = MPMusicPlayerController.systemMusicPlayer
-    var stings: [Sting] { didSet { NotificationCenter.default.post(Notification(name: .stingsDidChange)) } }
+    var show: ShowDocument
     
     private var playingSting = 0
     
     init() {
-        // load stings from user defaults
-        if let data = UserDefaults.standard.data(forKey: "Stings"), let array = try? JSONDecoder().decode([Sting].self, from: data) {
-            stings = array
+        #warning("Test whether file exists after initialising document?")
+        if FileManager.default.fileExists(atPath: ShowDocument.defaultURL.path) {
+            show = ShowDocument(fileURL: ShowDocument.defaultURL)
+            show.open()
         } else {
-            stings = [Sting]()
+            show = ShowDocument(fileURL: ShowDocument.defaultURL)
+            show.save(to: show.fileURL, for: .forCreating)
         }
         
         configureAudioSession()
@@ -52,22 +54,22 @@ class Engine {
     }
     
     func newShow() {
-        stings = [Sting]()
+        show.stings = [Sting]()
     }
     
     func addSting() {
-        stings.append(Sting(url: Sting.defaultURL, cuePoint: 0))
+        show.stings.append(Sting(url: Sting.defaultURL, cuePoint: 0))
     }
     
     func playSting(_ selectedSting: Int) {
         if !isMultiRoute { musicPlayer.pause() }
-        if selectedSting != playingSting { stings[playingSting].stop() }
-        stings[selectedSting].play()
+        if selectedSting != playingSting { show.stings[playingSting].stop() }
+        show.stings[selectedSting].play()
         playingSting = selectedSting
     }
     
     func stopSting() {
-        stings[playingSting].stop()
+        show.stings[playingSting].stop()
     }
     
     @objc func playbackStateDidChange(_ notification: Notification) {
@@ -77,7 +79,7 @@ class Engine {
     }
     
     func playiPod() {
-        if !isMultiRoute { stings[playingSting].stop() }
+        if !isMultiRoute { show.stings[playingSting].stop() }
         musicPlayer.play()
     }
     
@@ -86,14 +88,9 @@ class Engine {
     }
     
     func setStingDelegates(_ delegate: StingDelegate) {
-        for sting in stings {
+        for sting in show.stings {
             sting.delegate = delegate
         }
-    }
-    
-    func save() {
-        guard let jsonData = try? JSONEncoder().encode(stings) else { return }
-        UserDefaults.standard.set(jsonData, forKey: "Stings")
     }
     
 }

@@ -27,7 +27,7 @@ class ShowViewController: UITableViewController {
     
     @IBAction func addSting() {
         engine.addSting()
-        tableView.insertRows(at: [IndexPath(row: engine.stings.count - 1, section: 1)], with: .automatic)
+        tableView.insertRows(at: [IndexPath(row: engine.show.stings.count - 1, section: 1)], with: .automatic)
     }
     
     @IBAction func edit() {
@@ -54,7 +54,7 @@ class ShowViewController: UITableViewController {
         case 0:
             return 1
         case 1:
-            return engine.stings.count + 1
+            return engine.show.stings.count + 1
         default:
             return 0
         }
@@ -65,9 +65,9 @@ class ShowViewController: UITableViewController {
         case 0:
             return tableView.dequeueReusableCell(withIdentifier: "File Cell") ?? UITableViewCell()
         case 1:
-            if indexPath.row < engine.stings.count {
+            if indexPath.row < engine.show.stings.count {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Edit Sting Cell") ?? UITableViewCell()
-                cell.textLabel?.text = engine.stings[indexPath.row].title
+                cell.textLabel?.text = engine.show.stings[indexPath.row].title
             
                 return cell
             } else {
@@ -92,7 +92,7 @@ class ShowViewController: UITableViewController {
             })
             present(alert, animated: true)
         case 1:
-            if indexPath.row == engine.stings.count {
+            if indexPath.row == engine.show.stings.count {
                 tableView.deselectRow(at: indexPath, animated: true)
                 addSting()
             }
@@ -103,22 +103,22 @@ class ShowViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         guard indexPath.section == 1 else { return false }
-        return indexPath.row < engine.stings.count  // ignores add sting button
+        return indexPath.row < engine.show.stings.count  // ignores add sting button
     }
     
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         guard indexPath.section == 1 else { return false }
-        return indexPath.row < engine.stings.count  // ignores add sting button
+        return indexPath.row < engine.show.stings.count  // ignores add sting button
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { super.tableView(tableView, commit: editingStyle, forRowAt: indexPath); return }
-        engine.stings.remove(at: indexPath.row)
+        engine.show.stings.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        engine.stings.insert(engine.stings.remove(at: sourceIndexPath.row), at: destinationIndexPath.row)
+        engine.show.stings.insert(engine.show.stings.remove(at: sourceIndexPath.row), at: destinationIndexPath.row)
     }
     
 }

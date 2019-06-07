@@ -43,7 +43,7 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return engine.stings.count
+        return engine.show.stings.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -51,7 +51,7 @@ class PlaybackViewController: UICollectionViewController {
         
         guard let stingCell = cell as? StingCell else { return cell }
         
-        stingCell.titleLabel.text = engine.stings[indexPath.item].title
+        stingCell.titleLabel.text = engine.show.stings[indexPath.item].title
         
         return stingCell
     }
@@ -70,12 +70,12 @@ class PlaybackViewController: UICollectionViewController {
 // MARK: StingDelegate
 extension PlaybackViewController: StingDelegate {
     func stingDidStartPlaying(_ sting: Sting) {
-        let index = engine.stings.firstIndex(of: sting)
+        let index = engine.show.stings.firstIndex(of: sting)
         (collectionView.cellForItem(at: IndexPath(item: index ?? 0, section: 0)) as? StingCell)?.isPlaying = true
     }
     
     func stingDidStopPlaying(_ sting: Sting) {
-        let index = engine.stings.firstIndex(of: sting)
+        let index = engine.show.stings.firstIndex(of: sting)
         (collectionView.cellForItem(at: IndexPath(item: index ?? 0, section: 0)) as? StingCell)?.isPlaying = false
     }
 }

@@ -49,12 +49,12 @@ class StingViewController: UIViewController {
     
     func updateLabels() {
         // get all the relevant track info from the engine
-        titleLabel.text = engine.stings[stingIndex].title
-        artistLabel.text = engine.stings[stingIndex].artist
+        titleLabel.text = engine.show.stings[stingIndex].title
+        artistLabel.text = engine.show.stings[stingIndex].artist
     }
     
     func updateWaveURL() {
-        waveformView.audioURL = engine.stings[stingIndex].url
+        waveformView.audioURL = engine.show.stings[stingIndex].url
     }
     
     @IBAction func zoomWaveOut() {
@@ -77,7 +77,7 @@ extension StingViewController: FDWaveformViewDelegate {
     
     func waveformViewDidLoad(_ waveformView: FDWaveformView) {
         // once the audio file has loaded (and totalSamples is known), set the highlighted samples
-        waveformView.highlightedSamples = 0..<Int(Double(waveformView.totalSamples) * engine.stings[stingIndex].normalisedCuePoint)
+        waveformView.highlightedSamples = 0..<Int(Double(waveformView.totalSamples) * engine.show.stings[stingIndex].normalisedCuePoint)
     }
     
     func waveformViewDidRender(_ waveform: FDWaveformView) {
@@ -85,8 +85,8 @@ extension StingViewController: FDWaveformViewDelegate {
     }
     
     func waveformDidEndScrubbing(_ waveformView: FDWaveformView) {
-        engine.stings[stingIndex].normalisedCuePoint = Double(waveformView.highlightedSamples?.endIndex ?? 0) / Double(waveformView.totalSamples)
-        engine.save(); #warning("This is probably bad for performance!")
+        engine.show.stings[stingIndex].normalisedCuePoint = Double(waveformView.highlightedSamples?.endIndex ?? 0) / Double(waveformView.totalSamples)
+        engine.show.updateChangeCount(.done)
     }
     
 }
@@ -98,7 +98,7 @@ extension StingViewController: MPMediaPickerControllerDelegate {
     func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
         // load media item into the currently loading sting player and update labels
         if let newSting = Sting(mediaItem: mediaItemCollection.items[0]) {
-            engine.stings[stingIndex] = newSting
+            engine.show.stings[stingIndex] = newSting
             updateLabels()
             
             // add wave loading image whilst waveform generates
@@ -107,7 +107,7 @@ extension StingViewController: MPMediaPickerControllerDelegate {
             // generate new waveform
             updateWaveURL()
             
-            engine.save()
+            engine.show.updateChangeCount(.done)
         }
         
         // dismiss media picker
@@ -129,10 +129,10 @@ extension StingViewController: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return engine.stings.count
+        return engine.show.stings.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return engine.stings[row].title
+        return engine.show.stings[row].title
     }
 }
