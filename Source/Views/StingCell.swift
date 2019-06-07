@@ -10,4 +10,10 @@ class StingCell: UICollectionViewCell {
         }
     }
     
+    var isCued = false {
+        didSet {
+            layer.borderWidth = isCued ? 3 : 0
+        }
+    }
+    
 }

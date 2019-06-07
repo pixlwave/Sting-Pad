@@ -7,6 +7,8 @@ class TransportView: UIView {
     @IBOutlet var view: UIView!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
+    @IBOutlet weak var previousButton: UIButton!
+    @IBOutlet weak var nextButton: UIButton!
     
     override init(frame: CGRect) {
         super.init(frame: frame)

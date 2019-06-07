@@ -5,6 +5,7 @@ class PlaybackViewController: UICollectionViewController {
     
     private let engine = Engine.shared
     private var transportView: TransportView?
+    private var cuedSting = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -13,7 +14,10 @@ class PlaybackViewController: UICollectionViewController {
         engine.stingDelegate = self
         
         let transportView = TransportView(frame: .zero)
+        transportView.playButton.addTarget(self, action: #selector(playSting), for: .touchUpInside)
         transportView.stopButton.addTarget(self, action: #selector(stopSting), for: .touchUpInside)
+        transportView.previousButton.addTarget(self, action: #selector(previousSting), for: .touchUpInside)
+        transportView.nextButton.addTarget(self, action: #selector(nextSting), for: .touchUpInside)
         view.addSubview(transportView)
         self.transportView = transportView
         
@@ -55,8 +59,31 @@ class PlaybackViewController: UICollectionViewController {
         }
     }
     
+    @objc func playSting() {
+        engine.playSting(cuedSting)
+        nextSting()
+    }
+    
     @objc func stopSting() {
         engine.stopSting()
+    }
+    
+    @objc func nextSting() {
+        stingCellForItem(at: IndexPath(item: cuedSting, section: 0))?.isCued = false
+        cuedSting = (cuedSting + 1) % engine.show.stings.count
+        stingCellForItem(at: IndexPath(item: cuedSting, section: 0))?.isCued = true
+    }
+    
+    @objc func previousSting() {
+        if cuedSting > 0 {
+            stingCellForItem(at: IndexPath(item: cuedSting, section: 0))?.isCued = false
+            cuedSting = cuedSting - 1 % engine.show.stings.count
+            stingCellForItem(at: IndexPath(item: cuedSting, section: 0))?.isCued = true
+        }
+    }
+    
+    func stingCellForItem(at indexPath: IndexPath) -> StingCell? {
+        return collectionView.cellForItem(at: indexPath) as? StingCell
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -69,6 +96,7 @@ class PlaybackViewController: UICollectionViewController {
         guard let stingCell = cell as? StingCell else { return cell }
         
         stingCell.titleLabel.text = engine.show.stings[indexPath.item].title
+        stingCell.isCued = indexPath.item == cuedSting
         
         return stingCell
     }
