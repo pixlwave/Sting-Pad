@@ -4,12 +4,18 @@ import MediaPlayer
 class PlaybackViewController: UICollectionViewController {
     
     private let engine = Engine.shared
+    private var transportView: TransportView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // make self delegate for sting players
         engine.stingDelegate = self
+        
+        let transportView = TransportView(frame: .zero)
+        transportView.stopButton.addTarget(self, action: #selector(stopSting), for: .touchUpInside)
+        view.addSubview(transportView)
+        self.transportView = transportView
         
         // prevents scroll view from momentarily blocking the play button's action
         collectionView.delaysContentTouches = false; #warning("Test if this works or if the property needs to be set on the scroll view")
@@ -23,6 +29,13 @@ class PlaybackViewController: UICollectionViewController {
         if UserDefaults.standard.double(forKey: "WelcomeVersionSeen") < WelcomeViewController.currentVersion {
             showWelcomeScreen()
         }
+    }
+    
+    override func viewWillLayoutSubviews() {
+        let origin = CGPoint(x: 0, y: view.frame.height - view.safeAreaInsets.bottom - TransportView.defaultHeight)
+        let size = CGSize(width: view.frame.width, height: TransportView.defaultHeight)
+        transportView?.frame = CGRect(origin: origin, size: size)
+        collectionView.contentInset.bottom = size.height
     }
     
     #warning("Implement more efficient responses to changed data.")
@@ -40,6 +53,10 @@ class PlaybackViewController: UICollectionViewController {
             // record the version being seen to allow ui updates to be shown in future versions
             UserDefaults.standard.set(WelcomeViewController.currentVersion, forKey: "WelcomeVersionSeen")
         }
+    }
+    
+    @objc func stopSting() {
+        engine.stopSting()
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

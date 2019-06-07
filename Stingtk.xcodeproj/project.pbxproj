@@ -13,6 +13,8 @@
 		A549825A1F7067EC00909196 /* FDAudioContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54982581F7067EC00909196 /* FDAudioContext.swift */; };
 		A549825B1F7067EC00909196 /* FDWaveformRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54982591F7067EC00909196 /* FDWaveformRenderOperation.swift */; };
 		A55C0E7222AA5498008DDB12 /* ShowDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C0E7122AA5498008DDB12 /* ShowDocument.swift */; };
+		A55C0E7422AA71FC008DDB12 /* TransportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C0E7322AA71FC008DDB12 /* TransportView.swift */; };
+		A55C0E7622AA7202008DDB12 /* TransportView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A55C0E7522AA7202008DDB12 /* TransportView.xib */; };
 		A581C38D1B946B7C006CE228 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C38C1B946B7C006CE228 /* Engine.swift */; };
 		A581C3981B94769F006CE228 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A581C3951B94769F006CE228 /* Main.storyboard */; };
 		A581C3991B94769F006CE228 /* Welcome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A581C3961B94769F006CE228 /* Welcome.storyboard */; };
@@ -36,6 +38,8 @@
 		A54982581F7067EC00909196 /* FDAudioContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDAudioContext.swift; sourceTree = "<group>"; };
 		A54982591F7067EC00909196 /* FDWaveformRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDWaveformRenderOperation.swift; sourceTree = "<group>"; };
 		A55C0E7122AA5498008DDB12 /* ShowDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDocument.swift; sourceTree = "<group>"; };
+		A55C0E7322AA71FC008DDB12 /* TransportView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransportView.swift; sourceTree = "<group>"; };
+		A55C0E7522AA7202008DDB12 /* TransportView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransportView.xib; sourceTree = "<group>"; };
 		A581C38C1B946B7C006CE228 /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		A581C3951B94769F006CE228 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		A581C3961B94769F006CE228 /* Welcome.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Welcome.storyboard; sourceTree = "<group>"; };
@@ -97,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				A581C3951B94769F006CE228 /* Main.storyboard */,
+				A55C0E7522AA7202008DDB12 /* TransportView.xib */,
 				A581C3961B94769F006CE228 /* Welcome.storyboard */,
 				A5BD01DF218F2AEB0010FE10 /* Launch Screen.storyboard */,
 				A5A49C951B5BF1C2004B80CE /* Images.xcassets */,
@@ -144,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				A581C3A11B94A041006CE228 /* StingCell.swift */,
+				A55C0E7322AA71FC008DDB12 /* TransportView.swift */,
 				A52C90E3217A51A2005653C4 /* SongCell.swift */,
 			);
 			path = Views;
@@ -219,6 +225,7 @@
 				A5BD01E0218F2AEB0010FE10 /* Launch Screen.storyboard in Resources */,
 				A581C3991B94769F006CE228 /* Welcome.storyboard in Resources */,
 				A581C3981B94769F006CE228 /* Main.storyboard in Resources */,
+				A55C0E7622AA7202008DDB12 /* TransportView.xib in Resources */,
 				A5A49CB51B5BF7E0004B80CE /* ComputerMagic.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,6 +247,7 @@
 				A52C90E4217A51A2005653C4 /* SongCell.swift in Sources */,
 				A5C32F4E228B64FE00E4B4EB /* Extends.swift in Sources */,
 				A549825A1F7067EC00909196 /* FDAudioContext.swift in Sources */,
+				A55C0E7422AA71FC008DDB12 /* TransportView.swift in Sources */,
 				A504FDEB229557FE00B117BF /* SettingsViewController.swift in Sources */,
 				A504FDE9229550D900B117BF /* ShowViewController.swift in Sources */,
 				A581C39D1B949A06006CE228 /* StingViewController.swift in Sources */,
@@ -359,7 +367,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = NU8A5Y875P;
 				INFOPLIST_FILE = Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.pixlwave.Stingmtk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -375,7 +383,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = NU8A5Y875P;
 				INFOPLIST_FILE = Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.pixlwave.Stingmtk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
