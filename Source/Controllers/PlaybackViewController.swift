@@ -4,22 +4,20 @@ import MediaPlayer
 class PlaybackViewController: UICollectionViewController {
     
     private let engine = Engine.shared
-    private var transportView: TransportView?
     private var cuedSting = 0
-
+    
+    @IBOutlet var transportView: UIView!
+    private let transportViewHeight: CGFloat = 90
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // make self delegate for sting players
         engine.stingDelegate = self
         
-        let transportView = TransportView(frame: .zero)
-        transportView.playButton.addTarget(self, action: #selector(playSting), for: .touchUpInside)
-        transportView.stopButton.addTarget(self, action: #selector(stopSting), for: .touchUpInside)
-        transportView.previousButton.addTarget(self, action: #selector(previousSting), for: .touchUpInside)
-        transportView.nextButton.addTarget(self, action: #selector(nextSting), for: .touchUpInside)
+        // load the transport view nib and add as a subview via it's outlet
+        Bundle.main.loadNibNamed("TransportView", owner: self, options: nil)
         view.addSubview(transportView)
-        self.transportView = transportView
         
         // prevents scroll view from momentarily blocking the play button's action
         collectionView.delaysContentTouches = false; #warning("Test if this works or if the property needs to be set on the scroll view")
@@ -36,8 +34,8 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     override func viewWillLayoutSubviews() {
-        let origin = CGPoint(x: 0, y: view.frame.height - view.safeAreaInsets.bottom - TransportView.defaultHeight)
-        let size = CGSize(width: view.frame.width, height: TransportView.defaultHeight)
+        let origin = CGPoint(x: 0, y: view.frame.height - view.safeAreaInsets.bottom - transportViewHeight)
+        let size = CGSize(width: view.frame.width, height: transportViewHeight)
         transportView?.frame = CGRect(origin: origin, size: size)
         collectionView.contentInset.bottom = size.height
     }
@@ -59,22 +57,22 @@ class PlaybackViewController: UICollectionViewController {
         }
     }
     
-    @objc func playSting() {
+    @IBAction func playSting() {
         engine.playSting(cuedSting)
         nextSting()
     }
     
-    @objc func stopSting() {
+    @IBAction func stopSting() {
         engine.stopSting()
     }
     
-    @objc func nextSting() {
+    @IBAction func nextSting() {
         stingCellForItem(at: IndexPath(item: cuedSting, section: 0))?.isCued = false
         cuedSting = (cuedSting + 1) % engine.show.stings.count
         stingCellForItem(at: IndexPath(item: cuedSting, section: 0))?.isCued = true
     }
     
-    @objc func previousSting() {
+    @IBAction func previousSting() {
         if cuedSting > 0 {
             stingCellForItem(at: IndexPath(item: cuedSting, section: 0))?.isCued = false
             cuedSting = cuedSting - 1 % engine.show.stings.count
