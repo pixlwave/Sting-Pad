@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -19,51 +19,64 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <visualEffectView opaque="NO" contentMode="scaleToFill" id="fEE-y9-Vlx">
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fEE-y9-Vlx">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="QXm-bq-c4M">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="y23-dR-PwW">
-                                <rect key="frame" x="33" y="12" width="64" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y23-dR-PwW">
+                                <rect key="frame" x="32" y="13" width="64" height="64"/>
                                 <state key="normal" image="play"/>
                                 <connections>
                                     <action selector="playSting" destination="-1" eventType="touchUpInside" id="gPP-lq-KeX"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mUe-Rk-ltB">
-                                <rect key="frame" x="128" y="20" width="48" height="48"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mUe-Rk-ltB">
+                                <rect key="frame" x="128" y="21" width="48" height="48"/>
                                 <state key="normal" image="stop"/>
                                 <connections>
                                     <action selector="stopSting" destination="-1" eventType="touchUpInside" id="i7l-lD-82m"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="N6t-Wv-uJW">
-                                <rect key="frame" x="208" y="30" width="32" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N6t-Wv-uJW">
+                                <rect key="frame" x="198" y="22.5" width="52" height="45"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                 <state key="normal" image="ipodprevious"/>
                                 <connections>
                                     <action selector="previousSting" destination="-1" eventType="touchUpInside" id="g2m-9v-gfT"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="amq-cP-E4J">
-                                <rect key="frame" x="266" y="30" width="32" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="amq-cP-E4J">
+                                <rect key="frame" x="254" y="22.5" width="52" height="45"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                 <state key="normal" image="ipodnext"/>
                                 <connections>
                                     <action selector="nextSting" destination="-1" eventType="touchUpInside" id="AfS-T3-LIl"/>
                                 </connections>
                             </button>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="mUe-Rk-ltB" firstAttribute="centerY" secondItem="QXm-bq-c4M" secondAttribute="centerY" id="20m-xg-ejc"/>
+                            <constraint firstItem="amq-cP-E4J" firstAttribute="centerY" secondItem="QXm-bq-c4M" secondAttribute="centerY" id="85U-8D-zbR"/>
+                            <constraint firstItem="N6t-Wv-uJW" firstAttribute="centerX" secondItem="QXm-bq-c4M" secondAttribute="centerX" multiplier="1.4" id="9w3-0b-mv4"/>
+                            <constraint firstItem="y23-dR-PwW" firstAttribute="centerX" secondItem="QXm-bq-c4M" secondAttribute="centerX" multiplier="0.4" id="B4U-RL-azv"/>
+                            <constraint firstItem="y23-dR-PwW" firstAttribute="centerY" secondItem="QXm-bq-c4M" secondAttribute="centerY" id="TuB-hJ-B8C"/>
+                            <constraint firstItem="amq-cP-E4J" firstAttribute="centerX" secondItem="QXm-bq-c4M" secondAttribute="centerX" multiplier="1.75" id="aaf-rM-lUH"/>
+                            <constraint firstItem="mUe-Rk-ltB" firstAttribute="centerX" secondItem="QXm-bq-c4M" secondAttribute="centerX" multiplier="0.95" id="mPB-GD-Dli"/>
+                            <constraint firstItem="N6t-Wv-uJW" firstAttribute="centerY" secondItem="QXm-bq-c4M" secondAttribute="centerY" id="roK-OF-29R"/>
+                        </constraints>
                     </view>
                     <blurEffect style="light"/>
                 </visualEffectView>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="fEE-y9-Vlx" secondAttribute="bottom" id="0Oz-1K-UJf"/>
+                <constraint firstAttribute="trailing" secondItem="fEE-y9-Vlx" secondAttribute="trailing" id="DCn-mm-lI4"/>
+                <constraint firstItem="fEE-y9-Vlx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="EoK-Ub-vHR"/>
+                <constraint firstItem="fEE-y9-Vlx" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="O18-X0-n07"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="37.681159420289859" y="34.821428571428569"/>
