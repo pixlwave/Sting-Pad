@@ -101,7 +101,7 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if (collectionView.cellForItem(at: indexPath) as? StingCell)?.isPlaying != true {
+        if stingCellForItem(at: indexPath)?.isPlaying != true {
             engine.playSting(indexPath.item)
         } else {
             engine.rewindSting(indexPath.item)
@@ -114,12 +114,12 @@ class PlaybackViewController: UICollectionViewController {
 // MARK: StingDelegate
 extension PlaybackViewController: StingDelegate {
     func stingDidStartPlaying(_ sting: Sting) {
-        let index = engine.show.stings.firstIndex(of: sting)
-        (collectionView.cellForItem(at: IndexPath(item: index ?? 0, section: 0)) as? StingCell)?.isPlaying = true
+        guard let index = engine.show.stings.firstIndex(of: sting) else { return }
+        stingCellForItem(at: IndexPath(item: index, section: 0))?.isPlaying = true
     }
     
     func stingDidStopPlaying(_ sting: Sting) {
-        let index = engine.show.stings.firstIndex(of: sting)
-        (collectionView.cellForItem(at: IndexPath(item: index ?? 0, section: 0)) as? StingCell)?.isPlaying = false
+        guard let index = engine.show.stings.firstIndex(of: sting) else { return }
+        stingCellForItem(at: IndexPath(item: index, section: 0))?.isPlaying = false
     }
 }
