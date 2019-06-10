@@ -49,8 +49,14 @@ extension URL {
     }
 }
 
+
 extension Notification.Name {
     static let stingsDidChange = Notification.Name("Stings Did Change")
     static let stingDelegateDidChange = Notification.Name("Sting Delegate Did Change")
     static let outputChannelsDidChange = Notification.Name("Output Channels Did Change")
+}
+
+
+extension CGColor {
+    static let cuedStingBackgroundColor = UIColor.black.withAlphaComponent(0.5).cgColor
 }
