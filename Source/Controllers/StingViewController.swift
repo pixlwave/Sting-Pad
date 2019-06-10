@@ -1,5 +1,4 @@
 import UIKit
-import MediaPlayer
 
 class StingViewController: UIViewController {
     
@@ -17,7 +16,13 @@ class StingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        waveformView = FDWaveformView(frame: waveformLoadingImageView.frame)
+        // load track info
+        stingNumberLabel.text = "Sting \(stingIndex + 1)"
+        titleLabel.text = engine.show.stings[stingIndex].title
+        artistLabel.text = engine.show.stings[stingIndex].artist
+        
+        // set up the waveform view
+        waveformView = FDWaveformView(frame: .zero)
         waveformView.delegate = self
         waveformView.doesAllowScrubbing = true
         waveformView.doesAllowScroll = true
@@ -25,36 +30,13 @@ class StingViewController: UIViewController {
         waveformView.wavesColor = UIColor(red: 0.25, green: 0.25, blue: 1.0, alpha: 1.0)
         waveformView.progressColor = UIColor(red: 0.35, green: 0.35, blue: 0.35, alpha: 1.0)
         
-        loadSting(at: stingIndex)
+        // render the waveform
+        waveformView.audioURL = engine.show.stings[stingIndex].url
         view.addSubview(waveformView)
     }
     
-    func loadSting(at index: Int) {
-        stingIndex = index
-        
-        // load track info
-        stingNumberLabel.text = "Sting \(stingIndex + 1)"
-        updateLabels()
-        updateWaveURL()
-    }
-    
-    @IBAction func loadTrack() {
-        // present music picker to load a track from ipod
-        let mediaPicker = MPMediaPickerController(mediaTypes: .music)
-        mediaPicker.delegate = self
-        mediaPicker.showsCloudItems = false  // hides iTunes in the Cloud items, which crash the app if picked
-        mediaPicker.allowsPickingMultipleItems = false
-        present(mediaPicker, animated: true, completion: nil)
-    }
-    
-    func updateLabels() {
-        // get all the relevant track info from the engine
-        titleLabel.text = engine.show.stings[stingIndex].title
-        artistLabel.text = engine.show.stings[stingIndex].artist
-    }
-    
-    func updateWaveURL() {
-        waveformView.audioURL = engine.show.stings[stingIndex].url
+    override func viewWillLayoutSubviews() {
+        waveformView.frame = waveformLoadingImageView.frame
     }
     
     @IBAction func zoomWaveOut() {
@@ -81,6 +63,7 @@ extension StingViewController: FDWaveformViewDelegate {
     }
     
     func waveformViewDidRender(_ waveform: FDWaveformView) {
+        waveformView.frame = waveformLoadingImageView.frame
         waveformLoadingImageView.isHidden = true
     }
     
@@ -89,50 +72,4 @@ extension StingViewController: FDWaveformViewDelegate {
         engine.show.updateChangeCount(.done)
     }
     
-}
-
-
-// MARK: MPMediaPickerControllerDelegate
-extension StingViewController: MPMediaPickerControllerDelegate {
-    
-    func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
-        // load media item into the currently loading sting player and update labels
-        if let newSting = Sting(mediaItem: mediaItemCollection.items[0]) {
-            engine.show.stings[stingIndex] = newSting
-            updateLabels()
-            
-            // add wave loading image whilst waveform generates
-            waveformLoadingImageView.isHidden = false
-            
-            // generate new waveform
-            updateWaveURL()
-            
-            engine.show.updateChangeCount(.done)
-        }
-        
-        // dismiss media picker
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func mediaPickerDidCancel(_ mediaPicker: MPMediaPickerController) {
-        // dismiss media picker
-        dismiss(animated: true, completion: nil)
-    }
-    
-}
-
-
-// MARK: UIPickerViewDataSource
-extension StingViewController: UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return engine.show.stings.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return engine.show.stings[row].title
-    }
 }

@@ -1,4 +1,5 @@
 import UIKit
+import MediaPlayer
 
 class ShowViewController: UITableViewController {
     
@@ -25,9 +26,13 @@ class ShowViewController: UITableViewController {
         }
     }
     
-    @IBAction func addSting() {
-        engine.addSting()
-        tableView.insertRows(at: [IndexPath(row: engine.show.stings.count - 1, section: 1)], with: .automatic)
+    func loadTrack() {
+        // present music picker to load a track from ipod
+        let mediaPicker = MPMediaPickerController(mediaTypes: .music)
+        mediaPicker.delegate = self
+        mediaPicker.showsCloudItems = false  // hides iTunes in the Cloud items, which crash the app if picked
+        mediaPicker.allowsPickingMultipleItems = false
+        present(mediaPicker, animated: true, completion: nil)
     }
     
     @IBAction func edit() {
@@ -94,7 +99,7 @@ class ShowViewController: UITableViewController {
         case 1:
             if indexPath.row == engine.show.stings.count {
                 tableView.deselectRow(at: indexPath, animated: true)
-                addSting()
+                loadTrack()
             }
         default:
             return
@@ -119,6 +124,28 @@ class ShowViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         engine.show.stings.insert(engine.show.stings.remove(at: sourceIndexPath.row), at: destinationIndexPath.row)
+    }
+    
+}
+
+
+// MARK: MPMediaPickerControllerDelegate
+extension ShowViewController: MPMediaPickerControllerDelegate {
+    
+    func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
+        // make a sting from the selected media item, add it to the engine and update the table view
+        if let newSting = Sting(mediaItem: mediaItemCollection.items[0]) {
+            engine.add(newSting)
+            tableView.insertRows(at: [IndexPath(row: engine.show.stings.count - 1, section: 1)], with: .automatic)
+        }
+        
+        // dismiss media picker
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func mediaPickerDidCancel(_ mediaPicker: MPMediaPickerController) {
+        // dismiss media picker
+        dismiss(animated: true, completion: nil)
     }
     
 }

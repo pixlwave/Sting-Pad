@@ -57,8 +57,8 @@ class Engine {
         show.stings = [Sting]()
     }
     
-    func addSting() {
-        show.stings.append(Sting(url: Sting.defaultURL, cuePoint: 0))
+    func add(_ sting: Sting) {
+        show.stings.append(sting)
     }
     
     func playSting(_ selectedSting: Int) {
