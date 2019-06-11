@@ -8,6 +8,11 @@ class ShowViewController: UITableViewController {
     
     @IBOutlet weak var editBarButtonItem: UIBarButtonItem!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.rightBarButtonItem = editButtonItem
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
