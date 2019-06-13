@@ -6,11 +6,11 @@ class Sting: NSObject, Codable {
     
     static let defaultURL = URL(fileURLWithPath: Bundle.main.path(forResource: "ComputerMagic", ofType: "m4a")!)
     
-    var delegate: StingDelegate?
+    weak var delegate: StingDelegate?
     
-    var url: URL
-    var title: String
-    var artist: String
+    let url: URL
+    let title: String
+    let artist: String
     private var cuePoint: Double {
         didSet {
             stingPlayer.currentTime = cuePoint
@@ -118,7 +118,7 @@ extension Sting: AVAudioPlayerDelegate {
     }
 }
 
-protocol StingDelegate {
+protocol StingDelegate: AnyObject {
     func stingDidStartPlaying(_ sting: Sting)
     func stingDidStopPlaying(_ sting: Sting)
 }
