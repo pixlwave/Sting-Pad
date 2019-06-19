@@ -9,8 +9,10 @@ class Sting: NSObject, Codable {
     weak var delegate: StingDelegate?
     
     let url: URL
-    let title: String
-    let artist: String
+    let songTitle: String
+    let songArtist: String
+    
+    var name: String?
     private var cuePoint: Double {
         didSet {
             stingPlayer.currentTime = cuePoint
@@ -33,15 +35,15 @@ class Sting: NSObject, Codable {
     init(url: URL, cuePoint: Double) {
         if let stingPlayer = try? AVAudioPlayer(contentsOf: url) {
             self.url = url
-            self.title = url.songTitle() ?? "Unknown"
-            self.artist = url.songArtist() ?? "Unknown"
+            self.songTitle = url.songTitle() ?? "Unknown"
+            self.songArtist = url.songArtist() ?? "Unknown"
             self.cuePoint = cuePoint
             self.stingPlayer = stingPlayer
         } else {    #warning("Test this as a fallthrough case")
             self.url = Sting.defaultURL
             self.stingPlayer = try! AVAudioPlayer(contentsOf: self.url)
-            self.title = "Chime"
-            self.artist = "Default Sting"
+            self.songTitle = "Chime"
+            self.songArtist = "Default Sting"
             self.cuePoint = 0
         }
         
@@ -53,8 +55,8 @@ class Sting: NSObject, Codable {
         guard let assetURL = mediaItem.assetURL, let stingPlayer = try? AVAudioPlayer(contentsOf: assetURL) else { return nil }
         
         url = assetURL
-        title = mediaItem.title ?? "Unknown"
-        artist = mediaItem.artist ?? "Unknown"
+        songTitle = mediaItem.title ?? "Unknown"
+        songArtist = mediaItem.artist ?? "Unknown"
         cuePoint = 0
         self.stingPlayer = stingPlayer
         

@@ -18,8 +18,8 @@ class StingViewController: UIViewController {
         
         // load track info
         stingNumberLabel.text = "Sting \(stingIndex + 1)"
-        titleLabel.text = engine.show.stings[stingIndex].title
-        artistLabel.text = engine.show.stings[stingIndex].artist
+        titleLabel.text = engine.show.stings[stingIndex].songTitle
+        artistLabel.text = engine.show.stings[stingIndex].songArtist
         
         // set up the waveform view
         waveformView = FDWaveformView(frame: .zero)

@@ -77,7 +77,9 @@ class ShowViewController: UITableViewController {
         case 1:
             if indexPath.row < engine.show.stings.count {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Edit Sting Cell") ?? UITableViewCell()
-                cell.textLabel?.text = engine.show.stings[indexPath.row].title
+                
+                let sting = engine.show.stings[indexPath.row]
+                cell.textLabel?.text = sting.name ?? sting.songTitle
             
                 return cell
             } else {

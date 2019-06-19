@@ -95,7 +95,8 @@ class PlaybackViewController: UICollectionViewController {
         
         guard let stingCell = cell as? StingCell else { return cell }
         
-        stingCell.titleLabel.text = engine.show.stings[indexPath.item].title
+        let sting = engine.show.stings[indexPath.item]
+        stingCell.titleLabel.text = sting.name ?? sting.songTitle
         stingCell.isCued = indexPath.item == cuedSting
         
         return stingCell
