@@ -69,7 +69,7 @@ class Engine {
     }
     
     func rewindSting(_ selectedSting: Int) {
-        show.stings[selectedSting].seekToCuePoint()
+        show.stings[selectedSting].seekToStart()
     }
     
     func stopSting() {

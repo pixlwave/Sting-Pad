@@ -14,17 +14,18 @@ class Sting: NSObject, Codable {
     
     var name: String?
     var color: Color
-    private var cuePoint: Double {
+    private var startTime: TimeInterval {
         didSet {
-            stingPlayer.currentTime = cuePoint
+            stingPlayer.currentTime = startTime
             stingPlayer.prepareToPlay()
         }
     }
+    private var stopTime: TimeInterval?
     var numberOfLoops = 0 { didSet { stingPlayer.numberOfLoops = numberOfLoops } }
     
-    var normalisedCuePoint: Double {
-        get { return cuePoint / stingPlayer.duration }
-        set { cuePoint = newValue * stingPlayer.duration }
+    var normalisedStartTime: Double {
+        get { return startTime / stingPlayer.duration }
+        set { startTime = newValue * stingPlayer.duration }
     }
     
     private let stingPlayer: AVAudioPlayer
@@ -33,7 +34,8 @@ class Sting: NSObject, Codable {
         case url
         case name
         case color
-        case cuePoint
+        case startTime = "cuePoint";    #warning("Remove value after implementing file picker")
+        case stopTime
         case numberOfLoops
     }
     
@@ -42,14 +44,16 @@ class Sting: NSObject, Codable {
         let url = try container.decode(URL.self, forKey: .url)
         let name = try? container.decode(String.self, forKey: .name)
         let color = (try? container.decode(Color.self, forKey: .color)) ?? .default;    #warning("Replace ?? after implementing file picker")
-        let cuePoint = try container.decode(Double.self, forKey: .cuePoint)
+        let startTime = try container.decode(TimeInterval.self, forKey: .startTime)
+        let stopTime = try? container.decode(TimeInterval.self, forKey: .stopTime)
         let numberOfLoops = (try? container.decode(Int.self, forKey: .numberOfLoops)) ?? 0; #warning("Replace ?? after implementing file picker")
         
         if let stingPlayer = try? AVAudioPlayer(contentsOf: url) {
             self.url = url
             self.name = name
             self.color = color
-            self.cuePoint = cuePoint
+            self.startTime = startTime
+            self.stopTime = stopTime
             self.numberOfLoops = numberOfLoops
             self.songTitle = url.songTitle() ?? "Unknown"
             self.songArtist = url.songArtist() ?? "Unknown"
@@ -57,7 +61,7 @@ class Sting: NSObject, Codable {
         } else {    #warning("Replace this with a \"missing\" Sting object")
             self.url = Sting.defaultURL
             self.color = .default
-            self.cuePoint = 0
+            self.startTime = 0
             self.songTitle = "Chime"
             self.songArtist = "Default Sting"
             self.stingPlayer = try! AVAudioPlayer(contentsOf: self.url)
@@ -72,7 +76,7 @@ class Sting: NSObject, Codable {
         
         url = assetURL
         color = .default
-        cuePoint = 0
+        startTime = 0
         songTitle = mediaItem.title ?? "Unknown"
         songArtist = mediaItem.artist ?? "Unknown"
         self.stingPlayer = stingPlayer
@@ -86,7 +90,7 @@ class Sting: NSObject, Codable {
         updateOutputChannels()
         
         stingPlayer.delegate = self
-        seekToCuePoint()
+        seekToStart()
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateOutputChannels), name: .outputChannelsDidChange, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateDelegate), name: .stingDelegateDidChange, object: nil)
@@ -108,11 +112,11 @@ class Sting: NSObject, Codable {
     func stop() {
         stingPlayer.stop()
         delegate?.stingDidStopPlaying(self)
-        seekToCuePoint()
+        seekToStart()
     }
     
-    func seekToCuePoint() {
-        stingPlayer.currentTime = cuePoint
+    func seekToStart() {
+        stingPlayer.currentTime = startTime
         if !stingPlayer.isPlaying { stingPlayer.prepareToPlay() }
     }
     
