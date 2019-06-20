@@ -33,7 +33,12 @@ class Sting: NSObject, Codable {
         case cuePoint
     }
     
-    init(url: URL, name: String?, cuePoint: Double) {
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let url = try container.decode(URL.self, forKey: .url)
+        let name = try? container.decode(String.self, forKey: .name)
+        let cuePoint = try container.decode(Double.self, forKey: .cuePoint)
+        
         if let stingPlayer = try? AVAudioPlayer(contentsOf: url) {
             self.url = url
             self.name = name
@@ -64,14 +69,6 @@ class Sting: NSObject, Codable {
         
         super.init()
         configure()
-    }
-    
-    required convenience init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        let url = try container.decode(URL.self, forKey: .url)
-        let name = try? container.decode(String.self, forKey: .name)
-        let cuePoint = try container.decode(Double.self, forKey: .cuePoint)
-        self.init(url: url, name: name, cuePoint: cuePoint)
     }
     
     func configure() {
