@@ -34,7 +34,7 @@ class Sting: NSObject, Codable {
         case url
         case name
         case color
-        case startTime = "cuePoint";    #warning("Remove value after implementing file picker")
+        case startTime
         case stopTime
         case numberOfLoops
     }
@@ -43,10 +43,10 @@ class Sting: NSObject, Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let url = try container.decode(URL.self, forKey: .url)
         let name = try? container.decode(String.self, forKey: .name)
-        let color = (try? container.decode(Color.self, forKey: .color)) ?? .default;    #warning("Replace ?? after implementing file picker")
+        let color = try container.decode(Color.self, forKey: .color)
         let startTime = try container.decode(TimeInterval.self, forKey: .startTime)
         let stopTime = try? container.decode(TimeInterval.self, forKey: .stopTime)
-        let numberOfLoops = (try? container.decode(Int.self, forKey: .numberOfLoops)) ?? 0; #warning("Replace ?? after implementing file picker")
+        let numberOfLoops = try container.decode(Int.self, forKey: .numberOfLoops)
         
         if let stingPlayer = try? AVAudioPlayer(contentsOf: url) {
             self.url = url
