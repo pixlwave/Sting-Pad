@@ -20,7 +20,7 @@ class Sting: NSObject, Codable {
             stingPlayer.prepareToPlay()
         }
     }
-    private var stopTime: TimeInterval?
+    private var endTime: TimeInterval?
     var numberOfLoops = 0 { didSet { stingPlayer.numberOfLoops = numberOfLoops } }
     
     var normalisedStartTime: Double {
@@ -35,7 +35,7 @@ class Sting: NSObject, Codable {
         case name
         case color
         case startTime
-        case stopTime
+        case endTime
         case numberOfLoops
     }
     
@@ -45,7 +45,7 @@ class Sting: NSObject, Codable {
         let name = try? container.decode(String.self, forKey: .name)
         let color = try container.decode(Color.self, forKey: .color)
         let startTime = try container.decode(TimeInterval.self, forKey: .startTime)
-        let stopTime = try? container.decode(TimeInterval.self, forKey: .stopTime)
+        let endTime = try? container.decode(TimeInterval.self, forKey: .endTime)
         let numberOfLoops = try container.decode(Int.self, forKey: .numberOfLoops)
         
         if let stingPlayer = try? AVAudioPlayer(contentsOf: url) {
@@ -53,7 +53,7 @@ class Sting: NSObject, Codable {
             self.name = name
             self.color = color
             self.startTime = startTime
-            self.stopTime = stopTime
+            self.endTime = endTime
             self.numberOfLoops = numberOfLoops
             self.songTitle = url.songTitle() ?? "Unknown"
             self.songArtist = url.songArtist() ?? "Unknown"
