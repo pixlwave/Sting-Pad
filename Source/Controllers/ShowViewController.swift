@@ -1,5 +1,6 @@
 import UIKit
 import MediaPlayer
+import MobileCoreServices
 
 class ShowViewController: UITableViewController {
     
@@ -37,7 +38,14 @@ class ShowViewController: UITableViewController {
         mediaPicker.delegate = self
         mediaPicker.showsCloudItems = false  // hides iTunes in the Cloud items, which crash the app if picked
         mediaPicker.allowsPickingMultipleItems = false
-        present(mediaPicker, animated: true, completion: nil)
+        present(mediaPicker, animated: true)
+    }
+    
+    func loadTrackFromFile() {
+        // present file picker to load a track from
+        let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeAudio as String], in: .open)
+        documentPicker.delegate = self
+        present(documentPicker, animated: true)
     }
     
     @IBAction func edit() {
@@ -106,7 +114,14 @@ class ShowViewController: UITableViewController {
         case 1:
             if indexPath.row == engine.show.stings.count {
                 tableView.deselectRow(at: indexPath, animated: true)
-                loadTrack()
+                
+                #if targetEnvironment(simulator)
+                    // use a document picker as the simulator doesn't have a music library
+                    loadTrackFromFile()
+                #else
+                    // load the track with a media picker
+                    loadTrack()
+                #endif
             }
         default:
             return
@@ -141,18 +156,32 @@ extension ShowViewController: MPMediaPickerControllerDelegate {
     
     func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
         // make a sting from the selected media item, add it to the engine and update the table view
-        if let newSting = Sting(mediaItem: mediaItemCollection.items[0]) {
-            engine.add(newSting)
+        if let sting = Sting(mediaItem: mediaItemCollection.items[0]) {
+            engine.add(sting)
             tableView.insertRows(at: [IndexPath(row: engine.show.stings.count - 1, section: 1)], with: .automatic)
         }
         
         // dismiss media picker
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
     
     func mediaPickerDidCancel(_ mediaPicker: MPMediaPickerController) {
         // dismiss media picker
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
     
+}
+
+
+// MARK: UIDocumentPickerDelegate
+extension ShowViewController: UIDocumentPickerDelegate {
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        if let sting = Sting(url: urls[0]) {
+            engine.add(sting)
+            tableView.insertRows(at: [IndexPath(row: engine.show.stings.count - 1, section: 1)], with: .automatic)
+        }
+        
+        // dismiss document picker
+        dismiss(animated: true)
+    }
 }

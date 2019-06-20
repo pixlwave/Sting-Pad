@@ -13,8 +13,8 @@ class Sting: NSObject, Codable {
     let songArtist: String
     
     var name: String?
-    var color: Color
-    private var startTime: TimeInterval {
+    var color: Color = .default
+    private var startTime: TimeInterval = 0 {
         didSet {
             stingPlayer.currentTime = startTime
             stingPlayer.prepareToPlay()
@@ -60,8 +60,6 @@ class Sting: NSObject, Codable {
             self.stingPlayer = stingPlayer
         } else {    #warning("Replace this with a \"missing\" Sting object")
             self.url = Sting.defaultURL
-            self.color = .default
-            self.startTime = 0
             self.songTitle = "Chime"
             self.songArtist = "Default Sting"
             self.stingPlayer = try! AVAudioPlayer(contentsOf: self.url)
@@ -75,10 +73,20 @@ class Sting: NSObject, Codable {
         guard let assetURL = mediaItem.assetURL, let stingPlayer = try? AVAudioPlayer(contentsOf: assetURL) else { return nil }
         
         url = assetURL
-        color = .default
-        startTime = 0
         songTitle = mediaItem.title ?? "Unknown"
         songArtist = mediaItem.artist ?? "Unknown"
+        self.stingPlayer = stingPlayer
+        
+        super.init()
+        configure()
+    }
+    
+    init?(url: URL) {
+        guard let stingPlayer = try? AVAudioPlayer(contentsOf: url) else { return nil }
+        
+        self.url = url
+        songTitle = url.songTitle() ?? "Unknown"
+        songArtist = url.songArtist() ?? "Unknown"
         self.stingPlayer = stingPlayer
         
         super.init()
