@@ -20,6 +20,7 @@ class Sting: NSObject, Codable {
             stingPlayer.prepareToPlay()
         }
     }
+    var numberOfLoops = 0 { didSet { stingPlayer.numberOfLoops = numberOfLoops } }
     
     var normalisedCuePoint: Double {
         get { return cuePoint / stingPlayer.duration }
@@ -33,6 +34,7 @@ class Sting: NSObject, Codable {
         case name
         case color
         case cuePoint
+        case numberOfLoops
     }
     
     required init(from decoder: Decoder) throws {
@@ -41,16 +43,18 @@ class Sting: NSObject, Codable {
         let name = try? container.decode(String.self, forKey: .name)
         let color = (try? container.decode(Color.self, forKey: .color)) ?? .default;    #warning("Replace ?? after implementing file picker")
         let cuePoint = try container.decode(Double.self, forKey: .cuePoint)
+        let numberOfLoops = (try? container.decode(Int.self, forKey: .numberOfLoops)) ?? 0; #warning("Replace ?? after implementing file picker")
         
         if let stingPlayer = try? AVAudioPlayer(contentsOf: url) {
             self.url = url
             self.name = name
             self.color = color
             self.cuePoint = cuePoint
+            self.numberOfLoops = numberOfLoops
             self.songTitle = url.songTitle() ?? "Unknown"
             self.songArtist = url.songArtist() ?? "Unknown"
             self.stingPlayer = stingPlayer
-        } else {    #warning("Test this as a fallthrough case")
+        } else {    #warning("Replace this with a \"missing\" Sting object")
             self.url = Sting.defaultURL
             self.color = .default
             self.cuePoint = 0
