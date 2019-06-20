@@ -13,6 +13,7 @@ class Sting: NSObject, Codable {
     let songArtist: String
     
     var name: String?
+    var color: Color
     private var cuePoint: Double {
         didSet {
             stingPlayer.currentTime = cuePoint
@@ -30,6 +31,7 @@ class Sting: NSObject, Codable {
     enum CodingKeys: String, CodingKey {
         case url
         case name
+        case color
         case cuePoint
     }
     
@@ -37,21 +39,24 @@ class Sting: NSObject, Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let url = try container.decode(URL.self, forKey: .url)
         let name = try? container.decode(String.self, forKey: .name)
+        let color = (try? container.decode(Color.self, forKey: .color)) ?? .default;    #warning("Replace ?? after implementing file picker")
         let cuePoint = try container.decode(Double.self, forKey: .cuePoint)
         
         if let stingPlayer = try? AVAudioPlayer(contentsOf: url) {
             self.url = url
             self.name = name
+            self.color = color
+            self.cuePoint = cuePoint
             self.songTitle = url.songTitle() ?? "Unknown"
             self.songArtist = url.songArtist() ?? "Unknown"
-            self.cuePoint = cuePoint
             self.stingPlayer = stingPlayer
         } else {    #warning("Test this as a fallthrough case")
             self.url = Sting.defaultURL
-            self.stingPlayer = try! AVAudioPlayer(contentsOf: self.url)
+            self.color = .default
+            self.cuePoint = 0
             self.songTitle = "Chime"
             self.songArtist = "Default Sting"
-            self.cuePoint = 0
+            self.stingPlayer = try! AVAudioPlayer(contentsOf: self.url)
         }
         
         super.init()
@@ -62,9 +67,10 @@ class Sting: NSObject, Codable {
         guard let assetURL = mediaItem.assetURL, let stingPlayer = try? AVAudioPlayer(contentsOf: assetURL) else { return nil }
         
         url = assetURL
+        color = .default
+        cuePoint = 0
         songTitle = mediaItem.title ?? "Unknown"
         songArtist = mediaItem.artist ?? "Unknown"
-        cuePoint = 0
         self.stingPlayer = stingPlayer
         
         super.init()
