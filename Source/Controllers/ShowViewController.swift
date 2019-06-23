@@ -37,6 +37,7 @@ class ShowViewController: UITableViewController {
         let mediaPicker = MPMediaPickerController(mediaTypes: .music)
         mediaPicker.delegate = self
         mediaPicker.showsCloudItems = false  // hides iTunes in the Cloud items, which crash the app if picked
+        mediaPicker.showsItemsWithProtectedAssets = false  // hides Apple Music items, which are DRM protected
         mediaPicker.allowsPickingMultipleItems = false
         present(mediaPicker, animated: true)
     }

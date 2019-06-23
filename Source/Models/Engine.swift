@@ -6,7 +6,6 @@ class Engine {
     static let shared = Engine()
     
     #warning("Listen for multiroute notifications")
-    #warning("Handle false")
     private let session = AVAudioSession.sharedInstance()
     private var isMultiRoute = true
     
