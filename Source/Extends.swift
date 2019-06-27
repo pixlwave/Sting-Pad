@@ -50,10 +50,15 @@ extension URL {
 }
 
 
+extension AVAudioPCMBuffer {
+    convenience init?(for audioFile: AVAudioFile) {
+        self.init(pcmFormat: audioFile.processingFormat, frameCapacity: AVAudioFrameCount(audioFile.length))
+    }
+}
+
+
 extension Notification.Name {
     static let stingsDidChange = Notification.Name("Stings Did Change")
-    static let stingDelegateDidChange = Notification.Name("Sting Delegate Did Change")
-    static let outputChannelsDidChange = Notification.Name("Output Channels Did Change")
 }
 
 

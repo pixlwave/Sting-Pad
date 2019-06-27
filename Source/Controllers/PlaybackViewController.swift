@@ -4,7 +4,7 @@ import MediaPlayer
 class PlaybackViewController: UICollectionViewController {
     
     private let engine = Engine.shared
-    private var cuedSting = 0
+    private var cuedStingIndex = 0
     
     @IBOutlet var transportView: UIView!
     private let transportViewHeight: CGFloat = 90
@@ -13,7 +13,7 @@ class PlaybackViewController: UICollectionViewController {
         super.viewDidLoad()
         
         // make self delegate for sting players
-        engine.stingDelegate = self
+        engine.playbackDelegate = self
         
         // load the transport view nib and add as a subview via it's outlet
         Bundle.main.loadNibNamed("TransportView", owner: self, options: nil)
@@ -58,7 +58,7 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     @IBAction func playSting() {
-        engine.playSting(cuedSting)
+        engine.playSting(at: cuedStingIndex)
         nextSting()
     }
     
@@ -67,16 +67,16 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     @IBAction func nextSting() {
-        stingCellForItem(at: IndexPath(item: cuedSting, section: 0))?.isCued = false
-        cuedSting = (cuedSting + 1) % engine.show.stings.count
-        stingCellForItem(at: IndexPath(item: cuedSting, section: 0))?.isCued = true
+        stingCellForItem(at: IndexPath(item: cuedStingIndex, section: 0))?.isCued = false
+        cuedStingIndex = (cuedStingIndex + 1) % engine.show.stings.count
+        stingCellForItem(at: IndexPath(item: cuedStingIndex, section: 0))?.isCued = true
     }
     
     @IBAction func previousSting() {
-        if cuedSting > 0 {
-            stingCellForItem(at: IndexPath(item: cuedSting, section: 0))?.isCued = false
-            cuedSting = cuedSting - 1 % engine.show.stings.count
-            stingCellForItem(at: IndexPath(item: cuedSting, section: 0))?.isCued = true
+        if cuedStingIndex > 0 {
+            stingCellForItem(at: IndexPath(item: cuedStingIndex, section: 0))?.isCued = false
+            cuedStingIndex = cuedStingIndex - 1 % engine.show.stings.count
+            stingCellForItem(at: IndexPath(item: cuedStingIndex, section: 0))?.isCued = true
         }
     }
     
@@ -97,31 +97,25 @@ class PlaybackViewController: UICollectionViewController {
         
         let sting = engine.show.stings[indexPath.item]
         stingCell.titleLabel.text = sting.name ?? sting.songTitle
-        stingCell.isCued = indexPath.item == cuedSting
+        stingCell.isCued = indexPath.item == cuedStingIndex
         
         return stingCell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if stingCellForItem(at: indexPath)?.isPlaying != true {
-            engine.playSting(indexPath.item)
-        } else {
-            engine.rewindSting(indexPath.item)
-        }
+        engine.playSting(at: indexPath.item)
     }
     
 }
 
 
-// MARK: StingDelegate
-extension PlaybackViewController: StingDelegate {
-    func stingDidStartPlaying(_ sting: Sting) {
-        guard let index = engine.show.stings.firstIndex(of: sting) else { return }
+// MARK: PlaybackDelegate
+extension PlaybackViewController: PlaybackDelegate {
+    func stingDidStartPlaying(at index: Int) {
         stingCellForItem(at: IndexPath(item: index, section: 0))?.isPlaying = true
     }
     
-    func stingDidStopPlaying(_ sting: Sting) {
-        guard let index = engine.show.stings.firstIndex(of: sting) else { return }
+    func stingDidStopPlaying(at index: Int) {
         stingCellForItem(at: IndexPath(item: index, section: 0))?.isPlaying = false
     }
 }
