@@ -29,6 +29,21 @@ class Engine {
         return playerPosition < AVAudioFramePosition(buffer.frameLength)
     }
     
+    private var currentBuffer: AVAudioPCMBuffer?
+    
+    var currentStingLength: TimeInterval {
+        guard let buffer = currentBuffer else { return 0 }
+        return Double(buffer.frameLength) / buffer.format.sampleRate
+    }
+    var currentStingPosition: TimeInterval {
+        guard
+            let buffer = currentBuffer,
+            let lastRenderTime = player.lastRenderTime,
+            let playerPosition = player.playerTime(forNodeTime: lastRenderTime)?.sampleTime
+        else { return 0 }
+        return Double(playerPosition) / buffer.format.sampleRate
+    }
+    
     var playbackDelegate: PlaybackDelegate?
     
     init() {
@@ -78,7 +93,7 @@ class Engine {
         do {
             try engine.start()
         } catch {
-            fatalError("Could not start engine. error: \(error).")
+            fatalError("Could not start engine. Error: \(error).")
         }
     }
     
@@ -127,6 +142,7 @@ class Engine {
         }
         
         player.play()
+        currentBuffer = sting.buffer
         lastPlayedStingIndex = index
         playbackDelegate?.stingDidStartPlaying(at: index)
     }
