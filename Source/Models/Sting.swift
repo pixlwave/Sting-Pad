@@ -20,6 +20,22 @@ class Sting: NSObject, Codable {
         get { return AVAudioFramePosition(startTime * audioFile.fileFormat.sampleRate) }
         set { startTime = Double(newValue) / Double(audioFile.fileFormat.sampleRate) }
     }
+    var endSample: AVAudioFramePosition {
+        get {
+            if let endTime = endTime {
+                return AVAudioFramePosition(endTime * audioFile.fileFormat.sampleRate)
+            } else {
+                return audioFile.length
+            }
+        }
+        set {
+            if newValue < audioFile.length {
+                endTime = Double(newValue) / Double(audioFile.fileFormat.sampleRate)
+            } else {
+                endTime = nil
+            }
+        }
+    }
     
     private let audioFile: AVAudioFile
     private(set) var buffer: AVAudioPCMBuffer
@@ -93,8 +109,8 @@ class Sting: NSObject, Codable {
     
     func updateBuffer() {
         do {
-            audioFile.framePosition = AVAudioFramePosition(startTime * audioFile.fileFormat.sampleRate)
-            try audioFile.read(into: buffer)
+            audioFile.framePosition = startSample
+            try audioFile.read(into: buffer, frameCount: AVAudioFrameCount(endSample - startSample))
         } catch {
             print("Error: \(error)")
         }
