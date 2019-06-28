@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlaybackViewController" customModule="Stingtk" customModuleProvider="target">
             <connections>
+                <outlet property="timeLabel" destination="9Fx-yc-sdB" id="TCd-7E-MJx"/>
                 <outlet property="transportView" destination="iN0-l3-epB" id="Ar5-Vc-Td3"/>
             </connections>
         </placeholder>
@@ -55,14 +56,22 @@
                                     <action selector="nextSting" destination="-1" eventType="touchUpInside" id="AfS-T3-LIl"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00 remaining" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Fx-yc-sdB">
+                                <rect key="frame" x="220.5" y="70" width="91.5" height="16"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
                             <constraint firstItem="mUe-Rk-ltB" firstAttribute="centerY" secondItem="QXm-bq-c4M" secondAttribute="centerY" id="20m-xg-ejc"/>
                             <constraint firstItem="amq-cP-E4J" firstAttribute="centerY" secondItem="QXm-bq-c4M" secondAttribute="centerY" id="85U-8D-zbR"/>
                             <constraint firstItem="N6t-Wv-uJW" firstAttribute="centerX" secondItem="QXm-bq-c4M" secondAttribute="centerX" multiplier="1.4" id="9w3-0b-mv4"/>
                             <constraint firstItem="y23-dR-PwW" firstAttribute="centerX" secondItem="QXm-bq-c4M" secondAttribute="centerX" multiplier="0.4" id="B4U-RL-azv"/>
+                            <constraint firstAttribute="trailing" secondItem="9Fx-yc-sdB" secondAttribute="trailing" constant="8" id="Jrj-ZF-49k"/>
                             <constraint firstItem="y23-dR-PwW" firstAttribute="centerY" secondItem="QXm-bq-c4M" secondAttribute="centerY" id="TuB-hJ-B8C"/>
                             <constraint firstItem="amq-cP-E4J" firstAttribute="centerX" secondItem="QXm-bq-c4M" secondAttribute="centerX" multiplier="1.75" id="aaf-rM-lUH"/>
+                            <constraint firstAttribute="bottom" secondItem="9Fx-yc-sdB" secondAttribute="bottom" constant="4" id="bUk-bQ-eQm"/>
                             <constraint firstItem="mUe-Rk-ltB" firstAttribute="centerX" secondItem="QXm-bq-c4M" secondAttribute="centerX" multiplier="0.95" id="mPB-GD-Dli"/>
                             <constraint firstItem="N6t-Wv-uJW" firstAttribute="centerY" secondItem="QXm-bq-c4M" secondAttribute="centerY" id="roK-OF-29R"/>
                         </constraints>

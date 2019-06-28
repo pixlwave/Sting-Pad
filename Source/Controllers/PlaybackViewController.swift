@@ -9,6 +9,9 @@ class PlaybackViewController: UICollectionViewController {
     @IBOutlet var transportView: UIView!
     private let transportViewHeight: CGFloat = 90
     
+    @IBOutlet weak var timeLabel: UILabel!
+    private var timeTimer: Timer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,6 +21,7 @@ class PlaybackViewController: UICollectionViewController {
         // load the transport view nib and add as a subview via it's outlet
         Bundle.main.loadNibNamed("TransportView", owner: self, options: nil)
         view.addSubview(transportView)
+        timeLabel.font = UIFont.monospacedDigitSystemFont(ofSize: timeLabel.font.pointSize, weight: .regular)
         
         // prevents scroll view from momentarily blocking the play button's action
         collectionView.delaysContentTouches = false; #warning("Test if this works or if the property needs to be set on the scroll view")
@@ -84,6 +88,27 @@ class PlaybackViewController: UICollectionViewController {
         return collectionView.cellForItem(at: indexPath) as? StingCell
     }
     
+    func updateTimeLabel() {
+        guard let remainingString = engine.remainingTime.formatted() else { return }
+        timeLabel.text = remainingString
+    }
+    
+    func beginUpdatingTime() {
+        if timeTimer?.isValid == true {
+            stopUpdatingTime()
+        }
+        
+        updateTimeLabel()
+        timeTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            self.updateTimeLabel()
+        }
+    }
+    
+    func stopUpdatingTime() {
+        timeTimer?.invalidate()
+        timeTimer = nil
+    }
+    
     
     // MARK: UICollectionViewDataSource/Delegate
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -113,11 +138,15 @@ class PlaybackViewController: UICollectionViewController {
 extension PlaybackViewController: PlaybackDelegate {
     func stingDidStartPlaying(at index: Int) {
         stingCellForItem(at: IndexPath(item: index, section: 0))?.isPlaying = true
+        beginUpdatingTime()
     }
     
     func stingDidStopPlaying(at index: Int) {
         DispatchQueue.main.async {
-            self.stingCellForItem(at: IndexPath(item: index, section: 0))?.isPlaying = self.engine.indexOfPlayingSting == index
+            let indexOfPlayingSting = self.engine.indexOfPlayingSting
+            self.stingCellForItem(at: IndexPath(item: index, section: 0))?.isPlaying = indexOfPlayingSting == index
+            
+            if indexOfPlayingSting == nil { self.stopUpdatingTime() }
         }
     }
 }

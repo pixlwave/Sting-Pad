@@ -54,6 +54,10 @@ extension AVAudioPCMBuffer {
     convenience init?(for audioFile: AVAudioFile) {
         self.init(pcmFormat: audioFile.processingFormat, frameCapacity: AVAudioFrameCount(audioFile.length))
     }
+    
+    var totalTime: TimeInterval {
+        return Double(frameLength) / format.sampleRate
+    }
 }
 
 
@@ -64,4 +68,20 @@ extension Notification.Name {
 
 extension CGColor {
     static let cuedStingBackgroundColor = UIColor.black.withAlphaComponent(0.5).cgColor
+}
+
+
+extension TimeInterval {
+    static let formatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .positional
+        formatter.allowedUnits = [.minute, .second]
+        formatter.includesTimeRemainingPhrase = true
+        formatter.zeroFormattingBehavior = .pad
+        return formatter
+    }()
+    
+    func formatted() -> String? {
+        return TimeInterval.formatter.string(from: self)
+    }
 }

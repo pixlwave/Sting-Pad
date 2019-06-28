@@ -31,18 +31,16 @@ class Engine {
     
     private var currentBuffer: AVAudioPCMBuffer?
     
-    var currentStingLength: TimeInterval {
-        guard let buffer = currentBuffer else { return 0 }
-        return Double(buffer.frameLength) / buffer.format.sampleRate
-    }
-    var currentStingPosition: TimeInterval {
+    var totalTime: TimeInterval { return currentBuffer?.totalTime ?? 0 }
+    var elapsedTime: TimeInterval {
         guard
             let buffer = currentBuffer,
             let lastRenderTime = player.lastRenderTime,
-            let playerPosition = player.playerTime(forNodeTime: lastRenderTime)?.sampleTime
+            let elapsedSamples = player.playerTime(forNodeTime: lastRenderTime)?.sampleTime
         else { return 0 }
-        return Double(playerPosition) / buffer.format.sampleRate
+        return Double(elapsedSamples) / buffer.format.sampleRate
     }
+    var remainingTime: TimeInterval { return totalTime - elapsedTime }
     
     var playbackDelegate: PlaybackDelegate?
     
