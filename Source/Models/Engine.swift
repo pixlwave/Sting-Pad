@@ -16,7 +16,7 @@ class Engine {
     
     private var lastPlayedStingIndex = -1
     private var isPlaying: Bool { return player.isPlaying }
-    var playingStingIndex: Int? { return player.isPlaying ? lastPlayedStingIndex : nil }
+    var indexOfPlayingSting: Int? { return player.isPlaying ? lastPlayedStingIndex : nil }
     
     var playbackDelegate: PlaybackDelegate?
     
