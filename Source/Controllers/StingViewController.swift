@@ -5,13 +5,17 @@ class StingViewController: UIViewController {
     // access the music
     let engine = Engine.shared
     
+    enum Bound { case lower, upper }
+    
     var stingIndex = 0
+    var boundToEdit = Bound.lower
     var waveformView: FDWaveformView!
     
     @IBOutlet weak var stingNumberLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var waveformLoadingImageView: UIImageView!
+    @IBOutlet weak var loopSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +23,7 @@ class StingViewController: UIViewController {
         // load track info
         stingNumberLabel.text = "Sting \(stingIndex + 1)"
         updateLabels()
+        loopSwitch.isOn = engine.show.stings[stingIndex].loops
         
         // set up the waveform view
         waveformView = FDWaveformView(frame: .zero)
@@ -67,9 +72,10 @@ class StingViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    @IBAction func zoomWaveOut() {
-        waveformView.zoomSamples = Range(0...waveformView.totalSamples)
+    @IBAction func boundControlChanged(_ sender: UISegmentedControl) {
+        boundToEdit = sender.selectedSegmentIndex == 0 ? .lower : .upper
     }
+    
     
     @IBAction func startPreview() {
         engine.playSting(at: stingIndex)
@@ -79,6 +85,14 @@ class StingViewController: UIViewController {
         engine.stopSting()
     }
     
+    @IBAction func zoomWaveOut() {
+        waveformView.zoomSamples = Range(0...waveformView.totalSamples)
+    }
+    
+    @IBAction func toggleLoop(_ sender: UISwitch) {
+        engine.show.stings[stingIndex].loops = sender.isOn
+        engine.show.updateChangeCount(.done)
+    }
 }
 
 
@@ -96,7 +110,7 @@ extension StingViewController: FDWaveformViewDelegate {
     }
     
     func waveformDidEndScrubbing(_ waveformView: FDWaveformView) {
-        engine.show.stings[stingIndex].startSample = Int64(waveformView.highlightedSamples?.endIndex ?? 0)
+        engine.show.stings[stingIndex].startSample = Int64(waveformView.highlightedSamples?.upperBound ?? 0)
         engine.show.updateChangeCount(.done)
     }
     
