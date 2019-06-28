@@ -14,9 +14,20 @@ class Engine {
     let musicPlayer = MPMusicPlayerController.systemMusicPlayer
     var show: ShowDocument
     
+    var indexOfPlayingSting: Int? { return isPlaying ? lastPlayedStingIndex : nil }
     private var lastPlayedStingIndex = -1
-    private var isPlaying: Bool { return player.isPlaying }
-    var indexOfPlayingSting: Int? { return player.isPlaying ? lastPlayedStingIndex : nil }
+    private var isPlaying: Bool {
+        guard player.isPlaying else { return false }
+        let buffer = show.stings[lastPlayedStingIndex].buffer
+        
+        guard
+            let lastRenderTime = player.lastRenderTime,
+            let playerPosition = player.playerTime(forNodeTime: lastRenderTime)?.sampleTime
+        else { return true }
+        
+        // fix player.isPlaying returning true in the completion handler
+        return playerPosition < AVAudioFramePosition(buffer.frameLength)
+    }
     
     var playbackDelegate: PlaybackDelegate?
     
