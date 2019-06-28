@@ -14,7 +14,10 @@ class Engine {
     let musicPlayer = MPMusicPlayerController.systemMusicPlayer
     var show: ShowDocument
     
-    private var playingStingIndex = 0
+    private var lastPlayedStingIndex = -1
+    private var isPlaying: Bool { return player.isPlaying }
+    var playingStingIndex: Int? { return player.isPlaying ? lastPlayedStingIndex : nil }
+    
     var playbackDelegate: PlaybackDelegate?
     
     init() {
@@ -57,7 +60,7 @@ class Engine {
         
         // attach the player to the engine
         engine.attach(player)
-        engine.connect(player, to: mixer, format: outputHWFormat);  #warning("Format needs to be standardised, or tracked with each buffer played")
+        engine.connect(player, to: mixer, fromBus: 0, toBus: 0, format: outputHWFormat)
         
         updateChannelMap()
         
@@ -73,10 +76,13 @@ class Engine {
     }
     
     func updateChannelMap() {
-        if availableChannels().count > 3 {
-            let channelMapA: [Int32] = [0, 1, -1, -1]   // left out 1, right out 2
-            let channelMapB: [Int32] = [-1, -1, 0, 1]   // left out 3, right out 4
-            let channelMap = channelMapB
+        let channelCount = Int(engine.outputNode.outputFormat(forBus: 0).channelCount)
+        
+        // with 6 channels [-1, -1, 0, 1, -1, -1] would use channels 3 & 4
+        var channelMap = [Int32](repeating: -1, count: channelCount)
+        if channelCount > 3 {
+            channelMap[2] = 0   // left out 3
+            channelMap[3] = 1   // right out 4
             
             let propSize = UInt32(channelMap.count) * UInt32(MemoryLayout<UInt32>.size)
             let statusCode = AudioUnitSetProperty(engine.inputNode.audioUnit!, kAudioOutputUnitProperty_ChannelMap, kAudioUnitScope_Global, 1, channelMap, propSize)
@@ -101,18 +107,22 @@ class Engine {
         let sting = show.stings[index]
         let options: AVAudioPlayerNodeBufferOptions = sting.loops ? [.loops] : []
         
+        if sting.buffer.format != engine.mainMixerNode.inputFormat(forBus: 0) {
+            engine.connect(player, to: engine.mainMixerNode, fromBus: 0, toBus: 0, format: sting.buffer.format)
+        }
+        
         player.scheduleBuffer(sting.buffer, at: nil, options: options) {
             self.playbackDelegate?.stingDidStopPlaying(at: index)
         }
         
         player.play()
-        playingStingIndex = index
+        lastPlayedStingIndex = index
         playbackDelegate?.stingDidStartPlaying(at: index)
     }
     
     func stopSting() {
         player.stop()
-        playbackDelegate?.stingDidStopPlaying(at: playingStingIndex)
+        playbackDelegate?.stingDidStopPlaying(at: lastPlayedStingIndex)
     }
     
     @objc func playbackStateDidChange(_ notification: Notification) {

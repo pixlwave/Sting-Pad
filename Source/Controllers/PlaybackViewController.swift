@@ -116,6 +116,8 @@ extension PlaybackViewController: PlaybackDelegate {
     }
     
     func stingDidStopPlaying(at index: Int) {
-        stingCellForItem(at: IndexPath(item: index, section: 0))?.isPlaying = false
+        DispatchQueue.main.async {
+            self.stingCellForItem(at: IndexPath(item: index, section: 0))?.isPlaying = self.engine.playingStingIndex == index
+        }
     }
 }
