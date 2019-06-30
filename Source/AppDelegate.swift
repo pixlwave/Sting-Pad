@@ -11,7 +11,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.isIdleTimerDisabled = true
         
         #if targetEnvironment(simulator)
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.path)
         #endif
         
         return true

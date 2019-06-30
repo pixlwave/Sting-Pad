@@ -10,18 +10,18 @@ class StingViewController: UIViewController {
     var stingIndex = 0
     var waveformView: FDWaveformView!
     
-    @IBOutlet weak var stingNumberLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var waveformLoadingImageView: UIImageView!
+    @IBOutlet weak var previewButton: UIButton!
     @IBOutlet weak var loopSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // load track info
-        stingNumberLabel.text = "Sting \(stingIndex + 1)"
         updateLabels()
+        if engine.indexOfPlayingSting != nil { previewButton.setTitle("Stop", for: .normal) }
         loopSwitch.isOn = engine.show.stings[stingIndex].loops
         
         // set up the waveform view
@@ -77,12 +77,14 @@ class StingViewController: UIViewController {
     }
     
     
-    @IBAction func startPreview() {
-        engine.playSting(at: stingIndex)
-    }
-
-    @IBAction func stopPreview() {
-        engine.stopSting()
+    @IBAction func togglePreview() {
+        if engine.indexOfPlayingSting == nil {
+            previewButton.setTitle("Stop", for: .normal)
+            engine.playSting(at: stingIndex)
+        } else {
+            previewButton.setTitle("Preview", for: .normal)
+            engine.stopSting()
+        }
     }
     
     @IBAction func zoomWaveOut() {
