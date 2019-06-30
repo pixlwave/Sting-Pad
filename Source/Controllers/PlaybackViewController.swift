@@ -1,5 +1,6 @@
 import UIKit
 import MediaPlayer
+import MobileCoreServices
 
 class PlaybackViewController: UICollectionViewController {
     
@@ -29,7 +30,7 @@ class PlaybackViewController: UICollectionViewController {
         // prevents scroll view from momentarily blocking the play button's action
         collectionView.delaysContentTouches = false; #warning("Test if this works or if the property needs to be set on the scroll view")
         
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: .stingsDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applySnapshot), name: .stingsDidChange, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -80,7 +81,7 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     #warning("Implement more efficient responses to changed data.")
-    @objc func reloadData() {
+    @objc func applySnapshot() {
         let snapshot = NSDiffableDataSourceSnapshot<Int, Sting>()
         snapshot.appendSections([0])
         snapshot.appendItems(engine.show.stings)
@@ -97,6 +98,49 @@ class PlaybackViewController: UICollectionViewController {
             // record the version being seen to allow ui updates to be shown in future versions
             UserDefaults.standard.set(WelcomeViewController.currentVersion, forKey: "WelcomeVersionSeen")
         }
+    }
+    
+    func loadTrack() {
+        // present music picker to load a track from ipod
+        let mediaPicker = MPMediaPickerController(mediaTypes: .music)
+        mediaPicker.delegate = self
+        mediaPicker.showsCloudItems = false  // hides iTunes in the Cloud items, which crash the app if picked
+        mediaPicker.showsItemsWithProtectedAssets = false  // hides Apple Music items, which are DRM protected
+        mediaPicker.allowsPickingMultipleItems = false
+        present(mediaPicker, animated: true)
+    }
+    
+    func loadTrackFromFile() {
+        // present file picker to load a track from
+        let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeAudio as String], in: .open)
+        documentPicker.delegate = self
+        present(documentPicker, animated: true)
+    }
+    
+    #if targetEnvironment(simulator)
+    func loadRandomTrackFromHostFileSystem() {
+        guard let sharedFiles = try? FileManager.default.contentsOfDirectory(atPath: "/Users/Shared/Music") else { return }
+        
+        let audioFiles = sharedFiles.filter { $0.hasSuffix(".mp3") || $0.hasSuffix(".m4a") }
+        guard audioFiles.count > 0 else { fatalError() }
+        let file = audioFiles[Int.random(in: 0..<audioFiles.count)]
+        let url = URL(fileURLWithPath: "/Users/Shared/Music").appendingPathComponent(file)
+        
+        if let sting = Sting(url: url) {
+            engine.add(sting)
+            applySnapshot()
+        }
+    }
+    #endif
+    
+    @IBAction func addSting() {
+        #if targetEnvironment(simulator)
+            // pick a random file from the documents directory until iOS 13 syncs iCloud drive
+            loadRandomTrackFromHostFileSystem()
+        #else
+            // load the track with a media picker
+            loadTrack()
+        #endif
     }
     
     @IBAction func playSting() {
@@ -161,6 +205,42 @@ class PlaybackViewController: UICollectionViewController {
         engine.show.stings.insert(engine.show.stings.remove(at: sourceIndexPath.item), at: destinationIndexPath.item)
     }
     
+}
+
+
+// MARK: MPMediaPickerControllerDelegate
+extension PlaybackViewController: MPMediaPickerControllerDelegate {
+    
+    func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
+        // make a sting from the selected media item, add it to the engine and update the table view
+        if let sting = Sting(mediaItem: mediaItemCollection.items[0]) {
+            engine.add(sting)
+            applySnapshot()
+        }
+        
+        // dismiss media picker
+        dismiss(animated: true)
+    }
+    
+    func mediaPickerDidCancel(_ mediaPicker: MPMediaPickerController) {
+        // dismiss media picker
+        dismiss(animated: true)
+    }
+    
+}
+
+
+// MARK: UIDocumentPickerDelegate
+extension PlaybackViewController: UIDocumentPickerDelegate {
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        if let sting = Sting(url: urls[0]) {
+            engine.add(sting)
+            applySnapshot()
+        }
+        
+        // dismiss document picker
+        dismiss(animated: true)
+    }
 }
 
 

@@ -1,6 +1,5 @@
 import UIKit
 import MediaPlayer
-import MobileCoreServices
 
 class ShowViewController: UITableViewController {
     
@@ -32,39 +31,6 @@ class ShowViewController: UITableViewController {
         }
     }
     
-    func loadTrack() {
-        // present music picker to load a track from ipod
-        let mediaPicker = MPMediaPickerController(mediaTypes: .music)
-        mediaPicker.delegate = self
-        mediaPicker.showsCloudItems = false  // hides iTunes in the Cloud items, which crash the app if picked
-        mediaPicker.showsItemsWithProtectedAssets = false  // hides Apple Music items, which are DRM protected
-        mediaPicker.allowsPickingMultipleItems = false
-        present(mediaPicker, animated: true)
-    }
-    
-    func loadTrackFromFile() {
-        // present file picker to load a track from
-        let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeAudio as String], in: .open)
-        documentPicker.delegate = self
-        present(documentPicker, animated: true)
-    }
-    
-    #if targetEnvironment(simulator)
-    func loadRandomTrackFromHostFileSystem() {
-        guard let sharedFiles = try? FileManager.default.contentsOfDirectory(atPath: "/Users/Shared/Music") else { return }
-        
-        let audioFiles = sharedFiles.filter { $0.hasSuffix(".mp3") || $0.hasSuffix(".m4a") }
-        guard audioFiles.count > 0 else { fatalError() }
-        let file = audioFiles[Int.random(in: 0..<audioFiles.count)]
-        let url = URL(fileURLWithPath: "/Users/Shared/Music").appendingPathComponent(file)
-        
-        if let sting = Sting(url: url) {
-            engine.add(sting)
-            tableView.insertRows(at: [IndexPath(row: engine.show.stings.count - 1, section: 1)], with: .automatic)
-        }
-    }
-    #endif
-    
     @IBAction func edit() {
         tableView.setEditing(!tableView.isEditing, animated: true)
     }
@@ -89,7 +55,7 @@ class ShowViewController: UITableViewController {
         case 0:
             return 1
         case 1:
-            return engine.show.stings.count + 1
+            return engine.show.stings.count
         default:
             return 0
         }
@@ -100,16 +66,12 @@ class ShowViewController: UITableViewController {
         case 0:
             return tableView.dequeueReusableCell(withIdentifier: "File Cell") ?? UITableViewCell()
         case 1:
-            if indexPath.row < engine.show.stings.count {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "Edit Sting Cell") ?? UITableViewCell()
-                
-                let sting = engine.show.stings[indexPath.row]
-                cell.textLabel?.text = sting.name ?? sting.songTitle
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Edit Sting Cell") ?? UITableViewCell()
             
-                return cell
-            } else {
-                return tableView.dequeueReusableCell(withIdentifier: "Add Sting Cell") ?? UITableViewCell()
-            }
+            let sting = engine.show.stings[indexPath.row]
+            cell.textLabel?.text = sting.name ?? sting.songTitle
+        
+            return cell
         default:
             return UITableViewCell()
         }
@@ -128,31 +90,17 @@ class ShowViewController: UITableViewController {
                 tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
             })
             present(alert, animated: true)
-        case 1:
-            if indexPath.row == engine.show.stings.count {
-                tableView.deselectRow(at: indexPath, animated: true)
-                
-                #if targetEnvironment(simulator)
-                    // pick a random file from the documents directory until iOS 13 syncs iCloud drive
-                    loadRandomTrackFromHostFileSystem()
-                #else
-                    // load the track with a media picker
-                    loadTrack()
-                #endif
-            }
         default:
             return
         }
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        guard indexPath.section == 1 else { return false }
-        return indexPath.row < engine.show.stings.count  // ignores add sting button
+        indexPath.section == 1
     }
     
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        guard indexPath.section == 1 else { return false }
-        return indexPath.row < engine.show.stings.count  // ignores add sting button
+        indexPath.section == 1
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -165,40 +113,4 @@ class ShowViewController: UITableViewController {
         engine.show.stings.insert(engine.show.stings.remove(at: sourceIndexPath.row), at: destinationIndexPath.row)
     }
     
-}
-
-
-// MARK: MPMediaPickerControllerDelegate
-extension ShowViewController: MPMediaPickerControllerDelegate {
-    
-    func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
-        // make a sting from the selected media item, add it to the engine and update the table view
-        if let sting = Sting(mediaItem: mediaItemCollection.items[0]) {
-            engine.add(sting)
-            tableView.insertRows(at: [IndexPath(row: engine.show.stings.count - 1, section: 1)], with: .automatic)
-        }
-        
-        // dismiss media picker
-        dismiss(animated: true)
-    }
-    
-    func mediaPickerDidCancel(_ mediaPicker: MPMediaPickerController) {
-        // dismiss media picker
-        dismiss(animated: true)
-    }
-    
-}
-
-
-// MARK: UIDocumentPickerDelegate
-extension ShowViewController: UIDocumentPickerDelegate {
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        if let sting = Sting(url: urls[0]) {
-            engine.add(sting)
-            tableView.insertRows(at: [IndexPath(row: engine.show.stings.count - 1, section: 1)], with: .automatic)
-        }
-        
-        // dismiss document picker
-        dismiss(animated: true)
-    }
 }
