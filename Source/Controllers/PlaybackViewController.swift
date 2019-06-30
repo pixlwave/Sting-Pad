@@ -143,6 +143,21 @@ class PlaybackViewController: UICollectionViewController {
         #endif
     }
     
+    func renameSting(at index: Int) {
+        let sting = engine.show.stings[index]
+        
+        let alertController = UIAlertController(title: "Rename", message: nil, preferredStyle: .alert)
+        alertController.addTextField { textField in textField.text = sting.name }
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            guard let name = alertController.textFields?.first?.text else { return }
+            sting.name = name.isEmpty == false ? name : nil
+            self.engine.show.updateChangeCount(.done)
+            self.applySnapshot()
+        }))
+        present(alertController, animated: true, completion: nil)
+    }
+    
     @IBAction func playSting() {
         engine.playSting(at: cuedStingIndex)
         nextSting()
@@ -203,6 +218,24 @@ class PlaybackViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         engine.show.stings.insert(engine.show.stings.remove(at: sourceIndexPath.item), at: destinationIndexPath.item)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
+            let rename = UIAction(__title: "Rename", image: UIImage(systemName: "square.and.pencil"), options: []) { action in
+                self.renameSting(at: indexPath.item)
+            }
+            let edit = UIAction(__title: "Edit", image: UIImage(systemName: "waveform"), options: []) { action in
+                #warning("Missing implementation")
+            }
+            let delete = UIAction(__title: "Delete", image: UIImage(systemName: "minus.circle.fill"), options: [.destructive]) { action in
+                self.engine.show.stings.remove(at: indexPath.item)
+                self.applySnapshot()
+            }
+            
+            // Create and return a UIMenu with the share action
+            return UIMenu(__title: "", image: nil, identifier: nil, children: [rename, edit, delete])
+        }
     }
     
 }

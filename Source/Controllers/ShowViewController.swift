@@ -95,18 +95,8 @@ class ShowViewController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        indexPath.section == 1
-    }
-    
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         indexPath.section == 1
-    }
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        guard editingStyle == .delete else { super.tableView(tableView, commit: editingStyle, forRowAt: indexPath); return }
-        engine.show.stings.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {

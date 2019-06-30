@@ -55,23 +55,6 @@ class StingViewController: UIViewController {
         }
     }
     
-    @IBAction func rename() {
-        let sting = engine.show.stings[stingIndex]
-        
-        let alertController = UIAlertController(title: "Rename", message: nil, preferredStyle: .alert)
-        alertController.addTextField { textField in textField.text = sting.name }
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-            guard let name = alertController.textFields?.first?.text else { return }
-            sting.name = name.isEmpty == false ? name : nil
-            self.engine.show.updateChangeCount(.done)
-            self.updateLabels()
-            
-            NotificationCenter.default.post(Notification(name: .stingsDidChange))
-        }))
-        present(alertController, animated: true, completion: nil)
-    }
-    
     @IBAction func boundControlChanged(_ sender: UISegmentedControl) {
         waveformView.boundToScrub = sender.selectedSegmentIndex == 0 ? .lower : .upper
     }
