@@ -13,7 +13,7 @@ class Sting: NSObject, Codable {
     var name: String?
     var color: Color = .default
     private var startTime: TimeInterval = 0 { didSet { updateBuffer() } }
-    private var endTime: TimeInterval?
+    private var endTime: TimeInterval? { didSet { updateBuffer() } }
     var loops = false {
         didSet {
             if loops { createBuffer() }
@@ -89,25 +89,23 @@ class Sting: NSObject, Codable {
     }
     
     init?(mediaItem: MPMediaItem) {
-        guard let assetURL = mediaItem.assetURL, let audioFile = try? AVAudioFile(forReading: assetURL), let buffer = AVAudioPCMBuffer(for: audioFile) else { return nil }
+        guard let assetURL = mediaItem.assetURL, let audioFile = try? AVAudioFile(forReading: assetURL) else { return nil }
         
         url = assetURL
         songTitle = mediaItem.title ?? "Unknown"
         songArtist = mediaItem.artist ?? "Unknown"
         self.audioFile = audioFile
-        self.buffer = buffer
         
         super.init()
     }
     
     init?(url: URL) {
-        guard let audioFile = try? AVAudioFile(forReading: url), let buffer = AVAudioPCMBuffer(for: audioFile) else { return nil }
+        guard let audioFile = try? AVAudioFile(forReading: url) else { return nil }
         
         self.url = url
         songTitle = url.songTitle() ?? "Unknown"
         songArtist = url.songArtist() ?? "Unknown"
         self.audioFile = audioFile
-        self.buffer = buffer
         
         super.init()
     }
