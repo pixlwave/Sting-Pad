@@ -62,11 +62,6 @@ extension Notification.Name {
 }
 
 
-extension CGColor {
-    static let cuedStingBackgroundColor = UIColor.black.withAlphaComponent(0.5).cgColor
-}
-
-
 extension TimeInterval {
     static let formatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()

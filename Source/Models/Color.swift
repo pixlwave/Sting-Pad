@@ -19,29 +19,29 @@ enum Color: String, Codable {
     var value: UIColor {
         switch self {
         case .dark:
-            return .black
+            return .systemGray
         case .gray:
-            return .gray
+            return .systemGray3
         case .light:
-            return .white
+            return .systemGray6
         case .red:
-            return .red
+            return .systemRed
         case .orange:
-            return .orange
+            return .systemOrange
         case .yellow:
-            return .yellow
+            return .systemYellow
         case .green:
-            return .green
+            return .systemGreen
         case .teal:
-            return UIColor(red: 0.463, green: 0.776, blue: 0.961, alpha: 1.0)
+            return .systemTeal
         case .blue:
-            return .blue
+            return .systemBlue
         case .indigo:
-            return UIColor(red: 0.337, green: 0.353, blue: 0.812, alpha: 1.0)
+            return .systemIndigo
         case .purple:
-            return .purple
+            return .systemPurple
         case .pink:
-            return UIColor(red: 0.922, green: 0.271, blue: 0.353, alpha: 1.0)
+            return .systemPink
         }
     }
 }

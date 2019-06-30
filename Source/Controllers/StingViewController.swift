@@ -12,7 +12,7 @@ class StingViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
-    @IBOutlet weak var waveformLoadingImageView: UIImageView!
+    @IBOutlet weak var waveformLoadingView: UIView!
     @IBOutlet weak var previewButton: UIButton!
     @IBOutlet weak var loopSwitch: UISwitch!
     
@@ -40,7 +40,7 @@ class StingViewController: UIViewController {
     }
     
     override func viewWillLayoutSubviews() {
-        waveformView.frame = waveformLoadingImageView.frame
+        waveformView.frame = waveformLoadingView.frame
     }
     
     func updateLabels() {
@@ -107,8 +107,8 @@ extension StingViewController: FDWaveformViewDelegate {
     }
     
     func waveformViewDidRender(_ waveform: FDWaveformView) {
-        waveformView.frame = waveformLoadingImageView.frame
-        waveformLoadingImageView.isHidden = true
+        waveformView.frame = waveformLoadingView.frame
+        waveformLoadingView.isHidden = true
     }
     
     func waveformDidEndScrubbing(_ waveformView: FDWaveformView) {

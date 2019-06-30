@@ -13,7 +13,7 @@ class StingCell: UICollectionViewCell {
     var isCued = false {
         didSet {
             layer.borderWidth = isCued ? 3 : 0
-            layer.borderColor = .cuedStingBackgroundColor
+            layer.borderColor = UIColor(named: "Border Color")?.cgColor
         }
     }
     

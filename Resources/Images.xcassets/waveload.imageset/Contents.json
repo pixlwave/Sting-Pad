@@ -3,10 +3,23 @@
     {
       "idiom" : "universal",
       "filename" : "waveload.pdf"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "waveload-dark.pdf",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ]
     }
   ],
   "info" : {
     "version" : 1,
     "author" : "xcode"
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
   }
 }
