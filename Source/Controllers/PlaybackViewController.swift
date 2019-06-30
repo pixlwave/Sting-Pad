@@ -131,6 +131,14 @@ class PlaybackViewController: UICollectionViewController {
         engine.playSting(at: indexPath.item)
     }
     
+    override func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+        return indexPath.item < engine.show.stings.count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        engine.show.stings.insert(engine.show.stings.remove(at: sourceIndexPath.item), at: destinationIndexPath.item)
+    }
+    
 }
 
 
