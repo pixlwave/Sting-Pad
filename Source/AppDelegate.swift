@@ -10,6 +10,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // prevent device from going to sleep
         application.isIdleTimerDisabled = true
         
+        #if targetEnvironment(simulator)
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        #endif
+        
         return true
     }
     

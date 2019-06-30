@@ -18,7 +18,7 @@ class Engine {
     private var lastPlayedStingIndex = -1
     private var isPlaying: Bool {
         guard player.isPlaying else { return false }
-        let buffer = show.stings[lastPlayedStingIndex].buffer
+        let sting = show.stings[lastPlayedStingIndex]
         
         guard
             let lastRenderTime = player.lastRenderTime,
@@ -26,19 +26,22 @@ class Engine {
         else { return true }
         
         // fix player.isPlaying returning true in the completion handler
-        return playerPosition < AVAudioFramePosition(buffer.frameLength)
+        return playerPosition < AVAudioFramePosition(sting.sampleCount)
     }
     
-    private var currentBuffer: AVAudioPCMBuffer?
+    private var currentSting: Sting?
     
-    var totalTime: TimeInterval { return currentBuffer?.totalTime ?? 0 }
+    var totalTime: TimeInterval {
+        guard let sting = currentSting else { return 0 }
+        return Double(sting.sampleCount) / sting.audioFile.processingFormat.sampleRate
+    }
     var elapsedTime: TimeInterval {
         guard
-            let buffer = currentBuffer,
+            let sting = currentSting,
             let lastRenderTime = player.lastRenderTime,
             let elapsedSamples = player.playerTime(forNodeTime: lastRenderTime)?.sampleTime
         else { return 0 }
-        return Double(elapsedSamples) / buffer.format.sampleRate
+        return Double(elapsedSamples) / sting.audioFile.processingFormat.sampleRate
     }
     var remainingTime: TimeInterval { return totalTime - elapsedTime }
     
@@ -129,18 +132,25 @@ class Engine {
         if player.isPlaying { player.stop() }
         
         let sting = show.stings[index]
-        let options: AVAudioPlayerNodeBufferOptions = sting.loops ? [.loops] : []
         
-        if sting.buffer.format != engine.mainMixerNode.inputFormat(forBus: 0) {
-            engine.connect(player, to: engine.mainMixerNode, fromBus: 0, toBus: 0, format: sting.buffer.format)
+        if sting.audioFile.processingFormat != engine.mainMixerNode.inputFormat(forBus: 0) {
+            engine.connect(player, to: engine.mainMixerNode, fromBus: 0, toBus: 0, format: sting.audioFile.processingFormat)
         }
         
-        player.scheduleBuffer(sting.buffer, at: nil, options: options) {
-            self.playbackDelegate?.stingDidStopPlaying(at: index)
+        if sting.loops {
+            guard let buffer = sting.buffer else { return }
+            
+            player.scheduleBuffer(buffer, at: nil, options: .loops) {
+                self.playbackDelegate?.stingDidStopPlaying(at: index)
+            }
+        } else {
+            player.scheduleSegment(sting.audioFile, startingFrame: sting.startSample, frameCount: sting.sampleCount, at: nil) {
+                self.playbackDelegate?.stingDidStopPlaying(at: index)
+            }
         }
         
         player.play()
-        currentBuffer = sting.buffer
+        currentSting = sting
         lastPlayedStingIndex = index
         playbackDelegate?.stingDidStartPlaying(at: index)
     }

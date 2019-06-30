@@ -14,7 +14,12 @@ class Sting: NSObject, Codable {
     var color: Color = .default
     private var startTime: TimeInterval = 0 { didSet { updateBuffer() } }
     private var endTime: TimeInterval?
-    var loops = false
+    var loops = false {
+        didSet {
+            if loops { createBuffer() }
+            else { destroyBuffer() }
+        }
+    }
     
     var startSample: AVAudioFramePosition {
         get { return AVAudioFramePosition(startTime * audioFile.fileFormat.sampleRate) }
@@ -36,9 +41,12 @@ class Sting: NSObject, Codable {
             }
         }
     }
+    var sampleCount: AVAudioFrameCount {
+        return AVAudioFrameCount(endSample - startSample)
+    }
     
-    private let audioFile: AVAudioFile
-    private(set) var buffer: AVAudioPCMBuffer
+    let audioFile: AVAudioFile
+    private(set) var buffer: AVAudioPCMBuffer?
     
     enum CodingKeys: String, CodingKey {
         case url
@@ -58,7 +66,7 @@ class Sting: NSObject, Codable {
         let endTime = try? container.decode(TimeInterval.self, forKey: .endTime)
         let loops = try container.decode(Bool.self, forKey: .loops)
         
-        if let audioFile = try? AVAudioFile(forReading: url), let buffer = AVAudioPCMBuffer(for: audioFile) {
+        if let audioFile = try? AVAudioFile(forReading: url) {
             self.url = url
             self.name = name
             self.color = color
@@ -68,17 +76,16 @@ class Sting: NSObject, Codable {
             self.songTitle = url.songTitle() ?? "Unknown"
             self.songArtist = url.songArtist() ?? "Unknown"
             self.audioFile = audioFile
-            self.buffer = buffer
         } else {    #warning("Replace this with a \"missing\" Sting object")
             self.url = Sting.defaultURL
             self.songTitle = "Chime"
             self.songArtist = "Default Sting"
             self.audioFile = try! AVAudioFile(forReading: self.url)
-            self.buffer = AVAudioPCMBuffer(for: audioFile)!
         }
         
         super.init()
-        updateBuffer()
+        
+        if loops { createBuffer() }
     }
     
     init?(mediaItem: MPMediaItem) {
@@ -91,7 +98,6 @@ class Sting: NSObject, Codable {
         self.buffer = buffer
         
         super.init()
-        updateBuffer()
     }
     
     init?(url: URL) {
@@ -104,16 +110,26 @@ class Sting: NSObject, Codable {
         self.buffer = buffer
         
         super.init()
+    }
+    
+    func createBuffer() {
+        buffer = AVAudioPCMBuffer(for: audioFile)
         updateBuffer()
     }
     
     func updateBuffer() {
+        guard loops, let buffer = buffer else { return }
+        
         do {
             audioFile.framePosition = startSample
             try audioFile.read(into: buffer, frameCount: AVAudioFrameCount(endSample - startSample))
         } catch {
             print("Error: \(error)")
         }
+    }
+    
+    func destroyBuffer() {
+        buffer = nil
     }
     
 }

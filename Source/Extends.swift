@@ -54,10 +54,6 @@ extension AVAudioPCMBuffer {
     convenience init?(for audioFile: AVAudioFile) {
         self.init(pcmFormat: audioFile.processingFormat, frameCapacity: AVAudioFrameCount(audioFile.length))
     }
-    
-    var totalTime: TimeInterval {
-        return Double(frameLength) / format.sampleRate
-    }
 }
 
 
