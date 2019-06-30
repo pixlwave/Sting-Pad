@@ -50,16 +50,13 @@ class ShowViewController: UITableViewController {
     }
     
     #if targetEnvironment(simulator)
-    func loadRandomTrackFromDocuments() {
-        guard
-            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first,
-            let documents = try? FileManager.default.contentsOfDirectory(atPath: documentsURL.path)
-        else { return }
+    func loadRandomTrackFromHostFileSystem() {
+        guard let sharedFiles = try? FileManager.default.contentsOfDirectory(atPath: "/Users/Shared/Music") else { return }
         
-        let audioFiles = documents.filter { $0.hasSuffix(".mp3") || $0.hasSuffix(".m4a") }
+        let audioFiles = sharedFiles.filter { $0.hasSuffix(".mp3") || $0.hasSuffix(".m4a") }
         guard audioFiles.count > 0 else { fatalError() }
         let file = audioFiles[Int.random(in: 0..<audioFiles.count)]
-        let url = documentsURL.appendingPathComponent(file)
+        let url = URL(fileURLWithPath: "/Users/Shared/Music").appendingPathComponent(file)
         
         if let sting = Sting(url: url) {
             engine.add(sting)
@@ -137,7 +134,7 @@ class ShowViewController: UITableViewController {
                 
                 #if targetEnvironment(simulator)
                     // pick a random file from the documents directory until iOS 13 syncs iCloud drive
-                    loadRandomTrackFromDocuments()
+                    loadRandomTrackFromHostFileSystem()
                 #else
                     // load the track with a media picker
                     loadTrack()
