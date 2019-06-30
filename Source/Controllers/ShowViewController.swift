@@ -49,6 +49,25 @@ class ShowViewController: UITableViewController {
         present(documentPicker, animated: true)
     }
     
+    #if targetEnvironment(simulator)
+    func loadRandomTrackFromDocuments() {
+        guard
+            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first,
+            let documents = try? FileManager.default.contentsOfDirectory(atPath: documentsURL.path)
+        else { return }
+        
+        let audioFiles = documents.filter { $0.hasSuffix(".mp3") || $0.hasSuffix(".m4a") }
+        guard audioFiles.count > 0 else { fatalError() }
+        let file = audioFiles[Int.random(in: 0..<audioFiles.count)]
+        let url = documentsURL.appendingPathComponent(file)
+        
+        if let sting = Sting(url: url) {
+            engine.add(sting)
+            tableView.insertRows(at: [IndexPath(row: engine.show.stings.count - 1, section: 1)], with: .automatic)
+        }
+    }
+    #endif
+    
     @IBAction func edit() {
         tableView.setEditing(!tableView.isEditing, animated: true)
     }
@@ -117,8 +136,8 @@ class ShowViewController: UITableViewController {
                 tableView.deselectRow(at: indexPath, animated: true)
                 
                 #if targetEnvironment(simulator)
-                    // use a document picker as the simulator doesn't have a music library
-                    loadTrackFromFile()
+                    // pick a random file from the documents directory until iOS 13 syncs iCloud drive
+                    loadRandomTrackFromDocuments()
                 #else
                     // load the track with a media picker
                     loadTrack()
