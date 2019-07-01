@@ -78,6 +78,10 @@ class StingViewController: UIViewController {
         engine.show.stings[stingIndex].loops = sender.isOn
         engine.show.updateChangeCount(.done)
     }
+    
+    @IBAction func done() {
+        dismiss(animated: true)
+    }
 }
 
 

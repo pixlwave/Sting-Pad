@@ -57,6 +57,18 @@ class PlaybackViewController: UICollectionViewController {
         collectionView.contentInset.bottom = size.height
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Edit Sting" {
+            guard
+                let navigationVC = segue.destination as? UINavigationController,
+                let stingVC = navigationVC.topViewController as? StingViewController,
+                let indexPath = sender as? IndexPath
+            else { return }
+            
+            stingVC.stingIndex = indexPath.row
+        }
+    }
+    
     func createLayout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment -> NSCollectionLayoutSection? in
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
@@ -235,7 +247,7 @@ class PlaybackViewController: UICollectionViewController {
                 self.renameSting(at: indexPath.item)
             }
             let edit = UIAction(__title: "Edit", image: UIImage(systemName: "waveform"), options: []) { action in
-                #warning("Missing implementation")
+                self.performSegue(withIdentifier: "Edit Sting", sender: indexPath)
             }
             let delete = UIAction(__title: "Delete", image: UIImage(systemName: "minus.circle.fill"), options: [.destructive]) { action in
                 self.engine.show.stings.remove(at: indexPath.item)

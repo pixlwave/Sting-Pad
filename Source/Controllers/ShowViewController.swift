@@ -22,15 +22,6 @@ class ShowViewController: UITableViewController {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Edit Sting", let stingVC = segue.destination as? StingViewController {
-            if let indexPath = tableView.indexPathForSelectedRow {
-                editedIndexPath = indexPath
-                stingVC.stingIndex = indexPath.row
-            }
-        }
-    }
-    
     @IBAction func edit() {
         tableView.setEditing(!tableView.isEditing, animated: true)
     }
