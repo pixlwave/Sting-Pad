@@ -3,11 +3,16 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.15"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlaybackViewController" customModule="Stingtk" customModuleProvider="target">
             <connections>
+                <outlet property="nextButton" destination="amq-cP-E4J" id="WxI-Sb-axv"/>
+                <outlet property="playButton" destination="y23-dR-PwW" id="COh-6c-MwK"/>
+                <outlet property="previousButton" destination="N6t-Wv-uJW" id="hjX-AV-9rf"/>
+                <outlet property="stopButton" destination="mUe-Rk-ltB" id="lYg-UJ-vRk"/>
                 <outlet property="timeLabel" destination="9Fx-yc-sdB" id="TCd-7E-MJx"/>
                 <outlet property="transportView" destination="iN0-l3-epB" id="Ar5-Vc-Td3"/>
             </connections>
@@ -24,31 +29,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y23-dR-PwW">
-                                <rect key="frame" x="32" y="13" width="64" height="64"/>
-                                <state key="normal" image="play"/>
+                                <rect key="frame" x="46" y="34.5" width="15" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" image="play" catalog="system"/>
                                 <connections>
                                     <action selector="playSting" destination="-1" eventType="touchUpInside" id="gPP-lq-KeX"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mUe-Rk-ltB">
-                                <rect key="frame" x="128" y="21" width="48" height="48"/>
-                                <state key="normal" image="stop"/>
-                                <connections>
-                                    <action selector="stopSting" destination="-1" eventType="touchUpInside" id="i7l-lD-82m"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N6t-Wv-uJW">
-                                <rect key="frame" x="198" y="22.5" width="52" height="45"/>
-                                <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                <state key="normal" image="ipodprevious"/>
+                                <rect key="frame" x="178.5" y="34.5" width="27" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" image="backward" catalog="system"/>
                                 <connections>
                                     <action selector="previousSting" destination="-1" eventType="touchUpInside" id="g2m-9v-gfT"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="amq-cP-E4J">
-                                <rect key="frame" x="254" y="22.5" width="52" height="45"/>
-                                <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                <state key="normal" image="ipodnext"/>
+                                <rect key="frame" x="242.5" y="34.5" width="27" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" image="forward" catalog="system"/>
                                 <connections>
                                     <action selector="nextSting" destination="-1" eventType="touchUpInside" id="AfS-T3-LIl"/>
                                 </connections>
@@ -59,17 +58,26 @@
                                 <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mUe-Rk-ltB">
+                                <rect key="frame" x="114" y="34.5" width="18" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" image="stop" catalog="system"/>
+                                <connections>
+                                    <action selector="stopSting" destination="-1" eventType="touchUpInside" id="i7l-lD-82m"/>
+                                </connections>
+                            </button>
                         </subviews>
+                        <color key="tintColor" name="Tint Color"/>
                         <constraints>
                             <constraint firstItem="mUe-Rk-ltB" firstAttribute="centerY" secondItem="QXm-bq-c4M" secondAttribute="centerY" id="20m-xg-ejc"/>
                             <constraint firstItem="amq-cP-E4J" firstAttribute="centerY" secondItem="QXm-bq-c4M" secondAttribute="centerY" id="85U-8D-zbR"/>
-                            <constraint firstItem="N6t-Wv-uJW" firstAttribute="centerX" secondItem="QXm-bq-c4M" secondAttribute="centerX" multiplier="1.4" id="9w3-0b-mv4"/>
-                            <constraint firstItem="y23-dR-PwW" firstAttribute="centerX" secondItem="QXm-bq-c4M" secondAttribute="centerX" multiplier="0.4" id="B4U-RL-azv"/>
+                            <constraint firstItem="N6t-Wv-uJW" firstAttribute="centerX" secondItem="QXm-bq-c4M" secondAttribute="centerX" multiplier="1.2" id="9w3-0b-mv4"/>
+                            <constraint firstItem="y23-dR-PwW" firstAttribute="centerX" secondItem="QXm-bq-c4M" secondAttribute="centerX" multiplier="1/3" id="B4U-RL-azv"/>
                             <constraint firstAttribute="trailing" secondItem="9Fx-yc-sdB" secondAttribute="trailing" constant="8" id="Jrj-ZF-49k"/>
                             <constraint firstItem="y23-dR-PwW" firstAttribute="centerY" secondItem="QXm-bq-c4M" secondAttribute="centerY" id="TuB-hJ-B8C"/>
-                            <constraint firstItem="amq-cP-E4J" firstAttribute="centerX" secondItem="QXm-bq-c4M" secondAttribute="centerX" multiplier="1.75" id="aaf-rM-lUH"/>
+                            <constraint firstItem="amq-cP-E4J" firstAttribute="centerX" secondItem="QXm-bq-c4M" secondAttribute="centerX" multiplier="1.6" id="aaf-rM-lUH"/>
                             <constraint firstAttribute="bottom" secondItem="9Fx-yc-sdB" secondAttribute="bottom" constant="4" id="bUk-bQ-eQm"/>
-                            <constraint firstItem="mUe-Rk-ltB" firstAttribute="centerX" secondItem="QXm-bq-c4M" secondAttribute="centerX" multiplier="0.95" id="mPB-GD-Dli"/>
+                            <constraint firstItem="mUe-Rk-ltB" firstAttribute="centerX" secondItem="QXm-bq-c4M" secondAttribute="centerX" multiplier="1/1.3" id="mPB-GD-Dli"/>
                             <constraint firstItem="N6t-Wv-uJW" firstAttribute="centerY" secondItem="QXm-bq-c4M" secondAttribute="centerY" id="roK-OF-29R"/>
                         </constraints>
                     </view>
@@ -89,9 +97,12 @@
         </view>
     </objects>
     <resources>
-        <image name="ipodnext" width="32" height="25"/>
-        <image name="ipodprevious" width="32" height="25"/>
-        <image name="play" width="64" height="64"/>
-        <image name="stop" width="48" height="48"/>
+        <image name="backward" catalog="system" width="64" height="36"/>
+        <image name="forward" catalog="system" width="64" height="36"/>
+        <image name="play" catalog="system" width="58" height="64"/>
+        <image name="stop" catalog="system" width="64" height="56"/>
+        <namedColor name="Tint Color">
+            <color red="1" green="0.50196078431372548" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

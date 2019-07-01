@@ -124,7 +124,7 @@
                                     <action selector="togglePreview" destination="sKY-0b-GtB" eventType="touchDown" id="L1m-hr-lcc"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyO-e7-KqD">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyO-e7-KqD">
                                 <rect key="frame" x="185" y="344" width="119" height="58"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="25" minY="20" maxX="25" maxY="20"/>
@@ -175,6 +175,7 @@
                         <constraints>
                             <constraint firstItem="8ah-Ra-mmM" firstAttribute="top" secondItem="EDC-cS-RXP" secondAttribute="bottom" constant="5" id="2FF-7U-pZO"/>
                             <constraint firstItem="EDC-cS-RXP" firstAttribute="leading" secondItem="8ah-Ra-mmM" secondAttribute="leading" id="2q3-eT-qTJ"/>
+                            <constraint firstAttribute="trailing" secondItem="tyO-e7-KqD" secondAttribute="trailing" constant="16" id="CfI-CU-4XV"/>
                             <constraint firstAttribute="trailing" secondItem="45r-lx-NUx" secondAttribute="trailing" constant="20" id="Cg9-VC-XDU"/>
                             <constraint firstItem="45r-lx-NUx" firstAttribute="top" secondItem="1fo-c8-qOt" secondAttribute="bottom" constant="40" id="F4p-TO-gS2"/>
                             <constraint firstItem="RCd-w4-mUV" firstAttribute="leading" secondItem="IL7-SC-53c" secondAttribute="centerX" constant="10" id="KVV-rX-PAa"/>
@@ -296,7 +297,7 @@
         <scene sceneID="GbG-OJ-QD7">
             <objects>
                 <navigationController id="fvA-P5-zyc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Show" image="load_playlist" id="1gS-Wf-YTC"/>
+                    <tabBarItem key="tabBarItem" title="Show" image="scribble" catalog="system" id="1gS-Wf-YTC"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="sWf-db-phl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -372,7 +373,7 @@
                             <outlet property="delegate" destination="Viv-76-yOT" id="blU-PT-a6q"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Settings" image="settings" id="IHP-eE-OUx"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="slider.horizontal.3" catalog="system" id="IHP-eE-OUx"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cci-lr-xGF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -403,7 +404,7 @@
         <scene sceneID="kDB-4j-sjU">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YTS-cD-PDT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Playback" image="ipodplay" id="8eI-x5-krT"/>
+                    <tabBarItem key="tabBarItem" title="Playback" image="music.note.list" catalog="system" id="8eI-x5-krT"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="EvB-0l-pZT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -420,9 +421,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ipodplay" width="30" height="30"/>
-        <image name="load_playlist" width="18" height="18"/>
+        <image name="music.note.list" catalog="system" width="64" height="58"/>
+        <image name="scribble" catalog="system" width="64" height="56"/>
         <image name="settings" width="16" height="16"/>
+        <image name="slider.horizontal.3" catalog="system" width="64" height="50"/>
         <image name="waveload" width="280" height="75"/>
         <namedColor name="Background Color">
             <color red="0.80784313725490198" green="0.80784313725490198" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

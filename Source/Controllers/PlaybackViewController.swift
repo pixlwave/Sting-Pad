@@ -9,9 +9,13 @@ class PlaybackViewController: UICollectionViewController {
     private var cuedStingIndex = 0
     
     @IBOutlet var transportView: UIView!
-    private let transportViewHeight: CGFloat = 90
-    
+    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var stopButton: UIButton!
+    @IBOutlet weak var previousButton: UIButton!
+    @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var timeLabel: UILabel!
+    
+    private let transportViewHeight: CGFloat = 90
     private var timeTimer: Timer?
     
     override func viewDidLoad() {
@@ -23,6 +27,11 @@ class PlaybackViewController: UICollectionViewController {
         // load the transport view nib and add as a subview via it's outlet
         Bundle.main.loadNibNamed("TransportView", owner: self, options: nil)
         view.addSubview(transportView)
+        #warning("Symbol config would be better in the storyboard if possible")
+        playButton.setPreferredSymbolConfiguration(.init(pointSize: 52, weight: .thin, scale: .large), forImageIn: .normal)
+        stopButton.setPreferredSymbolConfiguration(.init(pointSize: 52, weight: .thin, scale: .medium), forImageIn: .normal)
+        previousButton.setPreferredSymbolConfiguration(.init(pointSize: 52, weight: .thin, scale: .small), forImageIn: .normal)
+        nextButton.setPreferredSymbolConfiguration(.init(pointSize: 52, weight: .thin, scale: .small), forImageIn: .normal)
         timeLabel.font = UIFont.monospacedDigitSystemFont(ofSize: timeLabel.font.pointSize, weight: .regular)
         
         collectionView.dataSource = dataSource
