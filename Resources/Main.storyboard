@@ -61,6 +61,11 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="fhU-qn-D6z">
+                        <barButtonItem key="leftBarButtonItem" title="New Show" id="ukz-9p-DRM">
+                            <connections>
+                                <action selector="newShow" destination="yak-cE-mUi" id="VCR-o0-Q9b"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="yWN-oa-4Xq">
                             <connections>
                                 <action selector="addSting" destination="yak-cE-mUi" id="mZX-G8-cwr"/>
