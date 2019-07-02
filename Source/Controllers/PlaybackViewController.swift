@@ -36,6 +36,8 @@ class PlaybackViewController: UICollectionViewController {
         
         collectionView.dataSource = dataSource
         collectionView.collectionViewLayout = createLayout()
+        collectionView.dragDelegate = self
+        collectionView.dropDelegate = self
         // prevents scroll view from momentarily blocking the play button's action
         collectionView.delaysContentTouches = false; #warning("Test if this works or if the property needs to be set on the scroll view")
         
@@ -276,6 +278,33 @@ class PlaybackViewController: UICollectionViewController {
         }
     }
     
+}
+
+
+// MARK: UICollectionViewDragDelegate
+extension PlaybackViewController: UICollectionViewDragDelegate {
+    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        // drag item doesn't require any customisation as the drop delegate only needs the source/destination index paths
+        return [UIDragItem(itemProvider: NSItemProvider())]
+    }
+    
+    #warning("Add itemsForAddingTo when testing on device, and handle multiple drops")
+}
+
+
+// MARK: UICollectionViewDropDelegate
+extension PlaybackViewController: UICollectionViewDropDelegate {
+    func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+        guard collectionView.hasActiveDrag else { return UICollectionViewDropProposal(operation: .forbidden) }
+        return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+        if let desinationIndexPath = coordinator.destinationIndexPath, let sourceIndexPath = coordinator.items.first?.sourceIndexPath {
+            engine.show.stings.insert(engine.show.stings.remove(at: sourceIndexPath.item), at: desinationIndexPath.item)
+            applySnapshot()
+        }
+    }
 }
 
 
