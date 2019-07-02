@@ -130,4 +130,9 @@ class Sting: NSObject, Codable {
         buffer = nil
     }
     
+    func copy() -> Sting? {
+        guard let data = try? JSONEncoder().encode(self) else { return nil }
+        return try? JSONDecoder().decode(Sting.self, from: data)
+    }
+    
 }

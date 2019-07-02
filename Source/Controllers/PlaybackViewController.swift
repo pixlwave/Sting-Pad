@@ -261,13 +261,18 @@ class PlaybackViewController: UICollectionViewController {
             let edit = UIAction(__title: "Edit", image: UIImage(systemName: "waveform"), options: []) { action in
                 self.performSegue(withIdentifier: "Edit Sting", sender: indexPath)
             }
+            let duplicate = UIAction(__title: "Duplicate", image: UIImage(systemName: "plus.square.on.square"), options: []) { action in
+                guard let duplicate = self.engine.show.stings[indexPath.item].copy() else { return }
+                self.engine.show.stings.insert(duplicate, at: indexPath.item + 1)
+                self.applySnapshot()
+            }
             let delete = UIAction(__title: "Delete", image: UIImage(systemName: "minus.circle.fill"), options: [.destructive]) { action in
                 self.engine.show.stings.remove(at: indexPath.item)
                 self.applySnapshot()
             }
             
             // Create and return a UIMenu with the share action
-            return UIMenu(__title: "", image: nil, identifier: nil, children: [rename, edit, delete])
+            return UIMenu(__title: "", image: nil, identifier: nil, children: [rename, edit, duplicate, delete])
         }
     }
     
