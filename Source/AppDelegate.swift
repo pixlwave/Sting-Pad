@@ -10,6 +10,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // prevent device from going to sleep
         application.isIdleTimerDisabled = true
         
+        // applies the included tint colour to UIAlertController (and presumably others)
+        window?.tintColor = UIColor(named: "Tint Color")
+        
         return true
     }
     
