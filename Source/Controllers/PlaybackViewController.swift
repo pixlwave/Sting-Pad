@@ -257,21 +257,22 @@ class PlaybackViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
-            let rename = UIAction(__title: "Rename", image: UIImage(systemName: "square.and.pencil"), options: []) { action in
+            let rename = UIAction(__title: "Rename", image: UIImage(systemName: "square.and.pencil"), identifier: nil) { action in
                 self.renameSting(at: indexPath.item)
             }
-            let edit = UIAction(__title: "Edit", image: UIImage(systemName: "waveform"), options: []) { action in
+            let edit = UIAction(__title: "Edit", image: UIImage(systemName: "waveform"), identifier: nil) { action in
                 self.performSegue(withIdentifier: "Edit Sting", sender: indexPath)
             }
-            let duplicate = UIAction(__title: "Duplicate", image: UIImage(systemName: "plus.square.on.square"), options: []) { action in
+            let duplicate = UIAction(__title: "Duplicate", image: UIImage(systemName: "plus.square.on.square"), identifier: nil) { action in
                 guard let duplicate = self.engine.show.stings[indexPath.item].copy() else { return }
                 self.engine.show.stings.insert(duplicate, at: indexPath.item + 1)
                 self.applySnapshot()
             }
-            let delete = UIAction(__title: "Delete", image: UIImage(systemName: "minus.circle.fill"), options: [.destructive]) { action in
+            let delete = UIAction(__title: "Delete", image: UIImage(systemName: "minus.circle.fill"), identifier: nil) { action in
                 self.engine.show.stings.remove(at: indexPath.item)
                 self.applySnapshot()
             }
+            delete.attributes = .destructive
             
             // Create and return a UIMenu with the share action
             return UIMenu(__title: "", image: nil, identifier: nil, children: [rename, edit, duplicate, delete])
