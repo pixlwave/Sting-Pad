@@ -38,6 +38,7 @@ class PlaybackViewController: UICollectionViewController {
         collectionView.collectionViewLayout = createLayout()
         collectionView.dragDelegate = self
         collectionView.dropDelegate = self
+        collectionView.dragInteractionEnabled = true
         // prevents scroll view from momentarily blocking the play button's action
         collectionView.delaysContentTouches = false; #warning("Test if this works or if the property needs to be set on the scroll view")
         
