@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		A504FDEB229557FE00B117BF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A504FDEA229557FE00B117BF /* SettingsViewController.swift */; };
 		A51D98EE22BBCF7D00124A40 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D98ED22BBCF7D00124A40 /* Color.swift */; };
-		A52C90E4217A51A2005653C4 /* SongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52C90E3217A51A2005653C4 /* SongCell.swift */; };
 		A549825A1F7067EC00909196 /* FDAudioContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54982581F7067EC00909196 /* FDAudioContext.swift */; };
 		A549825B1F7067EC00909196 /* FDWaveformRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54982591F7067EC00909196 /* FDWaveformRenderOperation.swift */; };
 		A55C0E7222AA5498008DDB12 /* ShowDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C0E7122AA5498008DDB12 /* ShowDocument.swift */; };
@@ -33,7 +32,6 @@
 /* Begin PBXFileReference section */
 		A504FDEA229557FE00B117BF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A51D98ED22BBCF7D00124A40 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		A52C90E3217A51A2005653C4 /* SongCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongCell.swift; sourceTree = "<group>"; };
 		A54982581F7067EC00909196 /* FDAudioContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDAudioContext.swift; sourceTree = "<group>"; };
 		A54982591F7067EC00909196 /* FDWaveformRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDWaveformRenderOperation.swift; sourceTree = "<group>"; };
 		A55C0E7122AA5498008DDB12 /* ShowDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDocument.swift; sourceTree = "<group>"; };
@@ -147,7 +145,6 @@
 			isa = PBXGroup;
 			children = (
 				A581C3A11B94A041006CE228 /* StingCell.swift */,
-				A52C90E3217A51A2005653C4 /* SongCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -242,7 +239,6 @@
 				A51D98EE22BBCF7D00124A40 /* Color.swift in Sources */,
 				A581C3A21B94A041006CE228 /* StingCell.swift in Sources */,
 				A5A49CB11B5BF216004B80CE /* Sting.swift in Sources */,
-				A52C90E4217A51A2005653C4 /* SongCell.swift in Sources */,
 				A5C32F4E228B64FE00E4B4EB /* Extends.swift in Sources */,
 				A549825A1F7067EC00909196 /* FDAudioContext.swift in Sources */,
 				A504FDEB229557FE00B117BF /* SettingsViewController.swift in Sources */,
