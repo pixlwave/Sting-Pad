@@ -111,6 +111,12 @@ class PlaybackViewController: UICollectionViewController {
         dataSource.apply(snapshot)
     }
     
+    func reloadItems(_ identifiers: [Sting]) {
+        let snapshot = dataSource.snapshot()
+        snapshot.reloadItems(identifiers)
+        dataSource.apply(snapshot)
+    }
+    
     func showWelcomeScreen() {
         // instantiate welcome controller and present
         let walkSB = UIStoryboard(name: "Welcome", bundle: nil)
@@ -188,7 +194,7 @@ class PlaybackViewController: UICollectionViewController {
             guard let name = alertController.textFields?.first?.text else { return }
             sting.name = name.isEmpty == false ? name : nil
             self.engine.show.updateChangeCount(.done)
-            self.applySnapshot()
+            self.reloadItems([sting])
         }))
         present(alertController, animated: true, completion: nil)
     }
