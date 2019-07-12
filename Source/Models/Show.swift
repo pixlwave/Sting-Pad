@@ -2,7 +2,7 @@ import UIKit
 
 class Show: UIDocument {
     
-    static let shared = Show()
+    static let shared = Show(fileURL: Show.defaultURL)
     
     static var defaultURL: URL = {
         guard let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { fatalError("Unable to access documents") }
@@ -10,7 +10,7 @@ class Show: UIDocument {
     }()
     
     override init(fileURL url: URL) {
-        super.init(fileURL: Show.defaultURL)
+        super.init(fileURL: url)
         
         if FileManager.default.fileExists(atPath: fileURL.path) {
             open()
