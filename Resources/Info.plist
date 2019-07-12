@@ -23,7 +23,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>This will allow you to load your playlists and music files into the app.</string>
+	<string>This will allow you to load your music into the app.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>

@@ -119,7 +119,7 @@ class PlaybackViewController: UICollectionViewController {
     func reloadItems(_ identifiers: [Sting]) {
         let snapshot = dataSource.snapshot()
         snapshot.reloadItems(identifiers)
-        dataSource.apply(snapshot)
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
     
     func showWelcomeScreen() {
