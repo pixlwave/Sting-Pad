@@ -98,6 +98,7 @@ class PlaybackViewController: UICollectionViewController {
             
             stingCell.titleLabel.text = sting.name ?? sting.songTitle
             stingCell.isCued = indexPath.item == self.cuedStingIndex
+            stingCell.isPlaying = indexPath.item == self.engine.indexOfPlayingSting
             
             return stingCell
         }
@@ -213,18 +214,22 @@ class PlaybackViewController: UICollectionViewController {
     @IBAction func nextSting() {
         guard engine.show.stings.count > 0 else { return }
         
-        stingCellForItem(at: IndexPath(item: cuedStingIndex, section: 0))?.isCued = false
+        let oldCue = engine.show.stings[cuedStingIndex]
         cuedStingIndex = (cuedStingIndex + 1) % engine.show.stings.count
-        stingCellForItem(at: IndexPath(item: cuedStingIndex, section: 0))?.isCued = true
+        let newCue = engine.show.stings[cuedStingIndex]
+        
+        reloadItems([oldCue, newCue])
     }
     
     @IBAction func previousSting() {
         guard engine.show.stings.count > 0 else { return }
         
         if cuedStingIndex > 0 {
-            stingCellForItem(at: IndexPath(item: cuedStingIndex, section: 0))?.isCued = false
+            let oldCue = engine.show.stings[cuedStingIndex]
             cuedStingIndex = cuedStingIndex - 1 % engine.show.stings.count
-            stingCellForItem(at: IndexPath(item: cuedStingIndex, section: 0))?.isCued = true
+            let newCue = engine.show.stings[cuedStingIndex]
+            
+            reloadItems([oldCue, newCue])
         }
     }
     
