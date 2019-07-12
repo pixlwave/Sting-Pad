@@ -6,7 +6,7 @@ class PlaybackViewController: UICollectionViewController {
     
     private let engine = Engine.shared
     lazy private var dataSource = makeDataSource()
-    private var cuedStingIndex = 0; #warning("Should this be optional?")
+    private var cuedSting: Sting?
     
     @IBOutlet var transportView: UIView!
     @IBOutlet weak var playButton: UIButton!
@@ -65,10 +65,11 @@ class PlaybackViewController: UICollectionViewController {
             guard
                 let navigationVC = segue.destination as? UINavigationController,
                 let stingVC = navigationVC.topViewController as? StingViewController,
-                let indexPath = sender as? IndexPath
+                let indexPath = sender as? IndexPath,
+                let sting = dataSource.itemIdentifier(for: indexPath)
             else { return }
             
-            stingVC.stingIndex = indexPath.row
+            stingVC.sting = sting
         }
     }
     
@@ -97,7 +98,7 @@ class PlaybackViewController: UICollectionViewController {
             guard let stingCell = cell as? StingCell else { return cell }
             
             stingCell.titleLabel.text = sting.name ?? sting.songTitle
-            stingCell.isCued = indexPath.item == self.cuedStingIndex
+            stingCell.isCued = sting == self.cuedSting
             stingCell.isPlaying = sting == self.engine.playingSting
             
             return stingCell
@@ -105,6 +106,9 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     @objc func applySnapshot() {
+        #warning("Move this to add sting")
+        if cuedSting == nil { cuedSting = engine.show.stings.first }
+        
         let snapshot = NSDiffableDataSourceSnapshot<Int, Sting>()
         snapshot.appendSections([0])
         snapshot.appendItems(engine.show.stings)
@@ -200,9 +204,9 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     @IBAction func playSting() {
-        guard cuedStingIndex < engine.show.stings.count else { return }
+        guard let sting = cuedSting ?? engine.show.stings.first else { return }
         
-        engine.playSting(at: cuedStingIndex)
+        engine.play(sting)
         nextSting()
     }
     
@@ -211,25 +215,32 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     @IBAction func nextSting() {
-        guard engine.show.stings.count > 0 else { return }
+        guard
+            engine.show.stings.count > 0,
+            let oldSting = cuedSting,
+            let oldIndex = dataSource.indexPath(for: oldSting)?.item
+        else { return }
         
-        let oldCue = engine.show.stings[cuedStingIndex]
-        cuedStingIndex = (cuedStingIndex + 1) % engine.show.stings.count
-        let newCue = engine.show.stings[cuedStingIndex]
+        let newIndex = (oldIndex + 1) % engine.show.stings.count
+        let newSting = engine.show.stings[newIndex]
+        cuedSting = newSting
         
-        reloadItems([oldCue, newCue])
+        reloadItems([oldSting, newSting])
     }
     
     @IBAction func previousSting() {
-        guard engine.show.stings.count > 0 else { return }
+        guard
+            engine.show.stings.count > 0,
+            let oldSting = cuedSting,
+            let oldIndex = dataSource.indexPath(for: oldSting)?.item,
+            oldIndex > 0
+        else { return }
         
-        if cuedStingIndex > 0 {
-            let oldCue = engine.show.stings[cuedStingIndex]
-            cuedStingIndex = cuedStingIndex - 1 % engine.show.stings.count
-            let newCue = engine.show.stings[cuedStingIndex]
-            
-            reloadItems([oldCue, newCue])
-        }
+        let newIndex = (oldIndex - 1) % engine.show.stings.count
+        let newSting = engine.show.stings[newIndex]
+        cuedSting = newSting
+        
+        reloadItems([oldSting, newSting])
     }
     
     func stingCellForItem(at indexPath: IndexPath) -> StingCell? {
@@ -260,7 +271,8 @@ class PlaybackViewController: UICollectionViewController {
     
     // MARK: UICollectionViewDataDelegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        engine.playSting(at: indexPath.item)
+        guard let sting = dataSource.itemIdentifier(for: indexPath) else { return }
+        engine.play(sting)
     }
     
     override func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {

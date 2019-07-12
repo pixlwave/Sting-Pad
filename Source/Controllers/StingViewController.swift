@@ -7,7 +7,7 @@ class StingViewController: UIViewController {
     
     enum Bound { case lower, upper }
     
-    var stingIndex = 0
+    var sting: Sting!
     var waveformView: FDWaveformView!
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -22,7 +22,7 @@ class StingViewController: UIViewController {
         // load track info
         updateLabels()
         if engine.playingSting != nil { previewButton.setTitle("Stop", for: .normal) }
-        loopSwitch.isOn = engine.show.stings[stingIndex].loops
+        loopSwitch.isOn = sting.loops
         
         // set up the waveform view
         waveformView = FDWaveformView(frame: .zero)
@@ -35,7 +35,7 @@ class StingViewController: UIViewController {
         waveformView.progressColor = UIColor(red: 0.25, green: 0.25, blue: 1.0, alpha: 1.0)
         
         // render the waveform
-        waveformView.audioURL = engine.show.stings[stingIndex].url
+        waveformView.audioURL = sting.url
         view.addSubview(waveformView)
     }
     
@@ -44,8 +44,6 @@ class StingViewController: UIViewController {
     }
     
     func updateLabels() {
-        let sting = engine.show.stings[stingIndex]
-        
         if let name = sting.name {
             titleLabel.text = name
             subtitleLabel.text = sting.songTitle
@@ -63,7 +61,7 @@ class StingViewController: UIViewController {
     @IBAction func togglePreview() {
         if engine.playingSting == nil {
             previewButton.setTitle("Stop", for: .normal)
-            engine.playSting(at: stingIndex)
+            engine.play(sting)
         } else {
             previewButton.setTitle("Preview", for: .normal)
             engine.stopSting()
@@ -75,7 +73,7 @@ class StingViewController: UIViewController {
     }
     
     @IBAction func toggleLoop(_ sender: UISwitch) {
-        engine.show.stings[stingIndex].loops = sender.isOn
+        sting.loops = sender.isOn
         engine.show.updateChangeCount(.done)
     }
     
@@ -90,7 +88,7 @@ extension StingViewController: FDWaveformViewDelegate {
     
     func waveformViewDidLoad(_ waveformView: FDWaveformView) {
         // once the audio file has loaded (and totalSamples is known), set the highlighted samples
-        waveformView.highlightedSamples = Int(engine.show.stings[stingIndex].startSample)..<Int(engine.show.stings[stingIndex].endSample)
+        waveformView.highlightedSamples = Int(sting.startSample)..<Int(sting.endSample)
     }
     
     func waveformViewDidRender(_ waveform: FDWaveformView) {
@@ -99,8 +97,8 @@ extension StingViewController: FDWaveformViewDelegate {
     }
     
     func waveformDidEndScrubbing(_ waveformView: FDWaveformView) {
-        engine.show.stings[stingIndex].startSample = Int64(waveformView.highlightedSamples?.lowerBound ?? 0)
-        engine.show.stings[stingIndex].endSample = Int64(waveformView.highlightedSamples?.upperBound ?? waveformView.totalSamples)
+        sting.startSample = Int64(waveformView.highlightedSamples?.lowerBound ?? 0)
+        sting.endSample = Int64(waveformView.highlightedSamples?.upperBound ?? waveformView.totalSamples)
         engine.show.updateChangeCount(.done)
     }
     

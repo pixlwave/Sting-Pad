@@ -124,11 +124,9 @@ class Engine {
         show.stings.append(sting)
     }
     
-    func playSting(at index: Int) {
+    func play(_ sting: Sting) {
         if !isMultiRoute { musicPlayer.pause() }
         if player.isPlaying { player.stop() }
-        
-        let sting = show.stings[index]
         
         if sting.audioFile.processingFormat != engine.mainMixerNode.inputFormat(forBus: 0) {
             engine.connect(player, to: engine.mainMixerNode, fromBus: 0, toBus: 0, format: sting.audioFile.processingFormat)
