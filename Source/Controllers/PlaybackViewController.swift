@@ -364,17 +364,15 @@ extension PlaybackViewController: UIDocumentPickerDelegate {
 
 // MARK: PlaybackDelegate
 extension PlaybackViewController: PlaybackDelegate {
-    func stingDidStartPlaying(at index: Int) {
-        stingCellForItem(at: IndexPath(item: index, section: 0))?.isPlaying = true
+    func stingDidStartPlaying(_ sting: Sting) {
+        reloadItems([sting])
         beginUpdatingTime()
     }
     
-    func stingDidStopPlaying(at index: Int) {
+    func stingDidStopPlaying(_ sting: Sting) {
         DispatchQueue.main.async {
-            let indexOfPlayingSting = self.engine.indexOfPlayingSting
-            self.stingCellForItem(at: IndexPath(item: index, section: 0))?.isPlaying = indexOfPlayingSting == index
-            
-            if indexOfPlayingSting == nil { self.stopUpdatingTime() }
+            self.reloadItems([sting])
+            if self.engine.indexOfPlayingSting == nil { self.stopUpdatingTime() }
         }
     }
 }

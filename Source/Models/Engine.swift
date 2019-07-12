@@ -141,23 +141,23 @@ class Engine {
             guard let buffer = sting.buffer else { return }
             
             player.scheduleBuffer(buffer, at: nil, options: .loops) {
-                self.playbackDelegate?.stingDidStopPlaying(at: index)
+                self.playbackDelegate?.stingDidStopPlaying(sting)
             }
         } else {
             player.scheduleSegment(sting.audioFile, startingFrame: sting.startSample, frameCount: sting.sampleCount, at: nil) {
-                self.playbackDelegate?.stingDidStopPlaying(at: index)
+                self.playbackDelegate?.stingDidStopPlaying(sting)
             }
         }
         
         player.play()
         currentSting = sting
         lastPlayedStingIndex = index
-        playbackDelegate?.stingDidStartPlaying(at: index)
+        playbackDelegate?.stingDidStartPlaying(sting)
     }
     
     func stopSting() {
         player.stop()
-        playbackDelegate?.stingDidStopPlaying(at: lastPlayedStingIndex)
+        playbackDelegate?.stingDidStopPlaying(show.stings[lastPlayedStingIndex])
     }
     
     @objc func playbackStateDidChange(_ notification: Notification) {
@@ -179,6 +179,6 @@ class Engine {
 
 
 protocol PlaybackDelegate: AnyObject {
-    func stingDidStartPlaying(at index: Int)
-    func stingDidStopPlaying(at index: Int)
+    func stingDidStartPlaying(_ sting: Sting)
+    func stingDidStopPlaying(_ sting: Sting)
 }
