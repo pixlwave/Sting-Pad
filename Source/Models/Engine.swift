@@ -12,7 +12,6 @@ class Engine {
     private var isMultiRoute = true
     
     let musicPlayer = MPMusicPlayerController.systemMusicPlayer
-    var show: ShowDocument
     
     var playingSting: Sting?
     private var isPlaying: Bool {
@@ -45,14 +44,6 @@ class Engine {
     var playbackDelegate: PlaybackDelegate?
     
     init() {
-        show = ShowDocument(fileURL: ShowDocument.defaultURL)
-        
-        if FileManager.default.fileExists(atPath: show.fileURL.path) {
-            show.open()
-        } else {
-            show.save(to: show.fileURL, for: .forCreating)
-        }
-        
         configureAudioSession()
         configureEngine()
         
@@ -114,14 +105,6 @@ class Engine {
             
             #warning("Restart engine?")
         }
-    }
-    
-    func newShow() {
-        show.stings = [Sting]()
-    }
-    
-    func add(_ sting: Sting) {
-        show.stings.append(sting)
     }
     
     func play(_ sting: Sting) {

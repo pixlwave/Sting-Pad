@@ -4,6 +4,7 @@ class StingViewController: UIViewController {
     
     // access the music
     let engine = Engine.shared
+    let show = Show.shared
     
     enum Bound { case lower, upper }
     
@@ -74,7 +75,7 @@ class StingViewController: UIViewController {
     
     @IBAction func toggleLoop(_ sender: UISwitch) {
         sting.loops = sender.isOn
-        engine.show.updateChangeCount(.done)
+        show.updateChangeCount(.done)
     }
     
     @IBAction func done() {
@@ -99,7 +100,7 @@ extension StingViewController: FDWaveformViewDelegate {
     func waveformDidEndScrubbing(_ waveformView: FDWaveformView) {
         sting.startSample = Int64(waveformView.highlightedSamples?.lowerBound ?? 0)
         sting.endSample = Int64(waveformView.highlightedSamples?.upperBound ?? waveformView.totalSamples)
-        engine.show.updateChangeCount(.done)
+        show.updateChangeCount(.done)
     }
     
 }

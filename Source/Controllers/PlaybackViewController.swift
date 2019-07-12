@@ -5,6 +5,7 @@ import MobileCoreServices
 class PlaybackViewController: UICollectionViewController {
     
     private let engine = Engine.shared
+    private let show = Show.shared
     lazy private var dataSource = makeDataSource()
     private var cuedSting: Sting?
     
@@ -107,11 +108,11 @@ class PlaybackViewController: UICollectionViewController {
     
     @objc func applySnapshot() {
         #warning("Move this to add sting")
-        if cuedSting == nil { cuedSting = engine.show.stings.first }
+        if cuedSting == nil { cuedSting = show.stings.first }
         
         let snapshot = NSDiffableDataSourceSnapshot<Int, Sting>()
         snapshot.appendSections([0])
-        snapshot.appendItems(engine.show.stings)
+        snapshot.appendItems(show.stings)
         dataSource.apply(snapshot)
     }
     
@@ -139,7 +140,7 @@ class PlaybackViewController: UICollectionViewController {
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         alert.addAction(UIAlertAction(title: "Yes", style: .destructive) { action in
-            self.engine.newShow()   // reloads via notification
+            self.show.newShow()   // reloads via notification
         })
         
         present(alert, animated: true)
@@ -172,7 +173,7 @@ class PlaybackViewController: UICollectionViewController {
         let url = URL(fileURLWithPath: "/Users/Shared/Music").appendingPathComponent(file)
         
         if let sting = Sting(url: url) {
-            engine.add(sting)
+            show.stings.append(sting)
             applySnapshot()
         }
     }
@@ -189,7 +190,7 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     func renameSting(at index: Int) {
-        let sting = engine.show.stings[index]
+        let sting = show.stings[index]
         
         let alertController = UIAlertController(title: "Rename", message: nil, preferredStyle: .alert)
         alertController.addTextField { textField in textField.text = sting.name }
@@ -197,14 +198,14 @@ class PlaybackViewController: UICollectionViewController {
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             guard let name = alertController.textFields?.first?.text else { return }
             sting.name = name.isEmpty == false ? name : nil
-            self.engine.show.updateChangeCount(.done)
+            self.show.updateChangeCount(.done)
             self.reloadItems([sting])
         }))
         present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func playSting() {
-        guard let sting = cuedSting ?? engine.show.stings.first else { return }
+        guard let sting = cuedSting ?? show.stings.first else { return }
         
         engine.play(sting)
         nextSting()
@@ -216,13 +217,13 @@ class PlaybackViewController: UICollectionViewController {
     
     @IBAction func nextSting() {
         guard
-            engine.show.stings.count > 0,
+            show.stings.count > 0,
             let oldSting = cuedSting,
             let oldIndex = dataSource.indexPath(for: oldSting)?.item
         else { return }
         
-        let newIndex = (oldIndex + 1) % engine.show.stings.count
-        let newSting = engine.show.stings[newIndex]
+        let newIndex = (oldIndex + 1) % show.stings.count
+        let newSting = show.stings[newIndex]
         cuedSting = newSting
         
         reloadItems([oldSting, newSting])
@@ -230,14 +231,14 @@ class PlaybackViewController: UICollectionViewController {
     
     @IBAction func previousSting() {
         guard
-            engine.show.stings.count > 0,
+            show.stings.count > 0,
             let oldSting = cuedSting,
             let oldIndex = dataSource.indexPath(for: oldSting)?.item,
             oldIndex > 0
         else { return }
         
-        let newIndex = (oldIndex - 1) % engine.show.stings.count
-        let newSting = engine.show.stings[newIndex]
+        let newIndex = (oldIndex - 1) % show.stings.count
+        let newSting = show.stings[newIndex]
         cuedSting = newSting
         
         reloadItems([oldSting, newSting])
@@ -284,12 +285,12 @@ class PlaybackViewController: UICollectionViewController {
                 self.performSegue(withIdentifier: "Edit Sting", sender: indexPath)
             }
             let duplicate = UIAction(__title: "Duplicate", image: UIImage(systemName: "plus.square.on.square"), identifier: nil) { action in
-                guard let duplicate = self.engine.show.stings[indexPath.item].copy() else { return }
-                self.engine.show.stings.insert(duplicate, at: indexPath.item + 1)
+                guard let duplicate = self.show.stings[indexPath.item].copy() else { return }
+                self.show.stings.insert(duplicate, at: indexPath.item + 1)
                 self.applySnapshot()
             }
             let delete = UIAction(__title: "Delete", image: UIImage(systemName: "minus.circle.fill"), identifier: nil) { action in
-                self.engine.show.stings.remove(at: indexPath.item)
+                self.show.stings.remove(at: indexPath.item)
                 self.applySnapshot()
             }
             delete.attributes = .destructive
@@ -322,7 +323,7 @@ extension PlaybackViewController: UICollectionViewDropDelegate {
     
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
         if let desinationIndexPath = coordinator.destinationIndexPath, let sourceIndexPath = coordinator.items.first?.sourceIndexPath {
-            engine.show.stings.insert(engine.show.stings.remove(at: sourceIndexPath.item), at: desinationIndexPath.item)
+            show.stings.insert(show.stings.remove(at: sourceIndexPath.item), at: desinationIndexPath.item)
             applySnapshot()
         }
     }
@@ -335,7 +336,7 @@ extension PlaybackViewController: MPMediaPickerControllerDelegate {
     func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
         // make a sting from the selected media item, add it to the engine and update the table view
         if let sting = Sting(mediaItem: mediaItemCollection.items[0]) {
-            engine.add(sting)
+            show.stings.append(sting)
             applySnapshot()
         }
         
@@ -355,7 +356,7 @@ extension PlaybackViewController: MPMediaPickerControllerDelegate {
 extension PlaybackViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         if let sting = Sting(url: urls[0]) {
-            engine.add(sting)
+            show.stings.append(sting)
             applySnapshot()
         }
         

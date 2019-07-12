@@ -1,17 +1,33 @@
 import UIKit
 
-class ShowDocument: UIDocument {
+class Show: UIDocument {
+    
+    static let shared = Show()
     
     static var defaultURL: URL = {
         guard let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { fatalError("Unable to access documents") }
         return directory.appendingPathComponent("show.json")
     }()
     
+    override init(fileURL url: URL) {
+        super.init(fileURL: Show.defaultURL)
+        
+        if FileManager.default.fileExists(atPath: fileURL.path) {
+            open()
+        } else {
+            save(to: fileURL, for: .forCreating)
+        }
+    }
+    
     var stings = [Sting]() {
         didSet {
             NotificationCenter.default.post(Notification(name: .stingsDidChange))
             updateChangeCount(.done)
         }
+    }
+    
+    func newShow() {
+        stings = [Sting]()
     }
     
     enum DocumentError: Error {
