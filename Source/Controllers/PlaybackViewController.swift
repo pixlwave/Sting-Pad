@@ -66,8 +66,7 @@ class PlaybackViewController: UICollectionViewController {
             guard
                 let navigationVC = segue.destination as? UINavigationController,
                 let stingVC = navigationVC.topViewController as? StingViewController,
-                let indexPath = sender as? IndexPath,
-                let sting = dataSource.itemIdentifier(for: indexPath)
+                let sting = sender as? Sting
             else { return }
             
             stingVC.sting = sting
@@ -189,9 +188,7 @@ class PlaybackViewController: UICollectionViewController {
         #endif
     }
     
-    func renameSting(at index: Int) {
-        let sting = show.stings[index]
-        
+    func rename(_ sting: Sting) {
         let alertController = UIAlertController(title: "Rename", message: nil, preferredStyle: .alert)
         alertController.addTextField { textField in textField.text = sting.name }
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -278,14 +275,26 @@ class PlaybackViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
+            guard let sting = self.dataSource.itemIdentifier(for: indexPath) else { return nil }
+            
             let rename = UIAction(__title: "Rename", image: UIImage(systemName: "square.and.pencil"), identifier: nil) { action in
-                self.renameSting(at: indexPath.item)
+                self.rename(sting)
             }
             let edit = UIAction(__title: "Edit", image: UIImage(systemName: "waveform"), identifier: nil) { action in
-                self.performSegue(withIdentifier: "Edit Sting", sender: indexPath)
+                self.performSegue(withIdentifier: "Edit Sting", sender: sting)
             }
+            var colorActions = [UIAction]()
+            for color in Color.allCases {
+                let image = UIImage(systemName: color == sting.color ? "checkmark.circle" : "circle")
+                let action = UIAction(__title: "\(color)".capitalized, image: image, identifier: nil) { action in
+                    sting.color = color
+                    self.show.updateChangeCount(.done)
+                }
+                colorActions.append(action)
+            }
+            let colorMenu = UIMenu(__title: "Colour", image: UIImage(systemName: "paintbrush"), identifier: nil, children: colorActions)
             let duplicate = UIAction(__title: "Duplicate", image: UIImage(systemName: "plus.square.on.square"), identifier: nil) { action in
-                guard let duplicate = self.show.stings[indexPath.item].copy() else { return }
+                guard let duplicate = sting.copy() else { return }
                 self.show.stings.insert(duplicate, at: indexPath.item + 1)
                 self.applySnapshot()
             }
@@ -296,7 +305,7 @@ class PlaybackViewController: UICollectionViewController {
             delete.attributes = .destructive
             
             // Create and return a UIMenu with the share action
-            return UIMenu(__title: "", image: nil, identifier: nil, children: [rename, edit, duplicate, delete])
+            return UIMenu(__title: "", image: nil, identifier: nil, children: [rename, edit, colorMenu, duplicate, delete])
         }
     }
     
