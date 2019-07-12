@@ -190,7 +190,11 @@ class PlaybackViewController: UICollectionViewController {
     
     func rename(_ sting: Sting) {
         let alertController = UIAlertController(title: "Rename", message: nil, preferredStyle: .alert)
-        alertController.addTextField { textField in textField.text = sting.name }
+        alertController.addTextField { textField in
+            textField.text = sting.name
+            textField.placeholder = sting.songTitle
+            textField.clearButtonMode = .always
+        }
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             guard let name = alertController.textFields?.first?.text else { return }
