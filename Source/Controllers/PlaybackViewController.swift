@@ -104,7 +104,6 @@ class PlaybackViewController: UICollectionViewController {
         }
     }
     
-    #warning("Implement more efficient responses to changed data.")
     @objc func applySnapshot() {
         let snapshot = NSDiffableDataSourceSnapshot<Int, Sting>()
         snapshot.appendSections([0])
