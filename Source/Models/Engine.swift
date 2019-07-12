@@ -14,10 +14,10 @@ class Engine {
     let musicPlayer = MPMusicPlayerController.systemMusicPlayer
     var show: ShowDocument
     
-    var currentSting: Sting?
+    var playingSting: Sting?
     private var isPlaying: Bool {
         guard player.isPlaying else { return false }
-        guard let sting = currentSting else { return false }
+        guard let sting = playingSting else { return false }
         
         guard
             let lastRenderTime = player.lastRenderTime,
@@ -29,12 +29,12 @@ class Engine {
     }
     
     var totalTime: TimeInterval {
-        guard let sting = currentSting else { return 0 }
+        guard let sting = playingSting else { return 0 }
         return Double(sting.sampleCount) / sting.audioFile.processingFormat.sampleRate
     }
     var elapsedTime: TimeInterval {
         guard
-            let sting = currentSting,
+            let sting = playingSting,
             let lastRenderTime = player.lastRenderTime,
             let elapsedSamples = player.playerTime(forNodeTime: lastRenderTime)?.sampleTime
         else { return 0 }
@@ -139,17 +139,17 @@ class Engine {
             
             player.scheduleBuffer(buffer, at: nil, options: .loops) {
                 self.playbackDelegate?.stingDidStopPlaying(sting)
-                self.currentSting = nil
+                self.playingSting = nil
             }
         } else {
             player.scheduleSegment(sting.audioFile, startingFrame: sting.startSample, frameCount: sting.sampleCount, at: nil) {
                 self.playbackDelegate?.stingDidStopPlaying(sting)
-                self.currentSting = nil
+                self.playingSting = nil
             }
         }
         
         player.play()
-        currentSting = sting
+        playingSting = sting
         playbackDelegate?.stingDidStartPlaying(sting)
     }
     

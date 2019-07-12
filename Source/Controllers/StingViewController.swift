@@ -21,7 +21,7 @@ class StingViewController: UIViewController {
         
         // load track info
         updateLabels()
-        if engine.currentSting != nil { previewButton.setTitle("Stop", for: .normal) }
+        if engine.playingSting != nil { previewButton.setTitle("Stop", for: .normal) }
         loopSwitch.isOn = engine.show.stings[stingIndex].loops
         
         // set up the waveform view
@@ -61,7 +61,7 @@ class StingViewController: UIViewController {
     
     
     @IBAction func togglePreview() {
-        if engine.currentSting == nil {
+        if engine.playingSting == nil {
             previewButton.setTitle("Stop", for: .normal)
             engine.playSting(at: stingIndex)
         } else {

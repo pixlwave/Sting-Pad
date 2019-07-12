@@ -98,7 +98,7 @@ class PlaybackViewController: UICollectionViewController {
             
             stingCell.titleLabel.text = sting.name ?? sting.songTitle
             stingCell.isCued = indexPath.item == self.cuedStingIndex
-            stingCell.isPlaying = sting == self.engine.currentSting
+            stingCell.isPlaying = sting == self.engine.playingSting
             
             return stingCell
         }
@@ -374,7 +374,7 @@ extension PlaybackViewController: PlaybackDelegate {
             self.reloadItems([sting])
             
             // this may be run after another sting has already started playback
-            if self.engine.currentSting == nil { self.stopUpdatingTime() }
+            if self.engine.playingSting == nil { self.stopUpdatingTime() }
         }
     }
 }
