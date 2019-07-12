@@ -302,7 +302,7 @@ class PlaybackViewController: UICollectionViewController {
                 self.show.stings.insert(duplicate, at: indexPath.item + 1)
                 self.applySnapshot()
             }
-            let delete = UIAction(__title: "Delete", image: UIImage(systemName: "minus.circle.fill"), identifier: nil) { action in
+            let delete = UIAction(__title: "Delete", image: UIImage(systemName: "trash"), identifier: nil) { action in
                 self.show.stings.remove(at: indexPath.item)
                 self.applySnapshot()
             }
