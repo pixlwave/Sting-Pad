@@ -15,11 +15,9 @@ class Engine {
     var show: ShowDocument
     
     var currentSting: Sting?
-    private var indexOfPlayingSting: Int? { return isPlaying ? lastPlayedStingIndex : nil }
-    private var lastPlayedStingIndex = -1
     private var isPlaying: Bool {
         guard player.isPlaying else { return false }
-        let sting = show.stings[lastPlayedStingIndex]
+        guard let sting = currentSting else { return false }
         
         guard
             let lastRenderTime = player.lastRenderTime,
@@ -152,7 +150,6 @@ class Engine {
         
         player.play()
         currentSting = sting
-        lastPlayedStingIndex = index
         playbackDelegate?.stingDidStartPlaying(sting)
     }
     
