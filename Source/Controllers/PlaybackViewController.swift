@@ -6,7 +6,7 @@ class PlaybackViewController: UICollectionViewController {
     
     private let engine = Engine.shared
     lazy private var dataSource = makeDataSource()
-    private var cuedStingIndex = 0
+    private var cuedStingIndex = 0; #warning("Should this be optional?")
     
     @IBOutlet var transportView: UIView!
     @IBOutlet weak var playButton: UIButton!
@@ -200,6 +200,8 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     @IBAction func playSting() {
+        guard cuedStingIndex < engine.show.stings.count else { return }
+        
         engine.playSting(at: cuedStingIndex)
         nextSting()
     }
@@ -209,12 +211,16 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     @IBAction func nextSting() {
+        guard engine.show.stings.count > 0 else { return }
+        
         stingCellForItem(at: IndexPath(item: cuedStingIndex, section: 0))?.isCued = false
         cuedStingIndex = (cuedStingIndex + 1) % engine.show.stings.count
         stingCellForItem(at: IndexPath(item: cuedStingIndex, section: 0))?.isCued = true
     }
     
     @IBAction func previousSting() {
+        guard engine.show.stings.count > 0 else { return }
+        
         if cuedStingIndex > 0 {
             stingCellForItem(at: IndexPath(item: cuedStingIndex, section: 0))?.isCued = false
             cuedStingIndex = cuedStingIndex - 1 % engine.show.stings.count
