@@ -98,7 +98,7 @@ class PlaybackViewController: UICollectionViewController {
             
             stingCell.titleLabel.text = sting.name ?? sting.songTitle
             stingCell.isCued = indexPath.item == self.cuedStingIndex
-            stingCell.isPlaying = indexPath.item == self.engine.indexOfPlayingSting
+            stingCell.isPlaying = sting == self.engine.currentSting
             
             return stingCell
         }
@@ -372,7 +372,9 @@ extension PlaybackViewController: PlaybackDelegate {
     func stingDidStopPlaying(_ sting: Sting) {
         DispatchQueue.main.async {
             self.reloadItems([sting])
-            if self.engine.indexOfPlayingSting == nil { self.stopUpdatingTime() }
+            
+            // this may be run after another sting has already started playback
+            if self.engine.currentSting == nil { self.stopUpdatingTime() }
         }
     }
 }

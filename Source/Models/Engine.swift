@@ -14,7 +14,8 @@ class Engine {
     let musicPlayer = MPMusicPlayerController.systemMusicPlayer
     var show: ShowDocument
     
-    var indexOfPlayingSting: Int? { return isPlaying ? lastPlayedStingIndex : nil }
+    var currentSting: Sting?
+    private var indexOfPlayingSting: Int? { return isPlaying ? lastPlayedStingIndex : nil }
     private var lastPlayedStingIndex = -1
     private var isPlaying: Bool {
         guard player.isPlaying else { return false }
@@ -28,8 +29,6 @@ class Engine {
         // fix player.isPlaying returning true in the completion handler
         return playerPosition < AVAudioFramePosition(sting.sampleCount)
     }
-    
-    private var currentSting: Sting?
     
     var totalTime: TimeInterval {
         guard let sting = currentSting else { return 0 }
@@ -142,10 +141,12 @@ class Engine {
             
             player.scheduleBuffer(buffer, at: nil, options: .loops) {
                 self.playbackDelegate?.stingDidStopPlaying(sting)
+                self.currentSting = nil
             }
         } else {
             player.scheduleSegment(sting.audioFile, startingFrame: sting.startSample, frameCount: sting.sampleCount, at: nil) {
                 self.playbackDelegate?.stingDidStopPlaying(sting)
+                self.currentSting = nil
             }
         }
         
@@ -156,8 +157,7 @@ class Engine {
     }
     
     func stopSting() {
-        player.stop()
-        playbackDelegate?.stingDidStopPlaying(show.stings[lastPlayedStingIndex])
+        player.stop()   // delegate method is called by the player
     }
     
     @objc func playbackStateDidChange(_ notification: Notification) {
