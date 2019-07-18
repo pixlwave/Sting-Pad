@@ -19,11 +19,11 @@ enum Color: String, Codable, CaseIterable {
     var value: UIColor {
         switch self {
         case .dark:
-            return .systemGray
+            return .darkGray
         case .gray:
-            return .systemGray3
+            return .gray
         case .light:
-            return .systemGray6
+            return .lightGray
         case .red:
             return .systemRed
         case .orange:

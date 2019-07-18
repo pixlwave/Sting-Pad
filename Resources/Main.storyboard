@@ -30,19 +30,29 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="103"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMJ-uU-fhi">
-                                            <rect key="frame" x="20" y="20" width="280" height="63"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Name" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMJ-uU-fhi">
+                                            <rect key="frame" x="103" y="20" width="197" height="63"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8OY-O0-xU8">
+                                            <rect key="frame" x="20" y="20" width="63" height="63"/>
+                                            <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="8OY-O0-xU8" secondAttribute="height" multiplier="1:1" id="77k-Sv-GFF"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                 </view>
                                 <color key="backgroundColor" name="Background Color"/>
                                 <constraints>
                                     <constraint firstItem="cMJ-uU-fhi" firstAttribute="top" secondItem="wn0-gC-jEl" secondAttribute="top" constant="20" id="6w2-xd-K8W"/>
                                     <constraint firstAttribute="bottom" secondItem="cMJ-uU-fhi" secondAttribute="bottom" constant="20" id="A6N-hm-zRL"/>
-                                    <constraint firstItem="cMJ-uU-fhi" firstAttribute="leading" secondItem="wn0-gC-jEl" secondAttribute="leading" constant="20" id="Mxp-SS-DEc"/>
+                                    <constraint firstItem="8OY-O0-xU8" firstAttribute="top" secondItem="wn0-gC-jEl" secondAttribute="top" constant="20" id="YES-Ov-8iW"/>
+                                    <constraint firstItem="cMJ-uU-fhi" firstAttribute="leading" secondItem="8OY-O0-xU8" secondAttribute="trailing" constant="20" id="c6b-nq-09W"/>
+                                    <constraint firstItem="8OY-O0-xU8" firstAttribute="leading" secondItem="wn0-gC-jEl" secondAttribute="leading" constant="20" id="giP-pA-mFl"/>
+                                    <constraint firstAttribute="bottom" secondItem="8OY-O0-xU8" secondAttribute="bottom" constant="20" id="smm-fL-zbQ"/>
                                     <constraint firstAttribute="trailing" secondItem="cMJ-uU-fhi" secondAttribute="trailing" constant="20" id="yvQ-G7-YiH"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -51,6 +61,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <outlet property="colorView" destination="8OY-O0-xU8" id="WG7-ll-kqz"/>
                                     <outlet property="titleLabel" destination="cMJ-uU-fhi" id="PU5-68-PKs"/>
                                 </connections>
                             </collectionViewCell>

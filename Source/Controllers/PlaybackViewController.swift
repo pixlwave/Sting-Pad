@@ -98,6 +98,7 @@ class PlaybackViewController: UICollectionViewController {
             guard let stingCell = cell as? StingCell else { return cell }
             
             stingCell.titleLabel.text = sting.name ?? sting.songTitle
+            stingCell.color = sting.color
             stingCell.isCued = sting == self.cuedSting
             stingCell.isPlaying = sting == self.engine.playingSting
             
@@ -293,6 +294,7 @@ class PlaybackViewController: UICollectionViewController {
                 let action = UIAction(__title: "\(color)".capitalized, image: image, identifier: nil) { action in
                     sting.color = color
                     self.show.updateChangeCount(.done)
+                    self.reloadItems([sting])
                 }
                 colorActions.append(action)
             }

@@ -3,6 +3,13 @@ import UIKit
 class StingCell: UICollectionViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var colorView: UIView!
+    
+    var color = Color.default {
+        didSet {
+            colorView.backgroundColor = color.value
+        }
+    }
     
     var isPlaying = false {
         didSet {
