@@ -33,25 +33,21 @@ class StingViewController: UIViewController {
         waveformView.doesAllowStretch = true
         waveformView.boundToScrub = .lower
         waveformView.wavesColor = UIColor(red: 0.35, green: 0.35, blue: 0.35, alpha: 1.0)
-        waveformView.progressColor = UIColor(red: 0.25, green: 0.25, blue: 1.0, alpha: 1.0)
+        waveformView.progressColor = .tintColor
         
         // render the waveform
         waveformView.audioURL = sting.url
         view.addSubview(waveformView)
     }
     
-    override func viewWillLayoutSubviews() {
+    override func viewDidLayoutSubviews() {
         waveformView.frame = waveformLoadingView.frame
     }
     
     func updateLabels() {
-        if let name = sting.name {
-            titleLabel.text = name
-            subtitleLabel.text = sting.songTitle
-        } else {
-            titleLabel.text = sting.songTitle
-            subtitleLabel.text = sting.songArtist
-        }
+        navigationItem.title = sting.name ?? sting.songTitle
+        titleLabel.text = sting.songTitle
+        subtitleLabel.text = sting.songArtist
     }
     
     @IBAction func boundControlChanged(_ sender: UISegmentedControl) {

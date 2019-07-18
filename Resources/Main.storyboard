@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14810.12" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Az4-sg-PrW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14845" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="YTS-cD-PDT">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.15"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14799.2"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -66,11 +66,18 @@
                                 <action selector="newShow" destination="yak-cE-mUi" id="VCR-o0-Q9b"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="yWN-oa-4Xq">
-                            <connections>
-                                <action selector="addSting" destination="yak-cE-mUi" id="mZX-G8-cwr"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="yWN-oa-4Xq">
+                                <connections>
+                                    <action selector="addSting" destination="yak-cE-mUi" id="mZX-G8-cwr"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="slider.horizontal.3" catalog="system" id="qmm-VS-QCJ">
+                                <connections>
+                                    <segue destination="Uyh-Oz-z9u" kind="presentation" id="Hme-ne-gmk"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <segue destination="nGG-by-uzG" kind="presentation" identifier="Edit Sting" id="7h3-gk-nqV"/>
@@ -80,7 +87,7 @@
             </objects>
             <point key="canvasLocation" x="1147.5" y="-732.04225352112678"/>
         </scene>
-        <!--Sting View Controller-->
+        <!--Edit Sting-->
         <scene sceneID="BBH-1f-24n">
             <objects>
                 <viewController id="sKY-0b-GtB" customClass="StingViewController" customModule="Stingtk" customModuleProvider="target" sceneMemberID="viewController">
@@ -93,7 +100,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="45r-lx-NUx">
-                                <rect key="frame" x="20" y="209" width="280" height="115"/>
+                                <rect key="frame" x="20" y="221" width="280" height="115"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="waveload" translatesAutoresizingMaskIntoConstraints="NO" id="DSS-g4-Ymn">
                                         <rect key="frame" x="0.0" y="20" width="280" height="75"/>
@@ -119,7 +126,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lRX-bK-xRr">
-                                <rect key="frame" x="15" y="339" width="114" height="68"/>
+                                <rect key="frame" x="15" y="351" width="114" height="68"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="114" id="xwc-Xn-8Yc"/>
                                 </constraints>
@@ -133,7 +140,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyO-e7-KqD">
-                                <rect key="frame" x="185" y="344" width="119" height="58"/>
+                                <rect key="frame" x="185" y="356" width="119" height="58"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="25" minY="20" maxX="25" maxY="20"/>
                                 <state key="normal" title="Zoom Out">
@@ -144,19 +151,19 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDC-cS-RXP">
-                                <rect key="frame" x="30" y="74" width="260" height="22"/>
+                                <rect key="frame" x="30" y="86" width="260" height="22"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ah-Ra-mmM">
-                                <rect key="frame" x="30" y="101" width="260" height="17"/>
+                                <rect key="frame" x="30" y="113" width="260" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="1fo-c8-qOt">
-                                <rect key="frame" x="99.5" y="138" width="121" height="32"/>
+                                <rect key="frame" x="99.5" y="150" width="121" height="32"/>
                                 <segments>
                                     <segment title="Start" width="60"/>
                                     <segment title="End" width="60"/>
@@ -166,13 +173,13 @@
                                 </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loop" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRD-t4-QSP">
-                                <rect key="frame" x="111" y="427" width="39" height="21"/>
+                                <rect key="frame" x="111" y="439" width="39" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RCd-w4-mUV">
-                                <rect key="frame" x="170" y="422" width="51" height="31"/>
+                                <rect key="frame" x="170" y="434" width="51" height="31"/>
                                 <connections>
                                     <action selector="toggleLoop:" destination="sKY-0b-GtB" eventType="valueChanged" id="m5f-vK-8vz"/>
                                 </connections>
@@ -202,8 +209,8 @@
                             <constraint firstItem="HRD-t4-QSP" firstAttribute="centerY" secondItem="RCd-w4-mUV" secondAttribute="centerY" id="tvh-vG-cff"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="JWi-WN-0lh">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Zhf-aF-9k6">
+                    <navigationItem key="navigationItem" title="Edit Sting" id="JWi-WN-0lh">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="Zhf-aF-9k6">
                             <connections>
                                 <action selector="done" destination="sKY-0b-GtB" id="svG-sK-1gj"/>
                             </connections>
@@ -226,7 +233,7 @@
             <objects>
                 <tableViewController id="Viv-76-yOT" customClass="SettingsViewController" customModule="Stingtk" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="hw3-Fr-nTM">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <color key="tintColor" name="Tint Color"/>
@@ -283,31 +290,17 @@
                             <outlet property="delegate" destination="Viv-76-yOT" id="blU-PT-a6q"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Settings" image="slider.horizontal.3" catalog="system" id="IHP-eE-OUx"/>
+                    <navigationItem key="navigationItem" title="Settings" id="EGK-pD-MlS">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="lwf-h3-8d9">
+                            <connections>
+                                <action selector="done:" destination="Viv-76-yOT" id="Xau-Jo-rYs"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cci-lr-xGF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="150" y="71"/>
-        </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="29m-fQ-Ok6">
-            <objects>
-                <tabBarController id="Az4-sg-PrW" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6CD-en-BVX">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="tintColor" name="Tint Color"/>
-                        <color key="selectedImageTintColor" name="Tint Color"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="YTS-cD-PDT" kind="relationship" relationship="viewControllers" id="vXm-H1-87N"/>
-                        <segue destination="Viv-76-yOT" kind="relationship" relationship="viewControllers" id="IaD-k1-0UI"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="auo-40-VJW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-799" y="-732"/>
+            <point key="canvasLocation" x="2145" y="78.16901408450704"/>
         </scene>
         <!--Playback-->
         <scene sceneID="kDB-4j-sjU">
@@ -335,7 +328,7 @@
                     <tabBarItem key="tabBarItem" title="Configuration" image="settings" id="8x9-bp-sBW"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="JI4-gK-ZCd">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -346,6 +339,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b8Y-zV-Rbl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2137.5" y="-732.04225352112678"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="pHB-vj-jXe">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Uyh-Oz-z9u" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" image="slider.horizontal.3" catalog="system" id="IHP-eE-OUx"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7ZO-5S-at7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Viv-76-yOT" kind="relationship" relationship="rootViewController" id="Ysq-1k-wtY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y1j-Ch-9tf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1147.5" y="78.16901408450704"/>
         </scene>
     </scenes>
     <resources>

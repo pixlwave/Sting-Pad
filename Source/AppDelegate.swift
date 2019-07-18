@@ -11,7 +11,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.isIdleTimerDisabled = true
         
         // applies the included tint colour to UIAlertController (and presumably others)
-        window?.tintColor = UIColor(named: "Tint Color")
+        window?.tintColor = .tintColor
         
         return true
     }

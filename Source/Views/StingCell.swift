@@ -6,14 +6,14 @@ class StingCell: UICollectionViewCell {
     
     var isPlaying = false {
         didSet {
-            backgroundColor = isPlaying ? .lightGray : UIColor(named: "Background Color")
+            backgroundColor = isPlaying ? .lightGray : .backgroundColor
         }
     }
     
     var isCued = false {
         didSet {
             layer.borderWidth = isCued ? 3 : 0
-            layer.borderColor = UIColor(named: "Border Color")?.cgColor
+            layer.borderColor = UIColor.borderColor.cgColor
         }
     }
     

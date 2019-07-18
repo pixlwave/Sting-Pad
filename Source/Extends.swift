@@ -76,3 +76,9 @@ extension TimeInterval {
         return TimeInterval.formatter.string(from: self)
     }
 }
+
+extension UIColor {
+    static let backgroundColor = UIColor(named: "Background Color")!
+    static let borderColor = UIColor(named: "Border Color")!
+    static let tintColor = UIColor(named: "Tint Color")!
+}
