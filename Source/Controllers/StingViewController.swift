@@ -10,6 +10,7 @@ class StingViewController: UIViewController {
     
     var sting: Sting!
     var waveformView: FDWaveformView!
+    var playsPreviewsAutomatically = true
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
@@ -38,6 +39,9 @@ class StingViewController: UIViewController {
         // render the waveform
         waveformView.audioURL = sting.url
         view.addSubview(waveformView)
+        
+        #warning("Add an override for automatic previews")
+        if engine.playingSting != nil { playsPreviewsAutomatically = false }
     }
     
     override func viewDidLayoutSubviews() {
@@ -97,6 +101,15 @@ extension StingViewController: FDWaveformViewDelegate {
         sting.startSample = Int64(waveformView.highlightedSamples?.lowerBound ?? 0)
         sting.endSample = Int64(waveformView.highlightedSamples?.upperBound ?? waveformView.totalSamples)
         show.updateChangeCount(.done)
+        
+        if playsPreviewsAutomatically {
+            switch waveformView.boundToScrub {
+            case .lower:
+                engine.previewStart(of: sting)
+            case .upper:
+                engine.previewEnd(of: sting)
+            }
+        }
     }
     
 }

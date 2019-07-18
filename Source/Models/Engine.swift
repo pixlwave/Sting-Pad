@@ -107,35 +107,74 @@ class Engine {
         }
     }
     
-    func play(_ sting: Sting) {
+    private func prepareToPlay(_ sting: Sting) {
         if !isMultiRoute { musicPlayer.pause() }
         if player.isPlaying { player.stop() }
         
         if sting.audioFile.processingFormat != engine.mainMixerNode.inputFormat(forBus: 0) {
             engine.connect(player, to: engine.mainMixerNode, fromBus: 0, toBus: 0, format: sting.audioFile.processingFormat)
         }
-        
-        if sting.loops {
-            guard let buffer = sting.buffer else { return }
-            
-            player.scheduleBuffer(buffer, at: nil, options: .loops) {
-                self.playbackDelegate?.stingDidStopPlaying(sting)
-                self.playingSting = nil
-            }
-        } else {
-            player.scheduleSegment(sting.audioFile, startingFrame: sting.startSample, frameCount: sting.sampleCount, at: nil) {
-                self.playbackDelegate?.stingDidStopPlaying(sting)
-                self.playingSting = nil
-            }
+    }
+    
+    private func scheduleSegment(of sting: Sting, from startSample: AVAudioFramePosition, for sampleCount: AVAudioFrameCount) {
+        player.scheduleSegment(sting.audioFile, startingFrame: startSample, frameCount: sampleCount, at: nil) {
+            self.playbackDelegate?.stingDidStopPlaying(sting)
+            self.playingSting = nil
         }
-        
+    }
+    
+    private func schedule(_ buffer: AVAudioPCMBuffer, for sting: Sting, options: AVAudioPlayerNodeBufferOptions = []) {
+        player.scheduleBuffer(buffer, at: nil, options: options) {
+            self.playbackDelegate?.stingDidStopPlaying(sting)
+            self.playingSting = nil
+        }
+    }
+    
+    private func startPlayback(of sting: Sting) {
         player.play()
         playingSting = sting
         playbackDelegate?.stingDidStartPlaying(sting)
     }
     
+    func play(_ sting: Sting) {
+        prepareToPlay(sting)
+        
+        if sting.loops {
+            guard let buffer = sting.buffer else { return }
+            schedule(buffer, for: sting, options: .loops)
+        } else {
+            scheduleSegment(of: sting, from: sting.startSample, for: sting.sampleCount)
+        }
+        
+        startPlayback(of: sting)
+    }
+    
     func stopSting() {
         player.stop()   // delegate method is called by the player
+    }
+    
+    func previewStart(of sting: Sting, for length: TimeInterval = 3) {
+        let sampleCount = AVAudioFrameCount(sting.audioFile.processingFormat.sampleRate * length)
+        
+        prepareToPlay(sting)
+        scheduleSegment(of: sting, from: sting.startSample, for: sampleCount)
+        startPlayback(of: sting)
+    }
+    
+    func previewEnd(of sting: Sting, for length: TimeInterval = 3) {
+        let endSample = AVAudioFrameCount(sting.startSample) + sting.sampleCount
+        if sting.loops {
+            let sampleCount = AVAudioFrameCount(sting.audioFile.processingFormat.sampleRate * length) / 2
+            let previewStartSample = AVAudioFramePosition(endSample - sampleCount)
+            #warning("Needs implementing")
+        } else {
+            let sampleCount = AVAudioFrameCount(sting.audioFile.processingFormat.sampleRate * length)
+            let previewStartSample = AVAudioFramePosition(endSample - sampleCount)
+            
+            prepareToPlay(sting)
+            scheduleSegment(of: sting, from: previewStartSample, for: sampleCount)
+            startPlayback(of: sting)
+        }
     }
     
     @objc func playbackStateDidChange(_ notification: Notification) {
