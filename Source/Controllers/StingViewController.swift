@@ -10,13 +10,14 @@ class StingViewController: UIViewController {
     
     var sting: Sting!
     var waveformView: FDWaveformView!
-    var playsPreviewsAutomatically = true
+    var previewLength: [TimeInterval] = [0, 1, 2, 5, 10]
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var waveformLoadingView: UIView!
     @IBOutlet weak var previewButton: UIButton!
     @IBOutlet weak var loopSwitch: UISwitch!
+    @IBOutlet weak var previewLengthControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +42,7 @@ class StingViewController: UIViewController {
         view.addSubview(waveformView)
         
         #warning("Add an override for automatic previews")
-        if engine.playingSting != nil { playsPreviewsAutomatically = false }
+        if engine.playingSting != nil { previewLengthControl.selectedSegmentIndex = 0 }
     }
     
     override func viewDidLayoutSubviews() {
@@ -58,6 +59,14 @@ class StingViewController: UIViewController {
         waveformView.boundToScrub = sender.selectedSegmentIndex == 0 ? .lower : .upper
     }
     
+    func previewSting() {
+        switch waveformView.boundToScrub {
+        case .lower:
+            engine.previewStart(of: sting, for: previewLength[previewLengthControl.selectedSegmentIndex])
+        case .upper:
+            engine.previewEnd(of: sting, for: previewLength[previewLengthControl.selectedSegmentIndex])
+        }
+    }
     
     @IBAction func togglePreview() {
         if engine.playingSting == nil {
@@ -102,14 +111,7 @@ extension StingViewController: FDWaveformViewDelegate {
         sting.endSample = Int64(waveformView.highlightedSamples?.upperBound ?? waveformView.totalSamples)
         show.updateChangeCount(.done)
         
-        if playsPreviewsAutomatically {
-            switch waveformView.boundToScrub {
-            case .lower:
-                engine.previewStart(of: sting)
-            case .upper:
-                engine.previewEnd(of: sting)
-            }
-        }
+        previewSting()
     }
     
 }

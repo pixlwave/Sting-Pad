@@ -195,14 +195,26 @@
                                     <action selector="toggleLoop:" destination="sKY-0b-GtB" eventType="valueChanged" id="m5f-vK-8vz"/>
                                 </connections>
                             </switch>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="vXN-JJ-zX7">
+                                <rect key="frame" x="63" y="485" width="194" height="32"/>
+                                <segments>
+                                    <segment title="Off"/>
+                                    <segment title="1"/>
+                                    <segment title="2"/>
+                                    <segment title="5"/>
+                                    <segment title="10"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <color key="tintColor" name="Tint Color"/>
                         <constraints>
                             <constraint firstItem="8ah-Ra-mmM" firstAttribute="top" secondItem="EDC-cS-RXP" secondAttribute="bottom" constant="5" id="2FF-7U-pZO"/>
                             <constraint firstItem="EDC-cS-RXP" firstAttribute="leading" secondItem="8ah-Ra-mmM" secondAttribute="leading" id="2q3-eT-qTJ"/>
+                            <constraint firstItem="vXN-JJ-zX7" firstAttribute="centerX" secondItem="IL7-SC-53c" secondAttribute="centerX" id="6Tr-u1-L5q"/>
                             <constraint firstAttribute="trailing" secondItem="tyO-e7-KqD" secondAttribute="trailing" constant="16" id="CfI-CU-4XV"/>
                             <constraint firstAttribute="trailing" secondItem="45r-lx-NUx" secondAttribute="trailing" constant="20" id="Cg9-VC-XDU"/>
+                            <constraint firstItem="vXN-JJ-zX7" firstAttribute="top" secondItem="RCd-w4-mUV" secondAttribute="bottom" constant="20" id="EHe-OR-P7Y"/>
                             <constraint firstItem="45r-lx-NUx" firstAttribute="top" secondItem="1fo-c8-qOt" secondAttribute="bottom" constant="40" id="F4p-TO-gS2"/>
                             <constraint firstItem="RCd-w4-mUV" firstAttribute="leading" secondItem="IL7-SC-53c" secondAttribute="centerX" constant="10" id="KVV-rX-PAa"/>
                             <constraint firstItem="tyO-e7-KqD" firstAttribute="baseline" secondItem="lRX-bK-xRr" secondAttribute="baseline" id="Kts-uq-dV1"/>
@@ -230,6 +242,7 @@
                     <connections>
                         <outlet property="loopSwitch" destination="RCd-w4-mUV" id="dO8-oc-7GR"/>
                         <outlet property="previewButton" destination="lRX-bK-xRr" id="2nX-BN-PIr"/>
+                        <outlet property="previewLengthControl" destination="vXN-JJ-zX7" id="kGY-kB-our"/>
                         <outlet property="subtitleLabel" destination="8ah-Ra-mmM" id="PDI-ff-nfj"/>
                         <outlet property="titleLabel" destination="EDC-cS-RXP" id="mWC-r4-wcL"/>
                         <outlet property="waveformLoadingView" destination="45r-lx-NUx" id="qlS-U8-2DN"/>

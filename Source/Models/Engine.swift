@@ -154,6 +154,8 @@ class Engine {
     }
     
     func previewStart(of sting: Sting, for length: TimeInterval = 3) {
+        guard length > 0 else { return }
+        
         let sampleCount = AVAudioFrameCount(sting.audioFile.processingFormat.sampleRate * length)
         
         prepareToPlay(sting)
@@ -162,6 +164,8 @@ class Engine {
     }
     
     func previewEnd(of sting: Sting, for length: TimeInterval = 3) {
+        guard length > 0 else { return }
+        
         let endSample = AVAudioFrameCount(sting.startSample) + sting.sampleCount
         if sting.loops {
             let sampleCount = AVAudioFrameCount(sting.audioFile.processingFormat.sampleRate * length) / 2
