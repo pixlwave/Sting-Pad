@@ -134,16 +134,9 @@ class PlaybackViewController: UICollectionViewController {
         }
     }
     
-    @IBAction func newShow() {
-        let alert = UIAlertController(title: "New Show?",
-                                      message: "Are you sure you would like to start a new show? This will delete any unsaved changes.",
-                                      preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Yes", style: .destructive) { action in
-            self.show.newShow()   // reloads via notification
-        })
-        
-        present(alert, animated: true)
+    @IBAction func closeShow() {
+        dismiss(animated: true)
+        #warning("Close the show here")
     }
     
     func loadTrack() {
