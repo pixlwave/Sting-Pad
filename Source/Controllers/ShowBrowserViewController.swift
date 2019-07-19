@@ -51,8 +51,10 @@ extension ShowBrowserViewController: UIDocumentBrowserViewControllerDelegate {
     }
     
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didPickDocumentsAt documentURLs: [URL]) {
-        let rootVC = storyboard?.instantiateViewController(withIdentifier: "Root View Controller")
-        show(rootVC!, sender: nil)
+        guard let url = documentURLs.first, url.isFileURL else { return }
+            
+        Show.shared = Show(fileURL: url)
+        self.presentCurrentShow()
     }
 }
 

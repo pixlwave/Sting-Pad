@@ -136,7 +136,7 @@ class PlaybackViewController: UICollectionViewController {
     
     @IBAction func closeShow() {
         dismiss(animated: true)
-        #warning("Close the show here")
+        Show.shared.close()
     }
     
     func loadTrack() {

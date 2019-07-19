@@ -2,7 +2,7 @@ import UIKit
 
 class Show: UIDocument {
     
-    static let shared = Show(fileURL: Show.defaultURL)
+    static var shared = Show(fileURL: Show.defaultURL)
     
     static var defaultURL: URL = {
         guard let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { fatalError("Unable to access documents") }
