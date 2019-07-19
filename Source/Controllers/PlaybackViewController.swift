@@ -49,6 +49,9 @@ class PlaybackViewController: UICollectionViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        // display the show's name in the navigation bar
+        navigationItem.title = show.fileURL.lastPathComponent
+        
         if UserDefaults.standard.double(forKey: "WelcomeVersionSeen") < WelcomeViewController.currentVersion {
             showWelcomeScreen()
         }
