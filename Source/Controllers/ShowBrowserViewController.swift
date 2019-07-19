@@ -33,6 +33,35 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
         
         present(rootVC, animated: animated)
     }
+    
+    override func encodeRestorableState(with coder: NSCoder) {
+        if presentedViewController != nil {
+            let showURL = Show.shared.fileURL
+            
+            let didStartAccessing = showURL.startAccessingSecurityScopedResource()
+            defer {
+                if didStartAccessing { showURL.stopAccessingSecurityScopedResource() }
+            }
+            
+            if let bookmarkData = try? showURL.bookmarkData() {
+                coder.encode(bookmarkData, forKey: "showBookmarkData")
+            }
+        }
+        
+        super.encodeRestorableState(with: coder)
+    }
+    
+    override func decodeRestorableState(with coder: NSCoder) {
+        if let bookmarkData = coder.decodeObject(forKey: "showBookmarkData") as? Data {
+            var isStale = false
+            if let url = try? URL(resolvingBookmarkData: bookmarkData, bookmarkDataIsStale: &isStale) {
+                Show.shared = Show(fileURL: url)
+                presentCurrentShow(animated: false)
+            }
+        }
+        
+        super.decodeRestorableState(with: coder)
+    }
 }
 
 

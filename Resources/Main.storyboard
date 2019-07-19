@@ -316,7 +316,7 @@
         <!--Show Browser View Controller-->
         <scene sceneID="49a-1F-SrI">
             <objects>
-                <viewController id="cXS-uy-K0n" customClass="ShowBrowserViewController" customModule="Stingtk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ShowBrowser" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cXS-uy-K0n" customClass="ShowBrowserViewController" customModule="Stingtk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1rn-W0-3xH"/>
                         <viewControllerLayoutGuide type="bottom" id="heL-90-VhG"/>
