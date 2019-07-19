@@ -344,11 +344,11 @@
             </objects>
             <point key="canvasLocation" x="-786" y="-732"/>
         </scene>
-        <!--Playback-->
+        <!--Navigation Controller-->
         <scene sceneID="kDB-4j-sjU">
             <objects>
                 <navigationController storyboardIdentifier="Root View Controller" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="YTS-cD-PDT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Playback" image="music.note.list" catalog="system" id="8eI-x5-krT"/>
+                    <tabBarItem key="tabBarItem" title="" id="8eI-x5-krT"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="EvB-0l-pZT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -363,11 +363,11 @@
             </objects>
             <point key="canvasLocation" x="150" y="-732.04225352112678"/>
         </scene>
-        <!--Configuration-->
+        <!--Navigation Controller-->
         <scene sceneID="Stl-Rh-H2v">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nGG-by-uzG" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Configuration" image="settings" id="8x9-bp-sBW"/>
+                    <tabBarItem key="tabBarItem" title="" id="8x9-bp-sBW"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="JI4-gK-ZCd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
@@ -403,8 +403,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="music.note.list" catalog="system" width="64" height="58"/>
-        <image name="settings" width="16" height="16"/>
         <image name="slider.horizontal.3" catalog="system" width="64" height="50"/>
         <image name="waveload" width="280" height="75"/>
         <namedColor name="Background Color">
