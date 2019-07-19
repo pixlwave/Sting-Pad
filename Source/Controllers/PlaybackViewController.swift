@@ -44,6 +44,7 @@ class PlaybackViewController: UICollectionViewController {
         collectionView.delaysContentTouches = false; #warning("Test if this works or if the property needs to be set on the scroll view")
         
         NotificationCenter.default.addObserver(self, selector: #selector(applySnapshot), name: .stingsDidChange, object: nil)
+        applySnapshot()
     }
     
     override func viewDidAppear(_ animated: Bool) {

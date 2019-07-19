@@ -16,8 +16,15 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
         super.viewDidAppear(animated)
         
         #if targetEnvironment(simulator)
-        presentCurrentShow(animated: false)
+        openShow()
         #endif
+    }
+    
+    func openShow(at url: URL? = nil) {
+        if let url = url { Show.shared = Show(fileURL: url) }
+        Show.shared.open { success in
+            if success { self.presentCurrentShow(animated: false) }
+        }
     }
     
     func presentCurrentShow(animated: Bool = true) {
@@ -55,8 +62,7 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
         if let bookmarkData = coder.decodeObject(forKey: "showBookmarkData") as? Data {
             var isStale = false
             if let url = try? URL(resolvingBookmarkData: bookmarkData, bookmarkDataIsStale: &isStale), url.isFileURL {
-                Show.shared = Show(fileURL: url)
-                presentCurrentShow(animated: false)
+                openShow(at: url)
             }
         }
         
@@ -81,16 +87,12 @@ extension ShowBrowserViewController: UIDocumentBrowserViewControllerDelegate {
     
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didPickDocumentsAt documentURLs: [URL]) {
         guard let url = documentURLs.first, url.isFileURL else { return }
-            
-        Show.shared = Show(fileURL: url)
-        presentCurrentShow()
+        openShow(at: url)
     }
     
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didImportDocumentAt sourceURL: URL, toDestinationURL destinationURL: URL) {
         guard destinationURL.isFileURL else { return }
-            
-        Show.shared = Show(fileURL: destinationURL)
-        presentCurrentShow()
+        openShow(at: destinationURL)
     }
 }
 

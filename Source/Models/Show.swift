@@ -14,9 +14,7 @@ class Show: UIDocument {
     override init(fileURL url: URL) {
         super.init(fileURL: url)
         
-        if FileManager.default.fileExists(atPath: fileURL.path) {
-            open()
-        } else {
+        if !FileManager.default.fileExists(atPath: fileURL.path) {
             save(to: fileURL, for: .forCreating)
         }
     }
