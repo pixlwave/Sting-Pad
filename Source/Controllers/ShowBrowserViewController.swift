@@ -54,7 +54,7 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
     override func decodeRestorableState(with coder: NSCoder) {
         if let bookmarkData = coder.decodeObject(forKey: "showBookmarkData") as? Data {
             var isStale = false
-            if let url = try? URL(resolvingBookmarkData: bookmarkData, bookmarkDataIsStale: &isStale) {
+            if let url = try? URL(resolvingBookmarkData: bookmarkData, bookmarkDataIsStale: &isStale), url.isFileURL {
                 Show.shared = Show(fileURL: url)
                 presentCurrentShow(animated: false)
             }
@@ -83,7 +83,14 @@ extension ShowBrowserViewController: UIDocumentBrowserViewControllerDelegate {
         guard let url = documentURLs.first, url.isFileURL else { return }
             
         Show.shared = Show(fileURL: url)
-        self.presentCurrentShow()
+        presentCurrentShow()
+    }
+    
+    func documentBrowser(_ controller: UIDocumentBrowserViewController, didImportDocumentAt sourceURL: URL, toDestinationURL destinationURL: URL) {
+        guard destinationURL.isFileURL else { return }
+            
+        Show.shared = Show(fileURL: destinationURL)
+        presentCurrentShow()
     }
 }
 
