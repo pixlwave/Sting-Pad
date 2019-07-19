@@ -139,8 +139,9 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     @IBAction func closeShow() {
-        dismiss(animated: true)
+        engine.stopSting()
         Show.shared.close()
+        dismiss(animated: true)
     }
     
     func loadTrack() {
