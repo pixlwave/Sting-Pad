@@ -16,18 +16,18 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
         super.viewDidAppear(animated)
         
         #if targetEnvironment(simulator)
-        openShow()
+        openShow(animated: false)
         #endif
     }
     
-    func openShow(at url: URL? = nil) {
+    func openShow(at url: URL? = nil, animated: Bool = true) {
         if let url = url { Show.shared = Show(fileURL: url) }
         Show.shared.open { success in
-            if success { self.presentCurrentShow(animated: false) }
+            if success { self.presentCurrentShow(animated: animated) }
         }
     }
     
-    func presentCurrentShow(animated: Bool = true) {
+    func presentCurrentShow(animated: Bool) {
         guard
             let storyboard = storyboard,
             let rootVC = storyboard.instantiateViewController(withIdentifier: "Root View Controller") as? UINavigationController,
@@ -62,7 +62,7 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
         if let bookmarkData = coder.decodeObject(forKey: "showBookmarkData") as? Data {
             var isStale = false
             if let url = try? URL(resolvingBookmarkData: bookmarkData, bookmarkDataIsStale: &isStale), url.isFileURL {
-                openShow(at: url)
+                openShow(at: url, animated: false)
             }
         }
         
