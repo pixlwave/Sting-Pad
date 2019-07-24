@@ -3,6 +3,7 @@ import UIKit
 class ShowBrowserViewController: UIDocumentBrowserViewController {
     
     var transitionController: UIDocumentBrowserTransitionController?
+    var hasRestored = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,7 +17,7 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
         super.viewDidAppear(animated)
         
         #if targetEnvironment(simulator)
-        openShow(animated: false)
+        if !hasRestored { openShow(animated: false) }
         #endif
     }
     
@@ -62,6 +63,7 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
         if let bookmarkData = coder.decodeObject(forKey: "showBookmarkData") as? Data {
             var isStale = false
             if let url = try? URL(resolvingBookmarkData: bookmarkData, bookmarkDataIsStale: &isStale), url.isFileURL {
+                hasRestored = true
                 openShow(at: url, animated: false)
             }
         }
