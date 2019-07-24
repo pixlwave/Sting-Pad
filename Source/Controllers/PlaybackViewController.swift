@@ -303,10 +303,16 @@ class PlaybackViewController: UICollectionViewController {
                 self.applySnapshot()
             }
             let delete = UIAction(__title: "Delete", image: UIImage(systemName: "trash"), identifier: nil) { action in
+                guard sting != self.engine.playingSting else { return }
                 self.show.stings.remove(at: indexPath.item)
                 self.applySnapshot()
             }
-            delete.attributes = .destructive
+            
+            if sting == self.engine.playingSting {
+                delete.attributes = .disabled
+            } else {
+                delete.attributes = .destructive
+            }
             
             // Create and return a UIMenu with the share action
             return UIMenu(__title: "", image: nil, identifier: nil, children: [rename, edit, colorMenu, duplicate, delete])
