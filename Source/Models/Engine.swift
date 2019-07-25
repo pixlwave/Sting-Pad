@@ -29,6 +29,17 @@ class Engine {
     }
     var remainingTime: TimeInterval { return totalTime - elapsedTime }
     
+    var isInBackground = false {
+        didSet {
+            switch isInBackground {
+            case true:
+                if playingSting == nil { engine.stop() }
+            case false:
+                startAudioEngine()
+            }
+        }
+    }
+    
     var playbackDelegate: PlaybackDelegate?
     
     init() {
@@ -66,7 +77,11 @@ class Engine {
         engine.connect(player, to: mixer, fromBus: 0, toBus: 0, format: outputHWFormat)
         
         updateChannelMap()
-        
+        startAudioEngine()
+    }
+    
+    func startAudioEngine() {
+        guard !engine.isRunning else { return }
         do {
             try engine.start()
         } catch {
@@ -105,16 +120,18 @@ class Engine {
     }
     
     private func scheduleSegment(of sting: Sting, from startSample: AVAudioFramePosition, for sampleCount: AVAudioFrameCount) {
-        player.scheduleSegment(sting.audioFile, startingFrame: startSample, frameCount: sampleCount, at: nil) {
-            self.playbackDelegate?.stingDidStopPlaying(sting)
-            self.playingSting = nil
-        }
+        player.scheduleSegment(sting.audioFile, startingFrame: startSample, frameCount: sampleCount, at: nil, completionCallbackType: .dataPlayedBack, completionHandler: stopCompletionHandler(for: sting))
     }
     
     private func schedule(_ buffer: AVAudioPCMBuffer, for sting: Sting, options: AVAudioPlayerNodeBufferOptions = []) {
-        player.scheduleBuffer(buffer, at: nil, options: options) {
+        player.scheduleBuffer(buffer, at: nil, options: options, completionCallbackType: .dataPlayedBack, completionHandler: stopCompletionHandler(for: sting))
+    }
+    
+    private func stopCompletionHandler(for sting: Sting) -> (AVAudioPlayerNodeCompletionCallbackType) -> Void {
+        { callbackType in
             self.playbackDelegate?.stingDidStopPlaying(sting)
             self.playingSting = nil
+            if self.isInBackground { self.engine.stop() }
         }
     }
     

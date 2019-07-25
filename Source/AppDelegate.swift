@@ -29,4 +29,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        Engine.shared.isInBackground = true
+    }
+    
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        Engine.shared.isInBackground = false
+    }
+    
 }
