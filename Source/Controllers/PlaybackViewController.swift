@@ -280,11 +280,11 @@ class PlaybackViewController: UICollectionViewController {
         UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
             guard let sting = self.dataSource.itemIdentifier(for: indexPath) else { return nil }
             
-            let rename = UIAction(__title: "Rename", image: UIImage(systemName: "square.and.pencil"), identifier: nil) { action in
-                self.rename(sting)
-            }
             let edit = UIAction(__title: "Edit", image: UIImage(systemName: "waveform"), identifier: nil) { action in
                 self.performSegue(withIdentifier: "Edit Sting", sender: sting)
+            }
+            let rename = UIAction(__title: "Rename", image: UIImage(systemName: "square.and.pencil"), identifier: nil) { action in
+                self.rename(sting)
             }
             var colorActions = [UIAction]()
             for color in Color.allCases {
@@ -315,7 +315,7 @@ class PlaybackViewController: UICollectionViewController {
             }
             
             // Create and return a UIMenu with the share action
-            return UIMenu(__title: "", image: nil, identifier: nil, children: [rename, edit, colorMenu, duplicate, delete])
+            return UIMenu(__title: "", image: nil, identifier: nil, children: [edit, rename, colorMenu, duplicate, delete])
         }
     }
     
