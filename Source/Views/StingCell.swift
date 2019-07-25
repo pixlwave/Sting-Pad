@@ -2,13 +2,14 @@ import UIKit
 
 class StingCell: UICollectionViewCell {
     
+    @IBOutlet weak var playbackIndicator: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var loopIndicator: UIImageView!
-    @IBOutlet weak var progressView: UIView!
     
     var color = Color.default {
         didSet {
             backgroundColor = color.value
+            playbackIndicator.tintColor = color.value
         }
     }
     
@@ -20,14 +21,24 @@ class StingCell: UICollectionViewCell {
     
     var isPlaying = false {
         didSet {
-            progressView.backgroundColor = isPlaying ? .lightGray : .clear
+            playbackIndicator.image = isPlaying ? UIImage(systemName: "play.circle.fill") : UIImage(systemName: "circle")
+            updateBorder()
         }
     }
     
     var isCued = false {
         didSet {
-            layer.borderWidth = isCued ? 3 : 0
+            updateBorder()
+        }
+    }
+    
+    func updateBorder() {
+        if isPlaying {
+            layer.borderColor = color.value.cgColor
+        } else if isCued {
             layer.borderColor = UIColor.borderColor.cgColor
+        } else {
+            layer.borderColor = UIColor.clear.cgColor
         }
     }
     
