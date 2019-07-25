@@ -33,7 +33,7 @@
                                     <subviews>
                                         <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="repeat" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Idd-io-e6G">
                                             <rect key="frame" x="292" y="76" width="20" height="18"/>
-                                            <color key="tintColor" cocoaTouchSystemColor="tertiaryLabelColor"/>
+                                            <color key="tintColor" xcode11CocoaTouchSystemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="crk-En-N2K"/>
                                                 <constraint firstAttribute="width" constant="20" id="wAt-6Q-apf"/>
@@ -43,14 +43,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="bv4-uN-qad">
-                                                    <rect key="frame" x="15.5" y="10.833333333333329" width="72" height="82.000000000000014"/>
+                                                    <rect key="frame" x="21.5" y="24.000000000000004" width="60" height="56.5"/>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="bv4-uN-qad" secondAttribute="height" multiplier="1:1" id="1Ld-mk-AZl"/>
                                                     </constraints>
-                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="50" scale="large" weight="light"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="50" weight="light"/>
                                                 </imageView>
                                             </subviews>
-                                            <color key="backgroundColor" cocoaTouchSystemColor="secondarySystemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstItem="bv4-uN-qad" firstAttribute="centerY" secondItem="Gjq-kL-8Xf" secondAttribute="centerY" id="D5W-of-7JA"/>
                                                 <constraint firstItem="bv4-uN-qad" firstAttribute="centerX" secondItem="Gjq-kL-8Xf" secondAttribute="centerX" id="OLl-px-6Ow"/>
@@ -61,7 +61,7 @@
                                             <rect key="frame" x="103" y="0.0" width="217" height="103"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Name" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMJ-uU-fhi">
-                                                    <rect key="frame" x="8" y="8" width="201" height="87"/>
+                                                    <rect key="frame" x="20" y="8" width="189" height="87"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -72,7 +72,7 @@
                                                 <constraint firstItem="cMJ-uU-fhi" firstAttribute="top" secondItem="UNM-N1-Mza" secondAttribute="top" constant="8" id="2PQ-Ba-bfn"/>
                                                 <constraint firstAttribute="trailing" secondItem="cMJ-uU-fhi" secondAttribute="trailing" constant="8" id="KFk-l8-3wG"/>
                                                 <constraint firstAttribute="bottom" secondItem="cMJ-uU-fhi" secondAttribute="bottom" constant="8" id="Vnh-nd-FAO"/>
-                                                <constraint firstItem="cMJ-uU-fhi" firstAttribute="leading" secondItem="UNM-N1-Mza" secondAttribute="leading" constant="8" id="etm-lZ-djE"/>
+                                                <constraint firstItem="cMJ-uU-fhi" firstAttribute="leading" secondItem="UNM-N1-Mza" secondAttribute="leading" constant="20" id="etm-lZ-djE"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -91,10 +91,10 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="10"/>
+                                        <integer key="value" value="8"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                        <integer key="value" value="5"/>
+                                        <integer key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>

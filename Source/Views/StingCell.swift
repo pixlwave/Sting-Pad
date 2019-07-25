@@ -9,7 +9,6 @@ class StingCell: UICollectionViewCell {
     var color = Color.default {
         didSet {
             backgroundColor = color.value
-            playbackIndicator.tintColor = color.value
         }
     }
     
@@ -22,23 +21,12 @@ class StingCell: UICollectionViewCell {
     var isPlaying = false {
         didSet {
             playbackIndicator.image = isPlaying ? UIImage(systemName: "play.circle.fill") : UIImage(systemName: "circle")
-            updateBorder()
         }
     }
     
     var isCued = false {
         didSet {
-            updateBorder()
-        }
-    }
-    
-    func updateBorder() {
-        if isPlaying {
-            layer.borderColor = color.value.cgColor
-        } else if isCued {
-            layer.borderColor = UIColor.borderColor.cgColor
-        } else {
-            layer.borderColor = UIColor.clear.cgColor
+            layer.borderColor = isCued ? UIColor.borderColor.cgColor : color.value.cgColor
         }
     }
     
