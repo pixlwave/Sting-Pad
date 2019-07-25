@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14799.2"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="iOS 13.0 system colors" minToolsVersion="11.0"/>
     </dependencies>
     <scenes>
         <!--Playback View Controller-->
@@ -30,38 +31,64 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="103"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Name" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMJ-uU-fhi">
-                                            <rect key="frame" x="103" y="20" width="197" height="63"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8OY-O0-xU8">
-                                            <rect key="frame" x="20" y="20" width="63" height="63"/>
-                                            <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cYY-yH-5Lf">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="103"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iEI-ar-xc8">
+                                            <rect key="frame" x="15" y="15" width="290" height="73"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Name" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMJ-uU-fhi">
+                                                    <rect key="frame" x="15" y="8" width="260" height="57"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="repeat" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Idd-io-e6G">
+                                                    <rect key="frame" x="270" y="54" width="20" height="18"/>
+                                                    <color key="tintColor" cocoaTouchSystemColor="tertiaryLabelColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="crk-En-N2K"/>
+                                                        <constraint firstAttribute="width" constant="20" id="wAt-6Q-apf"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="0.67329068791946312" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" secondItem="8OY-O0-xU8" secondAttribute="height" multiplier="1:1" id="77k-Sv-GFF"/>
+                                                <constraint firstItem="cMJ-uU-fhi" firstAttribute="leading" secondItem="iEI-ar-xc8" secondAttribute="leading" constant="15" id="Oiz-IG-ccm"/>
+                                                <constraint firstAttribute="trailing" secondItem="Idd-io-e6G" secondAttribute="trailing" id="Wby-pY-DKO"/>
+                                                <constraint firstAttribute="trailing" secondItem="cMJ-uU-fhi" secondAttribute="trailing" constant="15" id="iTa-iE-PMg"/>
+                                                <constraint firstItem="cMJ-uU-fhi" firstAttribute="top" secondItem="iEI-ar-xc8" secondAttribute="top" constant="8" id="iUW-GT-lK2"/>
+                                                <constraint firstAttribute="bottom" secondItem="cMJ-uU-fhi" secondAttribute="bottom" constant="8" id="n78-ju-h62"/>
+                                                <constraint firstAttribute="bottom" secondItem="Idd-io-e6G" secondAttribute="bottom" id="wYy-5w-qOt"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="7"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </view>
                                     </subviews>
                                 </view>
-                                <color key="backgroundColor" name="Background Color"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="systemYellowColor"/>
                                 <constraints>
-                                    <constraint firstItem="cMJ-uU-fhi" firstAttribute="top" secondItem="wn0-gC-jEl" secondAttribute="top" constant="20" id="6w2-xd-K8W"/>
-                                    <constraint firstAttribute="bottom" secondItem="cMJ-uU-fhi" secondAttribute="bottom" constant="20" id="A6N-hm-zRL"/>
-                                    <constraint firstItem="8OY-O0-xU8" firstAttribute="top" secondItem="wn0-gC-jEl" secondAttribute="top" constant="20" id="YES-Ov-8iW"/>
-                                    <constraint firstItem="cMJ-uU-fhi" firstAttribute="leading" secondItem="8OY-O0-xU8" secondAttribute="trailing" constant="20" id="c6b-nq-09W"/>
-                                    <constraint firstItem="8OY-O0-xU8" firstAttribute="leading" secondItem="wn0-gC-jEl" secondAttribute="leading" constant="20" id="giP-pA-mFl"/>
-                                    <constraint firstAttribute="bottom" secondItem="8OY-O0-xU8" secondAttribute="bottom" constant="20" id="smm-fL-zbQ"/>
-                                    <constraint firstAttribute="trailing" secondItem="cMJ-uU-fhi" secondAttribute="trailing" constant="20" id="yvQ-G7-YiH"/>
+                                    <constraint firstItem="cYY-yH-5Lf" firstAttribute="top" secondItem="wn0-gC-jEl" secondAttribute="top" id="F5Q-sl-RtW"/>
+                                    <constraint firstItem="iEI-ar-xc8" firstAttribute="top" secondItem="wn0-gC-jEl" secondAttribute="top" constant="15" id="Hch-Zx-bMn"/>
+                                    <constraint firstAttribute="bottom" secondItem="iEI-ar-xc8" secondAttribute="bottom" constant="15" id="eFT-mC-2sB"/>
+                                    <constraint firstItem="cYY-yH-5Lf" firstAttribute="leading" secondItem="wn0-gC-jEl" secondAttribute="leading" id="eWj-NS-UCG"/>
+                                    <constraint firstItem="iEI-ar-xc8" firstAttribute="leading" secondItem="wn0-gC-jEl" secondAttribute="leading" constant="15" id="fEQ-pM-bGM"/>
+                                    <constraint firstAttribute="bottom" secondItem="cYY-yH-5Lf" secondAttribute="bottom" id="i9S-ZH-LR6"/>
+                                    <constraint firstAttribute="trailing" secondItem="iEI-ar-xc8" secondAttribute="trailing" constant="15" id="isQ-Us-FO8"/>
+                                    <constraint firstAttribute="trailing" secondItem="cYY-yH-5Lf" secondAttribute="trailing" id="pyu-8B-xmd"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="15"/>
+                                        <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <outlet property="colorView" destination="8OY-O0-xU8" id="WG7-ll-kqz"/>
+                                    <outlet property="loopIndicator" destination="Idd-io-e6G" id="pVC-JF-M9b"/>
+                                    <outlet property="progressView" destination="cYY-yH-5Lf" id="ICP-wG-uS9"/>
                                     <outlet property="titleLabel" destination="cMJ-uU-fhi" id="PU5-68-PKs"/>
                                 </connections>
                             </collectionViewCell>
@@ -478,11 +505,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="repeat" catalog="system" width="64" height="50"/>
         <image name="slider.horizontal.3" catalog="system" width="64" height="50"/>
         <image name="waveload" width="280" height="75"/>
-        <namedColor name="Background Color">
-            <color red="0.80784313725490198" green="0.80784313725490198" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="Tint Color">
             <color red="1" green="0.50196078431372548" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

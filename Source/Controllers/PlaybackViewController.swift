@@ -103,6 +103,7 @@ class PlaybackViewController: UICollectionViewController {
             
             stingCell.titleLabel.text = sting.name ?? sting.songTitle
             stingCell.color = sting.color
+            stingCell.loops = sting.loops
             stingCell.isCued = sting == self.cuedSting
             stingCell.isPlaying = sting == self.engine.playingSting
             

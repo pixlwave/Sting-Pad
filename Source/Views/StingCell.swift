@@ -3,17 +3,24 @@ import UIKit
 class StingCell: UICollectionViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var colorView: UIView!
+    @IBOutlet weak var loopIndicator: UIImageView!
+    @IBOutlet weak var progressView: UIView!
     
     var color = Color.default {
         didSet {
-            colorView.backgroundColor = color.value
+            backgroundColor = color.value
+        }
+    }
+    
+    var loops = false {
+        didSet {
+            loopIndicator.isHidden = !loops
         }
     }
     
     var isPlaying = false {
         didSet {
-            backgroundColor = isPlaying ? .lightGray : .backgroundColor
+            progressView.backgroundColor = isPlaying ? .lightGray : .clear
         }
     }
     
