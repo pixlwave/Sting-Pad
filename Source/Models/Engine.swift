@@ -14,18 +14,6 @@ class Engine {
     let musicPlayer = MPMusicPlayerController.systemMusicPlayer
     
     var playingSting: Sting?
-    private var isPlaying: Bool {
-        guard player.isPlaying else { return false }
-        guard let sting = playingSting else { return false }
-        
-        guard
-            let lastRenderTime = player.lastRenderTime,
-            let playerPosition = player.playerTime(forNodeTime: lastRenderTime)?.sampleTime
-        else { return true }
-        
-        // fix player.isPlaying returning true in the completion handler
-        return playerPosition < AVAudioFramePosition(sting.sampleCount)
-    }
     
     var totalTime: TimeInterval {
         guard let sting = playingSting else { return 0 }
