@@ -20,7 +20,13 @@ class StingCell: UICollectionViewCell {
     
     var isPlaying = false {
         didSet {
-            playbackIndicator.image = isPlaying ? UIImage(systemName: "play.circle.fill") : UIImage(systemName: "circle")
+            if isPlaying {
+                playbackIndicator.image = UIImage(systemName: "play.circle.fill")
+                playbackIndicator.tintColor = .white
+            } else {
+                playbackIndicator.image = UIImage(systemName: "circle")
+                playbackIndicator.tintColor = .backgroundColor
+            }
         }
     }
     
