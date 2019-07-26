@@ -7,7 +7,9 @@ class PlaybackViewController: UICollectionViewController {
     private let engine = Engine.shared
     private let show = Show.shared
     lazy private var dataSource = makeDataSource()
-    private var cuedSting: Sting?
+    private var cuedSting: Sting? {
+        didSet { if let sting = cuedSting { scrollTo(sting) } }
+    }
     
     @IBOutlet var transportView: UIView!
     @IBOutlet weak var playButton: UIButton!
@@ -242,6 +244,11 @@ class PlaybackViewController: UICollectionViewController {
     
     func stingCellForItem(at indexPath: IndexPath) -> StingCell? {
         return collectionView.cellForItem(at: indexPath) as? StingCell
+    }
+    
+    func scrollTo(_ sting: Sting) {
+        guard let indexPath = dataSource.indexPath(for: sting) else { return }
+        collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
     }
     
     func updateTimeLabel() {
