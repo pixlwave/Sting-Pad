@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14810.12" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14845" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.15"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14799.2"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,25 +29,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y23-dR-PwW">
-                                <rect key="frame" x="46" y="34.5" width="15" height="21"/>
+                                <rect key="frame" x="26" y="14.5" width="54.5" height="61.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" image="play" catalog="system"/>
+                                <state key="normal" image="play" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="52" scale="large" weight="thin"/>
+                                </state>
                                 <connections>
                                     <action selector="playSting" destination="-1" eventType="touchUpInside" id="gPP-lq-KeX"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N6t-Wv-uJW">
-                                <rect key="frame" x="178.5" y="34.5" width="27" height="21"/>
+                                <rect key="frame" x="160.5" y="24.5" width="63.5" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" image="backward" catalog="system"/>
+                                <state key="normal" image="backward" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="52" scale="small" weight="thin"/>
+                                </state>
                                 <connections>
                                     <action selector="previousSting" destination="-1" eventType="touchUpInside" id="g2m-9v-gfT"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="amq-cP-E4J">
-                                <rect key="frame" x="242.5" y="34.5" width="27" height="21"/>
+                                <rect key="frame" x="224.5" y="24.5" width="63.5" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" image="forward" catalog="system"/>
+                                <state key="normal" image="forward" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="52" scale="small" weight="thin"/>
+                                </state>
                                 <connections>
                                     <action selector="nextSting" destination="-1" eventType="touchUpInside" id="AfS-T3-LIl"/>
                                 </connections>
@@ -59,9 +65,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mUe-Rk-ltB">
-                                <rect key="frame" x="114" y="34.5" width="18" height="21"/>
+                                <rect key="frame" x="97" y="22" width="52.5" height="46.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" image="stop" catalog="system"/>
+                                <state key="normal" image="stop" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="52" scale="medium" weight="thin"/>
+                                </state>
                                 <connections>
                                     <action selector="stopSting" destination="-1" eventType="touchUpInside" id="i7l-lD-82m"/>
                                 </connections>

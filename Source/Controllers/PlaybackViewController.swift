@@ -28,11 +28,6 @@ class PlaybackViewController: UICollectionViewController {
         // load the transport view nib and add as a subview via it's outlet
         Bundle.main.loadNibNamed("TransportView", owner: self, options: nil)
         view.addSubview(transportView)
-        #warning("Symbol config would be better in the storyboard if possible")
-        playButton.setPreferredSymbolConfiguration(.init(pointSize: 52, weight: .thin, scale: .large), forImageIn: .normal)
-        stopButton.setPreferredSymbolConfiguration(.init(pointSize: 52, weight: .thin, scale: .medium), forImageIn: .normal)
-        previousButton.setPreferredSymbolConfiguration(.init(pointSize: 52, weight: .thin, scale: .small), forImageIn: .normal)
-        nextButton.setPreferredSymbolConfiguration(.init(pointSize: 52, weight: .thin, scale: .small), forImageIn: .normal)
         timeLabel.font = UIFont.monospacedDigitSystemFont(ofSize: timeLabel.font.pointSize, weight: .regular)
         
         collectionView.dataSource = dataSource
