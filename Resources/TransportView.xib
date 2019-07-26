@@ -89,10 +89,11 @@
                             <constraint firstItem="y23-dR-PwW" firstAttribute="top" secondItem="QXm-bq-c4M" secondAttribute="top" constant="14.5" id="o2A-eA-fWi"/>
                         </constraints>
                     </view>
-                    <blurEffect style="regular"/>
+                    <blurEffect style="prominent"/>
                 </visualEffectView>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="tintColor" name="Tint Color"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="fEE-y9-Vlx" secondAttribute="bottom" id="0Oz-1K-UJf"/>
                 <constraint firstAttribute="trailing" secondItem="fEE-y9-Vlx" secondAttribute="trailing" id="DCn-mm-lI4"/>
