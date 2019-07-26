@@ -6,7 +6,7 @@ class Show: UIDocument {
     
     static var defaultURL: URL = {
         guard let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { fatalError("Unable to access documents") }
-        return directory.appendingPathComponent("show.stkshow")
+        return directory.appendingPathComponent("Show.stkshow")
     }()
     
     override var fileType: String { return "uk.pixlwave.stingtk.show" }

@@ -51,7 +51,7 @@ class PlaybackViewController: UICollectionViewController {
         super.viewDidAppear(animated)
         
         // display the show's name in the navigation bar
-        navigationItem.title = show.fileURL.lastPathComponent
+        navigationItem.title = show.fileURL.deletingPathExtension().lastPathComponent
         
         if UserDefaults.standard.double(forKey: "WelcomeVersionSeen") < WelcomeViewController.currentVersion {
             showWelcomeScreen()
