@@ -15,7 +15,6 @@ class StingViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var waveformLoadingView: UIView!
-    @IBOutlet weak var previewButton: UIButton!
     @IBOutlet weak var loopSwitch: UISwitch!
     @IBOutlet weak var previewLengthControl: UISegmentedControl!
     
@@ -24,7 +23,6 @@ class StingViewController: UIViewController {
         
         // load track info
         updateLabels()
-        if engine.playingSting != nil { previewButton.setTitle("Stop", for: .normal) }
         loopSwitch.isOn = sting.loops
         
         // set up the waveform view
@@ -59,23 +57,20 @@ class StingViewController: UIViewController {
         waveformView.boundToScrub = sender.selectedSegmentIndex == 0 ? .lower : .upper
     }
     
-    func previewSting() {
-        switch waveformView.boundToScrub {
-        case .lower:
-            engine.previewStart(of: sting, for: previewLength[previewLengthControl.selectedSegmentIndex])
-        case .upper:
-            engine.previewEnd(of: sting, for: previewLength[previewLengthControl.selectedSegmentIndex])
-        }
+    @IBAction func previewStart() {
+        engine.previewStart(of: sting, for: previewLength[previewLengthControl.selectedSegmentIndex])
     }
     
-    @IBAction func togglePreview() {
-        if engine.playingSting == nil {
-            previewButton.setTitle("Stop", for: .normal)
-            engine.play(sting)
-        } else {
-            previewButton.setTitle("Preview", for: .normal)
-            engine.stopSting()
-        }
+    @IBAction func previewEnd() {
+        engine.previewEnd(of: sting, for: previewLength[previewLengthControl.selectedSegmentIndex])
+    }
+    
+    @IBAction func previewFull() {
+        engine.play(sting)
+    }
+    
+    @IBAction func stop() {
+        engine.stopSting()
     }
     
     @IBAction func zoomWaveOut() {
@@ -111,7 +106,12 @@ extension StingViewController: FDWaveformViewDelegate {
         sting.endSample = Int64(waveformView.highlightedSamples?.upperBound ?? waveformView.totalSamples)
         show.updateChangeCount(.done)
         
-        previewSting()
+        switch waveformView.boundToScrub {
+        case .lower:
+            previewStart()
+        case .upper:
+            previewEnd()
+        }
     }
     
 }

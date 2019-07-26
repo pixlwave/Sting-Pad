@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14799.2"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="iOS 13.0 system colors" minToolsVersion="11.0"/>
     </dependencies>
@@ -211,37 +212,11 @@
                                     <action selector="zoomWaveOut" destination="sKY-0b-GtB" eventType="touchUpInside" id="Q8G-oQ-cGi"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="oK2-1w-g1j">
-                                <rect key="frame" x="20" y="280.5" width="280" height="94"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacingType="standard" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oK2-1w-g1j">
+                                <rect key="frame" x="20" y="280.5" width="280" height="132"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="F6f-rA-MF5">
-                                        <rect key="frame" x="0.0" y="0.0" width="280" height="58"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lRX-bK-xRr">
-                                                <rect key="frame" x="0.0" y="0.0" width="54" height="58"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <inset key="contentEdgeInsets" minX="0.0" minY="20" maxX="0.0" maxY="20"/>
-                                                <state key="normal" title="Preview">
-                                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="togglePreview" destination="sKY-0b-GtB" eventType="touchDown" id="L1m-hr-lcc"/>
-                                                </connections>
-                                            </button>
-                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="vXN-JJ-zX7">
-                                                <rect key="frame" x="86" y="13.5" width="194" height="32"/>
-                                                <segments>
-                                                    <segment title="Off"/>
-                                                    <segment title="1"/>
-                                                    <segment title="2"/>
-                                                    <segment title="5"/>
-                                                    <segment title="10"/>
-                                                </segments>
-                                            </segmentedControl>
-                                        </subviews>
-                                    </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hG6-QV-E3U">
-                                        <rect key="frame" x="88.5" y="63" width="103" height="31"/>
+                                        <rect key="frame" x="88.5" y="0.0" width="103" height="31"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loop" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRD-t4-QSP">
                                                 <rect key="frame" x="0.0" y="0.0" width="49" height="31"/>
@@ -257,10 +232,70 @@
                                             </switch>
                                         </subviews>
                                     </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="2ZM-zS-YH1">
+                                        <rect key="frame" x="0.0" y="38.5" width="280" height="31"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Auto-preview" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="obS-Gm-PoA">
+                                                <rect key="frame" x="0.0" y="5.5" width="103" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="vXN-JJ-zX7">
+                                                <rect key="frame" x="123" y="0.0" width="157" height="32"/>
+                                                <segments>
+                                                    <segment title="Off"/>
+                                                    <segment title="1"/>
+                                                    <segment title="2"/>
+                                                    <segment title="5"/>
+                                                    <segment title="10"/>
+                                                </segments>
+                                            </segmentedControl>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="F6f-rA-MF5">
+                                        <rect key="frame" x="11.5" y="82" width="257" height="30"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preview" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hhw-UJ-dAd">
+                                                <rect key="frame" x="0.0" y="5" width="60.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lRX-bK-xRr">
+                                                <rect key="frame" x="65.5" y="0.0" width="60.5" height="30"/>
+                                                <state key="normal" title="Start">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="previewStart" destination="sKY-0b-GtB" eventType="touchDown" id="Zea-fd-byW"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Oy-Y8-dK5">
+                                                <rect key="frame" x="131" y="0.0" width="60.5" height="30"/>
+                                                <state key="normal" title="End"/>
+                                                <connections>
+                                                    <action selector="previewEnd" destination="sKY-0b-GtB" eventType="touchDown" id="a8P-0O-yNN"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="adK-SS-ewl">
+                                                <rect key="frame" x="196.5" y="0.0" width="60.5" height="30"/>
+                                                <state key="normal" title="Full"/>
+                                                <connections>
+                                                    <action selector="previewFull" destination="sKY-0b-GtB" eventType="touchDown" id="EM9-qh-e0L"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="E1U-R8-1nj">
+                                        <rect key="frame" x="124" y="102" width="32" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Stop"/>
+                                        <connections>
+                                            <action selector="stop" destination="sKY-0b-GtB" eventType="touchDown" id="Aah-Rj-OXv"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="F6f-rA-MF5" firstAttribute="width" secondItem="oK2-1w-g1j" secondAttribute="width" id="4Cn-k6-4QE"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -289,7 +324,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="loopSwitch" destination="RCd-w4-mUV" id="dO8-oc-7GR"/>
-                        <outlet property="previewButton" destination="lRX-bK-xRr" id="2nX-BN-PIr"/>
                         <outlet property="previewLengthControl" destination="vXN-JJ-zX7" id="kGY-kB-our"/>
                         <outlet property="subtitleLabel" destination="8ah-Ra-mmM" id="PDI-ff-nfj"/>
                         <outlet property="titleLabel" destination="EDC-cS-RXP" id="mWC-r4-wcL"/>
@@ -297,6 +331,42 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="17N-rm-diW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" spacing="5" id="rJK-MH-Hdx">
+                    <rect key="frame" x="0.0" y="0.0" width="280" height="27"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ynt-qd-GCJ">
+                            <rect key="frame" x="0.0" y="2.5" width="18.5" height="22"/>
+                            <state key="normal" image="play" catalog="system">
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                            </state>
+                            <connections>
+                                <action selector="previewFull" destination="sKY-0b-GtB" eventType="touchDown" id="dDO-eA-pI5"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uMj-zK-jxh">
+                            <rect key="frame" x="63" y="2.5" width="18" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="stop" catalog="system">
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="stop" destination="sKY-0b-GtB" eventType="touchDown" id="XuM-UP-g6X"/>
+                            </connections>
+                        </button>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="dwK-2Y-U4x">
+                            <rect key="frame" x="86" y="0.0" width="194" height="28"/>
+                            <segments>
+                                <segment title="Off"/>
+                                <segment title="1"/>
+                                <segment title="2"/>
+                                <segment title="5"/>
+                                <segment title="10"/>
+                            </segments>
+                        </segmentedControl>
+                    </subviews>
+                </stackView>
             </objects>
             <point key="canvasLocation" x="3135" y="-732.04225352112678"/>
         </scene>
@@ -528,8 +598,10 @@
     <resources>
         <image name="1.magnifyingglass" catalog="system" width="64" height="60"/>
         <image name="circle" catalog="system" width="64" height="62"/>
+        <image name="play" catalog="system" width="58" height="64"/>
         <image name="repeat" catalog="system" width="64" height="50"/>
         <image name="slider.horizontal.3" catalog="system" width="64" height="50"/>
+        <image name="stop" catalog="system" width="64" height="56"/>
         <image name="waveload" width="280" height="75"/>
         <namedColor name="Background Color">
             <color red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
