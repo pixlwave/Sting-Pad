@@ -19,29 +19,29 @@
                         <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <color key="tintColor" name="Tint Color"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="20" sectionInsetReference="layoutMargins" id="hvH-XK-hJu">
-                            <size key="itemSize" width="320" height="103"/>
+                            <size key="itemSize" width="320" height="90"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Sting Cell" id="wn0-gC-jEl" customClass="StingCell" customModule="Stingtk" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="8" width="320" height="103"/>
+                                <rect key="frame" x="0.0" y="8" width="320" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="103"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="repeat" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Idd-io-e6G">
-                                            <rect key="frame" x="295" y="82.333333333333329" width="19" height="14.333333333333329"/>
+                                            <rect key="frame" x="295" y="69.333333333333329" width="19" height="14.333333333333329"/>
                                             <color key="tintColor" xcode11CocoaTouchSystemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="14"/>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gjq-kL-8Xf" userLabel="Left View">
-                                            <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="bv4-uN-qad">
-                                                    <rect key="frame" x="21.5" y="23.833333333333332" width="60" height="56.333333333333343"/>
+                                                    <rect key="frame" x="15" y="17.333333333333332" width="60" height="56.333333333333343"/>
                                                     <color key="tintColor" name="Background Color"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="bv4-uN-qad" secondAttribute="height" multiplier="1:1" id="1Ld-mk-AZl"/>
@@ -56,10 +56,10 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UNM-N1-Mza" userLabel="Right View">
-                                            <rect key="frame" x="103" y="0.0" width="217" height="103"/>
+                                            <rect key="frame" x="90" y="0.0" width="230" height="90"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track Name" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMJ-uU-fhi">
-                                                    <rect key="frame" x="12" y="8" width="197" height="87"/>
+                                                    <rect key="frame" x="12" y="8" width="210" height="74"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -87,6 +87,7 @@
                                     <constraint firstItem="Gjq-kL-8Xf" firstAttribute="leading" secondItem="wn0-gC-jEl" secondAttribute="leading" id="iTs-d1-Xce"/>
                                     <constraint firstItem="UNM-N1-Mza" firstAttribute="leading" secondItem="Gjq-kL-8Xf" secondAttribute="trailing" id="ncY-jo-bhA"/>
                                 </constraints>
+                                <size key="customSize" width="320" height="90"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="8"/>

@@ -83,7 +83,7 @@ class PlaybackViewController: UICollectionViewController {
             let minimumWidth: CGFloat = 300
             let effectiveWidth = layoutEnvironment.container.effectiveContentSize.width
             let count = effectiveWidth > minimumWidth ? Int(effectiveWidth / minimumWidth) : 1  // ensure count is greater than 0
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(120))
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(110))
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: count)
             
             let section = NSCollectionLayoutSection(group: group)
