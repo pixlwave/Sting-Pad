@@ -20,6 +20,7 @@
 		A581C39F1B949AD6006CE228 /* PlaybackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C39E1B949AD6006CE228 /* PlaybackViewController.swift */; };
 		A581C3A21B94A041006CE228 /* StingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C3A11B94A041006CE228 /* StingCell.swift */; };
 		A581C3A41B94C5B2006CE228 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C3A31B94C5B2006CE228 /* WelcomeViewController.swift */; };
+		A59EC6EA22EB5696009A7ED1 /* TransportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59EC6E922EB5696009A7ED1 /* TransportView.swift */; };
 		A5A49C8F1B5BF1C2004B80CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A49C8E1B5BF1C2004B80CE /* AppDelegate.swift */; };
 		A5A49C961B5BF1C2004B80CE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5A49C951B5BF1C2004B80CE /* Images.xcassets */; };
 		A5A49CB11B5BF216004B80CE /* Sting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A49CB01B5BF216004B80CE /* Sting.swift */; };
@@ -44,6 +45,7 @@
 		A581C39E1B949AD6006CE228 /* PlaybackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackViewController.swift; sourceTree = "<group>"; };
 		A581C3A11B94A041006CE228 /* StingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StingCell.swift; sourceTree = "<group>"; };
 		A581C3A31B94C5B2006CE228 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		A59EC6E922EB5696009A7ED1 /* TransportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportView.swift; sourceTree = "<group>"; };
 		A5A49C891B5BF1C2004B80CE /* Stingtk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stingtk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A49C8D1B5BF1C2004B80CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5A49C8E1B5BF1C2004B80CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				A581C3A11B94A041006CE228 /* StingCell.swift */,
+				A59EC6E922EB5696009A7ED1 /* TransportView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				A5B39BDE1DAA843A00AA22EF /* FDWaveformView.swift in Sources */,
 				A549825B1F7067EC00909196 /* FDWaveformRenderOperation.swift in Sources */,
 				A51D98EE22BBCF7D00124A40 /* Color.swift in Sources */,
+				A59EC6EA22EB5696009A7ED1 /* TransportView.swift in Sources */,
 				A581C3A21B94A041006CE228 /* StingCell.swift in Sources */,
 				A5A49CB11B5BF216004B80CE /* Sting.swift in Sources */,
 				A5C32F4E228B64FE00E4B4EB /* Extends.swift in Sources */,

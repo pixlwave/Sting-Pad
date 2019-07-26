@@ -33,7 +33,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="repeat" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Idd-io-e6G">
-                                            <rect key="frame" x="295" y="82" width="19" height="14.5"/>
+                                            <rect key="frame" x="295" y="82.333333333333329" width="19" height="14.333333333333329"/>
                                             <color key="tintColor" xcode11CocoaTouchSystemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="14"/>
                                         </imageView>
@@ -41,7 +41,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="bv4-uN-qad">
-                                                    <rect key="frame" x="21.5" y="24.000000000000004" width="60" height="56.5"/>
+                                                    <rect key="frame" x="21.5" y="23.833333333333332" width="60" height="56.333333333333343"/>
                                                     <color key="tintColor" name="Background Color"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="bv4-uN-qad" secondAttribute="height" multiplier="1:1" id="1Ld-mk-AZl"/>
