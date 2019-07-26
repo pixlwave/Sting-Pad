@@ -29,7 +29,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y23-dR-PwW">
-                                <rect key="frame" x="26" y="14.5" width="54.5" height="61.5"/>
+                                <rect key="frame" x="26" y="14.5" width="54.5" height="61"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" image="play" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="52" scale="large" weight="thin"/>
@@ -77,16 +77,16 @@
                         </subviews>
                         <color key="tintColor" name="Tint Color"/>
                         <constraints>
-                            <constraint firstItem="mUe-Rk-ltB" firstAttribute="centerY" secondItem="QXm-bq-c4M" secondAttribute="centerY" id="20m-xg-ejc"/>
-                            <constraint firstItem="amq-cP-E4J" firstAttribute="centerY" secondItem="QXm-bq-c4M" secondAttribute="centerY" id="85U-8D-zbR"/>
+                            <constraint firstItem="9Fx-yc-sdB" firstAttribute="top" secondItem="QXm-bq-c4M" secondAttribute="top" constant="70" id="6CZ-qJ-FN4"/>
                             <constraint firstItem="N6t-Wv-uJW" firstAttribute="centerX" secondItem="QXm-bq-c4M" secondAttribute="centerX" multiplier="1.2" id="9w3-0b-mv4"/>
                             <constraint firstItem="y23-dR-PwW" firstAttribute="centerX" secondItem="QXm-bq-c4M" secondAttribute="centerX" multiplier="1/3" id="B4U-RL-azv"/>
                             <constraint firstAttribute="trailing" secondItem="9Fx-yc-sdB" secondAttribute="trailing" constant="8" id="Jrj-ZF-49k"/>
-                            <constraint firstItem="y23-dR-PwW" firstAttribute="centerY" secondItem="QXm-bq-c4M" secondAttribute="centerY" id="TuB-hJ-B8C"/>
+                            <constraint firstItem="N6t-Wv-uJW" firstAttribute="centerY" secondItem="mUe-Rk-ltB" secondAttribute="centerY" id="LpF-IG-hUU"/>
+                            <constraint firstItem="mUe-Rk-ltB" firstAttribute="centerY" secondItem="y23-dR-PwW" secondAttribute="centerY" id="S2H-ZM-XVF"/>
+                            <constraint firstItem="amq-cP-E4J" firstAttribute="centerY" secondItem="N6t-Wv-uJW" secondAttribute="centerY" id="ZCH-9g-25m"/>
                             <constraint firstItem="amq-cP-E4J" firstAttribute="centerX" secondItem="QXm-bq-c4M" secondAttribute="centerX" multiplier="1.6" id="aaf-rM-lUH"/>
-                            <constraint firstAttribute="bottom" secondItem="9Fx-yc-sdB" secondAttribute="bottom" constant="4" id="bUk-bQ-eQm"/>
                             <constraint firstItem="mUe-Rk-ltB" firstAttribute="centerX" secondItem="QXm-bq-c4M" secondAttribute="centerX" multiplier="1/1.3" id="mPB-GD-Dli"/>
-                            <constraint firstItem="N6t-Wv-uJW" firstAttribute="centerY" secondItem="QXm-bq-c4M" secondAttribute="centerY" id="roK-OF-29R"/>
+                            <constraint firstItem="y23-dR-PwW" firstAttribute="top" secondItem="QXm-bq-c4M" secondAttribute="top" constant="14.5" id="o2A-eA-fWi"/>
                         </constraints>
                     </view>
                     <blurEffect style="regular"/>

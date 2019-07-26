@@ -55,7 +55,7 @@ class PlaybackViewController: UICollectionViewController {
     
     override func viewWillLayoutSubviews() {
         let origin = CGPoint(x: 0, y: view.frame.height - view.safeAreaInsets.bottom - transportViewHeight)
-        let size = CGSize(width: view.frame.width, height: transportViewHeight)
+        let size = CGSize(width: view.frame.width, height: view.bounds.height - origin.y)
         transportView?.frame = CGRect(origin: origin, size: size)
         collectionView.contentInset.bottom = size.height
     }
