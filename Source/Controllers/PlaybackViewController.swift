@@ -80,9 +80,10 @@ class PlaybackViewController: UICollectionViewController {
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
             
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(120))
             let minimumWidth: CGFloat = 300
-            let count = Int(layoutEnvironment.container.effectiveContentSize.width / minimumWidth)
+            let effectiveWidth = layoutEnvironment.container.effectiveContentSize.width
+            let count = effectiveWidth > minimumWidth ? Int(effectiveWidth / minimumWidth) : 1  // ensure count is greater than 0
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(120))
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: count)
             
             let section = NSCollectionLayoutSection(group: group)
