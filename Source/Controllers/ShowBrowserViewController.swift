@@ -19,7 +19,7 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
         #if targetEnvironment(simulator)
         if !hasRestored {
             let show = Show(fileURL: Show.defaultURL)
-            if !FileManager.default.fileExists(atPath: show.fileURL.path) {
+            if !show.fileExists {
                 show.save(to: show.fileURL, for: .forCreating) { sucess in
                     self.openShow(at: show.fileURL, animated: false)
                 }
@@ -95,7 +95,7 @@ extension ShowBrowserViewController: UIDocumentBrowserViewControllerDelegate {
         }
         
         let show = Show(fileURL: cacheURL.appendingPathComponent("Show.stkshow"))
-        if !FileManager.default.fileExists(atPath: show.fileURL.path) {
+        if !show.fileExists {
             show.save(to: show.fileURL, for: .forCreating) { sucess in
                 importHandler(show.fileURL, .move)
             }
@@ -116,7 +116,7 @@ extension ShowBrowserViewController: UIDocumentBrowserViewControllerDelegate {
 }
 
 
-//
+// MARK: UIViewControllerTransitioningDelegate
 extension ShowBrowserViewController: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return transitionController

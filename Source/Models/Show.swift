@@ -11,15 +11,13 @@ class Show: UIDocument {
     
     override var fileType: String { return "uk.pixlwave.stingtk.show" }
     
+    var fileExists: Bool { return FileManager.default.fileExists(atPath: fileURL.path) }
+    
     var stings = [Sting]() {
         didSet {
             NotificationCenter.default.post(Notification(name: .stingsDidChange))
             updateChangeCount(.done)
         }
-    }
-    
-    func newShow() {
-        stings = [Sting]()
     }
     
     enum DocumentError: Error {
