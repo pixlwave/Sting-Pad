@@ -139,7 +139,7 @@ class PlaybackViewController: UICollectionViewController {
     
     @IBAction func closeShow() {
         engine.stopSting()
-        Show.shared.close()
+        show.close()
         dismiss(animated: true)
     }
     

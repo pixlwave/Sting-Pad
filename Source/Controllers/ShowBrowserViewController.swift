@@ -17,18 +17,20 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
         super.viewDidAppear(animated)
         
         #if targetEnvironment(simulator)
-        if !hasRestored { openShow(animated: false) }
+        if !hasRestored { openShow(at: Show.defaultURL, animated: false) }
         #endif
     }
     
-    func openShow(at url: URL? = nil, animated: Bool = true) {
-        if let url = url { Show.shared = Show(fileURL: url) }
-        Show.shared.open { success in
-            if success { self.presentCurrentShow(animated: animated) }
+    func openShow(at url: URL, animated: Bool = true) {
+        let show = Show(fileURL: url)
+        show.open { success in
+            if success { self.present(show, animated: animated) }
         }
     }
     
-    func presentCurrentShow(animated: Bool) {
+    func present(_ show: Show, animated: Bool) {
+        Show.shared = show
+        
         guard
             let storyboard = storyboard,
             let rootVC = storyboard.instantiateViewController(withIdentifier: "Root View Controller") as? UINavigationController,
@@ -36,7 +38,7 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
         else { return }
         
         rootVC.transitioningDelegate = self
-        transitionController = transitionController(forDocumentAt: Show.shared.fileURL)
+        transitionController = transitionController(forDocumentAt: show.fileURL)
         transitionController?.targetView = playbackVC.view
         
         present(rootVC, animated: animated)
