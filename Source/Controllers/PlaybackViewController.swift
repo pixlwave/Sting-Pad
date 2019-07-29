@@ -191,6 +191,7 @@ class PlaybackViewController: UICollectionViewController {
         alertController.addTextField { textField in
             textField.text = sting.name
             textField.placeholder = sting.songTitle
+            textField.autocapitalizationType = .words
             textField.clearButtonMode = .always
         }
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
