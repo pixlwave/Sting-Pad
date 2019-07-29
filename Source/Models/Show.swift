@@ -11,14 +11,6 @@ class Show: UIDocument {
     
     override var fileType: String { return "uk.pixlwave.stingtk.show" }
     
-    override init(fileURL url: URL) {
-        super.init(fileURL: url)
-        
-        if !FileManager.default.fileExists(atPath: fileURL.path) {
-            save(to: fileURL, for: .forCreating)
-        }
-    }
-    
     var stings = [Sting]() {
         didSet {
             NotificationCenter.default.post(Notification(name: .stingsDidChange))

@@ -84,7 +84,13 @@ extension ShowBrowserViewController: UIDocumentBrowserViewControllerDelegate {
         }
         
         let show = Show(fileURL: cacheURL.appendingPathComponent("Show.stkshow"))
-        importHandler(show.fileURL, .move)
+        if !FileManager.default.fileExists(atPath: show.fileURL.path) {
+            show.save(to: show.fileURL, for: .forCreating) { sucess in
+                importHandler(show.fileURL, .move)
+            }
+        } else {
+            importHandler(show.fileURL, .move)
+        }
     }
     
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didPickDocumentsAt documentURLs: [URL]) {
