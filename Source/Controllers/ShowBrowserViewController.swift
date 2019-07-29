@@ -17,7 +17,16 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
         super.viewDidAppear(animated)
         
         #if targetEnvironment(simulator)
-        if !hasRestored { openShow(at: Show.defaultURL, animated: false) }
+        if !hasRestored {
+            let show = Show(fileURL: Show.defaultURL)
+            if !FileManager.default.fileExists(atPath: show.fileURL.path) {
+                show.save(to: show.fileURL, for: .forCreating) { sucess in
+                    self.openShow(at: show.fileURL, animated: false)
+                }
+            } else {
+                openShow(at: show.fileURL, animated: false)
+            }
+        }
         #endif
     }
     
