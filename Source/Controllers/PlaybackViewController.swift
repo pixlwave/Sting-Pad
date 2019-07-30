@@ -217,7 +217,7 @@ class PlaybackViewController: UICollectionViewController {
     
     @IBAction func nextSting() {
         guard
-            show.stings.count > 0,
+            show.stings.count > 1,
             let oldSting = cuedSting,
             let oldIndex = dataSource.indexPath(for: oldSting)?.item
         else { return }
@@ -231,7 +231,7 @@ class PlaybackViewController: UICollectionViewController {
     
     @IBAction func previousSting() {
         guard
-            show.stings.count > 0,
+            show.stings.count > 1,
             let oldSting = cuedSting,
             let oldIndex = dataSource.indexPath(for: oldSting)?.item,
             oldIndex > 0
