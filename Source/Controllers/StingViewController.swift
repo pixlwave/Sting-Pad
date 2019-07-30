@@ -39,7 +39,6 @@ class StingViewController: UIViewController {
         waveformView.audioURL = sting.url
         view.addSubview(waveformView)
         
-        #warning("Add an override for automatic previews")
         if engine.playingSting != nil { previewLengthControl.selectedSegmentIndex = 0 }
     }
     

@@ -87,20 +87,14 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
 // MARK: UIDocumentBrowserViewControllerDelegate
 extension ShowBrowserViewController: UIDocumentBrowserViewControllerDelegate {
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didRequestDocumentCreationWithHandler importHandler: @escaping (URL?, UIDocumentBrowserViewController.ImportMode) -> Void) {
-        guard
-            let cacheURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
-        else {
-            importHandler(nil, .none)
-            return
-        }
-        
-        let show = Show(fileURL: cacheURL.appendingPathComponent("Show.stkshow"))
-        if !show.fileExists {
-            show.save(to: show.fileURL, for: .forCreating) { sucess in
+        let show = Show(fileURL: Show.defaultURL)
+        if show.fileExists {
+            importHandler(show.fileURL, .move)
+        } else {
+            show.save(to: show.fileURL, for: .forCreating) { success in
+                guard success else { importHandler(nil, .none); return }
                 importHandler(show.fileURL, .move)
             }
-        } else {
-            importHandler(show.fileURL, .move)
         }
     }
     
