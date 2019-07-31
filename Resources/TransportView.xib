@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14845" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14854.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14799.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14806.4"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,7 +28,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y23-dR-PwW">
-                                <rect key="frame" x="26" y="14.5" width="54.5" height="61"/>
+                                <rect key="frame" x="26" y="14.5" width="55" height="62"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" image="play" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="52" scale="large" weight="thin"/>
@@ -39,23 +38,23 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N6t-Wv-uJW">
-                                <rect key="frame" x="160.5" y="24.5" width="63.5" height="41"/>
+                                <rect key="frame" x="162.5" y="24.5" width="59" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" image="backward" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="52" scale="small" weight="thin"/>
                                 </state>
                                 <connections>
-                                    <action selector="previousSting" destination="-1" eventType="touchUpInside" id="g2m-9v-gfT"/>
+                                    <action selector="previousCue" destination="-1" eventType="touchUpInside" id="g2m-9v-gfT"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="amq-cP-E4J">
-                                <rect key="frame" x="224.5" y="24.5" width="63.5" height="41"/>
+                                <rect key="frame" x="226.5" y="24.5" width="59" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" image="forward" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="52" scale="small" weight="thin"/>
                                 </state>
                                 <connections>
-                                    <action selector="nextSting" destination="-1" eventType="touchUpInside" id="AfS-T3-LIl"/>
+                                    <action selector="nextCue" destination="-1" eventType="touchUpInside" id="AfS-T3-LIl"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00 remaining" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Fx-yc-sdB">
@@ -65,7 +64,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mUe-Rk-ltB">
-                                <rect key="frame" x="97" y="22" width="52.5" height="46.5"/>
+                                <rect key="frame" x="97" y="22.5" width="52.5" height="46.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" image="stop" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="52" scale="medium" weight="thin"/>
@@ -106,8 +105,8 @@
         </view>
     </objects>
     <resources>
-        <image name="backward" catalog="system" width="64" height="36"/>
-        <image name="forward" catalog="system" width="64" height="36"/>
+        <image name="backward" catalog="system" width="64" height="38"/>
+        <image name="forward" catalog="system" width="64" height="38"/>
         <image name="play" catalog="system" width="58" height="64"/>
         <image name="stop" catalog="system" width="64" height="56"/>
         <namedColor name="Tint Color">

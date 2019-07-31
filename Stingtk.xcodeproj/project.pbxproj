@@ -13,6 +13,7 @@
 		A549825B1F7067EC00909196 /* FDWaveformRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54982591F7067EC00909196 /* FDWaveformRenderOperation.swift */; };
 		A55C0E7222AA5498008DDB12 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C0E7122AA5498008DDB12 /* Show.swift */; };
 		A55C0E7622AA7202008DDB12 /* TransportView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A55C0E7522AA7202008DDB12 /* TransportView.xib */; };
+		A567FB6A22F1B1D500B4DB70 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A567FB6922F1B1D500B4DB70 /* Settings.swift */; };
 		A581C38D1B946B7C006CE228 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C38C1B946B7C006CE228 /* Engine.swift */; };
 		A581C3981B94769F006CE228 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A581C3951B94769F006CE228 /* Main.storyboard */; };
 		A581C3991B94769F006CE228 /* Welcome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A581C3961B94769F006CE228 /* Welcome.storyboard */; };
@@ -38,6 +39,7 @@
 		A54982591F7067EC00909196 /* FDWaveformRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDWaveformRenderOperation.swift; sourceTree = "<group>"; };
 		A55C0E7122AA5498008DDB12 /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
 		A55C0E7522AA7202008DDB12 /* TransportView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransportView.xib; sourceTree = "<group>"; };
+		A567FB6922F1B1D500B4DB70 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		A581C38C1B946B7C006CE228 /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		A581C3951B94769F006CE228 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		A581C3961B94769F006CE228 /* Welcome.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Welcome.storyboard; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				A55C0E7122AA5498008DDB12 /* Show.swift */,
 				A5A49CB01B5BF216004B80CE /* Sting.swift */,
 				A51D98ED22BBCF7D00124A40 /* Color.swift */,
+				A567FB6922F1B1D500B4DB70 /* Settings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				A55C0E7222AA5498008DDB12 /* Show.swift in Sources */,
 				A581C3A41B94C5B2006CE228 /* WelcomeViewController.swift in Sources */,
 				A5A49C8F1B5BF1C2004B80CE /* AppDelegate.swift in Sources */,
+				A567FB6A22F1B1D500B4DB70 /* Settings.swift in Sources */,
 				A5B39BDE1DAA843A00AA22EF /* FDWaveformView.swift in Sources */,
 				A549825B1F7067EC00909196 /* FDWaveformRenderOperation.swift in Sources */,
 				A51D98EE22BBCF7D00124A40 /* Color.swift in Sources */,

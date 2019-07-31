@@ -6,6 +6,7 @@ class PlaybackViewController: UICollectionViewController {
     
     private let engine = Engine.shared
     private let show = Show.shared
+    private let settings = Settings.shared
     lazy private var dataSource = makeDataSource()
     private var cuedSting: Sting? {
         didSet { if let sting = cuedSting { scrollTo(sting) } }
@@ -120,8 +121,10 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     func reloadItems(_ identifiers: [Sting]) {
+        #warning("Is there a better way to do this?")
+        let uniqueIdentifiers = Array(Set(identifiers))
         let snapshot = dataSource.snapshot()
-        snapshot.reloadItems(identifiers)
+        snapshot.reloadItems(uniqueIdentifiers)
         dataSource.apply(snapshot, animatingDifferences: false)
     }
     
@@ -208,40 +211,54 @@ class PlaybackViewController: UICollectionViewController {
         guard let sting = cuedSting ?? show.stings.first else { return }
         
         engine.play(sting)
-        nextSting()
+        nextCue()
     }
     
     @IBAction func stopSting() {
         engine.stopSting()
     }
     
-    @IBAction func nextSting() {
+    @IBAction func nextCue() {
         guard
             show.stings.count > 1,
-            let oldSting = cuedSting,
-            let oldIndex = dataSource.indexPath(for: oldSting)?.item
+            let oldCue = cuedSting,
+            let oldCueIndex = dataSource.indexPath(for: oldCue)?.item
         else { return }
         
-        let newIndex = (oldIndex + 1) % show.stings.count
-        let newSting = show.stings[newIndex]
-        cuedSting = newSting
+        let newCueIndex = (oldCueIndex + 1) % show.stings.count
+        let newCue = show.stings[newCueIndex]
+        cuedSting = newCue
         
-        reloadItems([oldSting, newSting])
+        reloadItems([oldCue, newCue])
     }
     
-    @IBAction func previousSting() {
+    @IBAction func previousCue() {
         guard
             show.stings.count > 1,
-            let oldSting = cuedSting,
-            let oldIndex = dataSource.indexPath(for: oldSting)?.item,
-            oldIndex > 0
+            let oldCue = cuedSting,
+            let oldCueIndex = dataSource.indexPath(for: oldCue)?.item,
+            oldCueIndex > 0
         else { return }
         
-        let newIndex = (oldIndex - 1) % show.stings.count
-        let newSting = show.stings[newIndex]
-        cuedSting = newSting
+        let newCueIndex = (oldCueIndex - 1) % show.stings.count
+        let newCue = show.stings[newCueIndex]
+        cuedSting = newCue
         
-        reloadItems([oldSting, newSting])
+        reloadItems([oldCue, newCue])
+    }
+    
+    func cueSting(after selectedSting: Sting) {
+        guard
+            show.stings.count > 1,
+            let oldCue = cuedSting,
+            let selectedStingIndex = dataSource.indexPath(for: selectedSting)?.item
+        else { return }
+        
+        let newCueIndex = (selectedStingIndex + 1) % show.stings.count
+        let newCueSting = show.stings[newCueIndex]
+        cuedSting = newCueSting
+        
+        reloadItems([oldCue, newCueSting])
     }
     
     func stingCellForItem(at indexPath: IndexPath) -> StingCell? {
@@ -278,7 +295,14 @@ class PlaybackViewController: UICollectionViewController {
     // MARK: UICollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let sting = dataSource.itemIdentifier(for: indexPath) else { return }
-        engine.play(sting)
+        
+        if settings.launchMode == .toggle, sting == engine.playingSting {
+            engine.stopSting()
+        } else {
+            engine.play(sting)
+            if settings.autoCue { cueSting(after: sting) }
+        }
+        
     }
     
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {

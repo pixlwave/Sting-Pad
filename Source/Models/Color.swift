@@ -14,8 +14,6 @@ enum Color: String, Codable, CaseIterable {
     case purple
     case pink
     
-    static let `default` = Color.dark
-    
     var value: UIColor {
         switch self {
         case .dark:
