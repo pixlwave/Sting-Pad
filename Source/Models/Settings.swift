@@ -13,24 +13,7 @@ class Settings {
         didSet { UserDefaults.standard.set(launchMode.rawValue, forKey: "launchMode") }
     }
     @Stored(key: "showsTransportBar", defaultValue: true) var showsTransportBar: Bool
-    @Stored(key: "defaultColor", defaultValue: .dark) var defaultColor: Color
     
     private init() {}
     
-    @propertyWrapper
-    struct Stored<T> {
-        var key: String
-        var value: T { didSet { UserDefaults.standard.set(value, forKey: key) } }
-        
-        init(key: String, defaultValue: T) {
-            self.key = key
-            self.value = UserDefaults.standard.object(forKey: key) as? T ?? defaultValue
-        }
-        
-        var wrappedValue: T {
-            get { return value }
-            set { value = newValue }
-        }
-    }
-
 }

@@ -6,7 +6,7 @@ class StingCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var loopIndicator: UIImageView!
     
-    var color = Settings.shared.defaultColor {
+    var color = Color.default {
         didSet {
             backgroundColor = color.value
             layer.borderColor = color.value.cgColor

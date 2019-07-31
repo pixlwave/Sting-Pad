@@ -11,7 +11,7 @@ class Sting: NSObject, Codable {
     let songArtist: String
     
     var name: String?
-    var color: Color = Settings.shared.defaultColor
+    var color: Color = .default
     private var startTime: TimeInterval = 0 { didSet { updateBuffer() } }
     private var endTime: TimeInterval? { didSet { updateBuffer() } }
     var loops = false {
