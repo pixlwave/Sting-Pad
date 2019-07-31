@@ -6,7 +6,6 @@ class PlaybackViewController: UICollectionViewController {
     
     private let engine = Engine.shared
     private let show = Show.shared
-    private let settings = Settings.shared
     lazy private var dataSource = makeDataSource()
     private var cuedSting: Sting? {
         didSet { if let sting = cuedSting { scrollTo(sting) } }
@@ -247,20 +246,6 @@ class PlaybackViewController: UICollectionViewController {
         reloadItems([oldCue, newCue])
     }
     
-    func cueSting(after selectedSting: Sting) {
-        guard
-            show.stings.count > 1,
-            let oldCue = cuedSting,
-            let selectedStingIndex = dataSource.indexPath(for: selectedSting)?.item
-        else { return }
-        
-        let newCueIndex = (selectedStingIndex + 1) % show.stings.count
-        let newCueSting = show.stings[newCueIndex]
-        cuedSting = newCueSting
-        
-        reloadItems([oldCue, newCueSting])
-    }
-    
     func stingCellForItem(at indexPath: IndexPath) -> StingCell? {
         return collectionView.cellForItem(at: indexPath) as? StingCell
     }
@@ -295,14 +280,7 @@ class PlaybackViewController: UICollectionViewController {
     // MARK: UICollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let sting = dataSource.itemIdentifier(for: indexPath) else { return }
-        
-        if settings.launchMode == .toggle, sting == engine.playingSting {
-            engine.stopSting()
-        } else {
-            engine.play(sting)
-            if settings.autoCue { cueSting(after: sting) }
-        }
-        
+        engine.play(sting)
     }
     
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
