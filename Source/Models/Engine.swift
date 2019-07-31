@@ -5,7 +5,6 @@ import MediaPlayer
 class Engine {
     static let shared = Engine()
     
-    #warning("Listen for multiroute notifications")
     private let engine = AVAudioEngine()
     private let player = AVAudioPlayerNode()
     private let session = AVAudioSession.sharedInstance()

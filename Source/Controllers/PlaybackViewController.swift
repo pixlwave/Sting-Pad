@@ -111,7 +111,7 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     @objc func applySnapshot() {
-        #warning("Move this to add sting")
+        // ensure there's a cued sting if possible
         if cuedSting == nil { cuedSting = show.stings.first }
         
         let snapshot = NSDiffableDataSourceSnapshot<Int, Sting>()
