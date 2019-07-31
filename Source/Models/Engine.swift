@@ -143,6 +143,7 @@ class Engine {
     }
     
     func play(_ sting: Sting) {
+        guard !sting.isMissing else { return }
         prepareToPlay(sting)
         
         if sting.loops {

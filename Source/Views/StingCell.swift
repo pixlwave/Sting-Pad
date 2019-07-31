@@ -31,8 +31,17 @@ class StingCell: UICollectionViewCell {
         }
     }
     
+    var isMissing = false {
+        didSet {
+            updatePlaybackIndicator()
+        }
+    }
+    
     func updatePlaybackIndicator() {
-        if isPlaying {
+        if isMissing {
+            playbackIndicator.image = UIImage(systemName: "exclamationmark.circle")
+            playbackIndicator.tintColor = .white
+        } else if isPlaying {
             playbackIndicator.image = UIImage(systemName: "play.circle.fill")
             playbackIndicator.tintColor = .white
         } else if isCued{

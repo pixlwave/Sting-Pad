@@ -4,9 +4,8 @@ import MediaPlayer
 
 class Sting: NSObject, Codable {
     
-    static let defaultURL = URL(fileURLWithPath: Bundle.main.path(forResource: "ComputerMagic", ofType: "m4a")!)
-    
     let url: URL
+    let isMissing: Bool
     let songTitle: String
     let songArtist: String
     
@@ -66,21 +65,24 @@ class Sting: NSObject, Codable {
         let endTime = try? container.decode(TimeInterval.self, forKey: .endTime)
         let loops = try container.decode(Bool.self, forKey: .loops)
         
+        self.url = url
+        self.color = color
+        self.name = name
+        self.startTime = startTime
+        self.endTime = endTime
+        self.loops = loops
+        
         if let audioFile = try? AVAudioFile(forReading: url) {
-            self.url = url
-            self.name = name
-            self.color = color
-            self.startTime = startTime
-            self.endTime = endTime
-            self.loops = loops
+            self.isMissing = false
             self.songTitle = url.songTitle() ?? "Unknown"
             self.songArtist = url.songArtist() ?? "Unknown"
             self.audioFile = audioFile
-        } else {    #warning("Replace this with a \"missing\" Sting object")
-            self.url = Sting.defaultURL
-            self.songTitle = "Chime"
-            self.songArtist = "Default Sting"
-            self.audioFile = try! AVAudioFile(forReading: self.url)
+        } else {
+            // all codable properties are loaded above to preserve object if other changes are made to the show
+            self.isMissing = true
+            self.songTitle = "File Missing"
+            self.songArtist = "File Missing"
+            self.audioFile = AVAudioFile()
         }
         
         super.init()
@@ -92,6 +94,7 @@ class Sting: NSObject, Codable {
         guard let assetURL = mediaItem.assetURL, let audioFile = try? AVAudioFile(forReading: assetURL) else { return nil }
         
         url = assetURL
+        isMissing = false
         songTitle = mediaItem.title ?? "Unknown"
         songArtist = mediaItem.artist ?? "Unknown"
         self.audioFile = audioFile
@@ -103,6 +106,7 @@ class Sting: NSObject, Codable {
         guard let audioFile = try? AVAudioFile(forReading: url) else { return nil }
         
         self.url = url
+        isMissing = false
         songTitle = url.songTitle() ?? "Unknown"
         songArtist = url.songArtist() ?? "Unknown"
         self.audioFile = audioFile

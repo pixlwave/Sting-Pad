@@ -100,6 +100,7 @@ class PlaybackViewController: UICollectionViewController {
             guard let stingCell = cell as? StingCell else { return cell }
             
             stingCell.titleLabel.text = sting.name ?? sting.songTitle
+            stingCell.isMissing = sting.isMissing
             stingCell.color = sting.color
             stingCell.loops = sting.loops
             stingCell.isCued = sting == self.cuedSting
@@ -321,7 +322,8 @@ class PlaybackViewController: UICollectionViewController {
                 delete.attributes = .destructive
             }
             
-            // Create and return a UIMenu with the share action
+            if sting.isMissing { return UIMenu(title: "", children: [delete]) }
+            
             return UIMenu(__title: "", image: nil, identifier: nil, children: [edit, rename, colorMenu, duplicate, delete])
         }
     }
