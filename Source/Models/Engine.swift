@@ -48,6 +48,7 @@ class Engine {
         
         // listen for iPod playback changes
         musicPlayer.beginGeneratingPlaybackNotifications()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateChannelMap), name: AVAudioSession.routeChangeNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(playbackStateDidChange(_:)), name:  .MPMusicPlayerControllerPlaybackStateDidChange, object: nil)
     }
     
@@ -77,7 +78,6 @@ class Engine {
         engine.connect(player, to: mixer, fromBus: 0, toBus: 0, format: outputHWFormat)
         
         updateChannelMap()
-        startAudioEngine()
     }
     
     func startAudioEngine() {
@@ -93,7 +93,7 @@ class Engine {
         return session.currentRoute.outputs.compactMap { $0.channels }.flatMap { $0 }
     }
     
-    func updateChannelMap() {
+    @objc func updateChannelMap() {
         let channelCount = Int(engine.outputNode.outputFormat(forBus: 0).channelCount)
         
         // with 6 channels [-1, -1, 0, 1, -1, -1] would use channels 3 & 4
@@ -106,7 +106,7 @@ class Engine {
             let statusCode = AudioUnitSetProperty(engine.inputNode.audioUnit!, kAudioOutputUnitProperty_ChannelMap, kAudioUnitScope_Global, 1, channelMap, propSize)
             print(statusCode)
             
-            #warning("Restart engine?")
+            startAudioEngine()
         }
     }
     
