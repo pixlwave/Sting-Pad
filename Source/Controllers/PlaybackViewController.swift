@@ -312,6 +312,7 @@ class PlaybackViewController: UICollectionViewController {
             }
             let delete = UIAction(__title: "Delete", image: UIImage(systemName: "trash"), identifier: nil) { action in
                 guard sting != self.engine.playingSting else { return }
+                if sting == self.cuedSting { self.cuedSting = nil }
                 self.show.stings.remove(at: indexPath.item)
                 self.applySnapshot()
             }
