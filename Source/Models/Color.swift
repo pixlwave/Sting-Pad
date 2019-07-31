@@ -14,7 +14,9 @@ enum Color: String, Codable, CaseIterable {
     case purple
     case pink
     
-    @UserDefault(key: "defaultColor", defaultValue: .dark) static var `default`: Color
+    static var `default`: Color = Color(rawValue: UserDefaults.standard.string(forKey: "defaultColor") ?? "dark" ) ?? .dark {
+        didSet { UserDefaults.standard.set(`default`.rawValue, forKey: "defaultColor")}
+    }
     
     var value: UIColor {
         switch self {
