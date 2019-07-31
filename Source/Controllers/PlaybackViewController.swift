@@ -403,7 +403,7 @@ extension PlaybackViewController: PlaybackDelegate {
         DispatchQueue.main.async {
             self.reloadItems([sting])
             
-            // this may be run after another sting has already started playback
+            // by the time this executes another sting may have already started playback
             if self.engine.playingSting == nil { self.stopUpdatingTime() }
         }
     }

@@ -130,9 +130,8 @@ class Engine {
     
     private func stopCompletionHandler(for sting: Sting) -> (AVAudioPlayerNodeCompletionCallbackType) -> Void {
         { callbackType in
-            #warning("The next two lines should be the other way around?!")
-            self.playbackDelegate?.stingDidStopPlaying(sting)
             self.playingSting = nil
+            self.playbackDelegate?.stingDidStopPlaying(sting)
             if self.isInBackground { self.engine.stop() }
         }
     }
