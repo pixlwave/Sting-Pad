@@ -106,8 +106,9 @@ class Engine {
             let statusCode = AudioUnitSetProperty(engine.inputNode.audioUnit!, kAudioOutputUnitProperty_ChannelMap, kAudioUnitScope_Global, 1, channelMap, propSize)
             print(statusCode)
             
-            startAudioEngine()
         }
+        
+        startAudioEngine()
     }
     
     private func prepareToPlay(_ sting: Sting) {
