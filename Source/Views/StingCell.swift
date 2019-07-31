@@ -39,7 +39,7 @@ class StingCell: UICollectionViewCell {
     
     func updatePlaybackIndicator() {
         if isMissing {
-            playbackIndicator.image = UIImage(systemName: "exclamationmark.circle")
+            playbackIndicator.image = UIImage(systemName: "exclamationmark.octagon")
             playbackIndicator.tintColor = .white
         } else if isPlaying {
             playbackIndicator.image = UIImage(systemName: "play.circle.fill")
