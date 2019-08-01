@@ -103,9 +103,9 @@ class Engine {
         
         // with 6 channels [-1, -1, 0, 1, -1, -1] would use channels 3 & 4
         var channelMap = [Int32](repeating: -1, count: channelCount)
-        if channelCount > 3, let outputConfig = outputConfig {
-            channelMap[outputConfig.left] = 0   // left out 3
-            channelMap[outputConfig.right] = 1   // right out 4
+        if channelCount > 3, let outputConfig = outputConfig, outputConfig.highestChannel < channelCount {
+            channelMap[outputConfig.left] = 0   // send left channel, the left stream
+            channelMap[outputConfig.right] = 1   // send right channel, the right stream
             
             let propSize = UInt32(channelMap.count) * UInt32(MemoryLayout<UInt32>.size)
             let statusCode = AudioUnitSetProperty(engine.inputNode.audioUnit!, kAudioOutputUnitProperty_ChannelMap, kAudioUnitScope_Global, 1, channelMap, propSize)
