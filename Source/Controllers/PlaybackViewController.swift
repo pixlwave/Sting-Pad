@@ -102,6 +102,7 @@ class PlaybackViewController: UICollectionViewController {
             stingCell.titleLabel.text = sting.name ?? sting.songTitle
             stingCell.isMissing = sting.isMissing
             stingCell.color = sting.color
+            stingCell.footerLabel.text = sting.totalTime.formattedAsLength()
             stingCell.loops = sting.loops
             stingCell.isCued = sting == self.cuedSting
             stingCell.isPlaying = sting == self.engine.playingSting
@@ -257,7 +258,7 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     func updateTimeLabel() {
-        guard let remainingString = engine.remainingTime.formatted() else { return }
+        guard let remainingString = engine.remainingTime.formattedAsRemaining() else { return }
         timeLabel.text = remainingString
     }
     

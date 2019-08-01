@@ -36,6 +36,12 @@
                                             <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="14"/>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N87-CB-SQ8">
+                                            <rect key="frame" x="260.5" y="67.5" width="28.5" height="16"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gjq-kL-8Xf" userLabel="Left View">
                                             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                                             <subviews>
@@ -74,7 +80,7 @@
                                         </view>
                                     </subviews>
                                 </view>
-                                <color key="backgroundColor" systemColor="systemIndigoColor" red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="UNM-N1-Mza" secondAttribute="trailing" id="6df-kt-7dy"/>
                                     <constraint firstItem="Gjq-kL-8Xf" firstAttribute="top" secondItem="wn0-gC-jEl" secondAttribute="top" id="B37-KJ-6c4"/>
@@ -83,8 +89,10 @@
                                     <constraint firstAttribute="bottom" secondItem="UNM-N1-Mza" secondAttribute="bottom" id="Yyf-Ro-wyL"/>
                                     <constraint firstAttribute="trailing" secondItem="Idd-io-e6G" secondAttribute="trailing" constant="6" id="b2Z-zq-OVS"/>
                                     <constraint firstItem="UNM-N1-Mza" firstAttribute="top" secondItem="wn0-gC-jEl" secondAttribute="top" id="dWp-0U-TQd"/>
+                                    <constraint firstItem="Idd-io-e6G" firstAttribute="leading" secondItem="N87-CB-SQ8" secondAttribute="trailing" constant="6" id="hHh-lD-see"/>
                                     <constraint firstItem="Gjq-kL-8Xf" firstAttribute="leading" secondItem="wn0-gC-jEl" secondAttribute="leading" id="iTs-d1-Xce"/>
                                     <constraint firstItem="UNM-N1-Mza" firstAttribute="leading" secondItem="Gjq-kL-8Xf" secondAttribute="trailing" id="ncY-jo-bhA"/>
+                                    <constraint firstItem="N87-CB-SQ8" firstAttribute="centerY" secondItem="Idd-io-e6G" secondAttribute="centerY" id="rUV-hl-DHp"/>
                                 </constraints>
                                 <size key="customSize" width="320" height="90"/>
                                 <userDefinedRuntimeAttributes>
@@ -96,6 +104,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <outlet property="footerLabel" destination="N87-CB-SQ8" id="5WR-NY-7xS"/>
                                     <outlet property="loopIndicator" destination="Idd-io-e6G" id="pVC-JF-M9b"/>
                                     <outlet property="playbackIndicator" destination="bv4-uN-qad" id="Ww6-em-erI"/>
                                     <outlet property="titleLabel" destination="cMJ-uU-fhi" id="PU5-68-PKs"/>

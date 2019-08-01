@@ -63,7 +63,15 @@ extension Notification.Name {
 
 
 extension TimeInterval {
-    static let formatter: DateComponentsFormatter = {
+    static let lengthFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .positional
+        formatter.allowedUnits = [.minute, .second]
+        formatter.zeroFormattingBehavior = .pad
+        return formatter
+    }()
+    
+    static let remainingFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .positional
         formatter.allowedUnits = [.minute, .second]
@@ -72,8 +80,12 @@ extension TimeInterval {
         return formatter
     }()
     
-    func formatted() -> String? {
-        return TimeInterval.formatter.string(from: self)
+    func formattedAsLength() -> String? {
+        return TimeInterval.lengthFormatter.string(from: self)
+    }
+    
+    func formattedAsRemaining() -> String? {
+        return TimeInterval.remainingFormatter.string(from: self)
     }
 }
 

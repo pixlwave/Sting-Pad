@@ -43,6 +43,9 @@ class Sting: NSObject, Codable {
     var sampleCount: AVAudioFrameCount {
         return AVAudioFrameCount(endSample - startSample)
     }
+    var totalTime: TimeInterval {
+        Double(sampleCount) / audioFile.processingFormat.sampleRate
+    }
     
     let audioFile: AVAudioFile
     private(set) var buffer: AVAudioPCMBuffer?

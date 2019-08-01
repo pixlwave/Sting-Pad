@@ -4,6 +4,7 @@ class StingCell: UICollectionViewCell {
     
     @IBOutlet weak var playbackIndicator: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var footerLabel: UILabel!
     @IBOutlet weak var loopIndicator: UIImageView!
     
     var color = Color.default {

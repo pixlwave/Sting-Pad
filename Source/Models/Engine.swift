@@ -22,7 +22,7 @@ class Engine {
     
     var totalTime: TimeInterval {
         guard let sting = playingSting else { return 0 }
-        return Double(sting.sampleCount) / sting.audioFile.processingFormat.sampleRate
+        return sting.totalTime
     }
     var elapsedTime: TimeInterval {
         guard
