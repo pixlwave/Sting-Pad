@@ -29,6 +29,8 @@
 		A5BD01E0218F2AEB0010FE10 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5BD01DF218F2AEB0010FE10 /* Launch Screen.storyboard */; };
 		A5C32F4E228B64FE00E4B4EB /* Extends.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C32F4D228B64FE00E4B4EB /* Extends.swift */; };
 		A5ECB86B22F30F670020FE16 /* DefaultColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ECB86A22F30F670020FE16 /* DefaultColorViewController.swift */; };
+		A5EDA9BA22F3434B00355AA3 /* ChannelSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EDA9B922F3434B00355AA3 /* ChannelSelectionViewController.swift */; };
+		A5EDA9BC22F348FB00355AA3 /* ChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EDA9BB22F348FB00355AA3 /* ChannelCell.swift */; };
 		A5F62D5022E0F56A00D57126 /* ShowBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F62D4F22E0F56A00D57126 /* ShowBrowserViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +59,8 @@
 		A5BD01DF218F2AEB0010FE10 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		A5C32F4D228B64FE00E4B4EB /* Extends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extends.swift; sourceTree = "<group>"; };
 		A5ECB86A22F30F670020FE16 /* DefaultColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultColorViewController.swift; sourceTree = "<group>"; };
+		A5EDA9B922F3434B00355AA3 /* ChannelSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelSelectionViewController.swift; sourceTree = "<group>"; };
+		A5EDA9BB22F348FB00355AA3 /* ChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCell.swift; sourceTree = "<group>"; };
 		A5F62D4F22E0F56A00D57126 /* ShowBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowBrowserViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -132,6 +136,7 @@
 				A581C39C1B949A06006CE228 /* StingViewController.swift */,
 				A504FDEA229557FE00B117BF /* SettingsViewController.swift */,
 				A5ECB86A22F30F670020FE16 /* DefaultColorViewController.swift */,
+				A5EDA9B922F3434B00355AA3 /* ChannelSelectionViewController.swift */,
 				A581C3A31B94C5B2006CE228 /* WelcomeViewController.swift */,
 			);
 			path = Controllers;
@@ -154,6 +159,7 @@
 			children = (
 				A581C3A11B94A041006CE228 /* StingCell.swift */,
 				A59EC6E922EB5696009A7ED1 /* TransportView.swift */,
+				A5EDA9BB22F348FB00355AA3 /* ChannelCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -248,11 +254,13 @@
 				A51D98EE22BBCF7D00124A40 /* Color.swift in Sources */,
 				A59EC6EA22EB5696009A7ED1 /* TransportView.swift in Sources */,
 				A581C3A21B94A041006CE228 /* StingCell.swift in Sources */,
+				A5EDA9BC22F348FB00355AA3 /* ChannelCell.swift in Sources */,
 				A567FB7022F1F67A00B4DB70 /* OutputConfig.swift in Sources */,
 				A5A49CB11B5BF216004B80CE /* Sting.swift in Sources */,
 				A5C32F4E228B64FE00E4B4EB /* Extends.swift in Sources */,
 				A5F62D5022E0F56A00D57126 /* ShowBrowserViewController.swift in Sources */,
 				A549825A1F7067EC00909196 /* FDAudioContext.swift in Sources */,
+				A5EDA9BA22F3434B00355AA3 /* ChannelSelectionViewController.swift in Sources */,
 				A504FDEB229557FE00B117BF /* SettingsViewController.swift in Sources */,
 				A581C39D1B949A06006CE228 /* StingViewController.swift in Sources */,
 				A581C39F1B949AD6006CE228 /* PlaybackViewController.swift in Sources */,

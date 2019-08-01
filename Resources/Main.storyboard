@@ -433,6 +433,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="ASK-Q5-ytr" kind="show" id="1rl-qg-3Y0"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -482,27 +485,26 @@
         <scene sceneID="s5f-fK-aQY">
             <objects>
                 <tableViewController id="kJa-OC-EsS" customClass="DefaultColorViewController" customModule="Stingtk" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="tLR-FQ-h48">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="tLR-FQ-h48">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ColorCell" textLabel="4hW-F9-fSw" imageView="L1Q-9d-Ehm" style="IBUITableViewCellStyleDefault" id="PbX-jq-Rsm">
-                                <rect key="frame" x="0.0" y="28" width="320" height="43.5"/>
+                                <rect key="frame" x="16" y="55.5" width="288" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PbX-jq-Rsm" id="Ldv-rR-BM8">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4hW-F9-fSw">
-                                            <rect key="frame" x="76" y="0.0" width="228" height="43.5"/>
+                                            <rect key="frame" x="75" y="0.0" width="198" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="circle.fill" catalog="system" id="L1Q-9d-Ehm">
-                                            <rect key="frame" x="16" y="0.0" width="45" height="43.5"/>
+                                            <rect key="frame" x="15" y="0.0" width="45" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </imageView>
                                     </subviews>
@@ -517,7 +519,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gZ6-YK-o0d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3116" y="78"/>
+            <point key="canvasLocation" x="3135" y="882"/>
         </scene>
         <!--Show Browser View Controller-->
         <scene sceneID="49a-1F-SrI">
@@ -593,6 +595,52 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y1j-Ch-9tf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1147.5" y="78.16901408450704"/>
+        </scene>
+        <!--Channel Selection View Controller-->
+        <scene sceneID="sdG-pV-zxe">
+            <objects>
+                <tableViewController id="ASK-Q5-ytr" customClass="ChannelSelectionViewController" customModule="Stingtk" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Azz-4G-do2">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ChannelCell" id="wX8-FD-fal" customClass="ChannelCell" customModule="Stingtk" customModuleProvider="target">
+                                <rect key="frame" x="16" y="55.5" width="288" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wX8-FD-fal" id="ggZ-F7-vhN">
+                                    <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="qa7-EV-cN3">
+                                            <rect key="frame" x="170" y="6.5" width="103" height="32"/>
+                                            <segments>
+                                                <segment title="Left"/>
+                                                <segment title="Right"/>
+                                            </segments>
+                                            <connections>
+                                                <action selector="channelSelectionDidChange:" destination="ASK-Q5-ytr" eventType="valueChanged" id="lw7-mN-Ju5"/>
+                                            </connections>
+                                        </segmentedControl>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="qa7-EV-cN3" firstAttribute="centerY" secondItem="ggZ-F7-vhN" secondAttribute="centerY" id="0zk-hy-XOn"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="qa7-EV-cN3" secondAttribute="trailing" id="XJj-87-SB4"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="selectorControl" destination="qa7-EV-cN3" id="Vri-b2-Q5o"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ASK-Q5-ytr" id="UPs-Z7-yhz"/>
+                            <outlet property="delegate" destination="ASK-Q5-ytr" id="njL-82-ElW"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4KL-YS-z9c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3135" y="78"/>
         </scene>
     </scenes>
     <resources>

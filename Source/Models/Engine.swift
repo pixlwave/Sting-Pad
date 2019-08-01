@@ -8,7 +8,7 @@ class Engine {
     private let player = AVAudioPlayerNode()
     private let session = AVAudioSession.sharedInstance()
     
-    private var outputConfig: OutputConfig = (try? JSONDecoder().decode(OutputConfig.self, from: UserDefaults.standard.data(forKey: "outputConfig") ?? Data())) ?? .default {
+    var outputConfig: OutputConfig = (try? JSONDecoder().decode(OutputConfig.self, from: UserDefaults.standard.data(forKey: "outputConfig") ?? Data())) ?? .default {
         didSet {
             updateChannelMap()
             if let data = try? JSONEncoder().encode(outputConfig) { UserDefaults.standard.set(data, forKey: "outputConfig")}
@@ -92,8 +92,12 @@ class Engine {
         return session.currentRoute.outputs.compactMap { $0.channels }.flatMap { $0 }
     }
     
+    func outputChannelCount() -> Int {
+        Int(engine.outputNode.outputFormat(forBus: 0).channelCount)
+    }
+    
     @objc func updateChannelMap() {
-        let channelCount = Int(engine.outputNode.outputFormat(forBus: 0).channelCount)
+        let channelCount = outputChannelCount()
         
         // with 6 channels [-1, -1, 0, 1, -1, -1] would use channels 3 & 4
         var channelMap = [Int32](repeating: -1, count: channelCount)
