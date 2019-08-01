@@ -1,6 +1,5 @@
 import Foundation
 import AVFoundation
-import MediaPlayer
 
 class Engine {
     static let shared = Engine()
@@ -15,8 +14,6 @@ class Engine {
             if let data = try? JSONEncoder().encode(outputConfig) { UserDefaults.standard.set(data, forKey: "outputConfig")}
         }
     }
-    
-    let musicPlayer = MPMusicPlayerController.systemMusicPlayer
     
     var playingSting: Sting?
     
@@ -51,10 +48,7 @@ class Engine {
         configureAudioSession()
         configureEngine()
         
-        // listen for iPod playback changes
-        musicPlayer.beginGeneratingPlaybackNotifications()
         NotificationCenter.default.addObserver(self, selector: #selector(updateChannelMap), name: AVAudioSession.routeChangeNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(playbackStateDidChange(_:)), name:  .MPMusicPlayerControllerPlaybackStateDidChange, object: nil)
     }
     
     func configureAudioSession() {
@@ -117,7 +111,6 @@ class Engine {
     }
     
     private func prepareToPlay(_ sting: Sting) {
-        if outputConfig == nil { musicPlayer.pause() }
         if player.isPlaying { player.stop() }
         
         if sting.audioFile.processingFormat != engine.mainMixerNode.inputFormat(forBus: 0) {
@@ -191,21 +184,6 @@ class Engine {
             scheduleSegment(of: sting, from: previewStartSample, for: sampleCount)
             startPlayback(of: sting)
         }
-    }
-    
-    @objc func playbackStateDidChange(_ notification: Notification) {
-        if outputConfig == nil {
-            #warning("Handle music player starts playing on single output")
-        }
-    }
-    
-    func playiPod() {
-        if outputConfig == nil { stopSting() }
-        musicPlayer.play()
-    }
-    
-    func pauseiPod() {
-        musicPlayer.pause()
     }
     
 }
