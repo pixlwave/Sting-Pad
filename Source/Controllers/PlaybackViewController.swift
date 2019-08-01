@@ -296,7 +296,7 @@ class PlaybackViewController: UICollectionViewController {
             }
             var colorActions = [UIAction]()
             for color in Color.allCases {
-                let image = UIImage(systemName: color == sting.color ? "checkmark.circle" : "circle")
+                let image = UIImage(systemName: color == sting.color ? "checkmark.circle.fill" : "circle.fill")?.withTintColor(color.value, renderingMode: .alwaysOriginal).applyingSymbolConfiguration(UIImage.SymbolConfiguration(weight: .heavy))
                 let action = UIAction(__title: "\(color)".capitalized, image: image, identifier: nil) { action in
                     sting.color = color
                     self.show.updateChangeCount(.done)
