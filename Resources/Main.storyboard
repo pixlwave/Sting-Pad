@@ -424,7 +424,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="292.5" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Outputs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="y3Q-Tk-Q3s">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Left Channel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="y3Q-Tk-Q3s">
                                                     <rect key="frame" x="16" y="0.0" width="268.5" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -434,7 +434,27 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="ASK-Q5-ytr" kind="show" id="1rl-qg-3Y0"/>
+                                            <segue destination="ASK-Q5-ytr" kind="show" identifier="Left Channel Selection" id="1rl-qg-3Y0"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="z5k-1i-t8Q" style="IBUITableViewCellStyleDefault" id="xtb-M2-ZiY">
+                                        <rect key="frame" x="0.0" y="143.5" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xtb-M2-ZiY" id="Yjs-8f-yzp">
+                                            <rect key="frame" x="0.0" y="0.0" width="292.5" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Right Channel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="z5k-1i-t8Q">
+                                                    <rect key="frame" x="16" y="0.0" width="268.5" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="ASK-Q5-ytr" kind="show" identifier="Right Channel Selection" id="Mgp-kc-6gQ"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -442,7 +462,7 @@
                             <tableViewSection headerTitle="Defaults" id="MMR-ZU-8J0">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="6aK-Jj-ksU" style="IBUITableViewCellStyleDefault" id="TlC-Zp-6rQ">
-                                        <rect key="frame" x="0.0" y="199.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="243.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TlC-Zp-6rQ" id="JC5-M1-6BN">
                                             <rect key="frame" x="0.0" y="0.0" width="292.5" height="44"/>
@@ -479,12 +499,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cci-lr-xGF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2145" y="78.16901408450704"/>
+            <point key="canvasLocation" x="2138" y="78"/>
         </scene>
-        <!--Default Color View Controller-->
+        <!--Default Color-->
         <scene sceneID="s5f-fK-aQY">
             <objects>
-                <tableViewController id="kJa-OC-EsS" customClass="DefaultColorViewController" customModule="Stingtk" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Default Color" id="kJa-OC-EsS" customClass="DefaultColorViewController" customModule="Stingtk" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="tLR-FQ-h48">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -604,32 +624,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ChannelCell" id="wX8-FD-fal" customClass="ChannelCell" customModule="Stingtk" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChannelCell" textLabel="aYu-mK-uBv" style="IBUITableViewCellStyleDefault" id="MeO-rU-ZC4">
                                 <rect key="frame" x="16" y="55.5" width="288" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wX8-FD-fal" id="ggZ-F7-vhN">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MeO-rU-ZC4" id="nRB-qV-Deo">
                                     <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="qa7-EV-cN3">
-                                            <rect key="frame" x="170" y="6.5" width="103" height="32"/>
-                                            <segments>
-                                                <segment title="Left"/>
-                                                <segment title="Right"/>
-                                            </segments>
-                                            <connections>
-                                                <action selector="channelSelectionDidChange:" destination="ASK-Q5-ytr" eventType="valueChanged" id="lw7-mN-Ju5"/>
-                                            </connections>
-                                        </segmentedControl>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aYu-mK-uBv">
+                                            <rect key="frame" x="15" y="0.0" width="258" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
-                                    <constraints>
-                                        <constraint firstItem="qa7-EV-cN3" firstAttribute="centerY" secondItem="ggZ-F7-vhN" secondAttribute="centerY" id="0zk-hy-XOn"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="qa7-EV-cN3" secondAttribute="trailing" id="XJj-87-SB4"/>
-                                    </constraints>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="selectorControl" destination="qa7-EV-cN3" id="Vri-b2-Q5o"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -658,5 +668,8 @@
             <color red="1" green="0.50196078431372548" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Mgp-kc-6gQ"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" name="Tint Color"/>
 </document>
