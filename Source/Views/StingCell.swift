@@ -5,18 +5,11 @@ class StingCell: UICollectionViewCell {
     @IBOutlet weak var playbackIndicator: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var footerLabel: UILabel!
-    @IBOutlet weak var loopIndicator: UIImageView!
     
     var color = Color.default {
         didSet {
             backgroundColor = color.value
             layer.borderColor = color.value.cgColor
-        }
-    }
-    
-    var loops = false {
-        didSet {
-            loopIndicator.isHidden = !loops
         }
     }
     

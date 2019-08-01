@@ -31,17 +31,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="repeat" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Idd-io-e6G">
-                                            <rect key="frame" x="295" y="68.5" width="19" height="14.5"/>
-                                            <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="14"/>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N87-CB-SQ8">
-                                            <rect key="frame" x="260.5" y="67.5" width="28.5" height="16"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gjq-kL-8Xf" userLabel="Left View">
                                             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                                             <subviews>
@@ -78,21 +67,25 @@
                                                 <constraint firstItem="cMJ-uU-fhi" firstAttribute="leading" secondItem="UNM-N1-Mza" secondAttribute="leading" constant="12" id="etm-lZ-djE"/>
                                             </constraints>
                                         </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N87-CB-SQ8">
+                                            <rect key="frame" x="284.5" y="68" width="28.5" height="16"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </view>
                                 <color key="backgroundColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="UNM-N1-Mza" secondAttribute="trailing" id="6df-kt-7dy"/>
                                     <constraint firstItem="Gjq-kL-8Xf" firstAttribute="top" secondItem="wn0-gC-jEl" secondAttribute="top" id="B37-KJ-6c4"/>
-                                    <constraint firstAttribute="bottom" secondItem="Idd-io-e6G" secondAttribute="bottom" constant="6" id="JJL-x5-Teg"/>
                                     <constraint firstAttribute="bottom" secondItem="Gjq-kL-8Xf" secondAttribute="bottom" id="V2h-iB-RNo"/>
                                     <constraint firstAttribute="bottom" secondItem="UNM-N1-Mza" secondAttribute="bottom" id="Yyf-Ro-wyL"/>
-                                    <constraint firstAttribute="trailing" secondItem="Idd-io-e6G" secondAttribute="trailing" constant="6" id="b2Z-zq-OVS"/>
                                     <constraint firstItem="UNM-N1-Mza" firstAttribute="top" secondItem="wn0-gC-jEl" secondAttribute="top" id="dWp-0U-TQd"/>
-                                    <constraint firstItem="Idd-io-e6G" firstAttribute="leading" secondItem="N87-CB-SQ8" secondAttribute="trailing" constant="6" id="hHh-lD-see"/>
+                                    <constraint firstAttribute="bottom" secondItem="N87-CB-SQ8" secondAttribute="bottom" constant="6" id="eQD-ga-8ln"/>
                                     <constraint firstItem="Gjq-kL-8Xf" firstAttribute="leading" secondItem="wn0-gC-jEl" secondAttribute="leading" id="iTs-d1-Xce"/>
+                                    <constraint firstAttribute="trailing" secondItem="N87-CB-SQ8" secondAttribute="trailing" constant="7" id="n6K-7R-MHd"/>
                                     <constraint firstItem="UNM-N1-Mza" firstAttribute="leading" secondItem="Gjq-kL-8Xf" secondAttribute="trailing" id="ncY-jo-bhA"/>
-                                    <constraint firstItem="N87-CB-SQ8" firstAttribute="centerY" secondItem="Idd-io-e6G" secondAttribute="centerY" id="rUV-hl-DHp"/>
                                 </constraints>
                                 <size key="customSize" width="320" height="90"/>
                                 <userDefinedRuntimeAttributes>
@@ -105,7 +98,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="footerLabel" destination="N87-CB-SQ8" id="5WR-NY-7xS"/>
-                                    <outlet property="loopIndicator" destination="Idd-io-e6G" id="pVC-JF-M9b"/>
                                     <outlet property="playbackIndicator" destination="bv4-uN-qad" id="Ww6-em-erI"/>
                                     <outlet property="titleLabel" destination="cMJ-uU-fhi" id="PU5-68-PKs"/>
                                 </connections>
@@ -608,7 +600,6 @@
         <image name="circle" catalog="system" width="64" height="62"/>
         <image name="circle.fill" catalog="system" width="64" height="62"/>
         <image name="play" catalog="system" width="58" height="64"/>
-        <image name="repeat" catalog="system" width="64" height="50"/>
         <image name="slider.horizontal.3" catalog="system" width="64" height="50"/>
         <image name="stop" catalog="system" width="64" height="56"/>
         <image name="waveload" width="280" height="75"/>

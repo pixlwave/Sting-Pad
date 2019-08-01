@@ -103,8 +103,16 @@ class PlaybackViewController: UICollectionViewController {
             stingCell.titleLabel.text = sting.name ?? sting.songTitle
             stingCell.isMissing = sting.isMissing
             stingCell.color = sting.color
-            stingCell.footerLabel.text = sting.totalTime.formattedAsLength()
-            stingCell.loops = sting.loops
+            
+            if sting.isMissing {
+                stingCell.footerLabel.text = "?"
+            } else if sting.loops, let loopImage = UIImage(systemName: "repeat") {
+                let loopString = NSAttributedString(attachment: NSTextAttachment(image: loopImage))
+                stingCell.footerLabel.attributedText = loopString
+            } else {
+                stingCell.footerLabel.text = sting.totalTime.formattedAsLength()
+            }
+            
             stingCell.isCued = sting == self.cuedSting
             stingCell.isPlaying = sting == self.engine.playingSting
             
