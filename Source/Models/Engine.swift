@@ -8,7 +8,13 @@ class Engine {
     private let engine = AVAudioEngine()
     private let player = AVAudioPlayerNode()
     private let session = AVAudioSession.sharedInstance()
-    private var isMultiRoute = true
+    
+    private var outputConfig: OutputConfig? = try? JSONDecoder().decode(OutputConfig.self, from: UserDefaults.standard.data(forKey: "outputConfig") ?? Data() ) {
+        didSet {
+            updateChannelMap()
+            if let data = try? JSONEncoder().encode(outputConfig) { UserDefaults.standard.set(data, forKey: "outputConfig")}
+        }
+    }
     
     let musicPlayer = MPMusicPlayerController.systemMusicPlayer
     
@@ -97,9 +103,9 @@ class Engine {
         
         // with 6 channels [-1, -1, 0, 1, -1, -1] would use channels 3 & 4
         var channelMap = [Int32](repeating: -1, count: channelCount)
-        if channelCount > 3 {
-            channelMap[2] = 0   // left out 3
-            channelMap[3] = 1   // right out 4
+        if channelCount > 3, let outputConfig = outputConfig {
+            channelMap[outputConfig.left] = 0   // left out 3
+            channelMap[outputConfig.right] = 1   // right out 4
             
             let propSize = UInt32(channelMap.count) * UInt32(MemoryLayout<UInt32>.size)
             let statusCode = AudioUnitSetProperty(engine.inputNode.audioUnit!, kAudioOutputUnitProperty_ChannelMap, kAudioUnitScope_Global, 1, channelMap, propSize)
@@ -111,7 +117,7 @@ class Engine {
     }
     
     private func prepareToPlay(_ sting: Sting) {
-        if !isMultiRoute { musicPlayer.pause() }
+        if outputConfig == nil { musicPlayer.pause() }
         if player.isPlaying { player.stop() }
         
         if sting.audioFile.processingFormat != engine.mainMixerNode.inputFormat(forBus: 0) {
@@ -188,13 +194,13 @@ class Engine {
     }
     
     @objc func playbackStateDidChange(_ notification: Notification) {
-        if !isMultiRoute {
+        if outputConfig == nil {
             #warning("Handle music player starts playing on single output")
         }
     }
     
     func playiPod() {
-        if !isMultiRoute { stopSting() }
+        if outputConfig == nil { stopSting() }
         musicPlayer.play()
     }
     

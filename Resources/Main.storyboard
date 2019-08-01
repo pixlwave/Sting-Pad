@@ -74,7 +74,7 @@
                                         </view>
                                     </subviews>
                                 </view>
-                                <color key="backgroundColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="systemIndigoColor" red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="UNM-N1-Mza" secondAttribute="trailing" id="6df-kt-7dy"/>
                                     <constraint firstItem="Gjq-kL-8Xf" firstAttribute="top" secondItem="wn0-gC-jEl" secondAttribute="top" id="B37-KJ-6c4"/>
@@ -453,6 +453,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="kJa-OC-EsS" kind="show" id="1ll-cU-74Z"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -473,6 +476,47 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cci-lr-xGF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2145" y="78.16901408450704"/>
+        </scene>
+        <!--Default Color View Controller-->
+        <scene sceneID="s5f-fK-aQY">
+            <objects>
+                <tableViewController id="kJa-OC-EsS" customClass="DefaultColorViewController" customModule="Stingtk" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="tLR-FQ-h48">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ColorCell" textLabel="4hW-F9-fSw" imageView="L1Q-9d-Ehm" style="IBUITableViewCellStyleDefault" id="PbX-jq-Rsm">
+                                <rect key="frame" x="0.0" y="28" width="320" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PbX-jq-Rsm" id="Ldv-rR-BM8">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4hW-F9-fSw">
+                                            <rect key="frame" x="76" y="0.0" width="228" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="circle.fill" catalog="system" id="L1Q-9d-Ehm">
+                                            <rect key="frame" x="16" y="0.0" width="45" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </imageView>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="kJa-OC-EsS" id="mtU-ig-Vzs"/>
+                            <outlet property="delegate" destination="kJa-OC-EsS" id="YIM-Co-7Jj"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gZ6-YK-o0d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3116" y="78"/>
         </scene>
         <!--Show Browser View Controller-->
         <scene sceneID="49a-1F-SrI">
@@ -553,6 +597,7 @@
     <resources>
         <image name="1.magnifyingglass" catalog="system" width="64" height="60"/>
         <image name="circle" catalog="system" width="64" height="62"/>
+        <image name="circle.fill" catalog="system" width="64" height="62"/>
         <image name="play" catalog="system" width="58" height="64"/>
         <image name="repeat" catalog="system" width="64" height="50"/>
         <image name="slider.horizontal.3" catalog="system" width="64" height="50"/>
