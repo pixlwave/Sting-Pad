@@ -252,9 +252,9 @@ class PlaybackViewController: UICollectionViewController {
         return collectionView.cellForItem(at: indexPath) as? StingCell
     }
     
-    func scrollTo(_ sting: Sting) {
+    func scrollTo(_ sting: Sting, animated: Bool = true) {
         guard let indexPath = dataSource.indexPath(for: sting) else { return }
-        collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+        collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: animated)
     }
     
     func updateTimeLabel() {
@@ -368,6 +368,7 @@ extension PlaybackViewController: MPMediaPickerControllerDelegate {
         if let sting = Sting(mediaItem: mediaItemCollection.items[0]) {
             show.stings.append(sting)
             applySnapshot()
+            scrollTo(sting, animated: false)
         }
         
         // dismiss media picker
