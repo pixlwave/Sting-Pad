@@ -31,6 +31,7 @@ class PlaybackViewController: UICollectionViewController {
         // load the transport view nib and add as a subview via it's outlet
         Bundle.main.loadNibNamed("TransportView", owner: self, options: nil)
         view.addSubview(transportView)
+        progressView.progress = 0
         timeLabel.font = UIFont.monospacedDigitSystemFont(ofSize: timeLabel.font.pointSize, weight: .regular)
         
         collectionView.dataSource = dataSource
