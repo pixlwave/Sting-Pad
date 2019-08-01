@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14854.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14806.4"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -11,6 +12,7 @@
                 <outlet property="nextButton" destination="amq-cP-E4J" id="WxI-Sb-axv"/>
                 <outlet property="playButton" destination="y23-dR-PwW" id="COh-6c-MwK"/>
                 <outlet property="previousButton" destination="N6t-Wv-uJW" id="hjX-AV-9rf"/>
+                <outlet property="progressView" destination="YrX-w7-FiR" id="o8d-li-HJx"/>
                 <outlet property="stopButton" destination="mUe-Rk-ltB" id="lYg-UJ-vRk"/>
                 <outlet property="timeLabel" destination="9Fx-yc-sdB" id="TCd-7E-MJx"/>
                 <outlet property="transportView" destination="iN0-l3-epB" id="Ar5-Vc-Td3"/>
@@ -27,6 +29,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YrX-w7-FiR">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="2.5"/>
+                            </progressView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y23-dR-PwW">
                                 <rect key="frame" x="26" y="14.5" width="55" height="62"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -35,6 +40,16 @@
                                 </state>
                                 <connections>
                                     <action selector="playSting" destination="-1" eventType="touchUpInside" id="gPP-lq-KeX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mUe-Rk-ltB">
+                                <rect key="frame" x="97" y="22.5" width="52.5" height="46.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" image="stop" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="52" scale="medium" weight="thin"/>
+                                </state>
+                                <connections>
+                                    <action selector="stopSting" destination="-1" eventType="touchUpInside" id="i7l-lD-82m"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N6t-Wv-uJW">
@@ -63,19 +78,10 @@
                                 <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mUe-Rk-ltB">
-                                <rect key="frame" x="97" y="22.5" width="52.5" height="46.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" image="stop" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="52" scale="medium" weight="thin"/>
-                                </state>
-                                <connections>
-                                    <action selector="stopSting" destination="-1" eventType="touchUpInside" id="i7l-lD-82m"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="tintColor" name="Tint Color"/>
                         <constraints>
+                            <constraint firstItem="YrX-w7-FiR" firstAttribute="width" secondItem="QXm-bq-c4M" secondAttribute="width" id="1XX-d7-lfG"/>
                             <constraint firstItem="9Fx-yc-sdB" firstAttribute="top" secondItem="QXm-bq-c4M" secondAttribute="top" constant="70" id="6CZ-qJ-FN4"/>
                             <constraint firstItem="N6t-Wv-uJW" firstAttribute="centerX" secondItem="QXm-bq-c4M" secondAttribute="centerX" multiplier="1.2" id="9w3-0b-mv4"/>
                             <constraint firstItem="y23-dR-PwW" firstAttribute="centerX" secondItem="QXm-bq-c4M" secondAttribute="centerX" multiplier="1/3" id="B4U-RL-azv"/>
@@ -84,8 +90,10 @@
                             <constraint firstItem="mUe-Rk-ltB" firstAttribute="centerY" secondItem="y23-dR-PwW" secondAttribute="centerY" id="S2H-ZM-XVF"/>
                             <constraint firstItem="amq-cP-E4J" firstAttribute="centerY" secondItem="N6t-Wv-uJW" secondAttribute="centerY" id="ZCH-9g-25m"/>
                             <constraint firstItem="amq-cP-E4J" firstAttribute="centerX" secondItem="QXm-bq-c4M" secondAttribute="centerX" multiplier="1.6" id="aaf-rM-lUH"/>
+                            <constraint firstItem="YrX-w7-FiR" firstAttribute="top" secondItem="QXm-bq-c4M" secondAttribute="top" id="fzn-sO-mmb"/>
                             <constraint firstItem="mUe-Rk-ltB" firstAttribute="centerX" secondItem="QXm-bq-c4M" secondAttribute="centerX" multiplier="1/1.3" id="mPB-GD-Dli"/>
                             <constraint firstItem="y23-dR-PwW" firstAttribute="top" secondItem="QXm-bq-c4M" secondAttribute="top" constant="14.5" id="o2A-eA-fWi"/>
+                            <constraint firstItem="YrX-w7-FiR" firstAttribute="centerX" secondItem="QXm-bq-c4M" secondAttribute="centerX" id="xWx-QY-63i"/>
                         </constraints>
                     </view>
                     <blurEffect style="prominent"/>

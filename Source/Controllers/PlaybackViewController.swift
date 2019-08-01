@@ -12,6 +12,7 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     @IBOutlet var transportView: UIView!
+    @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var previousButton: UIButton!
@@ -258,8 +259,10 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     func updateTimeLabel() {
-        guard let remainingString = engine.remainingTime.formattedAsRemaining() else { return }
-        timeLabel.text = remainingString
+        progressView.progress = Float(engine.elapsedTime / engine.totalTime)
+        if let remainingString = engine.remainingTime.formattedAsRemaining() {
+            timeLabel.text = remainingString
+        }
     }
     
     func beginUpdatingTime() {
