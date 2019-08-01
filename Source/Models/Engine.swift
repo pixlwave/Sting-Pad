@@ -97,7 +97,7 @@ class Engine {
         
         // with 6 channels [-1, -1, 0, 1, -1, -1] would use channels 3 & 4
         var channelMap = [Int32](repeating: -1, count: channelCount)
-        if channelCount > 3, outputConfig.highestChannel < channelCount {
+        if outputConfig.highestChannel < channelCount {
             channelMap[outputConfig.left] = 0   // send left channel, the left stream
             channelMap[outputConfig.right] = 1   // send right channel, the right stream
             
