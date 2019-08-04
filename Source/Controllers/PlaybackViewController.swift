@@ -43,6 +43,7 @@ class PlaybackViewController: UICollectionViewController {
         collectionView.delaysContentTouches = false; #warning("Test if this works or if the property needs to be set on the scroll view")
         
         NotificationCenter.default.addObserver(self, selector: #selector(applySnapshot), name: .stingsDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadEditedSting(_:)), name: .didFinishEditing, object: nil)
         applySnapshot()
     }
     
@@ -137,6 +138,11 @@ class PlaybackViewController: UICollectionViewController {
         let snapshot = dataSource.snapshot()
         snapshot.reloadItems(uniqueIdentifiers)
         dataSource.apply(snapshot, animatingDifferences: false)
+    }
+    
+    @objc func reloadEditedSting(_ notification: Notification) {
+        guard let sting = notification.object as? Sting else { return }
+        reloadItems([sting])
     }
     
     func showWelcomeScreen() {

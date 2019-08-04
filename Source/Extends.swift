@@ -59,6 +59,7 @@ extension AVAudioPCMBuffer {
 
 extension Notification.Name {
     static let stingsDidChange = Notification.Name("Stings Did Change")
+    static let didFinishEditing = Notification.Name("Did Finish Editing")
 }
 
 

@@ -42,6 +42,11 @@ class EditViewController: UIViewController {
         if engine.playingSting != nil { previewLengthControl.selectedSegmentIndex = 0 }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        // the sting's cell will reload when previewed, so force a reload in case it wasn't previewed.
+        NotificationCenter.default.post(name: .didFinishEditing, object: sting)
+    }
+    
     override func viewDidLayoutSubviews() {
         waveformView.frame = waveformLoadingView.frame
     }
