@@ -138,7 +138,7 @@
         <!--Edit Sting-->
         <scene sceneID="BBH-1f-24n">
             <objects>
-                <viewController id="sKY-0b-GtB" customClass="StingViewController" customModule="Stingtk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="sKY-0b-GtB" customClass="EditViewController" customModule="Stingtk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jgb-pc-X2x"/>
                         <viewControllerLayoutGuide type="bottom" id="rVl-rn-yCL"/>

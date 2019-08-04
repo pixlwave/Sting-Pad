@@ -1,6 +1,6 @@
 import UIKit
 
-class StingViewController: UIViewController {
+class EditViewController: UIViewController {
     
     // access the music
     let engine = Engine.shared
@@ -88,7 +88,7 @@ class StingViewController: UIViewController {
 
 
 // MARK: FDWaveformViewDelegate
-extension StingViewController: FDWaveformViewDelegate {
+extension EditViewController: FDWaveformViewDelegate {
     
     func waveformViewDidLoad(_ waveformView: FDWaveformView) {
         // once the audio file has loaded (and totalSamples is known), set the highlighted samples

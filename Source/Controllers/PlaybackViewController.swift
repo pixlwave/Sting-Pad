@@ -68,7 +68,7 @@ class PlaybackViewController: UICollectionViewController {
         if segue.identifier == "Edit Sting" {
             guard
                 let navigationVC = segue.destination as? UINavigationController,
-                let stingVC = navigationVC.topViewController as? StingViewController,
+                let stingVC = navigationVC.topViewController as? EditViewController,
                 let sting = sender as? Sting
             else { return }
             
