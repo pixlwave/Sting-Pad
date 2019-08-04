@@ -35,9 +35,9 @@ class ChannelSelectionViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ChannelCell") ?? UITableViewCell()
-        
         if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ChannelCell") ?? UITableViewCell()
+        
             let cellChannels = channels(for: indexPath)
             
             if let textLabel = cell.textLabel {
@@ -51,18 +51,17 @@ class ChannelSelectionViewController: UITableViewController {
                 cell.accessoryType = .none
             }
             
-            cell.selectionStyle = .default
+            return cell
         } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "UnavailableChannelCell") ?? UITableViewCell()
+            
             if let textLabel = cell.textLabel {
                 textLabel.text = "Channels \(outputConfig.left + 1) & \(outputConfig.right + 1)"
                 textLabel.font = UIFont.monospacedDigitSystemFont(ofSize: textLabel.font.pointSize, weight: .regular)
             }
             
-            cell.accessoryType = .checkmark
-            cell.selectionStyle = .none
+            return cell
         }
-        
-        return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
