@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		A504FDEB229557FE00B117BF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A504FDEA229557FE00B117BF /* SettingsViewController.swift */; };
 		A51D98EE22BBCF7D00124A40 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D98ED22BBCF7D00124A40 /* Color.swift */; };
+		A545F62722F72FB200C62DF7 /* AddStingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A545F62622F72FB200C62DF7 /* AddStingFooterView.swift */; };
+		A545F62922F7398300C62DF7 /* AddStingFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A545F62822F7398300C62DF7 /* AddStingFooterView.xib */; };
 		A549825A1F7067EC00909196 /* FDAudioContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54982581F7067EC00909196 /* FDAudioContext.swift */; };
 		A549825B1F7067EC00909196 /* FDWaveformRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54982591F7067EC00909196 /* FDWaveformRenderOperation.swift */; };
 		A55C0E7222AA5498008DDB12 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C0E7122AA5498008DDB12 /* Show.swift */; };
@@ -36,6 +38,8 @@
 /* Begin PBXFileReference section */
 		A504FDEA229557FE00B117BF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A51D98ED22BBCF7D00124A40 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		A545F62622F72FB200C62DF7 /* AddStingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStingFooterView.swift; sourceTree = "<group>"; };
+		A545F62822F7398300C62DF7 /* AddStingFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddStingFooterView.xib; sourceTree = "<group>"; };
 		A54982581F7067EC00909196 /* FDAudioContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDAudioContext.swift; sourceTree = "<group>"; };
 		A54982591F7067EC00909196 /* FDWaveformRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDWaveformRenderOperation.swift; sourceTree = "<group>"; };
 		A55C0E7122AA5498008DDB12 /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
@@ -106,6 +110,7 @@
 			children = (
 				A581C3951B94769F006CE228 /* Main.storyboard */,
 				A55C0E7522AA7202008DDB12 /* TransportView.xib */,
+				A545F62822F7398300C62DF7 /* AddStingFooterView.xib */,
 				A581C3961B94769F006CE228 /* Welcome.storyboard */,
 				A5BD01DF218F2AEB0010FE10 /* Launch Screen.storyboard */,
 				A5A49C951B5BF1C2004B80CE /* Images.xcassets */,
@@ -157,6 +162,7 @@
 			children = (
 				A581C3A11B94A041006CE228 /* StingCell.swift */,
 				A59EC6E922EB5696009A7ED1 /* TransportView.swift */,
+				A545F62622F72FB200C62DF7 /* AddStingFooterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -229,6 +235,7 @@
 			files = (
 				A5A49C961B5BF1C2004B80CE /* Images.xcassets in Resources */,
 				A5BD01E0218F2AEB0010FE10 /* Launch Screen.storyboard in Resources */,
+				A545F62922F7398300C62DF7 /* AddStingFooterView.xib in Resources */,
 				A581C3991B94769F006CE228 /* Welcome.storyboard in Resources */,
 				A581C3981B94769F006CE228 /* Main.storyboard in Resources */,
 				A55C0E7622AA7202008DDB12 /* TransportView.xib in Resources */,
@@ -246,6 +253,7 @@
 				A581C3A41B94C5B2006CE228 /* WelcomeViewController.swift in Sources */,
 				A5ECB86B22F30F670020FE16 /* DefaultColorViewController.swift in Sources */,
 				A5A49C8F1B5BF1C2004B80CE /* AppDelegate.swift in Sources */,
+				A545F62722F72FB200C62DF7 /* AddStingFooterView.swift in Sources */,
 				A5B39BDE1DAA843A00AA22EF /* FDWaveformView.swift in Sources */,
 				A549825B1F7067EC00909196 /* FDWaveformRenderOperation.swift in Sources */,
 				A51D98EE22BBCF7D00124A40 /* Color.swift in Sources */,

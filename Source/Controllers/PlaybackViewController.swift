@@ -35,6 +35,8 @@ class PlaybackViewController: UICollectionViewController {
         timeLabel.font = UIFont.monospacedDigitSystemFont(ofSize: timeLabel.font.pointSize, weight: .regular)
         
         collectionView.dataSource = dataSource
+        dataSource.supplementaryViewProvider = footerProvider
+        collectionView.register(UINib(nibName: "AddStingFooterView", bundle: nil), forSupplementaryViewOfKind: "footer", withReuseIdentifier: "AddStingFooter")
         collectionView.collectionViewLayout = createLayout()
         collectionView.dragDelegate = self
         collectionView.dropDelegate = self
@@ -92,6 +94,10 @@ class PlaybackViewController: UICollectionViewController {
             let section = NSCollectionLayoutSection(group: group)
             section.contentInsets = item.contentInsets
             
+            let footer = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: groupSize, elementKind: "footer", alignment: .bottom)
+            section.boundarySupplementaryItems = [footer]
+            footer.contentInsets = item.contentInsets
+            
             return section
         }
     }
@@ -120,6 +126,10 @@ class PlaybackViewController: UICollectionViewController {
             
             return stingCell
         }
+    }
+    
+    var footerProvider: UICollectionViewDiffableDataSource<Int, Sting>.SupplementaryViewProvider = { collectionView, kind, indexPath in
+        collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "AddStingFooter", for: indexPath)
     }
     
     @objc func applySnapshot() {

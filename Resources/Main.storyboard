@@ -114,18 +114,11 @@
                                 <action selector="closeShow" destination="yak-cE-mUi" id="VCR-o0-Q9b"/>
                             </connections>
                         </barButtonItem>
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="yWN-oa-4Xq">
-                                <connections>
-                                    <action selector="addSting" destination="yak-cE-mUi" id="mZX-G8-cwr"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem image="slider.horizontal.3" catalog="system" id="qmm-VS-QCJ">
-                                <connections>
-                                    <segue destination="Uyh-Oz-z9u" kind="presentation" id="Hme-ne-gmk"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" image="slider.horizontal.3" catalog="system" id="qmm-VS-QCJ">
+                            <connections>
+                                <segue destination="Uyh-Oz-z9u" kind="presentation" id="Hme-ne-gmk"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="nGG-by-uzG" kind="presentation" identifier="Edit Sting" id="7h3-gk-nqV"/>
