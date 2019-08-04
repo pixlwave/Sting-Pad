@@ -35,7 +35,6 @@ class PlaybackViewController: UICollectionViewController {
         timeLabel.font = UIFont.monospacedDigitSystemFont(ofSize: timeLabel.font.pointSize, weight: .regular)
         
         collectionView.dataSource = dataSource
-        dataSource.supplementaryViewProvider = makeFooterProvider()
         collectionView.register(UINib(nibName: "AddStingFooterView", bundle: nil), forSupplementaryViewOfKind: "footer", withReuseIdentifier: "AddStingFooter")
         collectionView.collectionViewLayout = createLayout()
         collectionView.dragDelegate = self
@@ -103,7 +102,7 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     func makeDataSource() -> UICollectionViewDiffableDataSource<Int, Sting> {
-        return UICollectionViewDiffableDataSource<Int, Sting>(collectionView: collectionView) { collectionView, indexPath, sting -> UICollectionViewCell? in
+        let dataSource = UICollectionViewDiffableDataSource<Int, Sting>(collectionView: collectionView) { collectionView, indexPath, sting -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Sting Cell", for: indexPath)
             
             guard let stingCell = cell as? StingCell else { return cell }
@@ -126,6 +125,9 @@ class PlaybackViewController: UICollectionViewController {
             
             return stingCell
         }
+        
+        dataSource.supplementaryViewProvider = makeFooterProvider()
+        return dataSource
     }
     
     func makeFooterProvider() -> UICollectionViewDiffableDataSource<Int, Sting>.SupplementaryViewProvider {
