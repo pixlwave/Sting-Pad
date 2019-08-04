@@ -13,17 +13,21 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WNO-0v-bdV">
-                    <rect key="frame" x="117" y="42" width="86" height="36"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                    <state key="normal" title="Add Sting"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WNO-0v-bdV">
+                    <rect key="frame" x="143.5" y="44.5" width="33.5" height="31"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                    <state key="normal" image="plus" catalog="system">
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large">
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                        </preferredSymbolConfiguration>
+                    </state>
                     <connections>
                         <action selector="addSting" destination="-1" eventType="touchUpInside" id="3yT-Xc-bWZ"/>
                     </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-            <color key="tintColor" systemColor="secondaryLabelColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="tintColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="WNO-0v-bdV" firstAttribute="centerY" secondItem="uNb-Am-QC4" secondAttribute="centerY" id="dyI-XS-gzL"/>
                 <constraint firstItem="WNO-0v-bdV" firstAttribute="centerX" secondItem="uNb-Am-QC4" secondAttribute="centerX" id="lHY-Yt-PIh"/>
@@ -33,4 +37,7 @@
             <point key="canvasLocation" x="40.579710144927539" y="359.59821428571428"/>
         </view>
     </objects>
+    <resources>
+        <image name="plus" catalog="system" width="64" height="58"/>
+    </resources>
 </document>
