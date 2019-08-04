@@ -95,7 +95,8 @@ class PlaybackViewController: UICollectionViewController {
             
             let footer = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: groupSize, elementKind: "footer", alignment: .bottom)
             section.boundarySupplementaryItems = [footer]
-            footer.contentInsets = item.contentInsets
+            // footer doesn't seem to obay the bottom insets, so this is compensated for the subview layout
+            footer.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
             
             return section
         }

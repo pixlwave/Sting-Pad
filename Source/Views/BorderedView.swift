@@ -1,10 +1,10 @@
 import UIKit
 
-class AddStingFooterView: UICollectionReusableView {
+class BorderedView: UIView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        layer.borderColor = tintColor.cgColor
+        layer.borderColor = UIColor.secondaryLabel.cgColor
         layer.borderWidth = 4
         layer.cornerRadius = 8
     }
