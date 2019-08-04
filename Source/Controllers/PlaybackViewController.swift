@@ -319,29 +319,30 @@ class PlaybackViewController: UICollectionViewController {
         UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
             guard let sting = self.dataSource.itemIdentifier(for: indexPath) else { return nil }
             
-            let edit = UIAction(__title: "Edit", image: UIImage(systemName: "waveform"), identifier: nil) { action in
+            let edit = UIAction(title: "Edit", image: UIImage(systemName: "waveform")) { action in
                 self.performSegue(withIdentifier: "Edit Sting", sender: sting)
             }
-            let rename = UIAction(__title: "Rename", image: UIImage(systemName: "square.and.pencil"), identifier: nil) { action in
+            let rename = UIAction(title: "Rename", image: UIImage(systemName: "square.and.pencil")) { action in
                 self.rename(sting)
             }
             var colorActions = [UIAction]()
             for color in Color.allCases {
                 let image = UIImage(systemName: color == sting.color ? "checkmark.circle.fill" : "circle.fill")?.withTintColor(color.value, renderingMode: .alwaysOriginal).applyingSymbolConfiguration(UIImage.SymbolConfiguration(weight: .heavy))
-                let action = UIAction(__title: "\(color)".capitalized, image: image, identifier: nil) { action in
+                let action = UIAction(title: "\(color)".capitalized, image: image) { action in
                     sting.color = color
                     self.show.updateChangeCount(.done)
                     self.reloadItems([sting])
                 }
                 colorActions.append(action)
             }
-            let colorMenu = UIMenu(__title: "Colour", image: UIImage(systemName: "paintbrush"), identifier: nil, children: colorActions)
-            let duplicate = UIAction(__title: "Duplicate", image: UIImage(systemName: "plus.square.on.square"), identifier: nil) { action in
+            let colorMenu = UIMenu(title: "Colour", image: UIImage(systemName: "paintbrush"), children: colorActions)
+            
+            let duplicate = UIAction(title: "Duplicate", image: UIImage(systemName: "plus.square.on.square")) { action in
                 guard let duplicate = sting.copy() else { return }
                 self.show.stings.insert(duplicate, at: indexPath.item + 1)
                 self.applySnapshot()
             }
-            let delete = UIAction(__title: "Delete", image: UIImage(systemName: "trash"), identifier: nil) { action in
+            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash")) { action in
                 guard sting != self.engine.playingSting else { return }
                 if sting == self.cuedSting { self.cuedSting = nil }
                 self.show.stings.remove(at: indexPath.item)
@@ -356,7 +357,7 @@ class PlaybackViewController: UICollectionViewController {
             
             if sting.isMissing { return UIMenu(title: "", children: [delete]) }
             
-            return UIMenu(__title: "", image: nil, identifier: nil, children: [edit, rename, colorMenu, duplicate, delete])
+            return UIMenu(title: "", children: [edit, rename, colorMenu, duplicate, delete])
         }
     }
     
