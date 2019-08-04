@@ -357,7 +357,9 @@ class PlaybackViewController: UICollectionViewController {
             
             if sting.isMissing { return UIMenu(title: "", children: [delete]) }
             
-            return UIMenu(title: "", children: [edit, rename, colorMenu, duplicate, delete])
+            let editMenu = UIMenu(title: "", options: .displayInline, children: [edit, rename, colorMenu])
+            let fileMenu = UIMenu(title: "", options: .displayInline, children: [duplicate, delete])
+            return UIMenu(title: "", children: [editMenu, fileMenu])
         }
     }
     
