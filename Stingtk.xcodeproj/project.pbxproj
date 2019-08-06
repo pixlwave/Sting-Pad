@@ -23,6 +23,7 @@
 		A581C39F1B949AD6006CE228 /* PlaybackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C39E1B949AD6006CE228 /* PlaybackViewController.swift */; };
 		A581C3A21B94A041006CE228 /* StingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C3A11B94A041006CE228 /* StingCell.swift */; };
 		A581C3A41B94C5B2006CE228 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C3A31B94C5B2006CE228 /* WelcomeViewController.swift */; };
+		A595169A22F99A21001E820A /* AddStingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A595169922F99A21001E820A /* AddStingFooterView.swift */; };
 		A59EC6EA22EB5696009A7ED1 /* TransportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59EC6E922EB5696009A7ED1 /* TransportView.swift */; };
 		A5A49C8F1B5BF1C2004B80CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A49C8E1B5BF1C2004B80CE /* AppDelegate.swift */; };
 		A5A49C961B5BF1C2004B80CE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5A49C951B5BF1C2004B80CE /* Images.xcassets */; };
@@ -52,6 +53,7 @@
 		A581C39E1B949AD6006CE228 /* PlaybackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackViewController.swift; sourceTree = "<group>"; };
 		A581C3A11B94A041006CE228 /* StingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StingCell.swift; sourceTree = "<group>"; };
 		A581C3A31B94C5B2006CE228 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		A595169922F99A21001E820A /* AddStingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStingFooterView.swift; sourceTree = "<group>"; };
 		A59EC6E922EB5696009A7ED1 /* TransportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportView.swift; sourceTree = "<group>"; };
 		A5A49C891B5BF1C2004B80CE /* Stingtk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stingtk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A49C8D1B5BF1C2004B80CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			children = (
 				A581C3A11B94A041006CE228 /* StingCell.swift */,
 				A59EC6E922EB5696009A7ED1 /* TransportView.swift */,
+				A595169922F99A21001E820A /* AddStingFooterView.swift */,
 				A56EB2C822F7538F00358A7C /* BorderedView.swift */,
 			);
 			path = Views;
@@ -262,6 +265,7 @@
 				A567FB7022F1F67A00B4DB70 /* OutputConfig.swift in Sources */,
 				A5A49CB11B5BF216004B80CE /* Sting.swift in Sources */,
 				A5C32F4E228B64FE00E4B4EB /* Extends.swift in Sources */,
+				A595169A22F99A21001E820A /* AddStingFooterView.swift in Sources */,
 				A5F62D5022E0F56A00D57126 /* ShowBrowserViewController.swift in Sources */,
 				A549825A1F7067EC00909196 /* FDAudioContext.swift in Sources */,
 				A5EDA9BA22F3434B00355AA3 /* ChannelSelectionViewController.swift in Sources */,

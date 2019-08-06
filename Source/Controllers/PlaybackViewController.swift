@@ -43,6 +43,7 @@ class PlaybackViewController: UICollectionViewController {
         // prevents scroll view from momentarily blocking the play button's action
         collectionView.delaysContentTouches = false; #warning("Test if this works or if the property needs to be set on the scroll view")
         
+        NotificationCenter.default.addObserver(self, selector: #selector(addSting), name: .addStingFromLibrary, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applySnapshot), name: .stingsDidChange, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadEditedSting(_:)), name: .didFinishEditing, object: nil)
         applySnapshot()
