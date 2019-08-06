@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14854.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14806.4"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,10 +14,10 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M79-Hx-TiW" customClass="BorderedView" customModule="Stingtk" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                    <rect key="frame" x="0.0" y="0.0" width="150" height="80"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WNO-0v-bdV">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                            <rect key="frame" x="0.0" y="0.0" width="150" height="80"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                             <state key="normal" image="plus" catalog="system">
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large">
@@ -36,12 +37,40 @@
                         <constraint firstItem="WNO-0v-bdV" firstAttribute="top" secondItem="M79-Hx-TiW" secondAttribute="top" id="xJr-WB-Qje"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1tn-nO-qqN" customClass="BorderedView" customModule="Stingtk" customModuleProvider="target">
+                    <rect key="frame" x="170" y="0.0" width="150" height="80"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KeJ-aX-1gs">
+                            <rect key="frame" x="0.0" y="0.0" width="150" height="80"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                            <state key="normal" image="plus" catalog="system">
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large">
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                </preferredSymbolConfiguration>
+                            </state>
+                            <connections>
+                                <action selector="addFromFiles" destination="nSx-fl-0bd" eventType="touchUpInside" id="L8L-ql-lJx"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="KeJ-aX-1gs" firstAttribute="leading" secondItem="1tn-nO-qqN" secondAttribute="leading" id="FmA-SD-OYo"/>
+                        <constraint firstAttribute="trailing" secondItem="KeJ-aX-1gs" secondAttribute="trailing" id="Pwc-bF-iO8"/>
+                        <constraint firstItem="KeJ-aX-1gs" firstAttribute="top" secondItem="1tn-nO-qqN" secondAttribute="top" id="iO0-JK-p8w"/>
+                        <constraint firstAttribute="bottom" secondItem="KeJ-aX-1gs" secondAttribute="bottom" id="kwc-Eh-eEJ"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <color key="tintColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="uNb-Am-QC4" firstAttribute="trailing" secondItem="M79-Hx-TiW" secondAttribute="trailing" id="GPj-HT-9xi"/>
+                <constraint firstItem="uNb-Am-QC4" firstAttribute="centerX" secondItem="M79-Hx-TiW" secondAttribute="trailing" constant="10" id="GPj-HT-9xi"/>
+                <constraint firstItem="1tn-nO-qqN" firstAttribute="top" secondItem="M79-Hx-TiW" secondAttribute="top" id="IiW-60-GHe"/>
                 <constraint firstItem="uNb-Am-QC4" firstAttribute="bottom" secondItem="M79-Hx-TiW" secondAttribute="bottom" constant="20" id="Kb1-Ec-Gif"/>
+                <constraint firstItem="1tn-nO-qqN" firstAttribute="bottom" secondItem="M79-Hx-TiW" secondAttribute="bottom" id="Phj-q3-zep"/>
+                <constraint firstItem="1tn-nO-qqN" firstAttribute="leading" secondItem="uNb-Am-QC4" secondAttribute="centerX" constant="10" id="SEK-FR-4yE"/>
+                <constraint firstItem="uNb-Am-QC4" firstAttribute="trailing" secondItem="1tn-nO-qqN" secondAttribute="trailing" id="ex8-hR-fKE"/>
                 <constraint firstItem="M79-Hx-TiW" firstAttribute="top" secondItem="uNb-Am-QC4" secondAttribute="top" id="plr-UK-vGt"/>
                 <constraint firstItem="M79-Hx-TiW" firstAttribute="leading" secondItem="uNb-Am-QC4" secondAttribute="leading" id="uIv-Bl-KRu"/>
             </constraints>

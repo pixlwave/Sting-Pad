@@ -43,7 +43,8 @@ class PlaybackViewController: UICollectionViewController {
         // prevents scroll view from momentarily blocking the play button's action
         collectionView.delaysContentTouches = false; #warning("Test if this works or if the property needs to be set on the scroll view")
         
-        NotificationCenter.default.addObserver(self, selector: #selector(addSting), name: .addStingFromLibrary, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(addStingFromLibrary), name: .addStingFromLibrary, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(addStingFromFiles), name: .addStingFromFiles, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applySnapshot), name: .stingsDidChange, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadEditedSting(_:)), name: .didFinishEditing, object: nil)
         applySnapshot()
@@ -179,7 +180,11 @@ class PlaybackViewController: UICollectionViewController {
         dismiss(animated: true)
     }
     
-    func loadTrack() {
+    @objc func addStingFromLibrary() {
+        #if targetEnvironment(simulator)
+            // pick a random file from the file system as no library is available on the simulator
+            loadRandomTrackFromHostFileSystem()
+        #else
         // present music picker to load a track from ipod
         let mediaPicker = MPMediaPickerController(mediaTypes: .music)
         mediaPicker.delegate = self
@@ -187,9 +192,10 @@ class PlaybackViewController: UICollectionViewController {
         mediaPicker.showsItemsWithProtectedAssets = false  // hides Apple Music items, which are DRM protected
         mediaPicker.allowsPickingMultipleItems = false
         present(mediaPicker, animated: true)
+        #endif
     }
     
-    func loadTrackFromFile() {
+    @objc func addStingFromFiles() {
         // present file picker to load a track from
         let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeAudio as String], in: .open)
         documentPicker.delegate = self
@@ -211,16 +217,6 @@ class PlaybackViewController: UICollectionViewController {
         }
     }
     #endif
-    
-    @IBAction func addSting() {
-        #if targetEnvironment(simulator)
-            // pick a random file from the documents directory until iOS 13 syncs iCloud drive
-            loadRandomTrackFromHostFileSystem()
-        #else
-            // load the track with a media picker
-            loadTrack()
-        #endif
-    }
     
     func rename(_ sting: Sting) {
         let alertController = UIAlertController(title: "Rename", message: nil, preferredStyle: .alert)

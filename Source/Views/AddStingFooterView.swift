@@ -7,4 +7,8 @@ class AddStingFooterView: UICollectionReusableView {
         // send a notification as wiring up an action on the file's owner only worked once
         NotificationCenter.default.post(Notification(name: .addStingFromLibrary))
     }
+    
+    @IBAction func addFromFiles() {
+        NotificationCenter.default.post(Notification(name: .addStingFromFiles))
+    }
 }
