@@ -423,9 +423,6 @@ extension PlaybackViewController: UIDocumentPickerDelegate {
             show.stings.append(sting)
             applySnapshot()
         }
-        
-        // dismiss document picker
-        dismiss(animated: true)
     }
 }
 
