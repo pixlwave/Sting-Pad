@@ -13,13 +13,16 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M79-Hx-TiW" customClass="BorderedView" customModule="Stingtk" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M79-Hx-TiW" customClass="DashedBorderView" customModule="Stingtk" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="150" height="80"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WNO-0v-bdV">
                             <rect key="frame" x="0.0" y="0.0" width="150" height="80"/>
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                            <state key="normal" image="plus" catalog="system">
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                            <inset key="titleEdgeInsets" minX="-34" minY="35" maxX="0.0" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="58.5" minY="0.0" maxX="0.0" maxY="15"/>
+                            <state key="normal" title="Music Library" image="plus" catalog="system">
+                                <color key="titleColor" systemColor="secondaryLabelColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large">
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 </preferredSymbolConfiguration>
@@ -37,13 +40,16 @@
                         <constraint firstItem="WNO-0v-bdV" firstAttribute="top" secondItem="M79-Hx-TiW" secondAttribute="top" id="xJr-WB-Qje"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1tn-nO-qqN" customClass="BorderedView" customModule="Stingtk" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1tn-nO-qqN" customClass="DashedBorderView" customModule="Stingtk" customModuleProvider="target">
                     <rect key="frame" x="170" y="0.0" width="150" height="80"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KeJ-aX-1gs">
                             <rect key="frame" x="0.0" y="0.0" width="150" height="80"/>
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                            <state key="normal" image="plus" catalog="system">
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                            <inset key="titleEdgeInsets" minX="-33.5" minY="35" maxX="0.0" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="28" minY="0.0" maxX="0.0" maxY="15"/>
+                            <state key="normal" title="Files" image="plus" catalog="system">
+                                <color key="titleColor" systemColor="secondaryLabelColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large">
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 </preferredSymbolConfiguration>
@@ -63,7 +69,7 @@
                 </view>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-            <color key="tintColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="tintColor" systemColor="secondaryLabelColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="uNb-Am-QC4" firstAttribute="centerX" secondItem="M79-Hx-TiW" secondAttribute="trailing" constant="10" id="GPj-HT-9xi"/>
                 <constraint firstItem="1tn-nO-qqN" firstAttribute="top" secondItem="M79-Hx-TiW" secondAttribute="top" id="IiW-60-GHe"/>
