@@ -15,7 +15,7 @@
 		A55C0E7222AA5498008DDB12 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C0E7122AA5498008DDB12 /* Show.swift */; };
 		A55C0E7622AA7202008DDB12 /* TransportView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A55C0E7522AA7202008DDB12 /* TransportView.xib */; };
 		A567FB7022F1F67A00B4DB70 /* OutputConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A567FB6F22F1F67A00B4DB70 /* OutputConfig.swift */; };
-		A56EB2C922F7538F00358A7C /* DashedBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56EB2C822F7538F00358A7C /* DashedBorderView.swift */; };
+		A56EB2C922F7538F00358A7C /* DashedBorderControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56EB2C822F7538F00358A7C /* DashedBorderControl.swift */; };
 		A581C38D1B946B7C006CE228 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C38C1B946B7C006CE228 /* Engine.swift */; };
 		A581C3981B94769F006CE228 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A581C3951B94769F006CE228 /* Main.storyboard */; };
 		A581C3991B94769F006CE228 /* Welcome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A581C3961B94769F006CE228 /* Welcome.storyboard */; };
@@ -45,7 +45,7 @@
 		A55C0E7122AA5498008DDB12 /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
 		A55C0E7522AA7202008DDB12 /* TransportView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransportView.xib; sourceTree = "<group>"; };
 		A567FB6F22F1F67A00B4DB70 /* OutputConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputConfig.swift; sourceTree = "<group>"; };
-		A56EB2C822F7538F00358A7C /* DashedBorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashedBorderView.swift; sourceTree = "<group>"; };
+		A56EB2C822F7538F00358A7C /* DashedBorderControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashedBorderControl.swift; sourceTree = "<group>"; };
 		A581C38C1B946B7C006CE228 /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		A581C3951B94769F006CE228 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		A581C3961B94769F006CE228 /* Welcome.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Welcome.storyboard; sourceTree = "<group>"; };
@@ -165,7 +165,7 @@
 				A581C3A11B94A041006CE228 /* StingCell.swift */,
 				A59EC6E922EB5696009A7ED1 /* TransportView.swift */,
 				A595169922F99A21001E820A /* AddStingFooterView.swift */,
-				A56EB2C822F7538F00358A7C /* DashedBorderView.swift */,
+				A56EB2C822F7538F00358A7C /* DashedBorderControl.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -253,7 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A55C0E7222AA5498008DDB12 /* Show.swift in Sources */,
-				A56EB2C922F7538F00358A7C /* DashedBorderView.swift in Sources */,
+				A56EB2C922F7538F00358A7C /* DashedBorderControl.swift in Sources */,
 				A581C3A41B94C5B2006CE228 /* WelcomeViewController.swift in Sources */,
 				A5ECB86B22F30F670020FE16 /* DefaultColorViewController.swift in Sources */,
 				A5A49C8F1B5BF1C2004B80CE /* AppDelegate.swift in Sources */,

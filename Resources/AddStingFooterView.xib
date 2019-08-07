@@ -13,63 +13,69 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M79-Hx-TiW" customClass="DashedBorderView" customModule="Stingtk" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M79-Hx-TiW" customClass="DashedBorderControl" customModule="Stingtk" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="150" height="80"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WNO-0v-bdV">
-                            <rect key="frame" x="0.0" y="0.0" width="150" height="80"/>
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                            <inset key="titleEdgeInsets" minX="-34" minY="35" maxX="0.0" maxY="0.0"/>
-                            <inset key="imageEdgeInsets" minX="58.5" minY="0.0" maxX="0.0" maxY="15"/>
-                            <state key="normal" title="Music Library" image="plus" catalog="system">
-                                <color key="titleColor" systemColor="secondaryLabelColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large">
-                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                </preferredSymbolConfiguration>
-                            </state>
-                            <connections>
-                                <action selector="addFromLibrary" destination="nSx-fl-0bd" eventType="touchUpInside" id="dZi-gc-obh"/>
-                            </connections>
-                        </button>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mwN-8I-xVe">
+                            <rect key="frame" x="34" y="16.5" width="82" height="47.5"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="WQN-jx-cfE">
+                                    <rect key="frame" x="0.0" y="0.5" width="82" height="31"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large">
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                    </preferredSymbolConfiguration>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Music Library" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="246-xo-HAz">
+                                    <rect key="frame" x="0.0" y="31.5" width="82" height="16"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                    <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="WNO-0v-bdV" secondAttribute="bottom" id="CuW-ry-fH6"/>
-                        <constraint firstAttribute="trailing" secondItem="WNO-0v-bdV" secondAttribute="trailing" id="QjM-rf-g5I"/>
-                        <constraint firstItem="WNO-0v-bdV" firstAttribute="leading" secondItem="M79-Hx-TiW" secondAttribute="leading" id="ecg-Te-vh9"/>
-                        <constraint firstItem="WNO-0v-bdV" firstAttribute="top" secondItem="M79-Hx-TiW" secondAttribute="top" id="xJr-WB-Qje"/>
+                        <constraint firstItem="mwN-8I-xVe" firstAttribute="centerX" secondItem="M79-Hx-TiW" secondAttribute="centerX" id="Uye-ku-BJM"/>
+                        <constraint firstItem="mwN-8I-xVe" firstAttribute="centerY" secondItem="M79-Hx-TiW" secondAttribute="centerY" id="VhG-0d-8Q0"/>
                     </constraints>
+                    <connections>
+                        <action selector="addFromLibrary" destination="nSx-fl-0bd" eventType="touchUpInside" id="XGh-rc-Z2M"/>
+                    </connections>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1tn-nO-qqN" customClass="DashedBorderView" customModule="Stingtk" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1tn-nO-qqN" customClass="DashedBorderControl" customModule="Stingtk" customModuleProvider="target">
                     <rect key="frame" x="170" y="0.0" width="150" height="80"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KeJ-aX-1gs">
-                            <rect key="frame" x="0.0" y="0.0" width="150" height="80"/>
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                            <inset key="titleEdgeInsets" minX="-33.5" minY="35" maxX="0.0" maxY="0.0"/>
-                            <inset key="imageEdgeInsets" minX="28" minY="0.0" maxX="0.0" maxY="15"/>
-                            <state key="normal" title="Files" image="plus" catalog="system">
-                                <color key="titleColor" systemColor="secondaryLabelColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large">
-                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                </preferredSymbolConfiguration>
-                            </state>
-                            <connections>
-                                <action selector="addFromFiles" destination="nSx-fl-0bd" eventType="touchUpInside" id="L8L-ql-lJx"/>
-                            </connections>
-                        </button>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="eh8-Uo-mod">
+                            <rect key="frame" x="58.5" y="16.5" width="33.5" height="47.5"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="P1O-25-Wsd">
+                                    <rect key="frame" x="0.0" y="0.5" width="33.5" height="31"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large">
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                    </preferredSymbolConfiguration>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Files" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxp-xf-HP7">
+                                    <rect key="frame" x="0.0" y="31.5" width="33.5" height="16"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                    <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
-                        <constraint firstItem="KeJ-aX-1gs" firstAttribute="leading" secondItem="1tn-nO-qqN" secondAttribute="leading" id="FmA-SD-OYo"/>
-                        <constraint firstAttribute="trailing" secondItem="KeJ-aX-1gs" secondAttribute="trailing" id="Pwc-bF-iO8"/>
-                        <constraint firstItem="KeJ-aX-1gs" firstAttribute="top" secondItem="1tn-nO-qqN" secondAttribute="top" id="iO0-JK-p8w"/>
-                        <constraint firstAttribute="bottom" secondItem="KeJ-aX-1gs" secondAttribute="bottom" id="kwc-Eh-eEJ"/>
+                        <constraint firstItem="eh8-Uo-mod" firstAttribute="centerY" secondItem="1tn-nO-qqN" secondAttribute="centerY" id="lId-U9-dhl"/>
+                        <constraint firstItem="eh8-Uo-mod" firstAttribute="centerX" secondItem="1tn-nO-qqN" secondAttribute="centerX" id="z37-h2-IpI"/>
                     </constraints>
+                    <connections>
+                        <action selector="addFromFiles" destination="nSx-fl-0bd" eventType="touchUpInside" id="Xtf-Iy-4he"/>
+                    </connections>
                 </view>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-            <color key="tintColor" systemColor="secondaryLabelColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="tintColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="uNb-Am-QC4" firstAttribute="centerX" secondItem="M79-Hx-TiW" secondAttribute="trailing" constant="10" id="GPj-HT-9xi"/>
                 <constraint firstItem="1tn-nO-qqN" firstAttribute="top" secondItem="M79-Hx-TiW" secondAttribute="top" id="IiW-60-GHe"/>
@@ -82,7 +88,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="uNb-Am-QC4"/>
-            <point key="canvasLocation" x="40.579710144927539" y="359.59821428571428"/>
+            <point key="canvasLocation" x="39.375" y="359.15492957746477"/>
         </view>
     </objects>
     <resources>
