@@ -1,6 +1,6 @@
 import UIKit
 
-class DashedBorderControl: UIControl {
+class AddStingButton: UIControl {
     
     let shape = CAShapeLayer()
     
@@ -16,7 +16,7 @@ class DashedBorderControl: UIControl {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        shape.path = CGPath(roundedRect: bounds, cornerWidth: 8, cornerHeight: 8, transform: nil)
+        shape.path = CGPath(roundedRect: bounds.insetBy(dx: shape.lineWidth, dy: shape.lineWidth), cornerWidth: 8, cornerHeight: 8, transform: nil)
     }
     
 }

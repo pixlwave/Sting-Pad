@@ -13,7 +13,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M79-Hx-TiW" customClass="DashedBorderControl" customModule="Stingtk" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M79-Hx-TiW" customClass="AddStingButton" customModule="Stingtk" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="150" height="80"/>
                     <subviews>
                         <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mwN-8I-xVe">
@@ -43,7 +43,7 @@
                         <action selector="addFromLibrary" destination="nSx-fl-0bd" eventType="touchUpInside" id="XGh-rc-Z2M"/>
                     </connections>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1tn-nO-qqN" customClass="DashedBorderControl" customModule="Stingtk" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1tn-nO-qqN" customClass="AddStingButton" customModule="Stingtk" customModuleProvider="target">
                     <rect key="frame" x="170" y="0.0" width="150" height="80"/>
                     <subviews>
                         <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="eh8-Uo-mod">
