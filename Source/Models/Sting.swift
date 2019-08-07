@@ -5,6 +5,7 @@ import MediaPlayer
 class Sting: NSObject, Codable {
     
     let url: URL
+    let bookmark: Data?
     let isMissing: Bool
     let songTitle: String
     let songArtist: String
@@ -52,6 +53,7 @@ class Sting: NSObject, Codable {
     
     enum CodingKeys: String, CodingKey {
         case url
+        case bookmark
         case name
         case color
         case startTime
@@ -62,18 +64,33 @@ class Sting: NSObject, Codable {
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let url = try container.decode(URL.self, forKey: .url)
+        let bookmark = try? container.decode(Data.self, forKey: .bookmark)
         let name = try? container.decode(String.self, forKey: .name)
         let color = try container.decode(Color.self, forKey: .color)
         let startTime = try container.decode(TimeInterval.self, forKey: .startTime)
         let endTime = try? container.decode(TimeInterval.self, forKey: .endTime)
         let loops = try container.decode(Bool.self, forKey: .loops)
         
-        self.url = url
-        self.color = color
+        var isStale = false
+        if let bookmark = bookmark, let resolvedURL = try? URL(resolvingBookmarkData: bookmark, bookmarkDataIsStale: &isStale) {
+            self.url = resolvedURL
+        } else {
+            self.url = url
+        }
+        
+        self.bookmark = bookmark
         self.name = name
+        self.color = color
         self.startTime = startTime
         self.endTime = endTime
         self.loops = loops
+        
+        let hasSecurityScopedAccess = url.startAccessingSecurityScopedResource()
+        defer {
+            if hasSecurityScopedAccess {
+                url.stopAccessingSecurityScopedResource()
+            }
+        }
         
         if let audioFile = try? AVAudioFile(forReading: url) {
             self.isMissing = false
@@ -97,6 +114,7 @@ class Sting: NSObject, Codable {
         guard let assetURL = mediaItem.assetURL, let audioFile = try? AVAudioFile(forReading: assetURL) else { return nil }
         
         url = assetURL
+        bookmark = nil
         isMissing = false
         songTitle = mediaItem.title ?? "Unknown"
         songArtist = mediaItem.artist ?? "Unknown"
@@ -106,9 +124,17 @@ class Sting: NSObject, Codable {
     }
     
     init?(url: URL) {
+        let hasSecurityScopedAccess = url.startAccessingSecurityScopedResource()
+        defer {
+            if hasSecurityScopedAccess {
+                url.stopAccessingSecurityScopedResource()
+            }
+        }
+        
         guard let audioFile = try? AVAudioFile(forReading: url) else { return nil }
         
         self.url = url
+        bookmark = try? url.bookmarkData()
         isMissing = false
         songTitle = url.songTitle() ?? "Unknown"
         songArtist = url.songArtist() ?? "Unknown"
