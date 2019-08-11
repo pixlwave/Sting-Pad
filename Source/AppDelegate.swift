@@ -16,9 +16,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    #warning("Needs testing on device")
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        #warning("Missing implementation for opening urls")
-        return false
+        guard
+            url.isFileURL,
+            let showBrowser = window?.rootViewController as? ShowBrowserViewController
+        else { return false }
+        
+        if let playbackVC = showBrowser.presentedViewController as? PlaybackViewController {
+            playbackVC.closeShow()
+        }
+        
+        showBrowser.openShow(at: url)
+        
+        return true
     }
     
     func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
