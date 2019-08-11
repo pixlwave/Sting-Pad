@@ -66,7 +66,7 @@ class PlaybackViewController: UICollectionViewController {
         let size = CGSize(width: view.frame.width, height: view.bounds.height - origin.y)
         transportView?.frame = CGRect(origin: origin, size: size)
         collectionView.contentInset.bottom = size.height
-        collectionView.scrollIndicatorInsets.bottom = size.height
+        collectionView.verticalScrollIndicatorInsets.bottom = size.height
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
