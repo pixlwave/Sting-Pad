@@ -27,7 +27,7 @@ class DefaultColorViewController: UITableViewController {
         var snapshot = NSDiffableDataSourceSnapshot<Int, Color>()
         snapshot.appendSections([0])
         snapshot.appendItems(Color.allCases)
-        dataSource.apply(snapshot)
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
