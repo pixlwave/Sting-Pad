@@ -144,7 +144,7 @@ class PlaybackViewController: UICollectionViewController {
         // ensure there's a cued sting if possible
         if cuedSting == nil { cuedSting = show.stings.first }
         
-        let snapshot = NSDiffableDataSourceSnapshot<Int, Sting>()
+        var snapshot = NSDiffableDataSourceSnapshot<Int, Sting>()
         snapshot.appendSections([0])
         snapshot.appendItems(show.stings)
         dataSource.apply(snapshot)
@@ -153,7 +153,7 @@ class PlaybackViewController: UICollectionViewController {
     func reloadItems(_ identifiers: [Sting]) {
         #warning("Is there a better way to do this?")
         let uniqueIdentifiers = Array(Set(identifiers))
-        let snapshot = dataSource.snapshot()
+        var snapshot = dataSource.snapshot()
         snapshot.reloadItems(uniqueIdentifiers)
         dataSource.apply(snapshot, animatingDifferences: false)
     }

@@ -24,7 +24,7 @@ class DefaultColorViewController: UITableViewController {
     }
     
     func applySnapshot() {
-        let snapshot = NSDiffableDataSourceSnapshot<Int, Color>()
+        var snapshot = NSDiffableDataSourceSnapshot<Int, Color>()
         snapshot.appendSections([0])
         snapshot.appendItems(Color.allCases)
         dataSource.apply(snapshot)
@@ -37,7 +37,7 @@ class DefaultColorViewController: UITableViewController {
         
         Color.default = color
         
-        let snapshot = dataSource.snapshot()
+        var snapshot = dataSource.snapshot()
         snapshot.reloadItems([color, oldColor])
         
         dataSource.apply(snapshot)
