@@ -340,14 +340,12 @@ class PlaybackViewController: UICollectionViewController {
             
             let duplicate = UIAction(title: "Duplicate", image: UIImage(systemName: "plus.square.on.square")) { action in
                 guard let duplicate = sting.copy() else { return }
-                self.show.stings.insert(duplicate, at: indexPath.item + 1)
-                self.applySnapshot()
+                self.show.stings.insert(duplicate, at: indexPath.item + 1)  // updates collection view via didSet
             }
             let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash")) { action in
                 guard sting != self.engine.playingSting else { return }
                 if sting == self.cuedSting { self.cuedSting = nil }
-                self.show.stings.remove(at: indexPath.item)
-                self.applySnapshot()
+                self.show.stings.remove(at: indexPath.item)     // updates collection view via didSet
             }
             
             if sting == self.engine.playingSting {
