@@ -107,7 +107,6 @@ class Engine {
             
             let propSize = UInt32(channelMap.count) * UInt32(MemoryLayout<UInt32>.size)
             let statusCode = AudioUnitSetProperty(engine.outputNode.audioUnit!, kAudioOutputUnitProperty_ChannelMap, kAudioUnitScope_Global, 1, channelMap, propSize)
-            print(statusCode)
         }
         
         startAudioEngine()
