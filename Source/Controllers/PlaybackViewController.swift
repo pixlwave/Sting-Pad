@@ -6,7 +6,7 @@ class PlaybackViewController: UICollectionViewController {
     
     private let engine = Engine.shared
     private let show = Show.shared
-    lazy private var dataSource = makeDataSource()
+    private var dataSource: UICollectionViewDiffableDataSource<Int, Sting>?
     private var cuedSting: Sting? {
         didSet { if let sting = cuedSting { scrollTo(sting) } }
     }
@@ -36,7 +36,7 @@ class PlaybackViewController: UICollectionViewController {
         progressView.progress = 0
         timeLabel.font = UIFont.monospacedDigitSystemFont(ofSize: timeLabel.font.pointSize, weight: .regular)
         
-        collectionView.dataSource = dataSource
+        configureDataSource()
         collectionView.register(UINib(nibName: "AddStingFooterView", bundle: nil), forSupplementaryViewOfKind: "footer", withReuseIdentifier: "AddStingFooter")
         collectionView.collectionViewLayout = createLayout()
         collectionView.dragDelegate = self
@@ -107,8 +107,8 @@ class PlaybackViewController: UICollectionViewController {
         }
     }
     
-    func makeDataSource() -> UICollectionViewDiffableDataSource<Int, Sting> {
-        let dataSource = UICollectionViewDiffableDataSource<Int, Sting>(collectionView: collectionView) { collectionView, indexPath, sting -> UICollectionViewCell? in
+    func configureDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Int, Sting>(collectionView: collectionView) { collectionView, indexPath, sting -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Sting Cell", for: indexPath)
             
             guard let stingCell = cell as? StingCell else { return cell }
@@ -132,11 +132,9 @@ class PlaybackViewController: UICollectionViewController {
             return stingCell
         }
         
-        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
+        dataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
             collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "AddStingFooter", for: indexPath)
         }
-        
-        return dataSource
     }
     
     @objc func applySnapshot() {
@@ -146,10 +144,11 @@ class PlaybackViewController: UICollectionViewController {
         var snapshot = NSDiffableDataSourceSnapshot<Int, Sting>()
         snapshot.appendSections([0])
         snapshot.appendItems(show.stings)
-        dataSource.apply(snapshot)
+        dataSource?.apply(snapshot)
     }
     
     func reloadItems(_ identifiers: [Sting]) {
+        guard let dataSource = dataSource else { return }
         #warning("Is there a better way to do this?")
         let uniqueIdentifiers = Array(Set(identifiers))
         var snapshot = dataSource.snapshot()
@@ -175,15 +174,22 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     @IBAction func closeShow() {
+        // stop listening for notifications in case a new show is opened before this gets deallocated
+        NotificationCenter.default.removeObserver(self)
+        
         engine.stopSting()
         show.close()
         dismiss(animated: true)
+        
+        // set data source to nil to remove reference cycle
+        #warning("Test if this is necessary with the GM")
+        dataSource = nil
     }
     
     @objc func addStingFromLibrary() {
         #if targetEnvironment(simulator)
-            // pick a random file from the file system as no library is available on the simulator
-            loadRandomTrackFromHostFileSystem()
+        // pick a random file from the file system as no library is available on the simulator
+        loadRandomTrackFromHostFileSystem()
         #else
         // present music picker to load a track from ipod
         let mediaPicker = MPMediaPickerController(mediaTypes: .music)
@@ -256,7 +262,7 @@ class PlaybackViewController: UICollectionViewController {
         guard
             show.stings.count > 1,
             let oldCue = cuedSting,
-            let oldCueIndex = dataSource.indexPath(for: oldCue)?.item
+            let oldCueIndex = dataSource?.indexPath(for: oldCue)?.item
         else { return }
         
         let newCueIndex = (oldCueIndex + 1) % show.stings.count
@@ -270,7 +276,7 @@ class PlaybackViewController: UICollectionViewController {
         guard
             show.stings.count > 1,
             let oldCue = cuedSting,
-            let oldCueIndex = dataSource.indexPath(for: oldCue)?.item,
+            let oldCueIndex = dataSource?.indexPath(for: oldCue)?.item,
             oldCueIndex > 0
         else { return }
         
@@ -286,7 +292,7 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     func scrollTo(_ sting: Sting, animated: Bool = true) {
-        guard let indexPath = dataSource.indexPath(for: sting) else { return }
+        guard let indexPath = dataSource?.indexPath(for: sting) else { return }
         collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: animated)
     }
     
@@ -316,13 +322,13 @@ class PlaybackViewController: UICollectionViewController {
     
     // MARK: UICollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let sting = dataSource.itemIdentifier(for: indexPath) else { return }
+        guard let sting = dataSource?.itemIdentifier(for: indexPath) else { return }
         engine.play(sting)
     }
     
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
-            guard let sting = self.dataSource.itemIdentifier(for: indexPath) else { return nil }
+            guard let sting = self.dataSource?.itemIdentifier(for: indexPath) else { return nil }
             
             let edit = UIAction(title: "Edit", image: UIImage(systemName: "waveform")) { action in
                 self.performSegue(withIdentifier: "Edit Sting", sender: sting)
