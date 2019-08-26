@@ -130,14 +130,11 @@ class PlaybackViewController: UICollectionViewController {
             return stingCell
         }
         
-        dataSource.supplementaryViewProvider = makeFooterProvider()
-        return dataSource
-    }
-    
-    func makeFooterProvider() -> UICollectionViewDiffableDataSource<Int, Sting>.SupplementaryViewProvider {
-        { collectionView, kind, indexPath in
+        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
             collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "AddStingFooter", for: indexPath)
         }
+        
+        return dataSource
     }
     
     @objc func applySnapshot() {
