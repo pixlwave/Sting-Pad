@@ -13,22 +13,24 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
         allowsDocumentCreation = true
     }
     
+    #if targetEnvironment(simulator)
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        #if targetEnvironment(simulator)
         if !hasRestored {
-            let show = Show(fileURL: Show.defaultURL)
-            if !show.fileExists {
-                show.save(to: show.fileURL, for: .forCreating) { sucess in
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(1)) {
+                let show = Show(fileURL: Show.defaultURL)
+                if !show.fileExists {
+                    show.save(to: show.fileURL, for: .forCreating) { sucess in
+                        self.openShow(at: show.fileURL, animated: false)
+                    }
+                } else {
                     self.openShow(at: show.fileURL, animated: false)
                 }
-            } else {
-                openShow(at: show.fileURL, animated: false)
             }
         }
-        #endif
     }
+    #endif
     
     func openShow(at url: URL, animated: Bool = true) {
         let show = Show(fileURL: url)
