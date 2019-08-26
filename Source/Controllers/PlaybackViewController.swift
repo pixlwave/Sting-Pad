@@ -22,6 +22,8 @@ class PlaybackViewController: UICollectionViewController {
     private let transportViewHeight: CGFloat = 90
     private var timeTimer: Timer?
     
+    private var addStingAfterIndex: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -210,7 +212,12 @@ class PlaybackViewController: UICollectionViewController {
         let url = URL(fileURLWithPath: "/Users/Shared/Music").appendingPathComponent(file)
         
         if let sting = Sting(url: url) {
-            show.stings.append(sting)
+            if let index = addStingAfterIndex, index < show.stings.count {
+                show.stings.insert(sting, at: index + 1)
+                addStingAfterIndex = nil
+            } else {
+                show.stings.append(sting)
+            }
             applySnapshot()
         }
     }
@@ -339,6 +346,10 @@ class PlaybackViewController: UICollectionViewController {
                 guard let duplicate = sting.copy() else { return }
                 self.show.stings.insert(duplicate, at: indexPath.item + 1)  // updates collection view via didSet
             }
+            let insert = UIAction(title: "Insert After", image: UIImage(systemName: "square.stack")) { action in
+                self.addStingAfterIndex = indexPath.item
+                self.addStingFromLibrary()
+            }
             let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash")) { action in
                 guard sting != self.engine.playingSting else { return }
                 if sting == self.cuedSting { self.cuedSting = nil }
@@ -354,7 +365,7 @@ class PlaybackViewController: UICollectionViewController {
             if sting.isMissing { return UIMenu(title: "", children: [delete]) }
             
             let editMenu = UIMenu(title: "", options: .displayInline, children: [edit, rename, colorMenu])
-            let fileMenu = UIMenu(title: "", options: .displayInline, children: [duplicate, delete])
+            let fileMenu = UIMenu(title: "", options: .displayInline, children: [duplicate, insert, delete])
             return UIMenu(title: "", children: [editMenu, fileMenu])
         }
     }
@@ -395,7 +406,13 @@ extension PlaybackViewController: MPMediaPickerControllerDelegate {
     func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
         // make a sting from the selected media item, add it to the engine and update the table view
         if let sting = Sting(mediaItem: mediaItemCollection.items[0]) {
-            show.stings.append(sting)
+            if let index = addStingAfterIndex, index < show.stings.count {
+                show.stings.insert(sting, at: index + 1)
+                addStingAfterIndex = nil
+            } else {
+                show.stings.append(sting)
+            }
+            
             applySnapshot()
             scrollTo(sting, animated: false)
         }
@@ -405,7 +422,7 @@ extension PlaybackViewController: MPMediaPickerControllerDelegate {
     }
     
     func mediaPickerDidCancel(_ mediaPicker: MPMediaPickerController) {
-        // dismiss media picker
+        addStingAfterIndex = nil
         dismiss(animated: true)
     }
     
