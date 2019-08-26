@@ -402,7 +402,6 @@ extension PlaybackViewController: UICollectionViewDropDelegate {
 
 // MARK: MPMediaPickerControllerDelegate
 extension PlaybackViewController: MPMediaPickerControllerDelegate {
-    
     func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
         // make a sting from the selected media item, add it to the engine and update the table view
         if let sting = Sting(mediaItem: mediaItemCollection.items[0]) {
@@ -425,7 +424,6 @@ extension PlaybackViewController: MPMediaPickerControllerDelegate {
         addStingAfterIndex = nil
         dismiss(animated: true)
     }
-    
 }
 
 
