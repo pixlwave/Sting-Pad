@@ -10,7 +10,7 @@ class Sting: NSObject, Codable {
     let songTitle: String
     let songArtist: String
     
-    var name: String?
+    var name: String
     var color: Color = .default
     private var startTime: TimeInterval = 0 { didSet { updateBuffer() } }
     private var endTime: TimeInterval? { didSet { updateBuffer() } }
@@ -65,7 +65,7 @@ class Sting: NSObject, Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let url = try container.decode(URL.self, forKey: .url)
         let bookmark = try? container.decode(Data.self, forKey: .bookmark)
-        let name = try? container.decode(String.self, forKey: .name)
+        let name = try container.decode(String.self, forKey: .name)
         let color = try container.decode(Color.self, forKey: .color)
         let startTime = try container.decode(TimeInterval.self, forKey: .startTime)
         let endTime = try? container.decode(TimeInterval.self, forKey: .endTime)
@@ -118,6 +118,8 @@ class Sting: NSObject, Codable {
         isMissing = false
         songTitle = mediaItem.title ?? "Unknown"
         songArtist = mediaItem.artist ?? "Unknown"
+        
+        name = songTitle
         self.audioFile = audioFile
         
         super.init()
@@ -138,6 +140,8 @@ class Sting: NSObject, Codable {
         isMissing = false
         songTitle = url.songTitle() ?? "Unknown"
         songArtist = url.songArtist() ?? "Unknown"
+        
+        name = songTitle
         self.audioFile = audioFile
         
         super.init()
