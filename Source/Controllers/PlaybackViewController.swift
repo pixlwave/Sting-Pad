@@ -398,10 +398,15 @@ extension PlaybackViewController: UICollectionViewDropDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
-        if let desinationIndexPath = coordinator.destinationIndexPath, let sourceIndexPath = coordinator.items.first?.sourceIndexPath {
-            show.stings.insert(show.stings.remove(at: sourceIndexPath.item), at: desinationIndexPath.item)
-            applySnapshot()
-        }
+        guard
+            let sourceItem = coordinator.items.first,
+            let sourceIndexPath = sourceItem.sourceIndexPath,
+            let destinationIndexPath = coordinator.destinationIndexPath
+        else { return }
+        
+        show.stings.insert(show.stings.remove(at: sourceIndexPath.item), at: destinationIndexPath.item)
+        applySnapshot()
+        coordinator.drop(sourceItem.dragItem, toItemAt: destinationIndexPath)
     }
 }
 
