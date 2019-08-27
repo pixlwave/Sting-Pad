@@ -35,7 +35,8 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
     func openShow(at url: URL, animated: Bool = true) {
         let show = Show(fileURL: url)
         show.open { success in
-            if success { self.present(show, animated: animated) }
+            guard success else { self.failedToOpen(show); return }
+            self.present(show, animated: animated)
         }
     }
     
@@ -53,6 +54,15 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
         transitionController?.targetView = playbackVC.view
         
         present(rootVC, animated: animated)
+    }
+    
+    func failedToOpen(_ show: Show) {
+        DispatchQueue.main.async {
+            let showName = show.fileURL.deletingPathExtension().lastPathComponent
+            let alertController = UIAlertController(title: "Error", message: "Unable to open \(showName)", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
+            self.present(alertController, animated: true)
+        }
     }
     
     override func encodeRestorableState(with coder: NSCoder) {
