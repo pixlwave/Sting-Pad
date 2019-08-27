@@ -148,6 +148,8 @@ class Sting: NSObject, Codable {
     }
     
     func createBuffer() {
+        guard !isMissing else { return }
+        
         buffer = AVAudioPCMBuffer(for: audioFile)
         updateBuffer()
     }
