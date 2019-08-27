@@ -177,7 +177,11 @@ class Engine {
         if sting.loops {
             let sampleCount = AVAudioFrameCount(sting.audioFile.processingFormat.sampleRate * length) / 2
             let previewStartSample = AVAudioFramePosition(endSample - sampleCount)
-            #warning("Needs implementing")
+            
+            prepareToPlay(sting)
+            scheduleSegment(of: sting, from: previewStartSample, for: sampleCount)
+            scheduleSegment(of: sting, from: sting.startSample, for: sampleCount)
+            startPlayback(of: sting)
         } else {
             let sampleCount = AVAudioFrameCount(sting.audioFile.processingFormat.sampleRate * length)
             let previewStartSample = AVAudioFramePosition(endSample - sampleCount)
