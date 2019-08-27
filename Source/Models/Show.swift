@@ -12,7 +12,7 @@ class Show: UIDocument {
     
     var stings = [Sting]() {
         didSet {
-            NotificationCenter.default.post(Notification(name: .stingsDidChange))
+            NotificationCenter.default.post(Notification(name: .stingsDidChange, object: self))
             updateChangeCount(.done)
         }
     }
