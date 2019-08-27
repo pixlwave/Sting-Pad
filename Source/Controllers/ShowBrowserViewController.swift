@@ -35,7 +35,7 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
     func openShow(at url: URL, animated: Bool = true) {
         let show = Show(fileURL: url)
         show.open { success in
-            guard success else { self.failedToOpen(show); return }
+            guard success else { self.displayOpenError(for: show); return }
             self.present(show, animated: animated)
         }
     }
@@ -56,7 +56,7 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
         present(rootVC, animated: animated)
     }
     
-    func failedToOpen(_ show: Show) {
+    func displayOpenError(for show: Show) {
         DispatchQueue.main.async {
             let showName = show.fileURL.deletingPathExtension().lastPathComponent
             let alertController = UIAlertController(title: "Error", message: "Unable to open \(showName)", preferredStyle: .alert)
