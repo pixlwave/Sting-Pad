@@ -175,3 +175,9 @@ class Sting: NSObject, Codable {
     }
     
 }
+
+
+// MARK: Array<Sting>
+extension Array where Element: Sting {
+    var playable: Self { return self.filter { !$0.isMissing } }
+}

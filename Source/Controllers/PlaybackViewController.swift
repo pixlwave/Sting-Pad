@@ -139,7 +139,7 @@ class PlaybackViewController: UICollectionViewController {
     
     @objc func applySnapshot() {
         // ensure there's a cued sting if possible
-        if cuedSting == nil { cuedSting = show.stings.first }
+        validateCuedSting()
         
         var snapshot = NSDiffableDataSourceSnapshot<Int, Sting>()
         snapshot.appendSections([0])
@@ -248,7 +248,7 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     @IBAction func playSting() {
-        guard let sting = cuedSting ?? show.stings.first else { return }
+        guard let sting = cuedSting ?? show.stings.playable.first else { return }
         
         engine.play(sting)
         nextCue()
@@ -258,30 +258,45 @@ class PlaybackViewController: UICollectionViewController {
         engine.stopSting()
     }
     
+    func validateCuedSting() {
+        guard let cuedSting = cuedSting else {
+            self.cuedSting = show.stings.playable.first
+            return
+        }
+        
+        if !show.stings.playable.contains(cuedSting) {
+            self.cuedSting = show.stings.playable.first
+        }
+    }
+    
     @IBAction func nextCue() {
+        let playableStings = show.stings.playable
+        
         guard
-            show.stings.count > 1,
+            playableStings.count > 1,
             let oldCue = cuedSting,
-            let oldCueIndex = dataSource?.indexPath(for: oldCue)?.item
+            let oldCueIndex = playableStings.firstIndex(of: oldCue)
         else { return }
         
-        let newCueIndex = (oldCueIndex + 1) % show.stings.count
-        let newCue = show.stings[newCueIndex]
+        let newCueIndex = (oldCueIndex + 1) % playableStings.count
+        let newCue = playableStings[newCueIndex]
         cuedSting = newCue
         
         reloadItems([oldCue, newCue])
     }
     
     @IBAction func previousCue() {
+        let playableStings = show.stings.playable
+        
         guard
-            show.stings.count > 1,
+            playableStings.count > 1,
             let oldCue = cuedSting,
-            let oldCueIndex = dataSource?.indexPath(for: oldCue)?.item,
+            let oldCueIndex = playableStings.firstIndex(of: oldCue),
             oldCueIndex > 0
         else { return }
         
-        let newCueIndex = (oldCueIndex - 1) % show.stings.count
-        let newCue = show.stings[newCueIndex]
+        let newCueIndex = (oldCueIndex - 1) % playableStings.count
+        let newCue = playableStings[newCueIndex]
         cuedSting = newCue
         
         reloadItems([oldCue, newCue])
