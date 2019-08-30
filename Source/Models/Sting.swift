@@ -9,6 +9,7 @@ class Sting: NSObject, Codable {
     let isMissing: Bool
     let songTitle: String
     let songArtist: String
+    let songAlbum: String
     
     var name: String?
     var color: Color = .default
@@ -54,6 +55,9 @@ class Sting: NSObject, Codable {
     enum CodingKeys: String, CodingKey {
         case url
         case bookmark
+        case songTitle
+        case songArtist
+        case songAlbum
         case name
         case color
         case startTime
@@ -65,6 +69,9 @@ class Sting: NSObject, Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let url = try container.decode(URL.self, forKey: .url)
         let bookmark = try? container.decode(Data.self, forKey: .bookmark)
+        let songTitle = try container.decode(String.self, forKey: .songTitle)
+        let songArtist = try container.decode(String.self, forKey: .songArtist)
+        let songAlbum = try container.decode(String.self, forKey: .songAlbum)
         let name = try? container.decode(String.self, forKey: .name)
         let color = try container.decode(Color.self, forKey: .color)
         let startTime = try container.decode(TimeInterval.self, forKey: .startTime)
@@ -72,13 +79,25 @@ class Sting: NSObject, Codable {
         let loops = try container.decode(Bool.self, forKey: .loops)
         
         var isStale = false
-        if let bookmark = bookmark, let resolvedURL = try? URL(resolvingBookmarkData: bookmark, bookmarkDataIsStale: &isStale) {
+        if url.isMediaItem {
+            var query = MPMediaQuery.songs()
+            #warning("TEST THIS ON DEVICE")
+            #warning("Should this use track and disc number too?")
+            query.addFilterPredicate(MPMediaPropertyPredicate(value: songTitle, forProperty: MPMediaItemPropertyTitle))
+            query.addFilterPredicate(MPMediaPropertyPredicate(value: songArtist, forProperty: MPMediaItemPropertyArtist))
+            query.addFilterPredicate(MPMediaPropertyPredicate(value: songAlbum, forProperty: MPMediaItemPropertyAlbumTitle))
+            let mediaItem = query.items?.first
+            self.url = mediaItem?.assetURL ?? url
+        } else if let bookmark = bookmark, let resolvedURL = try? URL(resolvingBookmarkData: bookmark, bookmarkDataIsStale: &isStale) {
             self.url = resolvedURL
         } else {
             self.url = url
         }
         
         self.bookmark = bookmark
+        self.songTitle = songTitle
+        self.songArtist = songArtist
+        self.songAlbum = songAlbum
         self.name = name
         self.color = color
         self.startTime = startTime
@@ -94,14 +113,10 @@ class Sting: NSObject, Codable {
         
         if let audioFile = try? AVAudioFile(forReading: url) {
             self.isMissing = false
-            self.songTitle = url.songTitle() ?? "Unknown"
-            self.songArtist = url.songArtist() ?? "Unknown"
             self.audioFile = audioFile
         } else {
             // all codable properties are loaded above to preserve object if other changes are made to the show
             self.isMissing = true
-            self.songTitle = "File Missing"
-            self.songArtist = "File Missing"
             self.audioFile = AVAudioFile()
         }
         
@@ -118,6 +133,7 @@ class Sting: NSObject, Codable {
         isMissing = false
         songTitle = mediaItem.title ?? "Unknown"
         songArtist = mediaItem.artist ?? "Unknown"
+        songAlbum = mediaItem.albumTitle ?? "Unknown"
         self.audioFile = audioFile
         
         super.init()
@@ -138,6 +154,7 @@ class Sting: NSObject, Codable {
         isMissing = false
         songTitle = url.songTitle() ?? "Unknown"
         songArtist = url.songArtist() ?? "Unknown"
+        songAlbum = url.songAlbum() ?? "Unknown"
         self.audioFile = audioFile
         
         super.init()

@@ -3,8 +3,10 @@ import AVFoundation
 import MediaPlayer
 
 extension URL {
+    var isMediaItem: Bool { scheme == "ipod-library" }
+    
     func songTitle() -> String? {
-        if scheme == "ipod-library" {
+        if isMediaItem {
             return mediaItem()?.title
         } else if isFileURL {
             if let metadata = metadata() {
@@ -17,11 +19,24 @@ extension URL {
     }
     
     func songArtist() -> String? {
-        if scheme == "ipod-library" {
+        if isMediaItem {
             return mediaItem()?.artist
         } else if isFileURL {
             if let metadata = metadata() {
                 let artist = AVMetadataItem.metadataItems(from: metadata, filteredByIdentifier: .commonIdentifierArtist).first
+                return artist?.stringValue
+            }
+        }
+        
+        return nil
+    }
+    
+    func songAlbum() -> String? {
+        if isMediaItem {
+            return mediaItem()?.albumTitle
+        } else if isFileURL {
+            if let metadata = metadata() {
+                let artist = AVMetadataItem.metadataItems(from: metadata, filteredByIdentifier: .commonIdentifierAlbumName).first
                 return artist?.stringValue
             }
         }
