@@ -7,7 +7,6 @@ class DefaultColorViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = dataSource
-        #warning("UITableView was told to layout its visible cells and other contents without being in the view hierarchy")
         applySnapshot()
     }
     
