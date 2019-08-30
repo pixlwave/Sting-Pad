@@ -7,9 +7,9 @@ class Sting: NSObject, Codable {
     let url: URL
     let bookmark: Data?
     let isMissing: Bool
-    let songTitle: String
-    let songArtist: String
-    let songAlbum: String
+    let songTitle: String?
+    let songArtist: String?
+    let songAlbum: String?
     
     var name: String?
     var color: Color = .default
@@ -69,9 +69,9 @@ class Sting: NSObject, Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let url = try container.decode(URL.self, forKey: .url)
         let bookmark = try? container.decode(Data.self, forKey: .bookmark)
-        let songTitle = try container.decode(String.self, forKey: .songTitle)
-        let songArtist = try container.decode(String.self, forKey: .songArtist)
-        let songAlbum = try container.decode(String.self, forKey: .songAlbum)
+        let songTitle = try? container.decode(String.self, forKey: .songTitle)
+        let songArtist = try? container.decode(String.self, forKey: .songArtist)
+        let songAlbum = try? container.decode(String.self, forKey: .songAlbum)
         let name = try? container.decode(String.self, forKey: .name)
         let color = try container.decode(Color.self, forKey: .color)
         let startTime = try container.decode(TimeInterval.self, forKey: .startTime)
@@ -83,6 +83,7 @@ class Sting: NSObject, Codable {
             var query = MPMediaQuery.songs()
             #warning("TEST THIS ON DEVICE")
             #warning("Should this use track and disc number too?")
+            #warning("Does what happens here is one of the values is nil?")
             query.addFilterPredicate(MPMediaPropertyPredicate(value: songTitle, forProperty: MPMediaItemPropertyTitle))
             query.addFilterPredicate(MPMediaPropertyPredicate(value: songArtist, forProperty: MPMediaItemPropertyArtist))
             query.addFilterPredicate(MPMediaPropertyPredicate(value: songAlbum, forProperty: MPMediaItemPropertyAlbumTitle))
@@ -131,9 +132,9 @@ class Sting: NSObject, Codable {
         url = assetURL
         bookmark = nil
         isMissing = false
-        songTitle = mediaItem.title ?? "Unknown"
-        songArtist = mediaItem.artist ?? "Unknown"
-        songAlbum = mediaItem.albumTitle ?? "Unknown"
+        songTitle = mediaItem.title
+        songArtist = mediaItem.artist
+        songAlbum = mediaItem.albumTitle
         self.audioFile = audioFile
         
         super.init()
@@ -152,9 +153,9 @@ class Sting: NSObject, Codable {
         self.url = url
         bookmark = try? url.bookmarkData()
         isMissing = false
-        songTitle = url.songTitle() ?? "Unknown"
-        songArtist = url.songArtist() ?? "Unknown"
-        songAlbum = url.songAlbum() ?? "Unknown"
+        songTitle = url.songTitle()
+        songArtist = url.songArtist()
+        songAlbum = url.songAlbum()
         self.audioFile = audioFile
         
         super.init()

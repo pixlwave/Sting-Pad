@@ -60,9 +60,9 @@ class EditViewController: UIViewController {
     }
     
     func updateLabels() {
-        navigationItem.title = sting.name ?? sting.songTitle
-        titleLabel.text = sting.songTitle
-        subtitleLabel.text = sting.songArtist
+        navigationItem.title = sting.name ?? sting.songTitle ?? "Unknown Title"
+        titleLabel.text = sting.songTitle ?? "Unknown Title"
+        subtitleLabel.text = sting.songArtist ?? "Unknown Artist"
     }
     
     @IBAction func boundControlChanged(_ sender: UISegmentedControl) {
