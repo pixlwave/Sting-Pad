@@ -60,7 +60,7 @@ class EditViewController: UIViewController {
     }
     
     func updateLabels() {
-        navigationItem.title = sting.name
+        navigationItem.title = sting.name ?? sting.songTitle
         titleLabel.text = sting.songTitle
         subtitleLabel.text = sting.songArtist
     }

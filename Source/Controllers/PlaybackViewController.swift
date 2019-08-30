@@ -113,7 +113,7 @@ class PlaybackViewController: UICollectionViewController {
             
             guard let stingCell = cell as? StingCell else { return cell }
             
-            stingCell.titleLabel.text = sting.name
+            stingCell.titleLabel.text = sting.name ?? sting.songTitle
             stingCell.isMissing = sting.isMissing
             stingCell.color = sting.color
             
@@ -240,7 +240,7 @@ class PlaybackViewController: UICollectionViewController {
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             guard let name = alertController.textFields?.first?.text else { return }
-            sting.name = name.isEmpty == false ? name : sting.songTitle
+            sting.name = name.isEmpty == false ? name : nil
             self.show.updateChangeCount(.done)
             self.reloadItems([sting])
         }))
