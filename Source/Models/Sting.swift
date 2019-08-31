@@ -78,7 +78,6 @@ class Sting: NSObject, Codable {
         if url.isMediaItem {
             var query = MPMediaQuery.songs()
             #warning("TEST THIS ON DEVICE")
-            #warning("Should this use track and disc number too?")
             #warning("Does what happens here is one of the values is nil?")
             query.addFilterPredicate(MPMediaPropertyPredicate(value: metadata.title, forProperty: MPMediaItemPropertyTitle))
             query.addFilterPredicate(MPMediaPropertyPredicate(value: metadata.artist, forProperty: MPMediaItemPropertyArtist))
