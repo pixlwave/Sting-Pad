@@ -77,7 +77,8 @@ class Sting: NSObject, Codable {
         let loops = try container.decode(Bool.self, forKey: .loops)
         
         var isStale = false
-        if url.isMediaItem {
+        #warning("Need to test checkResourceIsReachable works for ipod-library:// urls")
+        if url.isMediaItem, let isReachable = try? url.checkResourceIsReachable(), !isReachable {
             let mediaItem = metadata.mediaQuery.items?.first
             self.url = mediaItem?.assetURL ?? url
         } else if let bookmark = bookmark, let resolvedURL = try? URL(resolvingBookmarkData: bookmark, bookmarkDataIsStale: &isStale) {
