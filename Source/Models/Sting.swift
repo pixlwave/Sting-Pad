@@ -7,12 +7,14 @@ class Sting: NSObject, Codable {
     let url: URL
     let bookmark: Data?
     let isMissing: Bool
+    
+    var name: String?
+    var color: Color = .default
+    
     let metadata: Metadata
     var songTitle: String { metadata.title ?? "Unknown Title" }
     var songArtist: String { metadata.artist ?? "Unknown Artist" }
     
-    var name: String?
-    var color: Color = .default
     private var startTime: TimeInterval = 0 { didSet { updateBuffer() } }
     private var endTime: TimeInterval? { didSet { updateBuffer() } }
     var loops = false {
@@ -55,9 +57,9 @@ class Sting: NSObject, Codable {
     enum CodingKeys: String, CodingKey {
         case url
         case bookmark
-        case metadata
         case name
         case color
+        case metadata
         case startTime
         case endTime
         case loops
@@ -67,9 +69,9 @@ class Sting: NSObject, Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let url = try container.decode(URL.self, forKey: .url)
         let bookmark = try? container.decode(Data.self, forKey: .bookmark)
-        let metadata = try container.decode(Metadata.self, forKey: .metadata)
         let name = try? container.decode(String.self, forKey: .name)
         let color = try container.decode(Color.self, forKey: .color)
+        let metadata = try container.decode(Metadata.self, forKey: .metadata)
         let startTime = try container.decode(TimeInterval.self, forKey: .startTime)
         let endTime = try? container.decode(TimeInterval.self, forKey: .endTime)
         let loops = try container.decode(Bool.self, forKey: .loops)
@@ -85,9 +87,9 @@ class Sting: NSObject, Codable {
         }
         
         self.bookmark = bookmark
-        self.metadata = metadata
         self.name = name
         self.color = color
+        self.metadata = metadata
         self.startTime = startTime
         self.endTime = endTime
         self.loops = loops
