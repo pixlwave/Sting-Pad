@@ -8,8 +8,8 @@ class Sting: NSObject, Codable {
     let bookmark: Data?
     let isMissing: Bool
     let metadata: Metadata
-    var songTitle: String { metadata.songTitle ?? "Unknown Title" }
-    var songArtist: String { metadata.songArtist ?? "Unknown Artist" }
+    var songTitle: String { metadata.title ?? "Unknown Title" }
+    var songArtist: String { metadata.artist ?? "Unknown Artist" }
     
     var name: String?
     var color: Color = .default
@@ -80,11 +80,11 @@ class Sting: NSObject, Codable {
             #warning("TEST THIS ON DEVICE")
             #warning("Should this use track and disc number too?")
             #warning("Does what happens here is one of the values is nil?")
-            query.addFilterPredicate(MPMediaPropertyPredicate(value: metadata.songTitle, forProperty: MPMediaItemPropertyTitle))
-            query.addFilterPredicate(MPMediaPropertyPredicate(value: metadata.songArtist, forProperty: MPMediaItemPropertyArtist))
-            query.addFilterPredicate(MPMediaPropertyPredicate(value: metadata.songAlbum, forProperty: MPMediaItemPropertyAlbumTitle))
-            query.addFilterPredicate(MPMediaPropertyPredicate(value: metadata.songTrackNumber, forProperty: MPMediaItemPropertyAlbumTrackNumber))
-            query.addFilterPredicate(MPMediaPropertyPredicate(value: metadata.songDiscNumber, forProperty: MPMediaItemPropertyDiscNumber))
+            query.addFilterPredicate(MPMediaPropertyPredicate(value: metadata.title, forProperty: MPMediaItemPropertyTitle))
+            query.addFilterPredicate(MPMediaPropertyPredicate(value: metadata.artist, forProperty: MPMediaItemPropertyArtist))
+            query.addFilterPredicate(MPMediaPropertyPredicate(value: metadata.albumTitle, forProperty: MPMediaItemPropertyAlbumTitle))
+            query.addFilterPredicate(MPMediaPropertyPredicate(value: metadata.trackNumber, forProperty: MPMediaItemPropertyAlbumTrackNumber))
+            query.addFilterPredicate(MPMediaPropertyPredicate(value: metadata.discNumber, forProperty: MPMediaItemPropertyDiscNumber))
             let mediaItem = query.items?.first
             self.url = mediaItem?.assetURL ?? url
         } else if let bookmark = bookmark, let resolvedURL = try? URL(resolvingBookmarkData: bookmark, bookmarkDataIsStale: &isStale) {
@@ -128,7 +128,7 @@ class Sting: NSObject, Codable {
         url = assetURL
         bookmark = nil
         isMissing = false
-        metadata = Metadata(songTitle: mediaItem.title, songArtist: mediaItem.artist, songAlbum: mediaItem.albumTitle, songTrackNumber: mediaItem.albumTrackNumber, songDiscNumber: mediaItem.discNumber)
+        metadata = Metadata(mediaItem: mediaItem)
         self.audioFile = audioFile
         
         super.init()
@@ -147,7 +147,7 @@ class Sting: NSObject, Codable {
         self.url = url
         bookmark = try? url.bookmarkData()
         isMissing = false
-        metadata = Metadata(songTitle: url.songTitle(), songArtist: url.songArtist(), songAlbum: url.songAlbum(), songTrackNumber: nil, songDiscNumber: nil)
+        metadata = Metadata(url: url)
         self.audioFile = audioFile
         
         super.init()
