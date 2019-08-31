@@ -76,15 +76,7 @@ class Sting: NSObject, Codable {
         
         var isStale = false
         if url.isMediaItem {
-            var query = MPMediaQuery.songs()
-            #warning("TEST THIS ON DEVICE")
-            #warning("Does what happens here is one of the values is nil?")
-            query.addFilterPredicate(MPMediaPropertyPredicate(value: metadata.title, forProperty: MPMediaItemPropertyTitle))
-            query.addFilterPredicate(MPMediaPropertyPredicate(value: metadata.artist, forProperty: MPMediaItemPropertyArtist))
-            query.addFilterPredicate(MPMediaPropertyPredicate(value: metadata.albumTitle, forProperty: MPMediaItemPropertyAlbumTitle))
-            query.addFilterPredicate(MPMediaPropertyPredicate(value: metadata.trackNumber, forProperty: MPMediaItemPropertyAlbumTrackNumber))
-            query.addFilterPredicate(MPMediaPropertyPredicate(value: metadata.discNumber, forProperty: MPMediaItemPropertyDiscNumber))
-            let mediaItem = query.items?.first
+            let mediaItem = metadata.mediaQuery.items?.first
             self.url = mediaItem?.assetURL ?? url
         } else if let bookmark = bookmark, let resolvedURL = try? URL(resolvingBookmarkData: bookmark, bookmarkDataIsStale: &isStale) {
             self.url = resolvedURL
