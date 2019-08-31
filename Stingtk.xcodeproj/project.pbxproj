@@ -155,8 +155,8 @@
 				A581C38C1B946B7C006CE228 /* Engine.swift */,
 				A55C0E7122AA5498008DDB12 /* Show.swift */,
 				A5A49CB01B5BF216004B80CE /* Sting.swift */,
-				A5E65EB3231AE0BA0058BBEE /* Metadata.swift */,
 				A51D98ED22BBCF7D00124A40 /* Color.swift */,
+				A5E65EB3231AE0BA0058BBEE /* Metadata.swift */,
 				A567FB6F22F1F67A00B4DB70 /* OutputConfig.swift */,
 			);
 			path = Models;
