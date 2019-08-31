@@ -113,7 +113,7 @@ class PlaybackViewController: UICollectionViewController {
             
             guard let stingCell = cell as? StingCell else { return cell }
             
-            stingCell.titleLabel.text = sting.name ?? sting.songTitle ?? "Unknown Title"
+            stingCell.titleLabel.text = sting.name ?? sting.songTitle
             stingCell.isMissing = sting.isMissing
             stingCell.color = sting.color
             
@@ -233,7 +233,7 @@ class PlaybackViewController: UICollectionViewController {
         let alertController = UIAlertController(title: "Rename", message: nil, preferredStyle: .alert)
         alertController.addTextField { textField in
             textField.text = sting.name
-            textField.placeholder = sting.songTitle ?? "Unknown Title"
+            textField.placeholder = sting.songTitle
             textField.autocapitalizationType = .words
             textField.clearButtonMode = .always
         }

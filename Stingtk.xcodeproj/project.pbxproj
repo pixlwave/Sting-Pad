@@ -31,6 +31,7 @@
 		A5B39BDE1DAA843A00AA22EF /* FDWaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B39BDD1DAA843A00AA22EF /* FDWaveformView.swift */; };
 		A5BD01E0218F2AEB0010FE10 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5BD01DF218F2AEB0010FE10 /* Launch Screen.storyboard */; };
 		A5C32F4E228B64FE00E4B4EB /* Extends.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C32F4D228B64FE00E4B4EB /* Extends.swift */; };
+		A5E65EB4231AE0BA0058BBEE /* Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E65EB3231AE0BA0058BBEE /* Metadata.swift */; };
 		A5ECB86B22F30F670020FE16 /* DefaultColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ECB86A22F30F670020FE16 /* DefaultColorViewController.swift */; };
 		A5EDA9BA22F3434B00355AA3 /* ChannelSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EDA9B922F3434B00355AA3 /* ChannelSelectionViewController.swift */; };
 		A5F62D5022E0F56A00D57126 /* ShowBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F62D4F22E0F56A00D57126 /* ShowBrowserViewController.swift */; };
@@ -63,6 +64,7 @@
 		A5B39BDD1DAA843A00AA22EF /* FDWaveformView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FDWaveformView.swift; sourceTree = "<group>"; };
 		A5BD01DF218F2AEB0010FE10 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		A5C32F4D228B64FE00E4B4EB /* Extends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extends.swift; sourceTree = "<group>"; };
+		A5E65EB3231AE0BA0058BBEE /* Metadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metadata.swift; sourceTree = "<group>"; };
 		A5ECB86A22F30F670020FE16 /* DefaultColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultColorViewController.swift; sourceTree = "<group>"; };
 		A5EDA9B922F3434B00355AA3 /* ChannelSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelSelectionViewController.swift; sourceTree = "<group>"; };
 		A5F62D4F22E0F56A00D57126 /* ShowBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowBrowserViewController.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				A581C38C1B946B7C006CE228 /* Engine.swift */,
 				A55C0E7122AA5498008DDB12 /* Show.swift */,
 				A5A49CB01B5BF216004B80CE /* Sting.swift */,
+				A5E65EB3231AE0BA0058BBEE /* Metadata.swift */,
 				A51D98ED22BBCF7D00124A40 /* Color.swift */,
 				A567FB6F22F1F67A00B4DB70 /* OutputConfig.swift */,
 			);
@@ -264,6 +267,7 @@
 				A581C3A21B94A041006CE228 /* StingCell.swift in Sources */,
 				A567FB7022F1F67A00B4DB70 /* OutputConfig.swift in Sources */,
 				A5A49CB11B5BF216004B80CE /* Sting.swift in Sources */,
+				A5E65EB4231AE0BA0058BBEE /* Metadata.swift in Sources */,
 				A5C32F4E228B64FE00E4B4EB /* Extends.swift in Sources */,
 				A595169A22F99A21001E820A /* AddStingFooterView.swift in Sources */,
 				A5F62D5022E0F56A00D57126 /* ShowBrowserViewController.swift in Sources */,

@@ -7,9 +7,9 @@ class Sting: NSObject, Codable {
     let url: URL
     let bookmark: Data?
     let isMissing: Bool
-    let songTitle: String?
-    let songArtist: String?
-    let songAlbum: String?
+    let metadata: Metadata
+    var songTitle: String { metadata.songTitle ?? "Unknown Title" }
+    var songArtist: String { metadata.songArtist ?? "Unknown Artist" }
     
     var name: String?
     var color: Color = .default
@@ -55,9 +55,7 @@ class Sting: NSObject, Codable {
     enum CodingKeys: String, CodingKey {
         case url
         case bookmark
-        case songTitle
-        case songArtist
-        case songAlbum
+        case metadata
         case name
         case color
         case startTime
@@ -69,9 +67,7 @@ class Sting: NSObject, Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let url = try container.decode(URL.self, forKey: .url)
         let bookmark = try? container.decode(Data.self, forKey: .bookmark)
-        let songTitle = try? container.decode(String.self, forKey: .songTitle)
-        let songArtist = try? container.decode(String.self, forKey: .songArtist)
-        let songAlbum = try? container.decode(String.self, forKey: .songAlbum)
+        let metadata = try container.decode(Metadata.self, forKey: .metadata)
         let name = try? container.decode(String.self, forKey: .name)
         let color = try container.decode(Color.self, forKey: .color)
         let startTime = try container.decode(TimeInterval.self, forKey: .startTime)
@@ -84,9 +80,11 @@ class Sting: NSObject, Codable {
             #warning("TEST THIS ON DEVICE")
             #warning("Should this use track and disc number too?")
             #warning("Does what happens here is one of the values is nil?")
-            query.addFilterPredicate(MPMediaPropertyPredicate(value: songTitle, forProperty: MPMediaItemPropertyTitle))
-            query.addFilterPredicate(MPMediaPropertyPredicate(value: songArtist, forProperty: MPMediaItemPropertyArtist))
-            query.addFilterPredicate(MPMediaPropertyPredicate(value: songAlbum, forProperty: MPMediaItemPropertyAlbumTitle))
+            query.addFilterPredicate(MPMediaPropertyPredicate(value: metadata.songTitle, forProperty: MPMediaItemPropertyTitle))
+            query.addFilterPredicate(MPMediaPropertyPredicate(value: metadata.songArtist, forProperty: MPMediaItemPropertyArtist))
+            query.addFilterPredicate(MPMediaPropertyPredicate(value: metadata.songAlbum, forProperty: MPMediaItemPropertyAlbumTitle))
+            query.addFilterPredicate(MPMediaPropertyPredicate(value: metadata.songTrackNumber, forProperty: MPMediaItemPropertyAlbumTrackNumber))
+            query.addFilterPredicate(MPMediaPropertyPredicate(value: metadata.songDiscNumber, forProperty: MPMediaItemPropertyDiscNumber))
             let mediaItem = query.items?.first
             self.url = mediaItem?.assetURL ?? url
         } else if let bookmark = bookmark, let resolvedURL = try? URL(resolvingBookmarkData: bookmark, bookmarkDataIsStale: &isStale) {
@@ -96,9 +94,7 @@ class Sting: NSObject, Codable {
         }
         
         self.bookmark = bookmark
-        self.songTitle = songTitle
-        self.songArtist = songArtist
-        self.songAlbum = songAlbum
+        self.metadata = metadata
         self.name = name
         self.color = color
         self.startTime = startTime
@@ -132,9 +128,7 @@ class Sting: NSObject, Codable {
         url = assetURL
         bookmark = nil
         isMissing = false
-        songTitle = mediaItem.title
-        songArtist = mediaItem.artist
-        songAlbum = mediaItem.albumTitle
+        metadata = Metadata(songTitle: mediaItem.title, songArtist: mediaItem.artist, songAlbum: mediaItem.albumTitle, songTrackNumber: mediaItem.albumTrackNumber, songDiscNumber: mediaItem.discNumber)
         self.audioFile = audioFile
         
         super.init()
@@ -153,9 +147,7 @@ class Sting: NSObject, Codable {
         self.url = url
         bookmark = try? url.bookmarkData()
         isMissing = false
-        songTitle = url.songTitle()
-        songArtist = url.songArtist()
-        songAlbum = url.songAlbum()
+        metadata = Metadata(songTitle: url.songTitle(), songArtist: url.songArtist(), songAlbum: url.songAlbum(), songTrackNumber: nil, songDiscNumber: nil)
         self.audioFile = audioFile
         
         super.init()
