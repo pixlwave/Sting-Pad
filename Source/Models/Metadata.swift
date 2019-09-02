@@ -17,15 +17,34 @@ extension Metadata {
         self.init(title: url.songTitle(), artist: url.songArtist(), albumTitle: url.songAlbum(), trackNumber: nil, discNumber: nil)
     }
     
-    var mediaQuery: MPMediaQuery {
+    var mediaQueryItems: [MPMediaItem]? {
         let query = MPMediaQuery.songs()
-        #warning("TEST THIS ON DEVICE")
-        #warning("What happens here if one of the values is nil?")
-        query.addFilterPredicate(MPMediaPropertyPredicate(value: title, forProperty: MPMediaItemPropertyTitle))
-        query.addFilterPredicate(MPMediaPropertyPredicate(value: artist, forProperty: MPMediaItemPropertyArtist))
-        query.addFilterPredicate(MPMediaPropertyPredicate(value: albumTitle, forProperty: MPMediaItemPropertyAlbumTitle))
-        query.addFilterPredicate(MPMediaPropertyPredicate(value: trackNumber, forProperty: MPMediaItemPropertyAlbumTrackNumber))
+        
+        if let title = title {
+            query.addFilterPredicate(MPMediaPropertyPredicate(value: title, forProperty: MPMediaItemPropertyTitle))
+        }
+        
+        if let artist = artist {
+            query.addFilterPredicate(MPMediaPropertyPredicate(value: artist, forProperty: MPMediaItemPropertyArtist))
+        }
+        
+        if let albumTitle = albumTitle {
+            query.addFilterPredicate(MPMediaPropertyPredicate(value: albumTitle, forProperty: MPMediaItemPropertyAlbumTitle))
+        }
         query.addFilterPredicate(MPMediaPropertyPredicate(value: discNumber, forProperty: MPMediaItemPropertyDiscNumber))
-        return query
+        
+        var items = query.items
+        
+        if let trackNumber = trackNumber, trackNumber > 0 {     // track number is 0 if missing
+            // it's not possible to create a query with a track number predicate
+            items?.removeAll(where: { $0.albumTrackNumber != trackNumber })
+        }
+        
+        if let discNumber = discNumber, discNumber > 0 {        // disc number is 0 if missing
+            // it's not possible to create a query with a disc number predicate
+            items?.removeAll(where: { $0.discNumber != discNumber })
+        }
+        
+        return items
     }
 }

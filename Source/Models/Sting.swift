@@ -67,7 +67,7 @@ class Sting: NSObject, Codable {
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let url = try container.decode(URL.self, forKey: .url)
+        var url = try container.decode(URL.self, forKey: .url)
         let bookmark = try? container.decode(Data.self, forKey: .bookmark)
         let name = try? container.decode(String.self, forKey: .name)
         let color = try container.decode(Color.self, forKey: .color)
@@ -77,14 +77,8 @@ class Sting: NSObject, Codable {
         let loops = try container.decode(Bool.self, forKey: .loops)
         
         var isStale = false
-        #warning("Need to test checkResourceIsReachable works for ipod-library:// urls")
-        if url.isMediaItem, let isReachable = try? url.checkResourceIsReachable(), !isReachable {
-            let mediaItem = metadata.mediaQuery.items?.first
-            self.url = mediaItem?.assetURL ?? url
-        } else if let bookmark = bookmark, let resolvedURL = try? URL(resolvingBookmarkData: bookmark, bookmarkDataIsStale: &isStale) {
-            self.url = resolvedURL
-        } else {
-            self.url = url
+        if let bookmark = bookmark, let resolvedURL = try? URL(resolvingBookmarkData: bookmark, bookmarkDataIsStale: &isStale) {
+            url = resolvedURL
         }
         
         self.bookmark = bookmark
@@ -105,11 +99,17 @@ class Sting: NSObject, Codable {
         if let audioFile = try? AVAudioFile(forReading: url) {
             self.isMissing = false
             self.audioFile = audioFile
+        } else if url.isMediaItem, let mediaItem = metadata.mediaQueryItems?.first, let assetURL = mediaItem.assetURL, let audioFile = try? AVAudioFile(forReading: assetURL) {
+            url = assetURL
+            self.isMissing = false
+            self.audioFile = audioFile
         } else {
             // all codable properties are loaded above to preserve object if other changes are made to the show
             self.isMissing = true
             self.audioFile = AVAudioFile()
         }
+        
+        self.url = url
         
         super.init()
         
