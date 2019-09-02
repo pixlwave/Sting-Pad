@@ -81,14 +81,6 @@ class Sting: NSObject, Codable {
             url = resolvedURL
         }
         
-        self.bookmark = bookmark
-        self.name = name
-        self.color = color
-        self.metadata = metadata
-        self.startTime = startTime
-        self.endTime = endTime
-        self.loops = loops
-        
         let hasSecurityScopedAccess = url.startAccessingSecurityScopedResource()
         defer {
             if hasSecurityScopedAccess {
@@ -104,12 +96,18 @@ class Sting: NSObject, Codable {
             self.isMissing = false
             self.audioFile = audioFile
         } else {
-            // all codable properties are loaded above to preserve object if other changes are made to the show
             self.isMissing = true
             self.audioFile = AVAudioFile()
         }
         
         self.url = url
+        self.bookmark = bookmark
+        self.name = name
+        self.color = color
+        self.metadata = metadata
+        self.startTime = startTime
+        self.endTime = endTime
+        self.loops = loops
         
         super.init()
         
