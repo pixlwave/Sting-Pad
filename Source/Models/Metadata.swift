@@ -31,7 +31,6 @@ extension Metadata {
         if let albumTitle = albumTitle {
             query.addFilterPredicate(MPMediaPropertyPredicate(value: albumTitle, forProperty: MPMediaItemPropertyAlbumTitle))
         }
-        query.addFilterPredicate(MPMediaPropertyPredicate(value: discNumber, forProperty: MPMediaItemPropertyDiscNumber))
         
         var items = query.items
         
