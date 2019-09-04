@@ -10,7 +10,10 @@ struct Metadata: Codable {
 
 extension Metadata {
     init(mediaItem: MPMediaItem) {
-        self.init(title: mediaItem.title, artist: mediaItem.artist, albumTitle: mediaItem.albumTitle, trackNumber: mediaItem.albumTrackNumber, discNumber: mediaItem.discNumber)
+        let trackNumber = mediaItem.albumTrackNumber > 0 ? mediaItem.albumTrackNumber : nil
+        let discNumber = mediaItem.discNumber > 0 ? mediaItem.discNumber : nil
+        
+        self.init(title: mediaItem.title, artist: mediaItem.artist, albumTitle: mediaItem.albumTitle, trackNumber: trackNumber, discNumber: discNumber)
     }
     
     init(url: URL) {
