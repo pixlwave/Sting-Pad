@@ -383,7 +383,10 @@ class PlaybackViewController: UICollectionViewController {
                 delete.attributes = .destructive
             }
             
-            if sting.isMissing { return UIMenu(title: "", children: [delete]) }
+            if sting.isMissing {
+                let songInfo = UIAction(title: "\(sting.songTitle) by \(sting.songArtist)", attributes: .disabled) { action in }
+                return UIMenu(title: "", children: [delete, UIMenu(title: "", options: .displayInline, children: [songInfo])])
+            }
             
             let editMenu = UIMenu(title: "", options: .displayInline, children: [edit, rename, colorMenu])
             let fileMenu = UIMenu(title: "", options: .displayInline, children: [duplicate, insert, delete])
