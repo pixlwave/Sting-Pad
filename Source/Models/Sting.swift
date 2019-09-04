@@ -45,7 +45,7 @@ class Sting: NSObject, Codable {
         }
     }
     var sampleCount: AVAudioFrameCount {
-        return AVAudioFrameCount(endSample - startSample)
+        AVAudioFrameCount(endSample - startSample)
     }
     var totalTime: TimeInterval {
         Double(sampleCount) / audioFile.processingFormat.sampleRate

@@ -29,7 +29,9 @@ class Engine {
         else { return 0 }
         return Double(elapsedSamples) / sting.audioFile.processingFormat.sampleRate
     }
-    var remainingTime: TimeInterval { return totalTime - elapsedTime }
+    var remainingTime: TimeInterval {
+        totalTime - elapsedTime
+    }
     
     var isInBackground = false {
         didSet {

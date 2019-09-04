@@ -7,6 +7,6 @@ struct OutputConfig: Codable {
     var right: Int
     
     var highestChannel: Int {
-        return [left, right].sorted()[1]
+        [left, right].sorted()[1]
     }
 }
