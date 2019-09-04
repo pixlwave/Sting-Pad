@@ -36,8 +36,8 @@ extension URL {
             return mediaItem()?.albumTitle
         } else if isFileURL {
             if let metadata = metadata() {
-                let artist = AVMetadataItem.metadataItems(from: metadata, filteredByIdentifier: .commonIdentifierAlbumName).first
-                return artist?.stringValue
+                let album = AVMetadataItem.metadataItems(from: metadata, filteredByIdentifier: .commonIdentifierAlbumName).first
+                return album?.stringValue
             }
         }
         
