@@ -31,7 +31,7 @@ class EditViewController: UIViewController {
         waveformView.doesAllowScrubbing = true
         waveformView.doesAllowScroll = true
         waveformView.doesAllowStretch = true
-        waveformView.boundToScrub = .lower
+        waveformView.scrubbing = .highlightStart
         waveformView.wavesColor = UIColor(red: 0.35, green: 0.35, blue: 0.35, alpha: 1.0)
         waveformView.progressColor = .tintColor
         
@@ -66,7 +66,7 @@ class EditViewController: UIViewController {
     }
     
     @IBAction func boundControlChanged(_ sender: UISegmentedControl) {
-        waveformView.boundToScrub = sender.selectedSegmentIndex == 0 ? .lower : .upper
+        waveformView.scrubbing = sender.selectedSegmentIndex == 0 ? .highlightStart : .highlightEnd
     }
     
     @IBAction func previewStart() {
@@ -118,10 +118,10 @@ extension EditViewController: FDWaveformViewDelegate {
         sting.endSample = Int64(waveformView.highlightedSamples?.upperBound ?? waveformView.totalSamples)
         show.updateChangeCount(.done)
         
-        switch waveformView.boundToScrub {
-        case .lower:
+        switch waveformView.scrubbing {
+        case .highlightStart:
             previewStart()
-        case .upper:
+        case .highlightEnd:
             previewEnd()
         }
     }
