@@ -22,6 +22,7 @@ extension Metadata {
     
     var mediaQueryItems: [MPMediaItem]? {
         let query = MPMediaQuery.songs()
+        let originalPredicateCount = query.filterPredicates?.count ?? 0
         
         if let title = title {
             query.addFilterPredicate(MPMediaPropertyPredicate(value: title, forProperty: MPMediaItemPropertyTitle))
@@ -34,6 +35,9 @@ extension Metadata {
         if let albumTitle = albumTitle {
             query.addFilterPredicate(MPMediaPropertyPredicate(value: albumTitle, forProperty: MPMediaItemPropertyAlbumTitle))
         }
+        
+        // only proceed if at least one of the predicates above was added to the query
+        guard query.filterPredicates?.count ?? 0 > originalPredicateCount else { return nil }
         
         var items = query.items
         
