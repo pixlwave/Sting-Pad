@@ -229,15 +229,18 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="7J2-20-QTO" secondAttribute="trailing" id="1Al-sk-TLs"/>
                                     <constraint firstItem="lRX-bK-xRr" firstAttribute="top" secondItem="bwd-bB-yIj" secondAttribute="top" id="4AV-YH-Nl4"/>
-                                    <constraint firstItem="lRX-bK-xRr" firstAttribute="centerX" secondItem="7J2-20-QTO" secondAttribute="leading" id="H6v-o9-uH7"/>
+                                    <constraint firstItem="6Oy-Y8-dK5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="lRX-bK-xRr" secondAttribute="trailing" id="4Kg-6F-3pG"/>
+                                    <constraint firstItem="lRX-bK-xRr" firstAttribute="centerX" secondItem="7J2-20-QTO" secondAttribute="leading" priority="750" id="H6v-o9-uH7"/>
                                     <constraint firstItem="6Oy-Y8-dK5" firstAttribute="top" secondItem="bwd-bB-yIj" secondAttribute="top" id="IJp-wK-GNY"/>
                                     <constraint firstItem="clh-uY-v8F" firstAttribute="leading" secondItem="7J2-20-QTO" secondAttribute="leading" id="Mb2-X5-QjW"/>
                                     <constraint firstItem="clh-uY-v8F" firstAttribute="trailing" secondItem="7J2-20-QTO" secondAttribute="trailing" id="Uuj-VJ-8fc"/>
                                     <constraint firstAttribute="bottom" secondItem="7J2-20-QTO" secondAttribute="bottom" id="Vi4-6R-sOd"/>
                                     <constraint firstItem="7J2-20-QTO" firstAttribute="top" secondItem="lRX-bK-xRr" secondAttribute="bottom" id="Yic-5Q-fR6"/>
                                     <constraint firstItem="clh-uY-v8F" firstAttribute="top" secondItem="7J2-20-QTO" secondAttribute="top" id="crE-OW-bgg"/>
+                                    <constraint firstItem="lRX-bK-xRr" firstAttribute="centerX" relation="greaterThanOrEqual" secondItem="7J2-20-QTO" secondAttribute="leading" id="dSZ-Hc-Xq5"/>
                                     <constraint firstItem="7J2-20-QTO" firstAttribute="leading" secondItem="bwd-bB-yIj" secondAttribute="leading" id="oqK-67-Q6g"/>
-                                    <constraint firstItem="6Oy-Y8-dK5" firstAttribute="centerX" secondItem="7J2-20-QTO" secondAttribute="leading" constant="280" id="tHE-qb-DPI"/>
+                                    <constraint firstItem="6Oy-Y8-dK5" firstAttribute="centerX" relation="lessThanOrEqual" secondItem="7J2-20-QTO" secondAttribute="trailing" id="pmw-kJ-dqN"/>
+                                    <constraint firstItem="6Oy-Y8-dK5" firstAttribute="centerX" secondItem="7J2-20-QTO" secondAttribute="leading" priority="750" constant="280" id="tHE-qb-DPI"/>
                                     <constraint firstItem="clh-uY-v8F" firstAttribute="bottom" secondItem="7J2-20-QTO" secondAttribute="bottom" id="xaG-tN-iGv"/>
                                 </constraints>
                             </view>
