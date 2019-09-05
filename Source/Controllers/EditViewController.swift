@@ -13,7 +13,7 @@ class EditViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
-    @IBOutlet weak var waveformView: FDWaveformView!
+    @IBOutlet weak var waveformView: WaveformView!
     @IBOutlet weak var waveformLoadingView: UIView!
     @IBOutlet weak var previewStartHorizontalLayoutConstraint: NSLayoutConstraint!
     @IBOutlet weak var previewEndHorizontalLayoutConstraint: NSLayoutConstraint!
@@ -47,6 +47,8 @@ class EditViewController: UIViewController {
         // render the waveform
         waveformView.audioURL = sting.url
         
+        NotificationCenter.default.addObserver(self, selector: #selector(updatePreviewButtonPositions), name: .waveformViewDidUpdate, object: nil)
+        
         if engine.playingSting != nil { previewLengthControl.selectedSegmentIndex = 0 }
     }
     
@@ -61,21 +63,14 @@ class EditViewController: UIViewController {
         subtitleLabel.text = sting.songArtist
     }
     
-    func updatePreviewButtonPositions() {
+    @objc func updatePreviewButtonPositions() {
         if let highlightStart = waveformView.highlightedSamples?.lowerBound {
-            previewStartHorizontalLayoutConstraint.constant = position(of: highlightStart)
+            previewStartHorizontalLayoutConstraint.constant = waveformView.position(of: highlightStart)
         }
         
         if let highlightEnd = waveformView.highlightedSamples?.upperBound {
-            previewEndHorizontalLayoutConstraint.constant = position(of: highlightEnd)
+            previewEndHorizontalLayoutConstraint.constant = waveformView.position(of: highlightEnd)
         }
-    }
-    
-    func position(of sample: Int) -> CGFloat {
-        let width = waveformView.frame.width
-        let ratio = width / CGFloat(waveformView.zoomSamples.count)
-        
-        return CGFloat(sample - waveformView.zoomSamples.lowerBound) * ratio
     }
     
     @IBAction func boundControlChanged(_ sender: UISegmentedControl) {
@@ -123,11 +118,6 @@ extension EditViewController: FDWaveformViewDelegate {
     
     func waveformViewDidRender(_ waveform: FDWaveformView) {
         waveformLoadingView.isHidden = true
-        updatePreviewButtonPositions()
-    }
-    
-    func waveformDidEndPanning(_ waveformView: FDWaveformView) {
-        updatePreviewButtonPositions()
     }
     
     func waveformDidEndScrubbing(_ waveformView: FDWaveformView) {
