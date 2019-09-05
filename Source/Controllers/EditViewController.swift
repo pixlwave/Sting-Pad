@@ -9,11 +9,11 @@ class EditViewController: UIViewController {
     enum Bound { case lower, upper }
     
     var sting: Sting!
-    var waveformView: FDWaveformView!
     var previewLength: [TimeInterval] = [0, 1, 2, 5, 10]
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
+    @IBOutlet weak var waveformView: FDWaveformView!
     @IBOutlet weak var waveformLoadingView: UIView!
     @IBOutlet weak var loopSwitch: UISwitch!
     @IBOutlet weak var previewLengthControl: UISegmentedControl!
@@ -26,7 +26,6 @@ class EditViewController: UIViewController {
         loopSwitch.isOn = sting.loops
         
         // set up the waveform view
-        waveformView = FDWaveformView(frame: .zero)
         waveformView.delegate = self
         waveformView.doesAllowScrubbing = true
         waveformView.doesAllowScroll = true
@@ -45,7 +44,6 @@ class EditViewController: UIViewController {
         
         // render the waveform
         waveformView.audioURL = sting.url
-        view.addSubview(waveformView)
         
         if engine.playingSting != nil { previewLengthControl.selectedSegmentIndex = 0 }
     }
@@ -53,10 +51,6 @@ class EditViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         // the sting's cell will reload when previewed, so force a reload in case it wasn't previewed.
         NotificationCenter.default.post(name: .didFinishEditing, object: sting)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        waveformView.frame = waveformLoadingView.frame
     }
     
     func updateLabels() {
@@ -109,7 +103,6 @@ extension EditViewController: FDWaveformViewDelegate {
     }
     
     func waveformViewDidRender(_ waveform: FDWaveformView) {
-        waveformView.frame = waveformLoadingView.frame
         waveformLoadingView.isHidden = true
     }
     
