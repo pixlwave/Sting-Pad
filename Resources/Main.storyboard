@@ -237,7 +237,7 @@
                                     <constraint firstItem="7J2-20-QTO" firstAttribute="top" secondItem="lRX-bK-xRr" secondAttribute="bottom" id="Yic-5Q-fR6"/>
                                     <constraint firstItem="clh-uY-v8F" firstAttribute="top" secondItem="7J2-20-QTO" secondAttribute="top" id="crE-OW-bgg"/>
                                     <constraint firstItem="7J2-20-QTO" firstAttribute="leading" secondItem="bwd-bB-yIj" secondAttribute="leading" id="oqK-67-Q6g"/>
-                                    <constraint firstItem="6Oy-Y8-dK5" firstAttribute="centerX" secondItem="7J2-20-QTO" secondAttribute="trailing" id="tHE-qb-DPI"/>
+                                    <constraint firstItem="6Oy-Y8-dK5" firstAttribute="centerX" secondItem="7J2-20-QTO" secondAttribute="leading" constant="280" id="tHE-qb-DPI"/>
                                     <constraint firstItem="clh-uY-v8F" firstAttribute="bottom" secondItem="7J2-20-QTO" secondAttribute="bottom" id="xaG-tN-iGv"/>
                                 </constraints>
                             </view>
@@ -350,7 +350,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="loopSwitch" destination="RCd-w4-mUV" id="dO8-oc-7GR"/>
+                        <outlet property="previewEndHorizontalLayoutConstraint" destination="tHE-qb-DPI" id="mOc-d5-OQM"/>
                         <outlet property="previewLengthControl" destination="vXN-JJ-zX7" id="kGY-kB-our"/>
+                        <outlet property="previewStartHorizontalLayoutConstraint" destination="H6v-o9-uH7" id="j11-3g-XM1"/>
                         <outlet property="subtitleLabel" destination="8ah-Ra-mmM" id="PDI-ff-nfj"/>
                         <outlet property="titleLabel" destination="EDC-cS-RXP" id="mWC-r4-wcL"/>
                         <outlet property="waveformLoadingView" destination="clh-uY-v8F" id="SAp-fH-qL2"/>
