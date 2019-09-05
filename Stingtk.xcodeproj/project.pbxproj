@@ -32,6 +32,7 @@
 		A5BD01E0218F2AEB0010FE10 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5BD01DF218F2AEB0010FE10 /* Launch Screen.storyboard */; };
 		A5C32F4E228B64FE00E4B4EB /* Extends.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C32F4D228B64FE00E4B4EB /* Extends.swift */; };
 		A5CEE51323215B1800BB7CD1 /* WaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CEE51223215B1800BB7CD1 /* WaveformView.swift */; };
+		A5CEE5152321695100BB7CD1 /* WaveformMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CEE5142321695100BB7CD1 /* WaveformMarkerView.swift */; };
 		A5E65EB4231AE0BA0058BBEE /* Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E65EB3231AE0BA0058BBEE /* Metadata.swift */; };
 		A5ECB86B22F30F670020FE16 /* DefaultColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ECB86A22F30F670020FE16 /* DefaultColorViewController.swift */; };
 		A5EDA9BA22F3434B00355AA3 /* ChannelSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EDA9B922F3434B00355AA3 /* ChannelSelectionViewController.swift */; };
@@ -66,6 +67,7 @@
 		A5BD01DF218F2AEB0010FE10 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		A5C32F4D228B64FE00E4B4EB /* Extends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extends.swift; sourceTree = "<group>"; };
 		A5CEE51223215B1800BB7CD1 /* WaveformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformView.swift; sourceTree = "<group>"; };
+		A5CEE5142321695100BB7CD1 /* WaveformMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformMarkerView.swift; sourceTree = "<group>"; };
 		A5E65EB3231AE0BA0058BBEE /* Metadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metadata.swift; sourceTree = "<group>"; };
 		A5ECB86A22F30F670020FE16 /* DefaultColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultColorViewController.swift; sourceTree = "<group>"; };
 		A5EDA9B922F3434B00355AA3 /* ChannelSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelSelectionViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				A595169922F99A21001E820A /* AddStingFooterView.swift */,
 				A56EB2C822F7538F00358A7C /* AddStingButton.swift */,
 				A5CEE51223215B1800BB7CD1 /* WaveformView.swift */,
+				A5CEE5142321695100BB7CD1 /* WaveformMarkerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				A5ECB86B22F30F670020FE16 /* DefaultColorViewController.swift in Sources */,
 				A5A49C8F1B5BF1C2004B80CE /* AppDelegate.swift in Sources */,
 				A5B39BDE1DAA843A00AA22EF /* FDWaveformView.swift in Sources */,
+				A5CEE5152321695100BB7CD1 /* WaveformMarkerView.swift in Sources */,
 				A549825B1F7067EC00909196 /* FDWaveformRenderOperation.swift in Sources */,
 				A51D98EE22BBCF7D00124A40 /* Color.swift in Sources */,
 				A59EC6EA22EB5696009A7ED1 /* TransportView.swift in Sources */,

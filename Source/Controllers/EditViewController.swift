@@ -34,7 +34,7 @@ class EditViewController: UIViewController {
         waveformView.doesAllowStretch = true
         waveformView.scrubbing = .highlightStart
         waveformView.wavesColor = UIColor(red: 0.35, green: 0.35, blue: 0.35, alpha: 1.0)
-        waveformView.progressColor = .tintColor
+        waveformView.progressColor = sting.color.value
         
         // safely access the url
         let hasSecurityScopedAccess = sting.url.startAccessingSecurityScopedResource()
