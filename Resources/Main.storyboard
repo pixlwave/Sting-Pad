@@ -141,7 +141,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="cey-fv-2gg" userLabel="Top Stack">
-                                <rect key="frame" x="20" y="76" width="280" height="79.5"/>
+                                <rect key="frame" x="20" y="76" width="280" height="43.5"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDC-cS-RXP">
                                         <rect key="frame" x="0.0" y="0.0" width="280" height="21.5"/>
@@ -155,16 +155,6 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="1fo-c8-qOt">
-                                        <rect key="frame" x="79.5" y="48.5" width="121" height="32"/>
-                                        <segments>
-                                            <segment title="Start" width="60"/>
-                                            <segment title="End" width="60"/>
-                                        </segments>
-                                        <connections>
-                                            <action selector="boundControlChanged:" destination="sKY-0b-GtB" eventType="valueChanged" id="L7z-rb-erb"/>
-                                        </connections>
-                                    </segmentedControl>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="8ah-Ra-mmM" firstAttribute="width" secondItem="cey-fv-2gg" secondAttribute="width" id="doJ-qv-mZd"/>
@@ -172,7 +162,7 @@
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bwd-bB-yIj" userLabel="Waveform Container">
-                                <rect key="frame" x="20" y="175.5" width="280" height="117"/>
+                                <rect key="frame" x="20" y="139.5" width="280" height="117"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7J2-20-QTO" customClass="WaveformView" customModule="Stingtk" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="42" width="280" height="75"/>
@@ -245,7 +235,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyO-e7-KqD">
-                                <rect key="frame" x="276" y="292.5" width="24" height="23"/>
+                                <rect key="frame" x="276" y="256.5" width="24" height="23"/>
                                 <state key="normal" image="1.magnifyingglass" catalog="system">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
@@ -255,7 +245,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="oK2-1w-g1j" userLabel="Bottom Stack">
-                                <rect key="frame" x="20" y="323.5" width="280" height="153"/>
+                                <rect key="frame" x="20" y="287.5" width="280" height="153"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hG6-QV-E3U">
                                         <rect key="frame" x="88.5" y="0.0" width="103" height="36"/>
@@ -280,14 +270,14 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="2ZM-zS-YH1">
                                         <rect key="frame" x="0.0" y="44" width="280" height="50"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto-preview" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="obS-Gm-PoA">
-                                                <rect key="frame" x="0.0" y="14" width="91" height="22"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Previews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="obS-Gm-PoA">
+                                                <rect key="frame" x="0.0" y="14" width="68" height="22"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="vXN-JJ-zX7">
-                                                <rect key="frame" x="111" y="9.5" width="169" height="32"/>
+                                                <rect key="frame" x="88" y="9.5" width="192" height="32"/>
                                                 <segments>
                                                     <segment title="Off"/>
                                                     <segment title="1"/>
