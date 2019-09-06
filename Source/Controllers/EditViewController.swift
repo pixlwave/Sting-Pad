@@ -13,9 +13,11 @@ class EditViewController: UIViewController {
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var waveformView: WaveformView!
     @IBOutlet weak var waveformLoadingView: UIView!
+    @IBOutlet weak var startPlayButton: UIButton!
     @IBOutlet weak var startPlayButtonHorizontalLayoutConstraint: NSLayoutConstraint!
     @IBOutlet weak var startMarkerView: WaveformMarkerView!
     @IBOutlet weak var startMarkerHorizontalLayoutConstraint: NSLayoutConstraint!
+    @IBOutlet weak var endPlayButton: UIButton!
     @IBOutlet weak var endPlayButtonHorizontalLayoutConstraint: NSLayoutConstraint!
     @IBOutlet weak var endMarkerView: WaveformMarkerView!
     @IBOutlet weak var endMarkerHorizontalLayoutConstraint: NSLayoutConstraint!
@@ -53,7 +55,10 @@ class EditViewController: UIViewController {
         startMarkerView.dragRecogniser.addTarget(self, action: #selector(startMarkerDragged(_:)))
         endMarkerView.dragRecogniser.addTarget(self, action: #selector(endMarkerDragged(_:)))
         
-        if engine.playingSting != nil { previewLengthControl.selectedSegmentIndex = 0 }
+        if engine.playingSting != nil {
+            previewLengthControl.selectedSegmentIndex = 0
+            previewLengthDidChange()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -65,6 +70,11 @@ class EditViewController: UIViewController {
         navigationItem.title = sting.name ?? sting.songTitle
         titleLabel.text = sting.songTitle
         subtitleLabel.text = sting.songArtist
+    }
+    
+    @IBAction func previewLengthDidChange() {
+        startPlayButton.isEnabled = previewLengthControl.selectedSegmentIndex > 0
+        endPlayButton.isEnabled = previewLengthControl.selectedSegmentIndex > 0
     }
     
     @objc func updatePreviewButtonPositions() {
@@ -116,15 +126,21 @@ class EditViewController: UIViewController {
     }
     
     @IBAction func previewStart() {
-        engine.previewStart(of: sting, for: previewLength[previewLengthControl.selectedSegmentIndex])
+        let length = previewLength[previewLengthControl.selectedSegmentIndex]
+        if length < 10 {
+            engine.previewStart(of: sting, for: length)
+        } else {
+            engine.play(sting)
+        }
     }
     
     @IBAction func previewEnd() {
-        engine.previewEnd(of: sting, for: previewLength[previewLengthControl.selectedSegmentIndex])
-    }
-    
-    @IBAction func previewFull() {
-        engine.play(sting)
+        let length = previewLength[previewLengthControl.selectedSegmentIndex]
+        if length < 10 {
+            engine.previewEnd(of: sting, for: length)
+        } else {
+            engine.play(sting)
+        }
     }
     
     @IBAction func stop() {

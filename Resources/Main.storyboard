@@ -259,19 +259,19 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="oK2-1w-g1j" userLabel="Bottom Stack">
-                                <rect key="frame" x="20" y="315.5" width="280" height="153"/>
+                                <rect key="frame" x="20" y="315.5" width="280" height="143"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hG6-QV-E3U">
-                                        <rect key="frame" x="88.5" y="0.0" width="103" height="36"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hG6-QV-E3U">
+                                        <rect key="frame" x="88.5" y="0.0" width="103" height="40.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loop" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRD-t4-QSP">
-                                                <rect key="frame" x="0.0" y="0.0" width="49" height="36"/>
+                                                <rect key="frame" x="0.0" y="10" width="49" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RCd-w4-mUV">
-                                                <rect key="frame" x="54" y="0.0" width="51" height="36"/>
+                                                <rect key="frame" x="54" y="4.5" width="51" height="31"/>
                                                 <connections>
                                                     <action selector="toggleLoop:" destination="sKY-0b-GtB" eventType="valueChanged" id="m5f-vK-8vz"/>
                                                 </connections>
@@ -281,53 +281,41 @@
                                             <constraint firstItem="HRD-t4-QSP" firstAttribute="centerY" secondItem="RCd-w4-mUV" secondAttribute="centerY" id="Fsi-GU-485"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="2ZM-zS-YH1">
-                                        <rect key="frame" x="0.0" y="44" width="280" height="50"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="firstBaseline" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="2ZM-zS-YH1">
+                                        <rect key="frame" x="0.0" y="48.5" width="280" height="34.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Previews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="obS-Gm-PoA">
-                                                <rect key="frame" x="0.0" y="14" width="68" height="22"/>
+                                                <rect key="frame" x="0.0" y="8" width="64.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="vXN-JJ-zX7">
-                                                <rect key="frame" x="88" y="9.5" width="192" height="32"/>
+                                                <rect key="frame" x="84.5" y="3.5" width="195.5" height="32"/>
                                                 <segments>
                                                     <segment title="Off"/>
                                                     <segment title="1"/>
                                                     <segment title="2"/>
                                                     <segment title="5"/>
-                                                    <segment title="10"/>
+                                                    <segment title="Full"/>
                                                 </segments>
+                                                <connections>
+                                                    <action selector="previewLengthDidChange" destination="sKY-0b-GtB" eventType="valueChanged" id="3PZ-9H-kRy"/>
+                                                </connections>
                                             </segmentedControl>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="CeP-yl-xei"/>
-                                            <constraint firstItem="obS-Gm-PoA" firstAttribute="firstBaseline" secondItem="vXN-JJ-zX7" secondAttribute="firstBaseline" id="Guc-A7-cE4"/>
-                                        </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="F6f-rA-MF5">
-                                        <rect key="frame" x="75.5" y="102" width="129" height="51"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="adK-SS-ewl">
-                                                <rect key="frame" x="0.0" y="1.5" width="62" height="48"/>
-                                                <inset key="contentEdgeInsets" minX="0.0" minY="15" maxX="0.0" maxY="15"/>
-                                                <state key="normal" title="Preview"/>
-                                                <connections>
-                                                    <action selector="previewFull" destination="sKY-0b-GtB" eventType="touchDown" id="EM9-qh-e0L"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="E1U-R8-1nj">
-                                                <rect key="frame" x="67" y="1.5" width="62" height="48"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <inset key="contentEdgeInsets" minX="15" minY="15" maxX="15" maxY="15"/>
-                                                <state key="normal" title="Stop"/>
-                                                <connections>
-                                                    <action selector="stop" destination="sKY-0b-GtB" eventType="touchDown" id="Aah-Rj-OXv"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="E1U-R8-1nj">
+                                        <rect key="frame" x="116" y="91" width="48" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <inset key="contentEdgeInsets" minX="15" minY="15" maxX="15" maxY="15"/>
+                                        <state key="normal" image="stop" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="stop" destination="sKY-0b-GtB" eventType="touchDown" id="Aah-Rj-OXv"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -364,11 +352,13 @@
                     <connections>
                         <outlet property="endMarkerHorizontalLayoutConstraint" destination="e4Q-it-uoL" id="sgG-WZ-o3v"/>
                         <outlet property="endMarkerView" destination="x4N-WC-9YE" id="GGz-x2-0fx"/>
+                        <outlet property="endPlayButton" destination="6Oy-Y8-dK5" id="vax-1o-9gi"/>
                         <outlet property="endPlayButtonHorizontalLayoutConstraint" destination="tHE-qb-DPI" id="mOc-d5-OQM"/>
                         <outlet property="loopSwitch" destination="RCd-w4-mUV" id="dO8-oc-7GR"/>
                         <outlet property="previewLengthControl" destination="vXN-JJ-zX7" id="kGY-kB-our"/>
                         <outlet property="startMarkerHorizontalLayoutConstraint" destination="6kI-r7-zUb" id="wd4-e0-WbL"/>
                         <outlet property="startMarkerView" destination="JeS-dG-0bW" id="7se-ac-Snw"/>
+                        <outlet property="startPlayButton" destination="lRX-bK-xRr" id="R61-ea-vPH"/>
                         <outlet property="startPlayButtonHorizontalLayoutConstraint" destination="H6v-o9-uH7" id="j11-3g-XM1"/>
                         <outlet property="subtitleLabel" destination="8ah-Ra-mmM" id="PDI-ff-nfj"/>
                         <outlet property="titleLabel" destination="EDC-cS-RXP" id="mWC-r4-wcL"/>
