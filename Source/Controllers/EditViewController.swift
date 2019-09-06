@@ -50,7 +50,7 @@ class EditViewController: UIViewController {
         // render the waveform
         waveformView.audioURL = sting.url
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updatePreviewButtonPositions), name: .waveformViewDidUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(layoutWaveformOverlayViews), name: .waveformViewDidUpdate, object: nil)
         
         startMarkerView.dragRecogniser.addTarget(self, action: #selector(startMarkerDragged(_:)))
         endMarkerView.dragRecogniser.addTarget(self, action: #selector(endMarkerDragged(_:)))
@@ -66,6 +66,10 @@ class EditViewController: UIViewController {
         NotificationCenter.default.post(name: .didFinishEditing, object: sting)
     }
     
+    override func viewDidLayoutSubviews() {
+        layoutWaveformOverlayViews()
+    }
+    
     func updateLabels() {
         navigationItem.title = sting.name ?? sting.songTitle
         titleLabel.text = sting.songTitle
@@ -77,7 +81,7 @@ class EditViewController: UIViewController {
         endPlayButton.isEnabled = previewLengthControl.selectedSegmentIndex > 0
     }
     
-    @objc func updatePreviewButtonPositions() {
+    @objc func layoutWaveformOverlayViews() {
         if let startSample = waveformView.highlightedSamples?.lowerBound, let x = waveformView.position(of: startSample) {
             startPlayButtonHorizontalLayoutConstraint.constant = waveformView.position(of: startSample) ?? 0
             startMarkerHorizontalLayoutConstraint.constant = x
