@@ -16,8 +16,9 @@ class WaveformView: FDWaveformView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
-        startMarker.dragRecogniser.addTarget(self, action: #selector(startHandleDragged(_:)))
-        endMarker.dragRecogniser.addTarget(self, action: #selector(endHandleDragged(_:)))
+        startMarker.dragRecogniser.addTarget(self, action: #selector(startMarkerDragged(_:)))
+        endMarker.dragRecogniser.addTarget(self, action: #selector(endMarkerDragged(_:)))
+        
         addSubview(startMarker)
         addSubview(endMarker)
     }
@@ -44,25 +45,25 @@ class WaveformView: FDWaveformView {
         return zoomSamples.lowerBound + Int(position * ratio)
     }
     
-    @objc func startHandleDragged(_ recognizer: UIPanGestureRecognizer) {
+    @objc func startMarkerDragged(_ recognizer: UIPanGestureRecognizer) {
         let startSample = sample(for: recognizer.location(in: self).x)
         
         guard let endSample = highlightedSamples?.upperBound, startSample < endSample else { return }
         highlightedSamples = startSample ..< endSample
         
         if recognizer.state == .ended {
-            NotificationCenter.default.post(Notification(name: .startMarkerDidFinishMoving))
+            NotificationCenter.default.post(Notification(name: .startMarkerDragDidFinish))
         }
     }
     
-    @objc func endHandleDragged(_ recognizer: UIPanGestureRecognizer) {
+    @objc func endMarkerDragged(_ recognizer: UIPanGestureRecognizer) {
         let endSample = sample(for: recognizer.location(in: self).x)
         
         guard let startSample = highlightedSamples?.lowerBound, startSample < endSample else { return }
         highlightedSamples = startSample ..< endSample
         
         if recognizer.state == .ended {
-            NotificationCenter.default.post(Notification(name: .endMarkerDidFinishMoving))
+            NotificationCenter.default.post(Notification(name: .endMarkerDragDidFinish))
         }
     }
     

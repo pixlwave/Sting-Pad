@@ -47,8 +47,8 @@ class EditViewController: UIViewController {
         waveformView.audioURL = sting.url
         
         NotificationCenter.default.addObserver(self, selector: #selector(updatePreviewButtonPositions), name: .waveformViewDidUpdate, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(startMarkerDidFinishMoving), name: .startMarkerDidFinishMoving, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(endMarkerDidFinishMoving), name: .endMarkerDidFinishMoving, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(startSampleDidChange), name: .startMarkerDragDidFinish, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(endSampleDidChange), name: .endMarkerDragDidFinish, object: nil)
         
         if engine.playingSting != nil { previewLengthControl.selectedSegmentIndex = 0 }
     }
@@ -74,14 +74,14 @@ class EditViewController: UIViewController {
         }
     }
     
-    @objc func startMarkerDidFinishMoving() {
+    @objc func startSampleDidChange() {
         sting.startSample = Int64(waveformView.highlightedSamples?.lowerBound ?? 0)
         sting.endSample = Int64(waveformView.highlightedSamples?.upperBound ?? waveformView.totalSamples)
         show.updateChangeCount(.done)
         previewStart()
     }
     
-    @objc func endMarkerDidFinishMoving() {
+    @objc func endSampleDidChange() {
         sting.startSample = Int64(waveformView.highlightedSamples?.lowerBound ?? 0)
         sting.endSample = Int64(waveformView.highlightedSamples?.upperBound ?? waveformView.totalSamples)
         show.updateChangeCount(.done)
