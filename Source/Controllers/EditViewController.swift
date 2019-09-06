@@ -66,11 +66,11 @@ class EditViewController: UIViewController {
     
     @objc func updatePreviewButtonPositions() {
         if let highlightStart = waveformView.highlightedSamples?.lowerBound {
-            previewStartHorizontalLayoutConstraint.constant = waveformView.position(of: highlightStart)
+            previewStartHorizontalLayoutConstraint.constant = waveformView.position(of: highlightStart) ?? 0
         }
         
         if let highlightEnd = waveformView.highlightedSamples?.upperBound {
-            previewEndHorizontalLayoutConstraint.constant = waveformView.position(of: highlightEnd)
+            previewEndHorizontalLayoutConstraint.constant = waveformView.position(of: highlightEnd) ?? waveformView.bounds.width
         }
     }
     
