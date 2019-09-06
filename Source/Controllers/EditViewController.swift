@@ -29,10 +29,9 @@ class EditViewController: UIViewController {
         
         // set up the waveform view
         waveformView.delegate = self
-        waveformView.doesAllowScrubbing = true
+        waveformView.doesAllowScrubbing = false
         waveformView.doesAllowScroll = true
         waveformView.doesAllowStretch = true
-        waveformView.scrubbing = .highlightStart
         waveformView.wavesColor = UIColor(red: 0.35, green: 0.35, blue: 0.35, alpha: 1.0)
         waveformView.progressColor = sting.color.value
         
@@ -48,6 +47,8 @@ class EditViewController: UIViewController {
         waveformView.audioURL = sting.url
         
         NotificationCenter.default.addObserver(self, selector: #selector(updatePreviewButtonPositions), name: .waveformViewDidUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(startMarkerDidFinishMoving), name: .startMarkerDidFinishMoving, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(endMarkerDidFinishMoving), name: .endMarkerDidFinishMoving, object: nil)
         
         if engine.playingSting != nil { previewLengthControl.selectedSegmentIndex = 0 }
     }
@@ -73,8 +74,18 @@ class EditViewController: UIViewController {
         }
     }
     
-    @IBAction func boundControlChanged(_ sender: UISegmentedControl) {
-        waveformView.scrubbing = sender.selectedSegmentIndex == 0 ? .highlightStart : .highlightEnd
+    @objc func startMarkerDidFinishMoving() {
+        sting.startSample = Int64(waveformView.highlightedSamples?.lowerBound ?? 0)
+        sting.endSample = Int64(waveformView.highlightedSamples?.upperBound ?? waveformView.totalSamples)
+        show.updateChangeCount(.done)
+        previewStart()
+    }
+    
+    @objc func endMarkerDidFinishMoving() {
+        sting.startSample = Int64(waveformView.highlightedSamples?.lowerBound ?? 0)
+        sting.endSample = Int64(waveformView.highlightedSamples?.upperBound ?? waveformView.totalSamples)
+        show.updateChangeCount(.done)
+        previewEnd()
     }
     
     @IBAction func previewStart() {
@@ -118,19 +129,6 @@ extension EditViewController: FDWaveformViewDelegate {
     
     func waveformViewDidRender(_ waveform: FDWaveformView) {
         waveformLoadingView.isHidden = true
-    }
-    
-    func waveformDidEndScrubbing(_ waveformView: FDWaveformView) {
-        sting.startSample = Int64(waveformView.highlightedSamples?.lowerBound ?? 0)
-        sting.endSample = Int64(waveformView.highlightedSamples?.upperBound ?? waveformView.totalSamples)
-        show.updateChangeCount(.done)
-        
-        switch waveformView.scrubbing {
-        case .highlightStart:
-            previewStart()
-        case .highlightEnd:
-            previewEnd()
-        }
     }
     
 }

@@ -45,13 +45,25 @@ class WaveformView: FDWaveformView {
     }
     
     @objc func startHandleDragged(_ recognizer: UIPanGestureRecognizer) {
-        scrubbing = .highlightStart
-        scrub(to: sample(for: recognizer.location(in: self).x))
+        let startSample = sample(for: recognizer.location(in: self).x)
+        
+        guard let endSample = highlightedSamples?.upperBound, startSample < endSample else { return }
+        highlightedSamples = startSample ..< endSample
+        
+        if recognizer.state == .ended {
+            NotificationCenter.default.post(Notification(name: .startMarkerDidFinishMoving))
+        }
     }
     
     @objc func endHandleDragged(_ recognizer: UIPanGestureRecognizer) {
-        scrubbing = .highlightEnd
-        scrub(to: sample(for: recognizer.location(in: self).x))
+        let endSample = sample(for: recognizer.location(in: self).x)
+        
+        guard let startSample = highlightedSamples?.lowerBound, startSample < endSample else { return }
+        highlightedSamples = startSample ..< endSample
+        
+        if recognizer.state == .ended {
+            NotificationCenter.default.post(Notification(name: .endMarkerDidFinishMoving))
+        }
     }
     
 }
