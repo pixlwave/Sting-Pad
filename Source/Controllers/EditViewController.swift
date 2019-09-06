@@ -6,8 +6,6 @@ class EditViewController: UIViewController {
     let engine = Engine.shared
     let show = Show.shared
     
-    enum Bound { case lower, upper }
-    
     var sting: Sting!
     var previewLength: [TimeInterval] = [0, 1, 2, 5, 10]
     
