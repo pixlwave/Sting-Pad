@@ -7,7 +7,7 @@ class WaveformMarkerView: UIView {
     
     let dragRecogniser = UIPanGestureRecognizer()
     let color = UIColor.tintColor
-    let width: CGFloat = 16
+    let width: CGFloat = 20
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -33,7 +33,7 @@ class WaveformMarkerView: UIView {
         
         let handleRadius = bounds.width / 2
         
-        lineView.frame = CGRect(x: bounds.midX - 0.5, y: 0, width: 1, height: bounds.height - handleRadius)
+        lineView.frame = CGRect(x: bounds.midX - 1, y: 0, width: 2, height: bounds.height - handleRadius)
         handleView.frame = CGRect(x: 0, y: bounds.height - 2 * handleRadius, width: 2 * handleRadius, height: 2 * handleRadius)
         handleView.layer.cornerRadius = handleRadius
     }
