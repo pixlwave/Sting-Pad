@@ -13,8 +13,12 @@ class EditViewController: UIViewController {
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var waveformView: WaveformView!
     @IBOutlet weak var waveformLoadingView: UIView!
-    @IBOutlet weak var previewStartHorizontalLayoutConstraint: NSLayoutConstraint!
-    @IBOutlet weak var previewEndHorizontalLayoutConstraint: NSLayoutConstraint!
+    @IBOutlet weak var startPlayButtonHorizontalLayoutConstraint: NSLayoutConstraint!
+    @IBOutlet weak var startMarkerView: WaveformMarkerView!
+    @IBOutlet weak var startMarkerHorizontalLayoutConstraint: NSLayoutConstraint!
+    @IBOutlet weak var endPlayButtonHorizontalLayoutConstraint: NSLayoutConstraint!
+    @IBOutlet weak var endMarkerView: WaveformMarkerView!
+    @IBOutlet weak var endMarkerHorizontalLayoutConstraint: NSLayoutConstraint!
     @IBOutlet weak var loopSwitch: UISwitch!
     @IBOutlet weak var previewLengthControl: UISegmentedControl!
     
@@ -45,8 +49,9 @@ class EditViewController: UIViewController {
         waveformView.audioURL = sting.url
         
         NotificationCenter.default.addObserver(self, selector: #selector(updatePreviewButtonPositions), name: .waveformViewDidUpdate, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(startSampleDidChange), name: .startMarkerDragDidFinish, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(endSampleDidChange), name: .endMarkerDragDidFinish, object: nil)
+        
+        startMarkerView.dragRecogniser.addTarget(self, action: #selector(startMarkerDragged(_:)))
+        endMarkerView.dragRecogniser.addTarget(self, action: #selector(endMarkerDragged(_:)))
         
         if engine.playingSting != nil { previewLengthControl.selectedSegmentIndex = 0 }
     }
@@ -63,27 +68,51 @@ class EditViewController: UIViewController {
     }
     
     @objc func updatePreviewButtonPositions() {
-        if let highlightStart = waveformView.highlightedSamples?.lowerBound {
-            previewStartHorizontalLayoutConstraint.constant = waveformView.position(of: highlightStart) ?? 0
+        if let startSample = waveformView.highlightedSamples?.lowerBound, let x = waveformView.position(of: startSample) {
+            startPlayButtonHorizontalLayoutConstraint.constant = waveformView.position(of: startSample) ?? 0
+            startMarkerHorizontalLayoutConstraint.constant = x
+            startMarkerView.isHidden = false
+        } else {
+            startMarkerView.isHidden = true
         }
         
-        if let highlightEnd = waveformView.highlightedSamples?.upperBound {
-            previewEndHorizontalLayoutConstraint.constant = waveformView.position(of: highlightEnd) ?? waveformView.bounds.width
+        if let endSample = waveformView.highlightedSamples?.upperBound, let x = waveformView.position(of: endSample) {
+            endPlayButtonHorizontalLayoutConstraint.constant = waveformView.position(of: endSample) ?? waveformView.bounds.width
+            endMarkerView.isHidden = false
+            endMarkerHorizontalLayoutConstraint.constant = x
+        } else {
+            endMarkerView.isHidden = true
         }
     }
     
-    @objc func startSampleDidChange() {
-        sting.startSample = Int64(waveformView.highlightedSamples?.lowerBound ?? 0)
-        sting.endSample = Int64(waveformView.highlightedSamples?.upperBound ?? waveformView.totalSamples)
-        show.updateChangeCount(.done)
-        previewStart()
+    @objc func startMarkerDragged(_ recognizer: UIPanGestureRecognizer) {
+        let startSample = waveformView.sample(for: recognizer.location(in: waveformView).x)
+        
+        guard let endSample = waveformView.highlightedSamples?.upperBound, startSample < endSample else { return }
+        waveformView.highlightedSamples = startSample ..< endSample
+        
+        if recognizer.state == .ended {
+            updateStartAndEndSamples()
+            previewStart()
+        }
     }
     
-    @objc func endSampleDidChange() {
+    @objc func endMarkerDragged(_ recognizer: UIPanGestureRecognizer) {
+        let endSample = waveformView.sample(for: recognizer.location(in: waveformView).x)
+        
+        guard let startSample = waveformView.highlightedSamples?.lowerBound, startSample < endSample else { return }
+        waveformView.highlightedSamples = startSample ..< endSample
+        
+        if recognizer.state == .ended {
+            updateStartAndEndSamples()
+            previewEnd()
+        }
+    }
+    
+    func updateStartAndEndSamples() {
         sting.startSample = Int64(waveformView.highlightedSamples?.lowerBound ?? 0)
         sting.endSample = Int64(waveformView.highlightedSamples?.upperBound ?? waveformView.totalSamples)
         show.updateChangeCount(.done)
-        previewEnd()
     }
     
     @IBAction func previewStart() {

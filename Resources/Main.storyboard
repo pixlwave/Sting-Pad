@@ -234,8 +234,22 @@
                                     <constraint firstItem="clh-uY-v8F" firstAttribute="bottom" secondItem="7J2-20-QTO" secondAttribute="bottom" id="xaG-tN-iGv"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JeS-dG-0bW" userLabel="Start Marker" customClass="WaveformMarkerView" customModule="Stingtk" customModuleProvider="target">
+                                <rect key="frame" x="10" y="181.5" width="20" height="95"/>
+                                <color key="backgroundColor" name="Tint Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="qx3-Jw-5Gw"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x4N-WC-9YE" userLabel="End Marker" customClass="WaveformMarkerView" customModule="Stingtk" customModuleProvider="target">
+                                <rect key="frame" x="290" y="181.5" width="20" height="95"/>
+                                <color key="backgroundColor" name="Tint Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="MOQ-PO-zcl"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyO-e7-KqD">
-                                <rect key="frame" x="276" y="256.5" width="24" height="23"/>
+                                <rect key="frame" x="276" y="284.5" width="24" height="23"/>
                                 <state key="normal" image="1.magnifyingglass" catalog="system">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
@@ -245,7 +259,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="oK2-1w-g1j" userLabel="Bottom Stack">
-                                <rect key="frame" x="20" y="287.5" width="280" height="153"/>
+                                <rect key="frame" x="20" y="315.5" width="280" height="153"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hG6-QV-E3U">
                                         <rect key="frame" x="88.5" y="0.0" width="103" height="36"/>
@@ -320,13 +334,19 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <color key="tintColor" name="Tint Color"/>
                         <constraints>
+                            <constraint firstItem="tyO-e7-KqD" firstAttribute="top" secondItem="x4N-WC-9YE" secondAttribute="bottom" constant="8" symbolic="YES" id="14J-Dh-7Gm"/>
+                            <constraint firstItem="x4N-WC-9YE" firstAttribute="height" secondItem="7J2-20-QTO" secondAttribute="height" constant="20" id="3Fs-61-R2w"/>
+                            <constraint firstItem="JeS-dG-0bW" firstAttribute="height" secondItem="7J2-20-QTO" secondAttribute="height" constant="20" id="4Pn-Cn-zbK"/>
+                            <constraint firstItem="JeS-dG-0bW" firstAttribute="centerX" secondItem="7J2-20-QTO" secondAttribute="leading" id="6kI-r7-zUb"/>
                             <constraint firstItem="oK2-1w-g1j" firstAttribute="width" secondItem="cey-fv-2gg" secondAttribute="width" id="9IW-3R-DB6"/>
                             <constraint firstItem="cey-fv-2gg" firstAttribute="top" secondItem="jgb-pc-X2x" secondAttribute="bottom" constant="20" id="Hpw-fM-An3"/>
+                            <constraint firstItem="JeS-dG-0bW" firstAttribute="top" secondItem="7J2-20-QTO" secondAttribute="top" id="Jx2-SJ-QOX"/>
                             <constraint firstItem="bwd-bB-yIj" firstAttribute="width" secondItem="cey-fv-2gg" secondAttribute="width" id="PP8-lx-XkK"/>
                             <constraint firstItem="rVl-rn-yCL" firstAttribute="top" relation="greaterThanOrEqual" secondItem="cey-fv-2gg" secondAttribute="bottom" constant="8" symbolic="YES" id="PRN-2l-UNv"/>
                             <constraint firstItem="tyO-e7-KqD" firstAttribute="trailing" secondItem="bwd-bB-yIj" secondAttribute="trailing" id="R9v-I8-hkQ"/>
-                            <constraint firstItem="tyO-e7-KqD" firstAttribute="top" secondItem="bwd-bB-yIj" secondAttribute="bottom" id="Tiz-g7-fyY"/>
+                            <constraint firstItem="x4N-WC-9YE" firstAttribute="top" secondItem="7J2-20-QTO" secondAttribute="top" id="UY1-RL-nfE"/>
                             <constraint firstItem="oK2-1w-g1j" firstAttribute="centerX" secondItem="cey-fv-2gg" secondAttribute="centerX" id="bkB-ez-gi4"/>
+                            <constraint firstItem="x4N-WC-9YE" firstAttribute="centerX" secondItem="7J2-20-QTO" secondAttribute="leading" constant="280" id="e4Q-it-uoL"/>
                             <constraint firstItem="bwd-bB-yIj" firstAttribute="top" secondItem="cey-fv-2gg" secondAttribute="bottom" constant="20" id="ikZ-xc-x2k"/>
                             <constraint firstAttribute="trailing" secondItem="cey-fv-2gg" secondAttribute="trailing" constant="20" symbolic="YES" id="o7e-3e-u51"/>
                             <constraint firstItem="oK2-1w-g1j" firstAttribute="top" secondItem="tyO-e7-KqD" secondAttribute="bottom" constant="8" symbolic="YES" id="prU-VX-lhg"/>
@@ -342,10 +362,14 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="endMarkerHorizontalLayoutConstraint" destination="e4Q-it-uoL" id="sgG-WZ-o3v"/>
+                        <outlet property="endMarkerView" destination="x4N-WC-9YE" id="GGz-x2-0fx"/>
+                        <outlet property="endPlayButtonHorizontalLayoutConstraint" destination="tHE-qb-DPI" id="mOc-d5-OQM"/>
                         <outlet property="loopSwitch" destination="RCd-w4-mUV" id="dO8-oc-7GR"/>
-                        <outlet property="previewEndHorizontalLayoutConstraint" destination="tHE-qb-DPI" id="mOc-d5-OQM"/>
                         <outlet property="previewLengthControl" destination="vXN-JJ-zX7" id="kGY-kB-our"/>
-                        <outlet property="previewStartHorizontalLayoutConstraint" destination="H6v-o9-uH7" id="j11-3g-XM1"/>
+                        <outlet property="startMarkerHorizontalLayoutConstraint" destination="6kI-r7-zUb" id="wd4-e0-WbL"/>
+                        <outlet property="startMarkerView" destination="JeS-dG-0bW" id="7se-ac-Snw"/>
+                        <outlet property="startPlayButtonHorizontalLayoutConstraint" destination="H6v-o9-uH7" id="j11-3g-XM1"/>
                         <outlet property="subtitleLabel" destination="8ah-Ra-mmM" id="PDI-ff-nfj"/>
                         <outlet property="titleLabel" destination="EDC-cS-RXP" id="mWC-r4-wcL"/>
                         <outlet property="waveformLoadingView" destination="clh-uY-v8F" id="SAp-fH-qL2"/>

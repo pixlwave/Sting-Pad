@@ -6,26 +6,23 @@ class WaveformMarkerView: UIView {
     private let handleView = UIView()
     
     let dragRecogniser = UIPanGestureRecognizer()
-    let color = UIColor.tintColor
-    let width: CGFloat = 20
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setup()
     }
     
-    init() {
-        super.init(frame: .zero)
-        setup()
-    }
-    
     private func setup() {
-        lineView.backgroundColor = color
-        handleView.backgroundColor = color
+        backgroundColor = .clear
         handleView.addGestureRecognizer(dragRecogniser)
         
         addSubview(lineView)
         addSubview(handleView)
+    }
+    
+    override func tintColorDidChange() {
+        lineView.backgroundColor = tintColor
+        handleView.backgroundColor = tintColor
     }
     
     override func layoutSubviews() {

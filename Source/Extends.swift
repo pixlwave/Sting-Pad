@@ -77,8 +77,6 @@ extension Notification.Name {
     static let addStingFromFiles = Notification.Name("Add Sting From Files")
     static let stingsDidChange = Notification.Name("Stings Did Change")
     static let waveformViewDidUpdate = Notification.Name("Waveform View Did Update")
-    static let startMarkerDragDidFinish = Notification.Name("Start Marker Drag Did Finish")
-    static let endMarkerDragDidFinish = Notification.Name("End Marker Drag Did Finish")
     static let didFinishEditing = Notification.Name("Did Finish Editing")
 }
 
