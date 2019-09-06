@@ -492,7 +492,7 @@ enum FDWaveformType: Equatable {
 
 extension FDWaveformView: UIGestureRecognizerDelegate {
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return gestureRecognizers?.contains(otherGestureRecognizer) ?? false
+        return true
     }
 
     @objc func handlePinchGesture(_ recognizer: UIPinchGestureRecognizer) {

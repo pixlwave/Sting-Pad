@@ -75,4 +75,9 @@ class WaveformView: FDWaveformView {
         }
     }
     
+    // prevents the pinch and pan gestures recognising with the gesture to dismiss the card style modal
+    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return gestureRecognizers?.contains(otherGestureRecognizer) ?? false
+    }
+    
 }
