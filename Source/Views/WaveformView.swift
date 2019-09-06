@@ -42,7 +42,8 @@ class WaveformView: FDWaveformView {
     
     func sample(for position: CGFloat) -> Int {
         let ratio = CGFloat(zoomSamples.count) / bounds.width
-        return zoomSamples.lowerBound + Int(position * ratio)
+        let sample = zoomSamples.lowerBound + Int(position * ratio)
+        return min(totalSamples, max(0, sample))
     }
     
     @objc func startMarkerDragged(_ recognizer: UIPanGestureRecognizer) {
