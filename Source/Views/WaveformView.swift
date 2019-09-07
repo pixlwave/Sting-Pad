@@ -2,12 +2,9 @@ import UIKit
 
 class WaveformView: FDWaveformView {
     
-    override var zoomSamples: CountableRange<Int> {
-        didSet { NotificationCenter.default.post(Notification(name: .waveformViewDidUpdate)) }
-    }
-    
-    override var highlightedSamples: CountableRange<Int>? {
-        didSet { NotificationCenter.default.post(Notification(name: .waveformViewDidUpdate)) }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        NotificationCenter.default.post(Notification(name: .waveformViewDidLayoutSubviews))
     }
     
     func position(of sample: Int) -> CGFloat? {

@@ -50,7 +50,7 @@ class EditViewController: UIViewController {
         // render the waveform
         waveformView.audioURL = sting.url
         
-        NotificationCenter.default.addObserver(self, selector: #selector(layoutWaveformOverlayViews), name: .waveformViewDidUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(layoutWaveformOverlayViews), name: .waveformViewDidLayoutSubviews, object: nil)
         
         startMarkerView.dragRecogniser.addTarget(self, action: #selector(startMarkerDragged(_:)))
         endMarkerView.dragRecogniser.addTarget(self, action: #selector(endMarkerDragged(_:)))
@@ -64,10 +64,6 @@ class EditViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         // the sting's cell will reload when previewed, so force a reload in case it wasn't previewed.
         NotificationCenter.default.post(name: .didFinishEditing, object: sting)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        layoutWaveformOverlayViews()
     }
     
     func updateLabels() {
