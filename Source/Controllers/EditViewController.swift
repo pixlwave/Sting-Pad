@@ -36,7 +36,7 @@ class EditViewController: UIViewController {
         waveformView.doesAllowScrubbing = false
         waveformView.doesAllowScroll = true
         waveformView.doesAllowStretch = true
-        waveformView.wavesColor = UIColor(red: 0.35, green: 0.35, blue: 0.35, alpha: 1.0)
+        waveformView.wavesColor = UIColor(white: 0.4, alpha: 1.0)
         waveformView.progressColor = UIColor.tintColor.withAlphaComponent(0.5)
         
         // safely access the url
