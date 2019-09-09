@@ -11,7 +11,7 @@
         <!--Playback View Controller-->
         <scene sceneID="qqr-4I-6Cw">
             <objects>
-                <collectionViewController clearsSelectionOnViewWillAppear="NO" id="yak-cE-mUi" customClass="PlaybackViewController" customModule="Stingtk" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController clearsSelectionOnViewWillAppear="NO" id="yak-cE-mUi" customClass="PlaybackViewController" customModule="StingPad" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="7JH-vP-Uzz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -24,7 +24,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Sting Cell" id="wn0-gC-jEl" customClass="StingCell" customModule="Stingtk" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Sting Cell" id="wn0-gC-jEl" customClass="StingCell" customModule="StingPad" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="8" width="320" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -131,7 +131,7 @@
         <!--Edit Sting-->
         <scene sceneID="BBH-1f-24n">
             <objects>
-                <viewController id="sKY-0b-GtB" customClass="EditViewController" customModule="Stingtk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="sKY-0b-GtB" customClass="EditViewController" customModule="StingPad" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jgb-pc-X2x"/>
                         <viewControllerLayoutGuide type="bottom" id="rVl-rn-yCL"/>
@@ -164,7 +164,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bwd-bB-yIj" userLabel="Waveform Container">
                                 <rect key="frame" x="20" y="139.5" width="280" height="117"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7J2-20-QTO" customClass="WaveformView" customModule="Stingtk" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7J2-20-QTO" customClass="WaveformView" customModule="StingPad" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="42" width="280" height="75"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
@@ -234,14 +234,14 @@
                                     <constraint firstItem="clh-uY-v8F" firstAttribute="bottom" secondItem="7J2-20-QTO" secondAttribute="bottom" id="xaG-tN-iGv"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JeS-dG-0bW" userLabel="Start Marker" customClass="WaveformMarkerView" customModule="Stingtk" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JeS-dG-0bW" userLabel="Start Marker" customClass="WaveformMarkerView" customModule="StingPad" customModuleProvider="target">
                                 <rect key="frame" x="10" y="181.5" width="20" height="95"/>
                                 <color key="backgroundColor" name="Tint Color"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="qx3-Jw-5Gw"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x4N-WC-9YE" userLabel="End Marker" customClass="WaveformMarkerView" customModule="Stingtk" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x4N-WC-9YE" userLabel="End Marker" customClass="WaveformMarkerView" customModule="StingPad" customModuleProvider="target">
                                 <rect key="frame" x="290" y="181.5" width="20" height="95"/>
                                 <color key="backgroundColor" name="Tint Color"/>
                                 <constraints>
@@ -409,7 +409,7 @@
         <!--Settings-->
         <scene sceneID="JMQ-tY-hdw">
             <objects>
-                <tableViewController id="Viv-76-yOT" customClass="SettingsViewController" customModule="Stingtk" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Viv-76-yOT" customClass="SettingsViewController" customModule="StingPad" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="hw3-Fr-nTM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -510,7 +510,7 @@
         <!--Default Color-->
         <scene sceneID="s5f-fK-aQY">
             <objects>
-                <tableViewController title="Default Color" id="kJa-OC-EsS" customClass="DefaultColorViewController" customModule="Stingtk" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Default Color" id="kJa-OC-EsS" customClass="DefaultColorViewController" customModule="StingPad" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="tLR-FQ-h48">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -550,7 +550,7 @@
         <!--Show Browser View Controller-->
         <scene sceneID="49a-1F-SrI">
             <objects>
-                <viewController storyboardIdentifier="ShowBrowser" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cXS-uy-K0n" customClass="ShowBrowserViewController" customModule="Stingtk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ShowBrowser" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cXS-uy-K0n" customClass="ShowBrowserViewController" customModule="StingPad" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1rn-W0-3xH"/>
                         <viewControllerLayoutGuide type="bottom" id="heL-90-VhG"/>
@@ -625,7 +625,7 @@
         <!--Channel Selection View Controller-->
         <scene sceneID="sdG-pV-zxe">
             <objects>
-                <tableViewController id="ASK-Q5-ytr" customClass="ChannelSelectionViewController" customModule="Stingtk" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="ASK-Q5-ytr" customClass="ChannelSelectionViewController" customModule="StingPad" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Azz-4G-do2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
