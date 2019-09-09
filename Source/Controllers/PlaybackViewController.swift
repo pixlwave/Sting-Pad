@@ -21,6 +21,7 @@ class PlaybackViewController: UICollectionViewController {
     
     private let transportViewHeight: CGFloat = 90
     private var timeTimer: Timer?
+    private var progressAnimator: UIViewPropertyAnimator?
     
     private var addStingAfterIndex: Int?
     
@@ -312,7 +313,11 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     func updateTimeLabel() {
-        progressView.progress = Float(engine.elapsedTime / engine.totalTime)
+        progressAnimator = UIViewPropertyAnimator(duration: 1, curve: .linear) {
+            self.progressView.setProgress(Float((self.engine.elapsedTime + 1) / self.engine.totalTime), animated: true)
+        }
+        progressAnimator?.startAnimation()
+        
         if let remainingString = engine.remainingTime.formattedAsRemaining() {
             timeLabel.text = remainingString
         }
@@ -323,6 +328,10 @@ class PlaybackViewController: UICollectionViewController {
             stopUpdatingTime()
         }
         
+        // reset progress view without animation
+        progressView.progress = 0
+        progressView.layoutIfNeeded()
+        
         updateTimeLabel()
         timeTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             self.updateTimeLabel()
@@ -332,6 +341,7 @@ class PlaybackViewController: UICollectionViewController {
     func stopUpdatingTime() {
         timeTimer?.invalidate()
         timeTimer = nil
+        progressAnimator?.stopAnimation(true)
     }
     
     
