@@ -4,9 +4,9 @@ class Show: UIDocument {
     
     static var shared = Show(fileURL: Show.defaultURL)
     
-    static var defaultURL: URL = FileManager.default.temporaryDirectory.appendingPathComponent("Show.stkshow")
+    static var defaultURL: URL = FileManager.default.temporaryDirectory.appendingPathComponent("Show.stings")
     
-    override var fileType: String { return "uk.pixlwave.stingtk.show" }
+    override var fileType: String { return "uk.pixlwave.stingpad.show" }
     
     var fileExists: Bool { return FileManager.default.fileExists(atPath: fileURL.path) }
     

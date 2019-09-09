@@ -10,12 +10,12 @@
 			<key>CFBundleTypeIconFiles</key>
 			<array/>
 			<key>CFBundleTypeName</key>
-			<string>Stingtk Show</string>
+			<string>Sting Pad Show</string>
 			<key>LSHandlerRank</key>
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>uk.pixlwave.stingtk.show</string>
+				<string>uk.pixlwave.stingpad.show</string>
 			</array>
 		</dict>
 	</array>
@@ -80,16 +80,16 @@
 				<string>public.content</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Stingtk Show</string>
+			<string>Sting Pad Show</string>
 			<key>UTTypeIconFiles</key>
 			<array/>
 			<key>UTTypeIdentifier</key>
-			<string>uk.pixlwave.stingtk.show</string>
+			<string>uk.pixlwave.stingpad.show</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
 				<array>
-					<string>stkshow</string>
+					<string>stings</string>
 				</array>
 			</dict>
 		</dict>
