@@ -214,12 +214,20 @@
                                             <action selector="previewEnd" destination="sKY-0b-GtB" eventType="touchDown" id="a8P-0O-yNN"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l5b-3m-bXs" userLabel="Stop Preview">
+                                        <rect key="frame" x="24.5" y="0.0" width="231.5" height="42"/>
+                                        <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
+                                        <state key="normal" image="stop" catalog="system"/>
+                                        <connections>
+                                            <action selector="stop" destination="sKY-0b-GtB" eventType="touchUpInside" id="2dT-M5-q37"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="7J2-20-QTO" secondAttribute="trailing" id="1Al-sk-TLs"/>
                                     <constraint firstItem="lRX-bK-xRr" firstAttribute="top" secondItem="bwd-bB-yIj" secondAttribute="top" id="4AV-YH-Nl4"/>
-                                    <constraint firstItem="6Oy-Y8-dK5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="lRX-bK-xRr" secondAttribute="trailing" id="4Kg-6F-3pG"/>
+                                    <constraint firstItem="l5b-3m-bXs" firstAttribute="top" secondItem="lRX-bK-xRr" secondAttribute="top" id="7CR-DT-Muz"/>
                                     <constraint firstItem="lRX-bK-xRr" firstAttribute="centerX" secondItem="7J2-20-QTO" secondAttribute="leading" priority="750" id="H6v-o9-uH7"/>
                                     <constraint firstItem="6Oy-Y8-dK5" firstAttribute="top" secondItem="bwd-bB-yIj" secondAttribute="top" id="IJp-wK-GNY"/>
                                     <constraint firstItem="clh-uY-v8F" firstAttribute="leading" secondItem="7J2-20-QTO" secondAttribute="leading" id="Mb2-X5-QjW"/>
@@ -228,9 +236,11 @@
                                     <constraint firstItem="7J2-20-QTO" firstAttribute="top" secondItem="lRX-bK-xRr" secondAttribute="bottom" id="Yic-5Q-fR6"/>
                                     <constraint firstItem="clh-uY-v8F" firstAttribute="top" secondItem="7J2-20-QTO" secondAttribute="top" id="crE-OW-bgg"/>
                                     <constraint firstItem="lRX-bK-xRr" firstAttribute="centerX" relation="greaterThanOrEqual" secondItem="7J2-20-QTO" secondAttribute="leading" id="dSZ-Hc-Xq5"/>
+                                    <constraint firstItem="6Oy-Y8-dK5" firstAttribute="leading" secondItem="l5b-3m-bXs" secondAttribute="trailing" id="iA8-2E-qUo"/>
                                     <constraint firstItem="7J2-20-QTO" firstAttribute="leading" secondItem="bwd-bB-yIj" secondAttribute="leading" id="oqK-67-Q6g"/>
                                     <constraint firstItem="6Oy-Y8-dK5" firstAttribute="centerX" relation="lessThanOrEqual" secondItem="7J2-20-QTO" secondAttribute="trailing" id="pmw-kJ-dqN"/>
-                                    <constraint firstItem="6Oy-Y8-dK5" firstAttribute="centerX" secondItem="7J2-20-QTO" secondAttribute="leading" priority="750" constant="280" id="tHE-qb-DPI"/>
+                                    <constraint firstItem="6Oy-Y8-dK5" firstAttribute="centerX" secondItem="7J2-20-QTO" secondAttribute="leading" priority="700" constant="280" id="tHE-qb-DPI"/>
+                                    <constraint firstItem="l5b-3m-bXs" firstAttribute="leading" secondItem="lRX-bK-xRr" secondAttribute="trailing" id="uaN-jA-DkN"/>
                                     <constraint firstItem="clh-uY-v8F" firstAttribute="bottom" secondItem="7J2-20-QTO" secondAttribute="bottom" id="xaG-tN-iGv"/>
                                 </constraints>
                             </view>
@@ -259,7 +269,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="oK2-1w-g1j" userLabel="Bottom Stack">
-                                <rect key="frame" x="20" y="315.5" width="280" height="143"/>
+                                <rect key="frame" x="20" y="315.5" width="280" height="75"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hG6-QV-E3U">
                                         <rect key="frame" x="88.5" y="0.0" width="103" height="40.5"/>
@@ -282,16 +292,16 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="firstBaseline" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="2ZM-zS-YH1">
-                                        <rect key="frame" x="0.0" y="48.5" width="280" height="34.5"/>
+                                        <rect key="frame" x="0.0" y="48.5" width="280" height="26.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Previews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="obS-Gm-PoA">
-                                                <rect key="frame" x="0.0" y="8" width="64.5" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="64.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="vXN-JJ-zX7">
-                                                <rect key="frame" x="84.5" y="3.5" width="195.5" height="32"/>
+                                                <rect key="frame" x="84.5" y="-4.5" width="195.5" height="32"/>
                                                 <segments>
                                                     <segment title="Off"/>
                                                     <segment title="1"/>
@@ -305,17 +315,6 @@
                                             </segmentedControl>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="E1U-R8-1nj">
-                                        <rect key="frame" x="116" y="91" width="48" height="52"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <inset key="contentEdgeInsets" minX="15" minY="15" maxX="15" maxY="15"/>
-                                        <state key="normal" image="stop" catalog="system">
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="stop" destination="sKY-0b-GtB" eventType="touchDown" id="Aah-Rj-OXv"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                             </stackView>
                         </subviews>
