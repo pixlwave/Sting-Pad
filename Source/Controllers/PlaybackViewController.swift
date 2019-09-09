@@ -17,10 +17,10 @@ class PlaybackViewController: UICollectionViewController {
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var previousButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var timeRemainingLabel: UILabel!
     
     private let transportViewHeight: CGFloat = 90
-    private var timeTimer: Timer?
+    private var progressTimer: Timer?
     private var progressAnimator: UIViewPropertyAnimator?
     
     private var addStingAfterIndex: Int?
@@ -35,7 +35,7 @@ class PlaybackViewController: UICollectionViewController {
         Bundle.main.loadNibNamed("TransportView", owner: self, options: nil)
         view.addSubview(transportView)
         progressView.progress = 0
-        timeLabel.font = UIFont.monospacedDigitSystemFont(ofSize: timeLabel.font.pointSize, weight: .regular)
+        timeRemainingLabel.font = UIFont.monospacedDigitSystemFont(ofSize: timeRemainingLabel.font.pointSize, weight: .regular)
         
         configureDataSource()
         collectionView.register(UINib(nibName: "AddStingFooterView", bundle: nil), forSupplementaryViewOfKind: "footer", withReuseIdentifier: "AddStingFooter")
@@ -312,35 +312,35 @@ class PlaybackViewController: UICollectionViewController {
         collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: animated)
     }
     
-    func updateTimeLabel() {
+    func updateProgress() {
         progressAnimator = UIViewPropertyAnimator(duration: 1, curve: .linear) {
             self.progressView.setProgress(Float((self.engine.elapsedTime + 1) / self.engine.totalTime), animated: true)
         }
         progressAnimator?.startAnimation()
         
         if let remainingString = engine.remainingTime.formattedAsRemaining() {
-            timeLabel.text = remainingString
+            timeRemainingLabel.text = remainingString
         }
     }
     
-    func beginUpdatingTime() {
-        if timeTimer?.isValid == true {
-            stopUpdatingTime()
+    func beginUpdatingProgress() {
+        if progressTimer?.isValid == true {
+            stopUpdatingProgress()
         }
         
         // reset progress view without animation
         progressView.progress = 0
         progressView.layoutIfNeeded()
         
-        updateTimeLabel()
-        timeTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            self.updateTimeLabel()
+        updateProgress()
+        progressTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            self.updateProgress()
         }
     }
     
-    func stopUpdatingTime() {
-        timeTimer?.invalidate()
-        timeTimer = nil
+    func stopUpdatingProgress() {
+        progressTimer?.invalidate()
+        progressTimer = nil
         progressAnimator?.stopAnimation(true)
     }
     
@@ -481,7 +481,7 @@ extension PlaybackViewController: UIDocumentPickerDelegate {
 extension PlaybackViewController: PlaybackDelegate {
     func stingDidStartPlaying(_ sting: Sting) {
         reloadItems([sting])
-        beginUpdatingTime()
+        beginUpdatingProgress()
     }
     
     func stingDidStopPlaying(_ sting: Sting) {
@@ -489,7 +489,7 @@ extension PlaybackViewController: PlaybackDelegate {
             self.reloadItems([sting])
             
             // by the time this executes another sting may have already started playback
-            if self.engine.playingSting == nil { self.stopUpdatingTime() }
+            if self.engine.playingSting == nil { self.stopUpdatingProgress() }
         }
     }
 }

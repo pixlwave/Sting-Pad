@@ -14,7 +14,7 @@
                 <outlet property="previousButton" destination="N6t-Wv-uJW" id="hjX-AV-9rf"/>
                 <outlet property="progressView" destination="YrX-w7-FiR" id="o8d-li-HJx"/>
                 <outlet property="stopButton" destination="mUe-Rk-ltB" id="lYg-UJ-vRk"/>
-                <outlet property="timeLabel" destination="9Fx-yc-sdB" id="TCd-7E-MJx"/>
+                <outlet property="timeRemainingLabel" destination="9Fx-yc-sdB" id="TCd-7E-MJx"/>
                 <outlet property="transportView" destination="iN0-l3-epB" id="Ar5-Vc-Td3"/>
             </connections>
         </placeholder>
