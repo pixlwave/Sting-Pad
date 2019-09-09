@@ -58,7 +58,7 @@
 		A581C3A31B94C5B2006CE228 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		A595169922F99A21001E820A /* AddStingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStingFooterView.swift; sourceTree = "<group>"; };
 		A59EC6E922EB5696009A7ED1 /* TransportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportView.swift; sourceTree = "<group>"; };
-		A5A49C891B5BF1C2004B80CE /* Stingtk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stingtk.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5A49C891B5BF1C2004B80CE /* Sting Pad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sting Pad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A49C8D1B5BF1C2004B80CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5A49C8E1B5BF1C2004B80CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5A49C951B5BF1C2004B80CE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -108,7 +108,7 @@
 		A5A49C8A1B5BF1C2004B80CE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A5A49C891B5BF1C2004B80CE /* Stingtk.app */,
+				A5A49C891B5BF1C2004B80CE /* Sting Pad.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -182,9 +182,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A5A49C881B5BF1C2004B80CE /* Stingtk */ = {
+		A5A49C881B5BF1C2004B80CE /* Sting Pad */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A5A49CA81B5BF1C2004B80CE /* Build configuration list for PBXNativeTarget "Stingtk" */;
+			buildConfigurationList = A5A49CA81B5BF1C2004B80CE /* Build configuration list for PBXNativeTarget "Sting Pad" */;
 			buildPhases = (
 				A5A49C851B5BF1C2004B80CE /* Sources */,
 				A5A49C861B5BF1C2004B80CE /* Frameworks */,
@@ -194,9 +194,9 @@
 			);
 			dependencies = (
 			);
-			name = Stingtk;
+			name = "Sting Pad";
 			productName = Stingtk;
-			productReference = A5A49C891B5BF1C2004B80CE /* Stingtk.app */;
+			productReference = A5A49C891B5BF1C2004B80CE /* Sting Pad.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -222,7 +222,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A5A49C841B5BF1C2004B80CE /* Build configuration list for PBXProject "Stingtk" */;
+			buildConfigurationList = A5A49C841B5BF1C2004B80CE /* Build configuration list for PBXProject "Sting Pad" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -235,7 +235,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A5A49C881B5BF1C2004B80CE /* Stingtk */,
+				A5A49C881B5BF1C2004B80CE /* Sting Pad */,
 			);
 		};
 /* End PBXProject section */
@@ -401,8 +401,8 @@
 				INFOPLIST_FILE = Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = uk.pixlwave.Stingmtk;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.pixlwave.StingPad;
+				PRODUCT_NAME = "Sting Pad";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -417,8 +417,8 @@
 				INFOPLIST_FILE = Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = uk.pixlwave.Stingmtk;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.pixlwave.StingPad;
+				PRODUCT_NAME = "Sting Pad";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -427,7 +427,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A5A49C841B5BF1C2004B80CE /* Build configuration list for PBXProject "Stingtk" */ = {
+		A5A49C841B5BF1C2004B80CE /* Build configuration list for PBXProject "Sting Pad" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A5A49CA61B5BF1C2004B80CE /* Debug */,
@@ -436,7 +436,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A5A49CA81B5BF1C2004B80CE /* Build configuration list for PBXNativeTarget "Stingtk" */ = {
+		A5A49CA81B5BF1C2004B80CE /* Build configuration list for PBXNativeTarget "Sting Pad" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A5A49CA91B5BF1C2004B80CE /* Debug */,
