@@ -57,7 +57,7 @@ class Engine {
         // allow music to play whilst muted with playback category
         // prevent app launch from killing iPod by allowing mixing
         do {
-            try session.setCategory(.multiRoute, options: .mixWithOthers)
+            try session.setCategory(.playback, options: .mixWithOthers)
             try session.setActive(true)
         } catch {
             print("Error: \(error)"); #warning("Implement error handling")
@@ -109,6 +109,8 @@ class Engine {
             
             let propSize = UInt32(channelMap.count) * UInt32(MemoryLayout<UInt32>.size)
             let statusCode = AudioUnitSetProperty(engine.outputNode.audioUnit!, kAudioOutputUnitProperty_ChannelMap, kAudioUnitScope_Global, 1, channelMap, propSize)
+        } else {
+            let statusCode = AudioUnitSetProperty(engine.outputNode.audioUnit!, kAudioOutputUnitProperty_ChannelMap, kAudioUnitScope_Global, 1, nil, 0)
         }
         
         startAudioEngine()
