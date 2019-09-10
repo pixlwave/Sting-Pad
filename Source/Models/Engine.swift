@@ -90,8 +90,8 @@ class Engine {
         }
     }
     
-    func availableChannels() -> [AVAudioSessionChannelDescription] {
-        return session.currentRoute.outputs.compactMap { $0.channels }.flatMap { $0 }
+    func audioInterfaceName() -> String {
+        return session.currentRoute.outputs.first?.portName ?? "Audio Interface"
     }
     
     func outputChannelCount() -> Int {

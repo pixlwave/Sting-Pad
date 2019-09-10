@@ -27,8 +27,7 @@ class ChannelSelectionViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            #warning("Get name of audio interface here...")
-            return "Audio Interface Name"
+            return Engine.shared.audioInterfaceName()
         } else {
             return "Unavailable"
         }
