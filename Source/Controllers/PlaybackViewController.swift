@@ -153,6 +153,15 @@ class PlaybackViewController: UICollectionViewController {
         #warning("Is there a better way to do this?")
         let uniqueIdentifiers = Array(Set(identifiers))
         var snapshot = dataSource.snapshot()
+        
+        #warning("Test this and add debug notification")
+        uniqueIdentifiers.forEach { sting in
+            guard snapshot.itemIdentifiers.contains(sting) else {
+                applySnapshot()
+                return
+            }
+        }
+        
         snapshot.reloadItems(uniqueIdentifiers)
         dataSource.apply(snapshot, animatingDifferences: false)
     }
