@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Engine.shared.isInBackground = true
     }
     
-    func applicationWillEnterForeground(_ application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         Engine.shared.isInBackground = false
     }
     
