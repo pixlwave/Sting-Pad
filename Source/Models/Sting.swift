@@ -91,7 +91,7 @@ class Sting: NSObject, Codable {
         if let audioFile = try? AVAudioFile(forReading: url) {
             self.isMissing = false
             self.audioFile = audioFile
-        } else if url.isMediaItem, let mediaItem = metadata.mediaQueryItems?.first, let assetURL = mediaItem.assetURL, let audioFile = try? AVAudioFile(forReading: assetURL) {
+        } else if url.isMediaItem, let assetURL = metadata.matchingAssetURL, let audioFile = try? AVAudioFile(forReading: assetURL) {
             url = assetURL
             self.isMissing = false
             self.audioFile = audioFile

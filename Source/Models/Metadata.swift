@@ -53,4 +53,10 @@ extension Metadata {
         
         return items
     }
+    
+    var matchingAssetURL: URL? {
+        // only consider a match if a single item is returned from the media query
+        guard let mediaQueryItems = mediaQueryItems, mediaQueryItems.count == 1 else { return nil }
+        return mediaQueryItems.first?.assetURL
+    }
 }
