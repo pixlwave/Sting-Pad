@@ -196,11 +196,42 @@ class PlaybackViewController: UICollectionViewController {
         dataSource = nil
     }
     
+    func requestMediaLibraryAuthorization(successHandler: @escaping () -> Void) {
+        MPMediaLibrary.requestAuthorization { authorizationStatus in
+            if authorizationStatus == .authorized {
+                DispatchQueue.main.async { successHandler() }
+            }
+        }
+    }
+    
+    func presentMediaLibraryAccessAlert() {
+        let alert = UIAlertController(title: "Enable Access",
+                                      message: "Please enable Media & Apple Music access in the Settings app.",
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: { action in
+            guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else { return }
+            UIApplication.shared.open(settingsURL)
+        }))
+        self.present(alert, animated: true)
+    }
+    
     @objc func addStingFromLibrary() {
+        guard MPMediaLibrary.authorizationStatus() == .authorized else {
+            if MPMediaLibrary.authorizationStatus() == .notDetermined {
+                requestMediaLibraryAuthorization(successHandler: { self.addStingFromLibrary() })
+            } else {
+                presentMediaLibraryAccessAlert()
+            }
+            
+            return
+        }
+        
         #if targetEnvironment(simulator)
         // pick a random file from the file system as no library is available on the simulator
         loadRandomTrackFromHostFileSystem()
         #else
+        
         // present music picker to load a track from ipod
         let mediaPicker = MPMediaPickerController(mediaTypes: .music)
         mediaPicker.delegate = self
