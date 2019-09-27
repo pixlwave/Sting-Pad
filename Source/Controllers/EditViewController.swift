@@ -7,6 +7,7 @@ class EditViewController: UIViewController {
     let show = Show.shared
     
     var sting: Sting!
+    var hasSecurityScopedAccess = false
     var previewLength: [TimeInterval] = [0, 1, 2, 5, 10]
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -40,12 +41,7 @@ class EditViewController: UIViewController {
         waveformView.progressColor = UIColor.tintColor.withAlphaComponent(0.5)
         
         // safely access the url
-        let hasSecurityScopedAccess = sting.url.startAccessingSecurityScopedResource()
-        defer {
-            if hasSecurityScopedAccess {
-                sting.url.stopAccessingSecurityScopedResource()
-            }
-        }
+        hasSecurityScopedAccess = sting.url.startAccessingSecurityScopedResource()
         
         // render the waveform
         waveformView.audioURL = sting.url
@@ -62,8 +58,20 @@ class EditViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
         // the sting's cell will reload when previewed, so force a reload in case it wasn't previewed.
         NotificationCenter.default.post(name: .didFinishEditing, object: sting)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        // remove access to the url when finished
+        if hasSecurityScopedAccess {
+            #warning("Is this holding onto access for too long?")
+            sting.url.stopAccessingSecurityScopedResource()
+        }
     }
     
     func updateLabels() {
