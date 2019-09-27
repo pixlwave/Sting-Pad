@@ -395,6 +395,11 @@ class PlaybackViewController: UICollectionViewController {
         UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
             guard let sting = self.dataSource?.itemIdentifier(for: indexPath) else { return nil }
             
+            let cue = UIAction(title: "Cue Next", image: UIImage(systemName: "pause.circle")) { action in
+                let oldCue = self.cuedSting
+                self.cuedSting = sting
+                self.reloadItems([oldCue, sting].compactMap { $0 })
+            }
             let edit = UIAction(title: "Edit", image: UIImage(systemName: "waveform")) { action in
                 self.performSegue(withIdentifier: "Edit Sting", sender: sting)
             }
@@ -438,9 +443,10 @@ class PlaybackViewController: UICollectionViewController {
                 return UIMenu(title: "", children: [delete, UIMenu(title: "", options: .displayInline, children: [songInfo])])
             }
             
+            let playMenu = UIMenu(title: "", options: .displayInline, children: [cue])
             let editMenu = UIMenu(title: "", options: .displayInline, children: [edit, rename, colorMenu])
             let fileMenu = UIMenu(title: "", options: .displayInline, children: [duplicate, insert, delete])
-            return UIMenu(title: "", children: [editMenu, fileMenu])
+            return UIMenu(title: "", children: [playMenu, editMenu, fileMenu])
         }
     }
     
