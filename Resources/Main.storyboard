@@ -245,21 +245,21 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JeS-dG-0bW" userLabel="Start Marker" customClass="WaveformMarkerView" customModule="StingPad" customModuleProvider="target">
-                                <rect key="frame" x="10" y="181.5" width="20" height="95"/>
+                                <rect key="frame" x="0.0" y="181.5" width="40" height="115"/>
                                 <color key="backgroundColor" name="Tint Color"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="qx3-Jw-5Gw"/>
+                                    <constraint firstAttribute="width" constant="40" id="qx3-Jw-5Gw"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x4N-WC-9YE" userLabel="End Marker" customClass="WaveformMarkerView" customModule="StingPad" customModuleProvider="target">
-                                <rect key="frame" x="290" y="181.5" width="20" height="95"/>
+                                <rect key="frame" x="280" y="181.5" width="40" height="115"/>
                                 <color key="backgroundColor" name="Tint Color"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="MOQ-PO-zcl"/>
+                                    <constraint firstAttribute="width" constant="40" id="MOQ-PO-zcl"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyO-e7-KqD">
-                                <rect key="frame" x="276" y="284.5" width="24" height="23"/>
+                                <rect key="frame" x="276" y="304.5" width="24" height="23"/>
                                 <state key="normal" image="1.magnifyingglass" catalog="system">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
@@ -269,7 +269,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="oK2-1w-g1j" userLabel="Bottom Stack">
-                                <rect key="frame" x="20" y="315.5" width="280" height="75"/>
+                                <rect key="frame" x="20" y="335.5" width="280" height="75"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hG6-QV-E3U">
                                         <rect key="frame" x="88.5" y="0.0" width="103" height="40.5"/>
@@ -322,8 +322,8 @@
                         <color key="tintColor" name="Tint Color"/>
                         <constraints>
                             <constraint firstItem="tyO-e7-KqD" firstAttribute="top" secondItem="x4N-WC-9YE" secondAttribute="bottom" constant="8" symbolic="YES" id="14J-Dh-7Gm"/>
-                            <constraint firstItem="x4N-WC-9YE" firstAttribute="height" secondItem="7J2-20-QTO" secondAttribute="height" constant="20" id="3Fs-61-R2w"/>
-                            <constraint firstItem="JeS-dG-0bW" firstAttribute="height" secondItem="7J2-20-QTO" secondAttribute="height" constant="20" id="4Pn-Cn-zbK"/>
+                            <constraint firstItem="x4N-WC-9YE" firstAttribute="height" secondItem="7J2-20-QTO" secondAttribute="height" constant="40" id="3Fs-61-R2w"/>
+                            <constraint firstItem="JeS-dG-0bW" firstAttribute="height" secondItem="7J2-20-QTO" secondAttribute="height" constant="40" id="4Pn-Cn-zbK"/>
                             <constraint firstItem="JeS-dG-0bW" firstAttribute="centerX" secondItem="7J2-20-QTO" secondAttribute="leading" id="6kI-r7-zUb"/>
                             <constraint firstItem="oK2-1w-g1j" firstAttribute="width" secondItem="cey-fv-2gg" secondAttribute="width" id="9IW-3R-DB6"/>
                             <constraint firstItem="cey-fv-2gg" firstAttribute="top" secondItem="jgb-pc-X2x" secondAttribute="bottom" constant="20" id="Hpw-fM-An3"/>

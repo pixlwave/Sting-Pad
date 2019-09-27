@@ -3,7 +3,8 @@ import UIKit
 class WaveformMarkerView: UIView {
     
     private let lineView = UIView()
-    private let handleView = UIView()
+    private let handleView = UIView()           // view with gesture recogniser
+    private let handleCircleView = UIView()     // smaller view to render circle
     
     let dragRecogniser = UIPanGestureRecognizer()
     
@@ -18,21 +19,24 @@ class WaveformMarkerView: UIView {
         
         addSubview(lineView)
         addSubview(handleView)
+        handleView.addSubview(handleCircleView)
     }
     
     override func tintColorDidChange() {
         lineView.backgroundColor = tintColor
-        handleView.backgroundColor = tintColor
+        handleView.backgroundColor = .clear
+        handleCircleView.backgroundColor = tintColor
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let handleRadius = bounds.width / 2
+        let handleRadius = bounds.width / 4
         
-        lineView.frame = CGRect(x: bounds.midX - 1, y: 0, width: 2, height: bounds.height - handleRadius)
-        handleView.frame = CGRect(x: 0, y: bounds.height - 2 * handleRadius, width: 2 * handleRadius, height: 2 * handleRadius)
-        handleView.layer.cornerRadius = handleRadius
+        lineView.frame = CGRect(x: bounds.midX - 1, y: 0, width: 2, height: bounds.height - (bounds.width / 2))
+        handleView.frame = CGRect(x: 0, y: bounds.height - bounds.width, width: bounds.width, height: bounds.width)
+        handleCircleView.frame = handleView.bounds.insetBy(dx: handleRadius, dy: handleRadius)
+        handleCircleView.layer.cornerRadius = handleRadius
     }
     
 }
