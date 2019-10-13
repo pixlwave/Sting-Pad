@@ -119,7 +119,7 @@ class PlaybackViewController: UICollectionViewController {
             stingCell.color = sting.color
             
             if sting.isMissing {
-                stingCell.footerLabel.text = "?"
+                stingCell.footerLabel.text = sting.url.isMediaItem ? "Song Missing" : "File Missing"
             } else if sting.loops, let loopImage = UIImage(systemName: "repeat") {
                 let loopString = NSAttributedString(attachment: NSTextAttachment(image: loopImage))
                 stingCell.footerLabel.attributedText = loopString
