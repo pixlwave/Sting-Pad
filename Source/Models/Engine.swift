@@ -11,7 +11,7 @@ class Engine {
     var outputConfig: OutputConfig = (try? JSONDecoder().decode(OutputConfig.self, from: UserDefaults.standard.data(forKey: "outputConfig") ?? Data())) ?? .default {
         didSet {
             updateChannelMap()
-            if let data = try? JSONEncoder().encode(outputConfig) { UserDefaults.standard.set(data, forKey: "outputConfig")}
+            if let data = try? JSONEncoder().encode(outputConfig) { UserDefaults.standard.set(data, forKey: "outputConfig") }
         }
     }
     
