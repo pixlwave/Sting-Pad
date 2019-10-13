@@ -13,10 +13,10 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
         allowsDocumentCreation = true
     }
     
-    #if targetEnvironment(simulator)
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        #if targetEnvironment(simulator)
         if !hasRestored {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(1)) {
                 let show = Show(fileURL: Show.defaultURL)
@@ -29,8 +29,20 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
                 }
             }
         }
+        #endif
+        
+        if UserDefaults.standard.double(forKey: "WelcomeVersionSeen") < WelcomeViewController.currentVersion, children.count == 0 {
+            showWelcomeScreen()
+        }
     }
-    #endif
+    
+    func showWelcomeScreen() {
+        // present the whole screen
+        performSegue(withIdentifier: "WelcomeSegue", sender: nil)
+        
+        // record the version being seen to allow ui updates to be shown in future versions
+        UserDefaults.standard.set(WelcomeViewController.currentVersion, forKey: "WelcomeVersionSeen")
+    }
     
     func openShow(at url: URL, animated: Bool = true) {
         let show = Show(fileURL: url)

@@ -58,10 +58,6 @@ class PlaybackViewController: UICollectionViewController {
         
         // display the show's name in the navigation bar
         navigationItem.title = show.fileURL.deletingPathExtension().lastPathComponent
-        
-        if UserDefaults.standard.double(forKey: "WelcomeVersionSeen") < WelcomeViewController.currentVersion {
-            showWelcomeScreen()
-        }
     }
     
     override func viewWillLayoutSubviews() {
@@ -169,18 +165,6 @@ class PlaybackViewController: UICollectionViewController {
     @objc func reloadEditedSting(_ notification: Notification) {
         guard let sting = notification.object as? Sting else { return }
         reloadItems([sting])
-    }
-    
-    func showWelcomeScreen() {
-        // instantiate welcome controller and present
-        let walkSB = UIStoryboard(name: "Welcome", bundle: nil)
-        if let walkVC = walkSB.instantiateViewController(withIdentifier: "Welcome") as? WelcomeViewController {
-            walkVC.modalTransitionStyle = .crossDissolve
-            present(walkVC, animated:true, completion:nil)
-            
-            // record the version being seen to allow ui updates to be shown in future versions
-            UserDefaults.standard.set(WelcomeViewController.currentVersion, forKey: "WelcomeVersionSeen")
-        }
     }
     
     @IBAction func closeShow() {
