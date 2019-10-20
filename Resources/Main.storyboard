@@ -554,69 +554,83 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sting Pad" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9yO-dq-abx">
-                                <rect key="frame" x="68" y="24" width="184" height="48"/>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="40"/>
-                                <color key="textColor" name="Tint Color"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zbN-TZ-hFs">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="122"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Getting Started" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9yO-dq-abx">
+                                        <rect key="frame" x="74.5" y="45.5" width="171.5" height="31.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="9yO-dq-abx" firstAttribute="centerX" secondItem="zbN-TZ-hFs" secondAttribute="centerX" id="cXG-wg-IQV"/>
+                                    <constraint firstItem="9yO-dq-abx" firstAttribute="centerY" secondItem="zbN-TZ-hFs" secondAttribute="centerY" id="pxg-sp-zmH"/>
+                                </constraints>
+                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1Yd-jP-UWT">
                                 <rect key="frame" x="16" y="122" width="288" height="304"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="W7N-ZE-E9D">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="W7N-ZE-E9D">
                                         <rect key="frame" x="0.0" y="0.0" width="288" height="61"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="M03-lh-cvc">
-                                                <rect key="frame" x="0.0" y="3.5" width="134" height="54.5"/>
-                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" scale="medium" weight="light"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="M03-lh-cvc">
+                                                <rect key="frame" x="0.0" y="1.5" width="144" height="59"/>
+                                                <color key="tintColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="36" weight="regular"/>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the + button to start a new show" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JuP-lH-RHN">
-                                                <rect key="frame" x="154" y="0.0" width="134" height="61"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the + button to start a new show" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JuP-lH-RHN">
+                                                <rect key="frame" x="144" y="0.0" width="144" height="61"/>
+                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="VTf-QM-5uR">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="VTf-QM-5uR">
                                         <rect key="frame" x="0.0" y="81" width="288" height="61"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="folder.badge.plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="fGg-bO-ymM">
-                                                <rect key="frame" x="0.0" y="2" width="134" height="57"/>
-                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" scale="medium" weight="light"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="folder.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="fGg-bO-ymM">
+                                                <rect key="frame" x="0.0" y="1.5" width="144" height="59"/>
+                                                <color key="tintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="36" scale="medium" weight="regular"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add stings from your device" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zK4-P8-iPE">
-                                                <rect key="frame" x="154" y="0.0" width="134" height="61"/>
+                                                <rect key="frame" x="144" y="0.0" width="144" height="61"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="kr6-1s-lYN">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="kr6-1s-lYN">
                                         <rect key="frame" x="0.0" y="162" width="288" height="61"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="waveform" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="D3u-bD-QCM">
-                                                <rect key="frame" x="0.0" y="2.5" width="134" height="56.5"/>
-                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" scale="medium" weight="light"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="waveform.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="D3u-bD-QCM">
+                                                <rect key="frame" x="0.0" y="1.5" width="144" height="59"/>
+                                                <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="36" scale="medium" weight="regular"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Long tap to modify stings" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tUw-Xt-nuY">
-                                                <rect key="frame" x="154" y="0.0" width="134" height="61"/>
+                                                <rect key="frame" x="144" y="0.0" width="144" height="61"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="4O2-LI-Rud">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="4O2-LI-Rud">
                                         <rect key="frame" x="0.0" y="243" width="288" height="61"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rectangle.grid.2x2" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="1T2-dU-DSI">
-                                                <rect key="frame" x="0.0" y="2.5" width="134" height="56.5"/>
-                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" scale="medium" weight="light"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.up.arrow.down.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="1T2-dU-DSI">
+                                                <rect key="frame" x="0.0" y="1.5" width="144" height="59"/>
+                                                <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="36" scale="medium" weight="regular"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Long tap and drag to re-order stings" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iSi-r8-qw4">
-                                                <rect key="frame" x="154" y="0.0" width="134" height="61"/>
+                                                <rect key="frame" x="144" y="0.0" width="144" height="61"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -625,33 +639,48 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xRU-sw-gc3">
-                                <rect key="frame" x="83" y="476" width="154" height="41"/>
-                                <color key="backgroundColor" name="Tint Color"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                <inset key="contentEdgeInsets" minX="50" minY="10" maxX="50" maxY="10"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CVb-pj-yJg">
+                                <rect key="frame" x="0.0" y="426" width="320" height="122"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xRU-sw-gc3">
+                                        <rect key="frame" x="80" y="38.5" width="160" height="45"/>
+                                        <color key="backgroundColor" name="Tint Color"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <inset key="contentEdgeInsets" minX="0.0" minY="12" maxX="0.0" maxY="12"/>
+                                        <state key="normal" title="Continue">
+                                            <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="7"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="xRU-sw-gc3" firstAttribute="centerY" secondItem="CVb-pj-yJg" secondAttribute="centerY" id="3Qi-Ga-xkz"/>
+                                    <constraint firstItem="xRU-sw-gc3" firstAttribute="centerX" secondItem="CVb-pj-yJg" secondAttribute="centerX" id="3Rb-nz-9Ma"/>
+                                    <constraint firstItem="xRU-sw-gc3" firstAttribute="width" secondItem="CVb-pj-yJg" secondAttribute="width" multiplier="0.5" id="BnZ-pv-zOM"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="1Yd-jP-UWT" firstAttribute="centerX" secondItem="0z2-x6-EEQ" secondAttribute="centerX" id="2Kl-um-v16"/>
-                            <constraint firstItem="9yO-dq-abx" firstAttribute="centerX" secondItem="0z2-x6-EEQ" secondAttribute="centerX" id="NEv-pZ-aw0"/>
-                            <constraint firstItem="1Yd-jP-UWT" firstAttribute="top" secondItem="9yO-dq-abx" secondAttribute="bottom" constant="50" id="OSU-Wy-Jqk"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="1Yd-jP-UWT" secondAttribute="trailing" id="afw-az-TKi"/>
-                            <constraint firstItem="1Yd-jP-UWT" firstAttribute="centerY" secondItem="0z2-x6-EEQ" secondAttribute="centerY" id="mXX-xR-1UZ"/>
-                            <constraint firstItem="xRU-sw-gc3" firstAttribute="top" secondItem="1Yd-jP-UWT" secondAttribute="bottom" constant="50" id="q8U-w9-gFD"/>
-                            <constraint firstItem="1Yd-jP-UWT" firstAttribute="leading" secondItem="0z2-x6-EEQ" secondAttribute="leadingMargin" id="wDo-jc-qaT"/>
-                            <constraint firstItem="xRU-sw-gc3" firstAttribute="centerX" secondItem="0z2-x6-EEQ" secondAttribute="centerX" id="zJq-Ue-0uW"/>
+                            <constraint firstAttribute="trailing" secondItem="zbN-TZ-hFs" secondAttribute="trailing" id="4ow-0e-NPO"/>
+                            <constraint firstItem="EbH-7X-hZJ" firstAttribute="top" secondItem="CVb-pj-yJg" secondAttribute="bottom" id="5Pe-WD-dxN"/>
+                            <constraint firstItem="CVb-pj-yJg" firstAttribute="leading" secondItem="0z2-x6-EEQ" secondAttribute="leading" id="5bj-CA-6Xp"/>
+                            <constraint firstItem="CVb-pj-yJg" firstAttribute="top" secondItem="1Yd-jP-UWT" secondAttribute="bottom" id="6W9-jA-PVP"/>
+                            <constraint firstItem="1Yd-jP-UWT" firstAttribute="leading" secondItem="0z2-x6-EEQ" secondAttribute="leadingMargin" id="DW8-wo-9oQ"/>
+                            <constraint firstAttribute="trailing" secondItem="CVb-pj-yJg" secondAttribute="trailing" id="Hgz-EQ-BPF"/>
+                            <constraint firstItem="1Yd-jP-UWT" firstAttribute="centerY" secondItem="0z2-x6-EEQ" secondAttribute="centerY" id="Iaa-Tw-DAH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="1Yd-jP-UWT" secondAttribute="trailing" id="Q3g-3I-XF2"/>
+                            <constraint firstItem="zbN-TZ-hFs" firstAttribute="top" secondItem="ni9-6W-wFK" secondAttribute="bottom" id="nxd-eq-Svc"/>
+                            <constraint firstItem="zbN-TZ-hFs" firstAttribute="leading" secondItem="0z2-x6-EEQ" secondAttribute="leading" id="oXp-Z8-uae"/>
+                            <constraint firstItem="1Yd-jP-UWT" firstAttribute="top" secondItem="zbN-TZ-hFs" secondAttribute="bottom" id="vNY-Zx-CJ7"/>
                         </constraints>
                     </view>
+                    <size key="freeformSize" width="320" height="568"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Kr-Lo-IB1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -771,15 +800,15 @@
     </scenes>
     <resources>
         <image name="1.magnifyingglass" catalog="system" width="64" height="56"/>
+        <image name="arrow.up.arrow.down.circle.fill" catalog="system" width="64" height="60"/>
         <image name="circle" catalog="system" width="64" height="60"/>
         <image name="circle.fill" catalog="system" width="64" height="60"/>
-        <image name="folder.badge.plus" catalog="system" width="64" height="42"/>
+        <image name="folder.circle.fill" catalog="system" width="64" height="60"/>
         <image name="play" catalog="system" width="60" height="64"/>
-        <image name="plus" catalog="system" width="64" height="56"/>
-        <image name="rectangle.grid.2x2" catalog="system" width="64" height="48"/>
+        <image name="plus.circle.fill" catalog="system" width="64" height="60"/>
         <image name="slider.horizontal.3" catalog="system" width="64" height="50"/>
         <image name="stop" catalog="system" width="64" height="56"/>
-        <image name="waveform" catalog="system" width="64" height="64"/>
+        <image name="waveform.circle.fill" catalog="system" width="64" height="60"/>
         <image name="waveload" width="280" height="75"/>
         <namedColor name="Background Color">
             <color red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
