@@ -427,9 +427,14 @@ class PlaybackViewController: UICollectionViewController {
                 return UIMenu(title: "", children: [delete, UIMenu(title: "", options: .displayInline, children: [songInfo])])
             }
             
-            let playMenu = UIMenu(title: "", options: .displayInline, children: [cue])
             let editMenu = UIMenu(title: "", options: .displayInline, children: [edit, rename, colorMenu])
             let fileMenu = UIMenu(title: "", options: .displayInline, children: [duplicate, insert, delete])
+            
+            if sting == self.cuedSting {
+                return UIMenu(title: "", children: [editMenu, fileMenu])
+            }
+            
+            let playMenu = UIMenu(title: "", options: .displayInline, children: [cue])
             return UIMenu(title: "", children: [playMenu, editMenu, fileMenu])
         }
     }
