@@ -593,7 +593,7 @@
                                             </label>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="500" id="2OK-8r-Ash"/>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="450" id="2OK-8r-Ash"/>
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CTa-xC-qYU">
@@ -660,7 +660,6 @@
                                 <constraints>
                                     <constraint firstItem="C5m-IN-uMW" firstAttribute="width" secondItem="M3j-Pf-VFI" secondAttribute="width" id="0q6-3j-wfl"/>
                                     <constraint firstItem="blF-w3-CWj" firstAttribute="width" secondItem="M3j-Pf-VFI" secondAttribute="width" id="3Ux-7J-51a"/>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="450" id="5IK-pm-Stw"/>
                                     <constraint firstAttribute="trailing" secondItem="M3j-Pf-VFI" secondAttribute="trailing" priority="750" id="XZV-34-ioV"/>
                                     <constraint firstItem="CTa-xC-qYU" firstAttribute="width" secondItem="M3j-Pf-VFI" secondAttribute="width" id="bnj-Te-wo4"/>
                                     <constraint firstItem="M3j-Pf-VFI" firstAttribute="leading" secondItem="1Yd-jP-UWT" secondAttribute="leading" priority="750" id="yIg-dR-LAN"/>
