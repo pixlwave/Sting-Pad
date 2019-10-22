@@ -570,11 +570,11 @@
                                     <constraint firstItem="9yO-dq-abx" firstAttribute="centerY" secondItem="zbN-TZ-hFs" secondAttribute="centerY" id="pxg-sp-zmH"/>
                                 </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1Yd-jP-UWT">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1Yd-jP-UWT">
                                 <rect key="frame" x="16" y="144" width="288" height="260"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="M3j-Pf-VFI">
-                                        <rect key="frame" x="0.0" y="0.0" width="288" height="50"/>
+                                        <rect key="frame" x="60" y="0.0" width="168" height="50"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="M03-lh-cvc">
                                                 <rect key="frame" x="0.0" y="1.5" width="50" height="48"/>
@@ -586,15 +586,18 @@
                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="36" weight="regular"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="Tap the + button to start a new show" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JuP-lH-RHN">
-                                                <rect key="frame" x="58" y="0.0" width="230" height="50"/>
+                                                <rect key="frame" x="58" y="0.0" width="110" height="50"/>
                                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="500" id="2OK-8r-Ash"/>
+                                        </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CTa-xC-qYU">
-                                        <rect key="frame" x="0.0" y="70" width="288" height="50"/>
+                                        <rect key="frame" x="60" y="70" width="168" height="50"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="folder.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="qRz-PZ-yZC">
                                                 <rect key="frame" x="0.0" y="1.5" width="50" height="48"/>
@@ -606,7 +609,7 @@
                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="36" weight="regular"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="Add stings from your device" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RtC-Yy-xdZ">
-                                                <rect key="frame" x="58" y="0.0" width="230" height="50"/>
+                                                <rect key="frame" x="58" y="0.0" width="110" height="50"/>
                                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -614,7 +617,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="C5m-IN-uMW">
-                                        <rect key="frame" x="0.0" y="140" width="288" height="50"/>
+                                        <rect key="frame" x="60" y="140" width="168" height="50"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="waveform.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="7ya-1X-ZH2">
                                                 <rect key="frame" x="0.0" y="1.5" width="50" height="48"/>
@@ -626,7 +629,7 @@
                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="36" weight="regular"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="Long tap to modify stings" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VEf-DD-EsT">
-                                                <rect key="frame" x="58" y="0.0" width="230" height="50"/>
+                                                <rect key="frame" x="58" y="0.0" width="110" height="50"/>
                                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -634,7 +637,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="blF-w3-CWj">
-                                        <rect key="frame" x="0.0" y="210" width="288" height="50"/>
+                                        <rect key="frame" x="60" y="210" width="168" height="50"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.up.arrow.down.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="8LO-mZ-GBf">
                                                 <rect key="frame" x="0.0" y="1.5" width="50" height="48"/>
@@ -646,7 +649,7 @@
                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="36" weight="regular"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="Long tap and drag to re-order stings" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SKD-Os-Hwb">
-                                                <rect key="frame" x="58" y="0.0" width="230" height="50"/>
+                                                <rect key="frame" x="58" y="0.0" width="110" height="50"/>
                                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -655,7 +658,12 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="500" id="5IK-pm-Stw"/>
+                                    <constraint firstItem="C5m-IN-uMW" firstAttribute="width" secondItem="M3j-Pf-VFI" secondAttribute="width" id="0q6-3j-wfl"/>
+                                    <constraint firstItem="blF-w3-CWj" firstAttribute="width" secondItem="M3j-Pf-VFI" secondAttribute="width" id="3Ux-7J-51a"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="450" id="5IK-pm-Stw"/>
+                                    <constraint firstAttribute="trailing" secondItem="M3j-Pf-VFI" secondAttribute="trailing" priority="750" id="XZV-34-ioV"/>
+                                    <constraint firstItem="CTa-xC-qYU" firstAttribute="width" secondItem="M3j-Pf-VFI" secondAttribute="width" id="bnj-Te-wo4"/>
+                                    <constraint firstItem="M3j-Pf-VFI" firstAttribute="leading" secondItem="1Yd-jP-UWT" secondAttribute="leading" priority="750" id="yIg-dR-LAN"/>
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CVb-pj-yJg">
@@ -690,11 +698,11 @@
                             <constraint firstItem="EbH-7X-hZJ" firstAttribute="top" secondItem="CVb-pj-yJg" secondAttribute="bottom" id="5Pe-WD-dxN"/>
                             <constraint firstItem="CVb-pj-yJg" firstAttribute="leading" secondItem="0z2-x6-EEQ" secondAttribute="leading" id="5bj-CA-6Xp"/>
                             <constraint firstItem="CVb-pj-yJg" firstAttribute="top" secondItem="1Yd-jP-UWT" secondAttribute="bottom" id="6W9-jA-PVP"/>
-                            <constraint firstItem="1Yd-jP-UWT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0z2-x6-EEQ" secondAttribute="leadingMargin" id="DW8-wo-9oQ"/>
+                            <constraint firstItem="1Yd-jP-UWT" firstAttribute="leading" secondItem="0z2-x6-EEQ" secondAttribute="leadingMargin" id="DW8-wo-9oQ"/>
                             <constraint firstAttribute="trailing" secondItem="CVb-pj-yJg" secondAttribute="trailing" id="Hgz-EQ-BPF"/>
                             <constraint firstItem="1Yd-jP-UWT" firstAttribute="centerX" secondItem="0z2-x6-EEQ" secondAttribute="centerX" id="HiW-Xj-wHg"/>
                             <constraint firstItem="1Yd-jP-UWT" firstAttribute="centerY" secondItem="0z2-x6-EEQ" secondAttribute="centerY" id="Iaa-Tw-DAH"/>
-                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="1Yd-jP-UWT" secondAttribute="trailing" id="Q3g-3I-XF2"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="1Yd-jP-UWT" secondAttribute="trailing" id="Q3g-3I-XF2"/>
                             <constraint firstItem="zbN-TZ-hFs" firstAttribute="top" secondItem="ni9-6W-wFK" secondAttribute="bottom" id="nxd-eq-Svc"/>
                             <constraint firstItem="zbN-TZ-hFs" firstAttribute="leading" secondItem="0z2-x6-EEQ" secondAttribute="leading" id="oXp-Z8-uae"/>
                             <constraint firstItem="1Yd-jP-UWT" firstAttribute="top" secondItem="zbN-TZ-hFs" secondAttribute="bottom" id="vNY-Zx-CJ7"/>
