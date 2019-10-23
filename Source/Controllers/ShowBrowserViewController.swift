@@ -2,9 +2,13 @@ import UIKit
 
 class ShowBrowserViewController: UIDocumentBrowserViewController {
     
-    var transitionController: UIDocumentBrowserTransitionController?
     var hasRestored = false
     var isLoading = false
+    
+    var transitionController: UIDocumentBrowserTransitionController?
+    var presentedPlaybackViewController: PlaybackViewController? {
+        presentedViewController?.children.first as? PlaybackViewController
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,8 +67,6 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
     }
     
     func present(_ show: Show, animated: Bool) {
-        Show.shared = show
-        
         guard
             let storyboard = storyboard,
             let rootVC = storyboard.instantiateViewController(withIdentifier: "Root View Controller") as? UINavigationController,
@@ -73,6 +75,8 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
             isLoading = false
             return
         }
+        
+        playbackVC.show = show
         
         rootVC.transitioningDelegate = self
         transitionController = transitionController(forDocumentAt: show.fileURL)
@@ -92,16 +96,15 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
     
     override func encodeRestorableState(with coder: NSCoder) {
         if presentedViewController != nil {
-            #warning("This will store a show even if it's been closed.")
-            let showURL = Show.shared.fileURL
-            
-            let didStartAccessing = showURL.startAccessingSecurityScopedResource()
-            defer {
-                if didStartAccessing { showURL.stopAccessingSecurityScopedResource() }
-            }
-            
-            if let bookmarkData = try? showURL.bookmarkData() {
-                coder.encode(bookmarkData, forKey: "showBookmarkData")
+            if let showURL = presentedPlaybackViewController?.show?.fileURL {
+                let didStartAccessing = showURL.startAccessingSecurityScopedResource()
+                defer {
+                    if didStartAccessing { showURL.stopAccessingSecurityScopedResource() }
+                }
+                
+                if let bookmarkData = try? showURL.bookmarkData() {
+                    coder.encode(bookmarkData, forKey: "showBookmarkData")
+                }
             }
         }
         

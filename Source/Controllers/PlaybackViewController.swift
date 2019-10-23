@@ -5,7 +5,7 @@ import MobileCoreServices
 class PlaybackViewController: UICollectionViewController {
     
     private let engine = Engine.shared
-    private let show = Show.shared
+    var show: Show!
     private var dataSource: UICollectionViewDiffableDataSource<Int, Sting>?
     private var cuedSting: Sting? {
         didSet { if let sting = cuedSting { scrollTo(sting) } }
@@ -50,11 +50,13 @@ class PlaybackViewController: UICollectionViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(addStingFromFiles), name: .addStingFromFiles, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applySnapshot), name: .stingsDidChange, object: show)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadEditedSting(_:)), name: .didFinishEditing, object: nil)
-        applySnapshot()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        #warning("This is only needed on first load")
+        applySnapshot()
         
         // display the show's name in the navigation bar
         navigationItem.title = show.fileURL.deletingPathExtension().lastPathComponent
@@ -72,11 +74,12 @@ class PlaybackViewController: UICollectionViewController {
         if segue.identifier == "Edit Sting" {
             guard
                 let navigationVC = segue.destination as? UINavigationController,
-                let stingVC = navigationVC.topViewController as? EditViewController,
+                let editVC = navigationVC.topViewController as? EditViewController,
                 let sting = sender as? Sting
             else { return }
             
-            stingVC.sting = sting
+            editVC.show = show
+            editVC.sting = sting
         }
     }
     

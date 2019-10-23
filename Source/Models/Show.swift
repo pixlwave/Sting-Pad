@@ -2,8 +2,6 @@ import UIKit
 
 class Show: UIDocument {
     
-    static var shared = Show(fileURL: Show.defaultURL)
-    
     static var defaultURL: URL = FileManager.default.temporaryDirectory.appendingPathComponent("Show.stings")
     
     override var fileType: String { return "uk.pixlwave.stingpad.show" }

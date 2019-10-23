@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let showBrowser = window?.rootViewController as? ShowBrowserViewController
         else { return false }
         
-        if let playbackVC = showBrowser.presentedViewController as? PlaybackViewController {
+        if let playbackVC = showBrowser.presentedPlaybackViewController {
             playbackVC.closeShow()
         }
         

@@ -4,7 +4,7 @@ class EditViewController: UIViewController {
     
     // access the music
     let engine = Engine.shared
-    let show = Show.shared
+    var show: Show?
     
     var sting: Sting!
     var hasSecurityScopedAccess = false
@@ -130,7 +130,7 @@ class EditViewController: UIViewController {
     func updateStartAndEndSamples() {
         sting.startSample = Int64(waveformView.highlightedSamples?.lowerBound ?? 0)
         sting.endSample = Int64(waveformView.highlightedSamples?.upperBound ?? waveformView.totalSamples)
-        show.updateChangeCount(.done)
+        show?.updateChangeCount(.done)
     }
     
     @IBAction func previewStart() {
@@ -161,7 +161,7 @@ class EditViewController: UIViewController {
     
     @IBAction func toggleLoop(_ sender: UISwitch) {
         sting.loops = sender.isOn
-        show.updateChangeCount(.done)
+        show?.updateChangeCount(.done)
     }
     
     @IBAction func done() {
