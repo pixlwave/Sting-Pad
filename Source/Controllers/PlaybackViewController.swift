@@ -172,8 +172,10 @@ class PlaybackViewController: UICollectionViewController {
         NotificationCenter.default.removeObserver(self)
         
         engine.stopSting()
-        show.close()
-        dismiss(animated: true)
+        show.close { success in
+            (self.presentingViewController as? ShowBrowserViewController)?.isLoading = false
+            self.dismiss(animated: true)
+        }
         
         // set data source to nil to remove reference cycle
         #warning("Test if this is necessary with the GM")

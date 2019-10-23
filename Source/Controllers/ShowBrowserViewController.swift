@@ -4,6 +4,7 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
     
     var transitionController: UIDocumentBrowserTransitionController?
     var hasRestored = false
+    var isLoading = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,9 +46,18 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
     }
     
     func openShow(at url: URL, animated: Bool = true) {
+        guard !isLoading else { return }    // prevent double tap opening a show twice
+        
+        isLoading = true
         let show = Show(fileURL: url)
+        
         show.open { success in
-            guard success else { self.displayOpenError(for: show); return }
+            guard success else {
+                self.displayOpenError(for: show)
+                self.isLoading = false
+                return
+            }
+            
             self.present(show, animated: animated)
         }
     }
@@ -59,7 +69,10 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
             let storyboard = storyboard,
             let rootVC = storyboard.instantiateViewController(withIdentifier: "Root View Controller") as? UINavigationController,
             let playbackVC = rootVC.topViewController as? PlaybackViewController
-        else { return }
+        else {
+            isLoading = false
+            return
+        }
         
         rootVC.transitioningDelegate = self
         transitionController = transitionController(forDocumentAt: show.fileURL)
@@ -79,6 +92,7 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
     
     override func encodeRestorableState(with coder: NSCoder) {
         if presentedViewController != nil {
+            #warning("This will store a show even if it's been closed.")
             let showURL = Show.shared.fileURL
             
             let didStartAccessing = showURL.startAccessingSecurityScopedResource()
