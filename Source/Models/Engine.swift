@@ -39,7 +39,7 @@ class Engine {
             case true:
                 if playingSting == nil { engine.stop() }
             case false:
-                startAudioEngine()
+                ensureEngineIsRunning()
             }
         }
     }
@@ -81,7 +81,7 @@ class Engine {
         updateChannelMap()
     }
     
-    func startAudioEngine() {
+    func ensureEngineIsRunning() {
         guard !engine.isRunning else { return }
         do {
             try engine.start()
@@ -113,7 +113,7 @@ class Engine {
             let statusCode = AudioUnitSetProperty(engine.outputNode.audioUnit!, kAudioOutputUnitProperty_ChannelMap, kAudioUnitScope_Global, 1, nil, 0)
         }
         
-        startAudioEngine()
+        ensureEngineIsRunning()
     }
     
     private func prepareToPlay(_ sting: Sting) {
