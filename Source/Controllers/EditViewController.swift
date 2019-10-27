@@ -60,7 +60,7 @@ class EditViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        // the sting's cell will reload when previewed, so force a reload in case it wasn't previewed.
+        // the sting's cell will only reload when previewed, so force a reload in case it wasn't previewed.
         NotificationCenter.default.post(name: .didFinishEditing, object: sting)
     }
     
@@ -153,6 +153,12 @@ class EditViewController: UIViewController {
     
     @IBAction func stop() {
         engine.stopSting()
+        
+        // re-enable previews now that the previous sting has been stopped
+        if previewLengthControl.selectedSegmentIndex == 0 {
+            previewLengthControl.selectedSegmentIndex = 2
+            previewLengthDidChange()
+        }
     }
     
     @IBAction func zoomWaveOut() {
