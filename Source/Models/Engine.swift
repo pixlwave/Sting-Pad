@@ -39,7 +39,8 @@ class Engine {
             case true:
                 if playingSting == nil { engine.stop() }
             case false:
-                ensureEngineIsRunning()
+                configureAudioSession()
+                updateChannelMap()
             }
         }
     }
@@ -81,13 +82,16 @@ class Engine {
         updateChannelMap()
     }
     
-    func ensureEngineIsRunning() {
-        guard !engine.isRunning else { return }
+    func ensureEngineIsRunning() -> Bool {
+        guard !engine.isRunning else { return true }
         do {
             try engine.start()
         } catch {
-            fatalError("Could not start engine. Error: \(error).")
+            print("Could not start engine. Error: \(error).")
+            return false
         }
+        
+        return true
     }
     
     func audioInterfaceName() -> String {
@@ -113,15 +117,18 @@ class Engine {
             let statusCode = AudioUnitSetProperty(engine.outputNode.audioUnit!, kAudioOutputUnitProperty_ChannelMap, kAudioUnitScope_Global, 1, nil, 0)
         }
         
-        ensureEngineIsRunning()
+        if playingSting != nil { ensureEngineIsRunning() }
     }
     
-    private func prepareToPlay(_ sting: Sting) {
+    private func prepareToPlay(_ sting: Sting) -> Bool {
+        guard !sting.isMissing else { return false }
         if player.isPlaying { player.stop() }
         
         if sting.audioFile.processingFormat != engine.mainMixerNode.inputFormat(forBus: 0) {
             engine.connect(player, to: engine.mainMixerNode, fromBus: 0, toBus: 0, format: sting.audioFile.processingFormat)
         }
+        
+        return ensureEngineIsRunning()
     }
     
     private func scheduleSegment(of sting: Sting, from startSample: AVAudioFramePosition, for sampleCount: AVAudioFrameCount) {
@@ -147,8 +154,7 @@ class Engine {
     }
     
     func play(_ sting: Sting) {
-        guard !sting.isMissing else { return }
-        prepareToPlay(sting)
+        guard prepareToPlay(sting) else { return }
         
         if sting.loops {
             guard let buffer = sting.buffer else { return }
@@ -166,23 +172,23 @@ class Engine {
     
     func previewStart(of sting: Sting, for length: TimeInterval = 3) {
         guard length > 0 else { return }
+        guard prepareToPlay(sting) else { return }
         
         let sampleCount = AVAudioFrameCount(sting.audioFile.processingFormat.sampleRate * length)
         
-        prepareToPlay(sting)
         scheduleSegment(of: sting, from: sting.startSample, for: sampleCount)
         startPlayback(of: sting)
     }
     
     func previewEnd(of sting: Sting, for length: TimeInterval = 3) {
         guard length > 0 else { return }
+        guard prepareToPlay(sting) else { return }
         
         let endSample = AVAudioFrameCount(sting.startSample) + sting.sampleCount
         if sting.loops {
             let sampleCount = AVAudioFrameCount(sting.audioFile.processingFormat.sampleRate * length) / 2
             let previewStartSample = AVAudioFramePosition(endSample - sampleCount)
             
-            prepareToPlay(sting)
             scheduleSegment(of: sting, from: previewStartSample, for: sampleCount)
             scheduleSegment(of: sting, from: sting.startSample, for: sampleCount)
             startPlayback(of: sting)
@@ -190,7 +196,6 @@ class Engine {
             let sampleCount = AVAudioFrameCount(sting.audioFile.processingFormat.sampleRate * length)
             let previewStartSample = AVAudioFramePosition(endSample - sampleCount)
             
-            prepareToPlay(sting)
             scheduleSegment(of: sting, from: previewStartSample, for: sampleCount)
             startPlayback(of: sting)
         }
