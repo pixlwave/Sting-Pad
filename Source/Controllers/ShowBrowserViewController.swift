@@ -83,6 +83,8 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
         transitionController?.targetView = playbackVC.view
         
         present(rootVC, animated: animated)
+        playbackVC.applySnapshot()
+        playbackVC.navigationItem.title = show.fileName
     }
     
     func displayOpenError(for show: Show) {

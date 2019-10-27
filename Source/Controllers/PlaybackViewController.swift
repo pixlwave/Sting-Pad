@@ -52,16 +52,6 @@ class PlaybackViewController: UICollectionViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadEditedSting(_:)), name: .didFinishEditing, object: nil)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        #warning("This is only needed on first load")
-        applySnapshot()
-        
-        // display the show's name in the navigation bar
-        navigationItem.title = show.fileURL.deletingPathExtension().lastPathComponent
-    }
-    
     override func viewWillLayoutSubviews() {
         let origin = CGPoint(x: 0, y: view.frame.height - view.safeAreaInsets.bottom - transportViewHeight)
         let size = CGSize(width: view.frame.width, height: view.bounds.height - origin.y)

@@ -7,6 +7,7 @@ class Show: UIDocument {
     override var fileType: String { return "uk.pixlwave.stingpad.show" }
     
     var fileExists: Bool { return FileManager.default.fileExists(atPath: fileURL.path) }
+    var fileName: String { return fileURL.deletingPathExtension().lastPathComponent }
     
     private(set) var stings = [Sting]() {
         didSet { NotificationCenter.default.post(Notification(name: .stingsDidChange, object: self)) }
