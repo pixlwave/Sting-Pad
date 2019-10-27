@@ -409,7 +409,7 @@ class PlaybackViewController: UICollectionViewController {
             
             let duplicate = UIAction(title: "Duplicate", image: UIImage(systemName: "plus.square.on.square")) { action in
                 guard let duplicate = sting.copy() else { return }
-                self.show.stings.insert(duplicate, at: indexPath.item + 1)  // updates collection view via didSet
+                self.show.insert(duplicate, at: indexPath.item + 1)  // updates collection view via didSet
             }
             let insert = UIAction(title: "Insert After", image: UIImage(systemName: "square.stack")) { action in
                 self.addStingAfterIndex = indexPath.item
@@ -418,7 +418,7 @@ class PlaybackViewController: UICollectionViewController {
             let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash")) { action in
                 guard sting != self.engine.playingSting else { return }
                 if sting == self.cuedSting { self.cuedSting = nil }
-                self.show.stings.remove(at: indexPath.item)     // updates collection view via didSet
+                self.show.removeSting(at: indexPath.item)     // updates collection view via didSet
             }
             
             if sting == self.engine.playingSting {
@@ -472,7 +472,7 @@ extension PlaybackViewController: UICollectionViewDropDelegate {
             let destinationIndexPath = coordinator.destinationIndexPath
         else { return }
         
-        show.stings.insert(show.stings.remove(at: sourceIndexPath.item), at: destinationIndexPath.item)
+        show.insert(show.removeSting(at: sourceIndexPath.item), at: destinationIndexPath.item)
         applySnapshot()
         coordinator.drop(sourceItem.dragItem, toItemAt: destinationIndexPath)
     }
@@ -485,10 +485,10 @@ extension PlaybackViewController: MPMediaPickerControllerDelegate {
         // make a sting from the selected media item, add it to the engine and update the table view
         if let sting = Sting(mediaItem: mediaItemCollection.items[0]) {
             if let index = addStingAfterIndex, index < show.stings.count {
-                show.stings.insert(sting, at: index + 1)
+                show.insert(sting, at: index + 1)
                 addStingAfterIndex = nil
             } else {
-                show.stings.append(sting)
+                show.append(sting)
             }
             
             applySnapshot()
@@ -510,7 +510,7 @@ extension PlaybackViewController: MPMediaPickerControllerDelegate {
 extension PlaybackViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         if let sting = Sting(url: urls[0]) {
-            show.stings.append(sting)
+            show.append(sting)
             applySnapshot()
         }
     }

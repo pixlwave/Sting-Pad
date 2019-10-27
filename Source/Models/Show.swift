@@ -8,11 +8,8 @@ class Show: UIDocument {
     
     var fileExists: Bool { return FileManager.default.fileExists(atPath: fileURL.path) }
     
-    var stings = [Sting]() {
-        didSet {
-            NotificationCenter.default.post(Notification(name: .stingsDidChange, object: self))
-            updateChangeCount(.done)
-        }
+    private(set) var stings = [Sting]() {
+        didSet { NotificationCenter.default.post(Notification(name: .stingsDidChange, object: self)) }
     }
     
     enum DocumentError: Error {
@@ -28,6 +25,24 @@ class Show: UIDocument {
     override func contents(forType typeName: String) throws -> Any {
         let jsonData = try JSONEncoder().encode(stings)
         return jsonData
+    }
+    
+    // editing functions exist to allow the show to load without updating it's change count
+    func append(_ sting: Sting) {
+        stings.append(sting)
+        updateChangeCount(.done)
+    }
+    
+    func insert(_ sting: Sting, at index: Int) {
+        stings.insert(sting, at: index)
+        updateChangeCount(.done)
+    }
+    
+    func removeSting(at index: Int) -> Sting {
+        let sting = stings.remove(at: index)
+        updateChangeCount(.done)
+        
+        return sting
     }
     
 }
