@@ -83,8 +83,10 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
         transitionController?.targetView = playbackVC.view
         
         present(rootVC, animated: animated)
+        
         playbackVC.applySnapshot()
         playbackVC.navigationItem.title = show.fileName
+        playbackVC.stopUpdatingProgress()   // update time remaining label
     }
     
     func displayOpenError(for show: Show) {

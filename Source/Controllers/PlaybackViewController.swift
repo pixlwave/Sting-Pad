@@ -361,6 +361,9 @@ class PlaybackViewController: UICollectionViewController {
         progressTimer?.invalidate()
         progressTimer = nil
         progressAnimator?.stopAnimation(true)
+        
+        progressView.setProgress(0, animated: false)
+        timeRemainingLabel.text = cuedSting?.totalTime.formattedAsRemaining()
     }
     
     
