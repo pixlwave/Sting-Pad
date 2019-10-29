@@ -239,10 +239,10 @@ class PlaybackViewController: UICollectionViewController {
         
         if let sting = Sting(url: url) {
             if let index = addStingAfterIndex, index < show.stings.count {
-                show.stings.insert(sting, at: index + 1)
+                show.insert(sting, at: index + 1)
                 addStingAfterIndex = nil
             } else {
-                show.stings.append(sting)
+                show.append(sting)
             }
             applySnapshot()
         }
