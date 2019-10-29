@@ -139,19 +139,16 @@ class PlaybackViewController: UICollectionViewController {
     
     func reloadItems(_ identifiers: [Sting]) {
         guard let dataSource = dataSource else { return }
-        #warning("Is there a better way to do this?")
-        let uniqueIdentifiers = Array(Set(identifiers))
+        let uniqueIdentifiers = Set(identifiers)
         var snapshot = dataSource.snapshot()
         
-        #warning("Test this and add debug notification")
-        uniqueIdentifiers.forEach { sting in
-            guard snapshot.itemIdentifiers.contains(sting) else {
-                applySnapshot()
-                return
-            }
+        #warning("Add debug notification")
+        guard uniqueIdentifiers.isSubset(of: snapshot.itemIdentifiers) else {
+            applySnapshot()
+            return
         }
         
-        snapshot.reloadItems(uniqueIdentifiers)
+        snapshot.reloadItems(Array(uniqueIdentifiers))
         dataSource.apply(snapshot, animatingDifferences: false)
     }
     
