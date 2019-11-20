@@ -407,7 +407,11 @@ class PlaybackViewController: UICollectionViewController {
             }
             let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash")) { action in
                 guard sting != self.engine.playingSting else { return }
-                if sting == self.cuedSting { self.cuedSting = nil }
+                if sting == self.cuedSting {
+                    self.nextCue()
+                    // remove cued sting if next cue is still the chosen sting
+                    if sting == self.cuedSting { self.cuedSting = nil }
+                }
                 self.show.removeSting(at: indexPath.item)     // updates collection view via didSet
             }
             
