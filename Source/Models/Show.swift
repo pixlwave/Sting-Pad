@@ -2,7 +2,7 @@ import UIKit
 
 class Show: UIDocument {
     
-    static var defaultURL: URL = FileManager.default.temporaryDirectory.appendingPathComponent("Show.stings")
+    static var defaultName = "Show"
     
     override var fileType: String { return "uk.pixlwave.stingpad.show" }
     
@@ -15,6 +15,20 @@ class Show: UIDocument {
     
     enum DocumentError: Error {
         case invalidData
+    }
+    
+    convenience init(name: String?) {
+        let fileName: String
+        
+        if let name = name, !name.isEmpty {
+            fileName = name
+        } else {
+            fileName = Show.defaultName
+        }
+        
+        let url = FileManager.default.temporaryDirectory.appendingPathComponent("\(fileName).stings")
+        
+        self.init(fileURL: url)
     }
     
     override func load(fromContents contents: Any, ofType typeName: String?) throws {

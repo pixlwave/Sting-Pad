@@ -24,7 +24,7 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
         #if targetEnvironment(simulator)
         if !hasRestored {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(1)) {
-                let show = Show(fileURL: Show.defaultURL)
+                let show = Show(name: Show.defaultName)
                 if !show.fileExists {
                     show.save(to: show.fileURL, for: .forCreating) { sucess in
                         self.openShow(at: show.fileURL, animated: false)
@@ -132,15 +132,33 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
 // MARK: UIDocumentBrowserViewControllerDelegate
 extension ShowBrowserViewController: UIDocumentBrowserViewControllerDelegate {
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didRequestDocumentCreationWithHandler importHandler: @escaping (URL?, UIDocumentBrowserViewController.ImportMode) -> Void) {
-        let show = Show(fileURL: Show.defaultURL)
-        if show.fileExists {
-            importHandler(show.fileURL, .move)
-        } else {
-            show.save(to: show.fileURL, for: .forCreating) { success in
-                guard success else { importHandler(nil, .none); return }
-                importHandler(show.fileURL, .move)
-            }
+        let showNameAlert = UIAlertController(title: "Show Name", message: nil, preferredStyle: .alert)
+        
+        showNameAlert.addTextField { textField in
+            textField.placeholder = Show.defaultName
+            textField.autocapitalizationType = .words
+            textField.clearButtonMode = .always
         }
+        showNameAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+            importHandler(nil, .none)
+        }))
+        showNameAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+            let show = Show(name: showNameAlert.textFields?.first?.text)
+            
+            // dismiss alert controller in order to present playback view controller
+            self.dismiss(animated: true)
+            
+            if show.fileExists {
+                importHandler(show.fileURL, .move)
+            } else {
+                show.save(to: show.fileURL, for: .forCreating) { success in
+                    guard success else { importHandler(nil, .none); return }
+                    importHandler(show.fileURL, .move)
+                }
+            }
+        }))
+        
+        present(showNameAlert, animated: true)
     }
     
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didPickDocumentsAt documentURLs: [URL]) {
