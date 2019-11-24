@@ -172,9 +172,13 @@ class Sting: NSObject, Codable {
     }
     
     func storeDefaults() {
-        let defaults = Defaults(startTime: startTime, endTime: endTime, loops: loops)
-        guard let data = try? JSONEncoder().encode(defaults) else { return }
-        UserDefaults.stings.setValue(data, forKey: url.absoluteString)
+        if startTime == 0 && endTime == nil && loops == false {
+            UserDefaults.stings.removeObject(forKey: url.absoluteString)
+        } else {
+            let defaults = Defaults(startTime: startTime, endTime: endTime, loops: loops)
+            guard let data = try? JSONEncoder().encode(defaults) else { return }
+            UserDefaults.stings.setValue(data, forKey: url.absoluteString)
+        }
     }
     
     func loadDefaults() {
