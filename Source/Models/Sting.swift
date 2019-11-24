@@ -124,6 +124,8 @@ class Sting: NSObject, Codable {
         self.audioFile = audioFile
         
         super.init()
+        
+        loadDefaults()
     }
     
     init?(url: URL) {
@@ -143,6 +145,8 @@ class Sting: NSObject, Codable {
         self.audioFile = audioFile
         
         super.init()
+        
+        loadDefaults()
     }
     
     func createBuffer() {
@@ -167,9 +171,33 @@ class Sting: NSObject, Codable {
         buffer = nil
     }
     
+    func saveDefaults() {
+        let defaults = Defaults(startTime: startTime, endTime: endTime, loops: loops)
+        guard let data = try? JSONEncoder().encode(defaults) else { return }
+        UserDefaults.stings.setValue(data, forKey: url.absoluteString)
+    }
+    
+    func loadDefaults() {
+        guard
+            let data = UserDefaults.stings.data(forKey: url.absoluteString),
+            let defaults = try? JSONDecoder().decode(Defaults.self, from: data)
+        else { return }
+        
+        #warning("Add range checks")
+        startTime = defaults.startTime
+        endTime = defaults.endTime
+        loops = defaults.loops
+    }
+    
     func copy() -> Sting? {
         guard let data = try? JSONEncoder().encode(self) else { return nil }
         return try? JSONDecoder().decode(Sting.self, from: data)
+    }
+    
+    struct Defaults: Codable {
+        var startTime: TimeInterval
+        var endTime: TimeInterval?
+        var loops: Bool
     }
     
 }

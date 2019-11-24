@@ -113,3 +113,8 @@ extension UIColor {
     static let borderColor = UIColor(named: "Border Color")!
     static let tintColor = UIColor(named: "Tint Color")!
 }
+
+
+extension UserDefaults {
+    static let stings = UserDefaults(suiteName: "uk.pixlwave.StingPad.StingDefaults")!
+}
