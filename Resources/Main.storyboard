@@ -318,10 +318,10 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tqx-tQ-4gh">
-                                <rect key="frame" x="112" y="430" width="96" height="30"/>
-                                <state key="normal" title="Set as Default"/>
+                                <rect key="frame" x="105" y="430" width="110" height="30"/>
+                                <state key="normal" title="Store as Default"/>
                                 <connections>
-                                    <action selector="saveDefaults" destination="sKY-0b-GtB" eventType="touchUpInside" id="0ju-9M-y08"/>
+                                    <action selector="storeDefaults" destination="sKY-0b-GtB" eventType="touchUpInside" id="0ju-9M-y08"/>
                                 </connections>
                             </button>
                         </subviews>

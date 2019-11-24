@@ -171,7 +171,7 @@ class Sting: NSObject, Codable {
         buffer = nil
     }
     
-    func saveDefaults() {
+    func storeDefaults() {
         let defaults = Defaults(startTime: startTime, endTime: endTime, loops: loops)
         guard let data = try? JSONEncoder().encode(defaults) else { return }
         UserDefaults.stings.setValue(data, forKey: url.absoluteString)
