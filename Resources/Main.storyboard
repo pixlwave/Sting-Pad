@@ -116,7 +116,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="slider.horizontal.3" catalog="system" id="qmm-VS-QCJ">
                             <connections>
-                                <segue destination="Uyh-Oz-z9u" kind="presentation" id="Hme-ne-gmk"/>
+                                <segue destination="Uyh-Oz-z9u" kind="presentation" identifier="Settings" id="Hme-ne-gmk"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -469,6 +469,23 @@
                                         <connections>
                                             <segue destination="kJa-OC-EsS" kind="show" id="1ll-cU-74Z"/>
                                         </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="mcQ-ib-aSq" style="IBUITableViewCellStyleDefault" id="TnO-cY-prK">
+                                        <rect key="frame" x="0.0" y="199.5" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TnO-cY-prK" id="qtT-wP-bGp">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Store Sting Defaults" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mcQ-ib-aSq">
+                                                    <rect key="frame" x="16" y="0.0" width="288" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
