@@ -18,7 +18,7 @@ class SettingsViewController: UITableViewController {
             storeAllStingDefaults()
             tableView.deselectRow(at: indexPath, animated: true)
         default:
-            super.tableView(tableView, didSelectRowAt: indexPath)
+            break
         }
     }
 }
