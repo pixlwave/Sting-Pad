@@ -50,6 +50,7 @@ class PlaybackViewController: UICollectionViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(addStingFromFiles), name: .addStingFromFiles, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applySnapshot), name: .stingsDidChange, object: show)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadEditedSting(_:)), name: .didFinishEditing, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showStateChanged(_:)), name: UIDocument.stateChangedNotification, object: show)
     }
     
     override func viewWillLayoutSubviews() {
@@ -162,6 +163,10 @@ class PlaybackViewController: UICollectionViewController {
     @objc func reloadEditedSting(_ notification: Notification) {
         guard let sting = notification.object as? Sting else { return }
         reloadItems([sting])
+    }
+    
+    @objc func showStateChanged(_ notification: Notification) {
+        print("Show State Changed \(show.documentState)")
     }
     
     @IBAction func closeShow() {
@@ -476,7 +481,6 @@ extension PlaybackViewController: UICollectionViewDropDelegate {
         else { return }
         
         show.insert(show.removeSting(at: sourceIndexPath.item), at: destinationIndexPath.item)
-        applySnapshot()
         coordinator.drop(sourceItem.dragItem, toItemAt: destinationIndexPath)
     }
 }
@@ -513,7 +517,6 @@ extension PlaybackViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         if let sting = Sting(url: urls[0]) {
             show.append(sting)
-            applySnapshot()
         }
     }
 }
