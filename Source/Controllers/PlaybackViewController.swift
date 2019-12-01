@@ -23,7 +23,7 @@ class PlaybackViewController: UICollectionViewController {
     private var progressTimer: Timer?
     private var progressAnimator: UIViewPropertyAnimator?
     
-    private var addStingAfterIndex: Int?
+    private var addStingAtIndex: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -242,13 +242,13 @@ class PlaybackViewController: UICollectionViewController {
         let url = URL(fileURLWithPath: "/Users/Shared/Music").appendingPathComponent(file)
         
         if let sting = Sting(url: url) {
-            if let index = addStingAfterIndex, index < show.stings.count {
-                show.insert(sting, at: index + 1)
-                addStingAfterIndex = nil
+            if let index = addStingAtIndex, index < show.stings.count {
+                show.insert(sting, at: index)
+                addStingAtIndex = nil
             } else {
                 show.append(sting)
+                scrollTo(sting, animated: false)
             }
-            applySnapshot()
         }
     }
     #endif
@@ -408,8 +408,8 @@ class PlaybackViewController: UICollectionViewController {
                 guard let duplicate = sting.copy() else { return }
                 self.show.insert(duplicate, at: indexPath.item + 1)  // updates collection view via didSet
             }
-            let insert = UIAction(title: "Insert After", image: UIImage(systemName: "square.stack")) { action in
-                self.addStingAfterIndex = indexPath.item
+            let insert = UIAction(title: "Insert Song Here", image: UIImage(systemName: "square.stack")) { action in
+                self.addStingAtIndex = indexPath.item
                 self.addStingFromLibrary()
             }
             let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash")) { action in
@@ -485,15 +485,14 @@ extension PlaybackViewController: MPMediaPickerControllerDelegate {
     func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
         // make a sting from the selected media item, add it to the engine and update the table view
         if let sting = Sting(mediaItem: mediaItemCollection.items[0]) {
-            if let index = addStingAfterIndex, index < show.stings.count {
-                show.insert(sting, at: index + 1)
-                addStingAfterIndex = nil
+            if let index = addStingAtIndex, index < show.stings.count {
+                show.insert(sting, at: index)
+                // don't call scrollTo sting will already be visible
+                addStingAtIndex = nil
             } else {
                 show.append(sting)
+                scrollTo(sting, animated: false)
             }
-            
-            applySnapshot()
-            scrollTo(sting, animated: false)
         }
         
         // dismiss media picker
@@ -501,7 +500,7 @@ extension PlaybackViewController: MPMediaPickerControllerDelegate {
     }
     
     func mediaPickerDidCancel(_ mediaPicker: MPMediaPickerController) {
-        addStingAfterIndex = nil
+        addStingAtIndex = nil
         dismiss(animated: true)
     }
 }
