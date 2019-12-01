@@ -430,7 +430,9 @@ class PlaybackViewController: UICollectionViewController {
             
             if sting.isMissing {
                 let songInfo = UIAction(title: "\(sting.songTitle) by \(sting.songArtist)", attributes: .disabled) { action in }
-                return UIMenu(title: "", children: [delete, UIMenu(title: "", options: .displayInline, children: [songInfo])])
+                let editMenu = UIMenu(title: "", options: .displayInline, children: [delete, insert])
+                let infoMenu = UIMenu(title: "", options: .displayInline, children: [songInfo])
+                return UIMenu(title: "", children: [editMenu, infoMenu])
             }
             
             let editMenu = UIMenu(title: "", options: .displayInline, children: [edit, rename, colorMenu])
