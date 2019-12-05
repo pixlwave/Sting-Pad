@@ -64,6 +64,8 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
             
             self.present(show, animated: animated)
         }
+        
+        tidyUpInbox()
     }
     
     func present(_ show: Show, animated: Bool) {
@@ -96,6 +98,15 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
             alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
             self.present(alertController, animated: true)
         }
+    }
+    
+    func tidyUpInbox() {
+        guard
+            let inboxURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Inbox"),
+            let inboxFiles = try? FileManager.default.contentsOfDirectory(atPath: inboxURL.path)
+        else { return }
+        
+        inboxFiles.forEach { try? FileManager.default.removeItem(at: inboxURL.appendingPathComponent($0)) }
     }
     
     override func encodeRestorableState(with coder: NSCoder) {
