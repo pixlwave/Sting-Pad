@@ -4,6 +4,14 @@ import MediaPlayer
 
 extension URL {
     var isMediaItem: Bool { scheme == "ipod-library" }
+    var isFileInsideInbox: Bool {
+        guard isFileURL, let inboxURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Inbox") else {
+            return false
+        }
+        
+        let directoryURL = resolvingSymlinksInPath().deletingLastPathComponent()  // resolve symlinks to match /private/var with /var
+        return directoryURL == inboxURL
+    }
     
     func songTitle() -> String? {
         if isMediaItem {

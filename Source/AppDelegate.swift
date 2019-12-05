@@ -27,9 +27,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             playbackVC.closeShow()
         }
         
-        showBrowser.openShow(at: url)
-        
-        return true
+        if url.isFileInsideInbox {
+            showBrowser.revealDocument(at: url, importIfNeeded: true) { importedURL, error in
+                guard let importedURL = importedURL else { return }
+                showBrowser.openShow(at: importedURL)
+            }
+            return false
+        } else {
+            showBrowser.openShow(at: url)
+            return true
+        }
     }
     
     func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
