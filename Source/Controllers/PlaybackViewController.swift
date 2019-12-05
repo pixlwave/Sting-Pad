@@ -386,7 +386,7 @@ class PlaybackViewController: UICollectionViewController {
         UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
             guard let sting = self.dataSource?.itemIdentifier(for: indexPath) else { return nil }
             
-            let cue = UIAction(title: "Cue Next", image: UIImage(systemName: "pause.circle")) { action in
+            let cue = UIAction(title: "Cue Next", image: UIImage(systemName: "smallcircle.fill.circle")) { action in
                 let oldCue = self.cuedSting
                 self.cuedSting = sting
                 self.reloadItems([oldCue, sting].compactMap { $0 })

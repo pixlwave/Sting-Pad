@@ -39,7 +39,7 @@ class StingCell: UICollectionViewCell {
             playbackIndicator.image = UIImage(systemName: "play.circle.fill")
             playbackIndicator.tintColor = .white
         } else if isCued{
-            playbackIndicator.image = UIImage(systemName: "pause.circle")
+            playbackIndicator.image = UIImage(systemName: "smallcircle.fill.circle")
             playbackIndicator.tintColor = .white
         } else {
             playbackIndicator.image = UIImage(systemName: "circle")
