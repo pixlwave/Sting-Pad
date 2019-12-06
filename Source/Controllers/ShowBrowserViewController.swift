@@ -36,7 +36,7 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
         }
         #endif
         
-        if UserDefaults.standard.double(forKey: "WelcomeVersionSeen") < WelcomeViewController.currentVersion, children.count == 0 {
+        if UserDefaults.standard.double(forKey: "WelcomeVersionSeen") < WelcomeViewController.currentVersion, presentedViewController == nil {
             showWelcomeScreen()
         }
     }
