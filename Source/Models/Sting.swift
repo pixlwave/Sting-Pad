@@ -111,6 +111,7 @@ class Sting: NSObject, Codable {
         
         super.init()
         
+        #warning("Check for valid start & end times")
         if loops { createBuffer() }
     }
     
@@ -187,9 +188,18 @@ class Sting: NSObject, Codable {
             let defaults = try? JSONDecoder().decode(Defaults.self, from: data)
         else { return }
         
-        #warning("Add range checks")
-        startTime = defaults.startTime
-        endTime = defaults.endTime
+        let duration = Double(audioFile.length) / audioFile.processingFormat.sampleRate
+        
+        // ensure the new start time is valid
+        if defaults.startTime < duration {
+            startTime = defaults.startTime
+        }
+        
+        // ensure the new end time is valid and is after the startSample
+        if let newEndTime = defaults.endTime, newEndTime < duration, startTime < newEndTime {
+            endTime = defaults.endTime
+        }
+        
         loops = defaults.loops
     }
     
