@@ -82,7 +82,10 @@
 			<key>UTTypeDescription</key>
 			<string>Sting Pad Show</string>
 			<key>UTTypeIconFiles</key>
-			<array/>
+			<array>
+				<string>iPadSmall</string>
+				<string>iPadLarge</string>
+			</array>
 			<key>UTTypeIdentifier</key>
 			<string>uk.pixlwave.stingpad.show</string>
 			<key>UTTypeTagSpecification</key>

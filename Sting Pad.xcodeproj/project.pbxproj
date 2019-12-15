@@ -22,6 +22,8 @@
 		A581C39F1B949AD6006CE228 /* PlaybackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C39E1B949AD6006CE228 /* PlaybackViewController.swift */; };
 		A581C3A21B94A041006CE228 /* StingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C3A11B94A041006CE228 /* StingCell.swift */; };
 		A581C3A41B94C5B2006CE228 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C3A31B94C5B2006CE228 /* WelcomeViewController.swift */; };
+		A58988FD23A6B97C00A85485 /* iPadLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = A58988FC23A6B97C00A85485 /* iPadLarge.png */; };
+		A58988FF23A6B98600A85485 /* iPadSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = A58988FE23A6B98600A85485 /* iPadSmall.png */; };
 		A595169A22F99A21001E820A /* AddStingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A595169922F99A21001E820A /* AddStingFooterView.swift */; };
 		A59EC6EA22EB5696009A7ED1 /* TransportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59EC6E922EB5696009A7ED1 /* TransportView.swift */; };
 		A5A49C8F1B5BF1C2004B80CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A49C8E1B5BF1C2004B80CE /* AppDelegate.swift */; };
@@ -54,6 +56,8 @@
 		A581C39E1B949AD6006CE228 /* PlaybackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackViewController.swift; sourceTree = "<group>"; };
 		A581C3A11B94A041006CE228 /* StingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StingCell.swift; sourceTree = "<group>"; };
 		A581C3A31B94C5B2006CE228 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		A58988FC23A6B97C00A85485 /* iPadLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPadLarge.png; sourceTree = "<group>"; };
+		A58988FE23A6B98600A85485 /* iPadSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPadSmall.png; sourceTree = "<group>"; };
 		A595169922F99A21001E820A /* AddStingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStingFooterView.swift; sourceTree = "<group>"; };
 		A59EC6E922EB5696009A7ED1 /* TransportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportView.swift; sourceTree = "<group>"; };
 		A5A49C891B5BF1C2004B80CE /* Sting Pad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sting Pad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,6 +97,15 @@
 			path = FDWaveformView;
 			sourceTree = "<group>";
 		};
+		A589890023A6B99C00A85485 /* Document Icons */ = {
+			isa = PBXGroup;
+			children = (
+				A58988FE23A6B98600A85485 /* iPadSmall.png */,
+				A58988FC23A6B97C00A85485 /* iPadLarge.png */,
+			);
+			path = "Document Icons";
+			sourceTree = "<group>";
+		};
 		A5A49C801B5BF1C2004B80CE = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +127,7 @@
 		A5A49CB31B5BF797004B80CE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A589890023A6B99C00A85485 /* Document Icons */,
 				A581C3951B94769F006CE228 /* Main.storyboard */,
 				A55C0E7522AA7202008DDB12 /* TransportView.xib */,
 				A545F62822F7398300C62DF7 /* AddStingFooterView.xib */,
@@ -246,7 +260,9 @@
 				A5BD01E0218F2AEB0010FE10 /* Launch Screen.storyboard in Resources */,
 				A545F62922F7398300C62DF7 /* AddStingFooterView.xib in Resources */,
 				A581C3981B94769F006CE228 /* Main.storyboard in Resources */,
+				A58988FF23A6B98600A85485 /* iPadSmall.png in Resources */,
 				A55C0E7622AA7202008DDB12 /* TransportView.xib in Resources */,
+				A58988FD23A6B97C00A85485 /* iPadLarge.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
