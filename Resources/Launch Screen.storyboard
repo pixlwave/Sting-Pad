@@ -29,12 +29,20 @@
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pixlwave" translatesAutoresizingMaskIntoConstraints="NO" id="Moi-Vx-IY8" userLabel="pixlwave">
                                 <rect key="frame" x="182" y="547" width="127" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Moi-Vx-IY8" secondAttribute="height" multiplier="127:14" id="DkN-lo-fwp"/>
+                                    <constraint firstAttribute="width" constant="127" id="eyQ-BX-H2M">
+                                        <variation key="widthClass=regular" constant="145"/>
+                                    </constraint>
+                                </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bee" translatesAutoresizingMaskIntoConstraints="NO" id="25f-Wj-RGF" userLabel="Bee">
-                                <rect key="frame" x="251" y="467" width="52" height="64"/>
+                                <rect key="frame" x="253" y="469.5" width="50" height="61.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="25f-Wj-RGF" secondAttribute="height" multiplier="13:16" id="cAV-54-0Ep"/>
-                                    <constraint firstAttribute="width" constant="52" id="xt5-Yx-RRN"/>
+                                    <constraint firstAttribute="width" constant="50" id="xt5-Yx-RRN">
+                                        <variation key="widthClass=regular" constant="60"/>
+                                    </constraint>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -44,7 +52,9 @@
                             <constraint firstItem="1j3-Ha-dHo" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="AQT-4O-NBS"/>
                             <constraint firstItem="1j3-Ha-dHo" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gUh-ii-bJs" secondAttribute="bottom" constant="100" id="Ayg-1X-2yc"/>
                             <constraint firstItem="1j3-Ha-dHo" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="Bcu-3y-fUS" secondAttribute="trailing" id="ChF-nu-uLu"/>
-                            <constraint firstItem="Moi-Vx-IY8" firstAttribute="top" secondItem="25f-Wj-RGF" secondAttribute="bottom" constant="16" id="EQc-SH-duG"/>
+                            <constraint firstItem="Moi-Vx-IY8" firstAttribute="top" secondItem="25f-Wj-RGF" secondAttribute="bottom" constant="16" id="EQc-SH-duG">
+                                <variation key="widthClass=regular" constant="22"/>
+                            </constraint>
                             <constraint firstItem="25f-Wj-RGF" firstAttribute="trailing" secondItem="Moi-Vx-IY8" secondAttribute="trailing" constant="-6" id="KkL-Bs-cIh"/>
                             <constraint firstItem="Bcu-3y-fUS" firstAttribute="trailing" secondItem="Moi-Vx-IY8" secondAttribute="trailing" constant="11" id="Luc-2H-5c1"/>
                             <constraint firstItem="Bcu-3y-fUS" firstAttribute="leading" relation="lessThanOrEqual" secondItem="1j3-Ha-dHo" secondAttribute="leading" id="PFm-eU-ptc"/>
