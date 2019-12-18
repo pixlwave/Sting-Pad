@@ -31,6 +31,7 @@
 		A5A49CB11B5BF216004B80CE /* Sting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A49CB01B5BF216004B80CE /* Sting.swift */; };
 		A5B39BDE1DAA843A00AA22EF /* FDWaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B39BDD1DAA843A00AA22EF /* FDWaveformView.swift */; };
 		A5BD01E0218F2AEB0010FE10 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5BD01DF218F2AEB0010FE10 /* Launch Screen.storyboard */; };
+		A5BD85E923AA531B00846F27 /* Launch Screen.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5BD85E823AA531B00846F27 /* Launch Screen.xcassets */; };
 		A5C32F4E228B64FE00E4B4EB /* Extends.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C32F4D228B64FE00E4B4EB /* Extends.swift */; };
 		A5CEE51323215B1800BB7CD1 /* WaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CEE51223215B1800BB7CD1 /* WaveformView.swift */; };
 		A5CEE5152321695100BB7CD1 /* WaveformMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CEE5142321695100BB7CD1 /* WaveformMarkerView.swift */; };
@@ -67,6 +68,7 @@
 		A5A49CB01B5BF216004B80CE /* Sting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sting.swift; sourceTree = "<group>"; };
 		A5B39BDD1DAA843A00AA22EF /* FDWaveformView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FDWaveformView.swift; sourceTree = "<group>"; };
 		A5BD01DF218F2AEB0010FE10 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		A5BD85E823AA531B00846F27 /* Launch Screen.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Launch Screen.xcassets"; sourceTree = "<group>"; };
 		A5C32F4D228B64FE00E4B4EB /* Extends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extends.swift; sourceTree = "<group>"; };
 		A5CEE51223215B1800BB7CD1 /* WaveformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformView.swift; sourceTree = "<group>"; };
 		A5CEE5142321695100BB7CD1 /* WaveformMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformMarkerView.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				A545F62822F7398300C62DF7 /* AddStingFooterView.xib */,
 				A5BD01DF218F2AEB0010FE10 /* Launch Screen.storyboard */,
 				A5A49C951B5BF1C2004B80CE /* Images.xcassets */,
+				A5BD85E823AA531B00846F27 /* Launch Screen.xcassets */,
 				A5A49C8D1B5BF1C2004B80CE /* Info.plist */,
 			);
 			path = Resources;
@@ -261,6 +264,7 @@
 				A545F62922F7398300C62DF7 /* AddStingFooterView.xib in Resources */,
 				A581C3981B94769F006CE228 /* Main.storyboard in Resources */,
 				A58988FF23A6B98600A85485 /* iPadSmall.png in Resources */,
+				A5BD85E923AA531B00846F27 /* Launch Screen.xcassets in Resources */,
 				A55C0E7622AA7202008DDB12 /* TransportView.xib in Resources */,
 				A58988FD23A6B97C00A85485 /* iPadLarge.png in Resources */,
 			);
