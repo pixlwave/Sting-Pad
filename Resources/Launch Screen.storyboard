@@ -16,13 +16,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="1j3-Ha-dHo" userLabel="Logo">
-                                <rect key="frame" x="70" y="192" width="180" height="180"/>
+                                <rect key="frame" x="74.5" y="196.5" width="171" height="171"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="1j3-Ha-dHo" secondAttribute="height" multiplier="1:1" id="ElL-Rx-QcP"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sting Pad" translatesAutoresizingMaskIntoConstraints="NO" id="gUh-ii-bJs" userLabel="Name">
-                                <rect key="frame" x="45" y="65" width="230" height="48"/>
+                                <rect key="frame" x="48" y="66" width="224" height="46.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="gUh-ii-bJs" secondAttribute="height" multiplier="115:24" id="7Gb-gV-JC0"/>
                                 </constraints>
@@ -40,7 +40,9 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="1j3-Ha-dHo" firstAttribute="width" secondItem="gUh-ii-bJs" secondAttribute="width" multiplier="0.75" priority="750" id="3jI-Wp-ItT"/>
                             <constraint firstItem="1j3-Ha-dHo" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="AQT-4O-NBS"/>
+                            <constraint firstItem="1j3-Ha-dHo" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gUh-ii-bJs" secondAttribute="bottom" constant="75" id="Ayg-1X-2yc"/>
                             <constraint firstItem="1j3-Ha-dHo" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="Bcu-3y-fUS" secondAttribute="trailing" id="ChF-nu-uLu"/>
                             <constraint firstItem="Moi-Vx-IY8" firstAttribute="top" secondItem="25f-Wj-RGF" secondAttribute="bottom" constant="16" id="EQc-SH-duG"/>
                             <constraint firstItem="25f-Wj-RGF" firstAttribute="trailing" secondItem="Moi-Vx-IY8" secondAttribute="trailing" constant="-6" id="KkL-Bs-cIh"/>
@@ -48,10 +50,11 @@
                             <constraint firstItem="Bcu-3y-fUS" firstAttribute="leading" relation="lessThanOrEqual" secondItem="1j3-Ha-dHo" secondAttribute="leading" id="PFm-eU-ptc"/>
                             <constraint firstItem="gUh-ii-bJs" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="0.314" id="QN0-al-Sxc"/>
                             <constraint firstItem="Bcu-3y-fUS" firstAttribute="bottom" secondItem="Moi-Vx-IY8" secondAttribute="bottom" constant="7" id="Uc2-iG-rbX"/>
-                            <constraint firstItem="1j3-Ha-dHo" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="9/16" priority="750" id="VMf-4K-MKj"/>
                             <constraint firstItem="1j3-Ha-dHo" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="0.993" id="eh7-f7-yLu"/>
-                            <constraint firstItem="1j3-Ha-dHo" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gUh-ii-bJs" secondAttribute="bottom" constant="75" id="sR2-iQ-llW"/>
                             <constraint firstItem="gUh-ii-bJs" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="u1t-ud-a0U"/>
+                            <constraint firstItem="gUh-ii-bJs" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.7" id="xy8-2n-2h6">
+                                <variation key="heightClass=regular-widthClass=regular" constant="-150"/>
+                            </constraint>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
                     </view>
