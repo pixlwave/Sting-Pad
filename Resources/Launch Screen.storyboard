@@ -40,9 +40,9 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="1j3-Ha-dHo" firstAttribute="width" secondItem="gUh-ii-bJs" secondAttribute="width" multiplier="0.75" priority="750" id="3jI-Wp-ItT"/>
+                            <constraint firstItem="1j3-Ha-dHo" firstAttribute="width" secondItem="gUh-ii-bJs" secondAttribute="width" multiplier="0.7" priority="750" id="3jI-Wp-ItT"/>
                             <constraint firstItem="1j3-Ha-dHo" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="AQT-4O-NBS"/>
-                            <constraint firstItem="1j3-Ha-dHo" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gUh-ii-bJs" secondAttribute="bottom" constant="75" id="Ayg-1X-2yc"/>
+                            <constraint firstItem="1j3-Ha-dHo" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gUh-ii-bJs" secondAttribute="bottom" constant="100" id="Ayg-1X-2yc"/>
                             <constraint firstItem="1j3-Ha-dHo" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="Bcu-3y-fUS" secondAttribute="trailing" id="ChF-nu-uLu"/>
                             <constraint firstItem="Moi-Vx-IY8" firstAttribute="top" secondItem="25f-Wj-RGF" secondAttribute="bottom" constant="16" id="EQc-SH-duG"/>
                             <constraint firstItem="25f-Wj-RGF" firstAttribute="trailing" secondItem="Moi-Vx-IY8" secondAttribute="trailing" constant="-6" id="KkL-Bs-cIh"/>
@@ -50,13 +50,30 @@
                             <constraint firstItem="Bcu-3y-fUS" firstAttribute="leading" relation="lessThanOrEqual" secondItem="1j3-Ha-dHo" secondAttribute="leading" id="PFm-eU-ptc"/>
                             <constraint firstItem="gUh-ii-bJs" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="0.314" id="QN0-al-Sxc"/>
                             <constraint firstItem="Bcu-3y-fUS" firstAttribute="bottom" secondItem="Moi-Vx-IY8" secondAttribute="bottom" constant="7" id="Uc2-iG-rbX"/>
+                            <constraint firstItem="gUh-ii-bJs" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.5" id="VKl-Pf-L7O"/>
                             <constraint firstItem="1j3-Ha-dHo" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="0.993" id="eh7-f7-yLu"/>
                             <constraint firstItem="gUh-ii-bJs" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="u1t-ud-a0U"/>
-                            <constraint firstItem="gUh-ii-bJs" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.7" id="xy8-2n-2h6">
-                                <variation key="heightClass=regular-widthClass=regular" constant="-150"/>
-                            </constraint>
+                            <constraint firstItem="gUh-ii-bJs" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.7" id="xy8-2n-2h6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="VKl-Pf-L7O"/>
+                                <exclude reference="xy8-2n-2h6"/>
+                                <exclude reference="Ayg-1X-2yc"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="xy8-2n-2h6"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="VKl-Pf-L7O"/>
+                                <include reference="Ayg-1X-2yc"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
