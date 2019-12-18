@@ -72,8 +72,8 @@ class Sting: NSObject, Codable {
         let name = try? container.decode(String.self, forKey: .name)
         let color = try container.decode(Color.self, forKey: .color)
         let metadata = try container.decode(Metadata.self, forKey: .metadata)
-        let startTime = try container.decode(TimeInterval.self, forKey: .startTime)
-        let endTime = try? container.decode(TimeInterval.self, forKey: .endTime)
+        var startTime = try container.decode(TimeInterval.self, forKey: .startTime)
+        var endTime = try? container.decode(TimeInterval.self, forKey: .endTime)
         let loops = try container.decode(Bool.self, forKey: .loops)
         
         var isStale = false
@@ -105,13 +105,15 @@ class Sting: NSObject, Codable {
         self.name = name
         self.color = color
         self.metadata = metadata
+        
+        super.init()
+        
+        validate(startTime: &startTime, endTime: &endTime)
+        
         self.startTime = startTime
         self.endTime = endTime
         self.loops = loops
         
-        super.init()
-        
-        #warning("Check for valid start & end times")
         if loops { createBuffer() }
     }
     
@@ -188,19 +190,29 @@ class Sting: NSObject, Codable {
             let defaults = try? JSONDecoder().decode(Defaults.self, from: data)
         else { return }
         
+        var startTime = defaults.startTime
+        var endTime = defaults.endTime
+        
+        validate(startTime: &startTime, endTime: &endTime)
+        
+        self.startTime = startTime
+        self.endTime = endTime
+        self.loops = defaults.loops
+    }
+    
+    func validate(startTime: inout TimeInterval, endTime: inout TimeInterval?) {
+        guard !isMissing else { return }    // don't wipe out the times when the audio file is missing
+        
         let duration = Double(audioFile.length) / audioFile.processingFormat.sampleRate
         
-        // ensure the new start time is valid
-        if defaults.startTime < duration {
-            startTime = defaults.startTime
+        if startTime >= duration {
+            startTime = 0
         }
         
-        // ensure the new end time is valid and is after the startSample
-        if let newEndTime = defaults.endTime, newEndTime < duration, startTime < newEndTime {
-            endTime = defaults.endTime
+        guard let newEndTime = endTime else { return }
+        if newEndTime >= duration || newEndTime <= startTime {
+            endTime = nil
         }
-        
-        loops = defaults.loops
     }
     
     func copy() -> Sting? {
