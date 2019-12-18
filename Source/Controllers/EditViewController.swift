@@ -110,7 +110,7 @@ class EditViewController: UIViewController {
         waveformView.highlightedSamples = startSample ..< endSample
         
         if recognizer.state == .ended {
-            updateStartAndEndSamples()
+            updateStartSample()
             previewStart()
         }
     }
@@ -122,13 +122,17 @@ class EditViewController: UIViewController {
         waveformView.highlightedSamples = startSample ..< endSample
         
         if recognizer.state == .ended {
-            updateStartAndEndSamples()
+            updateEndSample()
             previewEnd()
         }
     }
     
-    func updateStartAndEndSamples() {
+    func updateStartSample() {
         sting.startSample = Int64(waveformView.highlightedSamples?.lowerBound ?? 0)
+        show?.updateChangeCount(.done)
+    }
+    
+    func updateEndSample() {
         sting.endSample = Int64(waveformView.highlightedSamples?.upperBound ?? waveformView.totalSamples)
         show?.updateChangeCount(.done)
     }
