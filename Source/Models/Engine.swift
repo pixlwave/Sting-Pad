@@ -23,11 +23,11 @@ class Engine {
     }
     var elapsedTime: TimeInterval {
         guard
-            let sting = playingSting,
+            let audioFile = playingSting?.audioFile,
             let lastRenderTime = player.lastRenderTime,
             let elapsedSamples = player.playerTime(forNodeTime: lastRenderTime)?.sampleTime
         else { return 0 }
-        return Double(elapsedSamples) / sting.audioFile.processingFormat.sampleRate
+        return Double(elapsedSamples) / audioFile.processingFormat.sampleRate
     }
     var remainingTime: TimeInterval {
         totalTime - elapsedTime
@@ -121,18 +121,19 @@ class Engine {
     }
     
     private func prepareToPlay(_ sting: Sting) -> Bool {
-        guard !sting.isMissing else { return false }
+        guard let audioFile = sting.audioFile else { return false }
         if player.isPlaying { player.stop() }
         
-        if sting.audioFile.processingFormat != engine.mainMixerNode.inputFormat(forBus: 0) {
-            engine.connect(player, to: engine.mainMixerNode, fromBus: 0, toBus: 0, format: sting.audioFile.processingFormat)
+        if audioFile.processingFormat != engine.mainMixerNode.inputFormat(forBus: 0) {
+            engine.connect(player, to: engine.mainMixerNode, fromBus: 0, toBus: 0, format: audioFile.processingFormat)
         }
         
         return ensureEngineIsRunning()
     }
     
     private func scheduleSegment(of sting: Sting, from startSample: AVAudioFramePosition, for sampleCount: AVAudioFrameCount) {
-        player.scheduleSegment(sting.audioFile, startingFrame: startSample, frameCount: sampleCount, at: nil, completionCallbackType: .dataPlayedBack, completionHandler: stopCompletionHandler(for: sting))
+        guard let audioFile = sting.audioFile else { return }
+        player.scheduleSegment(audioFile, startingFrame: startSample, frameCount: sampleCount, at: nil, completionCallbackType: .dataPlayedBack, completionHandler: stopCompletionHandler(for: sting))
     }
     
     private func schedule(_ buffer: AVAudioPCMBuffer, for sting: Sting, options: AVAudioPlayerNodeBufferOptions = []) {
@@ -171,29 +172,29 @@ class Engine {
     }
     
     func previewStart(of sting: Sting, for length: TimeInterval = 3) {
-        guard length > 0 else { return }
+        guard let audioFile = sting.audioFile, length > 0 else { return }
         guard prepareToPlay(sting) else { return }
         
-        let sampleCount = AVAudioFrameCount(sting.audioFile.processingFormat.sampleRate * length)
+        let sampleCount = AVAudioFrameCount(audioFile.processingFormat.sampleRate * length)
         
         scheduleSegment(of: sting, from: sting.startSample, for: sampleCount)
         startPlayback(of: sting)
     }
     
     func previewEnd(of sting: Sting, for length: TimeInterval = 3) {
-        guard length > 0 else { return }
+        guard let audioFile = sting.audioFile, length > 0 else { return }
         guard prepareToPlay(sting) else { return }
         
         let endSample = AVAudioFrameCount(sting.startSample) + sting.sampleCount
         if sting.loops {
-            let sampleCount = AVAudioFrameCount(sting.audioFile.processingFormat.sampleRate * length) / 2
+            let sampleCount = AVAudioFrameCount(audioFile.processingFormat.sampleRate * length) / 2
             let previewStartSample = AVAudioFramePosition(endSample - sampleCount)
             
             scheduleSegment(of: sting, from: previewStartSample, for: sampleCount)
             scheduleSegment(of: sting, from: sting.startSample, for: sampleCount)
             startPlayback(of: sting)
         } else {
-            let sampleCount = AVAudioFrameCount(sting.audioFile.processingFormat.sampleRate * length)
+            let sampleCount = AVAudioFrameCount(audioFile.processingFormat.sampleRate * length)
             let previewStartSample = AVAudioFramePosition(endSample - sampleCount)
             
             scheduleSegment(of: sting, from: previewStartSample, for: sampleCount)

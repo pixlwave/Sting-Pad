@@ -6,7 +6,6 @@ class Sting: NSObject, Codable {
     
     let url: URL
     let bookmark: Data?
-    let isMissing: Bool
     
     var name: String?
     var color: Color = .default
@@ -25,11 +24,18 @@ class Sting: NSObject, Codable {
     }
     
     var startSample: AVAudioFramePosition {
-        get { return AVAudioFramePosition(startTime * audioFile.fileFormat.sampleRate) }
-        set { startTime = Double(newValue) / Double(audioFile.fileFormat.sampleRate) }
+        get {
+            guard let audioFile = audioFile else { return 0 }
+            return AVAudioFramePosition(startTime * audioFile.fileFormat.sampleRate)
+        }
+        set {
+            guard let audioFile = audioFile else { return }
+            startTime = Double(newValue) / Double(audioFile.fileFormat.sampleRate)
+        }
     }
     var endSample: AVAudioFramePosition {
         get {
+            guard let audioFile = audioFile else { return 0 }
             if let endTime = endTime {
                 return AVAudioFramePosition(endTime * audioFile.fileFormat.sampleRate)
             } else {
@@ -37,6 +43,7 @@ class Sting: NSObject, Codable {
             }
         }
         set {
+            guard let audioFile = audioFile else { return }
             if newValue < audioFile.length {
                 endTime = Double(newValue) / Double(audioFile.fileFormat.sampleRate)
             } else {
@@ -48,10 +55,11 @@ class Sting: NSObject, Codable {
         AVAudioFrameCount(endSample - startSample)
     }
     var totalTime: TimeInterval {
-        Double(sampleCount) / audioFile.processingFormat.sampleRate
+        guard let audioFile = audioFile else { return 0 }
+        return Double(sampleCount) / audioFile.processingFormat.sampleRate
     }
     
-    let audioFile: AVAudioFile
+    let audioFile: AVAudioFile?
     private(set) var buffer: AVAudioPCMBuffer?
     
     enum CodingKeys: String, CodingKey {
@@ -89,14 +97,11 @@ class Sting: NSObject, Codable {
         }
         
         if let audioFile = try? AVAudioFile(forReading: url) {
-            self.isMissing = false
             self.audioFile = audioFile
         } else if url.isMediaItem, let assetURL = metadata.matchingAssetURL, let audioFile = try? AVAudioFile(forReading: assetURL) {
             url = assetURL
-            self.isMissing = false
             self.audioFile = audioFile
         } else {
-            self.isMissing = true
             self.audioFile = AVAudioFile()
         }
         
@@ -122,7 +127,6 @@ class Sting: NSObject, Codable {
         
         url = assetURL
         bookmark = nil
-        isMissing = false
         metadata = Metadata(mediaItem: mediaItem)
         self.audioFile = audioFile
         
@@ -143,7 +147,6 @@ class Sting: NSObject, Codable {
         
         self.url = url
         bookmark = try? url.bookmarkData()
-        isMissing = false
         metadata = Metadata(url: url)
         self.audioFile = audioFile
         
@@ -153,14 +156,14 @@ class Sting: NSObject, Codable {
     }
     
     func createBuffer() {
-        guard !isMissing else { return }
+        guard let audioFile = audioFile else { return }
         
         buffer = AVAudioPCMBuffer(for: audioFile)
         updateBuffer()
     }
     
     func updateBuffer() {
-        guard loops, let buffer = buffer else { return }
+        guard let audioFile = audioFile, loops, let buffer = buffer else { return }
         
         do {
             audioFile.framePosition = startSample
@@ -201,7 +204,7 @@ class Sting: NSObject, Codable {
     }
     
     func validate(startTime: inout TimeInterval, endTime: inout TimeInterval?) {
-        guard !isMissing else { return }    // don't wipe out the times when the audio file is missing
+        guard let audioFile = audioFile else { return }    // don't wipe out the times when the audio file is missing
         
         let duration = Double(audioFile.length) / audioFile.processingFormat.sampleRate
         
@@ -231,5 +234,5 @@ class Sting: NSObject, Codable {
 
 // MARK: Array<Sting>
 extension Array where Element: Sting {
-    var playable: Self { return self.filter { !$0.isMissing } }
+    var playable: Self { return self.filter { $0.audioFile != nil } }
 }

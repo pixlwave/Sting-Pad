@@ -112,15 +112,17 @@ class PlaybackViewController: UICollectionViewController {
             guard let stingCell = cell as? StingCell else { return cell }
             
             stingCell.titleLabel.text = sting.name ?? sting.songTitle
-            stingCell.isMissing = sting.isMissing
             stingCell.color = sting.color
             
-            if sting.isMissing {
+            if sting.audioFile == nil {
+                stingCell.isMissing = true
                 stingCell.footerLabel.text = sting.url.isMediaItem ? "Song Missing" : "File Missing"
             } else if sting.loops, let loopImage = UIImage(systemName: "repeat") {
+                stingCell.isMissing = false
                 let loopString = NSAttributedString(attachment: NSTextAttachment(image: loopImage))
                 stingCell.footerLabel.attributedText = loopString
             } else {
+                stingCell.isMissing = false
                 stingCell.footerLabel.text = sting.totalTime.formattedAsLength()
             }
             
@@ -433,7 +435,7 @@ class PlaybackViewController: UICollectionViewController {
                 delete.attributes = .destructive
             }
             
-            if sting.isMissing {
+            if sting.audioFile == nil {
                 let songInfo = UIAction(title: "\(sting.songTitle) by \(sting.songArtist)", attributes: .disabled) { action in }
                 let editMenu = UIMenu(title: "", options: .displayInline, children: [delete, insert])
                 let infoMenu = UIMenu(title: "", options: .displayInline, children: [songInfo])
