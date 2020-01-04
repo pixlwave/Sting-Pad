@@ -102,7 +102,7 @@ class Sting: NSObject, Codable {
             url = assetURL
             self.audioFile = audioFile
         } else {
-            self.audioFile = AVAudioFile()
+            self.audioFile = nil
         }
         
         self.url = url
