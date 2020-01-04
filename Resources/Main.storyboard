@@ -184,7 +184,6 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="DSS-g4-Ymn" secondAttribute="trailing" id="B30-hi-D3o"/>
                                             <constraint firstAttribute="bottom" secondItem="DSS-g4-Ymn" secondAttribute="bottom" id="PTw-cs-cpg"/>
@@ -245,16 +244,18 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JeS-dG-0bW" userLabel="Start Marker" customClass="WaveformMarkerView" customModule="StingPad" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="181.5" width="40" height="115"/>
+                                <rect key="frame" x="0.0" y="256.5" width="40" height="40"/>
                                 <color key="backgroundColor" name="Tint Color"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="UOg-vJ-yHy"/>
                                     <constraint firstAttribute="width" constant="40" id="qx3-Jw-5Gw"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x4N-WC-9YE" userLabel="End Marker" customClass="WaveformMarkerView" customModule="StingPad" customModuleProvider="target">
-                                <rect key="frame" x="280" y="181.5" width="40" height="115"/>
+                                <rect key="frame" x="280" y="256.5" width="40" height="40"/>
                                 <color key="backgroundColor" name="Tint Color"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="3Jw-VJ-lf6"/>
                                     <constraint firstAttribute="width" constant="40" id="MOQ-PO-zcl"/>
                                 </constraints>
                             </view>
@@ -329,17 +330,15 @@
                         <color key="tintColor" name="Tint Color"/>
                         <constraints>
                             <constraint firstItem="tyO-e7-KqD" firstAttribute="top" secondItem="x4N-WC-9YE" secondAttribute="bottom" constant="8" symbolic="YES" id="14J-Dh-7Gm"/>
-                            <constraint firstItem="x4N-WC-9YE" firstAttribute="height" secondItem="7J2-20-QTO" secondAttribute="height" constant="40" id="3Fs-61-R2w"/>
-                            <constraint firstItem="JeS-dG-0bW" firstAttribute="height" secondItem="7J2-20-QTO" secondAttribute="height" constant="40" id="4Pn-Cn-zbK"/>
                             <constraint firstItem="JeS-dG-0bW" firstAttribute="centerX" secondItem="7J2-20-QTO" secondAttribute="leading" id="6kI-r7-zUb"/>
                             <constraint firstItem="oK2-1w-g1j" firstAttribute="width" secondItem="cey-fv-2gg" secondAttribute="width" id="9IW-3R-DB6"/>
                             <constraint firstItem="tqx-tQ-4gh" firstAttribute="centerX" secondItem="IL7-SC-53c" secondAttribute="centerX" id="CwW-nZ-VyM"/>
                             <constraint firstItem="cey-fv-2gg" firstAttribute="top" secondItem="jgb-pc-X2x" secondAttribute="bottom" constant="20" id="Hpw-fM-An3"/>
-                            <constraint firstItem="JeS-dG-0bW" firstAttribute="top" secondItem="7J2-20-QTO" secondAttribute="top" id="Jx2-SJ-QOX"/>
+                            <constraint firstItem="JeS-dG-0bW" firstAttribute="top" secondItem="7J2-20-QTO" secondAttribute="bottom" id="Jx2-SJ-QOX"/>
                             <constraint firstItem="bwd-bB-yIj" firstAttribute="width" secondItem="cey-fv-2gg" secondAttribute="width" id="PP8-lx-XkK"/>
                             <constraint firstItem="rVl-rn-yCL" firstAttribute="top" relation="greaterThanOrEqual" secondItem="cey-fv-2gg" secondAttribute="bottom" constant="8" symbolic="YES" id="PRN-2l-UNv"/>
                             <constraint firstItem="tyO-e7-KqD" firstAttribute="trailing" secondItem="bwd-bB-yIj" secondAttribute="trailing" id="R9v-I8-hkQ"/>
-                            <constraint firstItem="x4N-WC-9YE" firstAttribute="top" secondItem="7J2-20-QTO" secondAttribute="top" id="UY1-RL-nfE"/>
+                            <constraint firstItem="x4N-WC-9YE" firstAttribute="top" secondItem="7J2-20-QTO" secondAttribute="bottom" id="UY1-RL-nfE"/>
                             <constraint firstItem="oK2-1w-g1j" firstAttribute="centerX" secondItem="cey-fv-2gg" secondAttribute="centerX" id="bkB-ez-gi4"/>
                             <constraint firstItem="x4N-WC-9YE" firstAttribute="centerX" secondItem="7J2-20-QTO" secondAttribute="leading" constant="280" id="e4Q-it-uoL"/>
                             <constraint firstItem="bwd-bB-yIj" firstAttribute="top" secondItem="cey-fv-2gg" secondAttribute="bottom" constant="20" id="ikZ-xc-x2k"/>

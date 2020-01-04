@@ -217,6 +217,13 @@ open class FDWaveformView: UIView {
         retval.tintColor = self.wavesColor
         return retval
     }()
+    
+    /// A view which hides the zoomed waveform image
+    lazy fileprivate var imageClipping: UIView = {
+        let retval = UIView(frame: CGRect.zero)
+        retval.clipsToBounds = true
+        return retval
+    }()
 
     /// View for rendered waveform showing progress
     lazy fileprivate var highlightedImage: UIImageView = {
@@ -260,10 +267,11 @@ open class FDWaveformView: UIView {
     open var loadingInProgress = false
 
     func setup() {
-        addSubview(imageView)
+        imageClipping.addSubview(imageView)
+        addSubview(imageClipping)
         clipping.addSubview(highlightedImage)
         addSubview(clipping)
-        clipsToBounds = true
+        clipsToBounds = false
 
         pinchRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(handlePinchGesture))
         pinchRecognizer.delegate = self
@@ -393,6 +401,7 @@ open class FDWaveformView: UIView {
                                 width: frame.width * scaleW,
                                 height: frame.height)
         imageView.frame = childFrame
+        imageClipping.frame = bounds
         if let highlightedSamples = highlightedSamples, highlightedSamples.overlaps(zoomSamples) {
             clipping.frame = CGRect(x: frame.width * highlightClipScaleL,
                                     y: 0,

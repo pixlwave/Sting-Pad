@@ -86,20 +86,28 @@ class EditViewController: UIViewController {
     }
     
     @objc func layoutWaveformOverlayViews() {
-        if let startSample = waveformView.highlightedSamples?.lowerBound, let x = waveformView.position(of: startSample) {
-            startPlayButtonHorizontalLayoutConstraint.constant = waveformView.position(of: startSample) ?? 0
-            startMarkerHorizontalLayoutConstraint.constant = x
+        if let startPosition = waveformView.startPosition {
+            startPlayButtonHorizontalLayoutConstraint.constant = startPosition
+            startMarkerHorizontalLayoutConstraint.constant = startPosition
+            waveformView.startMarkerLine.frame = CGRect(x: startPosition - 1, y: 0, width: 2, height: waveformView.bounds.height)
             startMarkerView.isHidden = false
+            waveformView.startMarkerLine.isHidden = false
         } else {
+            startPlayButtonHorizontalLayoutConstraint.constant = 0
             startMarkerView.isHidden = true
+            waveformView.startMarkerLine.isHidden = true
         }
         
-        if let endSample = waveformView.highlightedSamples?.upperBound, let x = waveformView.position(of: endSample) {
-            endPlayButtonHorizontalLayoutConstraint.constant = waveformView.position(of: endSample) ?? waveformView.bounds.width
+        if let endPosition = waveformView.endPosition {
+            endPlayButtonHorizontalLayoutConstraint.constant = endPosition
+            endMarkerHorizontalLayoutConstraint.constant = endPosition
+            waveformView.endMarkerLine.frame = CGRect(x: endPosition - 1, y: 0, width: 2, height: waveformView.bounds.height)
             endMarkerView.isHidden = false
-            endMarkerHorizontalLayoutConstraint.constant = x
+            waveformView.endMarkerLine.isHidden = false
         } else {
+            endPlayButtonHorizontalLayoutConstraint.constant = waveformView.bounds.width
             endMarkerView.isHidden = true
+            waveformView.endMarkerLine.isHidden = true
         }
     }
     
