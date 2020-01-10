@@ -343,12 +343,24 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     func updateProgress() {
+        let elapsedTime = engine.elapsedTime
+        let totalTime = engine.totalTime
+        
+        let progress = Float((elapsedTime / totalTime).truncatingRemainder(dividingBy: 1) + (1 / totalTime))
+        
+        if progressView.progress == 1 {
+            progressView.reset()
+        }
+        
         progressAnimator = UIViewPropertyAnimator(duration: 1, curve: .linear) {
-            self.progressView.setProgress(Float((self.engine.elapsedTime + 1) / self.engine.totalTime), animated: true)
+            self.progressView.setProgress(progress, animated: true)
         }
         progressAnimator?.startAnimation()
         
-        if let remainingString = engine.remainingTime.formattedAsRemaining() {
+        let timeRemaining = totalTime - elapsedTime
+        if timeRemaining < 0 {
+            timeRemainingLabel.text = "Looping"
+        } else if let remainingString = timeRemaining.formattedAsRemaining() {
             timeRemainingLabel.text = remainingString
         }
     }
@@ -357,10 +369,6 @@ class PlaybackViewController: UICollectionViewController {
         if progressTimer?.isValid == true {
             stopUpdatingProgress()
         }
-        
-        // reset progress view without animation
-        progressView.progress = 0
-        progressView.layoutIfNeeded()
         
         updateProgress()
         progressTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
@@ -373,7 +381,7 @@ class PlaybackViewController: UICollectionViewController {
         progressTimer = nil
         progressAnimator?.stopAnimation(true)
         
-        progressView.setProgress(0, animated: false)
+        progressView.reset()
         timeRemainingLabel.text = cuedSting?.totalTime.formattedAsRemaining()
     }
     

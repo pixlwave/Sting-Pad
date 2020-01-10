@@ -29,9 +29,6 @@ class Engine {
         else { return 0 }
         return Double(elapsedSamples) / audioFile.processingFormat.sampleRate
     }
-    var remainingTime: TimeInterval {
-        totalTime - elapsedTime
-    }
     
     var isInBackground = false {
         didSet {

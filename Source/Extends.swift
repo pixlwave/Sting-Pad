@@ -126,3 +126,11 @@ extension UIColor {
 extension UserDefaults {
     static let stings = UserDefaults(suiteName: "uk.pixlwave.StingPad.StingDefaults")!
 }
+
+
+extension UIProgressView {
+    func reset() {
+        progress = 0
+        layoutIfNeeded()
+    }
+}
