@@ -140,19 +140,6 @@ final public class FDWaveformRenderOperation: Operation {
         finish(with: image)
     }
     
-    func waveformData(for audioData: [Float], with audioSamplesPerWave: Int) -> [WaveformSample] {
-        var waveformData = [WaveformSample]()
-        
-        for chunk in audioData.chunked(into: audioSamplesPerWave) {
-            var waveformSample = WaveformSample()
-            vDSP_maxv(chunk, 1, &waveformSample.max, vDSP_Length(chunk.count))
-            vDSP_minv(chunk, 1, &waveformSample.min, vDSP_Length(chunk.count))
-            waveformData.append(waveformSample)
-        }
-        
-        return waveformData
-    }
-    
     /// Read the asset and create create a lower resolution set of samples
     func sliceAsset(withRange slice: CountableRange<Int>, andDownsampleTo targetSamples: Int) -> [WaveformSample]? {
         guard !isCancelled else { return nil }
@@ -214,6 +201,19 @@ final public class FDWaveformRenderOperation: Operation {
             print("FDWaveformRenderOperation failed to read audio: \(String(describing: reader.error))")
             return nil
         }
+    }
+    
+    func waveformData(for audioData: [Float], with audioSamplesPerWave: Int) -> [WaveformSample] {
+        var waveformData = [WaveformSample]()
+        
+        for chunk in audioData.chunked(into: audioSamplesPerWave) {
+            var waveformSample = WaveformSample()
+            vDSP_maxv(chunk, 1, &waveformSample.max, vDSP_Length(chunk.count))
+            vDSP_minv(chunk, 1, &waveformSample.min, vDSP_Length(chunk.count))
+            waveformData.append(waveformSample)
+        }
+        
+        return waveformData
     }
     
     // TODO: report progress? (for issue #2)
