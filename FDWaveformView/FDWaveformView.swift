@@ -59,7 +59,7 @@ open class FDWaveformView: UIView {
             let highlightStartPortion = CGFloat(highlightedSamples?.startIndex ?? 0) / CGFloat(totalSamples)
             let highlightLastPortion = CGFloat(highlightedSamples?.last ?? 0) / CGFloat(totalSamples)
             let highlightWidthPortion = highlightLastPortion - highlightStartPortion
-            self.clipping.frame = CGRect(x: self.frame.width * highlightStartPortion, y: 0, width: self.frame.width * highlightWidthPortion , height: self.frame.height)
+            self.highlightClipping.frame = CGRect(x: self.frame.width * highlightStartPortion, y: 0, width: self.frame.width * highlightWidthPortion , height: self.frame.height)
             setNeedsLayout()
         }
     }
@@ -84,20 +84,6 @@ open class FDWaveformView: UIView {
 
     /// Whether to allow pan gesture to change zoom
     /*@IBInspectable*/ open var doesAllowScroll = true
-
-    /// Supported waveform types
-    //TODO: make this public after reconciling FDWaveformView.WaveformType and FDWaveformType
-    enum WaveformType {
-        case linear, logarithmic
-    }
-
-    // Type of waveform to display
-    var waveformType: WaveformType = .logarithmic {
-        didSet {
-            setNeedsDisplay()
-            setNeedsLayout()
-        }
-    }
 
     /// The color of the waveform
     @IBInspectable open var wavesColor = UIColor.black {
@@ -136,10 +122,6 @@ open class FDWaveformView: UIView {
     /// The required number of vertical pixels to render per visible pixel on the screen (for antialiasing)
     /// If this number is not available then a re-render will be performed
     private var verticalOverdrawAllowed = 1.0 ... 3.0
-
-    /// The "zero" level (in dB)
-    fileprivate let noiseFloor: CGFloat = -50.0
-
 
 
     // Mark - Private vars
@@ -189,25 +171,10 @@ open class FDWaveformView: UIView {
         return window?.screen.scale ?? UIScreen.main.scale
     }
 
-    /// Waveform type for rending waveforms
-    //TODO: make this public after reconciling FDWaveformView.WaveformType and FDWaveformType
-    var waveformRenderType: FDWaveformType {
-        get {
-            switch waveformType {
-            case .linear: return .linear
-            case .logarithmic: return .logarithmic(noiseFloor: noiseFloor)
-            }
-        }
-    }
-
     /// Represents the status of the waveform renderings
     fileprivate enum CacheStatus {
         case dirty
         case notDirty(cancelInProgressRenderOperation: Bool)
-    }
-
-    fileprivate func decibel(_ amplitude: CGFloat) -> CGFloat {
-        return 20.0 * log10(abs(amplitude))
     }
 
     /// View for rendered waveform
@@ -234,7 +201,7 @@ open class FDWaveformView: UIView {
     }()
 
     /// A view which hides part of the highlighted image
-    fileprivate let clipping: UIView = {
+    fileprivate let highlightClipping: UIView = {
         let retval = UIView(frame: CGRect.zero)
         retval.clipsToBounds = true
         return retval
@@ -269,8 +236,8 @@ open class FDWaveformView: UIView {
     func setup() {
         imageClipping.addSubview(imageView)
         addSubview(imageClipping)
-        clipping.addSubview(highlightedImage)
-        addSubview(clipping)
+        highlightClipping.addSubview(highlightedImage)
+        addSubview(highlightClipping)
         clipsToBounds = false
 
         pinchRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(handlePinchGesture))
@@ -332,24 +299,21 @@ open class FDWaveformView: UIView {
 
     func isWaveformRenderOperationDirty(_ renderOperation: FDWaveformRenderOperation?) -> Bool? {
         guard let renderOperation = renderOperation else { return nil }
-
-        if renderOperation.format.type != waveformRenderType {
-            return true
-        }
+        
         if renderOperation.format.scale != desiredImageScale {
             return true
         }
-
+        
         let requiredSamples = zoomSamples.extended(byFactor: horizontalBleedAllowed.lowerBound).clamped(to: 0 ..< totalSamples)
         if requiredSamples.clamped(to: renderOperation.sampleRange) != requiredSamples {
             return true
         }
-
+        
         let allowedSamples = zoomSamples.extended(byFactor: horizontalBleedAllowed.upperBound).clamped(to: 0 ..< totalSamples)
         if renderOperation.sampleRange.clamped(to: allowedSamples) != renderOperation.sampleRange {
             return true
         }
-
+        
         let verticalOverdrawRequested = Double(renderOperation.imageSize.height / frame.height)
         if !verticalOverdrawAllowed.contains(verticalOverdrawRequested) {
             return true
@@ -358,7 +322,7 @@ open class FDWaveformView: UIView {
         if !horizontalOverdrawAllowed.contains(horizontalOverdrawRequested) {
             return true
         }
-
+        
         return false
     }
 
@@ -403,18 +367,18 @@ open class FDWaveformView: UIView {
         imageView.frame = childFrame
         imageClipping.frame = bounds
         if let highlightedSamples = highlightedSamples, highlightedSamples.overlaps(zoomSamples) {
-            clipping.frame = CGRect(x: frame.width * highlightClipScaleL,
+            highlightClipping.frame = CGRect(x: frame.width * highlightClipScaleL,
                                     y: 0,
                                     width: frame.width * (highlightClipScaleR - highlightClipScaleL),
                                     height: frame.height)
-            if 0 < clipping.frame.minX {
+            if 0 < highlightClipping.frame.minX {
                 highlightedImage.frame = childFrame.offsetBy(dx: frame.width * scaleW * -highlightScaleX, dy: 0)
             } else {
                 highlightedImage.frame = childFrame
             }
-            clipping.isHidden = false
+            highlightClipping.isHidden = false
         } else {
-            clipping.isHidden = true
+            highlightClipping.isHidden = true
         }
     }
 
@@ -426,7 +390,7 @@ open class FDWaveformView: UIView {
         let widthInPixels = floor(frame.width * CGFloat(horizontalOverdrawTarget))
         let heightInPixels = frame.height * CGFloat(horizontalOverdrawTarget)
         let imageSize = CGSize(width: widthInPixels, height: heightInPixels)
-        let renderFormat = FDWaveformRenderFormat(type: waveformRenderType, wavesColor: .black, scale: desiredImageScale)
+        let renderFormat = FDWaveformRenderFormat(wavesColor: .black, scale: desiredImageScale)
 
         let waveformRenderOperation = FDWaveformRenderOperation(audioContext: audioContext, imageSize: imageSize, sampleRange: renderSamples, format: renderFormat) { [weak self] image in
             DispatchQueue.main.async {
@@ -447,55 +411,6 @@ open class FDWaveformView: UIView {
         delegate?.waveformViewWillRender?(self)
 
         waveformRenderOperation.start()
-    }
-}
-
-//TODO: make this public after reconciling FDWaveformView.WaveformType and FDWaveformType
-enum FDWaveformType: Equatable {
-    /// Waveform is rendered using a linear scale
-    case linear
-
-    /// Waveform is rendered using a logarithmic scale
-    ///   noiseFloor: The "zero" level (in dB)
-    case logarithmic(noiseFloor: CGFloat)
-
-    // See http://stackoverflow.com/questions/24339807/how-to-test-equality-of-swift-enums-with-associated-values
-    public static func ==(lhs: FDWaveformType, rhs: FDWaveformType) -> Bool {
-        switch lhs {
-        case .linear:
-            if case .linear = rhs {
-                return true
-            }
-        case .logarithmic(let lhsNoiseFloor):
-            if case .logarithmic(let rhsNoiseFloor) = rhs {
-                return lhsNoiseFloor == rhsNoiseFloor
-            }
-        }
-        return false
-    }
-
-    public var floorValue: CGFloat {
-        switch self {
-        case .linear: return 0
-        case .logarithmic(let noiseFloor): return noiseFloor
-        }
-    }
-
-    func process(normalizedSamples: inout [Float]) {
-        switch self {
-        case .linear:
-            return
-
-        case .logarithmic(let noiseFloor):
-            // Convert samples to a log scale
-            var zero: Float = 32768.0
-            vDSP_vdbcon(normalizedSamples, 1, &zero, &normalizedSamples, 1, vDSP_Length(normalizedSamples.count), 1)
-
-            //Clip to [noiseFloor, 0]
-            var ceil: Float = 0.0
-            var noiseFloorFloat = Float(noiseFloor)
-            vDSP_vclip(normalizedSamples, 1, &noiseFloorFloat, &ceil, &normalizedSamples, 1, vDSP_Length(normalizedSamples.count))
-        }
     }
 }
 

@@ -15,10 +15,6 @@ struct WaveformSample {
 //MAYBE: Make this public
 struct FDWaveformRenderFormat {
     
-    /// The type of waveform to render
-    //TODO: make this public after reconciling FDWaveformView.WaveformType and FDWaveformType
-    var type: FDWaveformType
-    
     /// The color of the waveform
     internal var wavesColor: UIColor
     
@@ -35,13 +31,10 @@ struct FDWaveformRenderFormat {
     // To make these public, you must implement them
     // See http://stackoverflow.com/questions/26224693/how-can-i-make-public-by-default-the-member-wise-initialiser-for-structs-in-swif
     public init() {
-        self.init(type: .linear,
-                  wavesColor: .black,
-                  scale: UIScreen.main.scale)
+        self.init(wavesColor: .black, scale: UIScreen.main.scale)
     }
     
-    init(type: FDWaveformType, wavesColor: UIColor, scale: CGFloat) {
-        self.type = type
+    init(wavesColor: UIColor, scale: CGFloat) {
         self.wavesColor = wavesColor
         self.scale = scale
     }
@@ -196,7 +189,6 @@ final public class FDWaveformRenderOperation: Operation {
         
         var outputSamples = [WaveformSample]()
         
-        // 16-bit samples
         reader.startReading()
         defer { reader.cancelReading() } // Cancel reading if we exit early if operation is cancelled
         
