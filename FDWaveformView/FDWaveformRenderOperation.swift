@@ -185,8 +185,6 @@ final public class FDWaveformRenderOperation: Operation {
         }
         
         let samplesPerPixel = max(1, channelCount * slice.count / targetSamples)
-        let filter = [Float](repeating: 1.0 / Float(samplesPerPixel), count: samplesPerPixel)
-        
         var outputSamples = [WaveformSample]()
         
         reader.startReading()
@@ -201,9 +199,8 @@ final public class FDWaveformRenderOperation: Operation {
             }
             
             let readBufferLength = CMBlockBufferGetDataLength(readBuffer)
-            let audioData = [Float](repeating: 0.0, count: readBufferLength / 4)
-            let audioDataPointer = UnsafeMutablePointer(mutating: audioData)
-            CMBlockBufferCopyDataBytes(readBuffer, atOffset: 0, dataLength: readBufferLength, destination: audioDataPointer)
+            var audioData = [Float](repeating: 0.0, count: readBufferLength / 4)
+            CMBlockBufferCopyDataBytes(readBuffer, atOffset: 0, dataLength: readBufferLength, destination: &audioData)
             
             let samples = waveformData(for: audioData, with: samplesPerPixel)
             outputSamples.append(contentsOf: samples)
