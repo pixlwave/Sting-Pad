@@ -444,7 +444,10 @@ extension FDWaveformView: UIGestureRecognizerDelegate {
         let newZoomStart = pinchCenterSample - Int(CGFloat(pinchCenterSample - zoomSamples.lowerBound) * 1.0 / recognizer.scale)
         let newZoomEnd = newZoomStart + newZoomRangeSamples
 
-        zoomSamples = (newZoomStart ..< newZoomEnd).clamped(to: 0 ..< totalSamples)
+        let newZoomSamples = (newZoomStart ..< newZoomEnd).clamped(to: 0 ..< totalSamples)
+        if newZoomSamples.count > Int(frame.width * desiredImageScale * CGFloat(horizontalOverdrawAllowed.upperBound)) {
+            zoomSamples = newZoomSamples
+        }
         recognizer.scale = 1
     }
 
