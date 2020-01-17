@@ -167,7 +167,7 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     @objc func showStateChanged(_ notification: Notification) {
-        print("Show State Changed \(show.documentState)")
+        os_log("Show State Changed: %d", log: .default, type: .debug, show.documentState.rawValue)
     }
     
     @IBAction func closeShow() {
