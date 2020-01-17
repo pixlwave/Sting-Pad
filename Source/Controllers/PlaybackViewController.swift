@@ -393,7 +393,7 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
+        UIContextMenuConfiguration(identifier: indexPath.item as NSCopying, previewProvider: nil) { suggestedActions in
             guard let sting = self.dataSource?.itemIdentifier(for: indexPath) else { return nil }
             
             let cue = UIAction(title: "Cue Next", image: UIImage(systemName: "smallcircle.fill.circle")) { action in
@@ -460,6 +460,12 @@ class PlaybackViewController: UICollectionViewController {
             let playMenu = UIMenu(title: "", options: .displayInline, children: [cue])
             return UIMenu(title: "", children: [playMenu, editMenu, fileMenu])
         }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        guard let index = configuration.identifier as? Int else { return nil }
+        guard let cell = collectionView.cellForItem(at: IndexPath(item: index, section: 0)) else { return nil }
+        return UITargetedPreview(view: cell)
     }
     
 }
