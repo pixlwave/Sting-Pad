@@ -1,6 +1,7 @@
 import UIKit
 import MediaPlayer
 import MobileCoreServices
+import os.log
 
 class PlaybackViewController: UICollectionViewController {
     
@@ -150,8 +151,8 @@ class PlaybackViewController: UICollectionViewController {
         let uniqueIdentifiers = Set(identifiers)
         var snapshot = dataSource.snapshot()
         
-        #warning("Add debug notification")
         guard uniqueIdentifiers.isSubset(of: snapshot.itemIdentifiers) else {
+            os_log("WARNING: Attempted to reload a sting that is no longer in the collection view.", log: .default, type: .debug)
             applySnapshot()
             return
         }
