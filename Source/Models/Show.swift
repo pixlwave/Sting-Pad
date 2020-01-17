@@ -53,6 +53,7 @@ class Show: UIDocument {
         updateChangeCount(.done)
     }
     
+    @discardableResult
     func removeSting(at index: Int) -> Sting {
         let sting = stings.remove(at: index)
         updateChangeCount(.done)

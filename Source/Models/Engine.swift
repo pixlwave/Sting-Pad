@@ -111,12 +111,12 @@ class Engine {
             channelMap[outputConfig.right] = 1   // send right channel, the right stream
             
             let propSize = UInt32(channelMap.count) * UInt32(MemoryLayout<UInt32>.size)
-            let statusCode = AudioUnitSetProperty(audioUnit, kAudioOutputUnitProperty_ChannelMap, kAudioUnitScope_Global, 1, channelMap, propSize)
+            _ = AudioUnitSetProperty(audioUnit, kAudioOutputUnitProperty_ChannelMap, kAudioUnitScope_Global, 1, channelMap, propSize)
         } else {
-            let statusCode = AudioUnitSetProperty(audioUnit, kAudioOutputUnitProperty_ChannelMap, kAudioUnitScope_Global, 1, nil, 0)
+            _ = AudioUnitSetProperty(audioUnit, kAudioOutputUnitProperty_ChannelMap, kAudioUnitScope_Global, 1, nil, 0)
         }
         
-        if playingSting != nil { ensureEngineIsRunning() }
+        if playingSting != nil { _ = ensureEngineIsRunning() }
     }
     
     private func prepareToPlay(_ sting: Sting) -> Bool {
