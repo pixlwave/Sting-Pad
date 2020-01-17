@@ -43,8 +43,6 @@ class PlaybackViewController: UICollectionViewController {
         collectionView.dragDelegate = self
         collectionView.dropDelegate = self
         collectionView.dragInteractionEnabled = true
-        // prevents scroll view from momentarily blocking the play button's action
-        collectionView.delaysContentTouches = false; #warning("Test if this works or if the property needs to be set on the scroll view")
         
         NotificationCenter.default.addObserver(self, selector: #selector(addStingFromLibrary), name: .addStingFromLibrary, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(addStingFromFiles), name: .addStingFromFiles, object: nil)
@@ -477,8 +475,6 @@ extension PlaybackViewController: UICollectionViewDragDelegate {
         // drag item doesn't require any customisation as the drop delegate only needs the source/destination index paths
         return [UIDragItem(itemProvider: NSItemProvider())]
     }
-    
-    #warning("Add itemsForAddingTo when testing on device, and handle multiple drops")
 }
 
 
