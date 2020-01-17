@@ -180,7 +180,6 @@ class PlaybackViewController: UICollectionViewController {
         }
         
         // set data source to nil to remove reference cycle
-        #warning("Test if this is necessary with the GM")
         dataSource = nil
     }
     
