@@ -8,14 +8,14 @@ class SettingsViewController: UITableViewController {
         dismiss(animated: true)
     }
     
-    func storeAllStingDefaults() {
-        show?.stings.forEach { $0.storeDefaults() }
+    func setAllStingPresets() {
+        show?.stings.forEach { $0.setPreset() }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch (indexPath.section, indexPath.row) {
         case (1, 1):
-            storeAllStingDefaults()
+            setAllStingPresets()
             tableView.deselectRow(at: indexPath, animated: true)
         default:
             break

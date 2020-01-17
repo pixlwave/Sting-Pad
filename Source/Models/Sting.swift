@@ -132,7 +132,7 @@ class Sting: NSObject, Codable {
         
         super.init()
         
-        loadDefaults()
+        loadPreset()
     }
     
     init?(url: URL) {
@@ -152,7 +152,7 @@ class Sting: NSObject, Codable {
         
         super.init()
         
-        loadDefaults()
+        loadPreset()
     }
     
     func createBuffer() {
@@ -177,30 +177,30 @@ class Sting: NSObject, Codable {
         buffer = nil
     }
     
-    func storeDefaults() {
+    func setPreset() {
         if startTime == 0 && endTime == nil && loops == false {
-            UserDefaults.stings.removeObject(forKey: url.absoluteString)
+            UserDefaults.presets.removeObject(forKey: url.absoluteString)
         } else {
-            let defaults = Defaults(startTime: startTime, endTime: endTime, loops: loops)
-            guard let data = try? JSONEncoder().encode(defaults) else { return }
-            UserDefaults.stings.setValue(data, forKey: url.absoluteString)
+            let preset = Preset(startTime: startTime, endTime: endTime, loops: loops)
+            guard let data = try? JSONEncoder().encode(preset) else { return }
+            UserDefaults.presets.setValue(data, forKey: url.absoluteString)
         }
     }
     
-    func loadDefaults() {
+    func loadPreset() {
         guard
-            let data = UserDefaults.stings.data(forKey: url.absoluteString),
-            let defaults = try? JSONDecoder().decode(Defaults.self, from: data)
+            let data = UserDefaults.presets.data(forKey: url.absoluteString),
+            let preset = try? JSONDecoder().decode(Preset.self, from: data)
         else { return }
         
-        var startTime = defaults.startTime
-        var endTime = defaults.endTime
+        var startTime = preset.startTime
+        var endTime = preset.endTime
         
         validate(startTime: &startTime, endTime: &endTime)
         
         self.startTime = startTime
         self.endTime = endTime
-        self.loops = defaults.loops
+        self.loops = preset.loops
     }
     
     func validate(startTime: inout TimeInterval, endTime: inout TimeInterval?) {
@@ -223,7 +223,7 @@ class Sting: NSObject, Codable {
         return try? JSONDecoder().decode(Sting.self, from: data)
     }
     
-    struct Defaults: Codable {
+    struct Preset: Codable {
         var startTime: TimeInterval
         var endTime: TimeInterval?
         var loops: Bool

@@ -124,7 +124,7 @@ extension UIColor {
 
 
 extension UserDefaults {
-    static let stings = UserDefaults(suiteName: "uk.pixlwave.StingPad.StingDefaults")!
+    static let presets = UserDefaults(suiteName: "uk.pixlwave.StingPad.Presets")!
 }
 
 

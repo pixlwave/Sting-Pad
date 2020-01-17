@@ -182,8 +182,8 @@ class EditViewController: UIViewController {
         show?.updateChangeCount(.done)
     }
     
-    @IBAction func storeDefaults() {
-        sting.storeDefaults()
+    @IBAction func saveAsPreset() {
+        sting.setPreset()
     }
     
     @IBAction func done() {
