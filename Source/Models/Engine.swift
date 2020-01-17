@@ -100,6 +100,8 @@ class Engine {
     }
     
     @objc func updateChannelMap() {
+        guard let audioUnit = engine.outputNode.audioUnit else { return }
+        
         let channelCount = outputChannelCount()
         
         // with 6 channels [-1, -1, 0, 1, -1, -1] would use channels 3 & 4
@@ -109,9 +111,9 @@ class Engine {
             channelMap[outputConfig.right] = 1   // send right channel, the right stream
             
             let propSize = UInt32(channelMap.count) * UInt32(MemoryLayout<UInt32>.size)
-            let statusCode = AudioUnitSetProperty(engine.outputNode.audioUnit!, kAudioOutputUnitProperty_ChannelMap, kAudioUnitScope_Global, 1, channelMap, propSize)
+            let statusCode = AudioUnitSetProperty(audioUnit, kAudioOutputUnitProperty_ChannelMap, kAudioUnitScope_Global, 1, channelMap, propSize)
         } else {
-            let statusCode = AudioUnitSetProperty(engine.outputNode.audioUnit!, kAudioOutputUnitProperty_ChannelMap, kAudioUnitScope_Global, 1, nil, 0)
+            let statusCode = AudioUnitSetProperty(audioUnit, kAudioOutputUnitProperty_ChannelMap, kAudioUnitScope_Global, 1, nil, 0)
         }
         
         if playingSting != nil { ensureEngineIsRunning() }
