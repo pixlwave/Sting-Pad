@@ -1,5 +1,6 @@
 import Foundation
 import AVFoundation
+import os.log
 
 class Engine {
     static let shared = Engine()
@@ -58,7 +59,8 @@ class Engine {
             try session.setCategory(.playback, options: .mixWithOthers)
             try session.setActive(true)
         } catch {
-            print("Error: \(error)"); #warning("Implement error handling")
+            #warning("Implement error handling")
+            os_log("Error configuring audio session: %@", String(describing: error))
         }
     }
     
@@ -84,7 +86,7 @@ class Engine {
         do {
             try engine.start()
         } catch {
-            print("Could not start engine. Error: \(error).")
+            os_log("Error starting audio engine: %@", String(describing: error))
             return false
         }
         

@@ -1,6 +1,7 @@
 import Foundation
 import AVFoundation
 import MediaPlayer
+import os.log
 
 class Sting: NSObject, Codable {
     
@@ -169,7 +170,7 @@ class Sting: NSObject, Codable {
             audioFile.framePosition = startSample
             try audioFile.read(into: buffer, frameCount: AVAudioFrameCount(endSample - startSample))
         } catch {
-            print("Error: \(error)")
+            os_log("Error updating loop buffer: %@", String(describing: error))
         }
     }
     
