@@ -802,10 +802,10 @@
             </objects>
             <point key="canvasLocation" x="1147.5" y="78.16901408450704"/>
         </scene>
-        <!--Channel Selection View Controller-->
+        <!--Output Channels-->
         <scene sceneID="sdG-pV-zxe">
             <objects>
-                <tableViewController id="ASK-Q5-ytr" customClass="ChannelSelectionViewController" customModule="StingPad" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Output Channels" id="ASK-Q5-ytr" customClass="ChannelSelectionViewController" customModule="StingPad" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Azz-4G-do2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
