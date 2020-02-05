@@ -235,7 +235,7 @@ final public class FDWaveformRenderOperation: Operation {
         context.setLineWidth(1.0 / format.scale)
         context.setStrokeColor(format.wavesColor.cgColor)
         
-        let sampleDrawingScale = Float(imageSize.height)
+        let sampleDrawingScale = Float(0.5 * imageSize.height * format.scale)
         
         let verticalMiddle = (imageSize.height * format.scale) / 2
         for (x, sample) in samples.enumerated() {
