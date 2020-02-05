@@ -235,12 +235,10 @@ final public class FDWaveformRenderOperation: Operation {
         context.setLineWidth(1.0 / format.scale)
         context.setStrokeColor(format.wavesColor.cgColor)
         
-        let sampleDrawingScale = Float(0.5 * imageSize.height * format.scale)
-        
         let verticalMiddle = (imageSize.height * format.scale) / 2
         for (x, sample) in samples.enumerated() {
-            context.move(to: CGPoint(x: CGFloat(x), y: verticalMiddle + CGFloat(sample.min * sampleDrawingScale)))
-            context.addLine(to: CGPoint(x: CGFloat(x), y: verticalMiddle + CGFloat(sample.max * sampleDrawingScale)))
+            context.move(to: CGPoint(x: CGFloat(x), y: verticalMiddle + (CGFloat(sample.min) * verticalMiddle)))
+            context.addLine(to: CGPoint(x: CGFloat(x), y: verticalMiddle + (CGFloat(sample.max) * verticalMiddle)))
             context.strokePath();
         }
         guard let image = UIGraphicsGetImageFromCurrentImageContext() else {
