@@ -24,11 +24,11 @@ class PlaybackViewController: UICollectionViewController {
     private var progressTimer: Timer?
     private var progressAnimator: UIViewPropertyAnimator?
     
-    private var loadOperation: LoadOperation = .normal
+    private var pickerOperation: PickerOperation = .normal
     
-    private enum LoadOperation {
+    private enum PickerOperation {
         case normal
-        case replace
+        case locate
         case insert(Int)
     }
     
@@ -51,8 +51,8 @@ class PlaybackViewController: UICollectionViewController {
         collectionView.dropDelegate = self
         collectionView.dragInteractionEnabled = true
         
-        NotificationCenter.default.addObserver(self, selector: #selector(addStingFromLibrary), name: .addStingFromLibrary, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(addStingFromFiles), name: .addStingFromFiles, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(pickStingFromLibrary), name: .addStingFromLibrary, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(pickStingFromFiles), name: .addStingFromFiles, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applySnapshot), name: .stingsDidChange, object: show)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadEditedSting(_:)), name: .didFinishEditing, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showStateChanged(_:)), name: UIDocument.stateChangedNotification, object: show)
@@ -210,10 +210,10 @@ class PlaybackViewController: UICollectionViewController {
         self.present(alert, animated: true)
     }
     
-    @objc func addStingFromLibrary() {
+    @objc func pickStingFromLibrary() {
         guard MPMediaLibrary.authorizationStatus() == .authorized else {
             if MPMediaLibrary.authorizationStatus() == .notDetermined {
-                requestMediaLibraryAuthorization(successHandler: { self.addStingFromLibrary() })
+                requestMediaLibraryAuthorization(successHandler: { self.pickStingFromLibrary() })
             } else {
                 presentMediaLibraryAccessAlert()
             }
@@ -226,7 +226,7 @@ class PlaybackViewController: UICollectionViewController {
         loadRandomTrackFromHostFileSystem()
         #else
         
-        // present music picker to load a track from ipod
+        // present music picker to load a track from media library
         let mediaPicker = MPMediaPickerController(mediaTypes: .music)
         mediaPicker.delegate = self
         mediaPicker.showsCloudItems = false  // hides iTunes in the Cloud items, which crash the app if picked
@@ -236,7 +236,7 @@ class PlaybackViewController: UICollectionViewController {
         #endif
     }
     
-    @objc func addStingFromFiles() {
+    @objc func pickStingFromFiles() {
         // present file picker to load a track from
         let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeAudio as String], in: .open)
         documentPicker.delegate = self
@@ -259,12 +259,12 @@ class PlaybackViewController: UICollectionViewController {
     #endif
     
     func load(_ sting: Sting) {
-        if case LoadOperation.insert(let index) = loadOperation, index < show.stings.count {
+        if case PickerOperation.insert(let index) = pickerOperation, index < show.stings.count {
             show.insert(sting, at: index)
-            loadOperation = .normal
-        } else if case LoadOperation.replace = loadOperation {
+            pickerOperation = .normal
+        } else if case PickerOperation.locate = pickerOperation {
             // implement sting replacement
-            loadOperation = .normal
+            pickerOperation = .normal
         } else {
             show.append(sting)
             scrollTo(sting, animated: false)
@@ -435,8 +435,8 @@ class PlaybackViewController: UICollectionViewController {
                 self.show.insert(duplicate, at: indexPath.item + 1)  // updates collection view via didSet
             }
             let insert = UIAction(title: "Insert Song Here", image: UIImage(systemName: "square.stack")) { action in
-                self.loadOperation = .insert(indexPath.item)
-                self.addStingFromLibrary()
+                self.pickerOperation = .insert(indexPath.item)
+                self.pickStingFromLibrary()
             }
             let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash")) { action in
                 guard sting != self.engine.playingSting else { return }
@@ -456,7 +456,15 @@ class PlaybackViewController: UICollectionViewController {
             
             if sting.audioFile == nil {
                 let songInfo = UIAction(title: "\(sting.songTitle) by \(sting.songArtist)", attributes: .disabled) { action in }
-                let editMenu = UIMenu(title: "", options: .displayInline, children: [delete, insert])
+                let locate = UIAction(title: "Locate", image: UIImage(systemName: "magnifyingglass")) { action in
+                    self.pickerOperation = .locate
+                    if sting.url.isMediaItem {
+                        self.pickStingFromLibrary()
+                    } else {
+                        self.pickStingFromFiles()
+                    }
+                }
+                let editMenu = UIMenu(title: "", options: .displayInline, children: [locate, insert, delete])
                 let infoMenu = UIMenu(title: "", options: .displayInline, children: [songInfo])
                 return UIMenu(title: "", children: [editMenu, infoMenu])
             }
@@ -524,7 +532,7 @@ extension PlaybackViewController: MPMediaPickerControllerDelegate {
     }
     
     func mediaPickerDidCancel(_ mediaPicker: MPMediaPickerController) {
-        loadOperation = .normal
+        pickerOperation = .normal
         dismiss(animated: true)
     }
 }
