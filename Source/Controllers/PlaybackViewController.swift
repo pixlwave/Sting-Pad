@@ -24,7 +24,13 @@ class PlaybackViewController: UICollectionViewController {
     private var progressTimer: Timer?
     private var progressAnimator: UIViewPropertyAnimator?
     
-    private var insertStingAtIndex: Int?
+    private var loadOperation: LoadOperation = .normal
+    
+    private enum LoadOperation {
+        case normal
+        case replace
+        case insert(Int)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -247,16 +253,23 @@ class PlaybackViewController: UICollectionViewController {
         let url = URL(fileURLWithPath: "/Users/Shared/Music").appendingPathComponent(file)
         
         if let sting = Sting(url: url) {
-            if let index = insertStingAtIndex, index < show.stings.count {
-                show.insert(sting, at: index)
-                insertStingAtIndex = nil
-            } else {
-                show.append(sting)
-                scrollTo(sting, animated: false)
-            }
+            load(sting)
         }
     }
     #endif
+    
+    func load(_ sting: Sting) {
+        if case LoadOperation.insert(let index) = loadOperation, index < show.stings.count {
+            show.insert(sting, at: index)
+            loadOperation = .normal
+        } else if case LoadOperation.replace = loadOperation {
+            // implement sting replacement
+            loadOperation = .normal
+        } else {
+            show.append(sting)
+            scrollTo(sting, animated: false)
+        }
+    }
     
     func rename(_ sting: Sting) {
         let alertController = UIAlertController(title: "Rename", message: nil, preferredStyle: .alert)
@@ -422,7 +435,7 @@ class PlaybackViewController: UICollectionViewController {
                 self.show.insert(duplicate, at: indexPath.item + 1)  // updates collection view via didSet
             }
             let insert = UIAction(title: "Insert Song Here", image: UIImage(systemName: "square.stack")) { action in
-                self.insertStingAtIndex = indexPath.item
+                self.loadOperation = .insert(indexPath.item)
                 self.addStingFromLibrary()
             }
             let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash")) { action in
@@ -503,14 +516,7 @@ extension PlaybackViewController: MPMediaPickerControllerDelegate {
     func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
         // make a sting from the selected media item, add it to the engine and update the table view
         if let sting = Sting(mediaItem: mediaItemCollection.items[0]) {
-            if let index = insertStingAtIndex, index < show.stings.count {
-                show.insert(sting, at: index)
-                // don't call scrollTo sting will already be visible
-                insertStingAtIndex = nil
-            } else {
-                show.append(sting)
-                scrollTo(sting, animated: false)
-            }
+            load(sting)
         }
         
         // dismiss media picker
@@ -518,7 +524,7 @@ extension PlaybackViewController: MPMediaPickerControllerDelegate {
     }
     
     func mediaPickerDidCancel(_ mediaPicker: MPMediaPickerController) {
-        insertStingAtIndex = nil
+        loadOperation = .normal
         dismiss(animated: true)
     }
 }
@@ -528,7 +534,7 @@ extension PlaybackViewController: MPMediaPickerControllerDelegate {
 extension PlaybackViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         if let sting = Sting(url: urls[0]) {
-            show.append(sting)
+            load(sting)
         }
     }
 }
