@@ -259,15 +259,16 @@ class PlaybackViewController: UICollectionViewController {
     #endif
     
     func load(_ sting: Sting) {
-        if case PickerOperation.insert(let index) = pickerOperation, index < show.stings.count {
+        switch pickerOperation {
+        case .insert(let index) where index < show.stings.count:
             show.insert(sting, at: index)
             pickerOperation = .normal
-        } else if case PickerOperation.locate(let missingSting) = pickerOperation {
+        case .locate(let missingSting):
             missingSting.reloadAudio(from: sting)
             show.updateChangeCount(.done)
             reloadItems([missingSting])
             pickerOperation = .normal
-        } else {
+        default:
             show.append(sting)
             scrollTo(sting, animated: false)
         }
