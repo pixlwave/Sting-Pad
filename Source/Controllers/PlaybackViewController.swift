@@ -42,7 +42,7 @@ class PlaybackViewController: UICollectionViewController {
         Bundle.main.loadNibNamed("TransportView", owner: self, options: nil)
         view.addSubview(transportView)
         progressView.progress = 0
-        timeRemainingLabel.font = UIFont.monospacedDigitSystemFont(ofSize: timeRemainingLabel.font.pointSize, weight: .regular)
+        timeRemainingLabel.font = .monospacedDigitSystemFont(ofSize: timeRemainingLabel.font.pointSize, weight: .regular)
         
         configureDataSource()
         collectionView.register(UINib(nibName: "AddStingFooterView", bundle: nil), forSupplementaryViewOfKind: "footer", withReuseIdentifier: "AddStingFooter")

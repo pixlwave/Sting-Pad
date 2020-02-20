@@ -51,7 +51,7 @@ class ChannelSelectionViewController: UITableViewController {
             if outputChannelCount == 1 {
                 if let textLabel = cell.textLabel {
                     textLabel.text = "Mono output"
-                    textLabel.font = UIFont.monospacedDigitSystemFont(ofSize: textLabel.font.pointSize, weight: .regular)
+                    textLabel.font = .monospacedDigitSystemFont(ofSize: textLabel.font.pointSize, weight: .regular)
                 }
                 
                 if outputConfigIsDefault() {
@@ -64,7 +64,7 @@ class ChannelSelectionViewController: UITableViewController {
                 
                 if let textLabel = cell.textLabel {
                     textLabel.text = "Channels \(cellChannels.0 + 1) & \(cellChannels.1 + 1)"
-                    textLabel.font = UIFont.monospacedDigitSystemFont(ofSize: textLabel.font.pointSize, weight: .regular)
+                    textLabel.font = .monospacedDigitSystemFont(ofSize: textLabel.font.pointSize, weight: .regular)
                 }
                 
                 if outputConfig.left == cellChannels.0, outputConfig.right == cellChannels.1 {
@@ -80,7 +80,7 @@ class ChannelSelectionViewController: UITableViewController {
             
             if let textLabel = cell.textLabel {
                 textLabel.text = "Channels \(outputConfig.left + 1) & \(outputConfig.right + 1)"
-                textLabel.font = UIFont.monospacedDigitSystemFont(ofSize: textLabel.font.pointSize, weight: .regular)
+                textLabel.font = .monospacedDigitSystemFont(ofSize: textLabel.font.pointSize, weight: .regular)
             }
             
             return cell
