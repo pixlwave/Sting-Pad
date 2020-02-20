@@ -28,7 +28,7 @@ class PlaybackViewController: UICollectionViewController {
     
     private enum PickerOperation {
         case normal
-        case locate
+        case locate(Sting)
         case insert(Int)
     }
     
@@ -262,8 +262,10 @@ class PlaybackViewController: UICollectionViewController {
         if case PickerOperation.insert(let index) = pickerOperation, index < show.stings.count {
             show.insert(sting, at: index)
             pickerOperation = .normal
-        } else if case PickerOperation.locate = pickerOperation {
-            // implement sting replacement
+        } else if case PickerOperation.locate(let missingSting) = pickerOperation {
+            missingSting.reloadAudio(from: sting)
+            show.updateChangeCount(.done)
+            reloadItems([missingSting])
             pickerOperation = .normal
         } else {
             show.append(sting)
@@ -457,7 +459,7 @@ class PlaybackViewController: UICollectionViewController {
             if sting.audioFile == nil {
                 let songInfo = UIAction(title: "\(sting.songTitle) by \(sting.songArtist)", attributes: .disabled) { action in }
                 let locate = UIAction(title: "Locate", image: UIImage(systemName: "magnifyingglass")) { action in
-                    self.pickerOperation = .locate
+                    self.pickerOperation = .locate(sting)
                     if sting.url.isMediaItem {
                         self.pickStingFromLibrary()
                     } else {

@@ -5,13 +5,13 @@ import os.log
 
 class Sting: NSObject, Codable {
     
-    let url: URL
-    let bookmark: Data?
+    private(set) var url: URL
+    private(set) var bookmark: Data?
     
     var name: String?
     var color: Color = .default
     
-    let metadata: Metadata
+    private(set) var metadata: Metadata
     var songTitle: String { metadata.title ?? "Unknown Title" }
     var songArtist: String { metadata.artist ?? "Unknown Artist" }
     
@@ -60,7 +60,7 @@ class Sting: NSObject, Codable {
         return Double(sampleCount) / audioFile.processingFormat.sampleRate
     }
     
-    let audioFile: AVAudioFile?
+    private(set) var audioFile: AVAudioFile?
     private(set) var buffer: AVAudioPCMBuffer?
     
     enum CodingKeys: String, CodingKey {
@@ -154,6 +154,18 @@ class Sting: NSObject, Codable {
         super.init()
         
         loadPreset()
+    }
+    
+    func reloadAudio(from sting: Sting) {
+        url = sting.url
+        bookmark = sting.bookmark
+        metadata = sting.metadata
+        audioFile = sting.audioFile
+        
+        // ensure start and end times are valid for new audio file
+        validate(startTime: &startTime, endTime: &endTime)
+        
+        if loops { createBuffer() }
     }
     
     func createBuffer() {
