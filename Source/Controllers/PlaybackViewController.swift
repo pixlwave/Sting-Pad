@@ -296,11 +296,14 @@ class PlaybackViewController: UICollectionViewController {
             textField.autocapitalizationType = .words
             textField.clearButtonMode = .always
         }
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+            self.becomeFirstResponder()     // ensure undo gestures work after a rename
+        }))
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             var name = alertController.textFields?.first?.text
             if name?.isEmpty == true { name = nil }
             self.rename(sting, to: name)
+            self.becomeFirstResponder()     // ensure undo gestures work after a rename
         }))
         
         present(alertController, animated: true, completion: nil)
