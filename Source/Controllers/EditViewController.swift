@@ -55,6 +55,8 @@ class EditViewController: UIViewController {
             previewLengthControl.selectedSegmentIndex = 0
             previewLengthDidChange()
         }
+        
+        show?.undoManager.removeAllActions()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -72,6 +74,8 @@ class EditViewController: UIViewController {
             #warning("Is this holding onto access for too long?")
             sting.url.stopAccessingSecurityScopedResource()
         }
+        
+        show?.undoManager.removeAllActions()
     }
     
     func updateLabels() {
