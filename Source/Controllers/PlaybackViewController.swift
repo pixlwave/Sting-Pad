@@ -286,7 +286,7 @@ class PlaybackViewController: UICollectionViewController {
         }
     }
     
-    func rename(_ sting: Sting) {
+    func presentRenameDialog(for sting: Sting) {
         let alertController = UIAlertController(title: "Rename", message: nil, preferredStyle: .alert)
         alertController.addTextField { textField in
             textField.text = sting.name
@@ -296,12 +296,23 @@ class PlaybackViewController: UICollectionViewController {
         }
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-            guard let name = alertController.textFields?.first?.text else { return }
-            sting.name = name.isEmpty == false ? name : nil
-            self.show.updateChangeCount(.done)
-            self.reloadItems([sting])
+            var name = alertController.textFields?.first?.text
+            if name?.isEmpty == true { name = nil }
+            self.rename(sting, to: name)
         }))
+        
         present(alertController, animated: true, completion: nil)
+    }
+    
+    func rename(_ sting: Sting, to name: String?) {
+        let oldName = sting.name
+        sting.name = name
+        if sting.name != oldName {
+            show.undoManager.registerUndo(withTarget: self) { _ in
+                self.rename(sting, to: oldName)
+            }
+        }
+        self.reloadItems([sting])
     }
     
     @IBAction func playSting() {
@@ -431,7 +442,7 @@ class PlaybackViewController: UICollectionViewController {
                 self.performSegue(withIdentifier: "Edit Sting", sender: sting)
             }
             let rename = UIAction(title: "Rename", image: UIImage(systemName: "square.and.pencil")) { action in
-                self.rename(sting)
+                self.presentRenameDialog(for: sting)
             }
             var colorActions = [UIAction]()
             for color in Color.allCases {
