@@ -51,6 +51,18 @@ class PlaybackViewController: UICollectionViewController {
         collectionView.dropDelegate = self
         collectionView.dragInteractionEnabled = true
         
+        let undoRecognizer = UISwipeGestureRecognizer()
+        undoRecognizer.numberOfTouchesRequired = 3
+        undoRecognizer.direction = .left
+        undoRecognizer.addTarget(show.undoManager as Any, action: #selector(UndoManager.undo))
+        collectionView.addGestureRecognizer(undoRecognizer)
+        
+        let redoRecognizer = UISwipeGestureRecognizer()
+        redoRecognizer.numberOfTouchesRequired = 3
+        redoRecognizer.direction = .right
+        redoRecognizer.addTarget(show.undoManager as Any, action: #selector(UndoManager.redo))
+        collectionView.addGestureRecognizer(redoRecognizer)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(pickStingFromLibrary), name: .addStingFromLibrary, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(pickStingFromFiles), name: .addStingFromFiles, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applySnapshot), name: .stingsDidChange, object: show)
@@ -516,8 +528,10 @@ extension PlaybackViewController: UICollectionViewDropDelegate {
             let destinationIndexPath = coordinator.destinationIndexPath
         else { return }
         
+        show.undoManager.beginUndoGrouping()
         show.insert(show.removeSting(at: sourceIndexPath.item), at: destinationIndexPath.item)
         coordinator.drop(sourceItem.dragItem, toItemAt: destinationIndexPath)
+        show.undoManager.endUndoGrouping()
     }
 }
 

@@ -45,18 +45,24 @@ class Show: UIDocument {
     // editing functions exist to allow the show to load without updating it's change count
     func append(_ sting: Sting) {
         stings.append(sting)
-        updateChangeCount(.done)
+        undoManager.registerUndo(withTarget: self) { _ in
+            self.removeSting(at: self.stings.count - 1)
+        }
     }
     
     func insert(_ sting: Sting, at index: Int) {
         stings.insert(sting, at: index)
-        updateChangeCount(.done)
+        undoManager.registerUndo(withTarget: self) { _ in
+            self.removeSting(at: index)
+        }
     }
     
     @discardableResult
     func removeSting(at index: Int) -> Sting {
         let sting = stings.remove(at: index)
-        updateChangeCount(.done)
+        undoManager.registerUndo(withTarget: self) { _ in
+            self.insert(sting, at: index)
+        }
         
         return sting
     }
