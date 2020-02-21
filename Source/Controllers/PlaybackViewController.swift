@@ -312,7 +312,18 @@ class PlaybackViewController: UICollectionViewController {
                 self.rename(sting, to: oldName)
             }
         }
-        self.reloadItems([sting])
+        reloadItems([sting])
+    }
+    
+    func change(_ sting: Sting, to color: Color) {
+        let oldColor = sting.color
+        sting.color = color
+        if sting.color != oldColor {
+            show.undoManager.registerUndo(withTarget: self) { _ in
+                self.change(sting, to: oldColor)
+            }
+        }
+        reloadItems([sting])
     }
     
     @IBAction func playSting() {
@@ -448,9 +459,7 @@ class PlaybackViewController: UICollectionViewController {
             for color in Color.allCases {
                 let image = UIImage(systemName: color == sting.color ? "checkmark.circle.fill" : "circle.fill")?.withTintColor(color.value, renderingMode: .alwaysOriginal).applyingSymbolConfiguration(UIImage.SymbolConfiguration(weight: .heavy))
                 let action = UIAction(title: "\(color)".capitalized, image: image) { action in
-                    sting.color = color
-                    self.show.updateChangeCount(.done)
-                    self.reloadItems([sting])
+                    self.change(sting, to: color)
                 }
                 colorActions.append(action)
             }
