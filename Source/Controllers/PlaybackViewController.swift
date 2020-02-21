@@ -32,6 +32,10 @@ class PlaybackViewController: UICollectionViewController {
         case insert(Int)
     }
     
+    // respond to undo gestures, forwarding them to the show's undo manager
+    override var canBecomeFirstResponder: Bool { true }
+    override var undoManager: UndoManager? { return show.undoManager }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,23 +55,21 @@ class PlaybackViewController: UICollectionViewController {
         collectionView.dropDelegate = self
         collectionView.dragInteractionEnabled = true
         
-        let undoRecognizer = UISwipeGestureRecognizer()
-        undoRecognizer.numberOfTouchesRequired = 3
-        undoRecognizer.direction = .left
-        undoRecognizer.addTarget(show.undoManager as Any, action: #selector(UndoManager.undo))
-        collectionView.addGestureRecognizer(undoRecognizer)
-        
-        let redoRecognizer = UISwipeGestureRecognizer()
-        redoRecognizer.numberOfTouchesRequired = 3
-        redoRecognizer.direction = .right
-        redoRecognizer.addTarget(show.undoManager as Any, action: #selector(UndoManager.redo))
-        collectionView.addGestureRecognizer(redoRecognizer)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(pickStingFromLibrary), name: .addStingFromLibrary, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(pickStingFromFiles), name: .addStingFromFiles, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applySnapshot), name: .stingsDidChange, object: show)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadEditedSting(_:)), name: .didFinishEditing, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showStateChanged(_:)), name: UIDocument.stateChangedNotification, object: show)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        becomeFirstResponder()  // respond to undo gestures
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        resignFirstResponder()
     }
     
     override func viewWillLayoutSubviews() {
