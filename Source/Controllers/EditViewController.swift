@@ -1,4 +1,5 @@
 import UIKit
+import AVFoundation
 
 class EditViewController: UIViewController {
     
@@ -25,6 +26,9 @@ class EditViewController: UIViewController {
     @IBOutlet weak var loopSwitch: UISwitch!
     @IBOutlet weak var previewLengthControl: UISegmentedControl!
     
+    override var canBecomeFirstResponder: Bool { true }
+    override var undoManager: UndoManager? { show?.undoManager }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,6 +51,8 @@ class EditViewController: UIViewController {
         waveformView.audioURL = sting.url
         
         NotificationCenter.default.addObserver(self, selector: #selector(layoutWaveformOverlayViews), name: .waveformViewDidLayoutSubviews, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateControls), name: .NSUndoManagerDidUndoChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateControls), name: .NSUndoManagerDidRedoChange, object: nil)
         
         startMarkerView.dragRecogniser.addTarget(self, action: #selector(startMarkerDragged(_:)))
         endMarkerView.dragRecogniser.addTarget(self, action: #selector(endMarkerDragged(_:)))
@@ -59,6 +65,11 @@ class EditViewController: UIViewController {
         show?.undoManager.removeAllActions()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        becomeFirstResponder()  // respond to undo gestures
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -68,6 +79,8 @@ class EditViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        
+        resignFirstResponder()
         
         // remove access to the url when finished
         if hasSecurityScopedAccess {
@@ -82,6 +95,11 @@ class EditViewController: UIViewController {
         navigationItem.title = sting.name ?? sting.songTitle
         titleLabel.text = sting.songTitle
         subtitleLabel.text = sting.songArtist
+    }
+    
+    @objc func updateControls() {
+        waveformView.highlightedSamples = Int(sting.startSample) ..< Int(sting.endSample)
+        loopSwitch.isOn = sting.loops
     }
     
     @IBAction func previewLengthDidChange() {
@@ -123,7 +141,8 @@ class EditViewController: UIViewController {
         }
         
         if recognizer.state == .ended {
-            updateStartSample()
+            // get the sample from the waveform in case the ended with an invalid location
+            setStartSample(to: AVAudioFramePosition(waveformView.highlightedSamples?.lowerBound ?? 0))
             previewStart()
         }
     }
@@ -136,19 +155,30 @@ class EditViewController: UIViewController {
         }
         
         if recognizer.state == .ended {
-            updateEndSample()
+            // get the sample from the waveform in case the ended with an invalid location
+            setEndSample(to: AVAudioFramePosition(waveformView.highlightedSamples?.upperBound ?? waveformView.totalSamples))
             previewEnd()
         }
     }
     
-    func updateStartSample() {
-        sting.startSample = Int64(waveformView.highlightedSamples?.lowerBound ?? 0)
-        show?.updateChangeCount(.done)
+    func setStartSample(to sample: AVAudioFramePosition) {
+        guard sample != sting.startSample else { return }
+        
+        let oldSample = sting.startSample
+        sting.startSample = sample
+        undoManager?.registerUndo(withTarget: self, handler: { _ in
+            self.setStartSample(to: oldSample)
+        })
     }
     
-    func updateEndSample() {
-        sting.endSample = Int64(waveformView.highlightedSamples?.upperBound ?? waveformView.totalSamples)
-        show?.updateChangeCount(.done)
+    func setEndSample(to sample: AVAudioFramePosition) {
+        guard sample != sting.endSample else { return }
+        
+        let oldSample = sting.endSample
+        sting.endSample = sample
+        undoManager?.registerUndo(withTarget: self, handler: { _ in
+            self.setEndSample(to: oldSample)
+        })
     }
     
     @IBAction func previewStart() {
@@ -184,8 +214,17 @@ class EditViewController: UIViewController {
     }
     
     @IBAction func toggleLoop(_ sender: UISwitch) {
-        sting.loops = sender.isOn
-        show?.updateChangeCount(.done)
+        setLoops(sender.isOn)
+    }
+    
+    func setLoops(_ value: Bool) {
+        guard value != sting.loops else { return }
+        
+        let oldValue = sting.loops
+        sting.loops = value
+        undoManager?.registerUndo(withTarget: self, handler: { _ in
+            self.setLoops(oldValue)
+        })
     }
     
     @IBAction func saveAsPreset() {

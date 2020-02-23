@@ -176,6 +176,7 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     @objc func reloadEditedSting(_ notification: Notification) {
+        becomeFirstResponder()  // ensure undo works again
         guard let sting = notification.object as? Sting else { return }
         reloadItems([sting])
     }
