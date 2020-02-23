@@ -14,10 +14,6 @@ class PlaybackViewController: UICollectionViewController {
     
     @IBOutlet var transportView: UIView!
     @IBOutlet weak var progressView: UIProgressView!
-    @IBOutlet weak var playButton: UIButton!
-    @IBOutlet weak var stopButton: UIButton!
-    @IBOutlet weak var previousButton: UIButton!
-    @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var timeRemainingLabel: UILabel!
     
     private let transportViewHeight: CGFloat = 90
