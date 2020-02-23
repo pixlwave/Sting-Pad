@@ -118,8 +118,9 @@ class EditViewController: UIViewController {
     @objc func startMarkerDragged(_ recognizer: UIPanGestureRecognizer) {
         let startSample = waveformView.sample(for: recognizer.location(in: waveformView).x)
         
-        guard let endSample = waveformView.highlightedSamples?.upperBound, startSample < endSample else { return }
-        waveformView.highlightedSamples = startSample ..< endSample
+        if let endSample = waveformView.highlightedSamples?.upperBound, startSample < endSample {
+            waveformView.highlightedSamples = startSample ..< endSample
+        }
         
         if recognizer.state == .ended {
             updateStartSample()
@@ -130,8 +131,9 @@ class EditViewController: UIViewController {
     @objc func endMarkerDragged(_ recognizer: UIPanGestureRecognizer) {
         let endSample = waveformView.sample(for: recognizer.location(in: waveformView).x)
         
-        guard let startSample = waveformView.highlightedSamples?.lowerBound, startSample < endSample else { return }
-        waveformView.highlightedSamples = startSample ..< endSample
+        if let startSample = waveformView.highlightedSamples?.lowerBound, startSample < endSample {
+            waveformView.highlightedSamples = startSample ..< endSample
+        }
         
         if recognizer.state == .ended {
             updateEndSample()
