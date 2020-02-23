@@ -106,6 +106,8 @@
                         <connections>
                             <outlet property="dataSource" destination="yak-cE-mUi" id="4Hm-aS-78b"/>
                             <outlet property="delegate" destination="yak-cE-mUi" id="UP5-39-shT"/>
+                            <outlet property="dragDelegate" destination="yak-cE-mUi" id="RfI-1X-OSr"/>
+                            <outlet property="dropDelegate" destination="yak-cE-mUi" id="MgR-3i-h8h"/>
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="fhU-qn-D6z">

@@ -47,8 +47,6 @@ class PlaybackViewController: UICollectionViewController {
         configureDataSource()
         collectionView.register(UINib(nibName: "AddStingFooterView", bundle: nil), forSupplementaryViewOfKind: "footer", withReuseIdentifier: "AddStingFooter")
         collectionView.collectionViewLayout = createLayout()
-        collectionView.dragDelegate = self
-        collectionView.dropDelegate = self
         collectionView.dragInteractionEnabled = true
         
         NotificationCenter.default.addObserver(self, selector: #selector(pickStingFromLibrary), name: .addStingFromLibrary, object: nil)
