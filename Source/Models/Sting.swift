@@ -77,7 +77,7 @@ class Sting: NSObject, Codable {
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         var url = try container.decode(URL.self, forKey: .url)
-        let bookmark = try? container.decode(Data.self, forKey: .bookmark)
+        var bookmark = try? container.decode(Data.self, forKey: .bookmark)
         let name = try? container.decode(String.self, forKey: .name)
         let color = try container.decode(Color.self, forKey: .color)
         let metadata = try container.decode(Metadata.self, forKey: .metadata)
@@ -86,8 +86,12 @@ class Sting: NSObject, Codable {
         let loops = try container.decode(Bool.self, forKey: .loops)
         
         var isStale = false
-        if let bookmark = bookmark, let resolvedURL = try? URL(resolvingBookmarkData: bookmark, bookmarkDataIsStale: &isStale) {
+        if let data = bookmark, let resolvedURL = try? URL(resolvingBookmarkData: data, bookmarkDataIsStale: &isStale) {
             url = resolvedURL
+            
+            if isStale, let freshBookmark = try? url.bookmarkData() {
+                bookmark = freshBookmark
+            }
         }
         
         let hasSecurityScopedAccess = url.startAccessingSecurityScopedResource()
