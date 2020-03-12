@@ -57,6 +57,13 @@ class Show: UIDocument {
         }
     }
     
+    func moveSting(from sourceIndex: Int, to destinationIndex: Int) {
+        stings.insert(stings.remove(at: sourceIndex), at: destinationIndex)
+        undoManager.registerUndo(withTarget: self) { _ in
+            self.moveSting(from: destinationIndex, to: sourceIndex)
+        }
+    }
+    
     @discardableResult
     func removeSting(at index: Int) -> Sting {
         let sting = stings.remove(at: index)

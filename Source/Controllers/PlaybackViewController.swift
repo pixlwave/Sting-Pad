@@ -548,10 +548,8 @@ extension PlaybackViewController: UICollectionViewDropDelegate {
             let destinationIndexPath = coordinator.destinationIndexPath
         else { return }
         
-        show.undoManager.beginUndoGrouping()
-        show.insert(show.removeSting(at: sourceIndexPath.item), at: destinationIndexPath.item)
+        show.moveSting(from: sourceIndexPath.item, to: destinationIndexPath.item)
         coordinator.drop(sourceItem.dragItem, toItemAt: destinationIndexPath)
-        show.undoManager.endUndoGrouping()
     }
 }
 
