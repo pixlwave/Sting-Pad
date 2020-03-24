@@ -21,21 +21,6 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        #if targetEnvironment(simulator)
-        if !hasRestored {
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(1)) {
-                let show = Show(name: Show.defaultName)
-                if !show.fileExists {
-                    show.save(to: show.fileURL, for: .forCreating) { sucess in
-                        self.openShow(at: show.fileURL, animated: false)
-                    }
-                } else {
-                    self.openShow(at: show.fileURL, animated: false)
-                }
-            }
-        }
-        #endif
-        
         if UserDefaults.standard.double(forKey: "WelcomeVersionSeen") < WelcomeViewController.currentVersion, presentedViewController == nil {
             showWelcomeScreen()
         }
