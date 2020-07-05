@@ -7,7 +7,7 @@ struct ChannelSelectionView: View {
     var audioInterfaceName = Engine.shared.audioInterfaceName()
     
     var body: some View {
-        List {
+        Form {
             Section(header: Text(audioInterfaceName)) {
                 ForEach(outputs, id: \.self) { config in
                     Button {
@@ -29,11 +29,10 @@ struct ChannelSelectionView: View {
                         Image(systemName: "checkmark")
                     }
                     .disabled(true)
-                    .foregroundColor(SwiftUI.Color(.secondaryLabel))
+                    .foregroundColor(.secondary)
                 }
             }
         }
-        .listStyle(InsetGroupedListStyle())
         .navigationBarTitle("Output Channels")
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -47,7 +46,7 @@ struct OutputCell: View {
         HStack {
             Text(label)
                 .font(Font.body.monospacedDigit())
-                .foregroundColor(SwiftUI.Color(.label))
+                .foregroundColor(.primary)
             if selected {
                 Spacer()
                 Image(systemName: "checkmark")

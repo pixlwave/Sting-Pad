@@ -7,9 +7,9 @@ struct SettingsView: View {
     
     var body: some View {
         NavigationView {
-            List {
+            Form {
                 Section(header: Text("I/O")) {
-                    ChannelsPicker()
+                    NavigationLink("Output Channels", destination: ChannelSelectionView())
                 }
                 Section(header: Text("Defaults")) {
                     Picker("Default Color", selection: $defaultColor) {
@@ -30,7 +30,6 @@ struct SettingsView: View {
                     }
                 }
             }
-            .listStyle(GroupedListStyle())
             .navigationBarTitle("Settings")
             .navigationBarItems(trailing: Button("Done") {
                 done()
