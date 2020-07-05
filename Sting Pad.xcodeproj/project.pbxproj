@@ -32,12 +32,15 @@
 		A5B39BDE1DAA843A00AA22EF /* FDWaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B39BDD1DAA843A00AA22EF /* FDWaveformView.swift */; };
 		A5BD01E0218F2AEB0010FE10 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5BD01DF218F2AEB0010FE10 /* Launch Screen.storyboard */; };
 		A5BD85E923AA531B00846F27 /* Launch Screen.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5BD85E823AA531B00846F27 /* Launch Screen.xcassets */; };
+		A5BF2D1E24B0F0B600AA69F4 /* ChannelSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BF2D1D24B0F0B600AA69F4 /* ChannelSelectionView.swift */; };
 		A5C32F4E228B64FE00E4B4EB /* Extends.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C32F4D228B64FE00E4B4EB /* Extends.swift */; };
+		A5C4FA5324B0DF9200C44365 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C4FA5224B0DF9200C44365 /* SettingsView.swift */; };
 		A5CEE51323215B1800BB7CD1 /* WaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CEE51223215B1800BB7CD1 /* WaveformView.swift */; };
 		A5CEE5152321695100BB7CD1 /* WaveformMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CEE5142321695100BB7CD1 /* WaveformMarkerView.swift */; };
 		A5E65EB4231AE0BA0058BBEE /* Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E65EB3231AE0BA0058BBEE /* Metadata.swift */; };
 		A5ECB86B22F30F670020FE16 /* DefaultColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ECB86A22F30F670020FE16 /* DefaultColorViewController.swift */; };
 		A5EDA9BA22F3434B00355AA3 /* ChannelSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EDA9B922F3434B00355AA3 /* ChannelSelectionViewController.swift */; };
+		A5F54ACA24B0D91800F0C33D /* DefaultColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F54AC924B0D91800F0C33D /* DefaultColorView.swift */; };
 		A5F62D5022E0F56A00D57126 /* ShowBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F62D4F22E0F56A00D57126 /* ShowBrowserViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,12 +72,15 @@
 		A5B39BDD1DAA843A00AA22EF /* FDWaveformView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FDWaveformView.swift; sourceTree = "<group>"; };
 		A5BD01DF218F2AEB0010FE10 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		A5BD85E823AA531B00846F27 /* Launch Screen.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Launch Screen.xcassets"; sourceTree = "<group>"; };
+		A5BF2D1D24B0F0B600AA69F4 /* ChannelSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelSelectionView.swift; sourceTree = "<group>"; };
 		A5C32F4D228B64FE00E4B4EB /* Extends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extends.swift; sourceTree = "<group>"; };
+		A5C4FA5224B0DF9200C44365 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A5CEE51223215B1800BB7CD1 /* WaveformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformView.swift; sourceTree = "<group>"; };
 		A5CEE5142321695100BB7CD1 /* WaveformMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformMarkerView.swift; sourceTree = "<group>"; };
 		A5E65EB3231AE0BA0058BBEE /* Metadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metadata.swift; sourceTree = "<group>"; };
 		A5ECB86A22F30F670020FE16 /* DefaultColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultColorViewController.swift; sourceTree = "<group>"; };
 		A5EDA9B922F3434B00355AA3 /* ChannelSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelSelectionViewController.swift; sourceTree = "<group>"; };
+		A5F54AC924B0D91800F0C33D /* DefaultColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultColorView.swift; sourceTree = "<group>"; };
 		A5F62D4F22E0F56A00D57126 /* ShowBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowBrowserViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -160,8 +166,11 @@
 				A581C39E1B949AD6006CE228 /* PlaybackViewController.swift */,
 				A581C39C1B949A06006CE228 /* EditViewController.swift */,
 				A504FDEA229557FE00B117BF /* SettingsViewController.swift */,
+				A5C4FA5224B0DF9200C44365 /* SettingsView.swift */,
 				A5ECB86A22F30F670020FE16 /* DefaultColorViewController.swift */,
+				A5F54AC924B0D91800F0C33D /* DefaultColorView.swift */,
 				A5EDA9B922F3434B00355AA3 /* ChannelSelectionViewController.swift */,
+				A5BF2D1D24B0F0B600AA69F4 /* ChannelSelectionView.swift */,
 				A581C3A31B94C5B2006CE228 /* WelcomeViewController.swift */,
 			);
 			path = Controllers;
@@ -291,6 +300,7 @@
 				A581C3A21B94A041006CE228 /* StingCell.swift in Sources */,
 				A567FB7022F1F67A00B4DB70 /* OutputConfig.swift in Sources */,
 				A5A49CB11B5BF216004B80CE /* Sting.swift in Sources */,
+				A5F54ACA24B0D91800F0C33D /* DefaultColorView.swift in Sources */,
 				A5E65EB4231AE0BA0058BBEE /* Metadata.swift in Sources */,
 				A5C32F4E228B64FE00E4B4EB /* Extends.swift in Sources */,
 				A595169A22F99A21001E820A /* AddStingFooterView.swift in Sources */,
@@ -300,7 +310,9 @@
 				A504FDEB229557FE00B117BF /* SettingsViewController.swift in Sources */,
 				A581C39D1B949A06006CE228 /* EditViewController.swift in Sources */,
 				A581C39F1B949AD6006CE228 /* PlaybackViewController.swift in Sources */,
+				A5BF2D1E24B0F0B600AA69F4 /* ChannelSelectionView.swift in Sources */,
 				A581C38D1B946B7C006CE228 /* Engine.swift in Sources */,
+				A5C4FA5324B0DF9200C44365 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,7 +428,7 @@
 				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = NU8A5Y875P;
 				INFOPLIST_FILE = Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.pixlwave.StingPad;
@@ -435,7 +447,7 @@
 				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = NU8A5Y875P;
 				INFOPLIST_FILE = Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.pixlwave.StingPad;
