@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @State private var defaultColor = Color.default
     
     var show: Show?
     
@@ -13,8 +14,16 @@ struct SettingsView: View {
                     }
                 }
                 Section(header: Text("Defaults")) {
-                    NavigationLink(destination: DefaultColorView()) {
-                        Text("Default Color")
+                    Picker("Default Color", selection: $defaultColor) {
+                        ForEach(StingPad.Color.allCases, id:\.self) { color in
+                            HStack {
+                                Image(systemName: "circle.fill").foregroundColor(SwiftUI.Color(color.value))
+                                Text(color.rawValue.capitalized)
+                            }
+                        }
+                    }
+                    .onChange(of: defaultColor) { color in
+                        Color.default = defaultColor
                     }
                 }
                 Section(header: Text("Presets")) {

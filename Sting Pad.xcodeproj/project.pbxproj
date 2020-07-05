@@ -40,7 +40,6 @@
 		A5E65EB4231AE0BA0058BBEE /* Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E65EB3231AE0BA0058BBEE /* Metadata.swift */; };
 		A5ECB86B22F30F670020FE16 /* DefaultColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ECB86A22F30F670020FE16 /* DefaultColorViewController.swift */; };
 		A5EDA9BA22F3434B00355AA3 /* ChannelSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EDA9B922F3434B00355AA3 /* ChannelSelectionViewController.swift */; };
-		A5F54ACA24B0D91800F0C33D /* DefaultColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F54AC924B0D91800F0C33D /* DefaultColorView.swift */; };
 		A5F62D5022E0F56A00D57126 /* ShowBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F62D4F22E0F56A00D57126 /* ShowBrowserViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -80,7 +79,6 @@
 		A5E65EB3231AE0BA0058BBEE /* Metadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metadata.swift; sourceTree = "<group>"; };
 		A5ECB86A22F30F670020FE16 /* DefaultColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultColorViewController.swift; sourceTree = "<group>"; };
 		A5EDA9B922F3434B00355AA3 /* ChannelSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelSelectionViewController.swift; sourceTree = "<group>"; };
-		A5F54AC924B0D91800F0C33D /* DefaultColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultColorView.swift; sourceTree = "<group>"; };
 		A5F62D4F22E0F56A00D57126 /* ShowBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowBrowserViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -168,7 +166,6 @@
 				A504FDEA229557FE00B117BF /* SettingsViewController.swift */,
 				A5C4FA5224B0DF9200C44365 /* SettingsView.swift */,
 				A5ECB86A22F30F670020FE16 /* DefaultColorViewController.swift */,
-				A5F54AC924B0D91800F0C33D /* DefaultColorView.swift */,
 				A5EDA9B922F3434B00355AA3 /* ChannelSelectionViewController.swift */,
 				A5BF2D1D24B0F0B600AA69F4 /* ChannelSelectionView.swift */,
 				A581C3A31B94C5B2006CE228 /* WelcomeViewController.swift */,
@@ -300,7 +297,6 @@
 				A581C3A21B94A041006CE228 /* StingCell.swift in Sources */,
 				A567FB7022F1F67A00B4DB70 /* OutputConfig.swift in Sources */,
 				A5A49CB11B5BF216004B80CE /* Sting.swift in Sources */,
-				A5F54ACA24B0D91800F0C33D /* DefaultColorView.swift in Sources */,
 				A5E65EB4231AE0BA0058BBEE /* Metadata.swift in Sources */,
 				A5C32F4E228B64FE00E4B4EB /* Extends.swift in Sources */,
 				A595169A22F99A21001E820A /* AddStingFooterView.swift in Sources */,
