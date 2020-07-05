@@ -88,13 +88,6 @@ class PlaybackViewController: UICollectionViewController {
             
             editVC.show = show
             editVC.sting = sting
-        } else if segue.identifier == "Settings" {
-            guard
-                let navigationVC = segue.destination as? UINavigationController,
-                let settingsVC = navigationVC.topViewController as? SettingsViewController
-            else { return }
-            
-            settingsVC.show = show
         }
     }
     

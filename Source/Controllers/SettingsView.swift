@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @State private var defaultColor = Color.default
+    @State private var channelPair = 0
     
     var show: Show?
     
@@ -9,9 +10,7 @@ struct SettingsView: View {
         NavigationView {
             List {
                 Section(header: Text("I/O")) {
-                    NavigationLink(destination: ChannelSelectionView()) {
-                        Text("Output Channels")
-                    }
+                    ChannelsPicker()
                 }
                 Section(header: Text("Defaults")) {
                     Picker("Default Color", selection: $defaultColor) {

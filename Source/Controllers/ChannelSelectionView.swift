@@ -3,39 +3,27 @@ import SwiftUI
 struct ChannelSelectionView: View {
     @State var outputConfig = Engine.shared.outputConfig
     
-    var outputChannelCount = Engine.shared.outputChannelCount()
+    var outputs = OutputConfig.array()
     var audioInterfaceName = Engine.shared.audioInterfaceName()
     
     var body: some View {
         List {
-            if outputChannelCount == 1 {
-                Section(header: Text(audioInterfaceName)) {
+            Section(header: Text(audioInterfaceName)) {
+                ForEach(outputs, id: \.self) { config in
                     Button {
-                        selectChannels(at: 0)
+                        Engine.shared.outputConfig = outputConfig
+                        outputConfig = config
                     } label: {
-                        OutputCell(label: "Mono output", selected: outputConfigIsDefault())
-                    }
-                }
-            } else {
-                Section(header: Text(audioInterfaceName)) {
-                    ForEach(0..<outputChannelCount / 2) { index in
-                        Button {
-                            selectChannels(at: index)
-                        } label: {
-                            let cellChannels = channels(for: index)
-                            let label = "Channels \(cellChannels.0 + 1) & \(cellChannels.1 + 1)"
-                            let selected = outputConfig.left == cellChannels.0 && outputConfig.right == cellChannels.1
-                            
-                            OutputCell(label: label, selected: selected)
-                        }
+                        let selected = outputConfig.left == config.left && outputConfig.right == config.right
+                        OutputCell(label: config.name, selected: selected)
                     }
                 }
             }
             
-            if !outputConfigIsAvailable() {
+            if !outputs.contains(outputConfig) {
                 Section(header: Text("Unavailable")) {
                     HStack {
-                        Text("Channels \(outputConfig.left + 1) & \(outputConfig.right + 1)")
+                        Text(outputConfig.name)
                             .font(Font.body.monospacedDigit())
                         Spacer()
                         Image(systemName: "checkmark")
@@ -49,40 +37,6 @@ struct ChannelSelectionView: View {
         .navigationBarTitle("Output Channels")
         .navigationBarTitleDisplayMode(.inline)
     }
-    
-    func outputConfigIsDefault() -> Bool {
-        outputConfig.left == 0 && outputConfig.right == 1
-    }
-    
-    func outputConfigIsAvailable() -> Bool {
-        outputConfig.highestChannel < outputChannelCount
-    }
-    
-    func channels(for index: Int) -> (Int, Int) {
-        return ((2 * index), (2 * index) + 1)
-    }
-    
-    func selectChannels(at index: Int) {
-        let selectedChannels = channels(for: index)
-        Engine.shared.outputConfig = outputConfig
-        outputConfig.left = selectedChannels.0
-        outputConfig.right = selectedChannels.1
-        
-    }
-}
-
-struct ChannelSelectionView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            NavigationView {
-                ChannelSelectionView(outputConfig: OutputConfig(left: 0, right: 1), outputChannelCount: 1, audioInterfaceName: "Speakers")
-            }
-            NavigationView {
-                ChannelSelectionView(outputConfig: OutputConfig(left: 0, right: 1), outputChannelCount: 2, audioInterfaceName: "Speakers")
-            }
-        }
-        
-    }
 }
 
 struct OutputCell: View {
@@ -93,11 +47,40 @@ struct OutputCell: View {
         HStack {
             Text(label)
                 .font(Font.body.monospacedDigit())
+                .foregroundColor(SwiftUI.Color(.label))
             if selected {
                 Spacer()
                 Image(systemName: "checkmark")
             }
         }
-        .foregroundColor(SwiftUI.Color(.label))
+    }
+}
+
+struct ChannelSelectionView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            NavigationView {
+                ChannelSelectionView(outputConfig: OutputConfig(left: 0, right: 1),
+                                     outputs: [
+                                        OutputConfig(left: 0, right: 1),
+                                        OutputConfig(left: 2, right: 3),
+                                        OutputConfig(left: 4, right: 5),
+                                        OutputConfig(left: 6, right: 7)
+                                     ],
+                                     audioInterfaceName: "Sound Card")
+            }
+            .previewLayout(.sizeThatFits)
+            .previewDevice("iPhone SE (1st generation)")
+            NavigationView {
+                ChannelSelectionView(outputConfig: OutputConfig(left: 2, right: 3),
+                                     outputs: [
+                                        OutputConfig(left: 0, right: 1)
+                                     ],
+                                     audioInterfaceName: "Speakers")
+            }
+            .previewLayout(.sizeThatFits)
+            .previewDevice("iPhone SE (1st generation)")
+        }
+        
     }
 }

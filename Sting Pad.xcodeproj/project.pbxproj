@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A504FDEB229557FE00B117BF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A504FDEA229557FE00B117BF /* SettingsViewController.swift */; };
 		A51D98EE22BBCF7D00124A40 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D98ED22BBCF7D00124A40 /* Color.swift */; };
 		A545F62922F7398300C62DF7 /* AddStingFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A545F62822F7398300C62DF7 /* AddStingFooterView.xib */; };
 		A549825A1F7067EC00909196 /* FDAudioContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54982581F7067EC00909196 /* FDAudioContext.swift */; };
@@ -37,14 +36,12 @@
 		A5C4FA5324B0DF9200C44365 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C4FA5224B0DF9200C44365 /* SettingsView.swift */; };
 		A5CEE51323215B1800BB7CD1 /* WaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CEE51223215B1800BB7CD1 /* WaveformView.swift */; };
 		A5CEE5152321695100BB7CD1 /* WaveformMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CEE5142321695100BB7CD1 /* WaveformMarkerView.swift */; };
+		A5D5677C24B1BACD00F102F1 /* ChannelsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D5677B24B1BACD00F102F1 /* ChannelsPicker.swift */; };
 		A5E65EB4231AE0BA0058BBEE /* Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E65EB3231AE0BA0058BBEE /* Metadata.swift */; };
-		A5ECB86B22F30F670020FE16 /* DefaultColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ECB86A22F30F670020FE16 /* DefaultColorViewController.swift */; };
-		A5EDA9BA22F3434B00355AA3 /* ChannelSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EDA9B922F3434B00355AA3 /* ChannelSelectionViewController.swift */; };
 		A5F62D5022E0F56A00D57126 /* ShowBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F62D4F22E0F56A00D57126 /* ShowBrowserViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A504FDEA229557FE00B117BF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A51D98ED22BBCF7D00124A40 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		A545F62822F7398300C62DF7 /* AddStingFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddStingFooterView.xib; sourceTree = "<group>"; };
 		A54982581F7067EC00909196 /* FDAudioContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDAudioContext.swift; sourceTree = "<group>"; };
@@ -76,9 +73,8 @@
 		A5C4FA5224B0DF9200C44365 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A5CEE51223215B1800BB7CD1 /* WaveformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformView.swift; sourceTree = "<group>"; };
 		A5CEE5142321695100BB7CD1 /* WaveformMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformMarkerView.swift; sourceTree = "<group>"; };
+		A5D5677B24B1BACD00F102F1 /* ChannelsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsPicker.swift; sourceTree = "<group>"; };
 		A5E65EB3231AE0BA0058BBEE /* Metadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metadata.swift; sourceTree = "<group>"; };
-		A5ECB86A22F30F670020FE16 /* DefaultColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultColorViewController.swift; sourceTree = "<group>"; };
-		A5EDA9B922F3434B00355AA3 /* ChannelSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelSelectionViewController.swift; sourceTree = "<group>"; };
 		A5F62D4F22E0F56A00D57126 /* ShowBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowBrowserViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -163,10 +159,8 @@
 				A5F62D4F22E0F56A00D57126 /* ShowBrowserViewController.swift */,
 				A581C39E1B949AD6006CE228 /* PlaybackViewController.swift */,
 				A581C39C1B949A06006CE228 /* EditViewController.swift */,
-				A504FDEA229557FE00B117BF /* SettingsViewController.swift */,
 				A5C4FA5224B0DF9200C44365 /* SettingsView.swift */,
-				A5ECB86A22F30F670020FE16 /* DefaultColorViewController.swift */,
-				A5EDA9B922F3434B00355AA3 /* ChannelSelectionViewController.swift */,
+				A5D5677B24B1BACD00F102F1 /* ChannelsPicker.swift */,
 				A5BF2D1D24B0F0B600AA69F4 /* ChannelSelectionView.swift */,
 				A581C3A31B94C5B2006CE228 /* WelcomeViewController.swift */,
 			);
@@ -286,8 +280,8 @@
 				A5CEE51323215B1800BB7CD1 /* WaveformView.swift in Sources */,
 				A55C0E7222AA5498008DDB12 /* Show.swift in Sources */,
 				A56EB2C922F7538F00358A7C /* AddStingButton.swift in Sources */,
+				A5D5677C24B1BACD00F102F1 /* ChannelsPicker.swift in Sources */,
 				A581C3A41B94C5B2006CE228 /* WelcomeViewController.swift in Sources */,
-				A5ECB86B22F30F670020FE16 /* DefaultColorViewController.swift in Sources */,
 				A5A49C8F1B5BF1C2004B80CE /* AppDelegate.swift in Sources */,
 				A5B39BDE1DAA843A00AA22EF /* FDWaveformView.swift in Sources */,
 				A5CEE5152321695100BB7CD1 /* WaveformMarkerView.swift in Sources */,
@@ -302,8 +296,6 @@
 				A595169A22F99A21001E820A /* AddStingFooterView.swift in Sources */,
 				A5F62D5022E0F56A00D57126 /* ShowBrowserViewController.swift in Sources */,
 				A549825A1F7067EC00909196 /* FDAudioContext.swift in Sources */,
-				A5EDA9BA22F3434B00355AA3 /* ChannelSelectionViewController.swift in Sources */,
-				A504FDEB229557FE00B117BF /* SettingsViewController.swift in Sources */,
 				A581C39D1B949A06006CE228 /* EditViewController.swift in Sources */,
 				A581C39F1B949AD6006CE228 /* PlaybackViewController.swift in Sources */,
 				A5BF2D1E24B0F0B600AA69F4 /* ChannelSelectionView.swift in Sources */,
