@@ -2,7 +2,6 @@ import SwiftUI
 
 struct SettingsView: View {
     @State private var defaultColor = Color.default
-    @State private var channelPair = 0
     
     var show: Show?
     

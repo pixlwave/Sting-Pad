@@ -17,6 +17,10 @@ struct OutputConfig: Codable, Hashable {
     }
     
     static func array() -> [OutputConfig] {
+        if Engine.shared.outputChannelCount() == 1 {
+            return [config(for: 0)]
+        }
+        
         var configs = [OutputConfig]()
         for i in 0..<Engine.shared.outputChannelCount() / 2 {
             configs.append(config(for: i))
