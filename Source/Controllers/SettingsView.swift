@@ -5,6 +5,8 @@ struct SettingsView: View {
     
     var show: Show?
     
+    var dismiss: (() -> Void)?
+    
     var body: some View {
         NavigationView {
             Form {
@@ -31,9 +33,7 @@ struct SettingsView: View {
                 }
             }
             .navigationBarTitle("Settings")
-            .navigationBarItems(trailing: Button("Done") {
-                done()
-            })
+            .navigationBarItems(trailing: Button("Done") { dismiss?() })
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
@@ -51,5 +51,21 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
+    }
+}
+
+class SettingsViewController: UIHostingController<SettingsView> {
+    required init?(coder decoder: NSCoder) {
+        super.init(coder: decoder, rootView: SettingsView())
+        rootView.dismiss = dismiss
+    }
+    
+    override init?(coder decoder: NSCoder, rootView: SettingsView) {
+        super.init(coder: decoder, rootView: rootView)
+        self.rootView.dismiss = dismiss
+    }
+
+    func dismiss() {
+        dismiss(animated: true)
     }
 }

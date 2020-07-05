@@ -75,7 +75,7 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     @IBSegueAction func SettingsSegue(_ coder: NSCoder) -> UIViewController? {
-        return UIHostingController(coder: coder, rootView: SettingsView(show: show))
+        return SettingsViewController(coder: coder, rootView: SettingsView(show: show))
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
