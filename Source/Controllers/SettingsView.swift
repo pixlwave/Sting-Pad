@@ -15,7 +15,7 @@ struct SettingsView: View {
                 }
                 Section(header: Text("Defaults")) {
                     Picker("Default Color", selection: $defaultColor) {
-                        ForEach(StingPad.Color.allCases, id:\.self) { color in
+                        ForEach(StingPad.Color.allCases, id: \.self) { color in
                             HStack {
                                 Image(systemName: "circle.fill").foregroundColor(SwiftUI.Color(color.value))
                                 Text(color.rawValue.capitalized)
@@ -36,11 +36,6 @@ struct SettingsView: View {
             .navigationBarItems(trailing: Button("Done") { dismiss?() })
         }
         .navigationViewStyle(StackNavigationViewStyle())
-    }
-    
-    
-    func done() {
-        //dismiss(animated: true)
     }
     
     func setAllStingPresets() {

@@ -47,10 +47,9 @@ struct OutputCell: View {
             Text(label)
                 .font(Font.body.monospacedDigit())
                 .foregroundColor(.primary)
-            if selected {
-                Spacer()
-                Image(systemName: "checkmark")
-            }
+            Spacer()
+            Image(systemName: "checkmark")
+                .opacity(selected ? 1 : 0)
         }
     }
 }
