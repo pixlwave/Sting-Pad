@@ -1,6 +1,7 @@
-import SwiftUI
+import UIKit
 import MediaPlayer
 import MobileCoreServices
+import SwiftUI
 import os.log
 
 class PlaybackViewController: UICollectionViewController {
@@ -244,7 +245,7 @@ class PlaybackViewController: UICollectionViewController {
     
     @objc func pickStingFromFiles() {
         // present file picker to load a track from
-        let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeAudio as String], in: .open)
+        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.audio])
         documentPicker.delegate = self
         present(documentPicker, animated: true)
     }
