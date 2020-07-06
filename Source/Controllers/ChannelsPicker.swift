@@ -11,9 +11,15 @@ struct ChannelsPicker: View {
             ForEach(outputs, id: \.self) { config in
                 Text(config.name).font(Font.body.monospacedDigit())
             }
+            if !outputs.contains(outputConfig) {
+                Text(outputConfig.name)
+                    .font(Font.body.monospacedDigit())
+                    .foregroundColor(.secondary)
+                    .disabled(true)
+            }
         }
         .onChange(of: outputConfig) { pair in
-            Engine.shared.outputConfig = outputConfig
+//            Engine.shared.outputConfig = outputConfig
         }
     }
 }
@@ -25,10 +31,10 @@ struct ChannelsPicker_Previews: PreviewProvider {
                 Form {
                     ChannelsPicker(outputConfig: OutputConfig(left: 0, right: 1),
                                    outputs: [
-                                    OutputConfig(left: 0, right: 1),
-                                    OutputConfig(left: 2, right: 3),
-                                    OutputConfig(left: 4, right: 5),
-                                    OutputConfig(left: 6, right: 7)
+                                        OutputConfig(left: 0, right: 1),
+                                        OutputConfig(left: 2, right: 3),
+                                        OutputConfig(left: 4, right: 5),
+                                        OutputConfig(left: 6, right: 7)
                                    ],
                                    audioInterfaceName: "Speakers")
                 }
@@ -39,7 +45,7 @@ struct ChannelsPicker_Previews: PreviewProvider {
                 Form {
                     ChannelsPicker(outputConfig: OutputConfig(left: 2, right: 3),
                                    outputs: [
-                                    OutputConfig(left: 0, right: 1)
+                                        OutputConfig(left: 0, right: 1)
                                    ],
                                    audioInterfaceName: "Speakers")
                 }
