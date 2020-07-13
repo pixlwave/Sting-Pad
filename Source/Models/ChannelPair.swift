@@ -1,7 +1,7 @@
 import Foundation
 
-struct OutputConfig: Codable, Hashable {
-    static let `default` = OutputConfig(left: 0, right: 1)
+struct ChannelPair: Codable, Hashable {
+    static let `default` = ChannelPair(left: 0, right: 1)
     
     let left: Int
     let right: Int
@@ -12,16 +12,16 @@ struct OutputConfig: Codable, Hashable {
     
     var isDefault: Bool { left == 0 && right == 1 }
     
-    static func config(for index: Int) -> OutputConfig {
-        OutputConfig(left: 2 * index, right: (2 * index) + 1)
+    static func config(for index: Int) -> ChannelPair {
+        ChannelPair(left: 2 * index, right: (2 * index) + 1)
     }
     
-    static func array() -> [OutputConfig] {
+    static func array() -> [ChannelPair] {
         if Engine.shared.outputChannelCount() == 1 {
             return [config(for: 0)]
         }
         
-        var configs = [OutputConfig]()
+        var configs = [ChannelPair]()
         for i in 0..<Engine.shared.outputChannelCount() / 2 {
             configs.append(config(for: i))
         }

@@ -3,7 +3,7 @@ import SwiftUI
 struct ChannelSelectionView: View {
     @State var outputConfig = Engine.shared.outputConfig
     
-    var outputs = OutputConfig.array()
+    var outputs = ChannelPair.array()
     var audioInterfaceName = Engine.shared.audioInterfaceName()
     
     var body: some View {
@@ -58,21 +58,21 @@ struct ChannelSelectionView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             NavigationView {
-                ChannelSelectionView(outputConfig: OutputConfig(left: 0, right: 1),
+                ChannelSelectionView(outputConfig: ChannelPair(left: 0, right: 1),
                                      outputs: [
-                                        OutputConfig(left: 0, right: 1),
-                                        OutputConfig(left: 2, right: 3),
-                                        OutputConfig(left: 4, right: 5),
-                                        OutputConfig(left: 6, right: 7)
+                                        ChannelPair(left: 0, right: 1),
+                                        ChannelPair(left: 2, right: 3),
+                                        ChannelPair(left: 4, right: 5),
+                                        ChannelPair(left: 6, right: 7)
                                      ],
                                      audioInterfaceName: "Sound Card")
             }
             .previewLayout(.sizeThatFits)
             .previewDevice("iPhone SE (1st generation)")
             NavigationView {
-                ChannelSelectionView(outputConfig: OutputConfig(left: 2, right: 3),
+                ChannelSelectionView(outputConfig: ChannelPair(left: 2, right: 3),
                                      outputs: [
-                                        OutputConfig(left: 0, right: 1)
+                                        ChannelPair(left: 0, right: 1)
                                      ],
                                      audioInterfaceName: "Speakers")
             }
