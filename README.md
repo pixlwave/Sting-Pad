@@ -1,5 +1,5 @@
-# Stingtk-iOS
-A music playback iOS app designed for live events.
+# Sting Pad
+A music playback app for iPad and iPhone designed for live events. Formerly called Stingtk.
 
 The original RubyMotion source code is available in the rubymotion branch.
 
