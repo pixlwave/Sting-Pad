@@ -34,7 +34,6 @@ struct ChannelSelectionView: View {
             }
         }
         .navigationBarTitle("Output Channels")
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

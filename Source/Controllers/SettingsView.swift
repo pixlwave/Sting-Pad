@@ -32,7 +32,7 @@ struct SettingsView: View {
                     }
                 }
             }
-            .navigationBarTitle("Settings")
+            .navigationBarTitle("Settings", displayMode: .inline)
             .navigationBarItems(trailing: Button("Done") { dismiss?() })
         }
         .navigationViewStyle(StackNavigationViewStyle())
