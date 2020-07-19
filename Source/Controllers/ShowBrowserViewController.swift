@@ -1,4 +1,5 @@
 import UIKit
+import SwiftUI
 
 class ShowBrowserViewController: UIDocumentBrowserViewController {
     
@@ -21,17 +22,24 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if UserDefaults.standard.double(forKey: "WelcomeVersionSeen") < WelcomeViewController.currentVersion, presentedViewController == nil {
+        if UserDefaults.standard.double(forKey: "WelcomeVersionSeen") < WelcomeView.currentVersion, presentedViewController == nil {
             showWelcomeScreen()
         }
     }
     
     func showWelcomeScreen() {
         // present the whole screen
-        performSegue(withIdentifier: "WelcomeSegue", sender: nil)
+        var welcomeView = WelcomeView()
+        welcomeView.dismiss = dismissWelcomeScreen
+        let hostingController = UIHostingController<WelcomeView>(rootView: welcomeView)
+        show(hostingController, sender: self)
         
         // record the version being seen to allow ui updates to be shown in future versions
-        UserDefaults.standard.set(WelcomeViewController.currentVersion, forKey: "WelcomeVersionSeen")
+        UserDefaults.standard.set(WelcomeView.currentVersion, forKey: "WelcomeVersionSeen")
+    }
+    
+    func dismissWelcomeScreen() {
+        dismiss(animated: true)
     }
     
     func openShow(at url: URL, animated: Bool = true) {

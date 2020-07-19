@@ -20,7 +20,6 @@
 		A581C39D1B949A06006CE228 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C39C1B949A06006CE228 /* EditViewController.swift */; };
 		A581C39F1B949AD6006CE228 /* PlaybackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C39E1B949AD6006CE228 /* PlaybackViewController.swift */; };
 		A581C3A21B94A041006CE228 /* StingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C3A11B94A041006CE228 /* StingCell.swift */; };
-		A581C3A41B94C5B2006CE228 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C3A31B94C5B2006CE228 /* WelcomeViewController.swift */; };
 		A58988FD23A6B97C00A85485 /* iPadLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = A58988FC23A6B97C00A85485 /* iPadLarge.png */; };
 		A58988FF23A6B98600A85485 /* iPadSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = A58988FE23A6B98600A85485 /* iPadSmall.png */; };
 		A595169A22F99A21001E820A /* AddStingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A595169922F99A21001E820A /* AddStingFooterView.swift */; };
@@ -39,6 +38,7 @@
 		A5D5677C24B1BACD00F102F1 /* ChannelsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D5677B24B1BACD00F102F1 /* ChannelsPicker.swift */; };
 		A5E65EB4231AE0BA0058BBEE /* Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E65EB3231AE0BA0058BBEE /* Metadata.swift */; };
 		A5F62D5022E0F56A00D57126 /* ShowBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F62D4F22E0F56A00D57126 /* ShowBrowserViewController.swift */; };
+		A5FF542824C49C5B00BE7928 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FF542724C49C5B00BE7928 /* WelcomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,7 +55,6 @@
 		A581C39C1B949A06006CE228 /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		A581C39E1B949AD6006CE228 /* PlaybackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackViewController.swift; sourceTree = "<group>"; };
 		A581C3A11B94A041006CE228 /* StingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StingCell.swift; sourceTree = "<group>"; };
-		A581C3A31B94C5B2006CE228 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		A58988FC23A6B97C00A85485 /* iPadLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPadLarge.png; sourceTree = "<group>"; };
 		A58988FE23A6B98600A85485 /* iPadSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPadSmall.png; sourceTree = "<group>"; };
 		A595169922F99A21001E820A /* AddStingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStingFooterView.swift; sourceTree = "<group>"; };
@@ -76,6 +75,7 @@
 		A5D5677B24B1BACD00F102F1 /* ChannelsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsPicker.swift; sourceTree = "<group>"; };
 		A5E65EB3231AE0BA0058BBEE /* Metadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metadata.swift; sourceTree = "<group>"; };
 		A5F62D4F22E0F56A00D57126 /* ShowBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowBrowserViewController.swift; sourceTree = "<group>"; };
+		A5FF542724C49C5B00BE7928 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,7 +162,7 @@
 				A5C4FA5224B0DF9200C44365 /* SettingsView.swift */,
 				A5D5677B24B1BACD00F102F1 /* ChannelsPicker.swift */,
 				A5BF2D1D24B0F0B600AA69F4 /* ChannelSelectionView.swift */,
-				A581C3A31B94C5B2006CE228 /* WelcomeViewController.swift */,
+				A5FF542724C49C5B00BE7928 /* WelcomeView.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -281,7 +281,6 @@
 				A55C0E7222AA5498008DDB12 /* Show.swift in Sources */,
 				A56EB2C922F7538F00358A7C /* AddStingButton.swift in Sources */,
 				A5D5677C24B1BACD00F102F1 /* ChannelsPicker.swift in Sources */,
-				A581C3A41B94C5B2006CE228 /* WelcomeViewController.swift in Sources */,
 				A5A49C8F1B5BF1C2004B80CE /* AppDelegate.swift in Sources */,
 				A5B39BDE1DAA843A00AA22EF /* FDWaveformView.swift in Sources */,
 				A5CEE5152321695100BB7CD1 /* WaveformMarkerView.swift in Sources */,
@@ -297,6 +296,7 @@
 				A5F62D5022E0F56A00D57126 /* ShowBrowserViewController.swift in Sources */,
 				A549825A1F7067EC00909196 /* FDAudioContext.swift in Sources */,
 				A581C39D1B949A06006CE228 /* EditViewController.swift in Sources */,
+				A5FF542824C49C5B00BE7928 /* WelcomeView.swift in Sources */,
 				A581C39F1B949AD6006CE228 /* PlaybackViewController.swift in Sources */,
 				A5BF2D1E24B0F0B600AA69F4 /* ChannelSelectionView.swift in Sources */,
 				A581C38D1B946B7C006CE228 /* Engine.swift in Sources */,
