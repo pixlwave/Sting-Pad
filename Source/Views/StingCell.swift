@@ -6,10 +6,10 @@ class StingCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var footerLabel: UILabel!
     
-    var color = Color.default {
+    var color: Sting.Color = .default {
         didSet {
-            backgroundColor = color.value
-            layer.borderColor = color.value.cgColor
+            backgroundColor = color.object
+            layer.borderColor = color.object.cgColor
         }
     }
     

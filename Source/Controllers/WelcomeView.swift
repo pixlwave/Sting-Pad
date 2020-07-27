@@ -27,7 +27,7 @@ struct WelcomeView: View {
                     .foregroundColor(.white)
                     .padding(.vertical, 12)
                     .padding(.horizontal, 40)
-                    .background(SwiftUI.Color("Tint Color"))
+                    .background(Color("Tint Color"))
                     .cornerRadius(7)
             }
             Spacer()
@@ -43,7 +43,7 @@ struct WelcomeItem: View {
         HStack {
             Image(systemName: symbolName)
                 .font(.system(size: 36))
-                .foregroundColor(SwiftUI.Color(symbolColor))
+                .foregroundColor(Color(symbolColor))
                 .padding(.trailing, 10)
             Text(text)
         }

@@ -313,7 +313,7 @@ class PlaybackViewController: UICollectionViewController {
         reloadItems([sting])
     }
     
-    func change(_ sting: Sting, to color: Color) {
+    func change(_ sting: Sting, to color: Sting.Color) {
         let oldColor = sting.color
         sting.color = color
         if sting.color != oldColor {
@@ -454,8 +454,8 @@ class PlaybackViewController: UICollectionViewController {
                 self.presentRenameDialog(for: sting)
             }
             var colorActions = [UIAction]()
-            for color in Color.allCases {
-                let image = UIImage(systemName: color == sting.color ? "checkmark.circle.fill" : "circle.fill")?.withTintColor(color.value, renderingMode: .alwaysOriginal).applyingSymbolConfiguration(UIImage.SymbolConfiguration(weight: .heavy))
+            for color in Sting.Color.allCases {
+                let image = UIImage(systemName: color == sting.color ? "checkmark.circle.fill" : "circle.fill")?.withTintColor(color.object, renderingMode: .alwaysOriginal).applyingSymbolConfiguration(UIImage.SymbolConfiguration(weight: .heavy))
                 let action = UIAction(title: "\(color)".capitalized, image: image) { action in
                     self.change(sting, to: color)
                 }

@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @State private var defaultColor = Color.default
+    @State private var defaultColor: Sting.Color = .default
     
     var show: Show?
     
@@ -15,15 +15,15 @@ struct SettingsView: View {
                 }
                 Section(header: Text("Defaults")) {
                     Picker("Default Color", selection: $defaultColor) {
-                        ForEach(StingPad.Color.allCases, id: \.self) { color in
+                        ForEach(Sting.Color.allCases, id: \.self) { color in
                             HStack {
-                                Image(systemName: "circle.fill").foregroundColor(SwiftUI.Color(color.value))
+                                Image(systemName: "circle.fill").foregroundColor(color.value)
                                 Text(color.rawValue.capitalized)
                             }
                         }
                     }
                     .onChange(of: defaultColor) { color in
-                        Color.default = defaultColor
+                        Sting.Color.default = defaultColor
                     }
                 }
                 Section(header: Text("Presets")) {
