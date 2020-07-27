@@ -48,6 +48,7 @@ struct OutputCell: View {
                 .foregroundColor(.primary)
             Spacer()
             Image(systemName: "checkmark")
+                .font(Font.body.bold())
                 .opacity(selected ? 1 : 0)
         }
     }
