@@ -16,9 +16,10 @@ struct SettingsView: View {
                 Section(header: Text("Defaults")) {
                     Picker("Default Color", selection: $defaultColor) {
                         ForEach(Sting.Color.allCases, id: \.self) { color in
-                            HStack {
-                                Image(systemName: "circle.fill").foregroundColor(color.value)
+                            Label {
                                 Text(color.rawValue.capitalized)
+                            } icon: {
+                                Image(systemName: "circle.fill").foregroundColor(color.value)
                             }
                         }
                     }
