@@ -3,7 +3,7 @@ import AVFoundation
 import MediaPlayer
 import os.log
 
-class Sting: NSObject, Codable {
+class Sting: NSObject, ObservableObject, Codable, Identifiable {
     
     private(set) var url: URL
     private(set) var bookmark: Data?

@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct StingCellUI: View {
-    @State var color = Color.green
+    @ObservedObject var sting: Sting
+    
     let foregroundColor = Color.white.opacity(0.5)
     
     var body: some View {
@@ -14,7 +15,7 @@ struct StingCellUI: View {
             Rectangle()
                 .foregroundColor(foregroundColor)
                 .overlay(
-                    Text("John")
+                    Text(sting.name ?? sting.songTitle)
                         .font(.title2)
                         .padding(.all, 8),
                     alignment: .leading)
@@ -27,19 +28,19 @@ struct StingCellUI: View {
                 )
         }
         .frame(height: 90)
-        .background(color)
+        .background(sting.color.value)
         .clipShape(RoundedRectangle(cornerRadius: 8))
-        .overlay(RoundedRectangle(cornerRadius: 8).strokeBorder(color, lineWidth: 4))
+        .overlay(RoundedRectangle(cornerRadius: 8).strokeBorder(sting.color.value, lineWidth: 4))
     }
 }
 
-struct StingCell_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack(spacing: 20) {
-            StingCellUI()
-            StingCellUI()
-            StingCellUI()
-        }
-        .padding(.all, 20)
-    }
-}
+//struct StingCell_Previews: PreviewProvider {
+//    static var previews: some View {
+//        VStack(spacing: 20) {
+//            StingCellUI()
+//            StingCellUI()
+//            StingCellUI()
+//        }
+//        .padding(.all, 20)
+//    }
+//}

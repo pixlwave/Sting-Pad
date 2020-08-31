@@ -62,26 +62,15 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
     }
     
     func present(_ show: Show, animated: Bool) {
-        guard
-            let storyboard = storyboard,
-            let rootVC = storyboard.instantiateViewController(withIdentifier: "Root View Controller") as? UINavigationController,
-            let playbackVC = rootVC.topViewController as? PlaybackViewController
-        else {
-            isLoading = false
-            return
-        }
+        let playbackController = UIHostingController(rootView: PlaybackView().environmentObject(show))
         
-        playbackVC.show = show
-        
-        rootVC.transitioningDelegate = self
+        playbackController.transitioningDelegate = self
+        playbackController.modalPresentationStyle = .custom
         transitionController = transitionController(forDocumentAt: show.fileURL)
-        transitionController?.targetView = playbackVC.view
+        #warning("This view doesn't exist")
+        transitionController?.targetView = playbackController.view
         
-        present(rootVC, animated: animated)
-        
-        playbackVC.applySnapshot()
-        playbackVC.navigationItem.title = show.fileName
-        playbackVC.stopUpdatingProgress()   // update time remaining label
+        present(playbackController, animated: animated)
     }
     
     func displayOpenError(for show: Show) {

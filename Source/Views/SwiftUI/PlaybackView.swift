@@ -1,16 +1,20 @@
 import SwiftUI
 
 struct PlaybackView: View {
+    @EnvironmentObject var show: Show
+    @ObservedObject var engine = Engine.shared
+    
     @State var isPresentingSettings = false
+    
+    var dismiss: (() -> Void)?
     
     var body: some View {
         NavigationView {
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 300))], spacing: 15) {
-                    StingCellUI(color: Sting.Color.teal.value)
-                    StingCellUI(color: Sting.Color.orange.value)
-                    StingCellUI(color: Sting.Color.green.value)
-                    StingCellUI(color: Sting.Color.blue.value)
+                    ForEach(show.stings) { sting in
+                        StingCellUI(sting: sting)
+                    }
                 }
                 .padding()
                 
@@ -24,11 +28,15 @@ struct PlaybackView: View {
                 TransportViewUI(),
                 alignment: .bottom
             )
-            .navigationBarTitle("Show 2", displayMode: .inline)
+            .navigationBarTitle(show.fileName, displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Shows") {
-                        //
+                        engine.stopSting()
+                        
+                        show.close { success in
+                            dismiss?()
+                        }
                     }
                 }
                 ToolbarItem {
@@ -45,6 +53,7 @@ struct PlaybackView: View {
         }
     }
 }
+
 
 struct PlaybackView_Previews: PreviewProvider {
     static var previews: some View {

@@ -1,6 +1,6 @@
 import UIKit
 
-class Show: UIDocument {
+class Show: UIDocument, ObservableObject {
     
     static var defaultName = "Show"
     
@@ -9,9 +9,7 @@ class Show: UIDocument {
     var fileExists: Bool { return FileManager.default.fileExists(atPath: fileURL.path) }
     var fileName: String { return fileURL.deletingPathExtension().lastPathComponent }
     
-    private(set) var stings = [Sting]() {
-        didSet { NotificationCenter.default.post(Notification(name: .stingsDidChange, object: self)) }
-    }
+    @Published private(set) var stings = [Sting]()
     
     enum DocumentError: Error {
         case invalidData
