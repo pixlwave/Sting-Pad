@@ -2,6 +2,7 @@ import SwiftUI
 import VisualEffects
 
 struct TransportViewUI: View {
+    @ObservedObject var engine = Engine.shared
     
     var body: some View {
         HStack {
@@ -15,7 +16,7 @@ struct TransportViewUI: View {
             }
             Spacer()
             Button {
-                //
+                engine.stopSting()
             } label: {
                 Image(systemName: "stop")
                     .font(.system(size: 52, weight: .thin))

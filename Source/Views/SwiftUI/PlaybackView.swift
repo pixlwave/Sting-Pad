@@ -14,6 +14,9 @@ struct PlaybackView: View {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 300))], spacing: 15) {
                     ForEach(show.stings) { sting in
                         StingCellUI(sting: sting)
+                            .onTapGesture {
+                                Engine.shared.play(sting)
+                            }
                     }
                 }
                 .padding()

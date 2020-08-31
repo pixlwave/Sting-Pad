@@ -16,7 +16,8 @@ class Engine: ObservableObject {
         }
     }
     
-    var playingSting: Sting?
+    @Published var cuedSting: Sting?
+    @Published var playingSting: Sting?
     
     var totalTime: TimeInterval {
         guard let sting = playingSting else { return 0 }
