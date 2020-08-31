@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/Douglas/Developer/Projects/Stingtk/Sting Pad.xcodeproj">
+      location = "self:">
    </FileRef>
 </Workspace>

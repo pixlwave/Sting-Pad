@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -22,6 +22,11 @@
 		A581C3A21B94A041006CE228 /* StingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C3A11B94A041006CE228 /* StingCell.swift */; };
 		A58988FD23A6B97C00A85485 /* iPadLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = A58988FC23A6B97C00A85485 /* iPadLarge.png */; };
 		A58988FF23A6B98600A85485 /* iPadSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = A58988FE23A6B98600A85485 /* iPadSmall.png */; };
+		A58AFDA424FCFE0F00F439DB /* StingCellUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58AFDA324FCFE0F00F439DB /* StingCellUI.swift */; };
+		A58AFDA624FCFE6C00F439DB /* TransportViewUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58AFDA524FCFE6C00F439DB /* TransportViewUI.swift */; };
+		A58AFDA824FCFEA600F439DB /* FooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58AFDA724FCFEA600F439DB /* FooterCell.swift */; };
+		A58AFDAA24FCFF4800F439DB /* PlaybackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58AFDA924FCFF4800F439DB /* PlaybackView.swift */; };
+		A58AFDAD24FD05C700F439DB /* VisualEffects in Frameworks */ = {isa = PBXBuildFile; productRef = A58AFDAC24FD05C700F439DB /* VisualEffects */; };
 		A595169A22F99A21001E820A /* AddStingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A595169922F99A21001E820A /* AddStingFooterView.swift */; };
 		A59EC6EA22EB5696009A7ED1 /* TransportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59EC6E922EB5696009A7ED1 /* TransportView.swift */; };
 		A5A49C8F1B5BF1C2004B80CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A49C8E1B5BF1C2004B80CE /* AppDelegate.swift */; };
@@ -56,6 +61,10 @@
 		A581C3A11B94A041006CE228 /* StingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StingCell.swift; sourceTree = "<group>"; };
 		A58988FC23A6B97C00A85485 /* iPadLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPadLarge.png; sourceTree = "<group>"; };
 		A58988FE23A6B98600A85485 /* iPadSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPadSmall.png; sourceTree = "<group>"; };
+		A58AFDA324FCFE0F00F439DB /* StingCellUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StingCellUI.swift; sourceTree = "<group>"; };
+		A58AFDA524FCFE6C00F439DB /* TransportViewUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportViewUI.swift; sourceTree = "<group>"; };
+		A58AFDA724FCFEA600F439DB /* FooterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterCell.swift; sourceTree = "<group>"; };
+		A58AFDA924FCFF4800F439DB /* PlaybackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackView.swift; sourceTree = "<group>"; };
 		A595169922F99A21001E820A /* AddStingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStingFooterView.swift; sourceTree = "<group>"; };
 		A59EC6E922EB5696009A7ED1 /* TransportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportView.swift; sourceTree = "<group>"; };
 		A5A49C891B5BF1C2004B80CE /* Sting Pad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sting Pad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A58AFDAD24FD05C700F439DB /* VisualEffects in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +114,17 @@
 				A58988FC23A6B97C00A85485 /* iPadLarge.png */,
 			);
 			path = "Document Icons";
+			sourceTree = "<group>";
+		};
+		A58AFDA224FCFDFD00F439DB /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				A58AFDA924FCFF4800F439DB /* PlaybackView.swift */,
+				A58AFDA324FCFE0F00F439DB /* StingCellUI.swift */,
+				A58AFDA724FCFEA600F439DB /* FooterCell.swift */,
+				A58AFDA524FCFE6C00F439DB /* TransportViewUI.swift */,
+			);
+			path = SwiftUI;
 			sourceTree = "<group>";
 		};
 		A5A49C801B5BF1C2004B80CE = {
@@ -180,6 +201,7 @@
 		A5FBD7D41F7C447D00B5799C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A58AFDA224FCFDFD00F439DB /* SwiftUI */,
 				A581C3A11B94A041006CE228 /* StingCell.swift */,
 				A59EC6E922EB5696009A7ED1 /* TransportView.swift */,
 				A595169922F99A21001E820A /* AddStingFooterView.swift */,
@@ -206,6 +228,9 @@
 			dependencies = (
 			);
 			name = "Sting Pad";
+			packageProductDependencies = (
+				A58AFDAC24FD05C700F439DB /* VisualEffects */,
+			);
 			productName = Stingtk;
 			productReference = A5A49C891B5BF1C2004B80CE /* Sting Pad.app */;
 			productType = "com.apple.product-type.application";
@@ -242,6 +267,9 @@
 				Base,
 			);
 			mainGroup = A5A49C801B5BF1C2004B80CE;
+			packageReferences = (
+				A58AFDAB24FD05C700F439DB /* XCRemoteSwiftPackageReference "VisualEffects" */,
+			);
 			productRefGroup = A5A49C8A1B5BF1C2004B80CE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -276,9 +304,12 @@
 			files = (
 				A5CEE51323215B1800BB7CD1 /* WaveformView.swift in Sources */,
 				A55C0E7222AA5498008DDB12 /* Show.swift in Sources */,
+				A58AFDA624FCFE6C00F439DB /* TransportViewUI.swift in Sources */,
 				A56EB2C922F7538F00358A7C /* AddStingButton.swift in Sources */,
 				A5A49C8F1B5BF1C2004B80CE /* AppDelegate.swift in Sources */,
 				A5B39BDE1DAA843A00AA22EF /* FDWaveformView.swift in Sources */,
+				A58AFDA824FCFEA600F439DB /* FooterCell.swift in Sources */,
+				A58AFDAA24FCFF4800F439DB /* PlaybackView.swift in Sources */,
 				A5CEE5152321695100BB7CD1 /* WaveformMarkerView.swift in Sources */,
 				A549825B1F7067EC00909196 /* FDWaveformRenderOperation.swift in Sources */,
 				A51D98EE22BBCF7D00124A40 /* Color.swift in Sources */,
@@ -297,6 +328,7 @@
 				A5BF2D1E24B0F0B600AA69F4 /* ChannelSelectionView.swift in Sources */,
 				A581C38D1B946B7C006CE228 /* Engine.swift in Sources */,
 				A5C4FA5324B0DF9200C44365 /* SettingsView.swift in Sources */,
+				A58AFDA424FCFE0F00F439DB /* StingCellUI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,7 +433,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -415,7 +448,10 @@
 				DEVELOPMENT_TEAM = NU8A5Y875P;
 				INFOPLIST_FILE = Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.pixlwave.StingPad;
 				PRODUCT_MODULE_NAME = StingPad;
@@ -434,7 +470,10 @@
 				DEVELOPMENT_TEAM = NU8A5Y875P;
 				INFOPLIST_FILE = Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = uk.pixlwave.StingPad;
 				PRODUCT_MODULE_NAME = StingPad;
@@ -466,6 +505,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A58AFDAB24FD05C700F439DB /* XCRemoteSwiftPackageReference "VisualEffects" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/VisualEffects";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A58AFDAC24FD05C700F439DB /* VisualEffects */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A58AFDAB24FD05C700F439DB /* XCRemoteSwiftPackageReference "VisualEffects" */;
+			productName = VisualEffects;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A5A49C811B5BF1C2004B80CE /* Project object */;
 }
