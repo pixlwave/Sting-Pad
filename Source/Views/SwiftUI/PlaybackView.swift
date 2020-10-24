@@ -54,6 +54,7 @@ struct PlaybackView: View {
                 SettingsView()
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
