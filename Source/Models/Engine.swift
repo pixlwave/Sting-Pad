@@ -16,7 +16,6 @@ class Engine: ObservableObject {
         }
     }
     
-    @Published var cuedSting: Sting?
     @Published var playingSting: Sting?
     
     var totalTime: TimeInterval {
@@ -43,8 +42,6 @@ class Engine: ObservableObject {
             }
         }
     }
-    
-    var playbackDelegate: PlaybackDelegate?
     
     init() {
         configureAudioSession()
@@ -145,7 +142,6 @@ class Engine: ObservableObject {
     private func stopCompletionHandler(for sting: Sting) -> (AVAudioPlayerNodeCompletionCallbackType) -> Void {
         { callbackType in
             self.playingSting = nil
-            self.playbackDelegate?.stingDidStopPlaying(sting)
             if self.isInBackground { self.engine.stop() }
         }
     }
@@ -153,7 +149,6 @@ class Engine: ObservableObject {
     private func startPlayback(of sting: Sting) {
         player.play()
         playingSting = sting
-        playbackDelegate?.stingDidStartPlaying(sting)
     }
     
     func play(_ sting: Sting) {
@@ -204,10 +199,4 @@ class Engine: ObservableObject {
         }
     }
     
-}
-
-
-protocol PlaybackDelegate: AnyObject {
-    func stingDidStartPlaying(_ sting: Sting)
-    func stingDidStopPlaying(_ sting: Sting)
 }

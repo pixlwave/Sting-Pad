@@ -36,22 +36,6 @@ class PlaybackViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // make self delegate for sting players
-        engine.playbackDelegate = self
-        
-        // load the transport view nib and add as a subview via it's outlet
-        Bundle.main.loadNibNamed("TransportView", owner: self, options: nil)
-        view.addSubview(transportView)
-        progressView.progress = 0
-        timeRemainingLabel.font = .monospacedDigitSystemFont(ofSize: timeRemainingLabel.font.pointSize, weight: .regular)
-        
-        configureDataSource()
-        collectionView.register(UINib(nibName: "AddStingFooterView", bundle: nil), forSupplementaryViewOfKind: "footer", withReuseIdentifier: "AddStingFooter")
-        collectionView.collectionViewLayout = createLayout()
-        collectionView.dragInteractionEnabled = true
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(pickStingFromLibrary), name: .addStingFromLibrary, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(pickStingFromFiles), name: .addStingFromFiles, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applySnapshot), name: .stingsDidChange, object: show)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadEditedSting(_:)), name: .didFinishEditing, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showStateChanged(_:)), name: UIDocument.stateChangedNotification, object: show)
@@ -60,24 +44,6 @@ class PlaybackViewController: UICollectionViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         becomeFirstResponder()  // respond to undo gestures
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        resignFirstResponder()
-    }
-    
-    override func viewWillLayoutSubviews() {
-        let origin = CGPoint(x: 0, y: view.frame.height - view.safeAreaInsets.bottom - transportViewHeight)
-        let size = CGSize(width: view.frame.width, height: view.bounds.height - origin.y)
-        transportView?.frame = CGRect(origin: origin, size: size)
-        collectionView.contentInset.bottom = size.height
-        collectionView.verticalScrollIndicatorInsets.bottom = size.height
-    }
-    
-    @IBSegueAction func SettingsSegue(_ coder: NSCoder) -> UIViewController? {
-        return UIViewController()
-        // return SettingsViewController(coder: coder, rootView: SettingsView(show: show))
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -151,7 +117,7 @@ class PlaybackViewController: UICollectionViewController {
     
     @objc func applySnapshot() {
         // ensure there's a cued sting if possible
-        validateCuedSting()
+//        validateCuedSting()
         
         var snapshot = NSDiffableDataSourceSnapshot<Int, Sting>()
         snapshot.appendSections([0])
@@ -185,100 +151,10 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     @IBAction func closeShow() {
-        // stop listening for notifications in case a new show is opened before this gets deallocated
-        NotificationCenter.default.removeObserver(self)
-        
         engine.stopSting()
         show.close { success in
             (self.presentingViewController as? ShowBrowserViewController)?.isLoading = false
             self.dismiss(animated: true)
-        }
-        
-        // set data source to nil to remove reference cycle
-        dataSource = nil
-    }
-    
-    func requestMediaLibraryAuthorization(successHandler: @escaping () -> Void) {
-        MPMediaLibrary.requestAuthorization { authorizationStatus in
-            if authorizationStatus == .authorized {
-                DispatchQueue.main.async { successHandler() }
-            }
-        }
-    }
-    
-    func presentMediaLibraryAccessAlert() {
-        let alert = UIAlertController(title: "Enable Access",
-                                      message: "Please enable Media & Apple Music access in the Settings app.",
-                                      preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: { action in
-            guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else { return }
-            UIApplication.shared.open(settingsURL)
-        }))
-        self.present(alert, animated: true)
-    }
-    
-    @objc func pickStingFromLibrary() {
-        guard MPMediaLibrary.authorizationStatus() == .authorized else {
-            if MPMediaLibrary.authorizationStatus() == .notDetermined {
-                requestMediaLibraryAuthorization(successHandler: { self.pickStingFromLibrary() })
-            } else {
-                presentMediaLibraryAccessAlert()
-            }
-            
-            return
-        }
-        
-        #if targetEnvironment(simulator)
-        // pick a random file from the file system as no library is available on the simulator
-        loadRandomTrackFromHostFileSystem()
-        #else
-        
-        // present music picker to load a track from media library
-        let mediaPicker = MPMediaPickerController(mediaTypes: .music)
-        mediaPicker.delegate = self
-        mediaPicker.showsCloudItems = false  // hides iTunes in the Cloud items, which crash the app if picked
-        mediaPicker.showsItemsWithProtectedAssets = false  // hides Apple Music items, which are DRM protected
-        mediaPicker.allowsPickingMultipleItems = false
-        present(mediaPicker, animated: true)
-        #endif
-    }
-    
-    @objc func pickStingFromFiles() {
-        // present file picker to load a track from
-        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.audio])
-        documentPicker.delegate = self
-        present(documentPicker, animated: true)
-    }
-    
-    #if targetEnvironment(simulator)
-    func loadRandomTrackFromHostFileSystem() {
-        guard let sharedFiles = try? FileManager.default.contentsOfDirectory(atPath: "/Users/Shared/Music") else { return }
-        
-        let audioFiles = sharedFiles.filter { $0.hasSuffix(".mp3") || $0.hasSuffix(".m4a") }
-        guard audioFiles.count > 0 else { fatalError() }
-        let file = audioFiles[Int.random(in: 0..<audioFiles.count)]
-        let url = URL(fileURLWithPath: "/Users/Shared/Music").appendingPathComponent(file)
-        
-        if let sting = Sting(url: url) {
-            load(sting)
-        }
-    }
-    #endif
-    
-    func load(_ sting: Sting) {
-        switch pickerOperation {
-        case .insert(let index) where index < show.stings.count:
-            show.insert(sting, at: index)
-            pickerOperation = .normal
-        case .locate(let missingSting):
-            missingSting.reloadAudio(from: sting)
-            show.updateChangeCount(.done)
-            reloadItems([missingSting])
-            pickerOperation = .normal
-        default:
-            show.append(sting)
-            scrollTo(sting, animated: false)
         }
     }
     
@@ -296,88 +172,11 @@ class PlaybackViewController: UICollectionViewController {
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             var name = alertController.textFields?.first?.text
             if name?.isEmpty == true { name = nil }
-            self.rename(sting, to: name)
+//            self.rename(sting, to: name)
             self.becomeFirstResponder()     // ensure undo gestures work after a rename
         }))
         
         present(alertController, animated: true, completion: nil)
-    }
-    
-    func rename(_ sting: Sting, to name: String?) {
-        let oldName = sting.name
-        sting.name = name
-        if sting.name != oldName {
-            show.undoManager.registerUndo(withTarget: self) { _ in
-                self.rename(sting, to: oldName)
-            }
-        }
-        reloadItems([sting])
-    }
-    
-    func change(_ sting: Sting, to color: Sting.Color) {
-        let oldColor = sting.color
-        sting.color = color
-        if sting.color != oldColor {
-            show.undoManager.registerUndo(withTarget: self) { _ in
-                self.change(sting, to: oldColor)
-            }
-        }
-        reloadItems([sting])
-    }
-    
-    @IBAction func playSting() {
-        guard let sting = cuedSting ?? show.stings.playable.first else { return }
-        
-        engine.play(sting)
-        nextCue()
-    }
-    
-    @IBAction func stopSting() {
-        engine.stopSting()
-    }
-    
-    func validateCuedSting() {
-        guard let cuedSting = cuedSting else {
-            self.cuedSting = show.stings.playable.first
-            return
-        }
-        
-        if !show.stings.playable.contains(cuedSting) {
-            self.cuedSting = show.stings.playable.first
-        }
-    }
-    
-    @IBAction func nextCue() {
-        let playableStings = show.stings.playable
-        
-        guard
-            playableStings.count > 1,
-            let oldCue = cuedSting,
-            let oldCueIndex = playableStings.firstIndex(of: oldCue)
-        else { return }
-        
-        let newCueIndex = (oldCueIndex + 1) % playableStings.count
-        let newCue = playableStings[newCueIndex]
-        cuedSting = newCue
-        
-        reloadItems([oldCue, newCue])
-    }
-    
-    @IBAction func previousCue() {
-        let playableStings = show.stings.playable
-        
-        guard
-            playableStings.count > 1,
-            let oldCue = cuedSting,
-            let oldCueIndex = playableStings.firstIndex(of: oldCue),
-            oldCueIndex > 0
-        else { return }
-        
-        let newCueIndex = (oldCueIndex - 1) % playableStings.count
-        let newCue = playableStings[newCueIndex]
-        cuedSting = newCue
-        
-        reloadItems([oldCue, newCue])
     }
     
     func stingCellForItem(at indexPath: IndexPath) -> StingCell? {
@@ -434,11 +233,6 @@ class PlaybackViewController: UICollectionViewController {
     
     
     // MARK: UICollectionViewDelegate
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let sting = dataSource?.itemIdentifier(for: indexPath) else { return }
-        engine.play(sting)
-    }
-    
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         UIContextMenuConfiguration(identifier: indexPath.item as NSCopying, previewProvider: nil) { suggestedActions in
             guard let sting = self.dataSource?.itemIdentifier(for: indexPath) else { return nil }
@@ -458,7 +252,7 @@ class PlaybackViewController: UICollectionViewController {
             for color in Sting.Color.allCases {
                 let image = UIImage(systemName: color == sting.color ? "checkmark.circle.fill" : "circle.fill")?.withTintColor(color.object, renderingMode: .alwaysOriginal).applyingSymbolConfiguration(UIImage.SymbolConfiguration(weight: .heavy))
                 let action = UIAction(title: "\(color)".capitalized, image: image) { action in
-                    self.change(sting, to: color)
+//                    self.change(sting, to: color)
                 }
                 colorActions.append(action)
             }
@@ -469,13 +263,13 @@ class PlaybackViewController: UICollectionViewController {
                 self.show.insert(duplicate, at: indexPath.item + 1)  // updates collection view via didSet
             }
             let insert = UIAction(title: "Insert Song Here", image: UIImage(systemName: "square.stack")) { action in
-                self.pickerOperation = .insert(indexPath.item)
-                self.pickStingFromLibrary()
+//                self.pickerOperation = .insert(indexPath.item)
+//                self.pickStingFromLibrary()
             }
             let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash")) { action in
                 guard sting != self.engine.playingSting else { return }
                 if sting == self.cuedSting {
-                    self.nextCue()
+//                    self.nextCue()
                     // remove cued sting if next cue is still the chosen sting
                     if sting == self.cuedSting { self.cuedSting = nil }
                 }
@@ -493,9 +287,9 @@ class PlaybackViewController: UICollectionViewController {
                 let locate = UIAction(title: "Locate", image: UIImage(systemName: "magnifyingglass")) { action in
                     self.pickerOperation = .locate(sting)
                     if sting.url.isMediaItem {
-                        self.pickStingFromLibrary()
+//                        self.pickStingFromLibrary()
                     } else {
-                        self.pickStingFromFiles()
+//                        self.pickStingFromFiles()
                     }
                 }
                 let editMenu = UIMenu(title: "", options: .displayInline, children: [locate, insert, delete])
@@ -549,52 +343,5 @@ extension PlaybackViewController: UICollectionViewDropDelegate {
         
         show.moveSting(from: sourceIndexPath.item, to: destinationIndexPath.item)
         coordinator.drop(sourceItem.dragItem, toItemAt: destinationIndexPath)
-    }
-}
-
-
-// MARK: MPMediaPickerControllerDelegate
-extension PlaybackViewController: MPMediaPickerControllerDelegate {
-    func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
-        // make a sting from the selected media item, add it to the engine and update the table view
-        if let sting = Sting(mediaItem: mediaItemCollection.items[0]) {
-            load(sting)
-        }
-        
-        // dismiss media picker
-        dismiss(animated: true)
-    }
-    
-    func mediaPickerDidCancel(_ mediaPicker: MPMediaPickerController) {
-        pickerOperation = .normal
-        dismiss(animated: true)
-    }
-}
-
-
-// MARK: UIDocumentPickerDelegate
-extension PlaybackViewController: UIDocumentPickerDelegate {
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        if let sting = Sting(url: urls[0]) {
-            load(sting)
-        }
-    }
-}
-
-
-// MARK: PlaybackDelegate
-extension PlaybackViewController: PlaybackDelegate {
-    func stingDidStartPlaying(_ sting: Sting) {
-        reloadItems([sting])
-        beginUpdatingProgress()
-    }
-    
-    func stingDidStopPlaying(_ sting: Sting) {
-        DispatchQueue.main.async {
-            self.reloadItems([sting])
-            
-            // by the time this executes another sting may have already started playback
-            if self.engine.playingSting == nil { self.stopUpdatingProgress() }
-        }
     }
 }

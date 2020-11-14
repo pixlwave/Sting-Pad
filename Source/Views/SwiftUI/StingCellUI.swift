@@ -1,17 +1,18 @@
 import SwiftUI
 
 struct StingCellUI: View {
+    @EnvironmentObject var controller: PlaybackController
     @ObservedObject var engine = Engine.shared
     @ObservedObject var sting: Sting
     
     var body: some View {
         let indicatorSymbol = sting.audioFile == nil ? "exclamationmark.octagon.fill" :
             sting == engine.playingSting ? "play.circle.fill" :
-            sting == engine.cuedSting ? "smallcircle.fill.circle" : "circle"
+            sting == controller.cuedSting ? "smallcircle.fill.circle" : "circle"
         
         let indicatorColor = sting.audioFile == nil ? Color.white.opacity(0.8) :
             sting == engine.playingSting ? .white :
-            sting == engine.cuedSting ? .white : Color("Background Color")
+            sting == controller.cuedSting ? .white : Color("Background Color")
         
         HStack(spacing: 0) {
             Image(systemName: indicatorSymbol)

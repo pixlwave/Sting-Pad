@@ -2,13 +2,13 @@ import SwiftUI
 import VisualEffects
 
 struct TransportViewUI: View {
-    @ObservedObject var engine = Engine.shared
+    @EnvironmentObject var controller: PlaybackController
     
     var body: some View {
         HStack {
             Spacer()
             Button {
-                //
+                controller.playSting()
             } label: {
                 Image(systemName: "play")
                     .font(.system(size: 52, weight: .thin))
@@ -16,7 +16,7 @@ struct TransportViewUI: View {
             }
             Spacer()
             Button {
-                engine.stopSting()
+                controller.stopSting()
             } label: {
                 Image(systemName: "stop")
                     .font(.system(size: 52, weight: .thin))
@@ -24,7 +24,7 @@ struct TransportViewUI: View {
             }
             Spacer()
             Button {
-                //
+                controller.previousCue()
             } label: {
                 Image(systemName: "backward")
                     .font(.system(size: 52, weight: .thin))
@@ -32,7 +32,7 @@ struct TransportViewUI: View {
             }
             Spacer()
             Button {
-                //
+                controller.nextCue()
             } label: {
                 Image(systemName: "forward")
                     .font(.system(size: 52, weight: .thin))

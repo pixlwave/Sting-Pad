@@ -4,7 +4,7 @@ struct SettingsView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var defaultColor: Sting.Color = .default
     
-    var show: Show?
+    var show: Show
     
     var body: some View {
         NavigationView {
@@ -39,12 +39,12 @@ struct SettingsView: View {
     }
     
     func setAllStingPresets() {
-        show?.stings.forEach { $0.setPreset() }
+        show.stings.forEach { $0.setPreset() }
     }
 }
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        SettingsView(show: Show())
     }
 }

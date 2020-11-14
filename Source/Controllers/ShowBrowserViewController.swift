@@ -62,7 +62,9 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
     }
     
     func present(_ show: Show, animated: Bool) {
-        let playbackController = UIHostingController(rootView: PlaybackView().environmentObject(show))
+        let playbackController = UIHostingController(rootView: PlaybackView()
+                                                        .environmentObject(show)
+                                                        .environmentObject(PlaybackController(show: show)))
         
         playbackController.transitioningDelegate = self
         playbackController.modalPresentationStyle = .custom
