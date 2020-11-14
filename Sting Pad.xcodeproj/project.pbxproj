@@ -125,8 +125,8 @@
 		A58AFDA224FCFDFD00F439DB /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				A5BAF6CB25600FAC00F979F5 /* PlaybackController.swift */,
 				A58AFDA924FCFF4800F439DB /* PlaybackView.swift */,
+				A5BAF6CB25600FAC00F979F5 /* PlaybackController.swift */,
 				A5BAF6D22560167C00F979F5 /* MediaPicker.swift */,
 				A5BAF6CF2560165200F979F5 /* FilePicker.swift */,
 				A58AFDA324FCFE0F00F439DB /* StingCellUI.swift */,

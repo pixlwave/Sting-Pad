@@ -1,4 +1,4 @@
-import Foundation
+import SwiftUI
 import MediaPlayer
 
 class PlaybackController: ObservableObject {
@@ -32,14 +32,14 @@ class PlaybackController: ObservableObject {
     func load(_ sting: Sting) {
         switch pickerOperation {
         case .insert(let index) where index < show.stings.count:
-            show.insert(sting, at: index)
+            withAnimation { show.insert(sting, at: index) }
             pickerOperation = .normal
         case .locate(let missingSting):
             missingSting.reloadAudio(from: sting)
             show.updateChangeCount(.done)
             pickerOperation = .normal
         default:
-            show.append(sting)
+            withAnimation { show.append(sting) }
             #warning("Scroll to sting without animation.")
         }
     }
@@ -61,6 +61,35 @@ class PlaybackController: ObservableObject {
             show.undoManager.registerUndo(withTarget: self) { _ in
                 self.change(sting, to: oldColor)
             }
+        }
+    }
+    
+    func duplicate(_ sting: Sting) {
+        guard let duplicate = sting.copy() else { return }
+        withAnimation { show.insert(duplicate, before: sting) }
+    }
+    
+    func insertSting(before sting: Sting) {
+        pickerOperation = .insert(0)
+//        pickStingFromLibrary()
+    }
+    
+    func delete(_ sting: Sting) {
+        guard sting != engine.playingSting else { return }
+        if sting == cuedSting {
+            nextCue()
+            // remove cued sting if next cue is still the chosen sting
+            if sting == cuedSting { cuedSting = nil }
+        }
+        withAnimation { _ = show.remove(sting) }
+    }
+    
+    func locate(_ sting: Sting) {
+        pickerOperation = .locate(sting)
+        if sting.url.isMediaItem {
+//            pickStingFromLibrary()
+        } else {
+//            pickStingFromFiles()
         }
     }
     

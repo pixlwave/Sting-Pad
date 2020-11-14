@@ -233,82 +233,8 @@ class PlaybackViewController: UICollectionViewController {
     
     
     // MARK: UICollectionViewDelegate
-    override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        UIContextMenuConfiguration(identifier: indexPath.item as NSCopying, previewProvider: nil) { suggestedActions in
-            guard let sting = self.dataSource?.itemIdentifier(for: indexPath) else { return nil }
-            
-            let cue = UIAction(title: "Cue Next", image: UIImage(systemName: "smallcircle.fill.circle")) { action in
-                let oldCue = self.cuedSting
-                self.cuedSting = sting
-                self.reloadItems([oldCue, sting].compactMap { $0 })
-            }
-            let edit = UIAction(title: "Edit", image: UIImage(systemName: "waveform")) { action in
-                self.performSegue(withIdentifier: "Edit Sting", sender: sting)
-            }
-            let rename = UIAction(title: "Rename", image: UIImage(systemName: "square.and.pencil")) { action in
-                self.presentRenameDialog(for: sting)
-            }
-            var colorActions = [UIAction]()
-            for color in Sting.Color.allCases {
-                let image = UIImage(systemName: color == sting.color ? "checkmark.circle.fill" : "circle.fill")?.withTintColor(color.object, renderingMode: .alwaysOriginal).applyingSymbolConfiguration(UIImage.SymbolConfiguration(weight: .heavy))
-                let action = UIAction(title: "\(color)".capitalized, image: image) { action in
-//                    self.change(sting, to: color)
-                }
-                colorActions.append(action)
-            }
-            let colorMenu = UIMenu(title: "Colour", image: UIImage(systemName: "paintbrush"), children: colorActions)
-            
-            let duplicate = UIAction(title: "Duplicate", image: UIImage(systemName: "plus.square.on.square")) { action in
-                guard let duplicate = sting.copy() else { return }
-                self.show.insert(duplicate, at: indexPath.item + 1)  // updates collection view via didSet
-            }
-            let insert = UIAction(title: "Insert Song Here", image: UIImage(systemName: "square.stack")) { action in
-//                self.pickerOperation = .insert(indexPath.item)
-//                self.pickStingFromLibrary()
-            }
-            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash")) { action in
-                guard sting != self.engine.playingSting else { return }
-                if sting == self.cuedSting {
-//                    self.nextCue()
-                    // remove cued sting if next cue is still the chosen sting
-                    if sting == self.cuedSting { self.cuedSting = nil }
-                }
-                self.show.removeSting(at: indexPath.item)     // updates collection view via didSet
-            }
-            
-            if sting == self.engine.playingSting {
-                delete.attributes = .disabled
-            } else {
-                delete.attributes = .destructive
-            }
-            
-            if sting.audioFile == nil {
-                let songInfo = UIAction(title: "\(sting.songTitle) by \(sting.songArtist)", attributes: .disabled) { action in }
-                let locate = UIAction(title: "Locate", image: UIImage(systemName: "magnifyingglass")) { action in
-                    self.pickerOperation = .locate(sting)
-                    if sting.url.isMediaItem {
-//                        self.pickStingFromLibrary()
-                    } else {
-//                        self.pickStingFromFiles()
-                    }
-                }
-                let editMenu = UIMenu(title: "", options: .displayInline, children: [locate, insert, delete])
-                let infoMenu = UIMenu(title: "", options: .displayInline, children: [songInfo])
-                return UIMenu(title: "", children: [editMenu, infoMenu])
-            }
-            
-            let editMenu = UIMenu(title: "", options: .displayInline, children: [edit, rename, colorMenu])
-            let fileMenu = UIMenu(title: "", options: .displayInline, children: [duplicate, insert, delete])
-            
-            if sting == self.cuedSting {
-                return UIMenu(title: "", children: [editMenu, fileMenu])
-            }
-            
-            let playMenu = UIMenu(title: "", options: .displayInline, children: [cue])
-            return UIMenu(title: "", children: [playMenu, editMenu, fileMenu])
-        }
-    }
     
+    // re-uses cell so it reacts to changes
     override func collectionView(_ collectionView: UICollectionView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
         guard let index = configuration.identifier as? Int else { return nil }
         guard let cell = collectionView.cellForItem(at: IndexPath(item: index, section: 0)) else { return nil }

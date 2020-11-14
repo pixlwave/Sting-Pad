@@ -20,14 +20,6 @@ struct PlaybackView: View {
                             .onTapGesture {
                                 Engine.shared.play(sting)
                             }
-                            .contextMenu {
-                                Button {
-                                    controller.pickerOperation = .insert(0)
-                                    pickStingFromLibrary()
-                                } label: {
-                                    Label("Insert Song Here", systemImage: "square.stack")
-                                }
-                            }
                     }
                 }
                 .padding()

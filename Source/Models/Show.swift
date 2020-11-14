@@ -55,6 +55,11 @@ class Show: UIDocument, ObservableObject {
         }
     }
     
+    func insert(_ sting: Sting, before selectedSting: Sting) {
+        guard let index = stings.firstIndex(of: selectedSting) else { return }
+        stings.insert(sting, at: index)
+    }
+    
     func moveSting(from sourceIndex: Int, to destinationIndex: Int) {
         stings.insert(stings.remove(at: sourceIndex), at: destinationIndex)
         undoManager.registerUndo(withTarget: self) { _ in
@@ -70,6 +75,12 @@ class Show: UIDocument, ObservableObject {
         }
         
         return sting
+    }
+    
+    @discardableResult
+    func remove(_ sting: Sting) -> Sting? {
+        guard let index = stings.firstIndex(of: sting) else { return nil }
+        return removeSting(at: index)
     }
     
 }

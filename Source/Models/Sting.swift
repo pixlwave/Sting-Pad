@@ -9,7 +9,7 @@ class Sting: NSObject, ObservableObject, Codable, Identifiable {
     private(set) var bookmark: Data?
     
     var name: String?
-    var color: Color = .default
+    var color: Color = .default { willSet { if newValue != color { objectWillChange.send() } } }
     
     private(set) var metadata: Metadata
     var songTitle: String { metadata.title ?? "Unknown Title" }
