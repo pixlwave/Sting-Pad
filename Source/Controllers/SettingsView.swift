@@ -49,19 +49,3 @@ struct SettingsView_Previews: PreviewProvider {
         SettingsView()
     }
 }
-
-class SettingsViewController: UIHostingController<SettingsView> {
-    required init?(coder decoder: NSCoder) {
-        super.init(coder: decoder, rootView: SettingsView())
-        rootView.dismiss = dismiss
-    }
-    
-    override init?(coder decoder: NSCoder, rootView: SettingsView) {
-        super.init(coder: decoder, rootView: rootView)
-        self.rootView.dismiss = dismiss
-    }
-
-    func dismiss() {
-        dismiss(animated: true)
-    }
-}

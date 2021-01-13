@@ -13,6 +13,7 @@ class PlaybackViewController: UICollectionViewController {
         didSet { if let sting = cuedSting { scrollTo(sting) } }
     }
     
+    @IBOutlet weak var missingStingsButton: UIBarButtonItem!
     @IBOutlet var transportView: UIView!
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var timeRemainingLabel: UILabel!
@@ -55,6 +56,9 @@ class PlaybackViewController: UICollectionViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(applySnapshot), name: .stingsDidChange, object: show)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadEditedSting(_:)), name: .didFinishEditing, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showStateChanged(_:)), name: UIDocument.stateChangedNotification, object: show)
+        
+        missingStingsButton.image = missingStingsButton.image?.withConfiguration(UIImage.SymbolConfiguration(weight: .semibold))
+        if show.missingStings.count == 0 { navigationItem.rightBarButtonItems?.removeAll{ $0 == missingStingsButton } }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -75,8 +79,14 @@ class PlaybackViewController: UICollectionViewController {
         collectionView.verticalScrollIndicatorInsets.bottom = size.height
     }
     
-    @IBSegueAction func SettingsSegue(_ coder: NSCoder) -> UIViewController? {
-        return SettingsViewController(coder: coder, rootView: SettingsView(show: show))
+    @IBSegueAction func missingStingsSegue(_ coder: NSCoder) -> UIViewController? {
+        let view = MissingStingsView(show: show, dismiss: { self.dismiss(animated: true) })
+        return UIHostingController(coder: coder, rootView: view)
+    }
+    
+    @IBSegueAction func settingsSegue(_ coder: NSCoder) -> UIViewController? {
+        let view = SettingsView(show: show, dismiss: { self.dismiss(animated: true) })
+        return UIHostingController(coder: coder, rootView: view)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -127,7 +137,7 @@ class PlaybackViewController: UICollectionViewController {
             
             if sting.audioFile == nil {
                 stingCell.isMissing = true
-                stingCell.footerLabel.text = sting.url.isMediaItem ? "Song Missing" : "File Missing"
+                stingCell.footerLabel.text = sting.availability.rawValue
             } else if sting.loops, let loopImage = UIImage(systemName: "repeat") {
                 stingCell.isMissing = false
                 let loopString = NSAttributedString(attachment: NSTextAttachment(image: loopImage))

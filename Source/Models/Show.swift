@@ -13,6 +13,8 @@ class Show: UIDocument {
         didSet { NotificationCenter.default.post(Notification(name: .stingsDidChange, object: self)) }
     }
     
+    var missingStings: [Sting] { stings.filter { $0.audioFile == nil } }
+    
     enum DocumentError: Error {
         case invalidData
     }

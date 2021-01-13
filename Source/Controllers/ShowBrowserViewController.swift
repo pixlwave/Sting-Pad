@@ -29,17 +29,12 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
     
     func showWelcomeScreen() {
         // present the whole screen
-        var welcomeView = WelcomeView()
-        welcomeView.dismiss = dismissWelcomeScreen
-        let hostingController = UIHostingController<WelcomeView>(rootView: welcomeView)
+        let welcomeView = WelcomeView(dismiss: { self.dismiss(animated: true) })
+        let hostingController = UIHostingController(rootView: welcomeView)
         show(hostingController, sender: self)
         
         // record the version being seen to allow ui updates to be shown in future versions
         UserDefaults.standard.set(WelcomeView.currentVersion, forKey: "WelcomeVersionSeen")
-    }
-    
-    func dismissWelcomeScreen() {
-        dismiss(animated: true)
     }
     
     func openShow(at url: URL, animated: Bool = true) {

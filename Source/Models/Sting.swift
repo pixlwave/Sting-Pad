@@ -3,7 +3,7 @@ import AVFoundation
 import MediaPlayer
 import os.log
 
-class Sting: NSObject, Codable {
+class Sting: NSObject, Codable, Identifiable {
     
     private(set) var url: URL
     private(set) var bookmark: Data?
@@ -62,6 +62,15 @@ class Sting: NSObject, Codable {
     
     private(set) var audioFile: AVAudioFile?
     private(set) var buffer: AVAudioPCMBuffer?
+    private(set) var availability: Availability
+    
+    enum Availability: String {
+        case available
+        case noPermission = "Permission denied"
+        case noSuchFile = "File is missing"
+        case noSuchSong = "Song is missing"
+        case unknown = "Unknown"
+    }
     
     enum CodingKeys: String, CodingKey {
         case url
@@ -103,11 +112,31 @@ class Sting: NSObject, Codable {
         
         if let audioFile = try? AVAudioFile(forReading: url) {
             self.audioFile = audioFile
+            availability = .available
         } else if url.isMediaItem, let assetURL = metadata.matchingAssetURL, let audioFile = try? AVAudioFile(forReading: assetURL) {
             url = assetURL
             self.audioFile = audioFile
+            availability = .available
         } else {
             self.audioFile = nil
+            do {
+                _ = try url.checkResourceIsReachable()
+                availability = .unknown
+            } catch {
+                switch (error as NSError).code {
+                case NSFileReadNoSuchFileError:
+                    availability = .noSuchFile
+                case NSFileReadNoPermissionError:
+                    availability = .noPermission
+                default:
+                    if url.isMediaItem {    // NSFileReadUnsupportedSchemeError
+                        availability = .noSuchSong
+                    } else {
+                        availability = .unknown
+                        print("\n*** \(url.lastPathComponent): Unknown Error \(error.localizedDescription)***\n")
+                    }
+                }
+            }
         }
         
         self.url = url
@@ -134,6 +163,7 @@ class Sting: NSObject, Codable {
         bookmark = nil
         metadata = Metadata(mediaItem: mediaItem)
         self.audioFile = audioFile
+        availability = .available
         
         super.init()
         
@@ -154,6 +184,7 @@ class Sting: NSObject, Codable {
         bookmark = try? url.bookmarkData()
         metadata = Metadata(url: url)
         self.audioFile = audioFile
+        availability = .available
         
         super.init()
         
