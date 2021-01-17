@@ -33,9 +33,9 @@ struct ManageStingsView: View {
     }
     
     func reloadData() {
-        noPermissionStings = show.missingStings.filter { $0.availability == .noPermission }
-        noSuchFileStings = show.missingStings.filter { $0.availability == .noSuchFile }
-        noSuchSongStings = show.missingStings.filter { $0.availability == .noSuchSong }
+        noPermissionStings = show.unavailableStings.filter { $0.availability == .noPermission }
+        noSuchFileStings = show.unavailableStings.filter { $0.availability == .noSuchFile }
+        noSuchSongStings = show.unavailableStings.filter { $0.availability == .noSuchSong }
     }
 }
 
@@ -51,7 +51,7 @@ struct ManageSongsView: View {
                 .font(.headline)
                 .padding(.horizontal)
             List(stings, id: \.self) { sting in
-                MissingStingsCell(sting: sting)
+                ManageStingCell(sting: sting)
             }
             .listStyle(GroupedListStyle())
             .overlay(Divider(), alignment: .top)
@@ -77,7 +77,7 @@ struct ManagePermissionsView: View {
                 .padding(.bottom, 1)
             Button ("Access Folder") { isPresentingFolderPicker = true }
             List(stings, id: \.self) { sting in
-                MissingStingsCell(sting: sting)
+                ManageStingCell(sting: sting)
             }
             .listStyle(GroupedListStyle())
             .overlay(Divider(), alignment: .top)
@@ -101,7 +101,7 @@ struct ManageFilesView: View {
                 .font(.headline)
                 .padding(.horizontal)
             List(stings, id: \.self) { sting in
-                MissingStingsCell(sting: sting)
+                ManageStingCell(sting: sting)
             }
             .listStyle(GroupedListStyle())
             .overlay(Divider(), alignment: .top)
@@ -113,7 +113,7 @@ struct ManageFilesView: View {
     }
 }
 
-struct MissingStingsCell: View {
+struct ManageStingCell: View {
     let sting: Sting
     var body: some View {
         HStack {

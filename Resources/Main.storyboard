@@ -134,13 +134,13 @@
                             <barButtonItem image="exclamationmark.circle" catalog="system" id="8fW-IC-D3F">
                                 <color key="tintColor" systemColor="systemRedColor"/>
                                 <connections>
-                                    <segue destination="xwM-HV-aWP" kind="presentation" destinationCreationSelector="missingStingsSegue:" id="BsP-EH-lwq"/>
+                                    <segue destination="xwM-HV-aWP" kind="presentation" destinationCreationSelector="manageStingsSegue:" id="BsP-EH-lwq"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="missingStingsButton" destination="8fW-IC-D3F" id="u7b-BK-RCK"/>
+                        <outlet property="manageStingsButton" destination="8fW-IC-D3F" id="u7b-BK-RCK"/>
                         <segue destination="nGG-by-uzG" kind="presentation" identifier="Edit Sting" id="7h3-gk-nqV"/>
                     </connections>
                 </collectionViewController>
@@ -501,7 +501,7 @@
     <color key="tintColor" name="Tint Color"/>
     <resources>
         <image name="1.magnifyingglass" catalog="system" width="128" height="115"/>
-        <image name="circle" catalog="system" width="128" height="121"/>
+        <image name="circle" catalog="system" width="32" height="32"/>
         <image name="exclamationmark.circle" catalog="system" width="128" height="121"/>
         <image name="play" catalog="system" width="120" height="128"/>
         <image name="slider.horizontal.3" catalog="system" width="128" height="100"/>

@@ -13,7 +13,7 @@ class Show: UIDocument {
         didSet { NotificationCenter.default.post(Notification(name: .stingsDidChange, object: self)) }
     }
     
-    var missingStings: [Sting] { stings.filter { $0.audioFile == nil } }
+    var unavailableStings: [Sting] { stings.filter { $0.availability != .available } }
     
     enum DocumentError: Error {
         case invalidData
@@ -54,7 +54,7 @@ class Show: UIDocument {
             securityScopedURLs.forEach { $0.stopAccessingSecurityScopedResource() }
         }
         
-        missingStings.filter { $0.availability == .noPermission }.forEach { sting in
+        unavailableStings.filter { $0.availability == .noPermission }.forEach { sting in
             sting.reloadAudioWithBookmarks()
         }
     }

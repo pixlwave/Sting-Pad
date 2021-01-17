@@ -13,7 +13,7 @@ class PlaybackViewController: UICollectionViewController {
         didSet { if let sting = cuedSting { scrollTo(sting) } }
     }
     
-    @IBOutlet weak var missingStingsButton: UIBarButtonItem!
+    @IBOutlet weak var manageStingsButton: UIBarButtonItem!
     @IBOutlet var transportView: UIView!
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var timeRemainingLabel: UILabel!
@@ -57,8 +57,8 @@ class PlaybackViewController: UICollectionViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadEditedSting(_:)), name: .didFinishEditing, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showStateChanged(_:)), name: UIDocument.stateChangedNotification, object: show)
         
-        missingStingsButton.image = missingStingsButton.image?.withConfiguration(UIImage.SymbolConfiguration(weight: .semibold))
-        if show.missingStings.count == 0 { navigationItem.rightBarButtonItems?.removeAll{ $0 == missingStingsButton } }
+        manageStingsButton.image = manageStingsButton.image?.withConfiguration(UIImage.SymbolConfiguration(weight: .semibold))
+        if show.unavailableStings.count == 0 { navigationItem.rightBarButtonItems?.removeAll{ $0 == manageStingsButton } }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -79,7 +79,7 @@ class PlaybackViewController: UICollectionViewController {
         collectionView.verticalScrollIndicatorInsets.bottom = size.height
     }
     
-    @IBSegueAction func missingStingsSegue(_ coder: NSCoder) -> UIViewController? {
+    @IBSegueAction func manageStingsSegue(_ coder: NSCoder) -> UIViewController? {
         let view = ManageStingsView(show: show, dismiss: { self.dismiss(animated: true) })
         return UIHostingController(coder: coder, rootView: view)
     }
