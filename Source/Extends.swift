@@ -125,6 +125,24 @@ extension UIColor {
 
 extension UserDefaults {
     static let presets = UserDefaults(suiteName: "uk.pixlwave.StingPad.Presets")!
+    static let bookmarks = UserDefaults(suiteName: "uk.pixlwave.StingPad.Bookmarks")!
+    
+    func setBookmark(from url: URL, forKey key: String) {
+        guard let data = try? url.bookmarkData() else { return }
+        setValue(data, forKey: key)
+    }
+    
+    func urlFromBookmark(forKey key: String) -> URL? {
+        var isStale = false
+        guard
+            let data = data(forKey: key),
+            let url = try? URL(resolvingBookmarkData: data, bookmarkDataIsStale: &isStale)
+        else { return nil }
+        
+        if isStale { setBookmark(from: url, forKey: key) }
+        
+        return url
+    }
 }
 
 

@@ -80,7 +80,7 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     @IBSegueAction func missingStingsSegue(_ coder: NSCoder) -> UIViewController? {
-        let view = MissingStingsView(show: show, dismiss: { self.dismiss(animated: true) })
+        let view = ManageStingsView(show: show, dismiss: { self.dismiss(animated: true) })
         return UIHostingController(coder: coder, rootView: view)
     }
     

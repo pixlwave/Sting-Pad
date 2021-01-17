@@ -3,7 +3,7 @@ import AVFoundation
 import MediaPlayer
 import os.log
 
-class Sting: NSObject, Codable, Identifiable {
+class Sting: NSObject, Codable {
     
     private(set) var url: URL
     private(set) var bookmark: Data?
@@ -201,6 +201,24 @@ class Sting: NSObject, Codable, Identifiable {
         validate(startTime: &startTime, endTime: &endTime)
         
         if loops { createBuffer() }
+    }
+    
+    func reloadAudioWithBookmarks() {
+        guard let audioFile = try? AVAudioFile(forReading: url) else { return }
+        
+        if let newBookmark = try? url.bookmarkData() {
+            bookmark = newBookmark
+        }
+        
+        self.audioFile = audioFile
+        availability = .available
+        
+        // ensure start and end times are valid for new audio file
+        validate(startTime: &startTime, endTime: &endTime)
+        
+        if loops { createBuffer() }
+        
+        NotificationCenter.default.post(name: .didFinishEditing, object: self)
     }
     
     func createBuffer() {

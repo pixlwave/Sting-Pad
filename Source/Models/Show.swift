@@ -44,6 +44,21 @@ class Show: UIDocument {
         return jsonData
     }
     
+    func reloadWithBookmarks() {
+        let securityScopedURLs: [URL] = UserDefaults.bookmarks.dictionaryRepresentation().keys.compactMap { key in
+            guard let url = UserDefaults.bookmarks.urlFromBookmark(forKey: key) else { return nil }
+            return url.startAccessingSecurityScopedResource() ? url : nil
+        }
+        
+        defer {
+            securityScopedURLs.forEach { $0.stopAccessingSecurityScopedResource() }
+        }
+        
+        missingStings.filter { $0.availability == .noPermission }.forEach { sting in
+            sting.reloadAudioWithBookmarks()
+        }
+    }
+    
     // editing functions exist to allow the show to load without updating it's change count
     func append(_ sting: Sting) {
         stings.append(sting)
