@@ -20,6 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             oldSuite.removePersistentDomain(forName: "uk.pixlwave.StingPad.StingDefaults")
         }
         
+        #if targetEnvironment(macCatalyst)
+        window?.windowScene?.sizeRestrictions?.minimumSize = CGSize(width: 320, height: 568)
+        #endif
+        
         return true
     }
     

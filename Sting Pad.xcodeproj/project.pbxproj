@@ -51,6 +51,7 @@
 		A55C0E7522AA7202008DDB12 /* TransportView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransportView.xib; sourceTree = "<group>"; };
 		A567FB6F22F1F67A00B4DB70 /* ChannelPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelPair.swift; sourceTree = "<group>"; };
 		A56EB2C822F7538F00358A7C /* AddStingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStingButton.swift; sourceTree = "<group>"; };
+		A570012F25B464C400CEC8BD /* Sting Pad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Sting Pad.entitlements"; sourceTree = "<group>"; };
 		A5760DD225AF414600398860 /* FolderAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderAccessView.swift; sourceTree = "<group>"; };
 		A581C38C1B946B7C006CE228 /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		A581C3951B94769F006CE228 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -139,6 +140,7 @@
 				A5A49C951B5BF1C2004B80CE /* Assets.xcassets */,
 				A5BD85E823AA531B00846F27 /* Launch Screen.xcassets */,
 				A5A49C8D1B5BF1C2004B80CE /* Info.plist */,
+				A570012F25B464C400CEC8BD /* Sting Pad.entitlements */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -419,6 +421,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Resources/Sting Pad.entitlements";
 				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_TEAM = NU8A5Y875P;
 				INFOPLIST_FILE = Resources/Info.plist;
@@ -428,6 +431,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = uk.pixlwave.StingPad;
 				PRODUCT_MODULE_NAME = StingPad;
 				PRODUCT_NAME = "Sting Pad";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -438,6 +442,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Resources/Sting Pad.entitlements";
 				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_TEAM = NU8A5Y875P;
 				INFOPLIST_FILE = Resources/Info.plist;
@@ -447,6 +452,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = uk.pixlwave.StingPad;
 				PRODUCT_MODULE_NAME = StingPad;
 				PRODUCT_NAME = "Sting Pad";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
