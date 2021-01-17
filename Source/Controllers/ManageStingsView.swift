@@ -11,15 +11,15 @@ struct ManageStingsView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
+            VStack(alignment: .leading, spacing: 20) {
                 NavigationLink("Missing Song (\(noSuchSongStings.count))",
-                               destination: Text("Missing Song"))
+                               destination: ManageSongsView(show: show, stings: $noSuchSongStings))
                     .disabled(noSuchSongStings.count == 0)
                 NavigationLink("Access Denied (\(noPermissionStings.count))",
                                destination: ManagePermissionsView(show: show, stings: $noPermissionStings))
                     .disabled(noPermissionStings.count == 0)
                 NavigationLink("Missing File (\(noSuchFileStings.count))",
-                               destination: Text("Access Denied"))
+                               destination: ManageFilesView(show: show, stings: $noSuchFileStings))
                     .disabled(noSuchFileStings.count == 0)
             }
             .navigationBarTitle("Manage Stings")
@@ -39,6 +39,30 @@ struct ManageStingsView: View {
     }
 }
 
+struct ManageSongsView: View {
+    let show: Show
+    @Binding var stings: [Sting]
+    
+    @State var isPresentingSongPicker = false
+    
+    var body: some View {
+        VStack {
+            Text("Sting Pad is unable to locate the following songs in your music library. Ensure they have been downloaded to your device and reopen the show, or replace them manually below.")
+                .font(.headline)
+                .padding(.horizontal)
+            List(stings, id: \.self) { sting in
+                MissingStingsCell(sting: sting)
+            }
+            .listStyle(GroupedListStyle())
+            .overlay(Divider(), alignment: .top)
+        }
+        .navigationBarTitle("Manage Songs")
+        .sheet(isPresented: $isPresentingSongPicker) {
+            Text("Todo")
+        }
+    }
+}
+
 struct ManagePermissionsView: View {
     let show: Show
     @Binding var stings: [Sting]
@@ -47,19 +71,44 @@ struct ManagePermissionsView: View {
     
     var body: some View {
         VStack {
-            Text("Sting Pad has been denied access to the following files on this device.")
+            Text("Sting Pad has been denied access to the following files on this device. You can fix this by opening the containing folder, or by re-opening each sting manually.")
+                .font(.headline)
+                .padding(.horizontal)
+                .padding(.bottom, 1)
+            Button ("Access Folder") { isPresentingFolderPicker = true }
             List(stings, id: \.self) { sting in
-                Section(header: Text("Access denied")) {
-                    Button ("Access Folder") { isPresentingFolderPicker = true }
-                        .foregroundColor(.accentColor)
-                    MissingStingsCell(sting: sting)
-                }
+                MissingStingsCell(sting: sting)
             }
             .listStyle(GroupedListStyle())
+            .overlay(Divider(), alignment: .top)
         }
         .navigationBarTitle("Manage Permissions")
         .sheet(isPresented: $isPresentingFolderPicker) {
             FolderAccessView(show: show)
+        }
+    }
+}
+
+struct ManageFilesView: View {
+    let show: Show
+    @Binding var stings: [Sting]
+    
+    @State var isPresentingFilePicker = false
+    
+    var body: some View {
+        VStack {
+            Text("Sting Pad is unable to locate the following files on this device. Ensure they have been downloaded to your device and then re-open the show, or replace them manually below.")
+                .font(.headline)
+                .padding(.horizontal)
+            List(stings, id: \.self) { sting in
+                MissingStingsCell(sting: sting)
+            }
+            .listStyle(GroupedListStyle())
+            .overlay(Divider(), alignment: .top)
+        }
+        .navigationBarTitle("Manage Files")
+        .sheet(isPresented: $isPresentingFilePicker) {
+            Text("Todo")
         }
     }
 }
