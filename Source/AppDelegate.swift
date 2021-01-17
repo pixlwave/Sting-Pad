@@ -13,13 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // applies the included tint colour to UIAlertController (and presumably others)
         window?.tintColor = .tintColor
         
-        // migrate sting defaults to presets for testflight users
-        #warning("Delete old preferences once all devices have migrated")
-        if let oldSuite = UserDefaults(suiteName: "uk.pixlwave.StingPad.StingDefaults") {
-            oldSuite.dictionaryRepresentation().forEach { UserDefaults.presets.set($0.value, forKey: $0.key) }
-            oldSuite.removePersistentDomain(forName: "uk.pixlwave.StingPad.StingDefaults")
-        }
-        
         #if targetEnvironment(macCatalyst)
         window?.windowScene?.sizeRestrictions?.minimumSize = CGSize(width: 320, height: 568)
         #endif
