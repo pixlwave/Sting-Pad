@@ -257,6 +257,12 @@ class PlaybackViewController: UICollectionViewController {
         // present file picker to load a track from
         let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.audio])
         documentPicker.delegate = self
+        
+        // start in the original directory if locating a sting
+        if case .locate(let sting) = pickerOperation {
+            documentPicker.directoryURL = sting.url.deletingLastPathComponent()
+        }
+        
         present(documentPicker, animated: true)
     }
     
