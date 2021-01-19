@@ -1,9 +1,8 @@
 import SwiftUI
 
 struct ManageStingsView: View {
-    @State var noSuchSongStings = [Sting]()
     @State var noPermissionStings = [Sting]()
-    @State var noSuchFileStings = [Sting]()
+    @State var missingStings = [Sting]()
     
     let show: Show
     
@@ -11,17 +10,32 @@ struct ManageStingsView: View {
     
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading, spacing: 20) {
-                NavigationLink("Missing Song (\(noSuchSongStings.count))",
-                               destination: ManageSongsView(show: show, stings: $noSuchSongStings))
-                    .disabled(noSuchSongStings.count == 0)
-                NavigationLink("Access Denied (\(noPermissionStings.count))",
-                               destination: ManagePermissionsView(show: show, stings: $noPermissionStings))
+            List {
+                Section(header: Text("Unavailable stings")) {
+                    NavigationLink(destination: ManagePermissionsView(show: show, stings: $noPermissionStings)) {
+                        Label {
+                            Text("Access Denied (\(noPermissionStings.count))")
+                        } icon: {
+                            Image(systemName: "lock.square")
+                                .foregroundColor(.red)
+                        }
+                        .font(.headline)
+                    }
                     .disabled(noPermissionStings.count == 0)
-                NavigationLink("Missing File (\(noSuchFileStings.count))",
-                               destination: ManageFilesView(show: show, stings: $noSuchFileStings))
-                    .disabled(noSuchFileStings.count == 0)
+                    
+                    NavigationLink(destination: MissingStingsView(show: show, stings: $missingStings)) {
+                        Label {
+                            Text("Missing (\(missingStings.count))")
+                        } icon: {
+                            Image(systemName: "questionmark.square.dashed")
+                                .foregroundColor(.red)
+                        }
+                        .font(.headline)
+                    }
+                    .disabled(missingStings.count == 0)
+                }
             }
+            .listStyle(GroupedListStyle())
             .navigationBarTitle("Manage Stings")
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
@@ -34,32 +48,7 @@ struct ManageStingsView: View {
     
     func reloadData() {
         noPermissionStings = show.unavailableStings.filter { $0.availability == .noPermission }
-        noSuchFileStings = show.unavailableStings.filter { $0.availability == .noSuchFile }
-        noSuchSongStings = show.unavailableStings.filter { $0.availability == .noSuchSong }
-    }
-}
-
-struct ManageSongsView: View {
-    let show: Show
-    @Binding var stings: [Sting]
-    
-    @State var isPresentingSongPicker = false
-    
-    var body: some View {
-        VStack {
-            Text("Sting Pad is unable to locate the following songs in your music library. Ensure they have been downloaded to your device and reopen the show, or replace them manually below.")
-                .font(.headline)
-                .padding(.horizontal)
-            List(stings, id: \.self) { sting in
-                ManageStingCell(sting: sting)
-            }
-            .listStyle(GroupedListStyle())
-            .overlay(Divider(), alignment: .top)
-        }
-        .navigationBarTitle("Manage Songs")
-        .sheet(isPresented: $isPresentingSongPicker) {
-            Text("Todo")
-        }
+        missingStings = show.unavailableStings.filter { $0.availability == .noSuchSong || $0.availability == .noSuchFile }
     }
 }
 
@@ -89,15 +78,15 @@ struct ManagePermissionsView: View {
     }
 }
 
-struct ManageFilesView: View {
+struct MissingStingsView: View {
     let show: Show
     @Binding var stings: [Sting]
     
-    @State var isPresentingFilePicker = false
+    @State var isPresentingPicker = false
     
     var body: some View {
         VStack {
-            Text("Sting Pad is unable to locate the following files on this device. Ensure they have been downloaded to your device and then re-open the show, or replace them manually below.")
+            Text("Sting Pad is unable to locate the following stings on your device. Ensure that they have been downloaded and reopen the show or replace them manually below.")
                 .font(.headline)
                 .padding(.horizontal)
             List(stings, id: \.self) { sting in
@@ -106,8 +95,8 @@ struct ManageFilesView: View {
             .listStyle(GroupedListStyle())
             .overlay(Divider(), alignment: .top)
         }
-        .navigationBarTitle("Manage Files")
-        .sheet(isPresented: $isPresentingFilePicker) {
+        .navigationBarTitle("Manage Songs")
+        .sheet(isPresented: $isPresentingPicker) {
             Text("Todo")
         }
     }
@@ -117,6 +106,7 @@ struct ManageStingCell: View {
     let sting: Sting
     var body: some View {
         HStack {
+            Image(systemName: sting.url.isMediaItem ? "music.note" : "doc")
             VStack(alignment: .leading) {
                 Text(sting.name ?? sting.songTitle)
                 Text(sting.name == nil ? sting.songArtist : sting.songTitle)
