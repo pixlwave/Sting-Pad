@@ -48,7 +48,9 @@ struct ManageStingsView: View {
     
     func reloadData() {
         noPermissionStings = show.unavailableStings.filter { $0.availability == .noPermission }
-        missingStings = show.unavailableStings.filter { $0.availability == .noSuchSong || $0.availability == .noSuchFile }
+        missingStings = show.unavailableStings.filter {
+            $0.availability == .noSuchSong || $0.availability == .noSuchFile || $0.availability == .isCloudSong
+        }
     }
 }
 

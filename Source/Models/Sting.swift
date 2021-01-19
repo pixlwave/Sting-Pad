@@ -69,6 +69,7 @@ class Sting: NSObject, Codable {
         case noPermission = "Permission denied"
         case noSuchFile = "File is missing"
         case noSuchSong = "Song is missing"
+        case isCloudSong = "Song needs downloading"
         case unknown = "Unknown"
     }
     
@@ -113,11 +114,23 @@ class Sting: NSObject, Codable {
         if let audioFile = try? AVAudioFile(forReading: url) {
             self.audioFile = audioFile
             availability = .available
-        } else if url.isMediaItem, let assetURL = metadata.matchingAssetURL, let audioFile = try? AVAudioFile(forReading: assetURL) {
-            url = assetURL
-            self.audioFile = audioFile
-            availability = .available
-        } else {
+        } else if url.isMediaItem {
+            if let matchingAsset = metadata.matchingAsset {
+                if let assetURL = matchingAsset.assetURL, let audioFile = try? AVAudioFile(forReading: assetURL) {
+                    self.audioFile = audioFile
+                    availability = .available
+                } else if matchingAsset.isCloudItem {
+                    self.audioFile = nil
+                    availability = .isCloudSong
+                } else {
+                    self.audioFile = nil
+                    availability = .unknown
+                }
+            } else {
+                self.audioFile = nil
+                availability = .noSuchSong
+            }
+        } else {    // is a file
             self.audioFile = nil
             do {
                 _ = try url.checkResourceIsReachable()
@@ -129,12 +142,8 @@ class Sting: NSObject, Codable {
                 case NSFileReadNoPermissionError:
                     availability = .noPermission
                 default:
-                    if url.isMediaItem {    // NSFileReadUnsupportedSchemeError
-                        availability = .noSuchSong
-                    } else {
-                        availability = .unknown
-                        os_log("URL access error: %@", String(describing: error))
-                    }
+                    availability = .unknown
+                    os_log("File URL access error: %@", String(describing: error))
                 }
             }
         }
