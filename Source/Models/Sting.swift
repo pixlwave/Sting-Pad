@@ -133,7 +133,7 @@ class Sting: NSObject, Codable {
                         availability = .noSuchSong
                     } else {
                         availability = .unknown
-                        print("\n*** \(url.lastPathComponent): Unknown Error \(error.localizedDescription)***\n")
+                        os_log("URL access error: %@", String(describing: error))
                     }
                 }
             }
