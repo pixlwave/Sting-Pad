@@ -27,7 +27,7 @@ struct FolderAccessView: UIViewControllerRepresentable {
         
         func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
             urls.forEach { url in
-                UserDefaults.bookmarks.setBookmark(from: url, forKey: url.path)
+                FolderBookmarks.shared.addBookmark(from: url)
             }
             view.show.reloadWithBookmarks()
         }

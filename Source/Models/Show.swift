@@ -45,14 +45,8 @@ class Show: UIDocument {
     }
     
     func reloadWithBookmarks() {
-        let securityScopedURLs: [URL] = UserDefaults.bookmarks.dictionaryRepresentation().keys.compactMap { key in
-            guard let url = UserDefaults.bookmarks.urlFromBookmark(forKey: key) else { return nil }
-            return url.startAccessingSecurityScopedResource() ? url : nil
-        }
-        
-        defer {
-            securityScopedURLs.forEach { $0.stopAccessingSecurityScopedResource() }
-        }
+        FolderBookmarks.shared.startAccessingSecurityScopedResources()
+        defer { FolderBookmarks.shared.stopAccessingSecurityScopedResources() }
         
         unavailableStings.filter { $0.availability == .noPermission }.forEach { sting in
             sting.reloadAudioWithBookmarks()

@@ -23,6 +23,7 @@
 		A581C3A21B94A041006CE228 /* StingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C3A11B94A041006CE228 /* StingCell.swift */; };
 		A58988FD23A6B97C00A85485 /* iPadLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = A58988FC23A6B97C00A85485 /* iPadLarge.png */; };
 		A58988FF23A6B98600A85485 /* iPadSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = A58988FE23A6B98600A85485 /* iPadSmall.png */; };
+		A592124425B6FA2300D864BD /* FolderBookmarks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A592124325B6FA2300D864BD /* FolderBookmarks.swift */; };
 		A595169A22F99A21001E820A /* AddStingFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A595169922F99A21001E820A /* AddStingFooterView.swift */; };
 		A59EC6EA22EB5696009A7ED1 /* TransportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59EC6E922EB5696009A7ED1 /* TransportView.swift */; };
 		A5A49C8F1B5BF1C2004B80CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A49C8E1B5BF1C2004B80CE /* AppDelegate.swift */; };
@@ -60,6 +61,7 @@
 		A581C3A11B94A041006CE228 /* StingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StingCell.swift; sourceTree = "<group>"; };
 		A58988FC23A6B97C00A85485 /* iPadLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPadLarge.png; sourceTree = "<group>"; };
 		A58988FE23A6B98600A85485 /* iPadSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPadSmall.png; sourceTree = "<group>"; };
+		A592124325B6FA2300D864BD /* FolderBookmarks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderBookmarks.swift; sourceTree = "<group>"; };
 		A595169922F99A21001E820A /* AddStingFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStingFooterView.swift; sourceTree = "<group>"; };
 		A59EC6E922EB5696009A7ED1 /* TransportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportView.swift; sourceTree = "<group>"; };
 		A5A49C891B5BF1C2004B80CE /* Sting Pad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sting Pad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -181,6 +183,7 @@
 				A51D98ED22BBCF7D00124A40 /* Color.swift */,
 				A5E65EB3231AE0BA0058BBEE /* Metadata.swift */,
 				A567FB6F22F1F67A00B4DB70 /* ChannelPair.swift */,
+				A592124325B6FA2300D864BD /* FolderBookmarks.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				A549825A1F7067EC00909196 /* FDAudioContext.swift in Sources */,
 				A581C39D1B949A06006CE228 /* EditViewController.swift in Sources */,
 				A5FF542824C49C5B00BE7928 /* WelcomeView.swift in Sources */,
+				A592124425B6FA2300D864BD /* FolderBookmarks.swift in Sources */,
 				A581C39F1B949AD6006CE228 /* PlaybackViewController.swift in Sources */,
 				A5BF2D1E24B0F0B600AA69F4 /* ChannelSelectionView.swift in Sources */,
 				A581C38D1B946B7C006CE228 /* Engine.swift in Sources */,
