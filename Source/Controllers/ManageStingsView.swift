@@ -82,8 +82,6 @@ struct MissingStingsView: View {
     let show: Show
     @Binding var stings: [Sting]
     
-    @State var isPresentingPicker = false
-    
     var body: some View {
         VStack {
             Text("Sting Pad is unable to locate the following stings on your device. Ensure that they have been downloaded and reopen the show or replace them manually below.")
@@ -95,15 +93,15 @@ struct MissingStingsView: View {
             .listStyle(GroupedListStyle())
             .overlay(Divider(), alignment: .top)
         }
-        .navigationBarTitle("Manage Songs")
-        .sheet(isPresented: $isPresentingPicker) {
-            Text("Todo")
-        }
+        .navigationBarTitle("Missing Stings")
     }
 }
 
 struct ManageStingCell: View {
     let sting: Sting
+    
+    @State var isPresentingPicker = false
+    
     var body: some View {
         HStack {
             Image(systemName: sting.url.isMediaItem ? "music.note" : "doc")
@@ -114,8 +112,13 @@ struct ManageStingCell: View {
                     .foregroundColor(.secondary)
             }
             Spacer()
-            Button { } label: { sting.availability == .noPermission ? Image(systemName: "lock.open") : Image(systemName: "magnifyingglass") }
-                .buttonStyle(BorderlessButtonStyle())
+            Button { isPresentingPicker = true } label: {
+                sting.availability == .noPermission ? Image(systemName: "lock.open") : Image(systemName: "magnifyingglass")
+            }
+            .buttonStyle(BorderlessButtonStyle())
+        }
+        .sheet(isPresented: $isPresentingPicker) {
+            Text("Not implemented. Long press on this sting in your show and choose replace.")
         }
     }
 }
