@@ -29,7 +29,7 @@ struct FolderAccessView: UIViewControllerRepresentable {
             urls.forEach { url in
                 FolderBookmarks.shared.addBookmark(from: url)
             }
-            view.show.reloadWithBookmarks()
+            view.show.reloadUnavailableStings()
         }
     }
 }

@@ -35,6 +35,9 @@ class Show: UIDocument {
     
     override func load(fromContents contents: Any, ofType typeName: String?) throws {
         guard let data = contents as? Data else { throw DocumentError.invalidData }
+        FolderBookmarks.shared.startAccessingSecurityScopedResources()
+        defer { FolderBookmarks.shared.stopAccessingSecurityScopedResources() }
+        
         let stings = try JSONDecoder().decode([Sting].self, from: data)
         self.stings = stings
     }
@@ -44,11 +47,11 @@ class Show: UIDocument {
         return jsonData
     }
     
-    func reloadWithBookmarks() {
+    func reloadUnavailableStings() {
         FolderBookmarks.shared.startAccessingSecurityScopedResources()
         defer { FolderBookmarks.shared.stopAccessingSecurityScopedResources() }
         
-        unavailableStings.filter { $0.availability == .noPermission }.forEach { sting in
+        unavailableStings.filter { $0.availability != .available }.forEach { sting in
             sting.reloadAudioWithBookmarks()
         }
     }
