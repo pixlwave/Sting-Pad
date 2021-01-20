@@ -3,6 +3,7 @@ import SwiftUI
 struct ManageStingsView: View {
     @State var noPermissionStings = [Sting]()
     @State var missingStings = [Sting]()
+    @State var unknownErrorStings = [Sting]()
     
     let show: Show
     
@@ -33,6 +34,23 @@ struct ManageStingsView: View {
                         .font(.headline)
                     }
                     .disabled(missingStings.count == 0)
+                    
+                    NavigationLink(destination: UnknownErrorList(stings: $unknownErrorStings)) {
+                        Label {
+                            Text("Unknown (\(unknownErrorStings.count))")
+                        } icon: {
+                            Image(systemName: "exclamationmark.triangle")
+                                .foregroundColor(.red)
+                        }
+                        .font(.headline)
+                    }
+                    .disabled(unknownErrorStings.count == 0)
+                }
+                
+                Section {
+                    Button("DEBUG: Remove all bookmarks") {
+                        FolderBookmarks.shared.clear()
+                    }
                 }
             }
             .listStyle(GroupedListStyle())
@@ -52,6 +70,7 @@ struct ManageStingsView: View {
         missingStings = show.unavailableStings.filter {
             $0.availability == .noSuchSong || $0.availability == .noSuchFile || $0.availability == .isCloudSong
         }
+        unknownErrorStings = show.unavailableStings.filter { $0.availability == .unknown }
     }
 }
 
@@ -122,6 +141,21 @@ struct ManageStingCell: View {
         }
         .sheet(isPresented: $isPresentingPicker) {
             Text("Not implemented. Long press on this sting in your show and choose replace.")
+        }
+    }
+}
+
+
+struct UnknownErrorList: View {
+    @Binding var stings: [Sting]
+    
+    var body: some View {
+        List(stings, id: \.self) { sting in
+            VStack(alignment: .leading) {
+                Text(sting.name ?? sting.songTitle)
+                Text(sting.unknownErrorString)
+                    .font(.footnote)
+            }
         }
     }
 }

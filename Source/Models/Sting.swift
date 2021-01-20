@@ -73,6 +73,9 @@ class Sting: NSObject, Codable {
         case unknown = "Unknown"
     }
     
+    #warning("Temporary for debug purposes")
+    var unknownErrorString: String = "Error string not set."
+    
     enum CodingKeys: String, CodingKey {
         case url
         case bookmark
@@ -125,6 +128,7 @@ class Sting: NSObject, Codable {
                 } else {
                     self.audioFile = nil
                     availability = .unknown
+                    unknownErrorString = "Sting Pad: Song has a local asset, unsure why load failed."
                 }
             } else {
                 self.audioFile = nil
@@ -135,14 +139,16 @@ class Sting: NSObject, Codable {
             do {
                 _ = try url.checkResourceIsReachable()
                 availability = .unknown
-            } catch {
-                switch (error as NSError).code {
+                unknownErrorString = "Sting Pad: Resource is reachable, unsure why load failed."
+            } catch let error as NSError {
+                switch error.code {
                 case NSFileReadNoSuchFileError:
                     availability = .noSuchFile
                 case NSFileReadNoPermissionError:
                     availability = .noPermission
                 default:
                     availability = .unknown
+                    unknownErrorString = error.localizedDescription
                     os_log("File URL access error: %@", String(describing: error))
                 }
             }

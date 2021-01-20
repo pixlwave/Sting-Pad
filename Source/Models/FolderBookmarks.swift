@@ -44,6 +44,11 @@ class FolderBookmarks {
         UserDefaults.standard.set(Array<Data>(bookmarkDictionary.values), forKey: "bookmarks")
     }
     
+    func clear() {
+        bookmarkDictionary = [URL: Data]()
+        updateDefaults()
+    }
+    
     func startAccessingSecurityScopedResources() {
         securityScopedURLs = bookmarkDictionary.keys.compactMap { url in
             url.startAccessingSecurityScopedResource() ? url : nil
