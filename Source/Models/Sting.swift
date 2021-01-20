@@ -69,7 +69,7 @@ class Sting: NSObject, Codable {
         case noPermission = "Permission denied"
         case noSuchFile = "File is missing"
         case noSuchSong = "Song is missing"
-        case isCloudSong = "Song needs downloading"
+        case isCloudSong = "Song is in the Cloud"
         case unknown = "Unknown"
     }
     
