@@ -43,6 +43,7 @@ struct ManageStingsView: View {
                 }
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         .onAppear { reloadData() }
     }
     
