@@ -94,6 +94,61 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A547362D261B671D0049E920 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				A5C4FA5224B0DF9200C44365 /* SettingsView.swift */,
+				A5BF2D1D24B0F0B600AA69F4 /* ChannelSelectionView.swift */,
+				A567FB6F22F1F67A00B4DB70 /* ChannelPair.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		A547362E261B673D0049E920 /* Playback */ = {
+			isa = PBXGroup;
+			children = (
+				A581C38C1B946B7C006CE228 /* Engine.swift */,
+				A581C39E1B949AD6006CE228 /* PlaybackViewController.swift */,
+				A581C3A11B94A041006CE228 /* StingCell.swift */,
+				A59EC6E922EB5696009A7ED1 /* TransportView.swift */,
+				A595169922F99A21001E820A /* AddStingFooterView.swift */,
+				A56EB2C822F7538F00358A7C /* AddStingButton.swift */,
+			);
+			path = Playback;
+			sourceTree = "<group>";
+		};
+		A547362F261B67570049E920 /* Document */ = {
+			isa = PBXGroup;
+			children = (
+				A5F62D4F22E0F56A00D57126 /* ShowBrowserViewController.swift */,
+				A55C0E7122AA5498008DDB12 /* Show.swift */,
+			);
+			path = Document;
+			sourceTree = "<group>";
+		};
+		A5473631261B67900049E920 /* Sting Management */ = {
+			isa = PBXGroup;
+			children = (
+				A5C5866D25ADBFE00050DC5C /* ManageStingsView.swift */,
+				A5760DD225AF414600398860 /* FolderAccessView.swift */,
+				A592124325B6FA2300D864BD /* FolderBookmarks.swift */,
+			);
+			path = "Sting Management";
+			sourceTree = "<group>";
+		};
+		A5473632261B67AC0049E920 /* Editing */ = {
+			isa = PBXGroup;
+			children = (
+				A5A49CB01B5BF216004B80CE /* Sting.swift */,
+				A51D98ED22BBCF7D00124A40 /* Color.swift */,
+				A5E65EB3231AE0BA0058BBEE /* Metadata.swift */,
+				A581C39C1B949A06006CE228 /* EditViewController.swift */,
+				A5CEE51223215B1800BB7CD1 /* WaveformView.swift */,
+				A5CEE5142321695100BB7CD1 /* WaveformMarkerView.swift */,
+			);
+			path = Editing;
+			sourceTree = "<group>";
+		};
 		A54FCB521B9E341300A85009 /* FDWaveformView */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,51 +207,28 @@
 			children = (
 				A5A49C8E1B5BF1C2004B80CE /* AppDelegate.swift */,
 				A5C32F4D228B64FE00E4B4EB /* Extends.swift */,
-				A5FBD7D21F7C447000B5799C /* Controllers */,
-				A5FBD7D31F7C447800B5799C /* Models */,
+				A547362F261B67570049E920 /* Document */,
+				A547362E261B673D0049E920 /* Playback */,
+				A5473632261B67AC0049E920 /* Editing */,
+				A5FBD7D21F7C447000B5799C /* Help */,
+				A547362D261B671D0049E920 /* Settings */,
+				A5473631261B67900049E920 /* Sting Management */,
 				A5FBD7D41F7C447D00B5799C /* Views */,
 			);
 			path = Source;
 			sourceTree = "<group>";
 		};
-		A5FBD7D21F7C447000B5799C /* Controllers */ = {
+		A5FBD7D21F7C447000B5799C /* Help */ = {
 			isa = PBXGroup;
 			children = (
-				A5F62D4F22E0F56A00D57126 /* ShowBrowserViewController.swift */,
-				A581C39E1B949AD6006CE228 /* PlaybackViewController.swift */,
-				A581C39C1B949A06006CE228 /* EditViewController.swift */,
 				A5FF542724C49C5B00BE7928 /* WelcomeView.swift */,
-				A5C4FA5224B0DF9200C44365 /* SettingsView.swift */,
-				A5BF2D1D24B0F0B600AA69F4 /* ChannelSelectionView.swift */,
-				A5C5866D25ADBFE00050DC5C /* ManageStingsView.swift */,
-				A5760DD225AF414600398860 /* FolderAccessView.swift */,
 			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		A5FBD7D31F7C447800B5799C /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				A581C38C1B946B7C006CE228 /* Engine.swift */,
-				A55C0E7122AA5498008DDB12 /* Show.swift */,
-				A5A49CB01B5BF216004B80CE /* Sting.swift */,
-				A51D98ED22BBCF7D00124A40 /* Color.swift */,
-				A5E65EB3231AE0BA0058BBEE /* Metadata.swift */,
-				A567FB6F22F1F67A00B4DB70 /* ChannelPair.swift */,
-				A592124325B6FA2300D864BD /* FolderBookmarks.swift */,
-			);
-			path = Models;
+			path = Help;
 			sourceTree = "<group>";
 		};
 		A5FBD7D41F7C447D00B5799C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A581C3A11B94A041006CE228 /* StingCell.swift */,
-				A59EC6E922EB5696009A7ED1 /* TransportView.swift */,
-				A595169922F99A21001E820A /* AddStingFooterView.swift */,
-				A56EB2C822F7538F00358A7C /* AddStingButton.swift */,
-				A5CEE51223215B1800BB7CD1 /* WaveformView.swift */,
-				A5CEE5142321695100BB7CD1 /* WaveformMarkerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
