@@ -213,7 +213,6 @@
 				A5FBD7D21F7C447000B5799C /* Help */,
 				A547362D261B671D0049E920 /* Settings */,
 				A5473631261B67900049E920 /* Sting Management */,
-				A5FBD7D41F7C447D00B5799C /* Views */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -224,13 +223,6 @@
 				A5FF542724C49C5B00BE7928 /* WelcomeView.swift */,
 			);
 			path = Help;
-			sourceTree = "<group>";
-		};
-		A5FBD7D41F7C447D00B5799C /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
