@@ -7,7 +7,7 @@ struct ManageStingsView: View {
     
     let show: Show
     
-    var dismiss: (() -> Void)?
+    let dismiss: (() -> Void)
     
     var body: some View {
         NavigationView {
@@ -57,7 +57,7 @@ struct ManageStingsView: View {
             .navigationBarTitle("Manage Stings")
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") { dismiss?() }
+                    Button("Done") { dismiss() }
                 }
             }
         }

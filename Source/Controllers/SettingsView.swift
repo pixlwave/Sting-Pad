@@ -5,7 +5,7 @@ struct SettingsView: View {
     
     var show: Show?
     
-    var dismiss: (() -> Void)?
+    let dismiss: (() -> Void)
     
     var body: some View {
         NavigationView {
@@ -34,7 +34,7 @@ struct SettingsView: View {
                 }
             }
             .navigationBarTitle("Settings", displayMode: .inline)
-            .navigationBarItems(trailing: Button("Done") { dismiss?() })
+            .navigationBarItems(trailing: Button("Done") { dismiss() })
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
@@ -46,6 +46,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        SettingsView(dismiss: { })
     }
 }
