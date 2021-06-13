@@ -120,6 +120,7 @@ class Sting: NSObject, Codable {
         } else if url.isMediaItem {
             if let matchingAsset = metadata.matchingAsset {
                 if let assetURL = matchingAsset.assetURL, let audioFile = try? AVAudioFile(forReading: assetURL) {
+                    url = assetURL
                     self.audioFile = audioFile
                     availability = .available
                 } else if matchingAsset.isCloudItem {
