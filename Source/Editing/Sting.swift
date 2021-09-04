@@ -3,7 +3,7 @@ import AVFoundation
 import MediaPlayer
 import os.log
 
-class Sting: NSObject, Codable {
+class Sting: NSObject, Codable, ObservableObject {
     
     private(set) var url: URL
     private(set) var bookmark: Data?
@@ -62,7 +62,7 @@ class Sting: NSObject, Codable {
     
     private(set) var audioFile: AVAudioFile?
     private(set) var buffer: AVAudioPCMBuffer?
-    private(set) var availability: Availability
+    @Published private(set) var availability: Availability
     
     enum Availability: String {
         case available
@@ -72,9 +72,6 @@ class Sting: NSObject, Codable {
         case isCloudSong = "Song is in the Cloud"
         case unknown = "Unknown"
     }
-    
-    #warning("Temporary for debug purposes")
-    var unknownErrorString: String = "Error string not set."
     
     enum CodingKeys: String, CodingKey {
         case url
@@ -129,7 +126,7 @@ class Sting: NSObject, Codable {
                 } else {
                     self.audioFile = nil
                     availability = .unknown
-                    unknownErrorString = "Sting Pad: Song has a local asset, unsure why load failed."
+                    os_log("Song access error: Song has a local asset, unsure why load failed.")
                 }
             } else {
                 self.audioFile = nil
@@ -140,7 +137,7 @@ class Sting: NSObject, Codable {
             do {
                 _ = try url.checkResourceIsReachable()
                 availability = .unknown
-                unknownErrorString = "Sting Pad: Resource is reachable, unsure why load failed."
+                os_log("File URL access error: Resource is reachable, unsure why load failed.")
             } catch let error as NSError {
                 switch error.code {
                 case NSFileReadNoSuchFileError:
@@ -149,7 +146,6 @@ class Sting: NSObject, Codable {
                     availability = .noPermission
                 default:
                     availability = .unknown
-                    unknownErrorString = error.localizedDescription
                     os_log("File URL access error: %@", String(describing: error))
                 }
             }
@@ -220,8 +216,30 @@ class Sting: NSObject, Codable {
     }
     
     func reloadAudioWithBookmarks() {
-        guard let audioFile = try? AVAudioFile(forReading: url) else { return }
+        // reload the audio file
+        guard let audioFile = try? AVAudioFile(forReading: url) else {
+            // update availability: file may switch from no permission to no such file
+            if url.isFileURL {
+                do {
+                    _ = try url.checkResourceIsReachable()
+                    availability = .unknown
+                    os_log("File URL access error: Resource is reachable, unsure why load failed.")
+                } catch let error as NSError {
+                    switch error.code {
+                    case NSFileReadNoSuchFileError:
+                        availability = .noSuchFile
+                    case NSFileReadNoPermissionError:
+                        availability = .noPermission
+                    default:
+                        availability = .unknown
+                        os_log("File URL access error: %@", String(describing: error))
+                    }
+                }
+            }
+            return
+        }
         
+        // update any bookmark data for the url
         if let newBookmark = try? url.bookmarkData() {
             bookmark = newBookmark
         }

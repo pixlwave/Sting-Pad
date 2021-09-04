@@ -86,6 +86,7 @@ extension Notification.Name {
     static let stingsDidChange = Notification.Name("Stings Did Change")
     static let waveformViewDidLayoutSubviews = Notification.Name("Waveform View Did Layout Subviews")
     static let didFinishEditing = Notification.Name("Did Finish Editing")
+    static let didTryReloadingUnavailableStings = Notification.Name("Did Try Reloading Unavailable Stings")
 }
 
 

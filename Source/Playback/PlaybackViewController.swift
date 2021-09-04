@@ -58,7 +58,9 @@ class PlaybackViewController: UICollectionViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(showStateChanged(_:)), name: UIDocument.stateChangedNotification, object: show)
         
         manageStingsButton.image = manageStingsButton.image?.withConfiguration(UIImage.SymbolConfiguration(weight: .semibold))
-        if show.unavailableStings.count == 0 { navigationItem.rightBarButtonItems?.removeAll{ $0 == manageStingsButton } }
+        if show.unavailableSongs.count == 0 && show.unavailableFiles.count == 0 {
+            navigationItem.rightBarButtonItems?.removeAll{ $0 == manageStingsButton }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -573,7 +575,7 @@ extension PlaybackViewController: MPMediaPickerControllerDelegate {
     func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
         // make a sting from the selected media item, add it to the engine and update the table view
         if let sting = Sting(mediaItem: mediaItemCollection.items[0]) {
-            load(sting)
+            load(sting)     // / resets pickerOperation when complete
         }
         
         // dismiss media picker
@@ -591,8 +593,12 @@ extension PlaybackViewController: MPMediaPickerControllerDelegate {
 extension PlaybackViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         if let sting = Sting(url: urls[0]) {
-            load(sting)
+            load(sting)     // resets pickerOperation when complete
         }
+    }
+    
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        pickerOperation = .normal
     }
 }
 

@@ -13,7 +13,8 @@ class Show: UIDocument {
         didSet { NotificationCenter.default.post(Notification(name: .stingsDidChange, object: self)) }
     }
     
-    var unavailableStings: [Sting] { stings.filter { $0.availability != .available } }
+    var unavailableFiles: [Sting] { stings.filter { $0.availability != .available && $0.url.isFileURL } }
+    var unavailableSongs: [Sting] { stings.filter { $0.availability != .available && $0.url.isMediaItem } }
     
     enum DocumentError: Error {
         case invalidData
@@ -51,9 +52,11 @@ class Show: UIDocument {
         FolderBookmarks.shared.startAccessingSecurityScopedResources()
         defer { FolderBookmarks.shared.stopAccessingSecurityScopedResources() }
         
-        unavailableStings.filter { $0.availability != .available }.forEach { sting in
-            sting.reloadAudioWithBookmarks()
-        }
+        unavailableSongs.forEach { $0.reloadAudioWithBookmarks() }
+        unavailableFiles.forEach { $0.reloadAudioWithBookmarks() }
+        
+        // updates any changes in sting management list
+        NotificationCenter.default.post(name: .didTryReloadingUnavailableStings, object: nil)
     }
     
     // editing functions exist to allow the show to load without updating it's change count

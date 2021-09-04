@@ -34,7 +34,11 @@ struct SettingsView: View {
                 }
             }
             .navigationBarTitle("Settings", displayMode: .inline)
-            .navigationBarItems(trailing: Button("Done") { dismiss() })
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Done", action: dismiss)
+                }
+            }
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
