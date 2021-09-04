@@ -83,10 +83,11 @@ extension AVAudioPCMBuffer {
 extension Notification.Name {
     static let addStingFromLibrary = Notification.Name("Add Sting From Library")
     static let addStingFromFiles = Notification.Name("Add Sting From Files")
+    static let didAppendSting = Notification.Name("Did Append Sting")
     static let stingsDidChange = Notification.Name("Stings Did Change")
+    static let unavailableStingsDidChange = Notification.Name("Unavailable Stings Did Change")
     static let waveformViewDidLayoutSubviews = Notification.Name("Waveform View Did Layout Subviews")
     static let didFinishEditing = Notification.Name("Did Finish Editing")
-    static let didTryReloadingUnavailableStings = Notification.Name("Did Try Reloading Unavailable Stings")
 }
 
 

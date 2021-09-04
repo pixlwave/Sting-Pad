@@ -14,7 +14,7 @@ struct UnavailableFilesView: View {
                 .padding(.bottom, 1)
             Button ("Access Folder") { isPresentingFolderPicker = true }
             List(stings, id: \.self) { sting in
-                ManageStingCell(sting: sting)
+                UnavailableStingCell(sting: sting, show: show)
             }
             .listStyle(GroupedListStyle())
             .overlay(Divider(), alignment: .top)

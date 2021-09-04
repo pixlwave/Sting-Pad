@@ -55,8 +55,8 @@ class Show: UIDocument {
         unavailableSongs.forEach { $0.reloadAudioWithBookmarks() }
         unavailableFiles.forEach { $0.reloadAudioWithBookmarks() }
         
-        // updates any changes in sting management list
-        NotificationCenter.default.post(name: .didTryReloadingUnavailableStings, object: nil)
+        // updates any changes in the sting management list
+        NotificationCenter.default.post(name: .unavailableStingsDidChange, object: nil)
     }
     
     // editing functions exist to allow the show to load without updating it's change count

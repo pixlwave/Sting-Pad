@@ -22,14 +22,6 @@ class PlaybackViewController: UICollectionViewController {
     private var progressTimer: Timer?
     private var progressAnimator: UIViewPropertyAnimator?
     
-    private var pickerOperation: PickerOperation = .normal
-    
-    private enum PickerOperation {
-        case normal
-        case locate(Sting)
-        case insert(Int)
-    }
-    
     // respond to undo gestures, forwarding them to the show's undo manager
     override var canBecomeFirstResponder: Bool { true }
     override var undoManager: UndoManager? { return show.undoManager }
@@ -51,8 +43,9 @@ class PlaybackViewController: UICollectionViewController {
         collectionView.collectionViewLayout = createLayout()
         collectionView.dragInteractionEnabled = true
         
-        NotificationCenter.default.addObserver(self, selector: #selector(pickStingFromLibrary), name: .addStingFromLibrary, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(pickStingFromFiles), name: .addStingFromFiles, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(addStingFromLibrary), name: .addStingFromLibrary, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(addStingFromFiles), name: .addStingFromFiles, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didAppendSting(_:)), name: .didAppendSting, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(applySnapshot), name: .stingsDidChange, object: show)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadEditedSting(_:)), name: .didFinishEditing, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showStateChanged(_:)), name: UIDocument.stateChangedNotification, object: show)
@@ -229,10 +222,14 @@ class PlaybackViewController: UICollectionViewController {
         self.present(alert, animated: true)
     }
     
-    @objc func pickStingFromLibrary() {
+    @objc func addStingFromLibrary() {
+        pickStingFromLibrary(pickerOperation: .normal)
+    }
+    
+    func pickStingFromLibrary(pickerOperation: PickerOperation) {
         guard MPMediaLibrary.authorizationStatus() == .authorized else {
             if MPMediaLibrary.authorizationStatus() == .notDetermined {
-                requestMediaLibraryAuthorization(successHandler: { self.pickStingFromLibrary() })
+                requestMediaLibraryAuthorization(successHandler: { self.pickStingFromLibrary(pickerOperation: pickerOperation) })
             } else {
                 presentMediaLibraryAccessAlert()
             }
@@ -245,27 +242,18 @@ class PlaybackViewController: UICollectionViewController {
         loadRandomTrackFromHostFileSystem()
         #else
         
-        // present music picker to load a track from media library
-        let mediaPicker = MPMediaPickerController(mediaTypes: .music)
-        mediaPicker.delegate = self
-        mediaPicker.showsCloudItems = false  // hides iTunes in the Cloud items, which crash the app if picked
-        mediaPicker.showsItemsWithProtectedAssets = false  // hides Apple Music items, which are DRM protected
-        mediaPicker.allowsPickingMultipleItems = false
-        present(mediaPicker, animated: true)
+        let hostedSongPicker = UIHostingController(rootView: SongPicker(show: show, pickerOperation: pickerOperation))
+        present(hostedSongPicker, animated: true)
         #endif
     }
     
-    @objc func pickStingFromFiles() {
-        // present file picker to load a track from
-        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.audio])
-        documentPicker.delegate = self
-        
-        // start in the original directory if locating a sting
-        if case .locate(let sting) = pickerOperation {
-            documentPicker.directoryURL = sting.url.deletingLastPathComponent()
-        }
-        
-        present(documentPicker, animated: true)
+    @objc func addStingFromFiles() {
+        pickStingFromFiles(pickerOperation: .normal)
+    }
+    
+    func pickStingFromFiles(pickerOperation: PickerOperation) {
+        let hostedFilePicker = UIHostingController(rootView: FilePicker(show: show, pickerOperation: pickerOperation))
+        present(hostedFilePicker, animated: true)
     }
     
     #if targetEnvironment(simulator)
@@ -283,20 +271,9 @@ class PlaybackViewController: UICollectionViewController {
     }
     #endif
     
-    func load(_ sting: Sting) {
-        switch pickerOperation {
-        case .insert(let index) where index < show.stings.count:
-            show.insert(sting, at: index)
-            pickerOperation = .normal
-        case .locate(let missingSting):
-            missingSting.reloadAudio(from: sting)
-            show.updateChangeCount(.done)
-            reloadItems([missingSting])
-            pickerOperation = .normal
-        default:
-            show.append(sting)
-            scrollTo(sting, animated: false)
-        }
+    @objc func didAppendSting(_ notification: Notification) {
+        guard let sting = notification.object as? Sting else { return }
+        scrollTo(sting, animated: false)
     }
     
     func presentRenameDialog(for sting: Sting) {
@@ -486,8 +463,7 @@ class PlaybackViewController: UICollectionViewController {
                 self.show.insert(duplicate, at: indexPath.item + 1)  // updates collection view via didSet
             }
             let insert = UIAction(title: "Insert Song Here", image: UIImage(systemName: "square.stack")) { action in
-                self.pickerOperation = .insert(indexPath.item)
-                self.pickStingFromLibrary()
+                self.pickStingFromLibrary(pickerOperation: .insert(indexPath.item))
             }
             let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash")) { action in
                 guard sting != self.engine.playingSting else { return }
@@ -508,11 +484,10 @@ class PlaybackViewController: UICollectionViewController {
             if sting.audioFile == nil {
                 let songInfo = UIAction(title: "\(sting.songTitle) by \(sting.songArtist)", attributes: .disabled) { action in }
                 let locate = UIAction(title: "Locate", image: UIImage(systemName: "magnifyingglass")) { action in
-                    self.pickerOperation = .locate(sting)
                     if sting.url.isMediaItem {
-                        self.pickStingFromLibrary()
+                        self.pickStingFromLibrary(pickerOperation: .locate(sting))
                     } else {
-                        self.pickStingFromFiles()
+                        self.pickStingFromFiles(pickerOperation: .locate(sting))
                     }
                 }
                 let editMenu = UIMenu(title: "", options: .displayInline, children: [locate, insert, delete])
@@ -566,39 +541,6 @@ extension PlaybackViewController: UICollectionViewDropDelegate {
         
         show.moveSting(from: sourceIndexPath.item, to: destinationIndexPath.item)
         coordinator.drop(sourceItem.dragItem, toItemAt: destinationIndexPath)
-    }
-}
-
-
-// MARK: MPMediaPickerControllerDelegate
-extension PlaybackViewController: MPMediaPickerControllerDelegate {
-    func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
-        // make a sting from the selected media item, add it to the engine and update the table view
-        if let sting = Sting(mediaItem: mediaItemCollection.items[0]) {
-            load(sting)     // / resets pickerOperation when complete
-        }
-        
-        // dismiss media picker
-        dismiss(animated: true)
-    }
-    
-    func mediaPickerDidCancel(_ mediaPicker: MPMediaPickerController) {
-        pickerOperation = .normal
-        dismiss(animated: true)
-    }
-}
-
-
-// MARK: UIDocumentPickerDelegate
-extension PlaybackViewController: UIDocumentPickerDelegate {
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        if let sting = Sting(url: urls[0]) {
-            load(sting)     // resets pickerOperation when complete
-        }
-    }
-    
-    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-        pickerOperation = .normal
     }
 }
 

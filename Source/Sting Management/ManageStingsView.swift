@@ -51,7 +51,7 @@ struct ManageStingsView: View {
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear { reloadData() }
-        .onReceive(NotificationCenter.default.publisher(for: .didTryReloadingUnavailableStings)) { _ in
+        .onReceive(NotificationCenter.default.publisher(for: .unavailableStingsDidChange)) { _ in
             reloadData()
         }
     }
@@ -59,43 +59,5 @@ struct ManageStingsView: View {
     func reloadData() {
         unavailableSongs = show.unavailableSongs
         unavailableFiles = show.unavailableFiles
-    }
-}
-
-struct ManageStingCell: View {
-    @ObservedObject var sting: Sting
-    
-    @State var isPresentingPicker = false
-    
-    var body: some View {
-        Button { isPresentingPicker = true } label: {
-            HStack {
-                Image(systemName: sting.url.isMediaItem ? "music.note" : "doc")
-                
-                VStack(alignment: .leading) {
-                    Text(sting.name ?? sting.songTitle)
-                    Text(sting.name == nil ? sting.songArtist : sting.songTitle)
-                        .font(.footnote)
-                        .foregroundColor(.secondary)
-                }
-                
-                Spacer()
-                
-                switch sting.availability {
-                case .noPermission:
-                    Image(systemName: "lock")
-                case .noSuchSong, .noSuchFile:
-                    Image(systemName: "questionmark.square.dashed")
-                case .isCloudSong:
-                    Image(systemName: "icloud")
-                default:
-                    Image(systemName: "exclamationmark.triangle")
-                }
-            }
-        }
-        .foregroundColor(.primary)
-        .sheet(isPresented: $isPresentingPicker) {
-            Text("Not implemented. Long press on this sting in your show and choose replace.")
-        }
     }
 }

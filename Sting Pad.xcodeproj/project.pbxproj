@@ -31,6 +31,11 @@
 		A5A49CB11B5BF216004B80CE /* Sting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A49CB01B5BF216004B80CE /* Sting.swift */; };
 		A5B1DFD326E3C089009BF8FB /* UnavailableFilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B1DFD226E3C089009BF8FB /* UnavailableFilesView.swift */; };
 		A5B1DFD526E3C0BA009BF8FB /* UnavailableSongsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B1DFD426E3C0BA009BF8FB /* UnavailableSongsView.swift */; };
+		A5B1DFD926E3E398009BF8FB /* SongPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B1DFD826E3E398009BF8FB /* SongPicker.swift */; };
+		A5B1DFDB26E3E84F009BF8FB /* PickerOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B1DFDA26E3E84F009BF8FB /* PickerOperation.swift */; };
+		A5B1DFDD26E3F825009BF8FB /* FilePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B1DFDC26E3F825009BF8FB /* FilePicker.swift */; };
+		A5B1DFDF26E3FDAE009BF8FB /* PickerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B1DFDE26E3FDAE009BF8FB /* PickerCoordinator.swift */; };
+		A5B1DFE126E40CE2009BF8FB /* UnavailableStingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B1DFE026E40CE2009BF8FB /* UnavailableStingCell.swift */; };
 		A5B39BDE1DAA843A00AA22EF /* FDWaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B39BDD1DAA843A00AA22EF /* FDWaveformView.swift */; };
 		A5BD01E0218F2AEB0010FE10 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5BD01DF218F2AEB0010FE10 /* Launch Screen.storyboard */; };
 		A5BD85E923AA531B00846F27 /* Launch Screen.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5BD85E823AA531B00846F27 /* Launch Screen.xcassets */; };
@@ -73,6 +78,11 @@
 		A5A49CB01B5BF216004B80CE /* Sting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sting.swift; sourceTree = "<group>"; };
 		A5B1DFD226E3C089009BF8FB /* UnavailableFilesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnavailableFilesView.swift; sourceTree = "<group>"; };
 		A5B1DFD426E3C0BA009BF8FB /* UnavailableSongsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnavailableSongsView.swift; sourceTree = "<group>"; };
+		A5B1DFD826E3E398009BF8FB /* SongPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongPicker.swift; sourceTree = "<group>"; };
+		A5B1DFDA26E3E84F009BF8FB /* PickerOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerOperation.swift; sourceTree = "<group>"; };
+		A5B1DFDC26E3F825009BF8FB /* FilePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePicker.swift; sourceTree = "<group>"; };
+		A5B1DFDE26E3FDAE009BF8FB /* PickerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerCoordinator.swift; sourceTree = "<group>"; };
+		A5B1DFE026E40CE2009BF8FB /* UnavailableStingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnavailableStingCell.swift; sourceTree = "<group>"; };
 		A5B39BDD1DAA843A00AA22EF /* FDWaveformView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FDWaveformView.swift; sourceTree = "<group>"; };
 		A5BD01DF218F2AEB0010FE10 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		A5BD85E823AA531B00846F27 /* Launch Screen.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Launch Screen.xcassets"; sourceTree = "<group>"; };
@@ -136,6 +146,7 @@
 				A5C5866D25ADBFE00050DC5C /* ManageStingsView.swift */,
 				A5B1DFD426E3C0BA009BF8FB /* UnavailableSongsView.swift */,
 				A5B1DFD226E3C089009BF8FB /* UnavailableFilesView.swift */,
+				A5B1DFE026E40CE2009BF8FB /* UnavailableStingCell.swift */,
 				A5760DD225AF414600398860 /* FolderAccessView.swift */,
 				A592124325B6FA2300D864BD /* FolderBookmarks.swift */,
 			);
@@ -208,6 +219,17 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		A5B1DFE226E41528009BF8FB /* Picking */ = {
+			isa = PBXGroup;
+			children = (
+				A5B1DFDE26E3FDAE009BF8FB /* PickerCoordinator.swift */,
+				A5B1DFDA26E3E84F009BF8FB /* PickerOperation.swift */,
+				A5B1DFD826E3E398009BF8FB /* SongPicker.swift */,
+				A5B1DFDC26E3F825009BF8FB /* FilePicker.swift */,
+			);
+			path = Picking;
+			sourceTree = "<group>";
+		};
 		A5FBD7D11F7C445A00B5799C /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +237,7 @@
 				A5C32F4D228B64FE00E4B4EB /* Extends.swift */,
 				A547362F261B67570049E920 /* Document */,
 				A547362E261B673D0049E920 /* Playback */,
+				A5B1DFE226E41528009BF8FB /* Picking */,
 				A5473632261B67AC0049E920 /* Editing */,
 				A5FBD7D21F7C447000B5799C /* Help */,
 				A547362D261B671D0049E920 /* Settings */,
@@ -318,11 +341,13 @@
 				A5B1DFD326E3C089009BF8FB /* UnavailableFilesView.swift in Sources */,
 				A5CEE51323215B1800BB7CD1 /* WaveformView.swift in Sources */,
 				A55C0E7222AA5498008DDB12 /* Show.swift in Sources */,
+				A5B1DFE126E40CE2009BF8FB /* UnavailableStingCell.swift in Sources */,
 				A56EB2C922F7538F00358A7C /* AddStingButton.swift in Sources */,
 				A5A49C8F1B5BF1C2004B80CE /* AppDelegate.swift in Sources */,
 				A5B39BDE1DAA843A00AA22EF /* FDWaveformView.swift in Sources */,
 				A5CEE5152321695100BB7CD1 /* WaveformMarkerView.swift in Sources */,
 				A549825B1F7067EC00909196 /* FDWaveformRenderOperation.swift in Sources */,
+				A5B1DFDD26E3F825009BF8FB /* FilePicker.swift in Sources */,
 				A51D98EE22BBCF7D00124A40 /* Color.swift in Sources */,
 				A59EC6EA22EB5696009A7ED1 /* TransportView.swift in Sources */,
 				A5B1DFD526E3C0BA009BF8FB /* UnavailableSongsView.swift in Sources */,
@@ -330,9 +355,11 @@
 				A581C3A21B94A041006CE228 /* StingCell.swift in Sources */,
 				A567FB7022F1F67A00B4DB70 /* ChannelPair.swift in Sources */,
 				A5A49CB11B5BF216004B80CE /* Sting.swift in Sources */,
+				A5B1DFD926E3E398009BF8FB /* SongPicker.swift in Sources */,
 				A5E65EB4231AE0BA0058BBEE /* Metadata.swift in Sources */,
 				A5C32F4E228B64FE00E4B4EB /* Extends.swift in Sources */,
 				A595169A22F99A21001E820A /* AddStingFooterView.swift in Sources */,
+				A5B1DFDF26E3FDAE009BF8FB /* PickerCoordinator.swift in Sources */,
 				A5F62D5022E0F56A00D57126 /* ShowBrowserViewController.swift in Sources */,
 				A5760DD325AF414600398860 /* FolderAccessView.swift in Sources */,
 				A549825A1F7067EC00909196 /* FDAudioContext.swift in Sources */,
@@ -341,6 +368,7 @@
 				A592124425B6FA2300D864BD /* FolderBookmarks.swift in Sources */,
 				A581C39F1B949AD6006CE228 /* PlaybackViewController.swift in Sources */,
 				A5BF2D1E24B0F0B600AA69F4 /* ChannelSelectionView.swift in Sources */,
+				A5B1DFDB26E3E84F009BF8FB /* PickerOperation.swift in Sources */,
 				A581C38D1B946B7C006CE228 /* Engine.swift in Sources */,
 				A5C4FA5324B0DF9200C44365 /* SettingsView.swift in Sources */,
 			);

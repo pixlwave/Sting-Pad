@@ -12,7 +12,7 @@ struct UnavailableSongsView: View {
                 .padding(.bottom, 1)
             Button ("Reload Stings") { show.reloadUnavailableStings() }
             List(stings, id: \.self) { sting in
-                ManageStingCell(sting: sting)
+                UnavailableStingCell(sting: sting, show: show)
             }
             .listStyle(GroupedListStyle())
             .overlay(Divider(), alignment: .top)
