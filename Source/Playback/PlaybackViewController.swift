@@ -50,11 +50,10 @@ class PlaybackViewController: UICollectionViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(applySnapshot), name: .stingsDidChange, object: show)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadEditedSting(_:)), name: .didFinishEditing, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showStateChanged(_:)), name: UIDocument.stateChangedNotification, object: show)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateManageStingsButtonVisibility), name: .unavailableStingsDidChange, object: nil)
         
         manageStingsButton.image = manageStingsButton.image?.withConfiguration(UIImage.SymbolConfiguration(weight: .semibold))
-        if show.unavailableSongs.count == 0 && show.unavailableFiles.count == 0 {
-            navigationItem.rightBarButtonItems?.removeAll{ $0 == manageStingsButton }
-        }
+        updateManageStingsButtonVisibility()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -286,6 +285,14 @@ class PlaybackViewController: UICollectionViewController {
     @objc func didAppendSting(_ notification: Notification) {
         guard let sting = notification.object as? Sting else { return }
         scrollTo(sting, animated: false)
+    }
+    
+    @objc func updateManageStingsButtonVisibility() {
+        guard let manageStingsButton = manageStingsButton else { return }
+        
+        if show.unavailableSongs.count == 0 && show.unavailableFiles.count == 0 {
+            navigationItem.rightBarButtonItems?.removeAll{ $0 == manageStingsButton }
+        }
     }
     
     func presentRenameDialog(for sting: Sting) {

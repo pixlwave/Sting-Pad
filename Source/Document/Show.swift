@@ -52,7 +52,7 @@ class Show: UIDocument {
         FolderBookmarks.shared.startAccessingSecurityScopedResources()
         defer { FolderBookmarks.shared.stopAccessingSecurityScopedResources() }
         
-        unavailableSongs.forEach { $0.reloadAudioWithBookmarks() }
+        unavailableSongs.forEach { $0.reloadAudioSearchingMediaLibrary() }
         unavailableFiles.forEach { $0.reloadAudioWithBookmarks() }
         
         // updates any changes in the sting management list

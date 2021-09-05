@@ -216,25 +216,61 @@ class Sting: NSObject, Codable, ObservableObject {
         if loops { createBuffer() }
     }
     
+    func reloadAudioSearchingMediaLibrary() {
+        guard url.isMediaItem else { return }
+        
+        if let audioFile = try? AVAudioFile(forReading: url) {
+            self.audioFile = audioFile
+        } else {
+            if let matchingAsset = metadata.matchingAsset {
+                if let assetURL = matchingAsset.assetURL, let audioFile = try? AVAudioFile(forReading: assetURL) {
+                    url = assetURL
+                    self.audioFile = audioFile
+                } else if matchingAsset.isCloudItem {
+                    self.audioFile = nil
+                    availability = .isCloudSong
+                } else {
+                    self.audioFile = nil
+                    availability = .unknown
+                    os_log("Song access error: Song has a local asset, unsure why load failed.")
+                }
+            } else {
+                self.audioFile = nil
+                availability = .noSuchSong
+            }
+        }
+        
+        guard audioFile != nil else { return }
+        
+        availability = .available
+        
+        // ensure start and end times are valid for new audio file
+        validateStartTimeAndEndTime()
+        
+        if loops { createBuffer() }
+        
+        NotificationCenter.default.post(name: .didFinishEditing, object: self)
+    }
+    
     func reloadAudioWithBookmarks() {
+        guard url.isFileURL else { return }
+        
         // reload the audio file
         guard let audioFile = try? AVAudioFile(forReading: url) else {
             // update availability: file may switch from no permission to no such file
-            if url.isFileURL {
-                do {
-                    _ = try url.checkResourceIsReachable()
+            do {
+                _ = try url.checkResourceIsReachable()
+                availability = .unknown
+                os_log("File URL access error: Resource is reachable, unsure why load failed.")
+            } catch let error as NSError {
+                switch error.code {
+                case NSFileReadNoSuchFileError:
+                    availability = .noSuchFile
+                case NSFileReadNoPermissionError:
+                    availability = .noPermission
+                default:
                     availability = .unknown
-                    os_log("File URL access error: Resource is reachable, unsure why load failed.")
-                } catch let error as NSError {
-                    switch error.code {
-                    case NSFileReadNoSuchFileError:
-                        availability = .noSuchFile
-                    case NSFileReadNoPermissionError:
-                        availability = .noPermission
-                    default:
-                        availability = .unknown
-                        os_log("File URL access error: %@", String(describing: error))
-                    }
+                    os_log("File URL access error: %@", String(describing: error))
                 }
             }
             return
