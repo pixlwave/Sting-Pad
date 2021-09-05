@@ -57,7 +57,9 @@ struct ManageStingsView: View {
     }
     
     func reloadData() {
-        unavailableSongs = show.unavailableSongs
-        unavailableFiles = show.unavailableFiles
+        withAnimation {
+            unavailableSongs = show.unavailableSongs
+            unavailableFiles = show.unavailableFiles
+        }
     }
 }

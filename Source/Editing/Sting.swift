@@ -159,7 +159,7 @@ class Sting: NSObject, Codable, ObservableObject {
         
         super.init()
         
-        validate(startTime: &startTime, endTime: &endTime)
+        validateNew(startTime: &startTime, endTime: &endTime)
         
         self.startTime = startTime
         self.endTime = endTime
@@ -208,9 +208,10 @@ class Sting: NSObject, Codable, ObservableObject {
         bookmark = sting.bookmark
         metadata = sting.metadata
         audioFile = sting.audioFile
+        availability = sting.availability
         
         // ensure start and end times are valid for new audio file
-        validate(startTime: &startTime, endTime: &endTime)
+        validateStartTimeAndEndTime()
         
         if loops { createBuffer() }
     }
@@ -248,7 +249,7 @@ class Sting: NSObject, Codable, ObservableObject {
         availability = .available
         
         // ensure start and end times are valid for new audio file
-        validate(startTime: &startTime, endTime: &endTime)
+        validateStartTimeAndEndTime()
         
         if loops { createBuffer() }
         
@@ -296,14 +297,36 @@ class Sting: NSObject, Codable, ObservableObject {
         var startTime = preset.startTime
         var endTime = preset.endTime
         
-        validate(startTime: &startTime, endTime: &endTime)
+        validateNew(startTime: &startTime, endTime: &endTime)
         
         self.startTime = startTime
         self.endTime = endTime
         self.loops = preset.loops
     }
     
-    func validate(startTime: inout TimeInterval, endTime: inout TimeInterval?) {
+    /// Validate ``startTime`` and ``endTime`` properties, updating them when necessary
+    func validateStartTimeAndEndTime() {
+        // make copies of the current start and end times otherwise
+        // validation can crash by accessing the mutated inout value
+        var startTime = startTime
+        var endTime = endTime
+        
+        // reset the current values to ensure it is safe to set them
+        // one before the other (as the buffer is updated each time)
+        self.startTime = 0
+        self.endTime = nil
+        
+        // ensure start and end times are valid for the audio file
+        validateNew(startTime: &startTime, endTime: &endTime)
+        
+        // set the times after validation has taken place
+        self.startTime = startTime
+        self.endTime = endTime
+    }
+    
+    /// Ensures the values passed in are valid start and end times for the current audio file.
+    /// Do NOT call this method passing in the current ``startTime`` and ``endTime`` properties.
+    func validateNew(startTime: inout TimeInterval, endTime: inout TimeInterval?) {
         guard let audioFile = audioFile else { return }    // don't wipe out the times when the audio file is missing
         
         let duration = Double(audioFile.length) / audioFile.processingFormat.sampleRate
