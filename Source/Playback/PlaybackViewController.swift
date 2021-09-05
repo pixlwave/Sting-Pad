@@ -26,6 +26,7 @@ class PlaybackViewController: UICollectionViewController {
     override var canBecomeFirstResponder: Bool { true }
     override var undoManager: UndoManager? { return show.undoManager }
     
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -97,6 +98,25 @@ class PlaybackViewController: UICollectionViewController {
         }
     }
     
+    @objc func showStateChanged(_ notification: Notification) {
+        os_log("Show State Changed: %d", log: .default, type: .debug, show.documentState.rawValue)
+    }
+    
+    @IBAction func closeShow() {
+        // stop listening for notifications in case a new show is opened before this gets deallocated
+        NotificationCenter.default.removeObserver(self)
+        
+        engine.stopSting()
+        show.close { success in
+            (self.presentingViewController as? ShowBrowserViewController)?.isLoading = false
+            self.dismiss(animated: true)
+        }
+        
+        // set data source to nil to remove reference cycle
+        dataSource = nil
+    }
+    
+    // MARK: Collection View
     func createLayout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment -> NSCollectionLayoutSection? in
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
@@ -184,24 +204,16 @@ class PlaybackViewController: UICollectionViewController {
         reloadItems([sting])
     }
     
-    @objc func showStateChanged(_ notification: Notification) {
-        os_log("Show State Changed: %d", log: .default, type: .debug, show.documentState.rawValue)
+    func stingCellForItem(at indexPath: IndexPath) -> StingCell? {
+        return collectionView.cellForItem(at: indexPath) as? StingCell
     }
     
-    @IBAction func closeShow() {
-        // stop listening for notifications in case a new show is opened before this gets deallocated
-        NotificationCenter.default.removeObserver(self)
-        
-        engine.stopSting()
-        show.close { success in
-            (self.presentingViewController as? ShowBrowserViewController)?.isLoading = false
-            self.dismiss(animated: true)
-        }
-        
-        // set data source to nil to remove reference cycle
-        dataSource = nil
+    func scrollTo(_ sting: Sting, animated: Bool = true) {
+        guard let indexPath = dataSource?.indexPath(for: sting) else { return }
+        collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: animated)
     }
     
+    // MARK: Editing
     func requestMediaLibraryAuthorization(successHandler: @escaping () -> Void) {
         MPMediaLibrary.requestAuthorization { authorizationStatus in
             if authorizationStatus == .authorized {
@@ -266,7 +278,7 @@ class PlaybackViewController: UICollectionViewController {
         let url = URL(fileURLWithPath: "/Users/Shared/Music").appendingPathComponent(file)
         
         if let sting = Sting(url: url) {
-            load(sting)
+            PickerCoordinator(show: show, pickerOperation: .normal).load(sting)
         }
     }
     #endif
@@ -319,6 +331,7 @@ class PlaybackViewController: UICollectionViewController {
         reloadItems([sting])
     }
     
+    // MARK: Playback
     @IBAction func playSting() {
         guard let sting = cuedSting ?? show.stings.playable.first else { return }
         
@@ -372,15 +385,6 @@ class PlaybackViewController: UICollectionViewController {
         cuedSting = newCue
         
         reloadItems([oldCue, newCue])
-    }
-    
-    func stingCellForItem(at indexPath: IndexPath) -> StingCell? {
-        return collectionView.cellForItem(at: indexPath) as? StingCell
-    }
-    
-    func scrollTo(_ sting: Sting, animated: Bool = true) {
-        guard let indexPath = dataSource?.indexPath(for: sting) else { return }
-        collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: animated)
     }
     
     func updateProgress() {
