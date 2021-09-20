@@ -10,7 +10,9 @@ extension Sting {
         case orange
         case yellow
         case green
+        case mint
         case teal
+        case cyan
         case blue
         case indigo
         case purple
@@ -36,8 +38,12 @@ extension Sting {
                 return .systemYellow
             case .green:
                 return .systemGreen
+            case .mint:
+                return .systemMint
             case .teal:
                 return .systemTeal
+            case .cyan:
+                return .systemCyan
             case .blue:
                 return .systemBlue
             case .indigo:
