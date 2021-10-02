@@ -169,9 +169,9 @@ class EditViewController: UIViewController {
         
         let oldSample = sting.startSample
         sting.startSample = sample
-        undoManager?.registerUndo(withTarget: self, handler: { _ in
-            self.setStartSample(to: oldSample)
-        })
+        undoManager?.registerUndo(withTarget: self) {
+            $0.setStartSample(to: oldSample)
+        }
     }
     
     func setEndSample(to sample: AVAudioFramePosition) {
@@ -179,9 +179,9 @@ class EditViewController: UIViewController {
         
         let oldSample = sting.endSample
         sting.endSample = sample
-        undoManager?.registerUndo(withTarget: self, handler: { _ in
-            self.setEndSample(to: oldSample)
-        })
+        undoManager?.registerUndo(withTarget: self) {
+            $0.setEndSample(to: oldSample)
+        }
     }
     
     @IBAction func previewStart() {
@@ -225,9 +225,9 @@ class EditViewController: UIViewController {
         
         let oldValue = sting.loops
         sting.loops = value
-        undoManager?.registerUndo(withTarget: self, handler: { _ in
-            self.setLoops(oldValue)
-        })
+        undoManager?.registerUndo(withTarget: self) {
+            $0.setLoops(oldValue)
+        }
     }
     
     @IBAction func saveAsPreset() {

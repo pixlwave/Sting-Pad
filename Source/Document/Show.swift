@@ -62,30 +62,30 @@ class Show: UIDocument {
     // editing functions exist to allow the show to load without updating it's change count
     func append(_ sting: Sting) {
         stings.append(sting)
-        undoManager.registerUndo(withTarget: self) { _ in
-            self.removeSting(at: self.stings.count - 1)
+        undoManager.registerUndo(withTarget: self) {
+            $0.removeSting(at: self.stings.count - 1)
         }
     }
     
     func insert(_ sting: Sting, at index: Int) {
         stings.insert(sting, at: index)
-        undoManager.registerUndo(withTarget: self) { _ in
-            self.removeSting(at: index)
+        undoManager.registerUndo(withTarget: self) {
+            $0.removeSting(at: index)
         }
     }
     
     func moveSting(from sourceIndex: Int, to destinationIndex: Int) {
         stings.insert(stings.remove(at: sourceIndex), at: destinationIndex)
-        undoManager.registerUndo(withTarget: self) { _ in
-            self.moveSting(from: destinationIndex, to: sourceIndex)
+        undoManager.registerUndo(withTarget: self) {
+            $0.moveSting(from: destinationIndex, to: sourceIndex)
         }
     }
     
     @discardableResult
     func removeSting(at index: Int) -> Sting {
         let sting = stings.remove(at: index)
-        undoManager.registerUndo(withTarget: self) { _ in
-            self.insert(sting, at: index)
+        undoManager.registerUndo(withTarget: self) {
+            $0.insert(sting, at: index)
         }
         
         return sting

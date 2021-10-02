@@ -320,8 +320,8 @@ class PlaybackViewController: UICollectionViewController {
         let oldName = sting.name
         sting.name = name
         if sting.name != oldName {
-            show.undoManager.registerUndo(withTarget: self) { _ in
-                self.rename(sting, to: oldName)
+            show.undoManager.registerUndo(withTarget: self) {
+                $0.rename(sting, to: oldName)
             }
         }
         reloadItems([sting])
@@ -331,8 +331,8 @@ class PlaybackViewController: UICollectionViewController {
         let oldColor = sting.color
         sting.color = color
         if sting.color != oldColor {
-            show.undoManager.registerUndo(withTarget: self) { _ in
-                self.change(sting, to: oldColor)
+            show.undoManager.registerUndo(withTarget: self) {
+                $0.change(sting, to: oldColor)
             }
         }
         reloadItems([sting])
