@@ -32,6 +32,9 @@ class EditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // add visual separation between the navigation bar and content
+        navigationController?.navigationBar.scrollEdgeAppearance = UINavigationBarAppearance()
+        
         // load track info
         updateLabels()
         loopSwitch.isOn = sting.loops
