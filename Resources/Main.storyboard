@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cXS-uy-K0n">
-    <device id="retina4_0" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cXS-uy-K0n">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
-        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,7 +20,7 @@
             <objects>
                 <collectionViewController clearsSelectionOnViewWillAppear="NO" id="yak-cE-mUi" customClass="PlaybackViewController" customModule="StingPad" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="7JH-vP-Uzz">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="tintColor" name="Tint Color"/>
@@ -34,7 +32,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Sting Cell" id="wn0-gC-jEl" customClass="StingCell" customModule="StingPad" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="8" width="320" height="90"/>
+                                <rect key="frame" x="140" y="8" width="320" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
@@ -44,7 +42,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="bv4-uN-qad">
-                                                    <rect key="frame" x="15" y="17" width="60" height="56.5"/>
+                                                    <rect key="frame" x="15" y="16" width="60" height="58.5"/>
                                                     <color key="tintColor" name="Background Color"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="bv4-uN-qad" secondAttribute="height" multiplier="1:1" id="1Ld-mk-AZl"/>
@@ -77,7 +75,7 @@
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N87-CB-SQ8">
-                                            <rect key="frame" x="284.5" y="68" width="28.5" height="16"/>
+                                            <rect key="frame" x="286.5" y="69.5" width="26.5" height="14.5"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                             <color key="textColor" systemColor="secondaryLabelColor"/>
                                             <nil key="highlightedColor"/>
@@ -141,55 +139,39 @@
                     </navigationItem>
                     <connections>
                         <outlet property="manageStingsButton" destination="8fW-IC-D3F" id="u7b-BK-RCK"/>
-                        <segue destination="nGG-by-uzG" kind="presentation" identifier="Edit Sting" id="7h3-gk-nqV"/>
+                        <segue destination="4b5-QQ-a7N" kind="presentation" identifier="Edit Sting" destinationCreationSelector="editStingSegue:sender:" id="gBs-UG-cdx"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TjI-mr-Eu1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1147.5" y="-732.04225352112678"/>
         </scene>
+        <!--Hosting Controller-->
+        <scene sceneID="uai-it-4hP">
+            <objects>
+                <hostingController id="4b5-QQ-a7N" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e9c-dd-FyW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2138" y="-732"/>
+        </scene>
         <!--Edit Sting-->
         <scene sceneID="BBH-1f-24n">
             <objects>
-                <viewController id="sKY-0b-GtB" customClass="EditViewController" customModule="StingPad" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Waveform View Controller" id="sKY-0b-GtB" customClass="WaveformViewController" customModule="StingPad" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jgb-pc-X2x"/>
                         <viewControllerLayoutGuide type="bottom" id="rVl-rn-yCL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="IL7-SC-53c">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="198"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="cey-fv-2gg" userLabel="Top Stack">
-                                <rect key="frame" x="20" y="76" width="280" height="43.5"/>
-                                <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDC-cS-RXP">
-                                        <rect key="frame" x="0.0" y="0.0" width="280" height="21.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ah-Ra-mmM">
-                                        <rect key="frame" x="0.0" y="26.5" width="280" height="17"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="8ah-Ra-mmM" firstAttribute="width" secondItem="cey-fv-2gg" secondAttribute="width" id="doJ-qv-mZd"/>
-                                    <constraint firstItem="EDC-cS-RXP" firstAttribute="width" secondItem="cey-fv-2gg" secondAttribute="width" id="lf4-1z-WFZ"/>
-                                </constraints>
-                            </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bwd-bB-yIj" userLabel="Waveform Container">
-                                <rect key="frame" x="20" y="139.5" width="280" height="117"/>
+                                <rect key="frame" x="20" y="0.0" width="280" height="117"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7J2-20-QTO" customClass="WaveformView" customModule="StingPad" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="42" width="280" height="75"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="7J2-20-QTO" secondAttribute="height" multiplier="56:15" id="mo1-e8-rbo"/>
-                                        </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="clh-uY-v8F">
                                         <rect key="frame" x="0.0" y="42" width="280" height="75"/>
@@ -213,7 +195,7 @@
                                             <constraint firstItem="DSS-g4-Ymn" firstAttribute="top" secondItem="clh-uY-v8F" secondAttribute="top" id="y2K-c5-lBl"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lRX-bK-xRr" userLabel="Preview Start">
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lRX-bK-xRr" userLabel="Preview Start">
                                         <rect key="frame" x="-24.5" y="0.0" width="49" height="42"/>
                                         <inset key="contentEdgeInsets" minX="15" minY="10" maxX="15" maxY="10"/>
                                         <state key="normal" image="play" catalog="system">
@@ -223,7 +205,15 @@
                                             <action selector="previewStart" destination="sKY-0b-GtB" eventType="touchDown" id="Zea-fd-byW"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Oy-Y8-dK5" userLabel="Preview End">
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l5b-3m-bXs" userLabel="Stop Preview">
+                                        <rect key="frame" x="24.5" y="0.0" width="231" height="42"/>
+                                        <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
+                                        <state key="normal" image="stop" catalog="system"/>
+                                        <connections>
+                                            <action selector="stop" destination="sKY-0b-GtB" eventType="touchUpInside" id="2dT-M5-q37"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Oy-Y8-dK5" userLabel="Preview End">
                                         <rect key="frame" x="255.5" y="0.0" width="49" height="42"/>
                                         <inset key="contentEdgeInsets" minX="15" minY="10" maxX="15" maxY="10"/>
                                         <state key="normal" image="play" catalog="system">
@@ -231,14 +221,6 @@
                                         </state>
                                         <connections>
                                             <action selector="previewEnd" destination="sKY-0b-GtB" eventType="touchDown" id="a8P-0O-yNN"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l5b-3m-bXs" userLabel="Stop Preview">
-                                        <rect key="frame" x="24.5" y="0.0" width="231" height="42"/>
-                                        <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
-                                        <state key="normal" image="stop" catalog="system"/>
-                                        <connections>
-                                            <action selector="stop" destination="sKY-0b-GtB" eventType="touchUpInside" id="2dT-M5-q37"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -264,7 +246,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JeS-dG-0bW" userLabel="Start Marker" customClass="WaveformMarkerView" customModule="StingPad" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="256.5" width="40" height="40"/>
+                                <rect key="frame" x="0.0" y="117" width="40" height="40"/>
                                 <color key="backgroundColor" name="Tint Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="UOg-vJ-yHy"/>
@@ -272,15 +254,16 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x4N-WC-9YE" userLabel="End Marker" customClass="WaveformMarkerView" customModule="StingPad" customModuleProvider="target">
-                                <rect key="frame" x="280" y="256.5" width="40" height="40"/>
+                                <rect key="frame" x="280" y="117" width="40" height="40"/>
                                 <color key="backgroundColor" name="Tint Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="3Jw-VJ-lf6"/>
                                     <constraint firstAttribute="width" constant="40" id="MOQ-PO-zcl"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyO-e7-KqD">
-                                <rect key="frame" x="275.5" y="304.5" width="24.5" height="22.5"/>
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyO-e7-KqD">
+                                <rect key="frame" x="275" y="165" width="25" height="33"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
                                 <state key="normal" image="1.magnifyingglass" catalog="system">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
@@ -289,84 +272,20 @@
                                     <action selector="zoomWaveOut" destination="sKY-0b-GtB" eventType="touchUpInside" id="Q8G-oQ-cGi"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="oK2-1w-g1j" userLabel="Bottom Stack">
-                                <rect key="frame" x="20" y="335" width="280" height="75"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hG6-QV-E3U">
-                                        <rect key="frame" x="88.5" y="0.0" width="103" height="40.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loop" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRD-t4-QSP">
-                                                <rect key="frame" x="0.0" y="10" width="49" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RCd-w4-mUV">
-                                                <rect key="frame" x="54" y="4.5" width="51" height="31"/>
-                                                <connections>
-                                                    <action selector="toggleLoop:" destination="sKY-0b-GtB" eventType="valueChanged" id="m5f-vK-8vz"/>
-                                                </connections>
-                                            </switch>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="HRD-t4-QSP" firstAttribute="centerY" secondItem="RCd-w4-mUV" secondAttribute="centerY" id="Fsi-GU-485"/>
-                                        </constraints>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="firstBaseline" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="2ZM-zS-YH1">
-                                        <rect key="frame" x="0.0" y="48.5" width="280" height="26.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Previews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="obS-Gm-PoA">
-                                                <rect key="frame" x="0.0" y="0.0" width="64.5" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="vXN-JJ-zX7">
-                                                <rect key="frame" x="84.5" y="-4.5" width="195.5" height="32"/>
-                                                <segments>
-                                                    <segment title="Off"/>
-                                                    <segment title="1"/>
-                                                    <segment title="2"/>
-                                                    <segment title="5"/>
-                                                    <segment title="Full"/>
-                                                </segments>
-                                                <connections>
-                                                    <action selector="previewLengthDidChange" destination="sKY-0b-GtB" eventType="valueChanged" id="3PZ-9H-kRy"/>
-                                                </connections>
-                                            </segmentedControl>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tqx-tQ-4gh">
-                                <rect key="frame" x="109.5" y="430" width="101" height="30"/>
-                                <state key="normal" title="Save as Preset"/>
-                                <connections>
-                                    <action selector="saveAsPreset" destination="sKY-0b-GtB" eventType="touchUpInside" id="0ju-9M-y08"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="tintColor" name="Tint Color"/>
                         <constraints>
                             <constraint firstItem="tyO-e7-KqD" firstAttribute="top" secondItem="x4N-WC-9YE" secondAttribute="bottom" constant="8" symbolic="YES" id="14J-Dh-7Gm"/>
                             <constraint firstItem="JeS-dG-0bW" firstAttribute="centerX" secondItem="7J2-20-QTO" secondAttribute="leading" id="6kI-r7-zUb"/>
-                            <constraint firstItem="oK2-1w-g1j" firstAttribute="width" secondItem="cey-fv-2gg" secondAttribute="width" id="9IW-3R-DB6"/>
-                            <constraint firstItem="tqx-tQ-4gh" firstAttribute="centerX" secondItem="IL7-SC-53c" secondAttribute="centerX" id="CwW-nZ-VyM"/>
-                            <constraint firstItem="cey-fv-2gg" firstAttribute="top" secondItem="jgb-pc-X2x" secondAttribute="bottom" constant="20" id="Hpw-fM-An3"/>
+                            <constraint firstAttribute="trailing" secondItem="bwd-bB-yIj" secondAttribute="trailing" constant="20" symbolic="YES" id="GUs-B3-SeH"/>
                             <constraint firstItem="JeS-dG-0bW" firstAttribute="top" secondItem="7J2-20-QTO" secondAttribute="bottom" id="Jx2-SJ-QOX"/>
-                            <constraint firstItem="bwd-bB-yIj" firstAttribute="width" secondItem="cey-fv-2gg" secondAttribute="width" id="PP8-lx-XkK"/>
-                            <constraint firstItem="rVl-rn-yCL" firstAttribute="top" relation="greaterThanOrEqual" secondItem="cey-fv-2gg" secondAttribute="bottom" constant="8" symbolic="YES" id="PRN-2l-UNv"/>
+                            <constraint firstAttribute="bottom" secondItem="tyO-e7-KqD" secondAttribute="bottom" id="PiB-6c-voY"/>
                             <constraint firstItem="tyO-e7-KqD" firstAttribute="trailing" secondItem="bwd-bB-yIj" secondAttribute="trailing" id="R9v-I8-hkQ"/>
                             <constraint firstItem="x4N-WC-9YE" firstAttribute="top" secondItem="7J2-20-QTO" secondAttribute="bottom" id="UY1-RL-nfE"/>
-                            <constraint firstItem="oK2-1w-g1j" firstAttribute="centerX" secondItem="cey-fv-2gg" secondAttribute="centerX" id="bkB-ez-gi4"/>
+                            <constraint firstItem="bwd-bB-yIj" firstAttribute="top" secondItem="IL7-SC-53c" secondAttribute="top" id="XVa-iV-mMU"/>
                             <constraint firstItem="x4N-WC-9YE" firstAttribute="centerX" secondItem="7J2-20-QTO" secondAttribute="leading" constant="280" id="e4Q-it-uoL"/>
-                            <constraint firstItem="bwd-bB-yIj" firstAttribute="top" secondItem="cey-fv-2gg" secondAttribute="bottom" constant="20" id="ikZ-xc-x2k"/>
-                            <constraint firstAttribute="trailing" secondItem="cey-fv-2gg" secondAttribute="trailing" constant="20" symbolic="YES" id="o7e-3e-u51"/>
-                            <constraint firstItem="tqx-tQ-4gh" firstAttribute="top" secondItem="2ZM-zS-YH1" secondAttribute="bottom" constant="20" id="oj7-Yg-Ukn"/>
-                            <constraint firstItem="oK2-1w-g1j" firstAttribute="top" secondItem="tyO-e7-KqD" secondAttribute="bottom" constant="8" symbolic="YES" id="prU-VX-lhg"/>
-                            <constraint firstItem="cey-fv-2gg" firstAttribute="leading" secondItem="IL7-SC-53c" secondAttribute="leading" constant="20" symbolic="YES" id="uIX-pJ-UfC"/>
-                            <constraint firstItem="bwd-bB-yIj" firstAttribute="centerX" secondItem="cey-fv-2gg" secondAttribute="centerX" id="yDD-1m-MVR"/>
+                            <constraint firstItem="bwd-bB-yIj" firstAttribute="leading" secondItem="IL7-SC-53c" secondAttribute="leading" constant="20" symbolic="YES" id="pxQ-Vo-XI9"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Edit Sting" id="JWi-WN-0lh">
@@ -376,19 +295,16 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <size key="freeformSize" width="320" height="198"/>
                     <connections>
                         <outlet property="endMarkerHorizontalLayoutConstraint" destination="e4Q-it-uoL" id="sgG-WZ-o3v"/>
                         <outlet property="endMarkerView" destination="x4N-WC-9YE" id="GGz-x2-0fx"/>
                         <outlet property="endPlayButton" destination="6Oy-Y8-dK5" id="vax-1o-9gi"/>
                         <outlet property="endPlayButtonHorizontalLayoutConstraint" destination="tHE-qb-DPI" id="mOc-d5-OQM"/>
-                        <outlet property="loopSwitch" destination="RCd-w4-mUV" id="dO8-oc-7GR"/>
-                        <outlet property="previewLengthControl" destination="vXN-JJ-zX7" id="kGY-kB-our"/>
                         <outlet property="startMarkerHorizontalLayoutConstraint" destination="6kI-r7-zUb" id="wd4-e0-WbL"/>
                         <outlet property="startMarkerView" destination="JeS-dG-0bW" id="7se-ac-Snw"/>
                         <outlet property="startPlayButton" destination="lRX-bK-xRr" id="R61-ea-vPH"/>
                         <outlet property="startPlayButtonHorizontalLayoutConstraint" destination="H6v-o9-uH7" id="j11-3g-XM1"/>
-                        <outlet property="subtitleLabel" destination="8ah-Ra-mmM" id="PDI-ff-nfj"/>
-                        <outlet property="titleLabel" destination="EDC-cS-RXP" id="mWC-r4-wcL"/>
                         <outlet property="waveformLoadingView" destination="clh-uY-v8F" id="SAp-fH-qL2"/>
                         <outlet property="waveformView" destination="7J2-20-QTO" id="WsB-ON-Oo1"/>
                     </connections>
@@ -431,7 +347,7 @@
                     </subviews>
                 </stackView>
             </objects>
-            <point key="canvasLocation" x="3135" y="-732.04225352112678"/>
+            <point key="canvasLocation" x="3136.875" y="-928.52112676056333"/>
         </scene>
         <!--Show Browser View Controller-->
         <scene sceneID="49a-1F-SrI">
@@ -442,7 +358,7 @@
                         <viewControllerLayoutGuide type="bottom" id="heL-90-VhG"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="i0c-bv-lB3">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
@@ -470,25 +386,6 @@
             </objects>
             <point key="canvasLocation" x="150" y="-732.04225352112678"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Stl-Rh-H2v">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nGG-by-uzG" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" id="8x9-bp-sBW"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="JI4-gK-ZCd">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="sKY-0b-GtB" kind="relationship" relationship="rootViewController" id="JAU-wG-cRr"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="b8Y-zV-Rbl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2137.5" y="-732.04225352112678"/>
-        </scene>
         <!--Settings-->
         <scene sceneID="hEy-43-KfM">
             <objects>
@@ -501,7 +398,7 @@
     <color key="tintColor" name="Tint Color"/>
     <resources>
         <image name="1.magnifyingglass" catalog="system" width="128" height="115"/>
-        <image name="circle" catalog="system" width="32" height="32"/>
+        <image name="circle" catalog="system" width="128" height="121"/>
         <image name="exclamationmark.circle" catalog="system" width="128" height="121"/>
         <image name="play" catalog="system" width="120" height="128"/>
         <image name="slider.horizontal.3" catalog="system" width="128" height="100"/>

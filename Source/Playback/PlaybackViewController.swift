@@ -24,7 +24,7 @@ class PlaybackViewController: UICollectionViewController {
     
     // respond to undo gestures, forwarding them to the show's undo manager
     override var canBecomeFirstResponder: Bool { true }
-    override var undoManager: UndoManager? { return show.undoManager }
+    override var undoManager: UndoManager? { show.undoManager }
     
     // MARK: Lifecycle
     override func viewDidLoad() {
@@ -74,6 +74,13 @@ class PlaybackViewController: UICollectionViewController {
         collectionView.verticalScrollIndicatorInsets.bottom = size.height
     }
     
+    @IBSegueAction func editStingSegue(_ coder: NSCoder, sender: Any?) -> UIViewController? {
+        guard let sting = sender as? Sting else { return nil }
+        
+        let view = EditStingView(show: show, sting: sting, dismiss: { self.dismiss(animated: true) })
+        return HostingController(coder: coder, rootView: view, show: show)
+    }
+    
     @IBSegueAction func manageStingsSegue(_ coder: NSCoder) -> UIViewController? {
         let view = ManageStingsView(show: show, dismiss: { self.dismiss(animated: true) })
         return UIHostingController(coder: coder, rootView: view)
@@ -82,19 +89,6 @@ class PlaybackViewController: UICollectionViewController {
     @IBSegueAction func settingsSegue(_ coder: NSCoder) -> UIViewController? {
         let view = SettingsView(show: show, dismiss: { self.dismiss(animated: true) })
         return UIHostingController(coder: coder, rootView: view)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Edit Sting" {
-            guard
-                let navigationVC = segue.destination as? UINavigationController,
-                let editVC = navigationVC.topViewController as? EditViewController,
-                let sting = sender as? Sting
-            else { return }
-            
-            editVC.show = show
-            editVC.sting = sting
-        }
     }
     
     @objc func showStateChanged(_ notification: Notification) {

@@ -1,18 +1,23 @@
 import UIKit
 import AVFoundation
 
-class EditViewController: UIViewController {
+class WaveformViewController: UIViewController {
+    
+    var coordinator: Waveform.Coordinator?
     
     // access the music
     let engine = Engine.shared
-    var show: Show?
+    var show: Show!
     
     var sting: Sting!
     var hasSecurityScopedAccess = false
-    var previewLength: [TimeInterval] = [0, 1, 2, 5, 10]
+    var previewLength: TimeInterval = 2 {
+        didSet {
+            startPlayButton.isEnabled = previewLength > 0
+            endPlayButton.isEnabled = previewLength > 0
+        }
+    }
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var waveformView: WaveformView!
     @IBOutlet weak var waveformLoadingView: UIView!
     @IBOutlet weak var startPlayButton: UIButton!
@@ -23,21 +28,11 @@ class EditViewController: UIViewController {
     @IBOutlet weak var endPlayButtonHorizontalLayoutConstraint: NSLayoutConstraint!
     @IBOutlet weak var endMarkerView: WaveformMarkerView!
     @IBOutlet weak var endMarkerHorizontalLayoutConstraint: NSLayoutConstraint!
-    @IBOutlet weak var loopSwitch: UISwitch!
-    @IBOutlet weak var previewLengthControl: UISegmentedControl!
     
-    override var canBecomeFirstResponder: Bool { true }
-    override var undoManager: UndoManager? { show?.undoManager }
+    override var undoManager: UndoManager? { show.undoManager }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // add visual separation between the navigation bar and content
-        navigationController?.navigationBar.scrollEdgeAppearance = UINavigationBarAppearance()
-        
-        // load track info
-        updateLabels()
-        loopSwitch.isOn = sting.loops
         
         // set up the waveform view
         waveformView.delegate = self
@@ -54,23 +49,11 @@ class EditViewController: UIViewController {
         waveformView.audioURL = sting.url
         
         NotificationCenter.default.addObserver(self, selector: #selector(layoutWaveformOverlayViews), name: .waveformViewDidLayoutSubviews, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateControls), name: .NSUndoManagerDidUndoChange, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateControls), name: .NSUndoManagerDidRedoChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateHighlightedSamples), name: .NSUndoManagerDidUndoChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateHighlightedSamples), name: .NSUndoManagerDidRedoChange, object: nil)
         
         startMarkerView.dragRecogniser.addTarget(self, action: #selector(startMarkerDragged(_:)))
         endMarkerView.dragRecogniser.addTarget(self, action: #selector(endMarkerDragged(_:)))
-        
-        if engine.playingSting != nil {
-            previewLengthControl.selectedSegmentIndex = 0
-            previewLengthDidChange()
-        }
-        
-        show?.undoManager.removeAllActions()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        becomeFirstResponder()  // respond to undo gestures
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -83,31 +66,15 @@ class EditViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        resignFirstResponder()
-        
         // remove access to the url when finished
         if hasSecurityScopedAccess {
             #warning("Is this holding onto access for too long?")
             sting.url.stopAccessingSecurityScopedResource()
         }
-        
-        show?.undoManager.removeAllActions()
     }
     
-    func updateLabels() {
-        navigationItem.title = sting.name ?? sting.songTitle
-        titleLabel.text = sting.songTitle
-        subtitleLabel.text = sting.songArtist
-    }
-    
-    @objc func updateControls() {
+    @objc func updateHighlightedSamples() {
         waveformView.highlightedSamples = Int(sting.startSample) ..< Int(sting.endSample)
-        loopSwitch.isOn = sting.loops
-    }
-    
-    @IBAction func previewLengthDidChange() {
-        startPlayButton.isEnabled = previewLengthControl.selectedSegmentIndex > 0
-        endPlayButton.isEnabled = previewLengthControl.selectedSegmentIndex > 0
     }
     
     @objc func layoutWaveformOverlayViews() {
@@ -185,18 +152,16 @@ class EditViewController: UIViewController {
     }
     
     @IBAction func previewStart() {
-        let length = previewLength[previewLengthControl.selectedSegmentIndex]
-        if length < 10 {
-            engine.previewStart(of: sting, for: length)
+        if previewLength < 10 {
+            engine.previewStart(of: sting, for: previewLength)
         } else {
             engine.play(sting)
         }
     }
     
     @IBAction func previewEnd() {
-        let length = previewLength[previewLengthControl.selectedSegmentIndex]
-        if length < 10 {
-            engine.previewEnd(of: sting, for: length)
+        if previewLength < 10 {
+            engine.previewEnd(of: sting, for: previewLength)
         } else {
             engine.play(sting)
         }
@@ -206,42 +171,20 @@ class EditViewController: UIViewController {
         engine.stopSting()
         
         // re-enable previews now that the previous sting has been stopped
-        if previewLengthControl.selectedSegmentIndex == 0 {
-            previewLengthControl.selectedSegmentIndex = 2
-            previewLengthDidChange()
+        if previewLength == 0 {
+            previewLength = 2
+            coordinator?.setPreviewLength(2)
         }
     }
     
     @IBAction func zoomWaveOut() {
         waveformView.zoomSamples = Range(0...waveformView.totalSamples)
     }
-    
-    @IBAction func toggleLoop(_ sender: UISwitch) {
-        setLoops(sender.isOn)
-    }
-    
-    func setLoops(_ value: Bool) {
-        guard value != sting.loops else { return }
-        
-        let oldValue = sting.loops
-        sting.loops = value
-        undoManager?.registerUndo(withTarget: self) {
-            $0.setLoops(oldValue)
-        }
-    }
-    
-    @IBAction func saveAsPreset() {
-        sting.setPreset()
-    }
-    
-    @IBAction func done() {
-        dismiss(animated: true)
-    }
 }
 
 
 // MARK: FDWaveformViewDelegate
-extension EditViewController: FDWaveformViewDelegate {
+extension WaveformViewController: FDWaveformViewDelegate {
     
     func waveformViewDidLoad(_ waveformView: FDWaveformView) {
         // once the audio file has loaded (and totalSamples is known), set the highlighted samples

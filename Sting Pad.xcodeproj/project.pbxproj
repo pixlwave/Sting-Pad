@@ -13,12 +13,16 @@
 		A549825B1F7067EC00909196 /* FDWaveformRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54982591F7067EC00909196 /* FDWaveformRenderOperation.swift */; };
 		A55C0E7222AA5498008DDB12 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C0E7122AA5498008DDB12 /* Show.swift */; };
 		A55C0E7622AA7202008DDB12 /* TransportView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A55C0E7522AA7202008DDB12 /* TransportView.xib */; };
+		A5616BE8270A3BEE007DB43A /* SizeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5616BE7270A3BEE007DB43A /* SizeKey.swift */; };
+		A5616BEA270A3C17007DB43A /* UndoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5616BE9270A3C17007DB43A /* UndoProvider.swift */; };
+		A5616DA4270897D300DFBCF2 /* EditStingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5616DA3270897D300DFBCF2 /* EditStingView.swift */; };
+		A5616DA62708BB7300DFBCF2 /* Waveform.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5616DA52708BB7200DFBCF2 /* Waveform.swift */; };
 		A567FB7022F1F67A00B4DB70 /* ChannelPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = A567FB6F22F1F67A00B4DB70 /* ChannelPair.swift */; };
 		A56EB2C922F7538F00358A7C /* AddStingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56EB2C822F7538F00358A7C /* AddStingButton.swift */; };
 		A5760DD325AF414600398860 /* FolderAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5760DD225AF414600398860 /* FolderAccessView.swift */; };
 		A581C38D1B946B7C006CE228 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C38C1B946B7C006CE228 /* Engine.swift */; };
 		A581C3981B94769F006CE228 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A581C3951B94769F006CE228 /* Main.storyboard */; };
-		A581C39D1B949A06006CE228 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C39C1B949A06006CE228 /* EditViewController.swift */; };
+		A581C39D1B949A06006CE228 /* WaveformViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C39C1B949A06006CE228 /* WaveformViewController.swift */; };
 		A581C39F1B949AD6006CE228 /* PlaybackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C39E1B949AD6006CE228 /* PlaybackViewController.swift */; };
 		A581C3A21B94A041006CE228 /* StingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581C3A11B94A041006CE228 /* StingCell.swift */; };
 		A58988FD23A6B97C00A85485 /* iPadLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = A58988FC23A6B97C00A85485 /* iPadLarge.png */; };
@@ -29,6 +33,7 @@
 		A5A49C8F1B5BF1C2004B80CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A49C8E1B5BF1C2004B80CE /* AppDelegate.swift */; };
 		A5A49C961B5BF1C2004B80CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5A49C951B5BF1C2004B80CE /* Assets.xcassets */; };
 		A5A49CB11B5BF216004B80CE /* Sting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A49CB01B5BF216004B80CE /* Sting.swift */; };
+		A5A5245C2711CDC000374E28 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5245B2711CDC000374E28 /* HostingController.swift */; };
 		A5B1DFD326E3C089009BF8FB /* UnavailableFilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B1DFD226E3C089009BF8FB /* UnavailableFilesView.swift */; };
 		A5B1DFD526E3C0BA009BF8FB /* UnavailableSongsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B1DFD426E3C0BA009BF8FB /* UnavailableSongsView.swift */; };
 		A5B1DFD926E3E398009BF8FB /* SongPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B1DFD826E3E398009BF8FB /* SongPicker.swift */; };
@@ -57,13 +62,17 @@
 		A54982591F7067EC00909196 /* FDWaveformRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDWaveformRenderOperation.swift; sourceTree = "<group>"; };
 		A55C0E7122AA5498008DDB12 /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
 		A55C0E7522AA7202008DDB12 /* TransportView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransportView.xib; sourceTree = "<group>"; };
+		A5616BE7270A3BEE007DB43A /* SizeKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeKey.swift; sourceTree = "<group>"; };
+		A5616BE9270A3C17007DB43A /* UndoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoProvider.swift; sourceTree = "<group>"; };
+		A5616DA3270897D300DFBCF2 /* EditStingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStingView.swift; sourceTree = "<group>"; };
+		A5616DA52708BB7200DFBCF2 /* Waveform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Waveform.swift; sourceTree = "<group>"; };
 		A567FB6F22F1F67A00B4DB70 /* ChannelPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelPair.swift; sourceTree = "<group>"; };
 		A56EB2C822F7538F00358A7C /* AddStingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStingButton.swift; sourceTree = "<group>"; };
 		A570012F25B464C400CEC8BD /* Sting Pad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Sting Pad.entitlements"; sourceTree = "<group>"; };
 		A5760DD225AF414600398860 /* FolderAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderAccessView.swift; sourceTree = "<group>"; };
 		A581C38C1B946B7C006CE228 /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		A581C3951B94769F006CE228 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		A581C39C1B949A06006CE228 /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		A581C39C1B949A06006CE228 /* WaveformViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveformViewController.swift; sourceTree = "<group>"; };
 		A581C39E1B949AD6006CE228 /* PlaybackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackViewController.swift; sourceTree = "<group>"; };
 		A581C3A11B94A041006CE228 /* StingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StingCell.swift; sourceTree = "<group>"; };
 		A58988FC23A6B97C00A85485 /* iPadLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPadLarge.png; sourceTree = "<group>"; };
@@ -76,6 +85,7 @@
 		A5A49C8E1B5BF1C2004B80CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5A49C951B5BF1C2004B80CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A5A49CB01B5BF216004B80CE /* Sting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sting.swift; sourceTree = "<group>"; };
+		A5A5245B2711CDC000374E28 /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
 		A5B1DFD226E3C089009BF8FB /* UnavailableFilesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnavailableFilesView.swift; sourceTree = "<group>"; };
 		A5B1DFD426E3C0BA009BF8FB /* UnavailableSongsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnavailableSongsView.swift; sourceTree = "<group>"; };
 		A5B1DFD826E3E398009BF8FB /* SongPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongPicker.swift; sourceTree = "<group>"; };
@@ -159,7 +169,9 @@
 				A5A49CB01B5BF216004B80CE /* Sting.swift */,
 				A51D98ED22BBCF7D00124A40 /* Color.swift */,
 				A5E65EB3231AE0BA0058BBEE /* Metadata.swift */,
-				A581C39C1B949A06006CE228 /* EditViewController.swift */,
+				A5616DA3270897D300DFBCF2 /* EditStingView.swift */,
+				A5616DA52708BB7200DFBCF2 /* Waveform.swift */,
+				A581C39C1B949A06006CE228 /* WaveformViewController.swift */,
 				A5CEE51223215B1800BB7CD1 /* WaveformView.swift */,
 				A5CEE5142321695100BB7CD1 /* WaveformMarkerView.swift */,
 			);
@@ -174,6 +186,16 @@
 				A54982591F7067EC00909196 /* FDWaveformRenderOperation.swift */,
 			);
 			path = FDWaveformView;
+			sourceTree = "<group>";
+		};
+		A5616BE6270A3BCA007DB43A /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				A5616BE7270A3BEE007DB43A /* SizeKey.swift */,
+				A5616BE9270A3C17007DB43A /* UndoProvider.swift */,
+				A5A5245B2711CDC000374E28 /* HostingController.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		A589890023A6B99C00A85485 /* Document Icons */ = {
@@ -242,6 +264,7 @@
 				A5FBD7D21F7C447000B5799C /* Help */,
 				A547362D261B671D0049E920 /* Settings */,
 				A5473631261B67900049E920 /* Sting Management */,
+				A5616BE6270A3BCA007DB43A /* Shared */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -346,27 +369,32 @@
 				A5A49C8F1B5BF1C2004B80CE /* AppDelegate.swift in Sources */,
 				A5B39BDE1DAA843A00AA22EF /* FDWaveformView.swift in Sources */,
 				A5CEE5152321695100BB7CD1 /* WaveformMarkerView.swift in Sources */,
+				A5616DA4270897D300DFBCF2 /* EditStingView.swift in Sources */,
 				A549825B1F7067EC00909196 /* FDWaveformRenderOperation.swift in Sources */,
 				A5B1DFDD26E3F825009BF8FB /* FilePicker.swift in Sources */,
 				A51D98EE22BBCF7D00124A40 /* Color.swift in Sources */,
+				A5A5245C2711CDC000374E28 /* HostingController.swift in Sources */,
 				A59EC6EA22EB5696009A7ED1 /* TransportView.swift in Sources */,
 				A5B1DFD526E3C0BA009BF8FB /* UnavailableSongsView.swift in Sources */,
 				A5C5866E25ADBFE00050DC5C /* ManageStingsView.swift in Sources */,
 				A581C3A21B94A041006CE228 /* StingCell.swift in Sources */,
 				A567FB7022F1F67A00B4DB70 /* ChannelPair.swift in Sources */,
 				A5A49CB11B5BF216004B80CE /* Sting.swift in Sources */,
+				A5616BEA270A3C17007DB43A /* UndoProvider.swift in Sources */,
 				A5B1DFD926E3E398009BF8FB /* SongPicker.swift in Sources */,
 				A5E65EB4231AE0BA0058BBEE /* Metadata.swift in Sources */,
+				A5616BE8270A3BEE007DB43A /* SizeKey.swift in Sources */,
 				A5C32F4E228B64FE00E4B4EB /* Extends.swift in Sources */,
 				A595169A22F99A21001E820A /* AddStingFooterView.swift in Sources */,
 				A5B1DFDF26E3FDAE009BF8FB /* PickerCoordinator.swift in Sources */,
 				A5F62D5022E0F56A00D57126 /* ShowBrowserViewController.swift in Sources */,
 				A5760DD325AF414600398860 /* FolderAccessView.swift in Sources */,
 				A549825A1F7067EC00909196 /* FDAudioContext.swift in Sources */,
-				A581C39D1B949A06006CE228 /* EditViewController.swift in Sources */,
+				A581C39D1B949A06006CE228 /* WaveformViewController.swift in Sources */,
 				A5FF542824C49C5B00BE7928 /* WelcomeView.swift in Sources */,
 				A592124425B6FA2300D864BD /* FolderBookmarks.swift in Sources */,
 				A581C39F1B949AD6006CE228 /* PlaybackViewController.swift in Sources */,
+				A5616DA62708BB7300DFBCF2 /* Waveform.swift in Sources */,
 				A5BF2D1E24B0F0B600AA69F4 /* ChannelSelectionView.swift in Sources */,
 				A5B1DFDB26E3E84F009BF8FB /* PickerOperation.swift in Sources */,
 				A581C38D1B946B7C006CE228 /* Engine.swift in Sources */,

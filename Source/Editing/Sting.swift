@@ -17,7 +17,7 @@ class Sting: NSObject, Codable, ObservableObject {
     
     private var startTime: TimeInterval = 0 { didSet { updateBuffer() } }
     private var endTime: TimeInterval? { didSet { updateBuffer() } }
-    var loops = false {
+    @Published var loops = false {
         didSet {
             if loops { createBuffer() }
             else { destroyBuffer() }
@@ -82,6 +82,18 @@ class Sting: NSObject, Codable, ObservableObject {
         case startTime
         case endTime
         case loops
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(url, forKey: .url)
+        try? container.encode(bookmark, forKey: .bookmark)
+        try? container.encode(name, forKey: .name)
+        try container.encode(color, forKey: .color)
+        try container.encode(metadata, forKey: .metadata)
+        try container.encode(startTime, forKey: .startTime)
+        try? container.encode(endTime, forKey: .endTime)
+        try container.encode(loops, forKey: .loops)
     }
     
     required init(from decoder: Decoder) throws {
