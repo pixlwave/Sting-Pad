@@ -11,8 +11,8 @@ struct ChannelSelectionView: View {
             Section(header: Text(audioInterfaceName)) {
                 ForEach(outputs, id: \.self) { config in
                     Button {
-                        Engine.shared.outputConfig = outputConfig
                         outputConfig = config
+                        Engine.shared.outputConfig = outputConfig
                     } label: {
                         let selected = outputConfig.left == config.left && outputConfig.right == config.right
                         OutputCell(label: config.name, selected: selected)
@@ -39,7 +39,7 @@ struct ChannelSelectionView: View {
 
 struct OutputCell: View {
     let label: String
-    @State var selected: Bool
+    let selected: Bool
     
     var body: some View {
         HStack {
