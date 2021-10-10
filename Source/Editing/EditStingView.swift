@@ -78,22 +78,4 @@ struct EditStingView: View {
             }
         }
     }
-    
-    func previewStart() {
-        
-    }
-    
-    func previewEnd() {
-        
-    }
-    
-    func stop() {
-        
-    }
 }
-
-//struct EditView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        EditView()
-//    }
-//}

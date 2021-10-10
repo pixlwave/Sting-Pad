@@ -10,11 +10,13 @@ struct UnavailableSongsView: View {
                 .font(.headline)
                 .padding(.horizontal)
                 .padding(.bottom, 1)
-            Button ("Reload Stings") { show.reloadUnavailableStings() }
+            Button("Reload Stings", action: show.reloadUnavailableStings)
+                .font(.body.bold())
+                .padding(.bottom, 8)
+            
             List(stings, id: \.self) { sting in
                 UnavailableStingCell(sting: sting, show: show)
             }
-            .listStyle(GroupedListStyle())
             .overlay(Divider(), alignment: .top)
         }
         .navigationBarTitle("Missing Stings")

@@ -17,31 +17,32 @@ struct ManageStingsView: View {
                             Text("Songs (\(unavailableSongs.count))")
                         } icon: {
                             Image(systemName: "music.note")
-                                .foregroundColor(.red)
+                                .foregroundColor(unavailableSongs.isEmpty ? .primary : .red)
                         }
                         .font(.headline)
                     }
-                    .disabled(unavailableSongs.count == 0)
+                    .disabled(unavailableSongs.isEmpty)
                     
                     NavigationLink(destination: UnavailableFilesView(show: show, stings: $unavailableFiles)) {
                         Label {
                             Text("Files (\(unavailableFiles.count))")
                         } icon: {
                             Image(systemName: "doc")
-                                .foregroundColor(.red)
+                                .foregroundColor(unavailableFiles.isEmpty ? .primary : .red)
                         }
                         .font(.headline)
                     }
-                    .disabled(unavailableFiles.count == 0)
+                    .disabled(unavailableFiles.isEmpty)
                 }
                 
+                #if DEBUG
                 Section {
                     Button("DEBUG: Remove all bookmarks") {
                         FolderBookmarks.shared.clear()
                     }
                 }
+                #endif
             }
-            .listStyle(GroupedListStyle())
             .navigationBarTitle("Manage Stings")
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
@@ -49,8 +50,8 @@ struct ManageStingsView: View {
                 }
             }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
-        .onAppear { reloadData() }
+        .navigationViewStyle(.stack)
+        .onAppear(perform: reloadData)
         .onReceive(NotificationCenter.default.publisher(for: .unavailableStingsDidChange)) { _ in
             reloadData()
         }

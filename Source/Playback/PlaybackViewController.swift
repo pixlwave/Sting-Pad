@@ -284,7 +284,7 @@ class PlaybackViewController: UICollectionViewController {
     @objc func updateManageStingsButtonVisibility() {
         guard let manageStingsButton = manageStingsButton else { return }
         
-        if show.unavailableSongs.count == 0 && show.unavailableFiles.count == 0 {
+        if show.unavailableSongs.isEmpty && show.unavailableFiles.isEmpty {
             navigationItem.rightBarButtonItems?.removeAll{ $0 == manageStingsButton }
         }
     }

@@ -13,10 +13,12 @@ struct UnavailableFilesView: View {
                 .padding(.horizontal)
                 .padding(.bottom, 1)
             Button ("Access Folder") { isPresentingFolderPicker = true }
+                .font(.body.bold())
+                .padding(.bottom, 8)
+            
             List(stings, id: \.self) { sting in
                 UnavailableStingCell(sting: sting, show: show)
             }
-            .listStyle(GroupedListStyle())
             .overlay(Divider(), alignment: .top)
         }
         .navigationBarTitle("Manage Permissions")
