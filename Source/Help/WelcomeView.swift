@@ -10,7 +10,7 @@ struct WelcomeView: View {
             Spacer()
             
             Text("Getting Started")
-                .font(.title)
+                .font(.largeTitle.bold())
             
             Spacer()
             
@@ -31,16 +31,13 @@ struct WelcomeView: View {
             .padding(20)
             
             Spacer()
+            Spacer()
             
-            Button(action: dismiss) {
-                Text("Continue")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding(.vertical, 12)
-                    .padding(.horizontal, 40)
-                    .background(Color("Tint Color"))
-                    .cornerRadius(7)
-            }
+            Button("Continue", action: dismiss)
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
+                .font(.headline)
+                .tint(.tint)
             
             Spacer()
         }
