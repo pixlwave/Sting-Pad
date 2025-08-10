@@ -3,7 +3,7 @@ import AVFoundation
 import MediaPlayer
 import os.log
 
-class Sting: NSObject, Codable, ObservableObject {
+@Observable class Sting: NSObject, Codable {
     
     private(set) var url: URL
     private(set) var bookmark: Data?
@@ -17,7 +17,7 @@ class Sting: NSObject, Codable, ObservableObject {
     
     private var startTime: TimeInterval = 0 { didSet { updateBuffer() } }
     private var endTime: TimeInterval? { didSet { updateBuffer() } }
-    @Published var loops = false {
+    var loops = false {
         didSet {
             if loops { createBuffer() }
             else { destroyBuffer() }
@@ -62,7 +62,7 @@ class Sting: NSObject, Codable, ObservableObject {
     
     private(set) var audioFile: AVAudioFile?
     private(set) var buffer: AVAudioPCMBuffer?
-    @Published private(set) var availability: Availability
+    private(set) var availability: Availability
     
     enum Availability: String {
         case available

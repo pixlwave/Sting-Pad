@@ -3,7 +3,7 @@
 import SwiftUI
 
 struct UndoProvider<WrappedView, Value>: View where WrappedView: View {
-    @StateObject var handler: UndoHandler<Value> = UndoHandler()
+    @State var handler: UndoHandler<Value> = UndoHandler()
     
     let binding: Binding<Value>
     let undoManger: UndoManager?
@@ -33,7 +33,7 @@ struct UndoProvider<WrappedView, Value>: View where WrappedView: View {
     }
 }
 
-class UndoHandler<Value>: ObservableObject {
+class UndoHandler<Value> {
     var binding: Binding<Value>?
     weak var undoManager: UndoManager?
     

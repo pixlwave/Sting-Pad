@@ -6,7 +6,7 @@ struct EditStingView: View {
     private let engine = Engine.shared
     
     let show: Show
-    @ObservedObject var sting: Sting
+    @Bindable var sting: Sting
     
     @State private var previewLength: TimeInterval = 2
     @State private var waveformHeight: CGFloat = 198

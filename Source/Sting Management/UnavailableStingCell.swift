@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct UnavailableStingCell: View {
-    @ObservedObject var sting: Sting
+    let sting: Sting
     let show: Show
     
     @State var isPresentingPicker = false
