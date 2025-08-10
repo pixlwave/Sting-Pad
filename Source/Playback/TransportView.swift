@@ -33,7 +33,7 @@ import SwiftUI
     }
 }
 
-struct TransportViewUI: View {
+struct TransportView: View {
     let model: TransportModel
     
     enum Action { case play, stop, previous, next }
@@ -92,6 +92,6 @@ struct TransportViewUI: View {
 #Preview {
     VStack {
         Spacer()
-        TransportViewUI(model: .init(elapsed: 90, total: 225)) { _ in }
+        TransportView(model: .init(elapsed: 90, total: 225)) { _ in }
     }
 }

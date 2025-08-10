@@ -15,7 +15,7 @@ class PlaybackViewController: UICollectionViewController {
     
     @IBOutlet weak var manageStingsButton: UIBarButtonItem!
     let transportModel = TransportModel(elapsed: 0, total: 0)
-    var transportController: UIHostingController<TransportViewUI>!
+    var transportController: UIHostingController<TransportView>!
     
     private let transportViewHeight: CGFloat = 90
     private var progressTimer: Timer?
@@ -32,7 +32,7 @@ class PlaybackViewController: UICollectionViewController {
         // make self delegate for sting players
         engine.playbackDelegate = self
         
-        let transportView = TransportViewUI(model: transportModel) { [weak self] action in
+        let transportView = TransportView(model: transportModel) { [weak self] action in
             guard let self else { return }
             switch action {
             case .play: playSting()
