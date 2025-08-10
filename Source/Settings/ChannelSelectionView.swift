@@ -54,31 +54,27 @@ struct OutputCell: View {
     }
 }
 
-struct ChannelSelectionView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            NavigationView {
-                ChannelSelectionView(outputConfig: ChannelPair(left: 0, right: 1),
-                                     outputs: [
-                                        ChannelPair(left: 0, right: 1),
-                                        ChannelPair(left: 2, right: 3),
-                                        ChannelPair(left: 4, right: 5),
-                                        ChannelPair(left: 6, right: 7)
-                                     ],
-                                     audioInterfaceName: "Sound Card")
-            }
-            .previewLayout(.sizeThatFits)
-            .previewDevice("iPhone SE (1st generation)")
-            NavigationView {
-                ChannelSelectionView(outputConfig: ChannelPair(left: 2, right: 3),
-                                     outputs: [
-                                        ChannelPair(left: 0, right: 1)
-                                     ],
-                                     audioInterfaceName: "Speakers")
-            }
-            .previewLayout(.sizeThatFits)
-            .previewDevice("iPhone SE (1st generation)")
-        }
-        
+// MARK: - Previews
+
+#Preview("Audio Interface") {
+    NavigationView {
+        ChannelSelectionView(outputConfig: ChannelPair(left: 0, right: 1),
+                             outputs: [
+                                ChannelPair(left: 0, right: 1),
+                                ChannelPair(left: 2, right: 3),
+                                ChannelPair(left: 4, right: 5),
+                                ChannelPair(left: 6, right: 7)
+                             ],
+                             audioInterfaceName: "Sound Card")
+    }
+}
+
+#Preview("Removed Device") {
+    NavigationView {
+        ChannelSelectionView(outputConfig: ChannelPair(left: 2, right: 3),
+                             outputs: [
+                                ChannelPair(left: 0, right: 1)
+                             ],
+                             audioInterfaceName: "Speakers")
     }
 }

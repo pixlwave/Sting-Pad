@@ -60,8 +60,8 @@ struct WelcomeItem: View {
     }
 }
 
-struct WelcomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        WelcomeView(dismiss: { })
-    }
+// MARK: - Previews
+
+#Preview {
+    WelcomeView(dismiss: { })
 }
