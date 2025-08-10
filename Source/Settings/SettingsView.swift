@@ -34,7 +34,8 @@ struct SettingsView: View {
                     }
                 }
             }
-            .navigationBarTitle("Settings", displayMode: .inline)
+            .navigationTitle("Settings")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done", action: dismiss)

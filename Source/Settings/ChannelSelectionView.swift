@@ -33,7 +33,7 @@ struct ChannelSelectionView: View {
                 }
             }
         }
-        .navigationBarTitle("Output Channels")
+        .navigationTitle("Output Channels")
     }
 }
 

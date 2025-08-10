@@ -43,7 +43,7 @@ struct ManageStingsView: View {
                 }
                 #endif
             }
-            .navigationBarTitle("Manage Stings")
+            .navigationTitle("Manage Stings")
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done", action: dismiss)

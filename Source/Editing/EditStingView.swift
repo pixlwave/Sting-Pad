@@ -63,7 +63,7 @@ struct EditStingView: View {
                     Button("Save as Preset", action: sting.setPreset)
                 }
             }
-            .navigationBarTitle(sting.name ?? sting.songTitle)
+            .navigationTitle(sting.name ?? sting.songTitle)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {

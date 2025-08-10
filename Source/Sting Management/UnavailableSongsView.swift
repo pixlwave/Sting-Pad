@@ -17,8 +17,8 @@ struct UnavailableSongsView: View {
             List(stings, id: \.self) { sting in
                 UnavailableStingCell(sting: sting, show: show)
             }
-            .overlay(Divider(), alignment: .top)
+            .overlay(alignment: .top) { Divider() }
         }
-        .navigationBarTitle("Missing Stings")
+        .navigationTitle("Missing Strings")
     }
 }

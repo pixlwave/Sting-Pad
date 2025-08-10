@@ -19,9 +19,9 @@ struct UnavailableFilesView: View {
             List(stings, id: \.self) { sting in
                 UnavailableStingCell(sting: sting, show: show)
             }
-            .overlay(Divider(), alignment: .top)
+            .overlay(alignment: .top) { Divider() }
         }
-        .navigationBarTitle("Manage Permissions")
+        .navigationTitle("Manage Permissions")
         .sheet(isPresented: $isPresentingFolderPicker) {
             FolderAccessView(show: show)
         }
