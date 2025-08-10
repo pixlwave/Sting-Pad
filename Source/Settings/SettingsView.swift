@@ -23,8 +23,9 @@ struct SettingsView: View {
                             }
                         }
                     }
-                    .onChange(of: defaultColor) { color in
-                        Sting.Color.default = defaultColor
+                    .pickerStyle(.navigationLink)
+                    .onChange(of: defaultColor) { _, newColor in
+                        Sting.Color.default = newColor
                     }
                 }
                 Section(header: Text("Presets")) {
