@@ -61,8 +61,10 @@ extension PickerCoordinator: MPMediaPickerControllerDelegate {
 // MARK: UIDocumentPickerDelegate
 extension PickerCoordinator: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        if let sting = Sting(url: urls[0]) {
-            load(sting)
+        Task {
+            if let sting = await Sting(url: urls[0]) {
+                load(sting)
+            }
         }
     }
 }

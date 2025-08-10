@@ -13,45 +13,6 @@ extension URL {
         return directoryURL == inboxURL
     }
     
-    func songTitle() -> String? {
-        if isMediaItem {
-            return mediaItem()?.title
-        } else if isFileURL {
-            if let metadata = metadata() {
-                let title = AVMetadataItem.metadataItems(from: metadata, filteredByIdentifier: .commonIdentifierTitle).first
-                return title?.stringValue
-            }
-        }
-        
-        return nil
-    }
-    
-    func songArtist() -> String? {
-        if isMediaItem {
-            return mediaItem()?.artist
-        } else if isFileURL {
-            if let metadata = metadata() {
-                let artist = AVMetadataItem.metadataItems(from: metadata, filteredByIdentifier: .commonIdentifierArtist).first
-                return artist?.stringValue
-            }
-        }
-        
-        return nil
-    }
-    
-    func songAlbum() -> String? {
-        if isMediaItem {
-            return mediaItem()?.albumTitle
-        } else if isFileURL {
-            if let metadata = metadata() {
-                let album = AVMetadataItem.metadataItems(from: metadata, filteredByIdentifier: .commonIdentifierAlbumName).first
-                return album?.stringValue
-            }
-        }
-        
-        return nil
-    }
-    
     func mediaItem() -> MPMediaItem? {
         guard
             let components = URLComponents(url: self, resolvingAgainstBaseURL: false),
@@ -66,9 +27,25 @@ extension URL {
         return mediaQuery.items?.first
     }
     
-    func metadata() -> [AVMetadataItem]? {
-        let asset = AVAsset(url: self)
-        return asset.metadata
+    func metadata() async -> [AVMetadataItem]? {
+        let asset = AVURLAsset(url: self)
+        return try? await asset.load(.metadata)
+    }
+}
+
+
+extension [AVMetadataItem] {
+    func title() async -> String? {
+        let data = AVMetadataItem.metadataItems(from: self, filteredByIdentifier: .commonIdentifierTitle).first
+        return try? await data?.load(.stringValue)
+    }
+    func artist() async -> String? {
+        let data = AVMetadataItem.metadataItems(from: self, filteredByIdentifier: .commonIdentifierArtist).first
+        return try? await data?.load(.stringValue)
+    }
+    func albumName() async -> String? {
+        let data = AVMetadataItem.metadataItems(from: self, filteredByIdentifier: .commonIdentifierAlbumName).first
+        return try? await data?.load(.stringValue)
     }
 }
 

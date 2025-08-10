@@ -16,8 +16,19 @@ extension Metadata {
         self.init(title: mediaItem.title, artist: mediaItem.artist, albumTitle: mediaItem.albumTitle, trackNumber: trackNumber, discNumber: discNumber)
     }
     
-    init(url: URL) {
-        self.init(title: url.songTitle(), artist: url.songArtist(), albumTitle: url.songAlbum(), trackNumber: nil, discNumber: nil)
+    init(url: URL) async {
+        if url.isMediaItem {
+            let mediaItem = url.mediaItem()
+            self.init(title: mediaItem?.title, artist: mediaItem?.artist, albumTitle: mediaItem?.albumTitle, trackNumber: nil, discNumber: nil)
+        } else if url.isFileURL {
+            let metadata = await url.metadata()
+            async let title = await metadata?.title()
+            async let artist = await metadata?.artist()
+            async let albumName = await metadata?.albumName()
+            await self.init(title: title, artist: artist, albumTitle: albumName, trackNumber: nil, discNumber: nil)
+        } else {
+            self.init(title: nil, artist: nil, albumTitle: nil, trackNumber: nil, discNumber: nil)
+        }
     }
     
     var mediaQueryItems: [MPMediaItem]? {

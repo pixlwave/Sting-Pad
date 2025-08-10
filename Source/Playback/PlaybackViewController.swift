@@ -244,7 +244,7 @@ class PlaybackViewController: UICollectionViewController {
         
         #if targetEnvironment(simulator)
         // pick a random file from the file system as no library is available on the simulator
-        loadRandomTrackFromHostFileSystem()
+        Task { await loadRandomTrackFromHostFileSystem() }
         #else
         
         let hostedSongPicker = UIHostingController(rootView: SongPicker(show: show, pickerOperation: pickerOperation))
@@ -262,7 +262,7 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     #if targetEnvironment(simulator)
-    func loadRandomTrackFromHostFileSystem() {
+    func loadRandomTrackFromHostFileSystem() async {
         guard let sharedFiles = try? FileManager.default.contentsOfDirectory(atPath: "/Users/Shared/Music") else { return }
         
         let audioFiles = sharedFiles.filter { $0.hasSuffix(".mp3") || $0.hasSuffix(".m4a") }
@@ -270,7 +270,7 @@ class PlaybackViewController: UICollectionViewController {
         let file = audioFiles[Int.random(in: 0..<audioFiles.count)]
         let url = URL(fileURLWithPath: "/Users/Shared/Music").appendingPathComponent(file)
         
-        if let sting = Sting(url: url) {
+        if let sting = await Sting(url: url) {
             PickerCoordinator(show: show, pickerOperation: .normal).load(sting)
         }
     }

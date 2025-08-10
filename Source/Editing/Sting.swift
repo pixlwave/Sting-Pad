@@ -194,7 +194,7 @@ import os.log
         loadPreset()
     }
     
-    init?(url: URL) {
+    init?(url: URL) async {
         let hasSecurityScopedAccess = url.startAccessingSecurityScopedResource()
         defer {
             if hasSecurityScopedAccess {
@@ -206,7 +206,7 @@ import os.log
         
         self.url = url
         bookmark = try? url.bookmarkData()
-        metadata = Metadata(url: url)
+        metadata = await Metadata(url: url)
         self.audioFile = audioFile
         availability = .available
         
