@@ -14,9 +14,8 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     @IBOutlet weak var manageStingsButton: UIBarButtonItem!
-    @IBOutlet var transportView: UIView!
-    @IBOutlet weak var progressView: UIProgressView!
-    @IBOutlet weak var timeRemainingLabel: UILabel!
+    let transportModel = TransportModel(elapsed: 0, total: 0)
+    var transportController: UIHostingController<TransportViewUI>!
     
     private let transportViewHeight: CGFloat = 90
     private var progressTimer: Timer?
@@ -33,11 +32,25 @@ class PlaybackViewController: UICollectionViewController {
         // make self delegate for sting players
         engine.playbackDelegate = self
         
-        // load the transport view nib and add as a subview via it's outlet
-        Bundle.main.loadNibNamed("TransportView", owner: self, options: nil)
-        view.addSubview(transportView)
-        progressView.progress = 0
-        timeRemainingLabel.font = .monospacedDigitSystemFont(ofSize: timeRemainingLabel.font.pointSize, weight: .regular)
+        let transportView = TransportViewUI(model: transportModel) { [weak self] action in
+            guard let self else { return }
+            switch action {
+            case .play: playSting()
+            case .stop: stopSting()
+            case .next: nextCue()
+            case .previous: previousCue()
+            }
+        }
+        transportController = UIHostingController(rootView: transportView)
+        transportController.view.backgroundColor = .clear
+        addChild(transportController)
+        transportController.didMove(toParent: self)
+        view.addSubview(transportController.view)
+        transportController.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            transportController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            transportController.view.widthAnchor.constraint(equalTo: view.widthAnchor)
+        ])
         
         configureDataSource()
         collectionView.register(UINib(nibName: "AddStingFooterView", bundle: nil), forSupplementaryViewOfKind: "footer", withReuseIdentifier: "AddStingFooter")
@@ -67,11 +80,9 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     override func viewWillLayoutSubviews() {
-        let origin = CGPoint(x: 0, y: view.frame.height - view.safeAreaInsets.bottom - transportViewHeight)
-        let size = CGSize(width: view.frame.width, height: view.bounds.height - origin.y)
-        transportView?.frame = CGRect(origin: origin, size: size)
-        collectionView.contentInset.bottom = size.height
-        collectionView.verticalScrollIndicatorInsets.bottom = size.height
+        let bottomInset = 8 + transportViewHeight
+        collectionView.contentInset.bottom = bottomInset
+        collectionView.verticalScrollIndicatorInsets.bottom = bottomInset
     }
     
     @IBSegueAction func editStingSegue(_ coder: NSCoder, sender: Any?) -> UIViewController? {
@@ -333,14 +344,14 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     // MARK: Playback
-    @IBAction func playSting() {
+    func playSting() {
         guard let sting = cuedSting ?? show.stings.playable.first else { return }
         
         engine.play(sting)
         nextCue()
     }
     
-    @IBAction func stopSting() {
+    func stopSting() {
         engine.stopSting()
     }
     
@@ -355,7 +366,7 @@ class PlaybackViewController: UICollectionViewController {
         }
     }
     
-    @IBAction func nextCue() {
+    func nextCue() {
         let playableStings = show.stings.playable
         
         guard
@@ -371,7 +382,7 @@ class PlaybackViewController: UICollectionViewController {
         reloadItems([oldCue, newCue])
     }
     
-    @IBAction func previousCue() {
+    func previousCue() {
         let playableStings = show.stings.playable
         
         guard
@@ -389,26 +400,8 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     func updateProgress() {
-        let elapsedTime = engine.elapsedTime
-        let totalTime = engine.totalTime
-        
-        let progress = Float((elapsedTime / totalTime).truncatingRemainder(dividingBy: 1) + (1 / totalTime))
-        
-        if progressView.progress == 1 {
-            progressView.reset()
-        }
-        
-        progressAnimator = UIViewPropertyAnimator(duration: 1, curve: .linear) {
-            self.progressView.setProgress(progress, animated: true)
-        }
-        progressAnimator?.startAnimation()
-        
-        let timeRemaining = totalTime - elapsedTime
-        if timeRemaining < 0 {
-            timeRemainingLabel.text = "Looping"
-        } else if let remainingString = timeRemaining.formattedAsRemaining() {
-            timeRemainingLabel.text = remainingString
-        }
+        transportModel.elapsed = engine.elapsedTime
+        transportModel.total = engine.totalTime
     }
     
     func beginUpdatingProgress() {
@@ -427,8 +420,8 @@ class PlaybackViewController: UICollectionViewController {
         progressTimer = nil
         progressAnimator?.stopAnimation(true)
         
-        progressView.reset()
-        timeRemainingLabel.text = cuedSting?.totalTime.formattedAsRemaining()
+        transportModel.elapsed = 0
+        transportModel.total = engine.totalTime
     }
     
     
