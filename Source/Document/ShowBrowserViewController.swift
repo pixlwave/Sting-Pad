@@ -66,7 +66,8 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
             return
         }
         
-        playbackVC.show = show
+        let playbackViewModel = PlaybackViewModel(show: show)
+        playbackVC.viewModel = playbackViewModel
         
         rootVC.transitioningDelegate = self
         transitionController = transitionController(forDocumentAt: show.fileURL)
@@ -76,7 +77,7 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
         
         playbackVC.applySnapshot()
         playbackVC.navigationItem.title = show.fileName
-        playbackVC.stopUpdatingProgress()   // update time remaining label
+        playbackViewModel.stopUpdatingProgress()   // update time remaining label
     }
     
     func displayOpenError(for show: Show) {
@@ -99,7 +100,7 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
     
     override func encodeRestorableState(with coder: NSCoder) {
         if presentedViewController != nil {
-            if let showURL = presentedPlaybackViewController?.show?.fileURL {
+            if let showURL = presentedPlaybackViewController?.viewModel?.show.fileURL {
                 let didStartAccessing = showURL.startAccessingSecurityScopedResource()
                 defer {
                     if didStartAccessing { showURL.stopAccessingSecurityScopedResource() }

@@ -5,40 +5,31 @@ import SwiftUI
 import os.log
 
 class PlaybackViewController: UICollectionViewController {
-    
-    private let engine = Engine.shared
-    var show: Show!
+    var viewModel: PlaybackViewModel!
     private var dataSource: UICollectionViewDiffableDataSource<Int, Sting>?
-    private var cuedSting: Sting? {
-        didSet { if let sting = cuedSting { scrollTo(sting) } }
-    }
     
     @IBOutlet weak var manageStingsButton: UIBarButtonItem!
-    let transportModel = TransportModel(elapsed: 0, total: 0)
     var transportController: UIHostingController<TransportView>!
     
     private let transportViewHeight: CGFloat = 90
-    private var progressTimer: Timer?
-    private var progressAnimator: UIViewPropertyAnimator?
+    
+    private var cuedStingTask: Task<Void, Never>?
     
     // respond to undo gestures, forwarding them to the show's undo manager
     override var canBecomeFirstResponder: Bool { true }
-    override var undoManager: UndoManager? { show.undoManager }
+    override var undoManager: UndoManager? { viewModel.show.undoManager }
     
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // make self delegate for sting players
-        engine.playbackDelegate = self
-        
-        let transportView = TransportView(model: transportModel) { [weak self] action in
+        let transportView = TransportView(model: viewModel.transportModel) { [weak self] action in
             guard let self else { return }
             switch action {
-            case .play: playSting()
-            case .stop: stopSting()
-            case .next: nextCue()
-            case .previous: previousCue()
+            case .play: viewModel.playSting()
+            case .stop: viewModel.stopSting()
+            case .next: viewModel.nextCue()
+            case .previous: viewModel.previousCue()
             }
         }
         transportController = UIHostingController(rootView: transportView)
@@ -57,12 +48,20 @@ class PlaybackViewController: UICollectionViewController {
         collectionView.collectionViewLayout = createLayout()
         collectionView.dragInteractionEnabled = true
         
+        let cuedStingObservations = Observations { [viewModel] in viewModel.cuedSting }
+        cuedStingTask = Task { [weak self] in
+            for await sting in cuedStingObservations {
+                guard let sting else { continue }
+                self?.scrollTo(sting)
+            }
+        }
+        
         NotificationCenter.default.addObserver(self, selector: #selector(addStingFromLibrary), name: .addStingFromLibrary, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(addStingFromFiles), name: .addStingFromFiles, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didAppendSting(_:)), name: .didAppendSting, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(applySnapshot), name: .stingsDidChange, object: show)
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadEditedSting(_:)), name: .didFinishEditing, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(showStateChanged(_:)), name: UIDocument.stateChangedNotification, object: show)
+        NotificationCenter.default.addObserver(self, selector: #selector(applySnapshot), name: .stingsDidChange, object: viewModel.show)
+        NotificationCenter.default.addObserver(self, selector: #selector(didFinishEditing), name: .didFinishEditing, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showStateChanged(_:)), name: UIDocument.stateChangedNotification, object: viewModel.show)
         NotificationCenter.default.addObserver(self, selector: #selector(updateManageStingsButtonVisibility), name: .unavailableStingsDidChange, object: nil)
         
         manageStingsButton.image = manageStingsButton.image?.withConfiguration(UIImage.SymbolConfiguration(weight: .semibold))
@@ -88,36 +87,39 @@ class PlaybackViewController: UICollectionViewController {
     @IBSegueAction func editStingSegue(_ coder: NSCoder, sender: Any?) -> UIViewController? {
         guard let sting = sender as? Sting else { return nil }
         
-        let view = EditStingView(show: show, sting: sting, dismiss: { self.dismiss(animated: true) })
-        return HostingController(coder: coder, rootView: view, show: show)
+        let view = EditStingView(show: viewModel.show, sting: sting, dismiss: { self.dismiss(animated: true) })
+        return HostingController(coder: coder, rootView: view, show: viewModel.show)
     }
     
     @IBSegueAction func manageStingsSegue(_ coder: NSCoder) -> UIViewController? {
-        let view = ManageStingsView(show: show, dismiss: { self.dismiss(animated: true) })
+        let view = ManageStingsView(show: viewModel.show, dismiss: { self.dismiss(animated: true) })
         return UIHostingController(coder: coder, rootView: view)
     }
     
     @IBSegueAction func settingsSegue(_ coder: NSCoder) -> UIViewController? {
-        let view = SettingsView(show: show, dismiss: { self.dismiss(animated: true) })
+        let view = SettingsView(show: viewModel.show, dismiss: { self.dismiss(animated: true) })
         return UIHostingController(coder: coder, rootView: view)
     }
     
     @objc func showStateChanged(_ notification: Notification) {
-        os_log("Show State Changed: %d", log: .default, type: .debug, show.documentState.rawValue)
+        os_log("Show State Changed: %d", log: .default, type: .debug, viewModel.show.documentState.rawValue)
     }
     
     @IBAction func closeShow() {
         // stop listening for notifications in case a new show is opened before this gets deallocated
         NotificationCenter.default.removeObserver(self)
         
-        engine.stopSting()
-        show.close { success in
+        cuedStingTask?.cancel()
+        cuedStingTask = nil
+        
+        Task {
+            await viewModel.closeShow()
             (self.presentingViewController as? ShowBrowserViewController)?.isLoading = false
             self.dismiss(animated: true)
+            
+            // set data source to nil to remove reference cycle
+            dataSource = nil
         }
-        
-        // set data source to nil to remove reference cycle
-        dataSource = nil
     }
     
     // MARK: Collection View
@@ -149,9 +151,7 @@ class PlaybackViewController: UICollectionViewController {
         dataSource = UICollectionViewDiffableDataSource<Int, Sting>(collectionView: collectionView) { collectionView, indexPath, sting -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Sting Cell", for: indexPath)
             cell.contentConfiguration = UIHostingConfiguration {
-                StingCell(sting: sting,
-                              isCued: sting == self.cuedSting,
-                              isPlaying: sting == self.engine.playingSting)
+                StingCell(sting: sting, viewModel: self.viewModel)
             }
             .margins(.all, 0)
             
@@ -165,11 +165,11 @@ class PlaybackViewController: UICollectionViewController {
     
     @objc func applySnapshot() {
         // ensure there's a cued sting if possible
-        validateCuedSting()
+        viewModel.validateCuedSting()
         
         var snapshot = NSDiffableDataSourceSnapshot<Int, Sting>()
         snapshot.appendSections([0])
-        snapshot.appendItems(show.stings)
+        snapshot.appendItems(viewModel.show.stings)
         dataSource?.apply(snapshot)
     }
     
@@ -188,10 +188,8 @@ class PlaybackViewController: UICollectionViewController {
         dataSource.apply(snapshot, animatingDifferences: false)
     }
     
-    @objc func reloadEditedSting(_ notification: Notification) {
+    @objc func didFinishEditing() {
         becomeFirstResponder()  // ensure undo works again
-        guard let sting = notification.object as? Sting else { return }
-        reloadItems([sting])
     }
     
     func scrollTo(_ sting: Sting, animated: Bool = true) {
@@ -250,7 +248,7 @@ class PlaybackViewController: UICollectionViewController {
     }
     
     func pickStingFromFiles(pickerOperation: PickerOperation) {
-        let hostedFilePicker = UIHostingController(rootView: FilePicker(show: show, pickerOperation: pickerOperation))
+        let hostedFilePicker = UIHostingController(rootView: FilePicker(show: viewModel.show, pickerOperation: pickerOperation))
         present(hostedFilePicker, animated: true)
     }
     
@@ -264,7 +262,7 @@ class PlaybackViewController: UICollectionViewController {
         let url = URL(fileURLWithPath: "/Users/Shared/Music").appendingPathComponent(file)
         
         if let sting = await Sting(url: url) {
-            PickerCoordinator(show: show, pickerOperation: .normal).load(sting)
+            PickerCoordinator(show: viewModel.show, pickerOperation: .normal).load(sting)
         }
     }
     #endif
@@ -277,7 +275,7 @@ class PlaybackViewController: UICollectionViewController {
     @objc func updateManageStingsButtonVisibility() {
         guard let manageStingsButton = manageStingsButton else { return }
         
-        if show.unavailableSongs.isEmpty && show.unavailableFiles.isEmpty {
+        if viewModel.show.unavailableSongs.isEmpty && viewModel.show.unavailableFiles.isEmpty {
             navigationItem.rightBarButtonItems?.removeAll{ $0 == manageStingsButton }
         }
     }
@@ -296,121 +294,17 @@ class PlaybackViewController: UICollectionViewController {
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
             var name = alertController.textFields?.first?.text
             if name?.isEmpty == true { name = nil }
-            self.rename(sting, to: name)
+            self.viewModel.rename(sting, to: name)
             self.becomeFirstResponder()     // ensure undo gestures work after a rename
         }))
         
         present(alertController, animated: true, completion: nil)
     }
     
-    func rename(_ sting: Sting, to name: String?) {
-        let oldName = sting.name
-        sting.name = name
-        if sting.name != oldName {
-            show.undoManager.registerUndo(withTarget: self) {
-                $0.rename(sting, to: oldName)
-            }
-        }
-        reloadItems([sting])
-    }
-    
-    func change(_ sting: Sting, to color: Sting.Color) {
-        let oldColor = sting.color
-        sting.color = color
-        if sting.color != oldColor {
-            show.undoManager.registerUndo(withTarget: self) {
-                $0.change(sting, to: oldColor)
-            }
-        }
-        reloadItems([sting])
-    }
-    
-    // MARK: Playback
-    func playSting() {
-        guard let sting = cuedSting ?? show.stings.playable.first else { return }
-        
-        engine.play(sting)
-        nextCue()
-    }
-    
-    func stopSting() {
-        engine.stopSting()
-    }
-    
-    func validateCuedSting() {
-        guard let cuedSting = cuedSting else {
-            self.cuedSting = show.stings.playable.first
-            return
-        }
-        
-        if !show.stings.playable.contains(cuedSting) {
-            self.cuedSting = show.stings.playable.first
-        }
-    }
-    
-    func nextCue() {
-        let playableStings = show.stings.playable
-        
-        guard
-            playableStings.count > 1,
-            let oldCue = cuedSting,
-            let oldCueIndex = playableStings.firstIndex(of: oldCue)
-        else { return }
-        
-        let newCueIndex = (oldCueIndex + 1) % playableStings.count
-        let newCue = playableStings[newCueIndex]
-        cuedSting = newCue
-        
-        reloadItems([oldCue, newCue])
-    }
-    
-    func previousCue() {
-        let playableStings = show.stings.playable
-        
-        guard
-            playableStings.count > 1,
-            let oldCue = cuedSting,
-            let oldCueIndex = playableStings.firstIndex(of: oldCue),
-            oldCueIndex > 0
-        else { return }
-        
-        let newCueIndex = (oldCueIndex - 1) % playableStings.count
-        let newCue = playableStings[newCueIndex]
-        cuedSting = newCue
-        
-        reloadItems([oldCue, newCue])
-    }
-    
-    func updateProgress() {
-        transportModel.elapsed = engine.elapsedTime
-        transportModel.total = engine.totalTime
-    }
-    
-    func beginUpdatingProgress() {
-        if progressTimer?.isValid == true {
-            stopUpdatingProgress()
-        }
-        
-        updateProgress()
-        progressTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            self.updateProgress()
-        }
-    }
-    
-    func stopUpdatingProgress() {
-        progressTimer?.invalidate()
-        progressTimer = nil
-        progressAnimator?.stopAnimation(true)
-        
-        transportModel.elapsed = 0
-        transportModel.total = cuedSting?.totalTime ?? 0
-    }
-    
-    
     // MARK: UICollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let sting = dataSource?.itemIdentifier(for: indexPath) else { return }
-        engine.play(sting)
+        viewModel.engine.play(sting)
     }
     
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
@@ -418,9 +312,7 @@ class PlaybackViewController: UICollectionViewController {
             guard let sting = self.dataSource?.itemIdentifier(for: indexPath) else { return nil }
             
             let cue = UIAction(title: "Cue Next", image: UIImage(systemName: "smallcircle.fill.circle")) { action in
-                let oldCue = self.cuedSting
-                self.cuedSting = sting
-                self.reloadItems([oldCue, sting].compactMap { $0 })
+                self.viewModel.cuedSting = sting
             }
             let edit = UIAction(title: "Edit", image: UIImage(systemName: "waveform")) { action in
                 self.performSegue(withIdentifier: "Edit Sting", sender: sting)
@@ -432,30 +324,23 @@ class PlaybackViewController: UICollectionViewController {
             for color in Sting.Color.allCases {
                 let image = UIImage(systemName: color == sting.color ? "checkmark.circle.fill" : "circle.fill")?.withTintColor(color.object, renderingMode: .alwaysOriginal).applyingSymbolConfiguration(UIImage.SymbolConfiguration(weight: .heavy))
                 let action = UIAction(title: "\(color)".capitalized, image: image) { action in
-                    self.change(sting, to: color)
+                    self.viewModel.change(sting, to: color)
                 }
                 colorActions.append(action)
             }
             let colorMenu = UIMenu(title: "Colour", image: UIImage(systemName: "paintbrush"), children: colorActions)
             
             let duplicate = UIAction(title: "Duplicate", image: UIImage(systemName: "plus.square.on.square")) { action in
-                guard let duplicate = sting.copy() else { return }
-                self.show.insert(duplicate, at: indexPath.item + 1)  // updates collection view via didSet
+                self.viewModel.copy(sting, to: indexPath.item + 1)
             }
             let insert = UIAction(title: "Insert Song Here", image: UIImage(systemName: "square.stack")) { action in
                 self.pickStingFromLibrary(pickerOperation: .insert(indexPath.item))
             }
             let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash")) { action in
-                guard sting != self.engine.playingSting else { return }
-                if sting == self.cuedSting {
-                    self.nextCue()
-                    // remove cued sting if next cue is still the chosen sting
-                    if sting == self.cuedSting { self.cuedSting = nil }
-                }
-                self.show.removeSting(at: indexPath.item)     // updates collection view via didSet
+                self.viewModel.delete(sting, at: indexPath.item)
             }
             
-            if sting == self.engine.playingSting {
+            if sting == self.viewModel.engine.playingSting {
                 delete.attributes = .disabled
             } else {
                 delete.attributes = .destructive
@@ -478,7 +363,7 @@ class PlaybackViewController: UICollectionViewController {
             let editMenu = UIMenu(title: "", options: .displayInline, children: [edit, rename, colorMenu])
             let fileMenu = UIMenu(title: "", options: .displayInline, children: [duplicate, insert, delete])
             
-            if sting == self.cuedSting {
+            if sting == self.viewModel.cuedSting {
                 return UIMenu(title: "", children: [editMenu, fileMenu])
             }
             
@@ -519,25 +404,7 @@ extension PlaybackViewController: UICollectionViewDropDelegate {
             let destinationIndexPath = coordinator.destinationIndexPath
         else { return }
         
-        show.moveSting(from: sourceIndexPath.item, to: destinationIndexPath.item)
+        viewModel.show.moveSting(from: sourceIndexPath.item, to: destinationIndexPath.item)
         coordinator.drop(sourceItem.dragItem, toItemAt: destinationIndexPath)
-    }
-}
-
-
-// MARK: PlaybackDelegate
-extension PlaybackViewController: PlaybackDelegate {
-    func stingDidStartPlaying(_ sting: Sting) {
-        reloadItems([sting])
-        beginUpdatingProgress()
-    }
-    
-    func stingDidStopPlaying(_ sting: Sting) {
-        DispatchQueue.main.async {
-            self.reloadItems([sting])
-            
-            // by the time this executes another sting may have already started playback
-            if self.engine.playingSting == nil { self.stopUpdatingProgress() }
-        }
     }
 }

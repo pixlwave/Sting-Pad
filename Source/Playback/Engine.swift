@@ -2,7 +2,7 @@ import Foundation
 import AVFoundation
 import os.log
 
-class Engine {
+@Observable class Engine {
     static let shared = Engine()
     
     private let engine = AVAudioEngine()

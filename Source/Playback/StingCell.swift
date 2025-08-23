@@ -2,25 +2,22 @@ import SwiftUI
 
 struct StingCell: View {
     let sting: Sting
+    let viewModel: PlaybackViewModel
     
-    let state: State
+    let shape = RoundedRectangle(cornerRadius: 8)
+    
     enum State { case idle, cued, playing, missing }
-    
-    init(sting: Sting, isCued: Bool, isPlaying: Bool) {
-        self.sting = sting
-        
-        self.state = if sting.audioFile == nil {
+    var state: State {
+        if sting.audioFile == nil {
             .missing
-        } else if isPlaying {
+        } else if sting == viewModel.engine.playingSting {
             .playing
-        } else if isCued {
+        } else if sting == viewModel.cuedSting {
             .cued
         } else {
             .idle
         }
     }
-    
-    let shape = RoundedRectangle(cornerRadius: 8)
     
     var indicatorImageName: String {
         switch state {
