@@ -421,7 +421,7 @@ class PlaybackViewController: UICollectionViewController {
         progressAnimator?.stopAnimation(true)
         
         transportModel.elapsed = 0
-        transportModel.total = engine.totalTime
+        transportModel.total = cuedSting?.totalTime ?? 0
     }
     
     
