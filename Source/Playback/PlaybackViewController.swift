@@ -23,16 +23,7 @@ class PlaybackViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let transportView = TransportView(model: viewModel.transportModel) { [weak self] action in
-            guard let self else { return }
-            switch action {
-            case .play: viewModel.playSting()
-            case .stop: viewModel.stopSting()
-            case .next: viewModel.nextCue()
-            case .previous: viewModel.previousCue()
-            }
-        }
-        transportController = UIHostingController(rootView: transportView)
+        transportController = UIHostingController(rootView: TransportView(viewModel: viewModel))
         transportController.view.backgroundColor = .clear
         addChild(transportController)
         transportController.didMove(toParent: self)

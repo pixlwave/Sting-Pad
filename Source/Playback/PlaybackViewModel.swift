@@ -5,11 +5,12 @@ import Foundation
     let show: Show
     var cuedSting: Sting?
     
-    let transportModel = TransportModel(elapsed: 0, total: 0)
+    private(set) var progress: Progress
     private var progressTimer: Timer?
     
-    init(show: Show) {
+    init(show: Show, progress: Progress = Progress(elapsed: 0, total: 0)) {
         self.show = show
+        self.progress = progress
         engine.playbackDelegate = self
     }
     
@@ -107,8 +108,8 @@ import Foundation
     }
     
     func updateProgress() {
-        transportModel.elapsed = engine.elapsedTime
-        transportModel.total = engine.totalTime
+        progress.elapsed = engine.elapsedTime
+        progress.total = engine.totalTime
     }
     
     func beginUpdatingProgress() {
@@ -126,8 +127,8 @@ import Foundation
         progressTimer?.invalidate()
         progressTimer = nil
         
-        transportModel.elapsed = 0
-        transportModel.total = cuedSting?.totalTime ?? 0
+        progress.elapsed = 0
+        progress.total = cuedSting?.totalTime ?? 0
     }
 }
 
@@ -141,6 +142,36 @@ extension PlaybackViewModel: PlaybackDelegate {
         DispatchQueue.main.async {
             // by the time this executes another sting may have already started playback
             if self.engine.playingSting == nil { self.stopUpdatingProgress() }
+        }
+    }
+}
+
+extension PlaybackViewModel {
+    struct Progress {
+        var elapsed: TimeInterval
+        var total: TimeInterval
+        
+        var value: Double {
+            guard total > 0 else { return 0 }
+            let progress = (elapsed / total).truncatingRemainder(dividingBy: 1) // + (1 / total)
+            return max(0, min(1, progress))
+            
+            // Make sure not to animate the loop point 🤔
+            // if progressView.progress == 1 {
+            //    progressView.reset()
+            // }
+            // UIView.animate { progressView.progress = newValue }
+        }
+        
+        var remaining: String {
+            let timeRemaining = total - elapsed
+            if timeRemaining < 0 {
+                return "Looping"
+            } else if let remainingString = timeRemaining.formattedAsRemaining() {
+                return remainingString
+            } else {
+                return "0:00 remaining"
+            }
         }
     }
 }
