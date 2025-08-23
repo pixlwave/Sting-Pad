@@ -148,28 +148,14 @@ class PlaybackViewController: UICollectionViewController {
     func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Int, Sting>(collectionView: collectionView) { collectionView, indexPath, sting -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Sting Cell", for: indexPath)
-            
-            guard let stingCell = cell as? StingCell else { return cell }
-            
-            stingCell.titleLabel.text = sting.name ?? sting.songTitle
-            stingCell.color = sting.color
-            
-            if sting.audioFile == nil {
-                stingCell.isMissing = true
-                stingCell.footerLabel.text = sting.availability.rawValue
-            } else if sting.loops, let loopImage = UIImage(systemName: "repeat") {
-                stingCell.isMissing = false
-                let loopString = NSAttributedString(attachment: NSTextAttachment(image: loopImage))
-                stingCell.footerLabel.attributedText = loopString
-            } else {
-                stingCell.isMissing = false
-                stingCell.footerLabel.text = sting.totalTime.formattedAsLength()
+            cell.contentConfiguration = UIHostingConfiguration {
+                StingCell(sting: sting,
+                              isCued: sting == self.cuedSting,
+                              isPlaying: sting == self.engine.playingSting)
             }
+            .margins(.all, 0)
             
-            stingCell.isCued = sting == self.cuedSting
-            stingCell.isPlaying = sting == self.engine.playingSting
-            
-            return stingCell
+            return cell
         }
         
         dataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
@@ -206,10 +192,6 @@ class PlaybackViewController: UICollectionViewController {
         becomeFirstResponder()  // ensure undo works again
         guard let sting = notification.object as? Sting else { return }
         reloadItems([sting])
-    }
-    
-    func stingCellForItem(at indexPath: IndexPath) -> StingCell? {
-        return collectionView.cellForItem(at: indexPath) as? StingCell
     }
     
     func scrollTo(_ sting: Sting, animated: Bool = true) {
