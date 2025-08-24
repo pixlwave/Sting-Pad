@@ -29,7 +29,7 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
     
     func showWelcomeScreen() {
         // present the whole screen
-        let welcomeView = WelcomeView(dismiss: { self.dismiss(animated: true) })
+        let welcomeView = WelcomeView()
         let hostingController = UIHostingController(rootView: welcomeView)
         show(hostingController, sender: self)
         
@@ -59,8 +59,7 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
     func present(_ show: Show, animated: Bool) {
         guard
             let storyboard = storyboard,
-            let rootVC = storyboard.instantiateViewController(withIdentifier: "Root View Controller") as? UINavigationController,
-            let playbackVC = rootVC.topViewController as? PlaybackViewController
+            let playbackVC = storyboard.instantiateViewController(withIdentifier: "Root View Controller") as? PlaybackViewController
         else {
             isLoading = false
             return
@@ -69,14 +68,13 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
         let playbackViewModel = PlaybackViewModel(show: show)
         playbackVC.viewModel = playbackViewModel
         
-        rootVC.transitioningDelegate = self
+        playbackVC.transitioningDelegate = self
         transitionController = transitionController(forDocumentAt: show.fileURL)
         transitionController?.targetView = playbackVC.view
         
-        present(rootVC, animated: animated)
+        present(playbackVC, animated: animated)
         
-        playbackVC.applySnapshot()
-        playbackVC.navigationItem.title = show.fileName
+        playbackViewModel.validateCuedSting()      // ensure there's a cued sting if possible
         playbackViewModel.stopUpdatingProgress()   // update time remaining label
     }
     

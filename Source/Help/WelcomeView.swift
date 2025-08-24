@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct WelcomeView: View {
-    static let currentVersion = 3.0
+    @Environment(\.dismiss) private var dismiss
     
-    let dismiss: (() -> Void)
+    static let currentVersion = 3.0
     
     var body: some View {
         VStack {
@@ -33,7 +33,7 @@ struct WelcomeView: View {
             Spacer()
             Spacer()
             
-            Button("Continue", action: dismiss)
+            Button("Continue", action: dismiss.callAsFunction)
                 .buttonStyle(.borderedProminent)
                 .controlSize(.large)
                 .font(.headline)
@@ -63,5 +63,5 @@ struct WelcomeItem: View {
 // MARK: - Previews
 
 #Preview {
-    WelcomeView(dismiss: { })
+    WelcomeView()
 }

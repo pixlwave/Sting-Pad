@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct EditStingView: View {
+    @Environment(\.dismiss) var dismiss
     @Environment(\.undoManager) var undoManager
     
     private let engine = Engine.shared
@@ -10,8 +11,6 @@ struct EditStingView: View {
     
     @State private var previewLength: TimeInterval = 2
     @State private var waveformHeight: CGFloat = 198
-    
-    let dismiss: (() -> Void)
     
     var body: some View {
         NavigationView {
@@ -67,7 +66,7 @@ struct EditStingView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Done", action: dismiss)
+                    Button("Done", action: dismiss.callAsFunction)
                 }
             }
         }
@@ -76,6 +75,9 @@ struct EditStingView: View {
             if engine.playingSting != nil {
                 previewLength = 0
             }
+        }
+        .onDisappear {
+            undoManager?.removeAllActions()
         }
     }
 }

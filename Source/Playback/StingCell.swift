@@ -45,6 +45,7 @@ struct StingCell: View {
         .frame(height: 90) // TODO: Let's go dynamic!
         .background(sting.color.value, in: shape)
         .overlay { shape.inset(by: 2).stroke(sting.color.value, lineWidth: 4) }
+        .contentShape(.contextMenuPreview, shape)
     }
     
     var indictor: some View {

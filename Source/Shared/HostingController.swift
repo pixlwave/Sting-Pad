@@ -1,4 +1,3 @@
-import UIKit
 import SwiftUI
 
 /// A subclass of `UIHostingController` that will become first responder

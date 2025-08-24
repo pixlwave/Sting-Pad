@@ -1,12 +1,12 @@
 import SwiftUI
 
 struct ManageStingsView: View {
-    @State var unavailableSongs = [Sting]()
-    @State var unavailableFiles = [Sting]()
+    @Environment(\.dismiss) private var dismiss
     
     let show: Show
     
-    let dismiss: (() -> Void)
+    @State private var unavailableSongs = [Sting]()
+    @State private var unavailableFiles = [Sting]()
     
     var body: some View {
         NavigationView {
@@ -46,7 +46,7 @@ struct ManageStingsView: View {
             .navigationTitle("Manage Stings")
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Done", action: dismiss)
+                    Button("Done", action: dismiss.callAsFunction)
                 }
             }
         }

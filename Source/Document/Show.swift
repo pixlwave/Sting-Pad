@@ -1,17 +1,15 @@
-import UIKit
+import SwiftUI
 
-class Show: UIDocument {
+@Observable class Show: UIDocument {
     
     static var defaultName = "Show"
     
-    override var fileType: String { return "uk.pixlwave.stingpad.show" }
+    override var fileType: String { "uk.pixlwave.stingpad.show" }
     
-    var fileExists: Bool { return FileManager.default.fileExists(atPath: fileURL.path) }
-    var fileName: String { return fileURL.deletingPathExtension().lastPathComponent }
+    var fileExists: Bool { FileManager.default.fileExists(atPath: fileURL.path) }
+    var fileName: String { fileURL.deletingPathExtension().lastPathComponent }
     
-    private(set) var stings = [Sting]() {
-        didSet { NotificationCenter.default.post(Notification(name: .stingsDidChange, object: self)) }
-    }
+    private(set) var stings = [Sting]()
     
     var unavailableFiles: [Sting] { stings.filter { $0.availability != .available && $0.url.isFileURL } }
     var unavailableSongs: [Sting] { stings.filter { $0.availability != .available && $0.url.isMediaItem } }

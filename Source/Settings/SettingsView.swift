@@ -1,11 +1,10 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @Environment(\.dismiss) private var dismiss
     @State private var defaultColor: Sting.Color = .default
     
     var show: Show?
-    
-    let dismiss: (() -> Void)
     
     var body: some View {
         NavigationView {
@@ -38,7 +37,7 @@ struct SettingsView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Done", action: dismiss)
+                    Button("Done", action: dismiss.callAsFunction)
                 }
             }
         }
@@ -53,5 +52,5 @@ struct SettingsView: View {
 // MARK: - Previews
 
 #Preview {
-    SettingsView(dismiss: { })
+    SettingsView()
 }

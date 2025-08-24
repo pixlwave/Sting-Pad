@@ -1,14 +1,52 @@
-import UIKit
+import SwiftUI
 
-class AddStingFooterView: UICollectionReusableView {
+struct AddStingFooterView: View {
+    let viewModel: PlaybackViewModel
     
-    @IBAction func addFromLibrary() {
-        #warning("Is this necessary or an SDK bug workaround")
-        // send a notification as wiring up an action on the file's owner only worked once
-        NotificationCenter.default.post(Notification(name: .addStingFromLibrary))
+    var body: some View {
+        HStack(spacing: 20) {
+            Button {
+                viewModel.pickStingFromLibrary(pickerOperation: .normal)
+            } label: {
+                Label("Music Library", systemImage: "plus")
+            }
+            .buttonStyle(FooterButtonStyle())
+            
+            Button {
+                viewModel.pickStingFromFiles(pickerOperation: .normal)
+            } label: {
+                Label("Files", systemImage: "plus")
+            }
+            .buttonStyle(FooterButtonStyle())
+        }
+    }
+}
+
+private struct FooterButtonStyle: ButtonStyle {
+    let shape = RoundedRectangle(cornerRadius: 8)
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .labelStyle(LabelStyle())
+            .padding(18)
+            .frame(maxWidth: .infinity)
+            .background {
+                shape
+                    .inset(by: 2)
+                    .stroke(.secondary, style: .init(lineWidth: 4, dash: [8]))
+            }
+            .contentShape(shape)
     }
     
-    @IBAction func addFromFiles() {
-        NotificationCenter.default.post(Notification(name: .addStingFromFiles))
+    struct LabelStyle: SwiftUI.LabelStyle {
+        func makeBody(configuration: Configuration) -> some View {
+            VStack {
+                configuration.icon
+                    .font(.title)
+                    .imageScale(.large)
+                configuration.title
+                    .font(.footnote)
+            }
+            .foregroundStyle(.secondary)
+        }
     }
 }
