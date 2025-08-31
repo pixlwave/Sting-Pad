@@ -1,7 +1,8 @@
 import Foundation
 import MediaPlayer
 
-@Observable class PlaybackViewModel {
+#warning("Revisit the implicit @MainActor with the new Approachable Concurrent stuff.")
+@Observable @MainActor class PlaybackViewModel {
     let engine = Engine.shared
     let show: Show
     var cuedSting: Sting?
@@ -178,8 +179,9 @@ import MediaPlayer
         }
         
         updateProgress()
-        progressTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            self.updateProgress()
+        progressTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
+            guard let self else { return }
+            Task { await self.updateProgress() }
         }
     }
     
@@ -195,11 +197,11 @@ import MediaPlayer
 // MARK: PlaybackDelegate
 
 extension PlaybackViewModel: PlaybackDelegate {
-    func stingDidStartPlaying(_ sting: Sting) {
-        beginUpdatingProgress()
+    nonisolated func stingDidStartPlaying(_ sting: Sting) {
+        Task { await beginUpdatingProgress() }
     }
     
-    func stingDidStopPlaying(_ sting: Sting) {
+    nonisolated func stingDidStopPlaying(_ sting: Sting) {
         DispatchQueue.main.async {
             // by the time this executes another sting may have already started playback
             if self.engine.playingSting == nil { self.stopUpdatingProgress() }
