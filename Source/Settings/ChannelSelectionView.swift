@@ -57,7 +57,7 @@ struct OutputCell: View {
 // MARK: - Previews
 
 #Preview("Audio Interface") {
-    NavigationView {
+    NavigationStack {
         ChannelSelectionView(outputConfig: ChannelPair(left: 0, right: 1),
                              outputs: [
                                 ChannelPair(left: 0, right: 1),
@@ -70,7 +70,7 @@ struct OutputCell: View {
 }
 
 #Preview("Removed Device") {
-    NavigationView {
+    NavigationStack {
         ChannelSelectionView(outputConfig: ChannelPair(left: 2, right: 3),
                              outputs: [
                                 ChannelPair(left: 0, right: 1)

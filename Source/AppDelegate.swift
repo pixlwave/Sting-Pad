@@ -10,9 +10,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // prevent device from going to sleep
         application.isIdleTimerDisabled = true
         
-        // applies the included tint colour to UIAlertController (and presumably others)
-        window?.tintColor = .tintColor
-        
         #if targetEnvironment(macCatalyst)
         window?.windowScene?.sizeRestrictions?.minimumSize = CGSize(width: 320, height: 568)
         #endif

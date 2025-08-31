@@ -92,12 +92,6 @@ extension TimeInterval {
     }
 }
 
-extension UIColor {
-    static let backgroundColor = UIColor(named: "Background Color")!
-    static let borderColor = UIColor(named: "Border Color")!
-    static let tintColor = UIColor(named: "Tint Color")!
-}
-
 
 extension UserDefaults {
     static let presets = UserDefaults(suiteName: "uk.pixlwave.StingPad.Presets")!

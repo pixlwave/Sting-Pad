@@ -9,7 +9,7 @@ struct ManageStingsView: View {
     @State private var unavailableFiles = [Sting]()
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 Section(header: Text("Unavailable stings")) {
                     NavigationLink(destination: UnavailableSongsView(show: show, stings: $unavailableSongs)) {
@@ -50,7 +50,6 @@ struct ManageStingsView: View {
                 }
             }
         }
-        .navigationViewStyle(.stack)
         .onAppear(perform: reloadData)
         .onReceive(NotificationCenter.default.publisher(for: .unavailableStingsDidChange)) { _ in
             reloadData()

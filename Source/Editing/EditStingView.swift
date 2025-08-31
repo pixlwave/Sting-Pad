@@ -13,7 +13,7 @@ struct EditStingView: View {
     @State private var waveformHeight: CGFloat = 198
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section {
                     VStack(alignment: .leading, spacing: 5) {
@@ -70,7 +70,6 @@ struct EditStingView: View {
                 }
             }
         }
-        .navigationViewStyle(.stack)
         .onAppear {
             if engine.playingSting != nil {
                 previewLength = 0

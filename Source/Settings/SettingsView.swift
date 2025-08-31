@@ -7,7 +7,7 @@ struct SettingsView: View {
     var show: Show?
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section(header: Text("I/O")) {
                     NavigationLink("Output Channels", destination: ChannelSelectionView())
@@ -41,7 +41,6 @@ struct SettingsView: View {
                 }
             }
         }
-        .navigationViewStyle(.stack)
     }
     
     func setAllStingPresets() {
