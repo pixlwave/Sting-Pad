@@ -1,15 +1,16 @@
 import SwiftUI
 
 struct PlaybackView: View {
-    @Environment(\.undoManager) private var undoManager
     @Bindable var viewModel: PlaybackViewModel
-    
     let dismissAction: () -> Void
+    
+    @Namespace private var sheets
     
     var body: some View {
         NavigationStack {
             scrollView
                 .navigationTitle(viewModel.show.fileName)
+                .navigationDocument(viewModel.show.fileURL)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar { toolbar }
         }
@@ -38,11 +39,22 @@ struct PlaybackView: View {
         } message: {
             Text("Please enable Media & Apple Music access in the Settings app.")
         }
-        .sheet(item: $viewModel.state.stingToEdit) { EditStingView(show: viewModel.show, sting: $0) }
-        .sheet(item: $viewModel.state.songPickerOperation) { SongPicker(show: viewModel.show, pickerOperation: $0) }
-        .sheet(item: $viewModel.state.filePickerOperation) { FilePicker(show: viewModel.show, pickerOperation: $0) }
-        .sheet(isPresented: $viewModel.state.isPresentingSettings) { SettingsView(show: viewModel.show) }
-        .sheet(isPresented: $viewModel.state.isPresentingManageStings) { ManageStingsView(show: viewModel.show) }
+        .sheet(item: $viewModel.state.songPickerOperation) {
+            SongPicker(show: viewModel.show, pickerOperation: $0)
+                .presentationSizing(.fitted)
+        }
+        .sheet(item: $viewModel.state.filePickerOperation) {
+            FilePicker(show: viewModel.show, pickerOperation: $0)
+                .presentationSizing(.fitted)
+        }
+        .sheet(isPresented: $viewModel.state.isPresentingSettings) {
+            SettingsView(show: viewModel.show)
+                .navigationTransition(.zoom(sourceID: SheetID.settings, in: sheets))
+        }
+        .sheet(isPresented: $viewModel.state.isPresentingManageStings) {
+            ManageStingsView(show: viewModel.show)
+                .navigationTransition(.zoom(sourceID: SheetID.manageStings, in: sheets))
+        }
     }
     
     var scrollView: some View {
@@ -71,15 +83,19 @@ struct PlaybackView: View {
                 Button { viewModel.state.isPresentingManageStings = true } label: {
                     Image(systemName: "exclamationmark.circle")
                         .fontWeight(.semibold)
-                        .tint(.red)
                 }
+                .tint(.red)
+                .matchedTransitionSource(id: SheetID.manageStings, in: sheets)
             }
+            
+            ToolbarSpacer(.fixed, placement: .primaryAction)
         }
         
         ToolbarItem(placement: .primaryAction) {
             Button { viewModel.state.isPresentingSettings = true } label: {
                 Image(systemName: "slider.horizontal.3")
             }
+            .matchedTransitionSource(id: SheetID.settings, in: sheets)
         }
     }
 }

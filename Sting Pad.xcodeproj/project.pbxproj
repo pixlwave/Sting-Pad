@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A51A585F2E6C36A800CAFA11 /* SheetID.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51A585E2E6C36A400CAFA11 /* SheetID.swift */; };
 		A51D98EE22BBCF7D00124A40 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D98ED22BBCF7D00124A40 /* Color.swift */; };
 		A549825A1F7067EC00909196 /* FDAudioContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54982581F7067EC00909196 /* FDAudioContext.swift */; };
 		A549825B1F7067EC00909196 /* FDWaveformRenderOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54982591F7067EC00909196 /* FDWaveformRenderOperation.swift */; };
@@ -56,6 +57,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A51A585E2E6C36A400CAFA11 /* SheetID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetID.swift; sourceTree = "<group>"; };
 		A51D98ED22BBCF7D00124A40 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		A54982581F7067EC00909196 /* FDAudioContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDAudioContext.swift; sourceTree = "<group>"; };
 		A54982591F7067EC00909196 /* FDWaveformRenderOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDWaveformRenderOperation.swift; sourceTree = "<group>"; };
@@ -193,9 +195,10 @@
 		A5616BE6270A3BCA007DB43A /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				A5616BE7270A3BEE007DB43A /* SizeKey.swift */,
-				A5616BE9270A3C17007DB43A /* UndoProvider.swift */,
 				A5A5245B2711CDC000374E28 /* HostingController.swift */,
+				A5616BE9270A3C17007DB43A /* UndoProvider.swift */,
+				A51A585E2E6C36A400CAFA11 /* SheetID.swift */,
+				A5616BE7270A3BEE007DB43A /* SizeKey.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5B1DFD326E3C089009BF8FB /* UnavailableFilesView.swift in Sources */,
+				A51A585F2E6C36A800CAFA11 /* SheetID.swift in Sources */,
 				A5CEE51323215B1800BB7CD1 /* WaveformView.swift in Sources */,
 				A55C0E7222AA5498008DDB12 /* Show.swift in Sources */,
 				A5B1DFE126E40CE2009BF8FB /* UnavailableStingCell.swift in Sources */,

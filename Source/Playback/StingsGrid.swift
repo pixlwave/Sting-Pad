@@ -1,12 +1,15 @@
 import SwiftUI
 
 struct StingsGrid: View {
-    let viewModel: PlaybackViewModel
+    @Bindable var viewModel: PlaybackViewModel
+    
+    @Namespace private var sheets
     
     var body: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 300), spacing: 20)], spacing: 20) {
             ForEach(viewModel.show.stings.enumerated(), id: \.element) { (index, sting) in
                 StingCell(sting: sting, viewModel: viewModel)
+                    .matchedTransitionSource(id: SheetID.edit(sting.id), in: sheets)
                     .onTapGesture {
                         viewModel.engine.play(sting)
                     }
@@ -85,6 +88,10 @@ struct StingsGrid: View {
 //                guard let sourceIndex = sourceIndexSet.first as Int? else { return }
 //                viewModel.show.moveSting(from: sourceIndex, to: destinationIndex)
 //            }
+        }
+        .sheet(item: $viewModel.state.stingToEdit) {
+            EditStingView(show: viewModel.show, sting: $0)
+                .navigationTransition(.zoom(sourceID: SheetID.edit($0.id), in: sheets))
         }
     }
 }

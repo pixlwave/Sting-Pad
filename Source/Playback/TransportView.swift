@@ -4,6 +4,18 @@ struct TransportView: View {
     let viewModel: PlaybackViewModel
     
     var body: some View {
+        controls
+            .padding(.vertical)
+            .overlay(alignment: .top) {
+                progressIndicator
+            }
+            .overlay(alignment: .bottomTrailing) {
+                remainingText
+            }
+            .background(.regularMaterial)
+    }
+    
+    var controls: some View {
         HStack {
             Spacer()
             Button {
@@ -39,17 +51,17 @@ struct TransportView: View {
             }
             Spacer()
         }
-        .padding(.vertical)
-        .overlay(alignment: .bottomTrailing) {
-            Text(viewModel.progress.remaining)
-                .font(Font.footnote.monospacedDigit())
-                .foregroundColor(Color(red: 111 / 255, green: 113 / 255, blue: 121/255))
-                .padding(8)
-        }
-        .overlay(alignment: .top) {
-            ProgressView(value: viewModel.progress.value)
-        }
-        .background(.regularMaterial)
+    }
+    
+    var progressIndicator: some View {
+        ProgressView(value: viewModel.progress.value)
+    }
+    
+    var remainingText: some View {
+        Text(viewModel.progress.remaining)
+            .font(Font.footnote.monospacedDigit())
+            .foregroundColor(Color(red: 111 / 255, green: 113 / 255, blue: 121/255))
+            .padding(8)
     }
 }
 
