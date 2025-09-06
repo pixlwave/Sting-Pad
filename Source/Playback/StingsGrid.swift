@@ -3,95 +3,80 @@ import SwiftUI
 struct StingsGrid: View {
     @Bindable var viewModel: PlaybackViewModel
     
+    @State private var dragOperation: DragOperation?
     @Namespace private var sheets
+    
+    private var stings: [Sting] {
+        viewModel.show.stings.previewing(dragOperation)
+    }
     
     var body: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 300), spacing: 20)], spacing: 20) {
-            ForEach(viewModel.show.stings.enumerated(), id: \.element) { (index, sting) in
+            ForEach(stings.enumerated(), id: \.element) { (index, sting) in
                 StingCell(sting: sting, viewModel: viewModel)
+                    // performDrop doesn't trigger when the destination is completely transparent…
+                    .opacity(sting == dragOperation?.sting && dragOperation?.destinationIndex != nil ? 0.001 : 1)
                     .matchedTransitionSource(id: SheetID.edit(sting.id), in: sheets)
-                    .onTapGesture {
-                        viewModel.engine.play(sting)
+                    .onTapGesture { viewModel.engine.play(sting) }
+                    .contextMenu { StingContextMenu(sting: sting, index: index, viewModel: viewModel) }
+                    .onDrag {
+                        dragOperation = DragOperation(sting: sting, sourceIndex: index)
+                        return NSItemProvider(object: "\(sting.hashValue)" as NSString)
                     }
-                    .contextMenu {
-                        if sting.audioFile != nil, sting != viewModel.cuedSting {
-                            Section { // Play section
-                                Button { viewModel.cuedSting = sting } label: {
-                                    Label("Cue Next", systemImage: "smallcircle.fill.circle")
-                                }
-                            }
-                        }
-                        
-                        if sting.audioFile != nil {
-                            Section { // Edit section
-                                Button { viewModel.state.stingToEdit = sting } label: {
-                                    Label("Edit", systemImage: "waveform")
-                                }
-                                
-                                Button { viewModel.presentRenameDialog(for: sting) } label: {
-                                    Label("Rename", systemImage: "square.and.pencil")
-                                }
-                                
-                                Menu("Colour", systemImage: "paintbrush") {
-                                    ForEach(Sting.Color.allCases, id: \.self) { color in
-                                        Button {
-                                            viewModel.change(sting, to: color)
-                                        } label: {
-                                            Label {
-                                                Text("\(color)".capitalized)
-                                            } icon: {
-                                                Image(systemName: color == sting.color ? "checkmark.circle" : "circle")
-                                                    .symbolVariant(.fill)
-                                                    .fontWeight(.heavy)
-                                                    .tint(color.value)
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        
-                        Section { // File section
-                            if sting.audioFile != nil {
-                                Button { viewModel.copy(sting, to: index + 1) } label: {
-                                    Label("Duplicate", systemImage: "plus.square.on.square")
-                                }
-                            } else {
-                                Button {
-                                    if sting.url.isMediaItem {
-                                        viewModel.pickStingFromLibrary(pickerOperation: .locate(sting))
-                                    } else {
-                                        viewModel.pickStingFromFiles(pickerOperation: .locate(sting))
-                                    }
-                                } label: {
-                                    Label("Locate", systemImage: "magnifyingglass")
-                                }
-                            }
-                            Button { viewModel.pickStingFromLibrary(pickerOperation: .insert(index)) } label: {
-                                Label("Insert Song Here", systemImage: "square.stack")
-                            }
-                            Button(role: .destructive) { viewModel.delete(sting, at: index) } label: {
-                                Label("Delete", systemImage: "trash")
-                            }
-                            .disabled(sting == viewModel.engine.playingSting)
-                        }
-                        
-                        if sting.audioFile == nil {
-                            Section { // Info section
-                                Text("\(sting.songTitle) by \(sting.songArtist)")
-                                    .disabled(true)
-                            }
-                        }
-                    }
+                    .onDrop(of: [.text], delegate: DragHandler(operation: $dragOperation,
+                                                                    destinationIndex: index,
+                                                                    viewModel: viewModel))
             }
-//            .onMove { sourceIndexSet, destinationIndex in
-//                guard let sourceIndex = sourceIndexSet.first as Int? else { return }
-//                viewModel.show.moveSting(from: sourceIndex, to: destinationIndex)
-//            }
         }
         .sheet(item: $viewModel.state.stingToEdit) {
             EditStingView(show: viewModel.show, sting: $0)
                 .navigationTransition(.zoom(sourceID: SheetID.edit($0.id), in: sheets))
         }
+    }
+}
+
+// MARK: Drag & Drop
+
+struct DragOperation {
+    let sting: Sting
+    let sourceIndex: Int
+    var destinationIndex: Int?
+}
+
+struct DragHandler: DropDelegate {
+    let operation: Binding<DragOperation?>
+    let destinationIndex: Int
+    let viewModel: PlaybackViewModel
+    
+    func dropEntered(info: DropInfo) {
+        withAnimation { operation.wrappedValue?.destinationIndex = destinationIndex }
+    }
+    
+    func dropUpdated(info: DropInfo) -> DropProposal? {
+        DropProposal(operation: .move)
+    }
+    
+    func performDrop(info: DropInfo) -> Bool {
+        guard let activeOperation = operation.wrappedValue,
+              let destinationIndex = activeOperation.destinationIndex
+        else { return false }
+        
+        viewModel.show.moveSting(from: activeOperation.sourceIndex, to: destinationIndex)
+        operation.wrappedValue = nil
+        
+        return true
+    }
+}
+
+private extension Array {
+    func previewing(_ dragOperation: DragOperation?) -> Self {
+        guard let sourceIndex = dragOperation?.sourceIndex,
+              let destinationindex = dragOperation?.destinationIndex
+        else { return self }
+        
+        var result = self
+        let offset = destinationindex > sourceIndex ? 1 : 0
+        result.move(fromOffsets: IndexSet(integer: sourceIndex), toOffset: destinationindex + offset)
+        return result
     }
 }

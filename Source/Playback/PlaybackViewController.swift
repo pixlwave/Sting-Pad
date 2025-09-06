@@ -87,32 +87,3 @@ class PlaybackViewController: UIViewController {
         scrollTo(sting, animated: false)
     }
 }
-
-
-// MARK: UICollectionViewDragDelegate
-extension PlaybackViewController: UICollectionViewDragDelegate {
-    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        // drag item doesn't require any customisation as the drop delegate only needs the source/destination index paths
-        return [UIDragItem(itemProvider: NSItemProvider())]
-    }
-}
-
-
-// MARK: UICollectionViewDropDelegate
-extension PlaybackViewController: UICollectionViewDropDelegate {
-    func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
-        guard collectionView.hasActiveDrag else { return UICollectionViewDropProposal(operation: .forbidden) }
-        return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
-        guard
-            let sourceItem = coordinator.items.first,
-            let sourceIndexPath = sourceItem.sourceIndexPath,
-            let destinationIndexPath = coordinator.destinationIndexPath
-        else { return }
-        
-        viewModel.show.moveSting(from: sourceIndexPath.item, to: destinationIndexPath.item)
-        coordinator.drop(sourceItem.dragItem, toItemAt: destinationIndexPath)
-    }
-}
