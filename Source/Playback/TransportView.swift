@@ -54,7 +54,7 @@ struct TransportView: View {
     }
     
     var progressIndicator: some View {
-        ProgressView(value: viewModel.progress.value)
+        PlaybackProgressView(value: viewModel.progress.value)
     }
     
     var remainingText: some View {
@@ -62,6 +62,46 @@ struct TransportView: View {
             .font(Font.footnote.monospacedDigit())
             .foregroundColor(Color(red: 111 / 255, green: 113 / 255, blue: 121/255))
             .padding(8)
+    }
+}
+
+/// A custom progress bar, as `ProgressView` doesn't honour the `.animation` modifier.
+struct PlaybackProgressView: View {
+    let value: Double
+    
+    @State var renderedValue: Double = 0
+    @State var isAnimated = false
+    
+    @State private var width: CGFloat = .zero
+    
+    var body: some View {
+        ZStack(alignment: .leading) {
+            Capsule()
+                .fill(.secondary.opacity(0.7))
+            
+            Capsule()
+                .fill(Color.tint)
+                .frame(width: width * renderedValue)
+                .animation(isAnimated ? .linear(duration: 1) : nil, value: renderedValue)
+        }
+        .frame(height: 4)
+        .onChange(of: value, updateRenderedValue)
+        .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { width = $0 }
+    }
+    
+    /// Updates the rendered value, making sure to not animate when playback stops or loops.
+    func updateRenderedValue(oldValue: Double, newValue: Double) {
+        if newValue < oldValue {
+            isAnimated = false
+            renderedValue = 0
+            DispatchQueue.main.async {
+                isAnimated = true
+                renderedValue = newValue
+            }
+        } else {
+            isAnimated = true
+            renderedValue = newValue
+        }
     }
 }
 

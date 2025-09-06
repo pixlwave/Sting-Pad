@@ -1,7 +1,7 @@
 import Foundation
 import MediaPlayer
 
-#warning("Revisit the implicit @MainActor with the new Approachable Concurrent stuff.")
+#warning("Revisit the implicit @MainActor with the new Approachable Concurrency stuff.")
 @Observable @MainActor class PlaybackViewModel {
     let engine = Engine.shared
     let show: Show
@@ -169,8 +169,7 @@ import MediaPlayer
     }
     
     func updateProgress() {
-        progress.elapsed = engine.elapsedTime
-        progress.total = engine.totalTime
+        progress.update(elapsed: engine.elapsedTime, total: engine.totalTime)
     }
     
     func beginUpdatingProgress() {
@@ -189,8 +188,7 @@ import MediaPlayer
         progressTimer?.invalidate()
         progressTimer = nil
         
-        progress.elapsed = 0
-        progress.total = cuedSting?.totalTime ?? 0
+        progress.reset(total: cuedSting?.totalTime ?? 0)
     }
 }
 
@@ -228,19 +226,38 @@ extension PlaybackViewModel {
     }
     
     struct Progress {
-        var elapsed: TimeInterval
-        var total: TimeInterval
+        private(set) var elapsed: TimeInterval = 0
+        private(set) var total: TimeInterval = 0
+        private(set) var value: Double
         
-        var value: Double {
-            guard total > 0 else { return 0 }
-            let progress = (elapsed / total).truncatingRemainder(dividingBy: 1) // + (1 / total)
-            return max(0, min(1, progress))
+        init(elapsed: TimeInterval, total: TimeInterval) {
+            self.elapsed = elapsed
+            self.total = total
+            self.value = 0
             
-            // Make sure not to animate the loop point 🤔
-            // if progressView.progress == 1 {
-            //    progressView.reset()
-            // }
-            // UIView.animate { progressView.progress = newValue }
+            calculateNextValue()
+        }
+        
+        mutating func update(elapsed: TimeInterval, total: TimeInterval) {
+            self.elapsed = elapsed
+            self.total = total
+            
+            calculateNextValue()
+        }
+        
+        mutating func reset(total: TimeInterval) {
+            self.total = total
+            elapsed = 0
+            value = 0
+            
+            // Don't calculate the next value as this is the stopped state.
+        }
+        
+        /// Calculates the next value to be shown by adding an additional 1-second as compensation for the animation time.
+        private mutating func calculateNextValue() {
+            guard total > 0 else { return }
+            let rawValue = (elapsed / total).truncatingRemainder(dividingBy: 1) + (1 / total)
+            value = max(0, min(1, rawValue))
         }
         
         var remaining: String {
