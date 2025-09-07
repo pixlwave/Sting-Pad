@@ -42,7 +42,6 @@ class PlaybackViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(didAppendSting(_:)), name: .didAppendSting, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didFinishEditing), name: .didFinishEditing, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(showStateChanged(_:)), name: UIDocument.stateChangedNotification, object: viewModel.show)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -53,10 +52,6 @@ class PlaybackViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         resignFirstResponder()
-    }
-    
-    @objc func showStateChanged(_ notification: Notification) {
-        os_log("Show State Changed: %d", log: .default, type: .debug, viewModel.show.documentState.rawValue)
     }
     
     func closeShow() {

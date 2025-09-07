@@ -1,5 +1,6 @@
 import Foundation
 import MediaPlayer
+import OSLog
 
 #warning("Revisit the implicit @MainActor with the new Approachable Concurrency stuff.")
 @Observable @MainActor class PlaybackViewModel {
@@ -16,11 +17,18 @@ import MediaPlayer
         self.show = show
         self.progress = progress
         engine.playbackDelegate = self
+        
+        NotificationCenter.default.addObserver(forName: UIDocument.stateChangedNotification, object: show, queue: nil) { notification in
+            guard let show = notification.object as? Show else { return }
+            os_log("Show State Changed: %d", log: .default, type: .debug, show.documentState.rawValue)
+        }
     }
     
     func closeShow() async {
         engine.stopSting()
         await show.close()
+        
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - Editing
