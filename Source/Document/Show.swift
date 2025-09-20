@@ -59,21 +59,27 @@ import SwiftUI
     
     // editing functions exist to allow the show to load without updating it's change count
     func append(_ sting: Sting) {
+        // no need to animate an append as the sheet covers it and SwiftUI
+        // doesn't like scrolling to a new item before it has animated.
         stings.append(sting)
+        
         undoManager.registerUndo(withTarget: self) {
             $0.removeSting(at: self.stings.count - 1)
         }
     }
     
     func insert(_ sting: Sting, at index: Int) {
-        stings.insert(sting, at: index)
+        withAnimation { stings.insert(sting, at: index) }
+        
         undoManager.registerUndo(withTarget: self) {
             $0.removeSting(at: index)
         }
     }
     
     func moveSting(from sourceIndex: Int, to destinationIndex: Int) {
+        // the move is already animated during the drag operation.
         stings.insert(stings.remove(at: sourceIndex), at: destinationIndex)
+        
         undoManager.registerUndo(withTarget: self) {
             $0.moveSting(from: destinationIndex, to: sourceIndex)
         }
@@ -81,7 +87,8 @@ import SwiftUI
     
     @discardableResult
     func removeSting(at index: Int) -> Sting {
-        let sting = stings.remove(at: index)
+        let sting = withAnimation { stings.remove(at: index) }
+        
         undoManager.registerUndo(withTarget: self) {
             $0.insert(sting, at: index)
         }

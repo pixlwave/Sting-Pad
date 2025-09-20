@@ -14,6 +14,7 @@ struct StingsGrid: View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 300), spacing: 20)], spacing: 20) {
             ForEach(stings.enumerated(), id: \.element) { (index, sting) in
                 StingCell(sting: sting, viewModel: viewModel)
+                    .id(sting.id)
                     // performDrop doesn't trigger when the destination is completely transparent…
                     .opacity(sting == dragOperation?.sting && dragOperation?.destinationIndex != nil ? 0.001 : 1)
                     .matchedTransitionSource(id: SheetID.edit(sting.id), in: sheets)

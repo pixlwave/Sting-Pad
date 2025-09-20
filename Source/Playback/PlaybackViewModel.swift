@@ -22,6 +22,12 @@ import OSLog
             guard let show = notification.object as? Show else { return }
             os_log("Show State Changed: %d", log: .default, type: .debug, show.documentState.rawValue)
         }
+        NotificationCenter.default.addObserver(forName: .didAppendSting, object: nil, queue: .main) { [weak self] notification in
+            MainActor.assumeIsolated {
+                guard let sting = notification.object as? Sting else { return }
+                self?.state.scrollPositionID = sting.id
+            }
+        }
     }
     
     func closeShow() async {
@@ -219,6 +225,8 @@ extension PlaybackViewModel: PlaybackDelegate {
 
 extension PlaybackViewModel {
     struct State {
+        var scrollPositionID: ObjectIdentifier?
+        
         var songPickerOperation: PickerOperation?
         var filePickerOperation: PickerOperation?
         var isPresentingMediaLibraryAccessAlert = false

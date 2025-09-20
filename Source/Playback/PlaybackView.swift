@@ -66,10 +66,12 @@ struct PlaybackView: View {
             AddStingFooterView(viewModel: viewModel)
                 .padding()
         }
-        .animation(.default, value: viewModel.show.stings)
+        .scrollPosition(id: $viewModel.state.scrollPositionID, anchor: .center)
         .safeAreaInset(edge: .bottom) {
             TransportView(viewModel: viewModel)
         }
+        .onChange(of: viewModel.cuedSting, scrollToCuedSting)
+        .onChange(of: viewModel.show.stings, stingsDidChange)
     }
     
     @ToolbarContentBuilder
@@ -97,6 +99,16 @@ struct PlaybackView: View {
             }
             .matchedTransitionSource(id: SheetID.settings, in: sheets)
         }
+    }
+    
+    func scrollToCuedSting(previousSting: Sting?, cuedSting: Sting?) {
+        guard let cuedSting else { return }
+        withAnimation { viewModel.state.scrollPositionID = cuedSting.id }
+    }
+    
+    func stingsDidChange(oldStings: [Sting], newStings: [Sting]) {
+        // ensure there's a cued sting if possible
+        viewModel.validateCuedSting()
     }
 }
 
