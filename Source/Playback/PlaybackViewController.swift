@@ -1,5 +1,3 @@
-import UIKit
-import MobileCoreServices
 import SwiftUI
 import os.log
 

@@ -1,4 +1,4 @@
-import UIKit
+import SwiftUI
 
 class WaveformView: FDWaveformView {
     

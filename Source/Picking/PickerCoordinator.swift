@@ -1,4 +1,3 @@
-import UIKit
 import MediaPlayer
 
 class PickerCoordinator: NSObject {
