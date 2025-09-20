@@ -70,6 +70,7 @@ struct PlaybackView: View {
         .safeAreaInset(edge: .bottom) {
             TransportView(viewModel: viewModel)
         }
+        .ignoresSafeArea(.keyboard)
         .onChange(of: viewModel.cuedSting, scrollToCuedSting)
         .onChange(of: viewModel.show.stings, stingsDidChange)
     }
