@@ -187,17 +187,21 @@ import os.log
         guard prepareToPlay(sting) else { return }
         
         let endSample = AVAudioFrameCount(sting.startSample) + sting.sampleCount
+        let lengthDivisor: UInt32 = sting.loops ? 2 : 1
+        let idealSampleCount = AVAudioFrameCount(audioFile.processingFormat.sampleRate * length) / lengthDivisor
+        
+        let (previewStartSample, sampleCount) = if endSample > idealSampleCount {
+            (AVAudioFramePosition(endSample - idealSampleCount), idealSampleCount)
+        } else {
+            // previewStartSample can't be negative, so preview from start to finish
+            (AVAudioFramePosition.zero, endSample)
+        }
+        
         if sting.loops {
-            let sampleCount = AVAudioFrameCount(audioFile.processingFormat.sampleRate * length) / 2
-            let previewStartSample = AVAudioFramePosition(endSample - sampleCount)
-            
             scheduleSegment(of: sting, from: previewStartSample, for: sampleCount)
             scheduleSegment(of: sting, from: sting.startSample, for: sampleCount)
             startPlayback(of: sting)
         } else {
-            let sampleCount = AVAudioFrameCount(audioFile.processingFormat.sampleRate * length)
-            let previewStartSample = AVAudioFramePosition(endSample - sampleCount)
-            
             scheduleSegment(of: sting, from: previewStartSample, for: sampleCount)
             startPlayback(of: sting)
         }
