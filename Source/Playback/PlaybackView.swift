@@ -2,7 +2,6 @@ import SwiftUI
 
 struct PlaybackView: View {
     @Bindable var viewModel: PlaybackViewModel
-    let dismissAction: () -> Void
     
     @Namespace private var sheets
     
@@ -13,6 +12,7 @@ struct PlaybackView: View {
                 .navigationDocument(viewModel.show.fileURL)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar { toolbar }
+                .toolbarRole(.editor)
         }
         .alert("Rename", isPresented: $viewModel.state.isPresentingRenameAlert, presenting: viewModel.state.stingToRename) { sting in
             TextField("Sting name", text: $viewModel.state.renameText, prompt: Text(sting.songTitle))
@@ -77,10 +77,6 @@ struct PlaybackView: View {
     
     @ToolbarContentBuilder
     var toolbar: some ToolbarContent {
-        ToolbarItem(placement: .cancellationAction) {
-            Button("Shows", action: dismissAction)
-        }
-        
         if !viewModel.show.unavailableSongs.isEmpty || !viewModel.show.unavailableFiles.isEmpty {
             ToolbarItem(placement: .primaryAction) {
                 Button { viewModel.state.isPresentingManageStings = true } label: {
@@ -116,5 +112,5 @@ struct PlaybackView: View {
 
 #Preview {
     let viewModel = PlaybackViewModel(show: Show(name: "Preview"))
-    PlaybackView(viewModel: viewModel) { }
+    PlaybackView(viewModel: viewModel)
 }

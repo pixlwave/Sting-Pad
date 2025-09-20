@@ -23,8 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let showBrowser = window?.rootViewController as? ShowBrowserViewController
         else { return false }
         
-        if let playbackVC = showBrowser.presentedPlaybackViewController {
-            playbackVC.closeShow()
+        if showBrowser.presentedPlaybackViewController != nil {
+            showBrowser.dismiss(animated: true)
+            #warning("Should really await closeShow or for !isLoading")
         }
         
         if url.isFileInsideInbox {

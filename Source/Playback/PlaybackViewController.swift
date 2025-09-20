@@ -3,7 +3,6 @@ import os.log
 
 class PlaybackViewController: UIViewController {
     var viewModel: PlaybackViewModel!
-    var hostingController: UIHostingController<PlaybackView>!
     
     // respond to undo gestures, forwarding them to the show's undo manager
     override var canBecomeFirstResponder: Bool { true }
@@ -13,9 +12,7 @@ class PlaybackViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        hostingController = UIHostingController(rootView: PlaybackView(viewModel: viewModel) { [weak self] in
-            self?.closeShow()
-        })
+        let hostingController = UIHostingController(rootView: PlaybackView(viewModel: viewModel))
         hostingController.view.backgroundColor = .clear
         addChild(hostingController)
         hostingController.didMove(toParent: self)
@@ -39,16 +36,21 @@ class PlaybackViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         resignFirstResponder()
+        
+        if isBeingDismissed {
+            closeShow()
+        }
     }
     
     func closeShow() {
+        os_log("Closing show.")
+        
         // stop listening for notifications in case a new show is opened before this gets deallocated
         NotificationCenter.default.removeObserver(self)
         
         Task {
             await viewModel.closeShow()
             (presentingViewController as? ShowBrowserViewController)?.isLoading = false
-            dismiss(animated: true)
         }
     }
     
