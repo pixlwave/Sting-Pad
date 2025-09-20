@@ -41,7 +41,6 @@ struct PlaybackView: View {
         }
         .sheet(item: $viewModel.state.songPickerOperation) {
             SongPicker(show: viewModel.show, pickerOperation: $0)
-                .presentationSizing(.fitted)
         }
         .sheet(item: $viewModel.state.filePickerOperation) {
             FilePicker(show: viewModel.show, pickerOperation: $0)
