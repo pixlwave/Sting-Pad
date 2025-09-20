@@ -25,10 +25,13 @@ struct StingsGrid: View {
                         return NSItemProvider(object: "\(sting.hashValue)" as NSString)
                     }
                     .onDrop(of: [.text], delegate: DragHandler(operation: $dragOperation,
-                                                                    destinationIndex: index,
-                                                                    viewModel: viewModel))
+                                                               destinationIndex: index,
+                                                               viewModel: viewModel))
             }
         }
+        .background() // performDrop doesn't trigger when the destination is transparent…
+        // second drop delegate to commit any drops that occur within the grid spacing
+        .onDrop(of: [.text], delegate: DragHandler(operation: $dragOperation, viewModel: viewModel))
         .sheet(item: $viewModel.state.stingToEdit) {
             EditStingView(show: viewModel.show, sting: $0)
                 .navigationTransition(.zoom(sourceID: SheetID.edit($0.id), in: sheets))
@@ -46,10 +49,11 @@ struct DragOperation {
 
 struct DragHandler: DropDelegate {
     let operation: Binding<DragOperation?>
-    let destinationIndex: Int
+    var destinationIndex: Int?
     let viewModel: PlaybackViewModel
     
     func dropEntered(info: DropInfo) {
+        guard let destinationIndex else { return }
         withAnimation { operation.wrappedValue?.destinationIndex = destinationIndex }
     }
     
