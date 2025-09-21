@@ -192,10 +192,13 @@ import OSLog
         }
         
         updateProgress()
-        progressTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
+        #warning("Re-write this with an AsyncTimerSequence?")
+        let timer = Timer(timeInterval: 1, repeats: true) { [weak self] _ in
             guard let self else { return }
             Task { await self.updateProgress() }
         }
+        RunLoop.main.add(timer, forMode: .common) // .common so updates continue when scrolling
+        progressTimer = timer
     }
     
     func stopUpdatingProgress() {
