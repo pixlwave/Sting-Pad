@@ -2,12 +2,11 @@ import SwiftUI
 
 class ShowBrowserViewController: UIDocumentBrowserViewController {
     
-    var hasRestored = false
     var isLoading = false
     
     var transitionController: UIDocumentBrowserTransitionController?
     var presentedPlaybackViewController: PlaybackViewController? {
-        presentedViewController?.children.first as? PlaybackViewController
+        presentedViewController as? PlaybackViewController
     }
     
     override func viewDidLoad() {
@@ -93,35 +92,6 @@ class ShowBrowserViewController: UIDocumentBrowserViewController {
         else { return }
         
         inboxFiles.forEach { try? FileManager.default.removeItem(at: inboxURL.appendingPathComponent($0)) }
-    }
-    
-    override func encodeRestorableState(with coder: NSCoder) {
-        if presentedViewController != nil {
-            if let showURL = presentedPlaybackViewController?.viewModel?.show.fileURL {
-                let didStartAccessing = showURL.startAccessingSecurityScopedResource()
-                defer {
-                    if didStartAccessing { showURL.stopAccessingSecurityScopedResource() }
-                }
-                
-                if let bookmarkData = try? showURL.bookmarkData() {
-                    coder.encode(bookmarkData, forKey: "showBookmarkData")
-                }
-            }
-        }
-        
-        super.encodeRestorableState(with: coder)
-    }
-    
-    override func decodeRestorableState(with coder: NSCoder) {
-        if let bookmarkData = coder.decodeObject(forKey: "showBookmarkData") as? Data {
-            var isStale = false
-            if let url = try? URL(resolvingBookmarkData: bookmarkData, bookmarkDataIsStale: &isStale), url.isFileURL {
-                hasRestored = true
-                openShow(at: url, animated: false)
-            }
-        }
-        
-        super.decodeRestorableState(with: coder)
     }
 }
 

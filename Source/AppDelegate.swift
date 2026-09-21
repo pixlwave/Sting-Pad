@@ -3,48 +3,9 @@ import SwiftUI
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    var window: UIWindow?
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // prevent device from going to sleep
         application.isIdleTimerDisabled = true
-        
-        #if targetEnvironment(macCatalyst)
-        window?.windowScene?.sizeRestrictions?.minimumSize = CGSize(width: 320, height: 568)
-        #endif
-        
-        return true
-    }
-    
-    #warning("Needs testing on device")
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        guard
-            url.isFileURL,
-            let showBrowser = window?.rootViewController as? ShowBrowserViewController
-        else { return false }
-        
-        if showBrowser.presentedPlaybackViewController != nil {
-            showBrowser.dismiss(animated: true)
-            #warning("Should really await closeShow or for !isLoading")
-        }
-        
-        if url.isFileInsideInbox {
-            showBrowser.revealDocument(at: url, importIfNeeded: true) { importedURL, error in
-                guard let importedURL = importedURL else { return }
-                showBrowser.openShow(at: importedURL)
-            }
-            return false
-        } else {
-            showBrowser.openShow(at: url)
-            return true
-        }
-    }
-    
-    func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
-        return true
-    }
-    
-    func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
         return true
     }
     
